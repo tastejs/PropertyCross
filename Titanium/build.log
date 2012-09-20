@@ -1,0 +1,111 @@
+Logfile initialized
+[INFO] logfile = C:\dev\Titanium_Studio_Workspace\property-finder-titanium\build.log
+[DEBUG] C:\Users\cprice\AppData\Roaming\Titanium\mobilesdk\win32\2.1.2.GA\android\builder.py simulator property-finder-titanium C:\Program Files\Android\android-sdk C:\dev\Titanium_Studio_Workspace\property-finder-titanium com.scottlogic.propertyfinder 16 WVGA854
+[INFO] Building property-finder-titanium for Android ... one moment
+[INFO] Titanium SDK version: 2.1.2 (08/24/12 14:46 ed7f777)
+[DEBUG] Waiting for device to be ready ...
+[TRACE] adb devices returned 2 devices/emulators
+[TRACE] adb devices returned 2 devices/emulators
+[TRACE] adb devices returned 2 devices/emulators
+[TRACE] adb devices returned 2 devices/emulators
+[TRACE] adb devices returned 2 devices/emulators
+[TRACE] adb devices returned 2 devices/emulators
+[DEBUG] Device connected... (waited 25 seconds)
+[DEBUG] waited 25.113000 seconds on emulator to get ready
+[INFO] Waiting for the Android Emulator to become available
+[ERROR] Timed out waiting for android.process.acore
+[DEBUG] com.scottlogic.propertyfinder installed? False
+[INFO] Fastdev server running, deploying in Fastdev mode
+[INFO] Copying CommonJS modules...
+[INFO] Copying project resources..
+[INFO] Tiapp.xml unchanged, skipping class generation
+[DEBUG] Processing Android resource drawables
+[INFO] Waiting for SDCard to become available..
+[DEBUG] creating unsigned apk: C:\dev\Titanium_Studio_Workspace\property-finder-titanium\build\android\bin\app-unsigned.apk
+[DEBUG] from resource zip => assets/Resources/lib/iscroll-4.1.9.js
+[DEBUG] from resource zip => assets/Resources/lib/iscroll.js
+[DEBUG] from resource zip => assets/Resources/lib/jquery-1.8.1.intellisense.js
+[DEBUG] from resource zip => assets/Resources/lib/jquery-1.8.1.js
+[DEBUG] from resource zip => assets/Resources/lib/jquery.js
+[DEBUG] from resource zip => assets/Resources/lib/jquery.jsonp-2.1.4.min.js
+[DEBUG] from resource zip => assets/Resources/lib/jquery.jsonp.js
+[DEBUG] from resource zip => assets/Resources/lib/jquery.tmpl-1.0.0pre.min.js
+[DEBUG] from resource zip => assets/Resources/lib/jquery.tmpl.js
+[DEBUG] from resource zip => assets/Resources/lib/knockout-2.1.0.js
+[DEBUG] from resource zip => assets/Resources/lib/knockout.js
+[DEBUG] from resource zip => assets/Resources/lib/require.intellisense.js
+[DEBUG] from resource zip => assets/Resources/lib/require.js
+[DEBUG] from resource zip => assets/Resources/model/AmbiguousSearchResults.json
+[DEBUG] from resource zip => assets/Resources/model/JSONDataSource.js
+[DEBUG] from resource zip => assets/Resources/model/JSONFileDataSource.js
+[DEBUG] from resource zip => assets/Resources/model/Location.js
+[DEBUG] from resource zip => assets/Resources/model/Property.js
+[DEBUG] from resource zip => assets/Resources/model/PropertyDataSource.js
+[DEBUG] from resource zip => assets/Resources/model/PropertyDataSourceResponse.js
+[DEBUG] from resource zip => assets/Resources/model/PropertySearchResponseCode.js
+[DEBUG] from resource zip => assets/Resources/model/SearchResults.json
+[DEBUG] from resource zip => assets/Resources/viewModel/AboutViewModel.js
+[DEBUG] from resource zip => assets/Resources/viewModel/ApplicationViewModel.js
+[DEBUG] from resource zip => assets/Resources/viewModel/FavouritesViewModel.js
+[DEBUG] from resource zip => assets/Resources/viewModel/GeolocationViewModel.js
+[DEBUG] from resource zip => assets/Resources/viewModel/LocationViewModel.js
+[DEBUG] from resource zip => assets/Resources/viewModel/PropertySearchViewModel.js
+[DEBUG] from resource zip => assets/Resources/viewModel/PropertyViewModel.js
+[DEBUG] from resource zip => assets/Resources/viewModel/SearchResultsViewModel.js
+[DEBUG] from resource zip => assets/Resources/viewModel/util.js
+[DEBUG] from resource zip => assets/Resources/app.js
+[DEBUG] from resource zip => assets/Resources/appicon.png
+[DEBUG] from resource zip => assets/Resources/default.png
+[DEBUG] from resource zip => assets/Resources/pull-icon.png
+[DEBUG] from resource zip => assets/Resources/sample-image.jpg
+[DEBUG] from resource zip => assets/Resources/spinner.gif
+[DEBUG] from resource zip => assets/Resources/underscore.js
+[DEBUG] from resource zip => assets/app.json
+[DEBUG] from resource zip => assets/index.json
+[DEBUG] from resource zip => assets/tiapp.xml
+[DEBUG] from resource zip => res/drawable/appicon.png
+[DEBUG] from resource zip => res/drawable/background.png
+[DEBUG] from resource zip => res/drawable/close.png
+[DEBUG] from resource zip => res/drawable/facebook_login.png
+[DEBUG] from resource zip => res/drawable/facebook_login_down.png
+[DEBUG] from resource zip => res/drawable/facebook_login_wide.png
+[DEBUG] from resource zip => res/drawable/facebook_login_wide_down.png
+[DEBUG] from resource zip => res/drawable/facebook_logout.png
+[DEBUG] from resource zip => res/drawable/facebook_logout_down.png
+[DEBUG] from resource zip => res/layout/titanium_tabgroup.xml
+[DEBUG] from resource zip => AndroidManifest.xml
+[DEBUG] from resource zip => resources.arsc
+[DEBUG] from resource zip => res/drawable-hdpi/close.png
+[DEBUG] from resource zip => res/drawable-ldpi/close.png
+[DEBUG] from JAR C:\Users\cprice\AppData\Roaming\Titanium\mobilesdk\win32\2.1.2.GA\android\modules\titanium-facebook.jar => ti/modules/titanium/facebook/LICENSE
+[DEBUG] from JAR C:\Users\cprice\AppData\Roaming\Titanium\mobilesdk\win32\2.1.2.GA\android\modules\titanium-ui.jar => ti/modules/titanium/ui/widget/webview/binding.js
+[DEBUG] from JAR C:\Users\cprice\AppData\Roaming\Titanium\mobilesdk\win32\2.1.2.GA\android\modules\titanium-ui.jar => ti/modules/titanium/ui/widget/webview/binding.min.js
+[DEBUG] from JAR C:\Users\cprice\AppData\Roaming\Titanium\mobilesdk\win32\2.1.2.GA\android\modules\titanium-ui.jar => ti/modules/titanium/ui/widget/webview/json2.js
+[DEBUG] from JAR C:\Users\cprice\AppData\Roaming\Titanium\mobilesdk\win32\2.1.2.GA\android\modules\titanium-ui.jar => ti/modules/titanium/ui/widget/webview/polling.js
+[DEBUG] from JAR C:\Users\cprice\AppData\Roaming\Titanium\mobilesdk\win32\2.1.2.GA\android\modules\titanium-ui.jar => ti/modules/titanium/ui/widget/webview/polling.min.js
+[DEBUG] from JAR C:\Users\cprice\AppData\Roaming\Titanium\mobilesdk\win32\2.1.2.GA\android\titanium.jar => org/appcelerator/titanium/build.properties
+[DEBUG] from JAR C:\Users\cprice\AppData\Roaming\Titanium\mobilesdk\win32\2.1.2.GA\android\titanium.jar => org/appcelerator/titanium/res/drawable/background.png
+[DEBUG] from JAR C:\Users\cprice\AppData\Roaming\Titanium\mobilesdk\win32\2.1.2.GA\android\titanium.jar => org/appcelerator/titanium/res/drawable/btn_check_buttonless_on.png
+[DEBUG] from JAR C:\Users\cprice\AppData\Roaming\Titanium\mobilesdk\win32\2.1.2.GA\android\titanium.jar => org/appcelerator/titanium/res/drawable/btn_check_buttonless_on_18.png
+[DEBUG] from JAR C:\Users\cprice\AppData\Roaming\Titanium\mobilesdk\win32\2.1.2.GA\android\titanium.jar => org/appcelerator/titanium/res/drawable/btn_check_buttonless_on_48.png
+[DEBUG] from JAR C:\Users\cprice\AppData\Roaming\Titanium\mobilesdk\win32\2.1.2.GA\android\titanium.jar => org/appcelerator/titanium/res/drawable/btn_more.png
+[DEBUG] from JAR C:\Users\cprice\AppData\Roaming\Titanium\mobilesdk\win32\2.1.2.GA\android\titanium.jar => org/appcelerator/titanium/res/drawable/btn_more_18.png
+[DEBUG] from JAR C:\Users\cprice\AppData\Roaming\Titanium\mobilesdk\win32\2.1.2.GA\android\titanium.jar => org/appcelerator/titanium/res/drawable/btn_more_48.png
+[DEBUG] from JAR C:\Users\cprice\AppData\Roaming\Titanium\mobilesdk\win32\2.1.2.GA\android\titanium.jar => org/appcelerator/titanium/res/drawable/btn_picker_normal.9.png
+[DEBUG] from JAR C:\Users\cprice\AppData\Roaming\Titanium\mobilesdk\win32\2.1.2.GA\android\titanium.jar => org/appcelerator/titanium/res/drawable/btn_picker_pressed.9.png
+[DEBUG] from JAR C:\Users\cprice\AppData\Roaming\Titanium\mobilesdk\win32\2.1.2.GA\android\titanium.jar => org/appcelerator/titanium/res/drawable/btn_picker_selected.9.png
+[DEBUG] from JAR C:\Users\cprice\AppData\Roaming\Titanium\mobilesdk\win32\2.1.2.GA\android\titanium.jar => org/appcelerator/titanium/res/drawable/default_icon.png
+[DEBUG] from JAR C:\Users\cprice\AppData\Roaming\Titanium\mobilesdk\win32\2.1.2.GA\android\titanium.jar => org/appcelerator/titanium/res/drawable/photoDefault.png
+[DEBUG] from JAR C:\Users\cprice\AppData\Roaming\Titanium\mobilesdk\win32\2.1.2.GA\android\thirdparty.jar => org/apache/Commons-NOTICE.txt
+[DEBUG] from JAR C:\Users\cprice\AppData\Roaming\Titanium\mobilesdk\win32\2.1.2.GA\android\thirdparty.jar => org/apache/HttpComponents-NOTICE.txt
+[DEBUG] from JAR C:\Users\cprice\AppData\Roaming\Titanium\mobilesdk\win32\2.1.2.GA\android\thirdparty.jar => org/apache/mime4j-NOTICE.txt
+[DEBUG] installing native SDK libs
+[DEBUG] Waiting for device to be ready ...
+[TRACE] adb devices returned 2 devices/emulators
+[DEBUG] Device connected... (waited 0 seconds)
+[DEBUG] waited 0.080000 seconds on emulator to get ready
+[INFO] Installing application on emulator
+[INFO] Launching application ... property-finder-titanium
+[TRACE] Launch output: Starting: Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.scottlogic.propertyfinder/.PropertyFinderTitaniumActivity }
+
+[INFO] Deployed property-finder-titanium ... Application should be running.
