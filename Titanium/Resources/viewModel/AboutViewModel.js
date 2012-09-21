@@ -1,21 +1,19 @@
-define("viewModel/AboutViewModel", function (require) {
-  var util = require("viewModel/util");
+var util = require("viewModel/util");
 
-  function AboutViewModel(propertySearchViewModel) {
-    /// <summary>
-    /// The view model that backs the about page
-    /// </summary>
+function AboutViewModel(propertySearchViewModel) {
+	/// <summary>
+	/// The view model that backs the about page
+	/// </summary>
 
-    // ----- framework fields
-  
-    this.template = "aboutView";
-    this.factoryName = "AboutViewModel";
+	// ----- framework fields
 
-    // ----- public fields
-    this.locationEnabled = propertySearchViewModel.locationEnabled;
-  }
+	this.template = "aboutView";
+	this.factoryName = "AboutViewModel";
 
-  util.registerFactory("AboutViewModel", AboutViewModel);
+	// ----- public fields
+	this.locationEnabled = propertySearchViewModel.locationEnabled;
+}
 
-  return AboutViewModel;
-});
+util.registerFactory("AboutViewModel", AboutViewModel);
+
+module.exports = AboutViewModel; 

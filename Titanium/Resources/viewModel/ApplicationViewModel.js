@@ -70,7 +70,7 @@ function ApplicationViewModel() {
 		/// </summary>
 
 		var
-		i, viewModel, state = Global.JSON.parse(stateString);
+		i, viewModel, state = JSON.parse(stateString);
 
 		that.viewModelBackStack.removeAll();
 		for ( i = 0; i < state.length; i++) {

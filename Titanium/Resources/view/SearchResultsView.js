@@ -13,7 +13,7 @@ module.exports = function(viewModel) {
 		backgroundColor : 'white'
 	});
 	tableView.addEventListener('click', function(e) {
-		e.rowData.viewModel.select();
+		viewModel.properties()[e.index].select();
 	});
 
 	window.add(tableView);
@@ -64,7 +64,6 @@ module.exports = function(viewModel) {
 				top : 46,
 				left : 100
 			}));
-			row.viewModel = property;
 			return row;
 		}));
 	}

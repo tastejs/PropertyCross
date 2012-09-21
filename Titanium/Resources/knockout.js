@@ -1,6 +1,29 @@
 // Knockout JavaScript library v2.1.0
 // (c) Steven Sanderson - http://knockoutjs.com/
 // License: MIT (http://www.opensource.org/licenses/mit-license.php)
+// keep knockout happy 
+
+
+
+var window = (function() {
+	return this;
+}).call(), document = {
+	createElement : function() {
+		return {
+			getElementsByTagName : function() {
+				return [];
+			}
+		}
+	},
+	createComment : function() {
+		return {
+			text : "<!--test-->"
+		};
+	}
+}, navigator = {
+	userAgent : ' '
+}; 
+
 
 (function(window,document,navigator,undefined){
 function m(w){throw w;}var n=void 0,p=!0,s=null,t=!1;function A(w){return function(){return w}};function E(w){function B(b,c,d){d&&c!==a.k.r(b)&&a.k.S(b,c);c!==a.k.r(b)&&a.a.va(b,"change")}var a="undefined"!==typeof w?w:{};a.b=function(b,c){for(var d=b.split("."),f=a,g=0;g<d.length-1;g++)f=f[d[g]];f[d[d.length-1]]=c};a.B=function(a,c,d){a[c]=d};a.version="2.1.0";a.b("version",a.version);a.a=new function(){function b(b,c){if("input"!==a.a.o(b)||!b.type||"click"!=c.toLowerCase())return t;var e=b.type;return"checkbox"==e||"radio"==e}var c=/^(\s|\u00A0)+|(\s|\u00A0)+$/g,d={},f={};d[/Firefox\/2/i.test(navigator.userAgent)?
