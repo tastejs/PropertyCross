@@ -1,6 +1,6 @@
 ﻿define("viewModel/util", function (require) {
-  var $ = require("lib/jquery");
-  var ko = require("lib/knockout");
+  var _ = require("underscore");
+  var ko = require("knockout");
   var viewModels = {};
 
   return {
@@ -46,8 +46,8 @@
 
             // check if this is an array observable
             if (unwrapped instanceof Array) {
-              $.each(propertyValue, function () {
-                viewModel[property].push(hydrateObject(this));
+              _.each(propertyValue, function (value) {
+                viewModel[property].push(hydrateObject(value));
               });
             } else {
               // otherwise set the value via the observable setter

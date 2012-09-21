@@ -3,7 +3,7 @@ var Property = require("model/Property");
 var Location = require("model/Location");
 var PropertyDataSourceResponse = require("model/PropertyDataSourceResponse");
 var PropertySearchResponseCode = require("model/PropertySearchResponseCode");
-var JSONDataSource = require("model/JSONFileDataSource");
+var JSONDataSource = require(Ti.Platform.osname == 'mobileweb' ? "model/JSONFileDataSource" : "model/JSONDataSource");
 
 function PropertyDataSource(config) {
 	/// <summary>

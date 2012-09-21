@@ -1,64 +1,46 @@
 var _ = require("underscore");
 var propertyDataSource = require("model/PropertyDataSource").Instance;
+var SearchResultsViewModel = require("viewModel/SearchResultsViewModel");
+var SearchResultsView = require("view/SearchResultsView");
+var PropertyView = require("view/PropertyView");
+var application = require("viewModel/ApplicationViewModel").Instance;
 
-var win = Titanium.UI.createWindow();
-
-propertyDataSource.findProperties("location", "pagenumber", function(response) {
-	var rows = _.map(response.data, function (property) {
-		// create first row
-		var row = Ti.UI.createTableViewRow();
-		row.height = 82;
-		row.add(Ti.UI.createView({
-			backgroundImage : property.thumbnailUrl,
-			top : 11,
-			left : 6,
-			width : 80,
-			height : 60
-		}));
-		row.add(Titanium.UI.createLabel({
-			text : '£ ' + property.price,
-			color : '#2F3E46',
-			textAlign : 'left',
-			font : {
-				fontSize : 16,
-				fontWeight : 'bold'
-			},
-			width : 'auto',
-			height : 'auto',
-			top : 21,
-			left : 100
-		}));
-		row.add(Titanium.UI.createLabel({
-			text : property.title + ' ' + property.bedrooms + ' bed ' + property.propertyType,
-			color : '#2F3E46',
-			textAlign : 'left',
-			font : {
-				fontSize : 12,
-				fontWeight : 'bold'
-			},
-			width : 'auto',
-			height : 'auto',
-			top : 46,
-			left : 100
-		}));
-		return row;
-	});
-
-	var tableView;
-
-	//
-	// create table view (
-	//
-	tableView = Titanium.UI.createTableView({
-		data : rows,
-		filterAttribute : 'filter',
-		backgroundColor : 'white'
-	});
-
-	win.add(tableView);
-
-	win.open(); 
-
+propertyDataSource.findPropertiesByCoordinate(54.98, -1.61, 0, function(response) {
+	var viewModel = new SearchResultsViewModel();
+	//viewModel.initialize(that.searchLocation, results);
+	viewModel.initialize("Newcastle upon Tyne", response);
+	application.navigateTo(viewModel);
+	// var searchResultsView = new SearchResultsView(viewModel);
+	// // win.add(searchResultsView.window);
+	// var propertyView = new PropertyView(viewModel.properties()[0]);
+	// propertyView.window.open();
 });
 
+var previousBackStackLength = 0;
+var viewStack = [];
 
+// subscribe to changes in the current view model, creating
+// the required view
+application.currentViewModel.subscribe(function(viewModel) {
+	var backStackLength = application.viewModelBackStack().length, view;
+
+	if (viewModel !== undefined) {
+
+		if (previousBackStackLength < backStackLength) {
+			// forward navigation
+			var upperCamelCase = viewModel.template[0].toUpperCase() + viewModel.template.substr(1);
+			view = new (require("view/" + upperCamelCase))(viewModel);
+			viewStack.push(view);
+			view.window.open();
+
+		} else {
+			// backward navigation
+			view = viewStack.pop();
+			view.window.close();
+			view.dispose();
+		}
+
+	}
+	previousBackStackLength = backStackLength;
+
+});
