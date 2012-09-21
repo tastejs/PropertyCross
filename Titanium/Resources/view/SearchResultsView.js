@@ -20,11 +20,7 @@ module.exports = function(viewModel) {
 	this.window = window;
 
 	function updateRows(properties) {
-		while (tableView.data.length) {
-			tableView.deleteRow(0);
-		}
-
-		tableView.appendRow(_.map(properties, function(property) {
+		tableView.setData(_.map(properties, function(property) {
 			// create first row
 			var row = Ti.UI.createTableViewRow();
 			row.height = 82;

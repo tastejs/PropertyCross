@@ -42,6 +42,7 @@ module.exports = function(viewModel) {
 	var goButton = Titanium.UI.createButton({
 		title : 'Go',
 		top : 150,
+		left : 15,
 		width : 100,
 		height : 50
 	});
@@ -51,6 +52,19 @@ module.exports = function(viewModel) {
 		viewModel.executeSearch();
 	});
 	view.add(goButton);
+
+	var myLocationButton = Titanium.UI.createButton({
+		title : 'My Location',
+		top : 150,
+		width : 100,
+		height : 50
+	});
+	myLocationButton.addEventListener('click', function(e) {
+		// ensure the keyboard is hidden
+		textField.blur();
+		viewModel.searchMyLocation();
+	});
+	view.add(myLocationButton);
 
 	var userMessage = Titanium.UI.createLabel({
 		text : "",
@@ -68,9 +82,59 @@ module.exports = function(viewModel) {
 		userMessage.text = newValue;
 	});
 	view.add(userMessage);
+	
+	var recentSearchesLabel = Titanium.UI.createLabel({
+		text : "Recent Searches",
+		color : '#2F3E46',
+		textAlign : 'left',
+		font : {
+			fontSize : 19,
+			fontWeight: 'bold'
+		},
+		width : 'auto',
+		height : 'auto',
+		top : 250,
+		left : 15
+	});
+	view.add(recentSearchesLabel);
+	
+	var tableView = Titanium.UI.createTableView({
+		backgroundColor : 'white',
+		width : 'auto',
+		height : 'auto',
+		top : 300,
+		left : 15
+	});
+	tableView.addEventListener('click', function(e) {
+		viewModel.selectLocation.call(viewModel.recentSearches()[e.index]);
+	});
+	function updateRecentSearches(items) {
+		tableView.setData(_.map(items, function(item) {
+			// create first row
+			var row = Ti.UI.createTableViewRow();
+			row.height = 82;
+			// tip the abstraction off that the rows have the same layout
+			row.className = 'myrows';
+			row.add(Titanium.UI.createLabel({
+				text : item.displayString,
+				color : '#2F3E46',
+				textAlign : 'left',
+				font : {
+					fontSize : 16,
+					fontWeight : 'bold'
+				}
+			}));
+			return row;
+		}));
+	}
+	var recentSearchesSubscription = viewModel.recentSearches.subscribe(function(newValue) {
+		updateRecentSearches(newValue);
+	});
+	updateRecentSearches(viewModel.recentSearches());
+	view.add(tableView);
 
 	var activityIndicator = Ti.UI.createActivityIndicator({
-		message: 'Loading...',
+		message : 'Loading...',
 		top : 10,
 		left : 10,
 		height : 'auto',
@@ -81,8 +145,8 @@ module.exports = function(viewModel) {
 	if (Ti.Platform.name === 'iPhone OS') {
 		window.add(activityIndicator);
 	}
-	
-	var isSearchEnabledSubscription = viewModel.isSearchEnabled.subscribe(function (newValue) {
+
+	var isSearchEnabledSubscription = viewModel.isSearchEnabled.subscribe(function(newValue) {
 		if (newValue) {
 			activityIndicator.hide();
 		} else {
@@ -96,6 +160,7 @@ module.exports = function(viewModel) {
 	this.dispose = function() {
 		searchDisplayStringSubscription.dispose();
 		userMessageSubscription.dispose();
+		recentSearchesSubscription.dispose();
 		isSearchEnabledSubscription.dispose();
 	};
 };

@@ -151,6 +151,10 @@ function PropertySearchViewModel() {
 		}
 
 		function successCallback(result) {
+			if (result.error) {
+				that.userMessage("Unable to detect current location. Please ensure location is turned on in your phone settings and try again.");
+				return;
+			}
 			var location = new GeolocationViewModel();
 			location.initialise(result.coords.latitude, result.coords.longitude);
 
@@ -162,12 +166,7 @@ function PropertySearchViewModel() {
 			that.executeSearch();
 		}
 
-		function errorCallback() {
-			that.userMessage("Unable to detect current location. Please ensure location is turned on in your phone settings and try again.");
-		}
-
-
-		navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+		Titanium.Geolocation.getCurrentPosition(successCallback);
 	};
 
 	this.selectLocation = function() {
