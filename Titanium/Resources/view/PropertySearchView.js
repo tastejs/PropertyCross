@@ -38,7 +38,7 @@ module.exports = function(viewModel) {
 		viewModel.searchDisplayString(textField.value);
 	});
 	view.add(textField);
-	
+
 	var goButton = Titanium.UI.createButton({
 		title : 'Go',
 		top : 150,
@@ -64,17 +64,38 @@ module.exports = function(viewModel) {
 		top : 210,
 		left : 15
 	});
-	var userMessageSubscription = viewModel.userMessage.subscribe(function (newValue) {
+	var userMessageSubscription = viewModel.userMessage.subscribe(function(newValue) {
 		userMessage.text = newValue;
 	});
 	view.add(userMessage);
 
+	var activityIndicator = Ti.UI.createActivityIndicator({
+		message: 'Loading...',
+		top : 10,
+		left : 10,
+		height : 'auto',
+		width : 'auto'
+	});
+
+	// On iOS, the activity indicator must be added to a window or view for it to appear
+	if (Ti.Platform.name === 'iPhone OS') {
+		window.add(activityIndicator);
+	}
+	
+	var isSearchEnabledSubscription = viewModel.isSearchEnabled.subscribe(function (newValue) {
+		if (newValue) {
+			activityIndicator.hide();
+		} else {
+			activityIndicator.show();
+		}
+	});
+
 	window.add(view);
 	this.window = window;
-
 
 	this.dispose = function() {
 		searchDisplayStringSubscription.dispose();
 		userMessageSubscription.dispose();
+		isSearchEnabledSubscription.dispose();
 	};
 };
