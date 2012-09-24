@@ -15,10 +15,7 @@ module.exports = {
 
 		// if state is a primitive type, rather than an object - no
 		// need to hydrate;
-		// can't use instanceof, in Titanium this module has a 
-		// different Object to where state was instantiated because
-		// it is running in a different context
-		if ( typeof(state) !== "object") {
+		if ( !_.isObject(state) ) {
 			return state;
 		}
 
@@ -35,7 +32,7 @@ module.exports = {
 			propertyValue = state[property];
 
 			// if the view model property is a function - it might be a KO observable
-			if (viewModel[property] instanceof Function) {
+			if (_.isFunction(viewModel[property])) {
 
 				// check if this is a KO observable
 				unwrapped = ko.utils.unwrapObservable(viewModel[property]);
@@ -45,7 +42,7 @@ module.exports = {
 				if (viewModel[property] !== unwrapped) {
 
 					// check if this is an array observable
-					if ( unwrapped instanceof Array) {
+					if ( _.isArray(unwrapped)) {
 						_.each(propertyValue, function(value) {
 							viewModel[property].push(hydrateObject(value));
 						});
