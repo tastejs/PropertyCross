@@ -76,6 +76,12 @@ module.exports = function(viewModel) {
 	});
 	view.add(userMessage);
 
+	var recentSearchesView = Titanium.UI.createView({
+		backgroundColor : 'white',
+		layout : 'vertical',
+		height : Titanium.UI.SIZE
+	});
+
 	var recentSearchesLabel = Titanium.UI.createLabel({
 		text : "Recent Searches",
 		color : '#2F3E46',
@@ -86,7 +92,7 @@ module.exports = function(viewModel) {
 		},
 		width : Titanium.UI.FILL
 	});
-	view.add(recentSearchesLabel);
+	recentSearchesView.add(recentSearchesLabel);
 
 	var tableView = Titanium.UI.createTableView({
 		backgroundColor : 'white',
@@ -102,6 +108,7 @@ module.exports = function(viewModel) {
 		tableView.setData(_.map(items, function(item) {
 			// create first row
 			var row = Ti.UI.createTableViewRow();
+			row.height = '82dip';
 			// tip the abstraction off that the rows have the same layout
 			row.className = 'myrows';
 			row.add(Titanium.UI.createLabel({
@@ -111,17 +118,103 @@ module.exports = function(viewModel) {
 				font : {
 					fontSize : '16dip',
 					fontWeight : 'bold'
-				}
+				},
+				left : 0
+			}));
+			row.add(Titanium.UI.createLabel({
+				text : item.totalResults,
+				color : '#2F3E46',
+				textAlign : 'right',
+				font : {
+					fontSize : '16dip',
+					fontWeight : 'bold'
+				},
+				right : 0
 			}));
 			return row;
 		}));
 	}
 
-	var recentSearchesSubscription = viewModel.recentSearches.subscribe(function(newValue) {
-		updateRecentSearches(newValue);
-	});
+	var recentSearchesSubscription = viewModel.recentSearches.subscribe(updateRecentSearches);
 	updateRecentSearches(viewModel.recentSearches());
-	view.add(tableView);
+	recentSearchesView.add(tableView);
+
+	function toggleRecentSearches() {
+		if (viewModel.recentSearches().length > 0 && viewModel.locations().length === 0) {
+			view.add(recentSearchesView);
+		} else {
+			view.remove(recentSearchesView);
+		}
+	}
+
+	var recentSearchesVisibilityRecentSearchesSubscription = viewModel.recentSearches.subscribe(toggleRecentSearches);
+	var recentSearchesVisibilityLocationsSubscription = viewModel.locations.subscribe(toggleRecentSearches);
+	toggleRecentSearches();
+
+	var locationsView = Titanium.UI.createView({
+		backgroundColor : 'white',
+		layout : 'vertical',
+		height : Titanium.UI.SIZE
+	});
+
+	var locationsLabel = Titanium.UI.createLabel({
+		text : "Please select a location below:",
+		color : '#2F3E46',
+		textAlign : 'left',
+		font : {
+			fontSize : '19dip',
+			fontWeight : 'bold'
+		},
+		width : Titanium.UI.FILL
+	});
+	locationsView.add(locationsLabel);
+
+	var tableView = Titanium.UI.createTableView({
+		backgroundColor : 'white',
+		width : Titanium.UI.FILL,
+		height : Titanium.UI.SIZE
+	});
+	tableView.addEventListener('click', function(e) {
+		// ensure the keyboard is hidden
+		textField.blur();
+		viewModel.selectLocation.call(viewModel.locations()[e.index]);
+	});
+	function updateLocations(items) {
+		tableView.setData(_.map(items, function(item) {
+			// create first row
+			var row = Ti.UI.createTableViewRow();
+			row.height = '82dip';
+			// tip the abstraction off that the rows have the same layout
+			row.className = 'myrows';
+			row.add(Titanium.UI.createLabel({
+				text : item.displayString,
+				color : '#2F3E46',
+				textAlign : 'left',
+				font : {
+					fontSize : '16dip',
+					fontWeight : 'bold'
+				},
+				left : 0
+			}));
+			return row;
+		}));
+	}
+
+	var locationsSubscription = viewModel.locations.subscribe(updateLocations);
+	updateLocations(viewModel.locations());
+	locationsView.add(tableView);
+
+	function toggleLocations() {
+		if (viewModel.locations().length > 0) {
+			view.add(locationsView);
+		} else {
+			view.remove(locationsView);
+		}
+	}
+
+	var locationsVisibilityRecentSearchesSubscription = viewModel.recentSearches.subscribe(toggleLocations);
+	var locationsVisibilityLocationsSubscription = viewModel.locations.subscribe(toggleLocations);
+	toggleLocations();
 
 	var activityIndicator = Ti.UI.createActivityIndicator({
 		message : 'Loading...',
@@ -150,5 +243,10 @@ module.exports = function(viewModel) {
 		userMessageSubscription.dispose();
 		recentSearchesSubscription.dispose();
 		isSearchEnabledSubscription.dispose();
+		recentSearchesVisibilityRecentSearchesSubscription.dispose();
+		recentSearchesVisibilityLocationsSubscription.dispose();
+		locationsSubscription.dispose();
+		locationsVisibilityRecentSearchesSubscription.dispose();
+		locationsVisibilityLocationsSubscription.dispose();
 	};
 };
