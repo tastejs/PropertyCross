@@ -3,11 +3,17 @@ var ko = require("knockout");
 
 module.exports = function(viewModel) {
 
-	var window = Titanium.UI.createWindow();
+	var window = Titanium.UI.createWindow({
+		backgroundColor : 'white'
+	});
 
 	var view = Titanium.UI.createView({
 		backgroundColor : 'white',
-		layout : 'vertical'
+		layout : 'vertical',
+		top : '6dip',
+		right : '6dip',
+		bottom : '6dip',
+		left : '6dip'
 	});
 
 	var instructions = Titanium.UI.createLabel({
@@ -41,7 +47,8 @@ module.exports = function(viewModel) {
 	});
 
 	var goButton = Titanium.UI.createButton({
-		title : 'Go'
+		title : 'Go',
+		width: '50%'
 	});
 	goButton.addEventListener('click', function(e) {
 		// ensure the keyboard is hidden
@@ -51,7 +58,8 @@ module.exports = function(viewModel) {
 	buttons.add(goButton);
 
 	var myLocationButton = Titanium.UI.createButton({
-		title : 'My Location'
+		title : 'My Location',
+		width: '50%'
 	});
 	myLocationButton.addEventListener('click', function(e) {
 		// ensure the keyboard is hidden
