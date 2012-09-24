@@ -3,6 +3,8 @@ var propertySearchViewModel = new (require("viewModel/PropertySearchViewModel"))
 function init() {
 
 	var _ = require("underscore");
+	var ko = require("knockout");
+	var util = require("viewModel/util");
 	var propertyDataSource = require("model/PropertyDataSource").Instance;
 	var SearchResultsViewModel = require("viewModel/SearchResultsViewModel");
 	var SearchResultsView = require("view/SearchResultsView");
@@ -42,6 +44,34 @@ function init() {
 		previousBackStackLength = backStackLength;
 
 	});
+
+	// handle changes in persistent state
+	function persistentStateChanged() {
+		var state = {
+			recentSearches : propertySearchViewModel.recentSearches,
+			favourites : propertySearchViewModel.favourites
+		}, jsonState = ko.toJSON(state);
+
+		Ti.App.Properties.setString('appState', jsonState);
+	}
+
+
+	propertySearchViewModel.favourites.subscribe(persistentStateChanged);
+	propertySearchViewModel.recentSearches.subscribe(persistentStateChanged);
+
+	var state = Ti.App.Properties.getString('appState');
+	if (state && ( state = JSON.parse(state))) {
+		if (state.favourites) {
+			_.each(state.favourites, function(item) {
+				propertySearchViewModel.favourites.push(util.hydrateObject(item));
+			});
+		}
+		if (state.recentSearches) {
+			_.each(state.recentSearches, function(item) {
+				propertySearchViewModel.recentSearches.push(util.hydrateObject(item));
+			});
+		}
+	}
 
 	application.navigateTo(propertySearchViewModel);
 

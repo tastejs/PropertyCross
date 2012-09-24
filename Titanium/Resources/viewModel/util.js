@@ -15,7 +15,10 @@ module.exports = {
 
 		// if state is a primitive type, rather than an object - no
 		// need to hydrate;
-		if (!( state instanceof Object)) {
+		// can't use instanceof, in Titanium this module has a 
+		// different Object to where state was instantiated because
+		// it is running in a different context
+		if ( typeof(state) !== "object") {
 			return state;
 		}
 
