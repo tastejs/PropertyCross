@@ -4,11 +4,9 @@ var ko = require("knockout");
 module.exports = function(viewModel) {
 
 	var window = Titanium.UI.createWindow({
-		backgroundColor : 'white'
 	});
 
 	var view = Titanium.UI.createView({
-		backgroundColor : 'white',
 		layout : 'vertical',
 		top : '6dip',
 		right : '6dip',
@@ -18,7 +16,6 @@ module.exports = function(viewModel) {
 
 	var price = Titanium.UI.createLabel({
 		text : '£ ' + viewModel.price,
-		color : '#2F3E46',
 		textAlign : 'left',
 		font : {
 			fontSize : '19dip',
@@ -30,7 +27,6 @@ module.exports = function(viewModel) {
 
 	var title = Titanium.UI.createLabel({
 		text : viewModel.title,
-		color : '#2F3E46',
 		textAlign : 'left',
 		font : {
 			fontSize : '16dip'
@@ -48,7 +44,6 @@ module.exports = function(viewModel) {
 
 	var description = Titanium.UI.createLabel({
 		text : viewModel.bedrooms + ' bed ' + viewModel.propertyType,
-		color : '#2F3E46',
 		textAlign : 'left',
 		font : {
 			fontSize : '16dip'

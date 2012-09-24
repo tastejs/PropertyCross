@@ -10,7 +10,6 @@ module.exports = function(viewModel) {
 	// create table view (
 	//
 	tableView = Titanium.UI.createTableView({
-		backgroundColor : 'white'
 	});
 	tableView.addEventListener('click', function(e) {
 		viewModel.properties()[e.index].select();
@@ -36,7 +35,6 @@ module.exports = function(viewModel) {
 			}));
 			row.add(Titanium.UI.createLabel({
 				text : '£ ' + property.price,
-				color : '#2F3E46',
 				textAlign : 'left',
 				font : {
 					fontSize : '16dip',
@@ -47,7 +45,6 @@ module.exports = function(viewModel) {
 			}));
 			row.add(Titanium.UI.createLabel({
 				text : property.title + ' ' + property.bedrooms + ' bed ' + property.propertyType,
-				color : '#2F3E46',
 				textAlign : 'left',
 				font : {
 					fontSize : '12dip',

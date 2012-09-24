@@ -4,11 +4,9 @@ var ko = require("knockout");
 module.exports = function(viewModel) {
 
 	var window = Titanium.UI.createWindow({
-		backgroundColor : 'white'
 	});
 
 	var view = Titanium.UI.createView({
-		backgroundColor : 'white',
 		layout : 'vertical',
 		top : '6dip',
 		right : '6dip',
@@ -18,7 +16,6 @@ module.exports = function(viewModel) {
 
 	var instructions = Titanium.UI.createLabel({
 		text : "Use the form below to search for houses to buy:",
-		color : '#2F3E46',
 		textAlign : 'left',
 		font : {
 			fontSize : '16dip'
@@ -29,7 +26,6 @@ module.exports = function(viewModel) {
 
 	var textField = Ti.UI.createTextField({
 		borderStyle : Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
-		color : '#336699',
 		width : Titanium.UI.FILL
 	});
 	var searchDisplayStringSubscription = viewModel.searchDisplayString.subscribe(function(newValue) {
@@ -41,7 +37,6 @@ module.exports = function(viewModel) {
 	view.add(textField);
 
 	var buttons = Titanium.UI.createView({
-		backgroundColor : 'white',
 		layout : 'horizontal',
 		height : Titanium.UI.SIZE
 	});
@@ -72,7 +67,6 @@ module.exports = function(viewModel) {
 
 	var userMessage = Titanium.UI.createLabel({
 		text : "",
-		color : '#2F3E46',
 		textAlign : 'left',
 		font : {
 			fontSize : '16dip'
@@ -85,14 +79,12 @@ module.exports = function(viewModel) {
 	view.add(userMessage);
 
 	var recentSearchesView = Titanium.UI.createView({
-		backgroundColor : 'white',
 		layout : 'vertical',
 		height : Titanium.UI.SIZE
 	});
 
 	var recentSearchesLabel = Titanium.UI.createLabel({
 		text : "Recent Searches",
-		color : '#2F3E46',
 		textAlign : 'left',
 		font : {
 			fontSize : '19dip',
@@ -103,7 +95,6 @@ module.exports = function(viewModel) {
 	recentSearchesView.add(recentSearchesLabel);
 
 	var tableView = Titanium.UI.createTableView({
-		backgroundColor : 'white',
 		width : Titanium.UI.FILL,
 		height : Titanium.UI.SIZE
 	});
@@ -116,12 +107,11 @@ module.exports = function(viewModel) {
 		tableView.setData(_.map(items, function(item) {
 			// create first row
 			var row = Ti.UI.createTableViewRow();
-			row.height = '82dip';
+			row.height = '41dip';
 			// tip the abstraction off that the rows have the same layout
 			row.className = 'myrows';
 			row.add(Titanium.UI.createLabel({
 				text : item.displayString,
-				color : '#2F3E46',
 				textAlign : 'left',
 				font : {
 					fontSize : '16dip',
@@ -131,7 +121,6 @@ module.exports = function(viewModel) {
 			}));
 			row.add(Titanium.UI.createLabel({
 				text : item.totalResults,
-				color : '#2F3E46',
 				textAlign : 'right',
 				font : {
 					fontSize : '16dip',
@@ -160,14 +149,12 @@ module.exports = function(viewModel) {
 	toggleRecentSearches();
 
 	var locationsView = Titanium.UI.createView({
-		backgroundColor : 'white',
 		layout : 'vertical',
 		height : Titanium.UI.SIZE
 	});
 
 	var locationsLabel = Titanium.UI.createLabel({
 		text : "Please select a location below:",
-		color : '#2F3E46',
 		textAlign : 'left',
 		font : {
 			fontSize : '19dip',
@@ -178,7 +165,6 @@ module.exports = function(viewModel) {
 	locationsView.add(locationsLabel);
 
 	var tableView = Titanium.UI.createTableView({
-		backgroundColor : 'white',
 		width : Titanium.UI.FILL,
 		height : Titanium.UI.SIZE
 	});
@@ -191,12 +177,11 @@ module.exports = function(viewModel) {
 		tableView.setData(_.map(items, function(item) {
 			// create first row
 			var row = Ti.UI.createTableViewRow();
-			row.height = '82dip';
+			row.height = '41dip';
 			// tip the abstraction off that the rows have the same layout
 			row.className = 'myrows';
 			row.add(Titanium.UI.createLabel({
 				text : item.displayString,
-				color : '#2F3E46',
 				textAlign : 'left',
 				font : {
 					fontSize : '16dip',

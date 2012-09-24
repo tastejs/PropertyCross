@@ -16,7 +16,6 @@ function createRow(imageUrl, title, description) {
 	}));
 	row.add(Titanium.UI.createLabel({
 		text : title,
-		color : '#2F3E46',
 		textAlign : 'left',
 		font : {
 			fontSize : '16dip',
@@ -27,7 +26,6 @@ function createRow(imageUrl, title, description) {
 	}));
 	row.add(Titanium.UI.createLabel({
 		text : description,
-		color : '#2F3E46',
 		textAlign : 'left',
 		font : {
 			fontSize : '12dip',
@@ -43,7 +41,6 @@ module.exports = function(viewModel) {
 
 	var window = Ti.UI.createWindow();
 	var tableView = Titanium.UI.createTableView({
-		backgroundColor : 'white'
 	});
 	tableView.addEventListener('click', function(e) {
 		if (e.index === viewModel.properties().length) {

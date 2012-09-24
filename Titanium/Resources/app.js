@@ -28,6 +28,11 @@ function init() {
 		var backStackLength = application.viewModelBackStack().length, view;
 
 		if (previousBackStackLength < backStackLength) {
+			// hide the previous view
+			var previousView = viewStack[viewStack.length - 1];
+			if (previousView) {
+				previousView.window.hide();
+			}
 			// forward navigation
 			var upperCamelCase = viewModel.template[0].toUpperCase() + viewModel.template.substr(1);
 			view = new (require("view/" + upperCamelCase))(viewModel);
@@ -49,6 +54,11 @@ function init() {
 			view = viewStack.pop();
 			view.window.close();
 			view.dispose();
+			// show the previous view
+			var previousView = viewStack[viewStack.length - 1];
+			if (previousView) {
+				previousView.window.show();
+			}
 		}
 
 		previousBackStackLength = backStackLength;
