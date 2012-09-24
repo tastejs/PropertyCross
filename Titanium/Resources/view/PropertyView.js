@@ -6,20 +6,18 @@ module.exports = function(viewModel) {
 	var window = Titanium.UI.createWindow();
 
 	var view = Titanium.UI.createView({
-		backgroundColor : 'white'
+		backgroundColor : 'white',
+		layout: 'vertical'
 	});
 
 	var price = Titanium.UI.createLabel({
 		color : '#2F3E46',
 		textAlign : 'left',
 		font : {
-			fontSize : 19,
+			fontSize : '19dip',
 			fontWeight : 'bold'
 		},
-		width : 'auto',
-		height : 'auto',
-		top : 15,
-		left : 15
+		width: Ti.UI.FILL
 	});
 	view.add(price);
 
@@ -27,19 +25,15 @@ module.exports = function(viewModel) {
 		color : '#2F3E46',
 		textAlign : 'left',
 		font : {
-			fontSize : 16
+			fontSize : '16dip'
 		},
-		width : 'auto',
-		height : 'auto',
-		top : 50,
-		left : 15
+		width: Ti.UI.FILL
 	});
 	view.add(title);
 
 	var image = Ti.UI.createImageView({
-		top : 75,
-		left : 15,
-		width: Titanium.UI.FILL
+		height: '50%',
+		width: Ti.UI.FILL
 	});
 	view.add(image);
 
@@ -47,11 +41,9 @@ module.exports = function(viewModel) {
 		color : '#2F3E46',
 		textAlign : 'left',
 		font : {
-			fontSize : 16
+			fontSize : '16dip'
 		},
-		width : 'auto',
-		height : 'auto',
-		left : 15
+		width: Ti.UI.FILL
 	});
 	view.add(description);
 

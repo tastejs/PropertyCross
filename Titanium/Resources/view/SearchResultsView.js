@@ -23,42 +23,38 @@ module.exports = function(viewModel) {
 		tableView.setData(_.map(properties, function(property) {
 			// create first row
 			var row = Ti.UI.createTableViewRow();
-			row.height = 82;
+			row.height = '82dip';
 			// tip the abstraction off that the rows have the same layout
 			row.className = 'myrows';
 			// use an image view rather than a plain view
 			row.add(Ti.UI.createImageView({
 				url : property.thumbnailUrl,
-				top : 11,
-				left : 6,
-				width : 80,
-				height : 60
+				top : '11dip',
+				left : '6dip',
+				width : '80dip',
+				height : '60dip'
 			}));
 			row.add(Titanium.UI.createLabel({
 				text : '£ ' + property.price,
 				color : '#2F3E46',
 				textAlign : 'left',
 				font : {
-					fontSize : 16,
+					fontSize : '16dip',
 					fontWeight : 'bold'
 				},
-				width : 'auto',
-				height : 'auto',
-				top : 21,
-				left : 100
+				top : '21dip',
+				left : '100dip'
 			}));
 			row.add(Titanium.UI.createLabel({
 				text : property.title + ' ' + property.bedrooms + ' bed ' + property.propertyType,
 				color : '#2F3E46',
 				textAlign : 'left',
 				font : {
-					fontSize : 12,
+					fontSize : '12dip',
 					fontWeight : 'bold'
 				},
-				width : 'auto',
-				height : 'auto',
-				top : 46,
-				left : 100
+				top : '46dip',
+				left : '100dip'
 			}));
 			return row;
 		}));
