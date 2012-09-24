@@ -7,6 +7,7 @@ function init() {
 	var util = require("viewModel/util");
 	var propertyDataSource = require("model/PropertyDataSource").Instance;
 	var SearchResultsViewModel = require("viewModel/SearchResultsViewModel");
+	var PropertyViewModel = require("viewModel/PropertyViewModel");
 	var SearchResultsView = require("view/SearchResultsView");
 	var PropertyView = require("view/PropertyView");
 	var application = require("viewModel/ApplicationViewModel").Instance;
@@ -25,13 +26,15 @@ function init() {
 			view = new (require("view/" + upperCamelCase))(viewModel);
 			viewStack.push(view);
 			// Android only - pressing back on the last screen should exit the application
-			view.window.addEventListener('android:back', function() {
-				if (application.backButtonRequired()) {
-					application.back();
-				} else {
-					Titanium.Android.currentActivity.finish();
-				}
-			});
+			if (Ti.Platform.osname === "android") {
+				view.window.addEventListener('android:back', function() {
+					if (application.backButtonRequired()) {
+						application.back();
+					} else {
+						Titanium.Android.currentActivity.finish();
+					}
+				});
+			}
 			view.window.open();
 
 		} else {
@@ -44,6 +47,42 @@ function init() {
 		previousBackStackLength = backStackLength;
 
 	});
+
+	// handle favourites
+	if (Ti.Platform.osname === "android") {
+		Titanium.Android.currentActivity.onCreateOptionsMenu = function(e) {
+			var menu = e.menu;
+			var menuItem = menu.add({
+				title : "Add to Favourites"
+			});
+			menuItem.addEventListener("click", function(e) {
+				var viewModel = application.currentViewModel();
+				propertySearchViewModel.addToFavourites(viewModel);
+			});
+			menuItem = menu.add({
+				title : "Remove from Favourites"
+			});
+			menuItem.addEventListener("click", function(e) {
+				var viewModel = application.currentViewModel();
+				propertySearchViewModel.addToFavourites(viewModel);
+			});
+			menuItem = menu.add({
+				title : "View Favourites"
+			});
+			menuItem.addEventListener("click", function(e) {
+				propertySearchViewModel.viewFavourites();
+			});
+		};
+
+		Titanium.Android.currentActivity.onPrepareOptionsMenu = function(e) {
+			var menu = e.menu;
+			var viewModel = application.currentViewModel();
+			var isPropertyViewModel = viewModel instanceof PropertyViewModel;
+			menu.items[0].visible = isPropertyViewModel && !viewModel.isFavourite();
+			menu.items[1].visible = isPropertyViewModel && viewModel.isFavourite();
+			menu.items[2].visible = !isPropertyViewModel;
+		};
+	}
 
 	// handle changes in persistent state
 	function persistentStateChanged() {
