@@ -7,7 +7,7 @@ module.exports = function(viewModel) {
 
 	var view = Titanium.UI.createView({
 		backgroundColor : 'white',
-		layout: 'vertical'
+		layout : 'vertical'
 	});
 
 	var instructions = Titanium.UI.createLabel({
@@ -17,14 +17,14 @@ module.exports = function(viewModel) {
 		font : {
 			fontSize : '16dip'
 		},
-		width:  Titanium.UI.FILL
+		width : Titanium.UI.FILL
 	});
 	view.add(instructions);
 
 	var textField = Ti.UI.createTextField({
 		borderStyle : Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
 		color : '#336699',
-		width:  Titanium.UI.FILL
+		width : Titanium.UI.FILL
 	});
 	var searchDisplayStringSubscription = viewModel.searchDisplayString.subscribe(function(newValue) {
 		textField.value = newValue;
@@ -36,8 +36,8 @@ module.exports = function(viewModel) {
 
 	var buttons = Titanium.UI.createView({
 		backgroundColor : 'white',
-		layout: 'horizontal',
-		height: Titanium.UI.SIZE
+		layout : 'horizontal',
+		height : Titanium.UI.SIZE
 	});
 
 	var goButton = Titanium.UI.createButton({
@@ -59,7 +59,7 @@ module.exports = function(viewModel) {
 		viewModel.searchMyLocation();
 	});
 	buttons.add(myLocationButton);
-	
+
 	view.add(buttons);
 
 	var userMessage = Titanium.UI.createLabel({
@@ -69,31 +69,33 @@ module.exports = function(viewModel) {
 		font : {
 			fontSize : '16dip'
 		},
-		width:  Titanium.UI.FILL
+		width : Titanium.UI.FILL
 	});
 	var userMessageSubscription = viewModel.userMessage.subscribe(function(newValue) {
 		userMessage.text = newValue;
 	});
 	view.add(userMessage);
-	
+
 	var recentSearchesLabel = Titanium.UI.createLabel({
 		text : "Recent Searches",
 		color : '#2F3E46',
 		textAlign : 'left',
 		font : {
 			fontSize : '19dip',
-			fontWeight: 'bold'
+			fontWeight : 'bold'
 		},
-		width:  Titanium.UI.FILL
+		width : Titanium.UI.FILL
 	});
 	view.add(recentSearchesLabel);
-	
+
 	var tableView = Titanium.UI.createTableView({
 		backgroundColor : 'white',
-		width:  Titanium.UI.FILL,
-		height:  Titanium.UI.SIZE
+		width : Titanium.UI.FILL,
+		height : Titanium.UI.SIZE
 	});
 	tableView.addEventListener('click', function(e) {
+		// ensure the keyboard is hidden
+		textField.blur();
 		viewModel.selectLocation.call(viewModel.recentSearches()[e.index]);
 	});
 	function updateRecentSearches(items) {
@@ -114,6 +116,7 @@ module.exports = function(viewModel) {
 			return row;
 		}));
 	}
+
 	var recentSearchesSubscription = viewModel.recentSearches.subscribe(function(newValue) {
 		updateRecentSearches(newValue);
 	});
@@ -122,8 +125,8 @@ module.exports = function(viewModel) {
 
 	var activityIndicator = Ti.UI.createActivityIndicator({
 		message : 'Loading...',
-		width:  Titanium.UI.FILL,
-		height:  Titanium.UI.FILL
+		width : Titanium.UI.FILL,
+		height : Titanium.UI.FILL
 	});
 
 	// On iOS, the activity indicator must be added to a window or view for it to appear

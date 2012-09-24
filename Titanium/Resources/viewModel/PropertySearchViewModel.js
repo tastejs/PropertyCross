@@ -208,7 +208,7 @@ function PropertySearchViewModel() {
 
 		// check if it already favourite
 		_.each(that.favourites(), function(item) {
-			if (this.guid === guid) {
+			if (item.guid === guid) {
 				existingFavourite = item;
 			}
 		});
