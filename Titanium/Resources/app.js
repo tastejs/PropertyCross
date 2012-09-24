@@ -1,4 +1,11 @@
+// create the top-level view model
+// N.B. This is kept as a global to avoid re-engineering the whole
+// project and losing the focus of this article. However, this seems
+// to be a hack to allow global state (i.e. favourites) to be stored
+// somewhere other than the application level (i.e. in the
+// ApplicationViewModel).
 var propertySearchViewModel = new (require("viewModel/PropertySearchViewModel"))();
+propertySearchViewModel.maxRecentSearch = 3;
 
 function init() {
 
