@@ -95,7 +95,7 @@ module.exports = function(viewModel) {
 
 	var tableView = Titanium.UI.createTableView({
 		width : Titanium.UI.FILL,
-		height : Titanium.UI.SIZE,
+		bottom : 0,
 		top : '6dip'
 	});
 	tableView.addEventListener('click', function(e) {
@@ -174,7 +174,7 @@ module.exports = function(viewModel) {
 
 	var tableView = Titanium.UI.createTableView({
 		width : Titanium.UI.FILL,
-		height : Titanium.UI.SIZE,
+		bottom : 0,
 		top : '6dip'
 	});
 	tableView.addEventListener('click', function(e) {
