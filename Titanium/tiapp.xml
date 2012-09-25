@@ -9,7 +9,7 @@
     </deployment-targets>
     <sdk-version>2.1.2.GA</sdk-version>
     <id>com.scottlogic.propertyfinder</id>
-    <name>property-finder-titanium</name>
+    <name>Property Finder</name>
     <version>1.0</version>
     <publisher>cprice</publisher>
     <url>http://www.scottlogic.co.uk</url>
@@ -22,7 +22,7 @@
     <statusbar-hidden>false</statusbar-hidden>
     <fullscreen>false</fullscreen>
     <navbar-hidden>false</navbar-hidden>
-    <analytics>true</analytics>
+    <analytics>false</analytics>
     <guid>fec9bf47-b927-455b-a29d-92a1512298d9</guid>
     <property name="ti.ui.defaultunit">system</property>
     <iphone>
