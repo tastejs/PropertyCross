@@ -14,6 +14,7 @@ function init() {
 	var util = require("viewModel/util");
 	var propertyDataSource = require("model/PropertyDataSource").Instance;
 	var SearchResultsViewModel = require("viewModel/SearchResultsViewModel");
+	var FavouritesViewModel = require("viewModel/FavouritesViewModel");
 	var PropertyViewModel = require("viewModel/PropertyViewModel");
 	var SearchResultsView = require("view/SearchResultsView");
 	var PropertyView = require("view/PropertyView");
@@ -21,6 +22,7 @@ function init() {
 
 	var previousBackStackLength = 0;
 	var viewStack = [];
+	var nav;
 
 	// subscribe to changes in the current view model, creating
 	// the required view
@@ -28,11 +30,6 @@ function init() {
 		var backStackLength = application.viewModelBackStack().length, view;
 
 		if (previousBackStackLength < backStackLength) {
-			// hide the previous view
-			var previousView = viewStack[viewStack.length - 1];
-			if (previousView) {
-				previousView.window.hide();
-			}
 			// forward navigation
 			var upperCamelCase = viewModel.template[0].toUpperCase() + viewModel.template.substr(1);
 			view = new (require("view/" + upperCamelCase))(viewModel);
@@ -47,18 +44,68 @@ function init() {
 					}
 				});
 			}
-			view.window.open();
+			if (Ti.Platform.osname === "iphone") {
+				if (!nav) {
+					var root = Titanium.UI.createWindow({
+						backgroundColor : "#ffffff"
+					});
+					nav = Titanium.UI.iPhone.createNavigationGroup({
+						window : view.window
+					});
+					root.add(nav);
+					root.open();
+				} else {
+					view.window.addEventListener('close', function() {
+						application.back();
+					});
+					nav.open(view.window);
+				}
+				if (viewModel instanceof PropertyViewModel) {
+					var toggleFavouriteButton = Titanium.UI.createButton({
+						title : 'Fave'
+					});
+					toggleFavouriteButton.addEventListener('click', function() {
+						var viewModel = application.currentViewModel();
+						propertySearchViewModel.addToFavourites(viewModel);
+					});
+					view.window.setRightNavButton(toggleFavouriteButton);
+					function updateToggleFavouriteButton(isFavourite) {
+						toggleFavouriteButton.title = isFavourite ? 'RFave' : 'AFave';
+					}
+					viewModel.isFavourite.subscribe(updateToggleFavouriteButton);
+					updateToggleFavouriteButton(viewModel.isFavourite());
+				} else if (!(viewModel instanceof FavouritesViewModel)){
+					var viewFavouritesButton = Titanium.UI.createButton({
+						title : 'Fave'
+					});
+					viewFavouritesButton.addEventListener('click', function() {
+						propertySearchViewModel.viewFavourites();
+					});
+					view.window.setRightNavButton(viewFavouritesButton);
+				}
+			} else {
+				// hide the previous view
+				var previousView = viewStack[viewStack.length - 2];
+				if (previousView) {
+					previousView.window.hide();
+				}
+				view.window.open();
+			}
 
 		} else {
 			// backward navigation
 			view = viewStack.pop();
-			view.window.close();
-			view.dispose();
-			// show the previous view
-			var previousView = viewStack[viewStack.length - 1];
-			if (previousView) {
-				previousView.window.show();
+			if (Ti.Platform.osname === "iphone") {
+
+			} else {
+				view.window.close();
+				// show the previous view
+				var previousView = viewStack[viewStack.length - 1];
+				if (previousView) {
+					previousView.window.show();
+				}
 			}
+			view.dispose();
 		}
 
 		previousBackStackLength = backStackLength;
