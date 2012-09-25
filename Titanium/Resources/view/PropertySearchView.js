@@ -106,7 +106,9 @@ module.exports = function(viewModel) {
 	function updateRecentSearches(items) {
 		tableView.setData(_.map(items, function(item) {
 			// create first row
-			var row = Ti.UI.createTableViewRow();
+			var row = Ti.UI.createTableViewRow({
+				hasChild : Ti.Platform.osname === "iphone"
+			});
 			row.height = '41dip';
 			// tip the abstraction off that the rows have the same layout
 			row.className = 'myrows';
@@ -176,7 +178,9 @@ module.exports = function(viewModel) {
 	function updateLocations(items) {
 		tableView.setData(_.map(items, function(item) {
 			// create first row
-			var row = Ti.UI.createTableViewRow();
+			var row = Ti.UI.createTableViewRow({
+				hasChild : Ti.Platform.osname === "iphone"
+			});
 			row.height = '41dip';
 			// tip the abstraction off that the rows have the same layout
 			row.className = 'myrows';

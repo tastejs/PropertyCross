@@ -21,7 +21,9 @@ module.exports = function(viewModel) {
 	function updateRows(properties) {
 		tableView.setData(_.map(properties, function(property) {
 			// create first row
-			var row = Ti.UI.createTableViewRow();
+			var row = Ti.UI.createTableViewRow({
+				hasChild: Ti.Platform.osname === "iphone"
+			});
 			row.height = '82dip';
 			// tip the abstraction off that the rows have the same layout
 			row.className = 'myrows';

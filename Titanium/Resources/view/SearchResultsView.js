@@ -2,7 +2,9 @@ var _ = require("underscore");
 var ko = require("knockout");
 
 function createRow(imageUrl, title, description) {
-	var row = Ti.UI.createTableViewRow();
+	var row = Ti.UI.createTableViewRow({
+		hasChild: Ti.Platform.osname === "iphone"
+	});
 	row.height = '82dip';
 	// tip the abstraction off that the rows have the same layout
 	row.className = 'myrows';
