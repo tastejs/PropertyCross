@@ -4,6 +4,7 @@ var ko = require("knockout");
 module.exports = function(viewModel) {
 
 	var window = Titanium.UI.createWindow({
+		title: "Details"
 	});
 
 	var view = Titanium.UI.createView({

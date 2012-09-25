@@ -41,9 +41,10 @@ function createRow(imageUrl, title, description) {
 
 module.exports = function(viewModel) {
 
-	var window = Ti.UI.createWindow();
-	var tableView = Titanium.UI.createTableView({
+	var window = Ti.UI.createWindow({
+		title: "Results"
 	});
+	var tableView = Titanium.UI.createTableView();
 	tableView.addEventListener('click', function(e) {
 		if (e.index === viewModel.properties().length) {
 			viewModel.loadMore();

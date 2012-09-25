@@ -4,14 +4,8 @@ var ko = require("knockout");
 module.exports = function(viewModel) {
 
 	var window = Titanium.UI.createWindow({
-	});
-
-	var view = Titanium.UI.createView({
-		layout : 'vertical',
-		top : '6dip',
-		right : '6dip',
-		bottom : '6dip',
-		left : '6dip'
+		title : 'Property Finder',
+		layout : 'vertical'
 	});
 
 	var instructions = Titanium.UI.createLabel({
@@ -20,13 +14,17 @@ module.exports = function(viewModel) {
 		font : {
 			fontSize : '16dip'
 		},
-		width : Titanium.UI.FILL
+		left : '6dip',
+		right : '6dip',
+		top : '6dip'
 	});
-	view.add(instructions);
+	window.add(instructions);
 
 	var textField = Ti.UI.createTextField({
 		borderStyle : Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
-		width : Titanium.UI.FILL
+		left : '6dip',
+		right : '6dip',
+		top : '6dip'
 	});
 	var searchDisplayStringSubscription = viewModel.searchDisplayString.subscribe(function(newValue) {
 		textField.value = newValue;
@@ -34,36 +32,33 @@ module.exports = function(viewModel) {
 	textField.addEventListener('change', function(e) {
 		viewModel.searchDisplayString(textField.value);
 	});
-	view.add(textField);
-
-	var buttons = Titanium.UI.createView({
-		layout : 'horizontal',
-		height : Titanium.UI.SIZE
-	});
+	window.add(textField);
 
 	var goButton = Titanium.UI.createButton({
 		title : 'Go',
-		width: '50%'
+		left : '6dip',
+		right : '6dip',
+		top : '6dip'
 	});
 	goButton.addEventListener('click', function(e) {
 		// ensure the keyboard is hidden
 		textField.blur();
 		viewModel.executeSearch();
 	});
-	buttons.add(goButton);
+	window.add(goButton);
 
 	var myLocationButton = Titanium.UI.createButton({
 		title : 'My Location',
-		width: '50%'
+		left : '6dip',
+		right : '6dip',
+		top : '6dip'
 	});
 	myLocationButton.addEventListener('click', function(e) {
 		// ensure the keyboard is hidden
 		textField.blur();
 		viewModel.searchMyLocation();
 	});
-	buttons.add(myLocationButton);
-
-	view.add(buttons);
+	window.add(myLocationButton);
 
 	var userMessage = Titanium.UI.createLabel({
 		text : "",
@@ -71,12 +66,14 @@ module.exports = function(viewModel) {
 		font : {
 			fontSize : '16dip'
 		},
-		width : Titanium.UI.FILL
+		left : '6dip',
+		right : '6dip',
+		top : '6dip'
 	});
 	var userMessageSubscription = viewModel.userMessage.subscribe(function(newValue) {
 		userMessage.text = newValue;
 	});
-	view.add(userMessage);
+	window.add(userMessage);
 
 	var recentSearchesView = Titanium.UI.createView({
 		layout : 'vertical',
@@ -90,13 +87,16 @@ module.exports = function(viewModel) {
 			fontSize : '19dip',
 			fontWeight : 'bold'
 		},
-		width : Titanium.UI.FILL
+		left : '6dip',
+		right : '6dip',
+		top : '6dip'
 	});
 	recentSearchesView.add(recentSearchesLabel);
 
 	var tableView = Titanium.UI.createTableView({
 		width : Titanium.UI.FILL,
-		height : Titanium.UI.SIZE
+		height : Titanium.UI.SIZE,
+		top : '6dip'
 	});
 	tableView.addEventListener('click', function(e) {
 		// ensure the keyboard is hidden
@@ -119,16 +119,15 @@ module.exports = function(viewModel) {
 					fontSize : '16dip',
 					fontWeight : 'bold'
 				},
-				left : 0
+				left : '6dip'
 			}));
 			row.add(Titanium.UI.createLabel({
 				text : item.totalResults,
 				textAlign : 'right',
 				font : {
-					fontSize : '16dip',
-					fontWeight : 'bold'
+					fontSize : '16dip'
 				},
-				right : 0
+				right : '6dip'
 			}));
 			return row;
 		}));
@@ -139,10 +138,15 @@ module.exports = function(viewModel) {
 	recentSearchesView.add(tableView);
 
 	function toggleRecentSearches() {
+		var attached = _.contains(window.children, recentSearchesView);
 		if (viewModel.recentSearches().length > 0 && viewModel.locations().length === 0) {
-			view.add(recentSearchesView);
+			if (!attached) {
+				window.add(recentSearchesView);
+			}
 		} else {
-			view.remove(recentSearchesView);
+			if (attached) {
+				window.remove(recentSearchesView);
+			}
 		}
 	}
 
@@ -162,13 +166,16 @@ module.exports = function(viewModel) {
 			fontSize : '19dip',
 			fontWeight : 'bold'
 		},
-		width : Titanium.UI.FILL
+		left : '6dip',
+		right : '6dip',
+		top : '6dip'
 	});
 	locationsView.add(locationsLabel);
 
 	var tableView = Titanium.UI.createTableView({
 		width : Titanium.UI.FILL,
-		height : Titanium.UI.SIZE
+		height : Titanium.UI.SIZE,
+		top : '6dip'
 	});
 	tableView.addEventListener('click', function(e) {
 		// ensure the keyboard is hidden
@@ -191,7 +198,8 @@ module.exports = function(viewModel) {
 					fontSize : '16dip',
 					fontWeight : 'bold'
 				},
-				left : 0
+				left : '6dip',
+				right : '6dip'
 			}));
 			return row;
 		}));
@@ -203,9 +211,9 @@ module.exports = function(viewModel) {
 
 	function toggleLocations() {
 		if (viewModel.locations().length > 0) {
-			view.add(locationsView);
+			window.add(locationsView);
 		} else {
-			view.remove(locationsView);
+			window.remove(locationsView);
 		}
 	}
 
@@ -213,15 +221,23 @@ module.exports = function(viewModel) {
 	var locationsVisibilityLocationsSubscription = viewModel.locations.subscribe(toggleLocations);
 	toggleLocations();
 
-	var activityIndicator = Ti.UI.createActivityIndicator({
-		message : 'Loading...',
-		width : Titanium.UI.FILL,
-		height : Titanium.UI.FILL
-	});
+	var activityIndicator;
 
 	// On iOS, the activity indicator must be added to a window or view for it to appear
-	if (Ti.Platform.name === 'iPhone OS') {
-		window.add(activityIndicator);
+	if (Ti.Platform.osname === "iphone") {
+		activityIndicator = Ti.UI.createActivityIndicator({
+			width : Titanium.UI.SIZE,
+			height : Titanium.UI.SIZE,
+			right : '6dip',
+			style : Ti.UI.iPhone.ActivityIndicatorStyle.DARK
+		});
+		textField.add(activityIndicator);
+	} else {
+		activityIndicator = Ti.UI.createActivityIndicator({
+			message : 'Loading...',
+			width : Titanium.UI.FILL,
+			height : Titanium.UI.FILL
+		});
 	}
 
 	var isSearchEnabledSubscription = viewModel.isSearchEnabled.subscribe(function(newValue) {
@@ -230,9 +246,11 @@ module.exports = function(viewModel) {
 		} else {
 			activityIndicator.show();
 		}
+		textField.enabled = newValue;
+		goButton.enabled = newValue;
+		myLocationButton.enabled = newValue;
 	});
 
-	window.add(view);
 	this.window = window;
 
 	this.dispose = function() {

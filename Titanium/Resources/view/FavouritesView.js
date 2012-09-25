@@ -3,7 +3,9 @@ var ko = require("knockout");
 
 module.exports = function(viewModel) {
 
-	var window = Ti.UI.createWindow();
+	var window = Ti.UI.createWindow({
+		title: "Favourites"
+	});
 	var tableView;
 
 	//
