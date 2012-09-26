@@ -93,18 +93,19 @@ module.exports = function(viewModel) {
 	});
 	recentSearchesView.add(recentSearchesLabel);
 
-	var tableView = Titanium.UI.createTableView({
+	var recentSearchesTableView = Titanium.UI.createTableView({
 		width : Titanium.UI.FILL,
 		bottom : 0,
 		top : '6dip'
 	});
-	tableView.addEventListener('click', function(e) {
+	recentSearchesTableView.addEventListener('click', function(e) {
 		// ensure the keyboard is hidden
 		textField.blur();
 		viewModel.selectLocation.call(viewModel.recentSearches()[e.index]);
 	});
 	function updateRecentSearches(items) {
-		tableView.setData(_.map(items, function(item) {
+		Titanium.API.log("updateRecentSearches:" + items.length);
+		recentSearchesTableView.setData(_.map(items, function(item) {
 			// create first row
 			var row = Ti.UI.createTableViewRow({
 				hasChild : Ti.Platform.osname === "iphone"
@@ -135,7 +136,7 @@ module.exports = function(viewModel) {
 
 	var recentSearchesSubscription = viewModel.recentSearches.subscribe(updateRecentSearches);
 	updateRecentSearches(viewModel.recentSearches());
-	recentSearchesView.add(tableView);
+	recentSearchesView.add(recentSearchesTableView);
 
 	function toggleRecentSearches() {
 		var attached = _.contains(window.children, recentSearchesView);
@@ -172,18 +173,18 @@ module.exports = function(viewModel) {
 	});
 	locationsView.add(locationsLabel);
 
-	var tableView = Titanium.UI.createTableView({
+	var locationsTableView = Titanium.UI.createTableView({
 		width : Titanium.UI.FILL,
 		bottom : 0,
 		top : '6dip'
 	});
-	tableView.addEventListener('click', function(e) {
+	locationsTableView.addEventListener('click', function(e) {
 		// ensure the keyboard is hidden
 		textField.blur();
 		viewModel.selectLocation.call(viewModel.locations()[e.index]);
 	});
 	function updateLocations(items) {
-		tableView.setData(_.map(items, function(item) {
+		locationsTableView.setData(_.map(items, function(item) {
 			// create first row
 			var row = Ti.UI.createTableViewRow({
 				hasChild : Ti.Platform.osname === "iphone"
@@ -207,7 +208,7 @@ module.exports = function(viewModel) {
 
 	var locationsSubscription = viewModel.locations.subscribe(updateLocations);
 	updateLocations(viewModel.locations());
-	locationsView.add(tableView);
+	locationsView.add(locationsTableView);
 
 	function toggleLocations() {
 		if (viewModel.locations().length > 0) {
