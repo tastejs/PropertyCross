@@ -1,18 +1,19 @@
-Welcome to your Appcelerator Titanium Mobile Project
+* Appcelerator Titanium
 
-This is a blank project.  Start by editing your application's app.js to 
-make your first mobile project using Titanium.
+* Framework Description
 
+Appcelerator Titanium is a platform for developing mobile, tablet and desktop applications using web technologies.
 
+* Pre-Requisites
 
-----------------------------------
-Stuff our legal folk make us say:
+To run this example you'll need to install Titanium Studio. Depending on your OS you'll then either be able to build the Android version or the Android and iPhone version.
 
-Appcelerator, Appcelerator Titanium and associated marks and logos are 
-trademarks of Appcelerator, Inc. 
+* Opening the Project
 
-Titanium is Copyright (c) 2008-2012 by Appcelerator, Inc. All Rights Reserved.
+Open Titatnium Studio, File, Import, General>Existing Projects into Workspace.
 
-Titanium is licensed under the Apache Public License (Version 2). Please
-see the LICENSE file for the full license.
+* Running on a Device
 
+From within the App Explorer tab, Run, Android Device/iOS Device.
+
+* Tips 
