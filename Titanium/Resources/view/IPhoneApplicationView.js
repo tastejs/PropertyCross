@@ -9,7 +9,7 @@ function IPhoneApplicationView(applicationViewModel, propertySearchViewModel) {
 
 	var that = this;
 	var nav;
-	
+
 	this.navigateForwards = function(viewModel, view) {
 		if (!nav) {
 			var root = Titanium.UI.createWindow({
@@ -26,28 +26,27 @@ function IPhoneApplicationView(applicationViewModel, propertySearchViewModel) {
 			});
 			nav.open(view.window);
 		}
-		if ( viewModel instanceof PropertyViewModel) {
-			var toggleFavouriteButton = Titanium.UI.createButton({
-				title : 'Fave'
-			});
-			toggleFavouriteButton.addEventListener('click', function() {
-				var viewModel = applicationViewModel.currentViewModel();
-				propertySearchViewModel.addToFavourites(viewModel);
-			});
-			view.window.setRightNavButton(toggleFavouriteButton);
-			function updateToggleFavouriteButton(isFavourite) {
-				toggleFavouriteButton.title = isFavourite ? 'RFave' : 'AFave';
+		if (!( viewModel instanceof FavouritesViewModel)) {
+			var favouriteButton = Titanium.UI.createButton();
+			if ( viewModel instanceof PropertyViewModel) {
+				favouriteButton.addEventListener('click', function() {
+					var viewModel = applicationViewModel.currentViewModel();
+					propertySearchViewModel.addToFavourites(viewModel);
+				});
+				function updateFavouriteButton(isFavourite) {
+					favouriteButton.image = isFavourite ? '/yellow-star.png' : '/white-star.png';
+				}
+
+
+				viewModel.isFavourite.subscribe(updateFavouriteButton);
+				updateFavouriteButton(viewModel.isFavourite());
+			} else {
+				favouriteButton.title = "Favourites";
+				favouriteButton.addEventListener('click', function() {
+					propertySearchViewModel.viewFavourites();
+				});
 			}
-			viewModel.isFavourite.subscribe(updateToggleFavouriteButton);
-			updateToggleFavouriteButton(viewModel.isFavourite());
-		} else if (!( viewModel instanceof FavouritesViewModel)) {
-			var viewFavouritesButton = Titanium.UI.createButton({
-				title : 'Fave'
-			});
-			viewFavouritesButton.addEventListener('click', function() {
-				propertySearchViewModel.viewFavourites();
-			});
-			view.window.setRightNavButton(viewFavouritesButton);
+			view.window.setRightNavButton(favouriteButton);
 		}
 	};
 
