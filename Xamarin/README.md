@@ -1,2 +1,2 @@
-Cross Platform Property Finder
-==============================
+Xamarin Property Finder
+=======================
