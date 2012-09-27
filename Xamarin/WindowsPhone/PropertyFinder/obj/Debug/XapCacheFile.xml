@@ -1,0 +1,18 @@
+﻿<xapCache source="C:\Projects\PropertyFinderCrossPlatform\Xamarin\WindowsPhone\PropertyFinder\Bin\Debug\PropertyFinder.xap" wasSigned="False" certificateThumbprint="" TimeStampUrl="" lastWriteTime="24/09/2012 14:25:34">
+  <file source="C:\Projects\PropertyFinderCrossPlatform\Xamarin\WindowsPhone\PropertyFinder\Bin\Debug\WMAppManifest.xml" archivePath="WMAppManifest.xml" lastWriteTime="13/09/2012 17:12:05" />
+  <file source="C:\Projects\PropertyFinderCrossPlatform\Xamarin\WindowsPhone\PropertyFinder\Background.png" archivePath="Background.png" lastWriteTime="12/09/2012 10:41:05" />
+  <file source="C:\Projects\PropertyFinderCrossPlatform\Xamarin\WindowsPhone\PropertyFinder\ApplicationIcon.png" archivePath="ApplicationIcon.png" lastWriteTime="12/09/2012 10:41:05" />
+  <file source="C:\Projects\PropertyFinderCrossPlatform\Xamarin\WindowsPhone\PropertyFinder\obj\Debug\PropertyFinder.dll" archivePath="PropertyFinder.dll" lastWriteTime="24/09/2012 14:25:33" />
+  <file source="C:\Projects\PropertyFinderCrossPlatform\Xamarin\WindowsPhone\packages\SilverlightToolkitWP.4.2012.6.25\lib\sl4-windowsphone71\Microsoft.Phone.Controls.Toolkit.dll" archivePath="Microsoft.Phone.Controls.Toolkit.dll" lastWriteTime="12/09/2012 10:44:46" />
+  <file source="C:\Projects\PropertyFinderCrossPlatform\Xamarin\WindowsPhone\packages\Newtonsoft.Json.4.5.9\lib\sl4-windowsphone71\Newtonsoft.Json.dll" archivePath="Newtonsoft.Json.dll" lastWriteTime="12/09/2012 10:44:16" />
+  <file source="C:\Program Files (x86)\Microsoft SDKs\Windows Phone\v7.1\Libraries\Silverlight\Microsoft.Phone.Controls.dll" archivePath="Microsoft.Phone.Controls.dll" lastWriteTime="15/09/2011 15:36:26" />
+  <file source="C:\Projects\PropertyFinderCrossPlatform\Xamarin\WindowsPhone\PropertyFinder\Toolkit.Content\ApplicationBar.Cancel.png" archivePath="Toolkit.Content\ApplicationBar.Cancel.png" lastWriteTime="12/09/2012 10:44:46" />
+  <file source="C:\Projects\PropertyFinderCrossPlatform\Xamarin\WindowsPhone\PropertyFinder\Toolkit.Content\ApplicationBar.Check.png" archivePath="Toolkit.Content\ApplicationBar.Check.png" lastWriteTime="12/09/2012 10:44:46" />
+  <file source="C:\Projects\PropertyFinderCrossPlatform\Xamarin\WindowsPhone\PropertyFinder\Toolkit.Content\ApplicationBar.Delete.png" archivePath="Toolkit.Content\ApplicationBar.Delete.png" lastWriteTime="12/09/2012 10:44:46" />
+  <file source="C:\Projects\PropertyFinderCrossPlatform\Xamarin\WindowsPhone\PropertyFinder\Toolkit.Content\ApplicationBar.Select.png" archivePath="Toolkit.Content\ApplicationBar.Select.png" lastWriteTime="12/09/2012 10:44:46" />
+  <file source="C:\Projects\PropertyFinderCrossPlatform\Xamarin\WindowsPhone\PropertyFinder\Images\addToFavourites.png" archivePath="Images\addToFavourites.png" lastWriteTime="12/09/2012 10:41:05" />
+  <file source="C:\Projects\PropertyFinderCrossPlatform\Xamarin\WindowsPhone\PropertyFinder\Images\favourited.png" archivePath="Images\favourited.png" lastWriteTime="12/09/2012 10:41:05" />
+  <file source="C:\Projects\PropertyFinderCrossPlatform\Xamarin\WindowsPhone\PropertyFinder\Images\favourites.png" archivePath="Images\favourites.png" lastWriteTime="12/09/2012 10:41:05" />
+  <file source="C:\Projects\PropertyFinderCrossPlatform\Xamarin\WindowsPhone\PropertyFinder\SplashScreenImage.jpg" archivePath="SplashScreenImage.jpg" lastWriteTime="12/09/2012 10:41:05" />
+  <file source="C:\Projects\PropertyFinderCrossPlatform\Xamarin\WindowsPhone\PropertyFinder\Bin\Debug\AppManifest.xaml" archivePath="AppManifest.xaml" lastWriteTime="24/09/2012 11:58:04" />
+</xapCache>

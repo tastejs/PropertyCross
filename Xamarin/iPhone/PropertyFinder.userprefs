@@ -1,0 +1,32 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhoneSimulator" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="PropertyFinder/GeoLocationService.cs">
+    <Files>
+      <File FileName="PropertyFinder/AppDelegate.cs" Line="46" Column="64" />
+      <File FileName="../WindowsPhone/PropertyFinder/Presenter/Events/LocationSelectedEventArgs.cs" Line="2" Column="22" />
+      <File FileName="../WindowsPhone/PropertyFinder/Model/JsonFilePropertySearch.cs" Line="19" Column="23" />
+      <File FileName="../WindowsPhone/PropertyFinder/Model/JsonWebPropertySearch.cs" Line="24" Column="8" />
+      <File FileName="../WindowsPhone/PropertyFinder/Model/PropertyDataSourceResult.cs" Line="13" Column="1" />
+      <File FileName="PropertyFinder/Main.cs" Line="17" Column="1" />
+      <File FileName="PropertyFinder/PropertyFinderViewController.cs" Line="137" Column="6" />
+      <File FileName="PropertyFinder/GeoLocationService.cs" Line="17" Column="4" />
+      <File FileName="PropertyFinder/StatePersistenceService.cs" Line="20" Column="4" />
+      <File FileName="PropertyFinder/NavigationService.cs" Line="24" Column="70" />
+      <File FileName="../WindowsPhone/PropertyFinder/Model/PropertyUnknownLocationResult.cs" Line="13" Column="1" />
+      <File FileName="../WindowsPhone/PropertyFinder/Presenter/PropertyFinderPresenter.cs" Line="125" Column="6" />
+      <File FileName="PropertyFinder/SearchResultsViewController.cs" Line="13" Column="2" />
+      <File FileName="PropertyFinder/PropertyFinderViewController.designer.cs" Line="1" Column="1" />
+      <File FileName="../WindowsPhone/PropertyFinder/Presenter/SearchItem/PlainTextSearchItem.cs" Line="33" Column="1" />
+      <File FileName="PropertyFinder/PropertyViewController.designer.cs" Line="1" Column="1" />
+      <File FileName="PropertyFinder/PropertyViewController.cs" Line="7" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint enabled="false" file="/Volumes/Projects/PropertyFinder-Xamarin/iPhone/PropertyFinder/PropertyFinderViewController.cs" line="99" />
+      <Breakpoint enabled="false" file="/Volumes/Projects/PropertyFinder-Xamarin/iPhone/PropertyFinder/Main.cs" line="17" />
+      <Breakpoint enabled="false" file="/Volumes/Projects/PropertyFinder-Xamarin/iPhone/PropertyFinder/AppDelegate.cs" line="37" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

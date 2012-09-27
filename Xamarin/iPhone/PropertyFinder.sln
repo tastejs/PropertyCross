@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PropertyFinder", "PropertyFinder\PropertyFinder.csproj", "{8A920BF5-B269-4BC6-AA28-3FF650CF36B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Newtonsoft.Json.MonoTouch", "lib\NewtonsoftJson\Newtonsoft.Json\Newtonsoft.Json.MonoTouch.csproj", "{12448CD5-D860-4C1C-8B9F-139F3794B9BC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|iPhoneSimulator = Debug|iPhoneSimulator
+		Release|iPhoneSimulator = Release|iPhoneSimulator
+		Debug|iPhone = Debug|iPhone
+		Release|iPhone = Release|iPhone
+		Ad-Hoc|iPhone = Ad-Hoc|iPhone
+		AppStore|iPhone = AppStore|iPhone
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{12448CD5-D860-4C1C-8B9F-139F3794B9BC}.Ad-Hoc|iPhone.ActiveCfg = Debug|Any CPU
+		{12448CD5-D860-4C1C-8B9F-139F3794B9BC}.Ad-Hoc|iPhone.Build.0 = Debug|Any CPU
+		{12448CD5-D860-4C1C-8B9F-139F3794B9BC}.AppStore|iPhone.ActiveCfg = Debug|Any CPU
+		{12448CD5-D860-4C1C-8B9F-139F3794B9BC}.AppStore|iPhone.Build.0 = Debug|Any CPU
+		{12448CD5-D860-4C1C-8B9F-139F3794B9BC}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{12448CD5-D860-4C1C-8B9F-139F3794B9BC}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{12448CD5-D860-4C1C-8B9F-139F3794B9BC}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{12448CD5-D860-4C1C-8B9F-139F3794B9BC}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{12448CD5-D860-4C1C-8B9F-139F3794B9BC}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{12448CD5-D860-4C1C-8B9F-139F3794B9BC}.Release|iPhone.Build.0 = Release|Any CPU
+		{12448CD5-D860-4C1C-8B9F-139F3794B9BC}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{12448CD5-D860-4C1C-8B9F-139F3794B9BC}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{8A920BF5-B269-4BC6-AA28-3FF650CF36B2}.Ad-Hoc|iPhone.ActiveCfg = Ad-Hoc|iPhone
+		{8A920BF5-B269-4BC6-AA28-3FF650CF36B2}.Ad-Hoc|iPhone.Build.0 = Ad-Hoc|iPhone
+		{8A920BF5-B269-4BC6-AA28-3FF650CF36B2}.AppStore|iPhone.ActiveCfg = AppStore|iPhone
+		{8A920BF5-B269-4BC6-AA28-3FF650CF36B2}.AppStore|iPhone.Build.0 = AppStore|iPhone
+		{8A920BF5-B269-4BC6-AA28-3FF650CF36B2}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{8A920BF5-B269-4BC6-AA28-3FF650CF36B2}.Debug|iPhone.Build.0 = Debug|iPhone
+		{8A920BF5-B269-4BC6-AA28-3FF650CF36B2}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{8A920BF5-B269-4BC6-AA28-3FF650CF36B2}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{8A920BF5-B269-4BC6-AA28-3FF650CF36B2}.Release|iPhone.ActiveCfg = Release|iPhone
+		{8A920BF5-B269-4BC6-AA28-3FF650CF36B2}.Release|iPhone.Build.0 = Release|iPhone
+		{8A920BF5-B269-4BC6-AA28-3FF650CF36B2}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{8A920BF5-B269-4BC6-AA28-3FF650CF36B2}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = PropertyFinder\PropertyFinder.csproj
+		Policies = $0
+		$0.DotNetNamingPolicy = $1
+		$1.DirectoryNamespaceAssociation = None
+		$1.ResourceNamePolicy = FileFormatDefault
+		$0.TextStylePolicy = $2
+		$2.FileWidth = 120
+		$2.TabWidth = 2
+		$2.IndentWidth = 2
+		$2.inheritsSet = VisualStudio
+		$2.inheritsScope = text/plain
+		$2.scope = text/x-csharp
+		$0.CSharpFormattingPolicy = $3
+		$3.inheritsSet = Mono
+		$3.inheritsScope = text/x-csharp
+		$3.scope = text/x-csharp
+	EndGlobalSection
+EndGlobal
