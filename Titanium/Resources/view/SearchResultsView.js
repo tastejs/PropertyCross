@@ -23,17 +23,16 @@ function createRow(imageUrl, title, description) {
 			fontSize : '16dip',
 			fontWeight : 'bold'
 		},
-		top : '21dip',
+		top : '16dip',
 		left : '100dip'
 	}));
 	row.add(Titanium.UI.createLabel({
 		text : description,
 		textAlign : 'left',
 		font : {
-			fontSize : '12dip',
-			fontWeight : 'bold'
+			fontSize : '12dip'
 		},
-		top : '46dip',
+		top : '41dip',
 		left : '100dip'
 	}));
 	return row;
