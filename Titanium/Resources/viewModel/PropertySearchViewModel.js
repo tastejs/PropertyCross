@@ -116,10 +116,10 @@ function PropertySearchViewModel() {
 		}
 
 		// add this new item
+		that.recentSearches.unshift(that.searchLocation);
 		if (that.recentSearches().length > that.maxRecentSearch) {
 			that.recentSearches.pop();
 		}
-		that.recentSearches.unshift(that.searchLocation);
 
 		that.updateListStyling(that.recentSearches);
 	};
