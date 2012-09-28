@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ti:app xmlns:ti="http://ti.appcelerator.org">
+    <deployment-targets>
+        <target device="mobileweb">true</target>
+        <target device="iphone">true</target>
+        <target device="ipad">false</target>
+        <target device="android">true</target>
+        <target device="blackberry">false</target>
+    </deployment-targets>
+    <sdk-version>2.1.2.GA</sdk-version>
+    <id>com.scottlogic.propertyfinder</id>
+    <name>Property Finder</name>
+    <version>1.0</version>
+    <publisher>cprice</publisher>
+    <url>http://www.scottlogic.co.uk</url>
+    <description>not specified</description>
+    <copyright>2012 by cprice</copyright>
+    <icon>appicon.png</icon>
+    <persistent-wifi>false</persistent-wifi>
+    <prerendered-icon>false</prerendered-icon>
+    <statusbar-style>default</statusbar-style>
+    <statusbar-hidden>false</statusbar-hidden>
+    <fullscreen>false</fullscreen>
+    <navbar-hidden>false</navbar-hidden>
+    <analytics>false</analytics>
+    <guid>fec9bf47-b927-455b-a29d-92a1512298d9</guid>
+    <property name="ti.ui.defaultunit">system</property>
+    <iphone>
+        <orientations device="iphone">
+            <orientation>Ti.UI.PORTRAIT</orientation>
+        </orientations>
+        <orientations device="ipad">
+            <orientation>Ti.UI.PORTRAIT</orientation>
+            <orientation>Ti.UI.UPSIDE_PORTRAIT</orientation>
+            <orientation>Ti.UI.LANDSCAPE_LEFT</orientation>
+            <orientation>Ti.UI.LANDSCAPE_RIGHT</orientation>
+        </orientations>
+    </iphone>
+    <android xmlns:android="http://schemas.android.com/apk/res/android">
+        <tool-api-level>14</tool-api-level>
+        <manifest>
+            <uses-sdk targetSdkVersion="14"/>
+            <application android:debuggable="false"
+                android:icon="@drawable/appicon"
+                android:label="Property Finder" android:name="PropertyFinderApplication">
+                <!-- TI_APPLICATION -->
+                <activity
+                    android:configChanges="keyboardHidden|orientation"
+                    android:label="Property Finder"
+                    android:name=".PropertyFinderActivity" android:theme="@style/Theme.MyTheme">
+                    <intent-filter>
+                        <action android:name="android.intent.action.MAIN"/>
+                        <category android:name="android.intent.category.LAUNCHER"/>
+                    </intent-filter>
+                </activity>
+                <activity
+                    android:configChanges="keyboardHidden|orientation" android:name="org.appcelerator.titanium.TiActivity"/>
+                <activity
+                    android:configChanges="keyboardHidden|orientation"
+                    android:name="org.appcelerator.titanium.TiTranslucentActivity" android:theme="@android:style/Theme.Translucent"/>
+                <activity
+                    android:configChanges="keyboardHidden|orientation"
+                    android:name="org.appcelerator.titanium.TiModalActivity" android:theme="@android:style/Theme.Translucent"/>
+                <activity
+                    android:configChanges="keyboardHidden|orientation" android:name="ti.modules.titanium.ui.TiTabActivity"/>
+                <activity android:name="ti.modules.titanium.ui.android.TiPreferencesActivity"/>
+                <service android:exported="false" android:name="org.appcelerator.titanium.analytics.TiAnalyticsService"/>
+            </application>
+        </manifest>
+    </android>
+    <mobileweb>
+        <precache/>
+        <splash>
+            <enabled>true</enabled>
+            <inline-css-images>true</inline-css-images>
+        </splash>
+        <theme>default</theme>
+    </mobileweb>
+    <modules/>
+</ti:app>
