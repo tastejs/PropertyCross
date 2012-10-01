@@ -2,6 +2,10 @@
 
 Appcelerator Titanium is a platform for developing mobile, tablet and desktop applications using web technologies.
 
+## Pre-build Binary
+
+* [Android](https://github.com/ColinEberhardt/PropertyFinderCrossPlatform/Property%20Finder.apk/qr_code)
+
 ## Pre-Requisites
 
 To run this example you'll need to install Titanium Studio, and depending on your OS the Android SDK and XCode (OSX only).
