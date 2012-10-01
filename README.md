@@ -51,6 +51,13 @@ The Apps
 
 ✔ = implemented, x = not yet implemented, n/a = not supported by the framework
 
+Platforms To Add:
+
+  * RhoMobile
+  * AppMobi
+  * Sencha Touch (with PhoneGap)
+  * Kendo UI Mobile (with PhoneGap)
+
 The Application
 ---------------
 
