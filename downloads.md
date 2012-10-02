@@ -10,6 +10,9 @@ These QR codes are provided as a convenience for loading the apps directly onto 
 * titanium
 ![titanium/android](https://chart.googleapis.com/chart?cht=qr&chs=300x300&chl=https://github.com/downloads/ColinEberhardt/PropertyFinderCrossPlatform/PropertyCross-titanium.apk)
 
+* xamarin
+![xamarin/android](https://chart.googleapis.com/chart?cht=qr&chs=300x300&chl=https://github.com/downloads/ColinEberhardt/PropertyFinderCrossPlatform/PropertyCross-xamarin.apk)
+
 ### iOS
 
 These links will unfortunately only work for our test devices, you will need to build the projects with your own developer certificate and provisioning profile.
