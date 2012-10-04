@@ -1,6 +1,7 @@
 ﻿using System;
 using PropertyFinder.Presenter;
 using System.Device.Location;
+using System.Diagnostics;
 
 namespace PropertyFinder
 {
@@ -8,16 +9,21 @@ namespace PropertyFinder
   {
     private GeoLocation _currentLocation;
 
+    private GeoCoordinateWatcher _watcher;
+
     public GeoLocationService()
     {
-      var watcher = new GeoCoordinateWatcher();
-      watcher.StatusChanged += Watcher_StatusChanged;
-      watcher.PositionChanged += Watcher_PositionChanged;
-      watcher.Start();
+      _watcher = new GeoCoordinateWatcher();
+      _watcher.StatusChanged += Watcher_StatusChanged;
+      _watcher.PositionChanged += Watcher_PositionChanged;
+      _watcher.Start();
     }
 
     private void Watcher_PositionChanged(object sender, GeoPositionChangedEventArgs<GeoCoordinate> e)
     {
+      Debug.WriteLine("Watcher_PositionChanged ({0}, {1})",
+        e.Position.Location.Latitude, e.Position.Location.Longitude);
+
       _currentLocation = new GeoLocation()
       {
         Latitude = e.Position.Location.Latitude,
@@ -27,6 +33,8 @@ namespace PropertyFinder
 
     private void Watcher_StatusChanged(object sender, GeoPositionStatusChangedEventArgs e)
     {
+      Debug.WriteLine("Watcher_StatusChanged ({0})", e.Status);
+
       switch (e.Status)
       {
         case GeoPositionStatus.Disabled:

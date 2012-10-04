@@ -26,6 +26,7 @@ namespace PropertyFinder
 
       try
       {
+        // load from isolated storage
         using (var store = IsolatedStorageFile.GetUserStoreForApplication())
         using (var stream = new IsolatedStorageFileStream("data.txt",
                                   FileMode.OpenOrCreate, FileAccess.Read, store))
@@ -35,6 +36,9 @@ namespace PropertyFinder
           {
             var serializer = new XmlSerializer(typeof(PropertyFinderPersistentState));
             state = (PropertyFinderPersistentState)serializer.Deserialize(reader);
+
+            // set the persistence service for the newly loaded state
+            state.PersistenceService = this;
           }
         }
       }
@@ -42,6 +46,7 @@ namespace PropertyFinder
       {
       }
 
+      // if we cannot retrieve the state, create a new state object
       if (state == null)
       {
         state = new PropertyFinderPersistentState(this);

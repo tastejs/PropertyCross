@@ -3,9 +3,9 @@ namespace PropertyFinder.Presenter
 {
   public class RecentSearch
   {
-    public SearchItemBase Search { get; private set; }
+    public SearchItemBase Search { get; set; }
 
-    public int ResultsCount { get; private set; }
+    public int ResultsCount { get; set; }
 
     public RecentSearch ()
     {

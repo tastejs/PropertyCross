@@ -56,19 +56,6 @@ namespace PropertyFinder
 
     public event EventHandler<RecentSearchSelectedEventArgs> RecentSearchSelected = delegate { };
 
-    public void DisplaySuggestedLocations(List<Location> locations)
-    {
-      if (locations == null)
-      {
-        locationsContainer.Visibility = Visibility.Collapsed;
-      }
-      else
-      {
-        locationsContainer.Visibility = Visibility.Visible;
-        locationsList.ItemsSource = locations;
-      }
-    }
-
     public void SetMessage(string message)
     {
       userMessage.Text = message;
@@ -90,11 +77,18 @@ namespace PropertyFinder
       FavouritesClicked(this, EventArgs.Empty);
     }
 
-    private void TextBlock_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+    private void Location_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
     {
       FrameworkElement fe = sender as FrameworkElement;
       Location location = fe.DataContext as Location;
       LocationSelected(this, new LocationSelectedEventArgs(location));
+    }
+
+    private void RecentSearch_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+    {
+      FrameworkElement fe = sender as FrameworkElement;
+      RecentSearch recentSearch = fe.DataContext as RecentSearch;
+      RecentSearchSelected(this, new RecentSearchSelectedEventArgs(recentSearch));
     }
 
     private void ButtonSearchGo_Click(object sender, RoutedEventArgs e)
@@ -114,7 +108,29 @@ namespace PropertyFinder
     
     public void DisplayRecentSearches(List<RecentSearch> recentSearches)
     {
+      if (recentSearches == null)
+      {
+        recentSearchesContainer.Visibility = Visibility.Collapsed;
+      }
+      else
+      {
+        recentSearchesContainer.Visibility = Visibility.Visible;
+        recentSearchList.ItemsSource = recentSearches;
+      }
     }
 
+
+    public void DisplaySuggestedLocations(List<Location> locations)
+    {
+      if (locations == null)
+      {
+        locationsContainer.Visibility = Visibility.Collapsed;
+      }
+      else
+      {
+        locationsContainer.Visibility = Visibility.Visible;
+        locationsList.ItemsSource = locations;
+      }
+    }
   }
 }

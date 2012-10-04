@@ -16,7 +16,6 @@
   <!--LayoutRoot is the root grid where all page content is placed-->
   <Grid x:Name="LayoutRoot" Background="Black">
 
-
     <Image Source="Images/background.jpg"
           VerticalAlignment="Bottom"
           Opacity="0.5"/>
@@ -78,7 +77,29 @@
                           Margin="20,10,0,10">
                 <TextBlock Text="• "/>
                 <TextBlock Text="{Binding DisplayName}"
-                           MouseLeftButtonUp="TextBlock_MouseLeftButtonUp"
+                           MouseLeftButtonUp="Location_MouseLeftButtonUp"
+                           FontSize="{StaticResource PhoneFontSizeMedium}"/>
+              </StackPanel>
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+      </StackPanel>
+
+      <StackPanel x:Name="recentSearchesContainer"
+                  Orientation="Vertical"
+                  Grid.Row="5"
+                  Margin="0,30,0,20"
+                  Visibility="Collapsed">
+        <TextBlock Text="Recent searches:"
+                   FontSize="{StaticResource PhoneFontSizeMedium}"/>
+        <ItemsControl x:Name="recentSearchList">
+          <ItemsControl.ItemTemplate>
+            <DataTemplate>
+              <StackPanel Orientation="Horizontal"
+                          Margin="20,10,0,10">
+                <TextBlock Text="• "/>
+                <TextBlock Text="{Binding Search.SearchText}"
+                           MouseLeftButtonUp="RecentSearch_MouseLeftButtonUp"
                            FontSize="{StaticResource PhoneFontSizeMedium}"/>
               </StackPanel>
             </DataTemplate>

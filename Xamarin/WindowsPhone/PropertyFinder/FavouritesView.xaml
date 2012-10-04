@@ -17,6 +17,11 @@
 
   <!--LayoutRoot is the root grid where all page content is placed-->
   <Grid x:Name="LayoutRoot" Background="Black">
+
+    <Image Source="Images/background.jpg"
+          VerticalAlignment="Bottom"
+          Opacity="0.5"/>
+    
     <ScrollViewer>
       <Grid Margin="10">
         <Grid.RowDefinitions>
