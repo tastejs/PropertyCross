@@ -14,16 +14,22 @@ namespace PropertyFinder
   {
     private PropertyPresenter _presenter;
 
+    private UIBarButtonItem _favouriteButton;
+
     public PropertyViewController (PropertyPresenter presenter) : base ("PropertyViewController", null)
     {
       Title = "Property";
       _presenter = presenter;
+
+      _favouriteButton = new UIBarButtonItem("+",
+            UIBarButtonItemStyle.Bordered, FavouriteButtonEventHandler);
     }
-		
 		
     public override void ViewDidLoad ()
     {
       base.ViewDidLoad ();
+
+      NavigationItem.RightBarButtonItem = _favouriteButton;
 
       _presenter.SetView(this);
     }
@@ -57,13 +63,16 @@ namespace PropertyFinder
     public bool IsFavourited {
       set
       {
-
+        _favouriteButton.Title = value ? "-" : "+";
       }
     }
 
     #endregion
 
-
+    private void FavouriteButtonEventHandler (object sender, EventArgs args)
+    {
+      ToggleFavourite(this, EventArgs.Empty);
+    }
 
   }
 }

@@ -183,11 +183,17 @@
     <Compile Include="..\..\Common\Model\Util.cs">
       <Link>Model\Util.cs</Link>
     </Compile>
+    <Compile Include="FavouritesViewController.cs" />
+    <Compile Include="FavouritesViewController.designer.cs">
+      <DependentUpon>FavouritesViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TableSourceBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="PropertyFinderViewController.xib" />
     <InterfaceDefinition Include="SearchResultsViewController.xib" />
     <InterfaceDefinition Include="PropertyViewController.xib" />
+    <InterfaceDefinition Include="FavouritesViewController.xib" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

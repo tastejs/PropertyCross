@@ -138,6 +138,8 @@ namespace PropertyFinder.Presenter
     {
       _view.IsLoading = true;
 
+      _view.SetMessage(null);
+
       _searchItem.FindProperties(_propertyDataSource, 1, response =>
       {
         if (response is PropertyListingsResult)

@@ -36,7 +36,7 @@ namespace PropertyFinder.Model
       WebClient webClient = new WebClient();
       webClient.DownloadStringCompleted += (s, e) =>
       {
-        callback(e.Result);
+        _marshal.Invoke(() => callback(e.Result));
       };
 
       webClient.DownloadStringAsync(new Uri(url));

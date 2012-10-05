@@ -29,10 +29,18 @@ namespace PropertyFinder
         var viewController = new PropertyViewController(presenter as PropertyPresenter);
         _navigationController.PushViewController(viewController, true);
       }
+
+      if (presenter is FavouritesPresenter)
+      {
+        var viewController = new FavouritesViewController(presenter as FavouritesPresenter);
+        _navigationController.PushViewController(viewController, true);
+      }
 		}
 
 		#endregion
 
 	}
 }
+
+
 

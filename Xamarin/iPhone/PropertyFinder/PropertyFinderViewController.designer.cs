@@ -34,6 +34,9 @@ namespace PropertyFinder
 
 		[Action ("searchLocationTextChanged:")]
 		partial void searchLocationTextChanged (MonoTouch.Foundation.NSObject sender);
+
+		[Action ("myLocationButtonTouched:")]
+		partial void myLocationButtonTouched (MonoTouch.Foundation.NSObject sender);
 		
 		void ReleaseDesignerOutlets ()
 		{

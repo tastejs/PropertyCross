@@ -95,6 +95,10 @@ namespace PropertyFinder
 
     #endregion
 
+    /// <summary>
+    /// A table source implementation that renders a list of properties
+    /// and optionally a load-more indicator.
+    /// </summary>
     public class TableSource : UITableViewSource
     {
       private bool _loadMoreVisible = false;

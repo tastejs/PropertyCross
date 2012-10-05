@@ -37,7 +37,7 @@ namespace PropertyFinder
       tableView.Hidden = true;
       tableView.SeparatorColor = UIColor.Clear;
 
-      // handle teh enter key, hiding teh keyboard and initiating a search
+      // handle the enter key, hiding the keyboard and initiating a search
       var enterDelegate = new CatchEnterDelegate();
       enterDelegate.EnterClicked += (s, e) => SearchButtonClicked(this, e);
       searchLocationText.Delegate = enterDelegate;
@@ -51,20 +51,27 @@ namespace PropertyFinder
       _locationsTableSource.ItemSelected += (sender, e) =>
         {
           LocationSelected(this,new LocationSelectedEventArgs(e.Item));
-      };
+        };
 
       _recentTableSource = new RecentSearchesTableSource();
       _recentTableSource.ItemSelected += (s,e) =>
         {
           RecentSearchSelected(this, new RecentSearchSelectedEventArgs(e.Item));
-      };
+        };
 
       tableView.BackgroundColor = UIColor.Clear;
+
+      NavigationItem.RightBarButtonItem = new UIBarButtonItem("Favs",
+                          UIBarButtonItemStyle.Bordered, FavouriteButtonEventHandler);
 
       // associate with the presenter
       _presenter.SetView (this);
     }
 
+    private void FavouriteButtonEventHandler (object sender, EventArgs args)
+    {
+      FavouritesClicked(this, EventArgs.Empty);
+    }
 
     private void BackButtonEventHandler (object sender, EventArgs args)
     {
@@ -140,10 +147,11 @@ namespace PropertyFinder
     {
       userMessageLabel.Text = message;
 
+      // shift the table down a little when displaying a message
       if (string.IsNullOrEmpty (message)) {
         tableView.Transform = CGAffineTransform.MakeIdentity ();
       } else {
-        tableView.Transform = CGAffineTransform.MakeTranslation(0, 100);
+        tableView.Transform = CGAffineTransform.MakeTranslation(0, 20);
       }
     }
 
@@ -167,6 +175,11 @@ namespace PropertyFinder
     }
 
     #endregion
+
+    partial void myLocationButtonTouched (NSObject sender)
+    {
+      MyLocationButtonClicked(this, EventArgs.Empty);
+    }
 
     partial void goButtonTouched (NSObject sender)
     {
@@ -193,70 +206,6 @@ namespace PropertyFinder
       public event EventHandler EnterClicked = delegate {};
     }
 
-    public abstract class TableSourceBase<T> : UITableViewSource
-    {
-      private List<T> _items = new List<T>();
-      private static readonly string _cellIdentifier = "TableCell";
-      private UITableViewCellStyle _cellStyle;
-      
-      public TableSourceBase (UITableViewCellStyle cellStyle)
-      {
-        _cellStyle = cellStyle;
-      }
-
-      
-      public void SetItems (List<T> items)
-      {
-        _items = items;
-      }
-      
-      public override int RowsInSection (UITableView tableview, int section)
-      {
-        return _items.Count;
-      }
-      
-      public override UITableViewCell GetCell (UITableView tableView, MonoTouch.Foundation.NSIndexPath indexPath)
-      {
-        UITableViewCell cell = tableView.DequeueReusableCell (_cellIdentifier);
-        if (cell == null) {
-          cell = new UITableViewCell (_cellStyle, _cellIdentifier);
-        }
-        T item = _items [indexPath.Row];
-        ConfigureCell(cell, item);
-        return cell;
-      }
-
-      public abstract void ConfigureCell (UITableViewCell cell, T item);
-      
-      public override void WillDisplay (UITableView tableView, UITableViewCell cell, NSIndexPath indexPath)
-      {
-        cell.TextLabel.Font = UIFont.SystemFontOfSize(UIFont.SystemFontSize);
-      }
-      
-      public override float GetHeightForRow (UITableView tableView, NSIndexPath indexPath)
-      {
-        return 30;
-      }
-      
-      public override void RowSelected (UITableView tableView, NSIndexPath indexPath)
-      {
-        T item = _items [indexPath.Row];
-        ItemSelected(this, new ItemSelectedEventArgs<T>(item));
-      }
-
-      public event EventHandler<ItemSelectedEventArgs<T>> ItemSelected = delegate { };
-    }
-
-    public class ItemSelectedEventArgs<T> : EventArgs
-    {
-      public T Item { get; private set; }
-      
-      public ItemSelectedEventArgs(T item)
-      {
-        Item = item;
-      }
-    }
-
     public class LocationsTableSource : TableSourceBase<Location>
     {
       public LocationsTableSource () : base(UITableViewCellStyle.Value1)
@@ -277,16 +226,13 @@ namespace PropertyFinder
 
     public class RecentSearchesTableSource : TableSourceBase<RecentSearch>
     {
-      private List<RecentSearch> _recent = new List<RecentSearch>();
-      private static readonly string _cellIdentifier = "TableCell";
-
       public RecentSearchesTableSource () : base(UITableViewCellStyle.Default)
       {
       }
 
       public override string TitleForHeader (UITableView tableView, int section)
       {
-        return _recent.Count > 0 ? "Recent searches:" : "";
+        return "Recent searches:";
       }
 
       public override void ConfigureCell (UITableViewCell cell, RecentSearch recentSearch)
