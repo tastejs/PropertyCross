@@ -12,6 +12,8 @@ namespace PropertyFinder
 {
   public partial class PropertyFinderView : PhoneApplicationPage, PropertyFinderPresenter.View
   {
+    private PropertyFinderPresenter _presenter;
+
     // Constructor
     public PropertyFinderView()
     {
@@ -26,13 +28,13 @@ namespace PropertyFinder
       {
         var source = new PropertyDataSource(new JsonWebPropertySearch(new MarshalInvokeService()));
         var geolocationService = new GeoLocationService();
-        
+
         var statePersistence = new StatePersistenceService();
         PropertyFinderPersistentState state = statePersistence.LoadState();
 
-        var presenter = new PropertyFinderPresenter(state, source,
+        _presenter = new PropertyFinderPresenter(state, source,
           new NavigationService(NavigationService), geolocationService);
-        presenter.SetView(this);
+        _presenter.SetView(this);
       }
     }
 
@@ -115,7 +117,7 @@ namespace PropertyFinder
       else
       {
         recentSearchesContainer.Visibility = Visibility.Visible;
-        recentSearchList.ItemsSource = recentSearches;
+        recentSearchList.ItemsSource = recentSearches.ToArray();
       }
     }
 
