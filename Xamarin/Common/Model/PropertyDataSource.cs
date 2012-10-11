@@ -13,16 +13,16 @@ namespace PropertyFinder.Model
       _jsonPropertySearch = jsonPropertySearch;
     }
 
-    public void FindProperties(double latitude, double longitude, int pageNumber, Action<PropertyDataSourceResult> callback)
+    public void FindProperties(double latitude, double longitude, int pageNumber, Action<PropertyDataSourceResult> callback, Action<Exception> error)
     {
       _jsonPropertySearch.FindProperties(latitude, longitude, pageNumber,
-        response => HandleResponse(response, callback));
+        response => HandleResponse(response, callback), error);
     }
 
-    public void FindProperties(string searchText, int pageNumber, Action<PropertyDataSourceResult> callback)
+    public void FindProperties(string searchText, int pageNumber, Action<PropertyDataSourceResult> callback, Action<Exception> error)
     {
       _jsonPropertySearch.FindProperties(searchText, pageNumber,
-        response => HandleResponse(response, callback));
+        response => HandleResponse(response, callback), error);
     }
 
 

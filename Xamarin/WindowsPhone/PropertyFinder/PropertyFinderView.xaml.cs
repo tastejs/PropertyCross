@@ -110,7 +110,7 @@ namespace PropertyFinder
     
     public void DisplayRecentSearches(List<RecentSearch> recentSearches)
     {
-      if (recentSearches == null)
+      if (recentSearches == null || recentSearches.Count == 0)
       {
         recentSearchesContainer.Visibility = Visibility.Collapsed;
       }

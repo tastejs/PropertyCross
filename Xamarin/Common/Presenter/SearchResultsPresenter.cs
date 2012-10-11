@@ -95,6 +95,9 @@ namespace PropertyFinder.Presenter
           _view.SetLoadMoreVisible(_pageNumber < _totalPages);
           _view.IsLoading = false;
         }
+      }, error =>
+      {
+        _view.IsLoading = false;
       });
     }
   }

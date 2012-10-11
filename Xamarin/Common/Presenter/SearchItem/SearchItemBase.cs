@@ -1,5 +1,6 @@
 ﻿using System;
 using PropertyFinder.Model;
+using System.Net;
 
 namespace PropertyFinder.Presenter
 {
@@ -18,6 +19,6 @@ namespace PropertyFinder.Presenter
     /// Executes the search that this item represents.
     /// </summary>
     public abstract void FindProperties(PropertyDataSource dataSource,
-      int pageNumber, Action<PropertyDataSourceResult> callback);
+      int pageNumber, Action<PropertyDataSourceResult> callback, Action<Exception> error);
   }
 }

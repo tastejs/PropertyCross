@@ -60,6 +60,7 @@
                    Visibility="Collapsed"/>
       
       <TextBlock x:Name="userMessage"
+                 TextWrapping="Wrap"
                  Grid.Row="4"
                  Margin="0,20,0,20"/>
 

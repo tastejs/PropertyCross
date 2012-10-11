@@ -170,6 +170,10 @@ namespace PropertyFinder.Presenter
         }
 
         _view.IsLoading = false;
+      }, error =>
+      {
+        _view.SetMessage("An error occurred while searching. Please check your network connection and try again.");
+        _view.IsLoading = false;
       });
     }
   }

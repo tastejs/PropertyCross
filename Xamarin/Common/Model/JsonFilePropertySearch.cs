@@ -7,7 +7,7 @@ namespace PropertyFinder.Model
   public class JsonFilePropertySearch : IJsonPropertySearch
   {
 
-    public void FindProperties(string location, int pageNumber, Action<string> callback)
+    public void FindProperties(string location, int pageNumber, Action<string> callback, Action<Exception> error)
     {
       /*var timer = new DispatcherTimer();
       timer.Interval = TimeSpan.FromSeconds(2);
@@ -21,9 +21,9 @@ namespace PropertyFinder.Model
       callback(location == "alf" ? locationsResult : listingsResult);
     }
 
-    public void FindProperties(double latitude, double longitude, int pageNumber, Action<string> callback)
+    public void FindProperties(double latitude, double longitude, int pageNumber, Action<string> callback, Action<Exception> error)
     {
-      FindProperties("foo", 1, callback);
+      FindProperties("foo", 1, callback, error);
     }
 
     private string locationsResult = @"{

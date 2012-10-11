@@ -151,7 +151,7 @@ namespace PropertyFinder
       if (string.IsNullOrEmpty (message)) {
         tableView.Transform = CGAffineTransform.MakeIdentity ();
       } else {
-        tableView.Transform = CGAffineTransform.MakeTranslation(0, 20);
+        tableView.Transform = CGAffineTransform.MakeTranslation(0, 40);
       }
     }
 

@@ -14,7 +14,7 @@ namespace PropertyFinder.Model
       _marshal = marshal;
     }
     
-    public void FindProperties(string location, int pageNumber, Action<string> callback)
+    public void FindProperties(string location, int pageNumber, Action<string> callback, Action<Exception> error)
     {
       string url = "http://api.nestoria.co.uk/api?country=uk&pretty=1&action=search_listings&encoding=json&listing_type=buy&place_name="
                     + location;
@@ -22,13 +22,21 @@ namespace PropertyFinder.Model
       WebClient webClient = new WebClient();
       webClient.DownloadStringCompleted += (s, e) =>
       {
-        _marshal.Invoke(() => callback(e.Result));
+        try
+        {
+          string result = e.Result;
+          _marshal.Invoke(() => callback(result));
+        }
+        catch (Exception ex)
+        {
+          _marshal.Invoke(() => error(ex));
+        }
       };
 
       webClient.DownloadStringAsync(new Uri(url));
     }
 
-    public void FindProperties(double latitude, double longitude, int pageNumber, Action<string> callback)
+    public void FindProperties(double latitude, double longitude, int pageNumber, Action<string> callback, Action<Exception> error)
     {
       string url = "http://api.nestoria.co.uk/api?country=uk&pretty=1&action=search_listings&encoding=json&listing_type=buy&centre_point=" +
         latitude.ToString() + "," + longitude.ToString();
@@ -36,7 +44,15 @@ namespace PropertyFinder.Model
       WebClient webClient = new WebClient();
       webClient.DownloadStringCompleted += (s, e) =>
       {
-        _marshal.Invoke(() => callback(e.Result));
+        try
+        {
+          string result = e.Result;
+          _marshal.Invoke(() => callback(result));
+        }
+        catch (Exception ex)
+        {
+          _marshal.Invoke(() => error(ex));
+        }
       };
 
       webClient.DownloadStringAsync(new Uri(url));

@@ -1,5 +1,6 @@
 ﻿using System;
 using PropertyFinder.Model;
+using System.Net;
 
 namespace PropertyFinder.Presenter
 {
@@ -21,9 +22,9 @@ namespace PropertyFinder.Presenter
     }
 
     public override void FindProperties(PropertyDataSource dataSource,
-      int pageNumber, Action<PropertyDataSourceResult> callback)
+      int pageNumber, Action<PropertyDataSourceResult> callback, Action<Exception> error)
     {
-      dataSource.FindProperties(Location.Latitude, Location.Longitude, 1, callback);
+      dataSource.FindProperties(Location.Latitude, Location.Longitude, 1, callback, error);
     }
   }
 }

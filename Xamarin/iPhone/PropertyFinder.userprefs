@@ -1,24 +1,25 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhoneSimulator" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="PropertyFinder/GeoLocationService.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="PropertyFinder/PropertyFinderViewController.cs">
     <Files>
       <File FileName="PropertyFinder/AppDelegate.cs" Line="46" Column="64" />
-      <File FileName="../WindowsPhone/PropertyFinder/Presenter/Events/LocationSelectedEventArgs.cs" Line="2" Column="22" />
-      <File FileName="../WindowsPhone/PropertyFinder/Model/JsonFilePropertySearch.cs" Line="19" Column="23" />
-      <File FileName="../WindowsPhone/PropertyFinder/Model/JsonWebPropertySearch.cs" Line="24" Column="8" />
-      <File FileName="../WindowsPhone/PropertyFinder/Model/PropertyDataSourceResult.cs" Line="13" Column="1" />
       <File FileName="PropertyFinder/Main.cs" Line="17" Column="1" />
-      <File FileName="PropertyFinder/PropertyFinderViewController.cs" Line="137" Column="6" />
-      <File FileName="PropertyFinder/GeoLocationService.cs" Line="17" Column="4" />
+      <File FileName="PropertyFinder/PropertyFinderViewController.cs" Line="159" Column="6" />
+      <File FileName="PropertyFinder/GeoLocationService.cs" Line="17" Column="5" />
       <File FileName="PropertyFinder/StatePersistenceService.cs" Line="20" Column="4" />
       <File FileName="PropertyFinder/NavigationService.cs" Line="24" Column="70" />
-      <File FileName="../WindowsPhone/PropertyFinder/Model/PropertyUnknownLocationResult.cs" Line="13" Column="1" />
-      <File FileName="../WindowsPhone/PropertyFinder/Presenter/PropertyFinderPresenter.cs" Line="125" Column="6" />
       <File FileName="PropertyFinder/SearchResultsViewController.cs" Line="13" Column="2" />
       <File FileName="PropertyFinder/PropertyFinderViewController.designer.cs" Line="1" Column="1" />
-      <File FileName="../WindowsPhone/PropertyFinder/Presenter/SearchItem/PlainTextSearchItem.cs" Line="33" Column="1" />
       <File FileName="PropertyFinder/PropertyViewController.designer.cs" Line="1" Column="1" />
       <File FileName="PropertyFinder/PropertyViewController.cs" Line="7" Column="1" />
+      <File FileName="../Common/Model/JsonWebPropertySearch.cs" Line="28" Column="31" />
+      <File FileName="../Common/Model/JsonFilePropertySearch.cs" Line="23" Column="5" />
+      <File FileName="../Common/Model/PropertyDataSourceResult.cs" Line="1" Column="1" />
+      <File FileName="../Common/Model/PropertyDataSource.cs" Line="17" Column="6" />
+      <File FileName="../Common/Presenter/SearchItem/GeoLocationSearchItem.cs" Line="24" Column="26" />
+      <File FileName="../Common/Presenter/SearchItem/PlainTextSearchItem.cs" Line="32" Column="73" />
+      <File FileName="../Common/Model/IJsonPropertySearch.cs" Line="10" Column="108" />
+      <File FileName="../Common/Presenter/SearchItem/SearchItemBase.cs" Line="22" Column="73" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
