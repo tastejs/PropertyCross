@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using PropertyFinder.Model;
 using System.Windows.Input;
 
-namespace PropertyFinder.Presenter
+namespace PropertyFinder.ViewModel
 {
   /// <summary>
   /// A view model for the front-page of this application This view model allows the
@@ -26,7 +26,7 @@ namespace PropertyFinder.Presenter
 
     private List<RecentSearch> _recentSearches = new List<RecentSearch>();
 
-    private List<Location> _locations = new List<Location>();
+    private List<LocationViewModel> _locations = new List<LocationViewModel>();
 
     private bool _isLoading;
 
@@ -94,12 +94,12 @@ namespace PropertyFinder.Presenter
       }
     }
 
-    public List<Location> Locations
+    public List<LocationViewModel> Locations
     {
       get { return _locations; }
       set
       {
-        SetField<List<Location>>(ref _locations, value, "Locations");
+        SetField<List<LocationViewModel>>(ref _locations, value, "Locations");
       }
     }
 
@@ -126,6 +126,45 @@ namespace PropertyFinder.Presenter
         return new DelegateCommand<Location>(location => LocationSelected(location));
       }
     }
+
+    public ICommand FavouritesSelectedCommand
+    {
+      get
+      {
+        return new DelegateCommand(() => FavouritesSelected());
+      }
+    }
+
+    public ICommand SearchMyLocationCommand
+    {
+      get
+      {
+        return new DelegateCommand(() => SearchMyLocation());
+      }
+    }
+
+    private void SearchMyLocation()
+    {
+      IsLoading = true;
+      _geolocationService.GetLocation(location =>
+        {
+          IsLoading = false;
+
+          _searchItem = new GeoLocationSearchItem(new GeoLocation()
+          {
+            Latitude = location.Latitude,
+            Longitude = location.Longitude
+          });
+          SetSearchText(_searchItem.DisplayText, true);
+          SearchForProperties();
+        });
+    }
+
+    private void FavouritesSelected()
+    {
+      var viewModel = new FavouritesViewModel(_navigationService, _state);
+      _navigationService.PushViewModel(viewModel);
+    }
     
     private void RecentSearchSelected(RecentSearch recentSearch)
     {
@@ -143,7 +182,7 @@ namespace PropertyFinder.Presenter
 
     private void SearchForProperties()
     {
-      Locations = new List<Location>();
+      Locations = new List<LocationViewModel>();
       IsLoading = true;
       UserMessage = null;
 
@@ -161,20 +200,17 @@ namespace PropertyFinder.Presenter
             var listingsResponse = (PropertyListingsResult)response;
             _state.AddSearchToRecent(new RecentSearch(_searchItem, listingsResponse.TotalResult, this));
             RecentSearches = _state.RecentSearches.ToList();
-            var presenter = new SearchResultsPresenter(_navigationService, _state, listingsResponse,
+            var presenter = new SearchResultsViewModel(_navigationService, _state, listingsResponse,
                                                         _searchItem, _propertyDataSource);
-            _navigationService.PushPresenter(presenter);
+            _navigationService.PushViewModel(presenter);
           }
         }
         else if (response is PropertyLocationsResult)
         {
           RecentSearches = new List<RecentSearch>(); // TODO - this is yucky!
-          Locations = ((PropertyLocationsResult)response).Data;
-
-          foreach (var location in Locations)
-          {
-            location.Parent = this;
-          }
+          Locations = ((PropertyLocationsResult)response).Data
+                                      .Select(location => new LocationViewModel(this, location))
+                                      .ToList();
         }
         else
         {

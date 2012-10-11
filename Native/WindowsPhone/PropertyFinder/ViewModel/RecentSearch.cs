@@ -1,6 +1,6 @@
 using System.Xml.Serialization;
 
-namespace PropertyFinder.Presenter
+namespace PropertyFinder.ViewModel
 {
   public class RecentSearch
   {

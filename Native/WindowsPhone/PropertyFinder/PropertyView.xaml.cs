@@ -5,14 +5,15 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using PropertyFinder.Converter;
 using PropertyFinder.Model;
-using PropertyFinder.Presenter;
+using PropertyFinder.ViewModel;
+using System.ComponentModel;
 
 namespace PropertyFinder
 {
-  public partial class PropertyView : PhoneApplicationPage, PropertyPresenter.View
+  public partial class PropertyView : PhoneApplicationPage
   {
     private UrlToImageSourceConverter _conv = new UrlToImageSourceConverter();
-
+    
     public PropertyView()
     {
       InitializeComponent();
@@ -24,35 +25,35 @@ namespace PropertyFinder
 
       if (e.NavigationMode != NavigationMode.Back)
       {
-        var presenter = App.Instance.CurrentPresenter as PropertyPresenter;
-        presenter.SetView(this);
+        DataContext = App.Instance.CurrentViewModel;
+        UpdateButtonState();
+        ViewModel.PropertyChanged += ViewModel_PropertyChanged;
       }
     }
 
-    public void SetProperty(Property property)
+    private PropertyViewModel ViewModel
     {
-      propertyTitle.Text = property.ShortTitle;
-      propertyPrice.Text = property.FormattedPrice;
-      propertyDescription.Text = property.Summary;
-      propertyDetails.Text = property.BedBathroomText;
-      propertyImage.Source = _conv.Convert(property.ImageUrl, null, null, null) as ImageSource;
+      get { return (PropertyViewModel)DataContext; }
     }
 
-    public event EventHandler ToggleFavourite = delegate { };
+    private void ViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
+    {
+      if (e.PropertyName == "IsFavourited")
+      {
+        UpdateButtonState();
+      }
+    }
+
+    private void UpdateButtonState()
+    {
+      var btn = (ApplicationBarIconButton)ApplicationBar.Buttons[0];
+      btn.IconUri = new Uri(ViewModel.IsFavourited ? "/Images/favourited.png" : "/Images/addToFavourites.png", UriKind.Relative);
+      btn.Text = ViewModel.IsFavourited ? "remove favourite" : "add favourite";
+    }
 
     private void ApplicationBarIconButton_Click(object sender, EventArgs e)
     {
-      ToggleFavourite(this, EventArgs.Empty);
-    }
-
-    public bool IsFavourited
-    {
-      set
-      {
-        var btn = (ApplicationBarIconButton)ApplicationBar.Buttons[0];
-        btn.IconUri = new Uri(value ? "/Images/favourited.png" : "/Images/addToFavourites.png", UriKind.Relative);
-        btn.Text = value ? "remove favourite" : "add favourite";
-      }
+      ViewModel.IsFavourited = !ViewModel.IsFavourited;
     }
   }
 }

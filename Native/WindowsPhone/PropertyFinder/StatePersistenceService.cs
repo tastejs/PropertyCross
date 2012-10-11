@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.IO.IsolatedStorage;
 using System.Xml.Serialization;
-using PropertyFinder.Presenter;
+using PropertyFinder.ViewModel;
 using System.Diagnostics;
 
 namespace PropertyFinder

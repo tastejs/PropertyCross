@@ -87,9 +87,9 @@ namespace MetroInMotionUtils
       targetElement.RenderTransform = transGroup;
       targetElement.RenderTransformOrigin = new Point(0.5, 0.5);
 
-      targetElement.MouseLeftButtonDown += (s, e) =>
+      targetElement.ManipulationStarted += (s, e) =>
         {
-          var clickPosition = e.GetPosition(targetElement);
+          var clickPosition = e.ManipulationOrigin;
 
           // find the maximum of width / height
           double maxDimension = Math.Max(targetElement.ActualWidth, targetElement.ActualHeight);

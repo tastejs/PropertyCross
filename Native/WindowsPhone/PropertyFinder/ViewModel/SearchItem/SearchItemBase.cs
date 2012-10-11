@@ -2,7 +2,7 @@
 using PropertyFinder.Model;
 using System.Net;
 
-namespace PropertyFinder.Presenter
+namespace PropertyFinder.ViewModel
 {
   /// <summary>
   /// Represents a 'property search', which can either be a plain-text search term

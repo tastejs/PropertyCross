@@ -6,7 +6,7 @@ using System.IO;
 using System.Diagnostics;
 using System.Runtime.Serialization;
 
-namespace PropertyFinder.Presenter
+namespace PropertyFinder.ViewModel
 {
   /// <summary>
   /// This class hold all the application state that should be persisted
@@ -74,14 +74,14 @@ namespace PropertyFinder.Presenter
     /// <summary>
     /// Toggles the favourited state of the given property.
     /// </summary>
-    public void ToggleFavourite(Property property)
+    public void SetPropertyFavourited(Property property, bool isFavourited)
     {
-      if (IsPropertyFavourited(property))
+      if (!isFavourited && IsPropertyFavourited(property))
       {
         var matchingProperty = Favourites.Single(p => p.Guid == property.Guid);
         Favourites.Remove(matchingProperty);
       }
-      else
+      else if (isFavourited && !IsPropertyFavourited(property))
       {
         Favourites.Add(property);
       }

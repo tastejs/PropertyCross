@@ -2,7 +2,7 @@
 using PropertyFinder.Model;
 using System.Net;
 
-namespace PropertyFinder.Presenter
+namespace PropertyFinder.ViewModel
 {
   /// <summary>
   /// Represents a search against a geo-location.

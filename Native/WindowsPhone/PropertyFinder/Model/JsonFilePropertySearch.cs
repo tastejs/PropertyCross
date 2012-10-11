@@ -1,15 +1,21 @@
 ﻿using System;
 using System.Net;
-//using System.Windows.Threading;
+using System.Windows.Threading;
 
 namespace PropertyFinder.Model
 {
   public class JsonFilePropertySearch : IJsonPropertySearch
   {
-
     public void FindProperties(string location, int pageNumber, Action<string> callback, Action<Exception> error)
     {
-      callback(location == "alf" ? locationsResult : listingsResult);
+      DispatcherTimer timer = new DispatcherTimer();
+      timer.Interval = TimeSpan.FromSeconds(2);
+      timer.Tick += (s, e) =>
+        {
+          callback(location == "alf" ? locationsResult : listingsResult);
+          timer.Stop();
+        };
+      timer.Start();
     }
 
     public void FindProperties(double latitude, double longitude, int pageNumber, Action<string> callback, Action<Exception> error)

@@ -1,5 +1,5 @@
 ﻿using System;
-using PropertyFinder.Presenter;
+using PropertyFinder.ViewModel;
 using System.Device.Location;
 using System.Diagnostics;
 

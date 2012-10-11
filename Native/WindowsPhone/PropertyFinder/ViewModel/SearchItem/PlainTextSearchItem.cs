@@ -4,7 +4,7 @@ using PropertyFinder.Model;
 using System.Net;
 
 
-namespace PropertyFinder.Presenter
+namespace PropertyFinder.ViewModel
 {
   /// <summary>
   /// A search against a plain-text string

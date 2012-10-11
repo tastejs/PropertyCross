@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Diagnostics;
-using PropertyFinder.Presenter;
+using PropertyFinder.ViewModel;
 
 namespace PropertyFinder.Model
 {

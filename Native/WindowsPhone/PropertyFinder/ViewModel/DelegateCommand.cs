@@ -2,7 +2,7 @@
 using System.Windows.Input;
 using System;
 
-namespace PropertyFinder.Presenter
+namespace PropertyFinder.ViewModel
 {
   public class DelegateCommand : ICommand
   {

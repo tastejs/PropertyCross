@@ -1,5 +1,5 @@
 ﻿
-namespace PropertyFinder.Presenter
+namespace PropertyFinder.ViewModel
 {
   /// <summary>
   /// A service which provides navigation from page to page.
@@ -9,6 +9,6 @@ namespace PropertyFinder.Presenter
     /// <summary>
     /// Navigates to a view for the given presenter.
     /// </summary>
-    void PushPresenter(object presenter);
+    void PushViewModel(object presenter);
   }
 }

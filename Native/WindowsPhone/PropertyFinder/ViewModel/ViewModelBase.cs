@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System;
 
-namespace PropertyFinder.Presenter
+namespace PropertyFinder.ViewModel
 {
   public class ViewModelBase : INotifyPropertyChanged
   {

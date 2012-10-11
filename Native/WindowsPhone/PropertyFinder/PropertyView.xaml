@@ -6,43 +6,45 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:conv="clr-namespace:PropertyFinder.Converter"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d" d:DesignHeight="696" d:DesignWidth="480"
     shell:SystemTray.IsVisible="True">
-
+  
+  <phone:PhoneApplicationPage.Resources>
+    <conv:UrlToImageSourceConverter x:Key="UrlToImageSource"/>
+  </phone:PhoneApplicationPage.Resources>
+  
   <!--LayoutRoot is the root grid where all page content is placed-->
   <Grid x:Name="LayoutRoot"
-        Background="Black">
+        Background="Black"
+        DataContext="{Binding Property}">
     <Image Source="Images/background.jpg"
           VerticalAlignment="Bottom"
           Opacity="0.5"/>
     <StackPanel Orientation="Vertical"
                 Margin="10">
-      <TextBlock x:Name="propertyTitle"
-                 Text="Huntingdon Road, Cambridge"
+      <TextBlock Text="{Binding ShortTitle}"
                  TextWrapping="Wrap"
                  FontSize="{StaticResource PhoneFontSizeExtraLarge}"/>
       <Border Margin="0,15,0,5"
               BorderThickness="2"
               BorderBrush="#AAA">
-        <Image x:Name="propertyImage"/>
+        <Image Source="{Binding ImageUrl, Converter={StaticResource UrlToImageSource}}"/>
       </Border>
-      <TextBlock x:Name="propertyPrice"
-                 Text="£350,000"
+      <TextBlock Text="{Binding FormattedPrice}"
                  Margin="0,10,0,10"
                  TextWrapping="Wrap"
                  FontSize="{StaticResource PhoneFontSizeExtraLarge}"/>
-      <TextBlock x:Name="propertyDetails"
-                 Text="4 bed, 2 bathrooms"
+      <TextBlock Text="{Binding BedBathroomText}"
                  Margin="0,10,0,10"
                  Foreground="#AAA"
                  TextWrapping="Wrap"
                  FontSize="{StaticResource PhoneFontSizeLarge}"/>
-      <TextBlock x:Name="propertyDescription"
-                 Text="lorem ipsum"
+      <TextBlock Text="{Binding Summary}"
                  Margin="0,10,0,10"
                  Foreground="#AAA"
                  TextWrapping="Wrap"

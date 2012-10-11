@@ -1,5 +1,5 @@
 ﻿using System;
-using PropertyFinder.Presenter;
+using PropertyFinder.ViewModel;
 using Microsoft.Phone.Controls;
 using PropertyFinder.Model;
 using System.Collections.Generic;
@@ -17,26 +17,11 @@ namespace PropertyFinder
     {
       InitializeComponent();
     }
-
-    protected override void OnNavigatedTo(NavigationEventArgs e)
+    
+    private void ApplicationBarIconButton_Click(object sender, EventArgs e)
     {
-      base.OnNavigatedTo(e);
-
-      if (e.NavigationMode != NavigationMode.Back)
-      {
-        var source = new PropertyDataSource(new JsonWebPropertySearch());
-        var geolocationService = new GeoLocationService();
-
-        var statePersistence = new StatePersistenceService();
-        PropertyFinderPersistentState state = statePersistence.LoadState();
-
-        var viewModel = new PropertyFinderViewModel(state, source,
-          new NavigationService(NavigationService), geolocationService);
-        
-        this.DataContext = viewModel;
-      }
+      ((PropertyFinderViewModel)DataContext).FavouritesSelectedCommand.Execute(null);
     }
-
 
   }
 }

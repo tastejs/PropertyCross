@@ -7,6 +7,7 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mm="clr-namespace:MetroInMotionUtils"
     mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="696"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -20,7 +21,7 @@
     <conv:VisibleWhenNonZeroConverter x:Key="VisibleWhenNonZeroConverter"/>
     
     <ControlTemplate TargetType="Button" x:Key="ButtonTemplate">
-      <Border Background="#99FF0000">
+      <Border Background="{StaticResource PhoneAccentBrush}">
         <ContentControl x:Name="ContentContainer"
                         ContentTemplate="{TemplateBinding ContentTemplate}"
                         Content="{TemplateBinding Content}"
@@ -68,11 +69,11 @@
                 IsEnabled="{Binding IsLoading, Converter={StaticResource BooleanNotConverter}}"
                 Command="{Binding SearchCommand}"/>
         <Button IsEnabled="{Binding IsLoading, Converter={StaticResource BooleanNotConverter}}"
+                Command="{Binding SearchMyLocationCommand}"
                 Content="My location"/>
       </StackPanel>
       
-      <ProgressBar x:Name="loadingIndicator"
-                   Grid.Row="3"
+      <ProgressBar Grid.Row="3"
                    IsIndeterminate="True"
                    Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibilityConverter}}"/>
       
@@ -81,27 +82,28 @@
                  Grid.Row="4"
                  Margin="0,20,0,20"/>
 
-      <StackPanel x:Name="locationsContainer"
-                  Orientation="Vertical"
+      <StackPanel Orientation="Vertical"
                   Grid.Row="5"
                   Margin="0,30,0,20"
                   DataContext="{Binding Locations}"
                   Visibility="{Binding Count, Converter={StaticResource VisibleWhenNonZeroConverter}}">
         <TextBlock Text="Please select a location below:"
                    FontSize="{StaticResource PhoneFontSizeMedium}"/>
-        <ScrollViewer Height="300">
+        <ScrollViewer Height="300"
+                      Margin="0 10 0 0">
           <ItemsControl ItemsSource="{Binding}">
             <ItemsControl.ItemTemplate>
               <DataTemplate>
                 <Button HorizontalAlignment="Stretch"
                         HorizontalContentAlignment="Stretch"
                         Template="{StaticResource ButtonTemplate}"
-                        CommandParameter="{Binding}"
+                        CommandParameter="{Binding Location}"
                         Command="{Binding Path=Parent.LocationSelectedCommand}"
+                        mm:MetroInMotion.Tilt="3"
                         Margin="3">
                   <Grid HorizontalAlignment="Stretch"
                         Margin="20,10,0,10">
-                    <TextBlock Text="{Binding DisplayName}"
+                    <TextBlock Text="{Binding Location.DisplayName}"
                                FontSize="{StaticResource PhoneFontSizeMedium}"/>
                   </Grid>
                 </Button>
@@ -111,15 +113,15 @@
         </ScrollViewer>
       </StackPanel>
 
-      <StackPanel x:Name="recentSearchesContainer"
-                  Orientation="Vertical"
+      <StackPanel Orientation="Vertical"
                   Grid.Row="5"
                   Margin="0,30,0,20"
                   DataContext="{Binding RecentSearches}"
                   Visibility="{Binding Count, Converter={StaticResource VisibleWhenNonZeroConverter}}">
         <TextBlock Text="Recent searches:"
                    FontSize="{StaticResource PhoneFontSizeMedium}"/>
-        <ItemsControl ItemsSource="{Binding}">
+        <ItemsControl ItemsSource="{Binding}"
+                      Margin="0 10 0 0">
           <ItemsControl.ItemTemplate>
             <DataTemplate>
               <Button HorizontalAlignment="Stretch"
@@ -127,6 +129,7 @@
                       Template="{StaticResource ButtonTemplate}"
                       CommandParameter="{Binding}"
                       Command="{Binding Path=Parent.RecentSearchSelectedCommand}"
+                      mm:MetroInMotion.Tilt="3"
                       Margin="3">
                 <Grid HorizontalAlignment="Stretch"
                       Width="400"
@@ -149,7 +152,8 @@
     <shell:ApplicationBar IsVisible="True"
                           IsMenuEnabled="True">
       <shell:ApplicationBarIconButton IconUri="/Images/favourites.png"
-                                      Text="Favourites"/>
+                                      Text="Favourites"
+                                      Click="ApplicationBarIconButton_Click"/>
       </shell:ApplicationBar>
   </phone:PhoneApplicationPage.ApplicationBar>
 

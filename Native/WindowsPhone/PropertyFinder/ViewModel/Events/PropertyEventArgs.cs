@@ -1,7 +1,7 @@
 ﻿using System;
 using PropertyFinder.Model;
 
-namespace PropertyFinder.Presenter
+namespace PropertyFinder.ViewModel
 {
   public class PropertyEventArgs : EventArgs
   {

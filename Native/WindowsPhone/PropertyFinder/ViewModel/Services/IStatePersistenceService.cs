@@ -1,5 +1,5 @@
 ﻿
-namespace PropertyFinder.Presenter
+namespace PropertyFinder.ViewModel
 {
   /// <summary>
   /// A service which provides state persistence.

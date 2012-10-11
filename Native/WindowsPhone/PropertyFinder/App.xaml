@@ -11,6 +11,12 @@
   <Application.Resources>
     <conv:UrlToImageSourceConverter x:Key="sourceConverter"/>
 
+    <ControlTemplate TargetType="Button" x:Key="PropertyButtonTemplate">
+      <ContentControl x:Name="ContentContainer"
+                        ContentTemplate="{TemplateBinding ContentTemplate}"
+                        Content="{TemplateBinding Content}"/>
+    </ControlTemplate>
+
     <DataTemplate x:Key="propertyTemplate">
       <Border Width="200" Height="250"
               Margin="10" Padding="10"

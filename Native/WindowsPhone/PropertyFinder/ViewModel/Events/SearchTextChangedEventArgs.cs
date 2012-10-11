@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PropertyFinder.Presenter
+namespace PropertyFinder.ViewModel
 {
   public class SearchTextChangedEventArgs : EventArgs
   {

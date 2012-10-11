@@ -5,16 +5,21 @@
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:conv="clr-namespace:PropertyFinder.Converter"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mm="clr-namespace:MetroInMotionUtils"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     xmlns:tk="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
-    xmlns:conv="clr-namespace:PropertyFinder.Converter"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
     shell:SystemTray.IsVisible="True">
-  
+
+  <phone:PhoneApplicationPage.Resources>
+    <conv:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+  </phone:PhoneApplicationPage.Resources>
+
   <Grid x:Name="LayoutRoot"
         Background="Black">
     <ScrollViewer Margin="5">
@@ -32,43 +37,51 @@
 
           <TextBlock TextWrapping="Wrap">
             <Run Foreground="#AAA">Showing results for </Run>
-            <Run x:Name="searchText"></Run>
+            <Run Text="{Binding SearchText}"></Run>
             <Run Foreground="#AAA">, showing </Run>
-            <Run x:Name="propertiesShown"></Run>
+            <Run Text="{Binding Properties.Count}"></Run>
             <Run Foreground="#AAA"> of </Run>
-            <Run x:Name="totalProperties"></Run>
+            <Run Text="{Binding TotalResults}"></Run>
             <Run Foreground="#AAA"> matching properties</Run>
           </TextBlock>
 
-          <ItemsControl x:Name="list"
-                      ItemTemplate="{StaticResource propertyTemplate}"
-                      Grid.Row="1"
-                      MouseLeftButtonUp="PropertyList_MouseLeftButtonUp">
+          <ItemsControl ItemsSource="{Binding Properties}"
+                      Grid.Row="1">
             <ItemsControl.ItemsPanel>
               <ItemsPanelTemplate>
                 <tk:WrapPanel Orientation="Horizontal"/>
               </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+              <DataTemplate>
+                <Button Template="{StaticResource PropertyButtonTemplate}"
+                        CommandParameter="{Binding}"
+                        mm:MetroInMotion.Tilt="3"
+                        Command="{Binding Parent.PropertySelectedCommand}">
+                  <ContentControl ContentTemplate="{StaticResource propertyTemplate}"
+                                  Content="{Binding Property}"/>
+                </Button>
+              </DataTemplate>
+            </ItemsControl.ItemTemplate>
           </ItemsControl>
 
           <StackPanel Orientation="Vertical"
                       Grid.Row="2"
+                      Visibility="{Binding LoadMoreVisible}"
                       Margin="0,10,0,0">
             <ProgressBar IsIndeterminate="True"
-                         Visibility="Collapsed"
-                         x:Name="loadingIndicator"/>
+                         Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibilityConverter}}"/>
             <StackPanel Orientation="Horizontal"
                       HorizontalAlignment="Right">
               <TextBlock TextWrapping="Wrap"
                      VerticalAlignment="Center">
-            <Run x:Name="pageNumber"></Run>
-            <Run Foreground="#AAA"> of </Run>
-            <Run x:Name="totalPages"></Run>
+                <Run Text="{Binding PageNumber}"></Run>
+                <Run Foreground="#AAA"> of </Run>
+                <Run Text="{Binding TotalPages}"></Run>
               </TextBlock>
               <Button Content="Load more ..."
-                  x:Name="loadMoreButton"
-                  Margin="40,0,0,0"
-                  Click="LoadMore_Click"/>
+                      Margin="40,0,0,0"
+                      Command="{Binding LoadMoreCommand}"/>
             </StackPanel>
           </StackPanel>
           

@@ -12,6 +12,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using PropertyFinder.Model;
+using PropertyFinder.ViewModel;
 
 namespace PropertyFinder
 {
@@ -26,7 +28,7 @@ namespace PropertyFinder
     /// <summary>
     /// Gets the application.
     /// </summary>
-    public new static App Instance
+    public static App Instance
     {
       get
       {
@@ -34,11 +36,29 @@ namespace PropertyFinder
       }
     }
 
+    public void NavigateToViewModel(object viewModel)
+    {
+      CurrentViewModel = viewModel;
+      var _navigationService = ((PhoneApplicationPage)RootFrame.Content).NavigationService;
+
+      if (viewModel is SearchResultsViewModel)
+      {
+        _navigationService.Navigate(new Uri("/SearchResultsView.xaml", UriKind.Relative));
+      }
+      else if (viewModel is PropertyViewModel)
+      {
+        _navigationService.Navigate(new Uri("/PropertyView.xaml", UriKind.Relative));
+      }
+      else if (viewModel is FavouritesViewModel)
+      {
+        _navigationService.Navigate(new Uri("/FavouritesView.xaml", UriKind.Relative));
+      }
+    }
 
     /// <summary>
     /// Used to pass state to new pages
     /// </summary>
-    public object CurrentPresenter { get; set; }
+    public object CurrentViewModel { get; set; }
 
     /// <summary>
     /// Constructor for the Application object.
@@ -80,6 +100,16 @@ namespace PropertyFinder
     // This code will not execute when the application is reactivated
     private void Application_Launching(object sender, LaunchingEventArgs e)
     {
+      var source = new PropertyDataSource(new JsonFilePropertySearch());
+      var geolocationService = new GeoLocationService();
+
+      var statePersistence = new StatePersistenceService();
+      PropertyFinderPersistentState state = statePersistence.LoadState();
+
+      var viewModel = new PropertyFinderViewModel(state, source,
+        new NavigationService(null), geolocationService);
+
+      RootFrame.DataContext = viewModel;
     }
 
     // Code to execute when the application is activated (brought to foreground)

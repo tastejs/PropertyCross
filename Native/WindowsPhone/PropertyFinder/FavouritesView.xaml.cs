@@ -11,43 +11,27 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using System.Windows.Navigation;
-using PropertyFinder.Presenter;
+using PropertyFinder.ViewModel;
 using PropertyFinder.Model;
 
 namespace PropertyFinder
 {
-  public partial class FavouritesView : PhoneApplicationPage, FavouritesPresenter.View
+  public partial class FavouritesView : PhoneApplicationPage
   {
     public FavouritesView()
     {
       InitializeComponent();
     }
 
-    protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+    protected override void OnNavigatedTo(NavigationEventArgs e)
     {
       base.OnNavigatedTo(e);
 
       if (e.NavigationMode != NavigationMode.Back)
       {
-        var presenter = App.Instance.CurrentPresenter as FavouritesPresenter;
-        presenter.SetView(this);
+        DataContext = App.Instance.CurrentViewModel;
       }
     }
 
-    public void SetFavourites(List<Property> properties)
-    {
-      favouritesList.ItemsSource = properties;
-    }
-
-    public event EventHandler<PropertyEventArgs> PropertySelected = delegate { };
-
-    private void FavouritesList_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-    {
-      Property property = ((FrameworkElement)e.OriginalSource).DataContext as Property;
-      if (property != null)
-      {
-        PropertySelected(this, new PropertyEventArgs(property));
-      }
-    }
   }
 }
