@@ -31,9 +31,9 @@ The Apps
   </tr>
   <tr>
     <th>Native</th>
+    <td>x</td>
+    <td>x</td>
     <td>✔</td>
-    <td>x</td>
-    <td>x</td>
   </tr>
   <tr>
     <th>PhoneGap / HTML5</th>
