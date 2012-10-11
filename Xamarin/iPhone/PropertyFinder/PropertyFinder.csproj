@@ -206,4 +206,10 @@
     <Folder Include="Presenter\" />
     <Folder Include="Model\" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Default.png" />
+    <Content Include="Default%402x.png" />
+    <Content Include="Icon.png" />
+    <Content Include="Icon%402x.png" />
+  </ItemGroup>
 </Project>
