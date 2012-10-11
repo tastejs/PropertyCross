@@ -1,0 +1,53 @@
+﻿<Application 
+    x:Class="PropertyFinder.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"       
+    xmlns:conv="clr-namespace:PropertyFinder.Converter"
+    xmlns:mm="clr-namespace:MetroInMotionUtils"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone">
+
+  <!--Application Resources-->
+  <Application.Resources>
+    <conv:UrlToImageSourceConverter x:Key="sourceConverter"/>
+
+    <DataTemplate x:Key="propertyTemplate">
+      <Border Width="200" Height="250"
+              Margin="10" Padding="10"
+              Background="#77888888"
+              mm:MetroInMotion.Tilt="2">
+        <StackPanel Orientation="Vertical">
+          <Border Width="140" Height="120"
+                          Padding="2"
+                          Background="#aaa"
+                          HorizontalAlignment="Center">
+            <Image Source="{Binding Path=ThumbnailUrl, Converter={StaticResource sourceConverter}}"
+                           Stretch="Fill"/>
+          </Border>
+          <TextBlock Text="{Binding Path=FormattedPrice}"
+                             FontSize="30"/>
+          <StackPanel Orientation="Horizontal">
+            <TextBlock Text="{Binding Path=Bedrooms}"
+                               FontSize="22"/>
+            <TextBlock Text=" bed "
+                               FontSize="22"/>
+            <TextBlock Text="{Binding Path=PropertyType}"
+                               FontSize="22"/>
+          </StackPanel>
+          <TextBlock Text="{Binding Path=Title}"
+                             Foreground="#aaa"
+                            TextTrimming="WordEllipsis"
+                            FontSize="22"/>
+        </StackPanel>
+      </Border>
+    </DataTemplate>
+  </Application.Resources>
+
+  <Application.ApplicationLifetimeObjects>
+    <!--Required object that handles lifetime events for the application-->
+    <shell:PhoneApplicationService 
+            Launching="Application_Launching" Closing="Application_Closing" 
+            Activated="Application_Activated" Deactivated="Application_Deactivated"/>
+  </Application.ApplicationLifetimeObjects>
+
+</Application>
