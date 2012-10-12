@@ -23,7 +23,8 @@ async.series([
     ["assets/frameworks/xamarin.png", "xamarin/android/PropertyCross/Resources/drawable-hdpi/ic_launcher.png", 72],
     ["assets/frameworks/xamarin.png", "xamarin/android/PropertyCross/Resources/drawable-ldpi/ic_launcher.png", 36],
     ["assets/frameworks/xamarin.png", "xamarin/android/PropertyCross/Resources/drawable-mdpi/ic_launcher.png", 48],
-    ["assets/frameworks/xamarin.png", "xamarin/android/PropertyCross/Resources/drawable-xhdpi/ic_launcher.png", 96]
+    ["assets/frameworks/xamarin.png", "xamarin/android/PropertyCross/Resources/drawable-xhdpi/ic_launcher.png", 96],
+    ["assets/frameworks/sencha.png", "senchatouch2/resources/icons/ApplicationIcon.png", 144]
   ]),
 
   generateSplashscreens.bind(null, "assets/splashscreen-bottom-640x640.png", [
@@ -36,7 +37,8 @@ async.series([
     ["jquerymobile/ios/assets/splashscreens/screen-iphone-portrait-2x.png", 640, 960],
     ["jquerymobile/windowsphone/SplashScreenImage.jpg", 480, 800],
     ["titanium/Resources/iphone/Default.png", 320, 480],
-    ["titanium/Resources/iphone/Default@2x.png", 640, 960]
+    ["titanium/Resources/iphone/Default@2x.png", 640, 960],
+    ["senchatouch2/resources/loading/Default.png", 320, 480]
   ]),
 
   generateOther.bind(null, "assets/star.png", [
