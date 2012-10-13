@@ -100,7 +100,7 @@ namespace PropertyFinder
     // This code will not execute when the application is reactivated
     private void Application_Launching(object sender, LaunchingEventArgs e)
     {
-      var source = new PropertyDataSource(new JsonFilePropertySearch());
+      var source = new PropertyDataSource(new JsonWebPropertySearch());
       var geolocationService = new GeoLocationService();
 
       var statePersistence = new StatePersistenceService();

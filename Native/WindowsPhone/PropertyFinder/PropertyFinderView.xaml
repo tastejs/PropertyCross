@@ -19,17 +19,30 @@
     <conv:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
     <conv:BooleanNotConverter x:Key="BooleanNotConverter"/>
     <conv:VisibleWhenNonZeroConverter x:Key="VisibleWhenNonZeroConverter"/>
-    
-    <ControlTemplate TargetType="Button" x:Key="ButtonTemplate">
-      <Border Background="{StaticResource PhoneAccentBrush}">
-        <ContentControl x:Name="ContentContainer"
-                        ContentTemplate="{TemplateBinding ContentTemplate}"
-                        Content="{TemplateBinding Content}"
-                        HorizontalAlignment="Left"
-                        HorizontalContentAlignment="Stretch"
-                        Background="LightBlue"/>
-      </Border>
-    </ControlTemplate>
+
+    <Style TargetType="Button"  x:Key="ButtonStyle">
+      <Setter Property="HorizontalAlignment" Value="Center"/>
+      <Setter Property="HorizontalContentAlignment" Value="Center"/>
+      <Setter Property="mm:MetroInMotion.Tilt" Value="3"/>
+      <Setter Property="Margin" Value="3"/>
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="Button">
+            <Border Background="{StaticResource PhoneAccentBrush}">
+              <ContentControl x:Name="ContentContainer"
+                              Margin="20,10,0,10"
+                              Padding="0,0,10,0"
+                              Width="430"
+                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                              Content="{TemplateBinding Content}"
+                              HorizontalAlignment="Left"
+                              HorizontalContentAlignment="Stretch"
+                              Background="LightBlue"/>
+            </Border>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
   </phone:PhoneApplicationPage.Resources>
 
   <!--LayoutRoot is the root grid where all page content is placed-->
@@ -59,6 +72,7 @@
                  TextWrapping="Wrap"
                  Margin="0,30,0,0"/>
     
+      <!-- search form -->
       <StackPanel Orientation="Horizontal"
                   Grid.Row="2"
                   Margin="0,10,0,0">
@@ -73,15 +87,18 @@
                 Content="My location"/>
       </StackPanel>
       
+      <!-- loading indicator -->
       <ProgressBar Grid.Row="3"
                    IsIndeterminate="True"
                    Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibilityConverter}}"/>
       
+      <!-- error messages -->
       <TextBlock Text="{Binding UserMessage}"
                  TextWrapping="Wrap"
                  Grid.Row="4"
                  Margin="0,20,0,20"/>
 
+      <!-- ambiguous locations -->
       <StackPanel Orientation="Vertical"
                   Grid.Row="5"
                   Margin="0,30,0,20"
@@ -94,15 +111,10 @@
           <ItemsControl ItemsSource="{Binding}">
             <ItemsControl.ItemTemplate>
               <DataTemplate>
-                <Button HorizontalAlignment="Stretch"
-                        HorizontalContentAlignment="Stretch"
-                        Template="{StaticResource ButtonTemplate}"
+                <Button Style="{StaticResource ButtonStyle}"
                         CommandParameter="{Binding Location}"
-                        Command="{Binding Path=Parent.LocationSelectedCommand}"
-                        mm:MetroInMotion.Tilt="3"
-                        Margin="3">
-                  <Grid HorizontalAlignment="Stretch"
-                        Margin="20,10,0,10">
+                        Command="{Binding Path=Parent.LocationSelectedCommand}">
+                  <Grid>
                     <TextBlock Text="{Binding Location.DisplayName}"
                                FontSize="{StaticResource PhoneFontSizeMedium}"/>
                   </Grid>
@@ -113,6 +125,7 @@
         </ScrollViewer>
       </StackPanel>
 
+      <!-- recent searches -->
       <StackPanel Orientation="Vertical"
                   Grid.Row="5"
                   Margin="0,30,0,20"
@@ -124,16 +137,10 @@
                       Margin="0 10 0 0">
           <ItemsControl.ItemTemplate>
             <DataTemplate>
-              <Button HorizontalAlignment="Stretch"
-                      HorizontalContentAlignment="Stretch"
-                      Template="{StaticResource ButtonTemplate}"
+              <Button Style="{StaticResource ButtonStyle}"
                       CommandParameter="{Binding}"
-                      Command="{Binding Path=Parent.RecentSearchSelectedCommand}"
-                      mm:MetroInMotion.Tilt="3"
-                      Margin="3">
-                <Grid HorizontalAlignment="Stretch"
-                      Width="400"
-                      Margin="20,10,0,10">
+                      Command="{Binding Path=Parent.RecentSearchSelectedCommand}">
+                <Grid>
                   <TextBlock Text="{Binding Search.DisplayText}"
                              FontSize="{StaticResource PhoneFontSizeMedium}"/>
                   <TextBlock Text="{Binding ResultsCount}"
