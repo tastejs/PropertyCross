@@ -30,6 +30,12 @@ The Apps
     <th>Windows Phone</th>
   </tr>
   <tr>
+    <th>Native</th>
+    <td>x</td>
+    <td>x</td>
+    <td>✔</td>
+  </tr>
+  <tr>
     <th>PhoneGap / HTML5</th>
     <td>✔</td>
     <td>x</td>
@@ -55,6 +61,7 @@ Platforms To Add:
 
   * RhoMobile
   * AppMobi
+  * MoSync
   * Sencha Touch (with PhoneGap)
   * Kendo UI Mobile (with PhoneGap)
 
@@ -81,6 +88,7 @@ and appropriate experience on each platform.
 Credits
 -------
 
+ * Native - Colin Eberhardt
  * PhoneGap / HTML5 - Colin Eberhardt / Chris Price
  * Xamarin - Colin Eberhardt
  * Titanium - Chris Price
