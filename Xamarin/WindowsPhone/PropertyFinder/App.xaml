@@ -15,7 +15,7 @@
       <Border Width="200" Height="250"
               Margin="10" Padding="10"
               Background="#77888888"
-              mm:MetroInMotion.Tilt="2">
+              mm:MetroInMotion.Tilt="3">
         <StackPanel Orientation="Vertical">
           <Border Width="140" Height="120"
                           Padding="2"
