@@ -101,7 +101,7 @@
       <!-- ambiguous locations -->
       <StackPanel Orientation="Vertical"
                   Grid.Row="5"
-                  Margin="0,30,0,20"
+                  Margin="0,5,0,20"
                   DataContext="{Binding Locations}"
                   Visibility="{Binding Count, Converter={StaticResource VisibleWhenNonZeroConverter}}">
         <TextBlock Text="Please select a location below:"
@@ -128,7 +128,7 @@
       <!-- recent searches -->
       <StackPanel Orientation="Vertical"
                   Grid.Row="5"
-                  Margin="0,30,0,20"
+                  Margin="0,5,0,20"
                   DataContext="{Binding RecentSearches}"
                   Visibility="{Binding Count, Converter={StaticResource VisibleWhenNonZeroConverter}}">
         <TextBlock Text="Recent searches:"
