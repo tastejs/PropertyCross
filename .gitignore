@@ -20,7 +20,8 @@
 /Native/WindowsPhone/PropertyFinder/Toolkit.Content
 /Native/WindowsPhone/*.suo
 /Native/WindowsPhone/PropertyFinder/PropertyFinder.csproj.user
-/Xamarin/Android/PropertyFinder/Bin
-/Xamarin/Android/PropertyFinder/obj
+/Xamarin/Android/PropertyFinder/Binj/Xamarin/Android/PropertyFinder/obj
+/Xamarin/Android/PropertyFinder.suo
+/Xamarin/Android/PropertyFinder.userprefs
 
 node_modules
