@@ -49,6 +49,7 @@ namespace PropertyFinder
     public void SetSearchResults(int totalResult, int pageNumber, int totalPages,
       List<Property> properties, string searchLocation)
     {
+      _properties.Clear();
       foreach (var property in properties)
       {
         _properties.Add(property);

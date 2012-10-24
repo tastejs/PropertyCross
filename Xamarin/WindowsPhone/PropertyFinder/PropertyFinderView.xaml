@@ -6,12 +6,39 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mm="clr-namespace:MetroInMotionUtils"
     mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="696"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     shell:SystemTray.IsVisible="True">
+  
+  <phone:PhoneApplicationPage.Resources>
+    <Style TargetType="Button"  x:Key="ButtonStyle">
+      <Setter Property="HorizontalAlignment" Value="Center"/>
+      <Setter Property="HorizontalContentAlignment" Value="Center"/>
+      <Setter Property="mm:MetroInMotion.Tilt" Value="3"/>
+      <Setter Property="Margin" Value="3"/>
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="Button">
+            <Border Background="{StaticResource PhoneAccentBrush}">
+              <ContentControl x:Name="ContentContainer"
+                              Margin="20,10,0,10"
+                              Padding="0,0,10,0"
+                              Width="430"
+                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                              Content="{TemplateBinding Content}"
+                              HorizontalAlignment="Left"
+                              HorizontalContentAlignment="Stretch"
+                              Background="LightBlue"/>
+            </Border>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+  </phone:PhoneApplicationPage.Resources>
 
   <!--LayoutRoot is the root grid where all page content is placed-->
   <Grid x:Name="LayoutRoot" Background="Black">
@@ -40,6 +67,7 @@
                  TextWrapping="Wrap"
                  Margin="0,30,0,0"/>
     
+      <!-- search form -->
       <StackPanel Orientation="Horizontal"
                   Grid.Row="2"
                   Margin="0,10,0,0">
@@ -54,55 +82,62 @@
                 Click="ButtonMyLocation_Click"/>
       </StackPanel>
       
+      <!-- progress indicator -->
       <ProgressBar x:Name="loadingIndicator"
                    Grid.Row="3"
                    IsIndeterminate="True"
                    Visibility="Collapsed"/>
       
+      <!-- error message -->
       <TextBlock x:Name="userMessage"
                  TextWrapping="Wrap"
                  Grid.Row="4"
                  Margin="0,20,0,20"/>
 
+      <!-- ambiguous locations list -->
       <StackPanel x:Name="locationsContainer"
                   Orientation="Vertical"
                   Grid.Row="5"
-                  Margin="0,30,0,20"
+                  Margin="0,5,0,20"
                   Visibility="Collapsed">
         <TextBlock Text="Please select a location below:"
                    FontSize="{StaticResource PhoneFontSizeMedium}"/>
         <ItemsControl x:Name="locationsList">
           <ItemsControl.ItemTemplate>
             <DataTemplate>
-              <StackPanel Orientation="Horizontal"
-                          Margin="20,10,0,10">
-                <TextBlock Text="• "/>
-                <TextBlock Text="{Binding DisplayName}"
-                           MouseLeftButtonUp="Location_MouseLeftButtonUp"
-                           FontSize="{StaticResource PhoneFontSizeMedium}"/>
-              </StackPanel>
+              <Button Style="{StaticResource ButtonStyle}"
+                      Click="Button_LocationClick">
+                <Grid>
+                  <TextBlock Text="{Binding DisplayName}"
+                             FontSize="{StaticResource PhoneFontSizeMedium}"/>
+                </Grid>
+              </Button>
             </DataTemplate>
           </ItemsControl.ItemTemplate>
         </ItemsControl>
       </StackPanel>
 
+      <!-- recent searches -->
       <StackPanel x:Name="recentSearchesContainer"
                   Orientation="Vertical"
                   Grid.Row="5"
-                  Margin="0,30,0,20"
+                  Margin="0,5,0,20"
                   Visibility="Collapsed">
         <TextBlock Text="Recent searches:"
                    FontSize="{StaticResource PhoneFontSizeMedium}"/>
         <ItemsControl x:Name="recentSearchList">
           <ItemsControl.ItemTemplate>
             <DataTemplate>
-              <StackPanel Orientation="Horizontal"
-                          Margin="20,10,0,10">
-                <TextBlock Text="• "/>
-                <TextBlock Text="{Binding Search.SearchText}"
-                           MouseLeftButtonUp="RecentSearch_MouseLeftButtonUp"
-                           FontSize="{StaticResource PhoneFontSizeMedium}"/>
-              </StackPanel>
+              <Button Style="{StaticResource ButtonStyle}"
+                      Click="Button_RecentSearchClick">
+                <Grid>
+                  <TextBlock Text="{Binding Search.DisplayText}"
+                             FontSize="{StaticResource PhoneFontSizeMedium}"/>
+                  <TextBlock Text="{Binding ResultsCount}"
+                             HorizontalAlignment="Right"
+                             FontSize="{StaticResource PhoneFontSizeMedium}"/>
+                </Grid>
+              </Button>
             </DataTemplate>
           </ItemsControl.ItemTemplate>
         </ItemsControl>

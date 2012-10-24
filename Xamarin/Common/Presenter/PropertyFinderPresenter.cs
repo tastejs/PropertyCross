@@ -107,11 +107,18 @@ namespace PropertyFinder.Presenter
       _view.IsLoading = true;
       _geolocationService.GetLocation(location =>
         {
-          _searchItem = new GeoLocationSearchItem(location);
-          _view.SearchText = _searchItem.DisplayText;
           _view.IsLoading = false;
 
-          SearchForProperties();
+          if (location == null)
+          {
+            _view.SetMessage("Unable to detect current location. Please ensure location is turned on in your phone settings and try again.");
+          }
+          else
+          {
+            _searchItem = new GeoLocationSearchItem(location);
+            _view.SearchText = _searchItem.DisplayText;
+            SearchForProperties();
+          }
         });
     }
 

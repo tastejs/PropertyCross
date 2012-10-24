@@ -150,13 +150,20 @@ namespace PropertyFinder.ViewModel
         {
           IsLoading = false;
 
-          _searchItem = new GeoLocationSearchItem(new GeoLocation()
+          if (location == null)
           {
-            Latitude = location.Latitude,
-            Longitude = location.Longitude
-          });
-          SetSearchText(_searchItem.DisplayText, true);
-          SearchForProperties();
+            UserMessage = "Unable to detect current location. Please ensure location is turned on in your phone settings and try again.";
+          }
+          else
+          {
+            _searchItem = new GeoLocationSearchItem(new GeoLocation()
+            {
+              Latitude = location.Latitude,
+              Longitude = location.Longitude
+            });
+            SetSearchText(_searchItem.DisplayText, true);
+            SearchForProperties();
+          }
         });
     }
 

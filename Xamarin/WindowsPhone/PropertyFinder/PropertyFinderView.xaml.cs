@@ -78,21 +78,7 @@ namespace PropertyFinder
     {
       FavouritesClicked(this, EventArgs.Empty);
     }
-
-    private void Location_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-    {
-      FrameworkElement fe = sender as FrameworkElement;
-      Location location = fe.DataContext as Location;
-      LocationSelected(this, new LocationSelectedEventArgs(location));
-    }
-
-    private void RecentSearch_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-    {
-      FrameworkElement fe = sender as FrameworkElement;
-      RecentSearch recentSearch = fe.DataContext as RecentSearch;
-      RecentSearchSelected(this, new RecentSearchSelectedEventArgs(recentSearch));
-    }
-
+    
     private void ButtonSearchGo_Click(object sender, RoutedEventArgs e)
     {
       SearchButtonClicked(this, EventArgs.Empty);
@@ -133,6 +119,20 @@ namespace PropertyFinder
         locationsContainer.Visibility = Visibility.Visible;
         locationsList.ItemsSource = locations;
       }
+    }
+
+    private void Button_LocationClick(object sender, RoutedEventArgs e)
+    {
+      FrameworkElement fe = sender as FrameworkElement;
+      Location location = fe.DataContext as Location;
+      LocationSelected(this, new LocationSelectedEventArgs(location));
+    }
+
+    private void Button_RecentSearchClick(object sender, RoutedEventArgs e)
+    {
+      FrameworkElement fe = sender as FrameworkElement;
+      RecentSearch recentSearch = fe.DataContext as RecentSearch;
+      RecentSearchSelected(this, new RecentSearchSelectedEventArgs(recentSearch));
     }
   }
 }
