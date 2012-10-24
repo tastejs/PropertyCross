@@ -1,0 +1,212 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, user-scalable=no" />
+
+  <!-- hide the navigation bar when bookmarked on an iPhone -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+
+  <!-- required libraries -->
+  <link rel="stylesheet" href="lib/jquery.mobile-1.2.0.min.css" />
+  <script type="text/javascript" src="lib/jquery-1.8.2.min.js"></script>
+  <script type="text/javascript" src="lib/jquery.mobile-1.2.0.min.js"></script>
+  <script type="text/javascript" src="lib/jquery.jsonp-2.1.4.min.js"></script>
+  <script type="text/javascript" src="lib/knockout-2.2.0rc.debug.js"></script>
+  <script type="text/javascript" src="lib/iscroll.js"></script>
+  <script type="text/javascript" src="lib/jquery.mobile.iscrollview.js"></script>
+  <script type="text/javascript" src="lib/cordova-1.9.0.js"></script>
+  
+  <script src="namespaces.js" type="text/javascript"></script>
+  
+  <!-- model layer -->
+  <script src="model/Property.js" type="text/javascript"></script>
+  <script src="model/Location.js" type="text/javascript"></script>
+  <script src="model/PropertyDataSourceResponse.js" type="text/javascript"></script>
+  <script src="model/PropertyDataSource.js" type="text/javascript"></script>
+  <script src="model/JSONDataSource.js" type="text/javascript"></script>
+
+  <!-- view model layer -->
+  <script src="viewModel/util.js" type="text/javascript"></script>
+  <script src="viewModel/PropertyViewModel.js" type="text/javascript"></script>
+  <script src="viewModel/PropertySearchViewModel.js" type="text/javascript"></script>
+  <script src="viewModel/LocationViewModel.js" type="text/javascript"></script>
+  <script src="viewModel/GeolocationViewModel.js" type="text/javascript"></script>
+  <script src="viewModel/SearchResultsViewModel.js" type="text/javascript"></script>
+  <script src="viewModel/FavouritesViewModel.js" type="text/javascript"></script>
+
+  <!-- bootstrap -->
+  <script src="app.js" type="text/javascript"></script>
+  
+  <!-- application specific styling -->
+  <link rel="stylesheet" type="text/css" href="style.css" />  
+</head>
+<body>
+  <script id="locationTemplate" type="text/x-jquery-tmpl">
+    <li>
+      <a data-bind="click: propertySearchViewModel.selectLocation">
+        <span data-bind="text: displayString"/>
+      </a>
+    </li>
+  </script>
+
+  <script id="locationWithCountTemplate" type="text/x-jquery-tmpl">
+    <li>
+      <a data-bind="click: propertySearchViewModel.selectLocation">
+        <span data-bind="text: displayString"/>
+        <span class="ui-li-count" data-bind="text: totalResults"></span>
+      </a>
+    </li>
+  </script>
+
+  <script id="propertyThumbnailView" type="text/x-jquery-tmpl">
+    <li>
+      <a data-bind="click: select">
+        <div class="thumbnail-container">
+          <img data-bind="attr: { src: thumbnailUrl }"/>
+        </div>
+        <h3>£<span data-bind="text: price"/></h3>
+        <p data-bind="text: title"></p>
+      </a>
+    </li>
+  </script>
+
+  <!-- Renders the property finder front page-->
+  <div data-role="page" data-theme="b"
+        id="propertySearchView">
+    <div data-role="header" data-theme="b">
+      <h1>Property Finder</h1>
+      <a data-bind="click: viewFavourites"
+        data-icon="grid" class="ui-btn-right">Fave</a>
+    </div>
+    <div data-role="content" data-theme="c" data-iscroll>
+          
+      <p>Use the form below to search for houses to buy. You can search by place-name, postcode, or click 'My location', to search in your current location!</p>      
+      <div>
+          <input type="search"
+                  data-bind="value: searchDisplayString, enable: isSearchEnabled, valueUpdate:'afterkeydown'"/>
+          <button type="submit"
+                  data-bind="enable: isSearchEnabled, click: executeSearch">Go</button>
+          <button data-bind="enable: isSearchEnabled, click: searchMyLocation">My location</button>
+      </div>
+      
+      <div data-bind="visible: isSearchEnabled() == false">
+        Searching...
+      </div>
+      
+      <!-- a message that indicates search failure etc ... -->
+      <p data-bind="text:userMessage"/>
+      
+      <!-- a list of locations that the user can pick from -->
+      <div data-bind="visible: locations().length > 0">
+        <h4>Please select a location below:</h4>
+        <ul data-role="listview" data-inset="true"
+            data-bind='template: { name: "locationTemplate", foreach: locations },
+                       updateListviewOnChange:locations'/>
+      </div>
+
+      <!-- the last 4 recent searches -->
+      <div data-bind="visible: recentSearches().length > 0 && locations().length === 0">
+        <h4>Recent searches:</h4>
+        <ul data-role="listview" data-inset="true"
+            data-bind='template: { name: "locationWithCountTemplate", foreach: recentSearches },
+                      updateListviewOnChange:recentSearches'/>
+      </div>
+    </div>
+  </div>
+
+  <!-- a page which renders a list of search results -->
+  <div data-role="page" data-theme="b" data-add-back-btn="true"
+        id="searchResultsView">
+    <div data-role="header" data-theme="b">
+      <h1>Results</h1>
+    </div>
+    <div data-role="content" data-theme="c" data-iscroll>
+      <div>
+        <ul data-role="listview"/>
+          <!-- ko foreach: properties, updateListviewOnChange:properties -->
+          <li>
+            <a data-bind="click: $parent.select">
+              <div class="thumbnail-container">
+                <img data-bind="attr: { src: thumbnailUrl }"/>
+              </div>
+              <h3>£<span data-bind="text: price"/></h3>
+              <p data-bind="text: title"></p>
+            </a>
+          </li>
+          <!-- /ko -->
+          <li data-bind="visible: properties().length !== totalResults">
+            <a data-bind="click: loadMore">
+              <h3>Load more ...</h3>
+              <p class="results-summary">
+                Results for <span data-bind="with: searchLocation"><span data-bind="text: displayString"></span></span>, showing
+                <span data-bind="text: properties().length"></span> of 
+                <span data-bind="text: totalResults"></span> properties
+              </p>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- a page which renders the users favourites -->
+  <div data-role="page" data-theme="b" data-add-back-btn="true"
+        id="favouritesView">
+    <div data-role="header" data-theme="b">
+      <h1>Favourites</h1>
+    </div>
+    <div data-role="content" data-theme="c" data-iscroll>
+      <ul data-role="listview"/>
+        <!-- ko foreach: properties, updateListviewOnChange:properties -->
+        <li>
+          <a data-bind="click: $parent.select">
+            <div class="thumbnail-container">
+              <img data-bind="attr: { src: thumbnailUrl }"/>
+            </div>
+            <h3>£<span data-bind="text: price"/></h3>
+            <p data-bind="text: title"></p>
+          </a>
+        </li>
+        <!-- /ko -->
+      </ul>
+    </div>
+  </div>
+
+  <!-- a page which renders a property -->
+  <div data-role="page" data-theme="b" data-add-back-btn="true"
+        id="propertyView">
+    <div data-role="header" data-theme="b">
+      <h1>Property</h1>
+
+      <!-- for the farourites button I want to bind the data-icon value to the view model. Unfortunately this cannot be done because
+        the element that holds this class is a generated child of the item that is bound to. For this reason I have resorted to 
+        creating the required markup manually -->
+      <a  class="ui-btn-right ui-btn ui-btn-icon-left ui-btn-corner-all ui-shadow ui-btn-up-b"
+            data-bind="click: propertySearchViewModel.addToFavourites">
+          <span class="ui-btn-inner ui-btn-corner-all">
+            <span class="ui-btn-text">Fave</span>
+
+            <!-- swap button icon based on the view model state -->
+            <span class="ui-icon ui-icon-plus ui-icon-shadow"
+                  data-bind="visible: isFavourite() == false"></span>
+            <span class="ui-icon ui-icon-minus ui-icon-shadow"
+                  data-bind="visible: isFavourite() == true"></span>
+          </span>
+        </a>
+    </div>
+    <div data-role="content" data-theme="c" class="propertyView" data-iscroll>
+      <h1 data-bind="text: title"></h1>
+      <img data-bind="attr: { src: thumbnailUrl }"/>
+      <ul class="propertyView">
+        <li class="price">£<span data-bind="text: price"/></li>
+        <li class="propertyType">
+          <span data-bind="text: bedrooms"></span> bed
+          <span data-bind="text: propertyType"></span><span data-bind="visible: bathrooms !== ''">, <span data-bind="text: bathrooms"></span> bathroom</span>
+        </li>
+      </ul>
+      <span data-bind="text: summary"></span>
+    </div>
+  </div>
+
+</body>
+</html>

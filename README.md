@@ -36,10 +36,10 @@ The Apps
     <td>✔</td>
   </tr>
   <tr>
-    <th>PhoneGap / HTML5</th>
+    <th>jQueryMobile</th>
     <td>✔</td>
     <td>x</td>
-    <td>✔</td>
+    <td>x</td>
   </tr>
   <tr>
     <th>Xamarin / MonoTouch</th>
