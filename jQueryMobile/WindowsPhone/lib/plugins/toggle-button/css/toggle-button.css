@@ -1,0 +1,72 @@
+/*
+"Toggle button" plugin
+*/
+
+.ui-toggle-button{
+    width: 35px;
+    text-decoration: none;
+    display: inline-block;
+    margin: 5px 10px 5px 0px;
+    cursor: pointer;
+}
+
+/*
+icon
+*/
+
+.ui-toggle-icon{
+    border: 2px solid;
+    width: 35px;
+    height: 35px;
+}
+
+.ui-toggle-button-a .ui-toggle-icon{
+    background-color: black;
+    border-color: white;
+}
+
+.ui-toggle-button-b .ui-toggle-icon{
+    background-color: white;
+    border-color: black;
+}
+
+.ui-toggle-button-a[checked='checked'] .ui-toggle-icon{
+    background-color: white;
+}
+
+.ui-toggle-button-b[checked='checked'] .ui-toggle-icon{
+    background-color: black;
+}
+
+/*
+caption
+*/
+.ui-toggle-caption {
+    font-size: 8pt;
+    width: 35px;
+}
+
+.ui-toggle-button-a .ui-toggle-caption{
+    color: white;
+}
+
+.ui-toggle-button-b .ui-toggle-caption{
+    color: black;
+}
+
+/*
+disabled state
+*/
+
+.ui-toggle-button.ui-disabled .ui-toggle-caption{
+    color: #808080;
+}
+
+.ui-toggle-button.ui-disabled .ui-toggle-icon{
+    border-color: #808080;
+    cursor: default;
+}
+
+.ui-toggle-button.ui-disabled[checked='checked'] .ui-toggle-icon{
+    background-color: #808080;
+}

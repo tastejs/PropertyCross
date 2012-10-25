@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <title>Date/Time picker</title>
+    <link rel="stylesheet"  href="../../themes/metro/jquery.mobile.metro.theme.css" />
+
+    <script src="../../jqmobile-core/jquery.js"></script>
+    <script src="../../jqmobile-core/jquery.mobile.js"></script>
+    <script src="js/mobiscroll-1.5.3.js" type="text/javascript"></script>
+    <link href="css/mobiscroll-1.5.3.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript">
+
+// allows to use the page in NON Cordova environment
+if (typeof window.external.Notify !== "undefined") {
+
+	var head = document.getElementsByTagName("head")[0];
+
+	var sc1 = document.createElement("script");
+	sc1.src = "../../cordova/cordova-1.5.0.js";
+	(head || document.body).appendChild(sc1);
+	
+	
+	var sc2 = document.createElement("script");
+	sc2.src = "../../cordova/dateTimePicker.js";
+	(head || document.body).appendChild(sc2);
+}
+
+</script>
+
+    <script type="text/javascript">
+        // provide our own console if it does not exist, huge dev aid!
+        if (typeof window.console == "undefined") {
+            window.console = { log: function (str) { window.external.Notify(str); } };
+        }
+
+        // output any errors to console log, created above.
+        window.onerror = function (e) {
+            console.log("window.onerror ::" + JSON.stringify(e));
+        };
+
+        console.log("Installed console ! ");
+    </script>
+
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            // Date with external button
+            $('#date1').scroller({ mode: 'clickpick' });
+            // Time
+            $('#date2').scroller({ preset: 'time',mode: 'clickpick' });
+        });
+    </script>
+</head>
+
+<body>
+    <div data-role="page" data-theme="a" id="jqm-home">
+        <div data-role="header" data-theme="a">
+            <h1>Date/Time picker</h1>
+        </div>
+
+        <div data-role="content" data-theme="a">
+            <form id="testform">
+
+                <div data-role="fieldcontain">
+                    <label for="date1">Date</label>
+                    <input type="text" name="date1" id="date1"  readonly="1"/>
+                </div>
+
+                <div data-role="fieldcontain">
+                    <label for="date2">Time</label>
+                    <input type="text" name="date2" id="date2" readonly="1"/>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

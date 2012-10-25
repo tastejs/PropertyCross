@@ -1,0 +1,46 @@
+.thumbnail-container
+{
+  padding: 5px 10px 0 5px;
+  text-align: center;
+  float: left;
+}
+
+.thumbnail-container img
+{
+  width: 60px;
+  height: 60px;
+}
+
+.results-summary span
+{
+  font-weight: bold;
+}
+
+div.propertyView img 
+{
+  padding: 2px;
+  margin: 5px;
+  width: 95%;
+  background-color: #aaa;
+}
+
+/* add a background image to all pages */
+.ui-page
+{
+  background-image: url("background.png");
+  background-position: bottom;
+  background-repeat: no-repeat;
+}
+
+/* give recent searches an 'accent colour' style */
+.recent-search-list li
+{
+  background-color: #339933;
+}
+
+/* give properties a simple background effect */
+.property-list li
+{
+  background-color: rgba(100,100,100, 0.6);
+}
+

@@ -1,0 +1,62 @@
+{
+   "request" : {
+      "country" : "uk",
+      "language" : "en",
+      "listing_type" : "buy",
+      "location" : "alford",
+      "num_res" : 20,
+      "offset" : 0,
+      "output" : "json_xs",
+      "page" : 1,
+      "pretty" : "1",
+      "product_type" : "realestate",
+      "property_type" : "property",
+      "sort" : "nestoria_rank"
+   },
+   "response" : {
+      "application_response_code" : "200",
+      "application_response_text" : "ambiguous location",
+      "attribution" : {
+         "img_height" : 20,
+         "img_url" : "http://static.nestoria.co.uk/i/realestate/uk/en/pb.png",
+         "img_width" : 200,
+         "link_to_img" : "http://www.nestoria.co.uk"
+      },
+      "created_http" : "Mon, 18 Jul 2011 19:42:40 GMT",
+      "created_unix" : 1311018160,
+      "locations" : [
+         {
+            "center_lat" : "51.131487",
+            "center_long" : "-0.481011",
+            "long_title" : "Alford",
+            "place_name" : "alford_gu6",
+            "title" : "Alford"
+         },
+         {
+            "center_lat" : "57.223792",
+            "center_long" : "-2.746543",
+            "long_title" : "Alford, Aberdeenshire",
+            "place_name" : "alford_ab",
+            "title" : "Alford"
+         },
+         {
+            "center_lat" : "53.265506",
+            "center_long" : "0.184356",
+            "long_title" : "Alford, Lincolnshire",
+            "place_name" : "alford_ln",
+            "title" : "Alford"
+         },
+         {
+            "center_lat" : "51.084592",
+            "center_long" : "-2.565313",
+            "long_title" : "Alford, Castle Cary",
+            "place_name" : "alford_castlecary",
+            "title" : "Alford"
+         }
+      ],
+      "sort" : "nestoria_rank",
+      "status_code" : "200",
+      "status_text" : "OK",
+      "thanks" : "For using the Nestoria API."
+   }
+}

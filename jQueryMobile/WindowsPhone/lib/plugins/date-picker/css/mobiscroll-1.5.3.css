@@ -1,0 +1,267 @@
+/* Datewheel overlay */
+.dw {
+    position: absolute;
+    left: 0px;;
+    top: 0px;
+    z-index: 1001;
+    background: #202020;
+    color: white;
+    height: 100% !important;
+    width: 100% !important;
+    margin: 0px;
+    padding: 0px;
+}
+/* Datewheel overlay background */
+.dwo {
+    width: 100%;
+    background: #202020;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    display: none;
+}
+/* Datewheel wheel container wrapper */
+.dwc {
+    display: block;
+    margin: 0px;
+    padding: 0px;
+    width: 100% !important;
+    top: 30%;
+    position: relative;
+    text-align: center;
+}
+/* Datewheel label */
+.dwl {
+    margin: 0 5px;
+    line-height: 30px;
+    height: 30px;
+    white-space: nowrap;
+    position: relative;
+    top: 65px;
+    z-index: 900;
+    text-align: left;
+}
+
+.dwpm .dwl{
+    top: 80px;
+}
+
+/* Datewheel value */
+.dwv {
+    padding-left: 15px;
+    padding-top: 25px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 15px;
+}
+/* Datewheel wheel container */
+.dwrc {
+    border-radius: 0px;
+}
+.dwwc {
+    display: block;
+    margin: 0 auto;
+    padding: 0px;
+    background: #202020;
+    text-align: center;
+}
+/* Datewheel wheels */
+.dwwl {
+    margin: 0px 5px;
+    padding: 0px 0px;
+    float: left;
+    display: block;
+    position: relative;
+}
+.dww {
+    margin: 0px;
+    overflow: hidden;
+    position: relative;
+    top: -30px;
+    color: #fff;
+    background: #202020;
+    border: none;
+}
+.dww ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: block;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+}
+.dww li {
+    list-style: none;
+    margin: 0;
+    padding: 0 5px;
+    display: block;
+    line-height: 40px;
+    font-size: 24px;
+    font-family: "Segoe WP";
+    text-align: left;
+}
+/* Wheel +/- buttons */
+.dwwb {
+    position: absolute;
+    z-index: 4;
+    left: 0;
+    cursor: pointer;
+    width: 95% !important;
+    height: 50% !important;
+    background: #202020;
+    border: 2px solid #666666;
+    text-align: center;
+    color: #888;
+    line-height: 70px !important;
+}
+.dwwbp {
+    top: -28%;
+    font-size: 40px;
+}
+.dwwbm {
+    bottom: -28%;
+    font-size: 32px;
+    font-weight: bold;
+}
+.dwpm .dwwc {
+    background: transparent;
+}
+.dwpm .dww {
+    margin: 0px;
+    color: #000;
+    background: #666666;
+}
+.dwpm .dww li {
+    text-shadow: none;
+}
+.dwpm .dwwol {
+    display: none;
+}
+/* Datewheel wheel overlay */
+.dwwo {
+    position: absolute;
+    z-index: 3;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+/* Background line */
+.dwwol {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 0;
+    margin-top: -1px;
+    border-top: 1px solid #333;
+    border-bottom: 1px solid #555;
+}
+/* Datewheel button */
+.dwb {
+    display: block;
+    /*width: 70px;*/
+    line-height: 40px;
+    padding: 0px;
+    margin: 0px auto;
+    font-size: 0px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #fff;
+    background-position: 50% 50%;
+    background-size: 30px 30px;
+    border: 2px solid white;
+    border-radius: 20px;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+}
+.dwb-a {
+    background: white;
+    background-position: 50% 50%;
+    background-size: 30px 30px;
+}
+.dwwl .dwb-a {
+    background: white;
+    background-position: 50% 50%;
+}
+/* Datewheel button container */
+.dwbc {
+    /*margin-top: 5px;*/
+    padding: 10px 0px;
+    text-align: center;
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+}
+/* Datewheel button wrapper */
+.dwbw {
+    display: inline-block;
+    margin: 0px 10px;
+}
+
+
+.dwbw.dwb-s,
+.dwbw.dwb-c{
+    background:#202020;
+}
+
+.dwbw.dwb-s .dwb{
+    background-image: url("../images/appbar.check.rest.dark.png");
+}
+
+.dwbw.dwb-c .dwb{
+    background-image: url("../images/appbar.cancel.rest.dark.png");
+}
+
+.dwbw.dwb-s .dwb-a{
+    background-image: url("../images/appbar.check.rest.ligth.png");
+}
+
+.dwbw.dwb-c .dwb-a{
+    background-image: url("../images/appbar.cancel.rest.light.png");
+}
+
+.dww ul{
+    background-color: #666666;
+    color: white;
+    width:100%;
+}
+
+
+@media screen and (orientation: portrait){
+    .dwc {
+        top:30%;
+    }
+}
+@media only screen and (orientation: landscape) and (min-device-width: 400px){
+    .dwc {
+        top: 15%;
+        width: 60% !important;
+        float: left;
+    }
+
+    .dwbc{
+        float: right;
+        height: 100%;
+        width: 15% !important;
+        position: static;
+        margin-top: 0px;
+        padding-top: 15%;
+        clear: none !important;
+    }
+
+    .dwbw.dwb-s,
+    .dwbw.dwb-c{
+        display: block;
+        margin: 10px;
+    }
+
+    .dwv{
+        float: left;
+        width: 15% !important;
+    }
+}
