@@ -39,10 +39,7 @@
   <script src="viewModel/GeolocationViewModel.js" type="text/javascript"></script>
   <script src="viewModel/SearchResultsViewModel.js" type="text/javascript"></script>
   <script src="viewModel/FavouritesViewModel.js" type="text/javascript"></script>
-
-  <!-- bootstrap -->
-  <script src="app.js" type="text/javascript"></script>
-  
+    
   <!-- application specific styling -->
   <link rel="stylesheet" type="text/css" href="style/style.css" />  
 
@@ -138,13 +135,11 @@
             data-bind='template: { name: "locationWithCountTemplate", foreach: recentSearches },
                       updateListviewOnChange:recentSearches'/>
       </div>
-
-      
     </div>
     <div data-role='app-bar' >
-      <a data-bind="click:viewFavourites"
-          data-icon='demo-help' >favourites</a>
-    </div>
+        <a data-bind="click:viewFavourites"
+            data-icon='demo-help' >help</a>
+      </div>
   </div>
 
   <!-- a page which renders a list of search results -->
@@ -243,6 +238,9 @@
       <span data-bind="text: summary"></span>
     </div>
   </div>
+
+  <!-- bootstrap -->
+  <script src="app.js" type="text/javascript"></script>
 
 </body>
 </html>
