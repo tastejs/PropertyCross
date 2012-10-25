@@ -131,8 +131,14 @@ function onBackButton() {
   }
 }
 
-
-// startup the app
-document.addEventListener("deviceready", initializeViewModels, false);
+// start the app
+var browserUA = navigator.userAgent.toLowerCase();
+if (browserUA.search('windows phone os 7') > -1) {
+  // on a device - wait for the PhoneGap device ready event
+  document.addEventListener("deviceready", initializeViewModels, false);
+} else {
+  // if there is we are not running on a phone - start the app immediately
+  initializeViewModels();
+}
 
 
