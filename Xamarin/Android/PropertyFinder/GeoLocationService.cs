@@ -18,7 +18,14 @@ namespace PropertyFinder
 		public void GetLocation(Action<GeoLocation> callback)
 		{
 			pendingCallback = callback;
-			manager.RequestLocationUpdates(LocationManager.GpsProvider, 1000, 10, this);
+			if(!manager.IsProviderEnabled(LocationManager.GpsProvider))
+			{
+				DoCallback(null);
+			}
+			else
+			{
+				manager.RequestLocationUpdates(LocationManager.GpsProvider, 1000, 10, this);
+			}
 		}
 
 		public void OnLocationChanged (Location location)
@@ -32,8 +39,7 @@ namespace PropertyFinder
 					Latitude = location.Latitude,
 					Longitude = location.Longitude
 				};
-				pendingCallback(g);
-				pendingCallback = null;
+				DoCallback(g);
 			}
 		}
 		
@@ -59,6 +65,12 @@ namespace PropertyFinder
 		public void Dispose()
 		{
 			Unsubscribe();
+		}
+
+		private void DoCallback(GeoLocation g)
+		{
+			pendingCallback(g);
+			pendingCallback = null;
 		}
 
 		public IntPtr Handle { get { return new IntPtr (); } }
