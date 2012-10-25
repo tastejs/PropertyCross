@@ -55,6 +55,25 @@ namespace PropertyFinder.Views
 			presenter.SetView(this);
 		}
 
+		public override bool OnCreateOptionsMenu(IMenu menu)
+		{
+			MenuInflater.Inflate(Resource.Menu.favourites_view, menu);
+			return true;
+		}
+
+		public override bool OnOptionsItemSelected(IMenuItem item)
+		{
+			if(item.ItemId == Resource.Id.favourites_view_item)
+			{
+				FavouritesClicked(this, EventArgs.Empty);
+				return true;
+			}
+			else
+			{
+				return base.OnOptionsItemSelected(item);
+			}
+		}
+
 		public string SearchText
 		{
 			set { searchText.SetText(value, TextView.BufferType.Editable); }

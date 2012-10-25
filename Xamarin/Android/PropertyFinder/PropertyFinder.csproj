@@ -67,6 +67,7 @@
     <AndroidResource Include="Resources\drawable\Icon.png" />
     <AndroidResource Include="Resources\layout\PropertyFinderView.axml" />
     <AndroidResource Include="Resources\layout\recent_search_row.axml" />
+    <AndroidResource Include="Resources\menu\favourites_view.xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\Common\Model\IJsonPropertySearch.cs">
@@ -154,5 +155,6 @@
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Views\" />
+    <Folder Include="Resources\menu\" />
   </ItemGroup>
 </Project>
