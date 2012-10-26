@@ -13,7 +13,7 @@ using PropertyFinder.Model;
 
 namespace PropertyFinder.Views
 {
-	[Activity (Label = "PropertyFinder", MainLauncher = true)]
+	[Activity (Label = "PropertyFinder", MainLauncher = true, WindowSoftInputMode = SoftInput.StateHidden)]
 	public class PropertyFinderView : Activity, PropertyFinderPresenter.View
 	{
 		private PropertyFinderPresenter presenter;
