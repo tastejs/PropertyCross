@@ -44,3 +44,33 @@ div.propertyView img
   background-color: rgba(100,100,100, 0.6);
 }
 
+/* app-bar styling (based on the naming conventions that the plugin imposes) */
+.ui-icon-favourites,
+.ui-icon-addToFavourites,
+.ui-icon-favourited
+{
+  background-repeat: no-repeat;
+  background-position: 50% 50% ;
+  background-size: 30px 30px;
+}
+
+.ui-btn-up-a .ui-icon-favourites,
+.ui-btn-hover-a .ui-icon-favourites,
+.ui-btn-down-b .ui-icon-favourites
+{
+    background-image: url(favourites.png);
+}
+
+.ui-btn-up-a .ui-icon-addToFavourites,
+.ui-btn-hover-a .ui-icon-addToFavourites,
+.ui-btn-down-b .ui-icon-addToFavourites
+{
+    background-image: url(addToFavourites.png);
+}
+
+.ui-btn-up-a .ui-icon-favourited,
+.ui-btn-hover-a .ui-icon-favourited,
+.ui-btn-down-b .ui-icon-favourited
+{
+    background-image: url(favourited.png);
+}

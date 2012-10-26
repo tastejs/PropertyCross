@@ -45,29 +45,6 @@
 
   <!-- application specific styling -->
   <link rel="stylesheet" type="text/css" href="style/style.css" />  
-
-  <!-- app bar styling - needs tridying up! -->
-  <style type="text/css">
-    .ui-icon-demo-help,
-    .ui-icon-demo-set {
-        background-repeat: no-repeat;
-        background-position: 50% 50% ;
-        background-size: 30px 30px;
-    }
-
-    .ui-btn-up-a .ui-icon-demo-help,
-    .ui-btn-hover-a .ui-icon-demo-help,
-    .ui-btn-down-b .ui-icon-demo-help{
-        background-image: url(lib/plugins/app-bar/Images/help.dark.png);
-    }
-
-    .ui-btn-up-a .ui-icon-demo-set,
-    .ui-btn-hover-a .ui-icon-demo-set,
-    .ui-btn-down-b .ui-icon-demo-set{
-        background-image: url(lib/plugins/app-bar/Images/set.dark.png) ;
-    }
-
-    </style>
 </head>
 <body>
   <script id="locationTemplate" type="text/x-jquery-tmpl">
@@ -140,9 +117,9 @@
       </div>
     </div>
     <div data-role='app-bar' >
-        <a data-bind="click:viewFavourites"
-            data-icon='demo-help' >help</a>
-      </div>
+      <a data-bind="click:viewFavourites"
+          data-icon='favourites'>favourites</a>
+    </div>
   </div>
 
   <!-- a page which renders a list of search results -->
@@ -211,22 +188,6 @@
         id="propertyView">
     <div data-role="header">
       <h1>Property</h1>
-
-      <!-- for the farourites button I want to bind the data-icon value to the view model. Unfortunately this cannot be done because
-        the element that holds this class is a generated child of the item that is bound to. For this reason I have resorted to 
-        creating the required markup manually -->
-      <a  class="ui-btn-right ui-btn ui-btn-icon-left ui-btn-corner-all ui-shadow ui-btn-up-b"
-            data-bind="click: propertySearchViewModel.addToFavourites">
-          <span class="ui-btn-inner ui-btn-corner-all">
-            <span class="ui-btn-text">Fave</span>
-
-            <!-- swap button icon based on the view model state -->
-            <span class="ui-icon ui-icon-plus ui-icon-shadow"
-                  data-bind="visible: isFavourite() == false"></span>
-            <span class="ui-icon ui-icon-minus ui-icon-shadow"
-                  data-bind="visible: isFavourite() == true"></span>
-          </span>
-        </a>
     </div>
     <div data-role="content" class="propertyView">
       <h1 data-bind="text: title"></h1>
@@ -239,6 +200,24 @@
         </li>
       </ul>
       <span data-bind="text: summary"></span>
+    </div>
+    
+      <div class="ui-app-bar ui-app-bar-a">
+      <!-- for the favourites button I want to bind the data-icon value to the view model. Unfortunately this cannot be done because
+        the element that holds this class is a generated child of the item that is bound to. For this reason I have resorted to 
+        creating the required markup manually -->
+        <div class="ui-app-bar-btn-panel">
+          <a data-bind="click : propertySearchViewModel.addToFavourites" class="ui-btn ui-btn-icon-top ui-btn-up-a">
+            <span class="ui-btn-inner">
+              <span class="ui-btn-text">favourites</span>
+              <span data-bind="attr: { class: isFavourite() ? 'ui-icon ui-icon-addToFavourites ui-icon-shadow'
+                                                          : 'ui-icon ui-icon-favourited ui-icon-shadow' }">&nbsp;</span>
+            </span>
+          </a>
+          <span class="ui-app-bar-dots">...</span>
+        </div>
+      
+    </div>
     </div>
   </div>
 
