@@ -17,25 +17,13 @@ namespace PropertyFinder
 	public class RecentSearchAdapter : ArrayAdapter<RecentSearch>
 	{
 		private Context context;
-		private IList<RecentSearch> data;
 
 		public RecentSearchAdapter (Context c, IList<RecentSearch> d)
-		: base(c, Resource.Id.recent_search_text, d.ToArray())
+		: base(c, Android.Resource.Layout.SimpleListItem1, d)
 		{
-			context = c;
-			data = d;
 		}
 
-		public void SetData (IList<RecentSearch> d)
-		{
-			if (data != d)
-			{
-				data = d;
-				NotifyDataSetChanged();
-			}
-		}
-
-		public override int Count
+		/*public override int Count
 		{
 			get { return data.Count; }
 		}
@@ -63,6 +51,6 @@ namespace PropertyFinder
 			}
 
 			return view;
-		}
+		}*/
 	}
 }

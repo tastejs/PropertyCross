@@ -21,8 +21,7 @@ namespace PropertyFinder.Views
 		private Button myLocationButton;
 		private Button startSearchButton;
 		private ListView recentSearchList;
-		//private RecentSearchAdapter adapter;
-		private ArrayAdapter<RecentSearch> adapter;
+		private RecentSearchAdapter adapter;
 
 		protected override void OnCreate (Bundle bundle)
 		{
@@ -45,8 +44,7 @@ namespace PropertyFinder.Views
 
 			recentSearchList = (ListView) FindViewById (Resource.Id.recentsearches_list);
 			recentSearchList.ItemClick += RecentSearchItem_Clicked;
-			//adapter = new RecentSearchAdapter(this, new List<RecentSearch>());
-			adapter = new ArrayAdapter<RecentSearch>(this, Android.Resource.Layout.SimpleListItem1, new List<RecentSearch>());
+			adapter = new RecentSearchAdapter(this, new List<RecentSearch>());
 			recentSearchList.Adapter = adapter;
 
 			presenter = 
