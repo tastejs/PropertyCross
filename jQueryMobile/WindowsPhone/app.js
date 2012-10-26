@@ -138,7 +138,9 @@ if (browserUA.search('windows phone os 7') > -1) {
   document.addEventListener("deviceready", initializeViewModels, false);
 } else {
   // if there is we are not running on a phone - start the app immediately
-  initializeViewModels();
+  $(document).ready(function () {
+    initializeViewModels();
+  });
 }
 
 

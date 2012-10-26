@@ -61,8 +61,4 @@ ViewModel.PropertyViewModel = function () {
     this.summary(propertyViewModel.summary());
     this.title(propertyViewModel.title());
   };
-
-  this.foo = function () {
-    console.log("foo");
-  }
 };
