@@ -27,7 +27,7 @@ namespace PropertyFinder.Views
 		{
 			base.OnCreate (bundle);
 
-			var source = new PropertyDataSource(new JsonWebPropertySearch(new MarshalInvokeService()));
+			var source = new PropertyDataSource(new JsonWebPropertySearch(new MarshalInvokeService(this)));
 			var geoLocationService = new GeoLocationService((LocationManager)GetSystemService(Context.LocationService));
 			var stateService = new StatePersistenceService(this);
 			PropertyFinderPersistentState state = stateService.LoadState();
