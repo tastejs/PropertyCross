@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "FavouritePropertyDataEntity.h"
 
+// a property listing
 @interface Property : NSObject
 
 @property NSNumber* price;

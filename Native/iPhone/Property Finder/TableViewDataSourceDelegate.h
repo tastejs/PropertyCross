@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+// a protocol that indicates selection
 @protocol TableViewDataSourceDelegate <NSObject>
 
 - (void) itemSelected: (NSObject*) item;

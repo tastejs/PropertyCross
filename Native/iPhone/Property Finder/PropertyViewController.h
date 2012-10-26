@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Property.h"
 
+// a view controller that displays a single property
 @interface PropertyViewController : UIViewController
 
 - (void) setProperty:(Property*) property;

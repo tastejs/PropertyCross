@@ -47,14 +47,14 @@
     }];
 }
 
+// handles the JSON string response, converting it into teh resuired Obj-C classes.
 - (void) handleResult: (NSString*) result
               success:(PropertyDataSourceResultSuccess)successResult
 {
     NSData* resultData = [result dataUsingEncoding:NSUTF8StringEncoding];
-    NSDictionary* json = [NSJSONSerialization
-                          JSONObjectWithData: resultData
-                          options:kNilOptions
-                          error:nil];
+    NSDictionary* json = [NSJSONSerialization JSONObjectWithData:resultData
+                                                         options:kNilOptions
+                                                           error:nil];
     
     NSDictionary* response = (NSDictionary*)[json objectForKey:@"response"];
     NSString* responseCode = [response NSStringForKey:@"application_response_code"];

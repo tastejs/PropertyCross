@@ -10,6 +10,7 @@
 
 #import "PropertyListingResult.h"
 
+// the view controller that displays a list of search results
 @interface SearchResultsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *searchResultsTable;

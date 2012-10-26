@@ -12,6 +12,7 @@
 
 #import "TableViewDataSourceDelegate.h"
 
+// a view controller that displays the front page of the application
 @interface PropertyFinderViewController : UIViewController <TableViewDataSourceDelegate, CLLocationManagerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *searchText;

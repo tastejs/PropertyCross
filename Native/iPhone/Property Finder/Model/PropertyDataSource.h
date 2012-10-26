@@ -12,14 +12,19 @@
 
 typedef void(^PropertyDataSourceResultSuccess)(PropertyDataSourceResult* result);
 
+// Provides methods for querying a property database with the results
+// returned in the form of 'model' objects.
 @interface PropertyDataSource : NSObject
 
 - (id)initWithDataSource:(id<JSONDataSourceProtocol>)dataSource;
 
 // TODO - add timeout / error
--(void)findPropertiesForSearchString: (NSString*) searchString
-                        success: (PropertyDataSourceResultSuccess) successResult;
 
+// finds properties which match the given plain-text string
+-(void)findPropertiesForSearchString: (NSString*) searchString
+                             success: (PropertyDataSourceResultSuccess) successResult;
+
+// finds properties which match the given geolocation
 -(void)findPropertiesForLatitude: (double) latitude
                        longitude: (double) longitude
                          success: (PropertyDataSourceResultSuccess) successResult;

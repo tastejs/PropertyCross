@@ -21,6 +21,7 @@
     PropertyListingResult* _result;
 }
 
+#pragma mark - initialisation code
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -42,18 +43,14 @@
     
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-}
-
-
 - (void)setResult:(PropertyListingResult*)result
 {
     _result = result;
     _properties = result.properties;
     [self.searchResultsTable reloadData];
 }
+
+#pragma mark - UITableViewDataSource implementation
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -93,6 +90,8 @@
     
     return _properties.count + (loadMoreVisible ? 1 : 0);
 }
+
+#pragma mark - UITableViewDelegate implementation
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {

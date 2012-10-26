@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+// represents a location which can be used to un-ambiguous query the property database.
 @interface Location : NSObject
 
 @property NSString* displayName;

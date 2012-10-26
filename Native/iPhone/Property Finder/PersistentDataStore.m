@@ -17,6 +17,8 @@
 @synthesize recentSearches = _recentSearches;
 @synthesize favourites = _favourites;
 
+#pragma mark - initialisation
+
 - (id)initWithObjectContext:(NSManagedObjectContext *)context
 {
     self = [super init];
@@ -31,10 +33,38 @@
     return self;
 }
 
-+ (id)persistentDataStoreWithObjectContext:(NSManagedObjectContext *)context
++ (id) persistentDataStoreWithObjectContext:(NSManagedObjectContext *)context
 {
     return [[PersistentDataStore alloc] initWithObjectContext:context];
 }
+
+- (void) loadState
+{
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription* entity = [NSEntityDescription
+                                   entityForName:@"RecentSearchDataEntity"
+                                   inManagedObjectContext:_context];
+    [fetchRequest setEntity:entity];
+    
+    NSSortDescriptor* sortByDate = [[NSSortDescriptor alloc] initWithKey:@"timestamp" ascending:NO];
+    [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sortByDate]];
+    
+    NSArray* fetchedObjects = [_context executeFetchRequest:fetchRequest
+                                                      error:nil];
+    _recentSearches = [NSArray arrayWithArray:fetchedObjects];
+    
+    NSFetchRequest* favouritesFetchRequest = [[NSFetchRequest alloc] init];
+    entity = [NSEntityDescription
+              entityForName:@"FavouritePropertyDataEntity"
+              inManagedObjectContext:_context];
+    [favouritesFetchRequest setEntity:entity];
+    
+    fetchedObjects = [_context executeFetchRequest:favouritesFetchRequest
+                                             error:nil];
+    _favourites = [NSArray arrayWithArray:fetchedObjects];
+}
+
+#pragma mark - methods for updating state
 
 - (void)toggleFavourite:(Property *)property
 {
@@ -64,7 +94,7 @@
 
 - (FavouritePropertyDataEntity*) persistedPropertyForGuid: (NSString*) guid
 {
-    // locate thsi guid
+    // locate this guid
     NSUInteger index = [_favourites indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
         return [((FavouritePropertyDataEntity*)obj).guid isEqual:guid];
     }];
@@ -83,33 +113,7 @@
 {
     return [self persistedPropertyForGuid:property.guid] != nil;
 }
-    
 
-- (void) loadState
-{
-    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription* entity = [NSEntityDescription
-                                   entityForName:@"RecentSearchDataEntity"
-                                   inManagedObjectContext:_context];
-    [fetchRequest setEntity:entity];
-    
-    NSSortDescriptor* sortByDate = [[NSSortDescriptor alloc] initWithKey:@"timestamp" ascending:NO];
-    [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sortByDate]];
-    
-    NSArray* fetchedObjects = [_context executeFetchRequest:fetchRequest
-                                                      error:nil];
-    _recentSearches = [NSArray arrayWithArray:fetchedObjects];
-    
-    NSFetchRequest* favouritesFetchRequest = [[NSFetchRequest alloc] init];
-    entity = [NSEntityDescription
-                                   entityForName:@"FavouritePropertyDataEntity"
-                                   inManagedObjectContext:_context];
-    [favouritesFetchRequest setEntity:entity];
-    
-    fetchedObjects = [_context executeFetchRequest:favouritesFetchRequest
-                                             error:nil];
-    _favourites = [NSArray arrayWithArray:fetchedObjects];
-}
 
 - (void)addToRecentSearches:(SearchItemBase *)searchItem
 {

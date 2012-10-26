@@ -8,6 +8,7 @@
 
 #import "TableViewDataSourceBase.h"
 
+// a table source that renders a list of recent searches
 @interface RecentSearchesTableViewSource : TableViewDataSourceBase
 
 + recentSearchesTableViewSourceFromArray : (NSArray*) recentSearches;

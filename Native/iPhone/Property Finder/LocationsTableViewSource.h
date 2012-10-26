@@ -10,7 +10,7 @@
 #import "Location.h"
 #import "TableViewDataSourceBase.h"
 
-
+// a table source that renders a list of locations
 @interface LocationsTableViewSource : TableViewDataSourceBase
 
 + locationsTableViewSourceFromArray : (NSArray*) locations;

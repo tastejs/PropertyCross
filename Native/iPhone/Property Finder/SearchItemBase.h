@@ -10,15 +10,20 @@
 #import "PropertyDataSource.h"
 #import "RecentSearchDataEntity.h"
 
+// represents a search that can be executed. This search might be plain-text or geolocation based.
 @interface SearchItemBase : NSObject
 
+// the human-readble description of this search.
 @property NSString* displayText;
 
--(void) findPropertiesWithDataSource: (PropertyDataSource*) propertyDataSource result:(PropertyDataSourceResultSuccess) successResult;
+// executes the search that this item represents
+-(void) findPropertiesWithDataSource: (PropertyDataSource*) propertyDataSource
+                              result:(PropertyDataSourceResultSuccess) successResult;
 
+// copies the state of this search to the given entity
 -(void) toRecentSearchDataEntity: (RecentSearchDataEntity*) entity;
 
+// creates a search item from the given entity
 + (id) fromRecentSearchDataEntity: (RecentSearchDataEntity*) entity;
-
 
 @end

@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "JSONDataSourceProtocol.h"
 
+// adopts the JSONDataSourceProtocol protocol with the JSON results being supplied
+// from test text files (useful for offline testing).
 @interface JSONFileDataSource : NSObject <JSONDataSourceProtocol>
 
 @end

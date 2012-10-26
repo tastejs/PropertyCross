@@ -10,6 +10,8 @@
 
 @interface UITableViewCell (ImageHelpers)
 
+// sets the imageView.image property to a UIImage which renders the image from the given URL. This is
+// performed on a background thread in order to free the UI thread to give smooth scrolling.
 - (void) loadImageFromURLInBackground: (NSString*) imageURL;
 
 @end

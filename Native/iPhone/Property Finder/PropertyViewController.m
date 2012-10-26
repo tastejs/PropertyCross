@@ -21,6 +21,8 @@
     PersistentDataStore* _dataStore;
 }
 
+#pragma mark - initialisation
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -59,12 +61,6 @@
     [_dataStore toggleFavourite:_property];
     NSString* buttonText = [_dataStore isPropertyFavourited:_property] ? @"-" : @"+";
     self.navigationItem.rightBarButtonItem.title = buttonText;
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)setProperty:(Property *)property

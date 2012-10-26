@@ -10,6 +10,8 @@
 
 #import "PropertyDataSourceResult.h"
 
+// a collection of property listings returned as the result of a successful query of
+// the property database.
 @interface PropertyListingResult : PropertyDataSourceResult
 
 @property NSNumber* totalResults;

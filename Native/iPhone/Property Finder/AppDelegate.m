@@ -12,10 +12,12 @@
 #import "PersistentDataStore.h"
 
 @implementation AppDelegate
+{
+    NSManagedObjectContext* _managedObjectContext;
+    NSManagedObjectModel* _managedObjectModel;
+    NSPersistentStoreCoordinator* _persistentStoreCoordinator;
+}
 
-@synthesize managedObjectContext = _managedObjectContext;
-@synthesize managedObjectModel = _managedObjectModel;
-@synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 @synthesize persistentDataStore = _persistentDataStore;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -61,20 +63,6 @@
 
 #pragma mark - Core Data stack
 
-- (void)saveContext
-{
-    NSError *error = nil;
-    NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
-    if (managedObjectContext != nil) {
-        if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
-            // Replace this implementation with code to handle the error appropriately.
-            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-            abort();
-        }
-    }
-}
-
 - (PersistentDataStore *)persistentDataStore
 {
     if (_persistentDataStore!=nil) {
@@ -84,8 +72,6 @@
     _persistentDataStore = [PersistentDataStore persistentDataStoreWithObjectContext:[self managedObjectContext]];
     return _persistentDataStore;
 }
-
-
 
 // Returns the managed object context for the application.
 // If the context doesn't already exist, it is created and bound to the persistent store coordinator for the application.

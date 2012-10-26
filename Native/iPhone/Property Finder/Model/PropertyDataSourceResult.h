@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+// TODO - is this needed?
 @interface PropertyDataSourceResult : NSObject
 
 @end

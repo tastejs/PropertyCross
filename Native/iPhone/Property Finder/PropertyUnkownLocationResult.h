@@ -8,6 +8,7 @@
 
 #import "PropertyDataSourceResult.h"
 
+// returned as the result of a failure property listings query.
 @interface PropertyUnkownLocationResult : PropertyDataSourceResult
 
 @end

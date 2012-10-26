@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-
+// the persistent state for a property which has been marked as a favourite
 @interface FavouritePropertyDataEntity : NSManagedObject
 
 @property (nonatomic, retain) NSNumber * price;

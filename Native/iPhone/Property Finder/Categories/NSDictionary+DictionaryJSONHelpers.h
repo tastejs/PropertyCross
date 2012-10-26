@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+// mehods that make it easier to extract JSON values
 @interface NSDictionary (DictionaryJSONHelpers)
 
 - (NSNumber*) NSNumberForKey:(NSString*)key;

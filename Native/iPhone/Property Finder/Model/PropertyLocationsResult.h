@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "PropertyDataSourceResult.h"
 
+// a list of locations, returned as the result of a property search which was ambiguous.
 @interface PropertyLocationsResult : PropertyDataSourceResult
 
 @property NSArray* locations;

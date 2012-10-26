@@ -13,7 +13,6 @@
 + (id)imageWithURLString:(NSString*) url
 {
     return [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:url]]];
-    //return nil;
 }
 
 @end

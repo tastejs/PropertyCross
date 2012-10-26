@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-
+// the persistent state for a recent search
 @interface RecentSearchDataEntity : NSManagedObject
 
 @property (nonatomic, retain) NSString * searchString;

@@ -15,6 +15,7 @@
 - (void) findPropertiesWithDataSource:(PropertyDataSource *)propertyDataSource
                                result:(PropertyDataSourceResultSuccess)successResult
 {
+    // abstract method!
     @throw [NSException exceptionWithName:NSInternalInconsistencyException
                                    reason:[NSString stringWithFormat:@"You must override %@ in a subclass", NSStringFromSelector(_cmd)]
                                  userInfo:nil];
@@ -22,6 +23,7 @@
 
 - (void)toRecentSearchDataEntity:(RecentSearchDataEntity *)entity
 {
+    // abstract method!
     @throw [NSException exceptionWithName:NSInternalInconsistencyException
                                    reason:[NSString stringWithFormat:@"You must override %@ in a subclass", NSStringFromSelector(_cmd)]
                                  userInfo:nil];

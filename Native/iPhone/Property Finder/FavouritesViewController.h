@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+// a view controller that displays a list of favourite properties
 @interface FavouritesViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;

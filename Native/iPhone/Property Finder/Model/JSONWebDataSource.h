@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "JSONDataSourceProtocol.h"
 
+// adopts the JSONDataSourceProtocol protocol with the JSON results being supplied
+// by the Nestoria search API.
 @interface JSONWebDataSource : NSObject <JSONDataSourceProtocol>
 
 @end

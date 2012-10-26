@@ -154,6 +154,33 @@
 			name = "Test Files";
 			sourceTree = "<group>";
 		};
+		72AB4A19163AB60A006B5EF1 /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				72AB49DF1636FA8C006B5EF1 /* PropertyFinderDataModel.xcdatamodeld */,
+				72AB4A161639A3D0006B5EF1 /* FavouritePropertyDataEntity.h */,
+				72AB4A171639A3D1006B5EF1 /* FavouritePropertyDataEntity.m */,
+				72AB4A0B16388FB2006B5EF1 /* RecentSearchDataEntity.h */,
+				72AB4A0C16388FB2006B5EF1 /* RecentSearchDataEntity.m */,
+				72AB4A1316391751006B5EF1 /* PersistentDataStore.h */,
+				72AB4A1416391752006B5EF1 /* PersistentDataStore.m */,
+			);
+			name = Persistence;
+			sourceTree = "<group>";
+		};
+		72AB4A1A163AB642006B5EF1 /* SearchItem */ = {
+			isa = PBXGroup;
+			children = (
+				72AB49EB1637CA3A006B5EF1 /* SearchItemBase.h */,
+				72AB49EC1637CA3A006B5EF1 /* SearchItemBase.m */,
+				72AB49EE1637CA7E006B5EF1 /* PlainTextSearchItem.h */,
+				72AB49EF1637CA7E006B5EF1 /* PlainTextSearchItem.m */,
+				72AB4A0516388C91006B5EF1 /* GeolocationSearchItem.h */,
+				72AB4A0616388C92006B5EF1 /* GeolocationSearchItem.m */,
+			);
+			name = SearchItem;
+			sourceTree = "<group>";
+		};
 		72B98E031627644300296302 = {
 			isa = PBXGroup;
 			children = (
@@ -186,6 +213,8 @@
 		72B98E181627644300296302 /* Property Finder */ = {
 			isa = PBXGroup;
 			children = (
+				72AB4A1A163AB642006B5EF1 /* SearchItem */,
+				72AB4A19163AB60A006B5EF1 /* Persistence */,
 				72B98E191627644300296302 /* Supporting Files */,
 				72AB49DD1636FA16006B5EF1 /* Test Files */,
 				72D057451630726000D41480 /* Categories */,
@@ -208,22 +237,9 @@
 				72D0574416306DA100D41480 /* TableViewDataSourceDelegate.h */,
 				72D142B51630742000D8EE70 /* RecentSearchesTableViewSource.h */,
 				72D142B61630742000D8EE70 /* RecentSearchesTableViewSource.m */,
-				72AB49DF1636FA8C006B5EF1 /* PropertyFinderDataModel.xcdatamodeld */,
-				72AB4A161639A3D0006B5EF1 /* FavouritePropertyDataEntity.h */,
-				72AB4A171639A3D1006B5EF1 /* FavouritePropertyDataEntity.m */,
-				72AB4A0B16388FB2006B5EF1 /* RecentSearchDataEntity.h */,
-				72AB4A0C16388FB2006B5EF1 /* RecentSearchDataEntity.m */,
-				72AB49EB1637CA3A006B5EF1 /* SearchItemBase.h */,
-				72AB49EC1637CA3A006B5EF1 /* SearchItemBase.m */,
-				72AB49EE1637CA7E006B5EF1 /* PlainTextSearchItem.h */,
-				72AB49EF1637CA7E006B5EF1 /* PlainTextSearchItem.m */,
-				72AB4A0516388C91006B5EF1 /* GeolocationSearchItem.h */,
-				72AB4A0616388C92006B5EF1 /* GeolocationSearchItem.m */,
 				72AB4A0E16389554006B5EF1 /* FavouritesViewController.h */,
 				72AB4A0F16389554006B5EF1 /* FavouritesViewController.m */,
 				72AB4A1016389555006B5EF1 /* FavouritesViewController.xib */,
-				72AB4A1316391751006B5EF1 /* PersistentDataStore.h */,
-				72AB4A1416391752006B5EF1 /* PersistentDataStore.m */,
 			);
 			path = "Property Finder";
 			sourceTree = "<group>";

@@ -39,6 +39,8 @@
     PersistentDataStore* _dataStore;
 }
 
+#pragma mark - initialisation and lifecycle
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -56,16 +58,17 @@
 {
     [super viewDidLoad];
     
+    // create a location manager - used to search the current location
     _locationManager = [[CLLocationManager alloc] init];
     _locationManager.delegate = self;
     _awaitingLocation = NO;
     
+    // locatesteh persistent datastore
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     _dataStore = appDelegate.persistentDataStore;
     
-    [self showRecentSearches];
     
-    
+    // add navigation bar buttons
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Search"
                                                                              style:UIBarButtonItemStyleBordered
                                                                             target:self
@@ -75,12 +78,17 @@
                                                                               style:UIBarButtonItemStyleBordered
                                                                              target:self
                                                                              action:@selector(favouriteButtonTouched)];
+    // set initial UI state
+    [self showRecentSearches];
     self.loadingIndicator.hidden = YES;
 
+    // handles changes to the search string
     [self.searchText addTarget:self
                         action:@selector(searchTextDidChange:)
               forControlEvents:UIControlEventEditingChanged];
 }
+
+#pragma mark - user interaction handlers
 
 - (void) searchTextDidChange: (id)sender
 {
@@ -98,12 +106,6 @@
 -(void)backButtonPressed
 {
     [self.navigationController popViewControllerAnimated:YES];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void) itemSelected: (NSObject*) item
@@ -177,6 +179,14 @@
                                        result:success];
 }
 
+- (IBAction)myLocationButtonTouched:(id)sender
+{
+    [_locationManager startUpdatingLocation];
+    _awaitingLocation = YES;
+}
+
+#pragma mark - other methods
+
 - (void) showRecentSearches
 {
     if (_dataStore.recentSearches.count > 0)
@@ -186,13 +196,6 @@
         [_tableViewSource attachToTableView:self.tableView];
         _tableViewSource.delegate = self;
     }
-}
-
-
-- (IBAction)myLocationButtonTouched:(id)sender
-{
-    [_locationManager startUpdatingLocation];
-    _awaitingLocation = YES;
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations

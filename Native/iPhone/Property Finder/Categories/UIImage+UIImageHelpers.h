@@ -10,6 +10,7 @@
 
 @interface UIImage (UIImageHelpers)
 
+// creates a UIImage which displays the image from the given URL.
 + (id)imageWithURLString:(NSString*) url;
 
 @end
