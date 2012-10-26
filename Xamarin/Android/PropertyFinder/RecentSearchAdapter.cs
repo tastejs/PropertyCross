@@ -17,40 +17,56 @@ namespace PropertyFinder
 	public class RecentSearchAdapter : ArrayAdapter<RecentSearch>
 	{
 		private Context context;
+		private IList<RecentSearch> data;
 
 		public RecentSearchAdapter (Context c, IList<RecentSearch> d)
 		: base(c, Android.Resource.Layout.SimpleListItem1, d)
 		{
+			this.context = c;
+			this.data = d;
 		}
 
-		/*public override int Count
+		public override int Count
 		{
 			get { return data.Count; }
 		}
 
-		public override View GetView (int position, View convertView, ViewGroup parent)
+		public override View GetView(int position, View convertView, ViewGroup parent)
 		{
 			View view = convertView;
-			if (view == null)
+			RecentSearchHolder holder;
+
+			if(view == null)
 			{
-				LayoutInflater li = (LayoutInflater) context.GetSystemService(Context.LayoutInflaterService);
+				LayoutInflater li = (LayoutInflater)context.GetSystemService(Context.LayoutInflaterService);
 				view = li.Inflate(Resource.Layout.recent_search_row, parent, false);
+
+				holder = new RecentSearchHolder()
+				{
+					SearchText = (TextView) view.FindViewById(Resource.Id.recent_search_text),
+					ResultsCount = (TextView) view.FindViewById(Resource.Id.recent_search_count)
+				};
+				view.SetTag(Resource.Layout.recent_search_row, holder);
+			}
+			else
+			{
+				holder = (RecentSearchHolder) view.GetTag(Resource.Layout.recent_search_row);
 			}
 
 			RecentSearch item = data[position];
-			if(item != null)
-			{
-				TextView searchText = (TextView) view.FindViewById(Resource.Id.recent_search_text);
-				TextView count = (TextView) view.FindViewById(Resource.Id.recent_search_count);
+			holder.SearchText.SetText(item.Search.DisplayText, TextView.BufferType.Normal);
 
-				searchText.SetText(item.Search.ToString(), TextView.BufferType.Normal);
-
-				String c = String.Format(context.Resources.GetString(Resource.String.recent_searches_count_format),
+				String c = Java.Lang.String.Format(context.Resources.GetString(Resource.String.recent_searches_count_format),
 				              item.ResultsCount);
-				count.SetText(c, TextView.BufferType.Normal);
-			}
+			holder.ResultsCount.SetText(c, TextView.BufferType.Normal);
 
 			return view;
-		}*/
+		}
+
+		private class RecentSearchHolder : Java.Lang.Object
+		{
+			public TextView SearchText { get; set; }
+			public TextView ResultsCount { get; set; }
+		}
 	}
 }

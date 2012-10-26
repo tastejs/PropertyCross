@@ -5,7 +5,7 @@
 	<string name="do_search_text">Go</string>
 	<string name="use_location_text">My Location</string>
 	<string name="recent_searches">Recent Searches</string>
-	<string name="recent_searches_count_format">(%1$s)</string>
+	<string name="recent_searches_count_format">(%1$d)</string>
 	<string name="favourites_view">View Favourites</string>
 	<string name="favourites_add">Add to Favourites</string>
 	<string name="favourites_remove">Remove from Favourites</string>
