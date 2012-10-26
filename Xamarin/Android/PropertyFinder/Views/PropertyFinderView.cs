@@ -91,14 +91,13 @@ namespace PropertyFinder.Views
 
 		public void DisplayRecentSearches(List<RecentSearch> recentSearches)
 		{
-			/*if(recentSearches == null)
+			if(recentSearches != null)
 			{
-				adapter.SetData(new List<RecentSearch>());
+				foreach(RecentSearch searchItem in recentSearches)
+				{
+					adapter.Add(searchItem);
+				}
 			}
-			else
-			{
-				adapter.SetData(recentSearches);
-			}*/
 		}
 
 		public bool IsLoading
