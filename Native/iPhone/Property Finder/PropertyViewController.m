@@ -23,6 +23,16 @@
 
 #pragma mark - initialisation
 
+- (id)initWithProperty:(Property *)property
+{
+    self = [self initWithNibName:@"PropertyViewController" bundle:nil];
+    if (self)
+    {
+        _property = property;
+    }
+    return self;
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -61,11 +71,6 @@
     [_dataStore toggleFavourite:_property];
     NSString* buttonText = [_dataStore isPropertyFavourited:_property] ? @"-" : @"+";
     self.navigationItem.rightBarButtonItem.title = buttonText;
-}
-
-- (void)setProperty:(Property *)property
-{
-    _property = property;
 }
 
 @end

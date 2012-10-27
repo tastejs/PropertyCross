@@ -23,6 +23,19 @@
 
 #pragma mark - initialisation code
 
+- (id) initWithResults:(PropertyListingResult *)result
+{
+    self = [self initWithNibName:@"SearchResultsViewController"
+                          bundle:nil];
+    if (self)
+    {
+        _result = result;
+        _properties = result.properties;
+        [self.searchResultsTable reloadData];
+    }
+    return self;
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -43,13 +56,6 @@
     
 }
 
-- (void)setResult:(PropertyListingResult*)result
-{
-    _result = result;
-    _properties = result.properties;
-    [self.searchResultsTable reloadData];
-}
-
 #pragma mark - UITableViewDataSource implementation
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -62,14 +68,16 @@
     
     if (indexPath.row < _result.properties.count)
     {
+        // render a property
         Property* property = _properties[indexPath.row];
-        cell.textLabel.text = property.title;
-        cell.detailTextLabel.text = property.formattedPrice;
+        cell.textLabel.text = property.formattedPrice;
+        cell.detailTextLabel.text = property.title;
         [cell loadImageFromURLInBackground:property.thumbnailUrl];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     else
     {
+        // render a load more indicator
         cell.textLabel.text = @"Load more ...";
         cell.detailTextLabel.Text = [NSString stringWithFormat:@"Showing %d of %@ matches",
                                      _result.properties.count, _result.totalResults];
@@ -95,15 +103,19 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    PropertyViewController* controller = [[PropertyViewController alloc] initWithNibName:@"PropertyViewController" bundle:nil];
-    
     if (indexPath.row < _result.properties.count)
     {
+        // property clicked
         Property* property = _properties[indexPath.row];
-        [controller setProperty:property];
+        PropertyViewController* controller = [[PropertyViewController alloc] initWithProperty:property];
         
         [self.navigationController pushViewController:controller
                                              animated:YES];
+    }
+    else
+    {
+        // load more clicked
+        
     }
 }
 

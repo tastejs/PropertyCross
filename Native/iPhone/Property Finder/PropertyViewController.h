@@ -12,7 +12,7 @@
 // a view controller that displays a single property
 @interface PropertyViewController : UIViewController
 
-- (void) setProperty:(Property*) property;
+- (id)initWithProperty:(Property*) property;
 
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;

@@ -24,9 +24,7 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    
-    PropertyFinderViewController* propertyFinderController = [[PropertyFinderViewController alloc] initWithNibName:@"PropertyFinderViewController" bundle:nil];
-    
+    PropertyFinderViewController* propertyFinderController = [[PropertyFinderViewController alloc] init];
     UINavigationController* navigationController = [[UINavigationController alloc] initWithRootViewController:propertyFinderController];
         
     self.window.rootViewController = navigationController;

@@ -25,6 +25,11 @@
 
 #pragma mark - initialisation
 
+- (id)init
+{
+    return [self initWithNibName:@"FavouritesViewController" bundle:nil];
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -57,8 +62,8 @@
     
     FavouritePropertyDataEntity* propertyEntity = _properties[indexPath.row];
     Property* property = [Property propertyFromFavouritePropertyDataEntity:propertyEntity];
-    cell.textLabel.text = property.title;
-    cell.detailTextLabel.text = property.formattedPrice;
+    cell.textLabel.text = property.formattedPrice;
+    cell.detailTextLabel.text = property.title;
     [cell loadImageFromURLInBackground:property.thumbnailUrl];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
@@ -79,12 +84,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    PropertyViewController* controller = [[PropertyViewController alloc] initWithNibName:@"PropertyViewController" bundle:nil];
-    
     FavouritePropertyDataEntity* property = _properties[indexPath.row];
     Property* prop = [Property propertyFromFavouritePropertyDataEntity:property];
-    [controller setProperty:prop];
-    
+    PropertyViewController* controller = [[PropertyViewController alloc] initWithProperty:prop];
+        
     [self.navigationController pushViewController:controller
                                          animated:YES];
 }

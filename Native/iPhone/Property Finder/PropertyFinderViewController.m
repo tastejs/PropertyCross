@@ -41,6 +41,12 @@
 
 #pragma mark - initialisation and lifecycle
 
+- (id)init
+{
+    return [self initWithNibName:@"PropertyFinderViewController"
+                          bundle:nil];
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -97,7 +103,7 @@
 
 - (void) favouriteButtonTouched
 {
-    FavouritesViewController* controller = [[FavouritesViewController alloc] initWithNibName:@"FavouritesViewController" bundle:nil];
+    FavouritesViewController* controller = [[FavouritesViewController alloc] init];
     
     [self.navigationController pushViewController:controller
                                          animated:YES];
@@ -131,54 +137,6 @@
     [self executeSearch];
 }
 
-- (void) executeSearch
-{
-    self.userMessageLabel.text = nil;
-    
-    PropertyDataSourceResultSuccess success = ^(PropertyDataSourceResult *result){
-        
-        // stop the loading indicator
-        self.loadingIndicator.hidden = YES;
-        [self.loadingIndicator stopAnimating];
-        
-        // determine the type of returned result
-        if ([result isKindOfClass:[PropertyListingResult class]])
-        {
-            // if properties were returned navigate to the results view controller
-            SearchResultsViewController* controller = [[SearchResultsViewController alloc] initWithNibName:@"SearchResultsViewController" bundle:nil];
-            [controller setResult:(PropertyListingResult*)result];
-            
-            [self.navigationController pushViewController:controller
-                                                 animated:YES];
-            
-            [_dataStore addToRecentSearches:_searchItem];
-            [self showRecentSearches];
-            
-        }
-        else if ([result isKindOfClass:[PropertyLocationsResult class]])
-        {
-            // display a list of suggested locations
-            _tableViewSource = [LocationsTableViewSource locationsTableViewSourceFromArray:[(PropertyLocationsResult*)result locations]];
-            [_tableViewSource attachToTableView:self.tableView];
-            _tableViewSource.delegate = self;
-        }
-        else if ([result isKindOfClass:[PropertyUnkownLocationResult class]])
-        {
-            self.userMessageLabel.text = @"The location given was not recognised.";
-            
-            // hide the locations / recent searches table
-            self.tableView.dataSource = nil;
-            [self.tableView reloadData];
-        }
-    };
-    
-    self.loadingIndicator.hidden = NO;
-    [self.loadingIndicator startAnimating];
-    
-    [_searchItem findPropertiesWithDataSource:_dataSource
-                                       result:success];
-}
-
 - (IBAction)myLocationButtonTouched:(id)sender
 {
     [_locationManager startUpdatingLocation];
@@ -210,4 +168,52 @@
         [self executeSearch];
     }
 }
+
+- (void) executeSearch
+{
+    self.userMessageLabel.text = nil;
+    
+    PropertyDataSourceResultSuccess success = ^(PropertyDataSourceResult *result){
+        
+        // stop the loading indicator
+        self.loadingIndicator.hidden = YES;
+        [self.loadingIndicator stopAnimating];
+        
+        // determine the type of returned result
+        if ([result isKindOfClass:[PropertyListingResult class]])
+        {
+            // if properties were returned navigate to the results view controller
+            SearchResultsViewController* controller = [[SearchResultsViewController alloc] initWithResults:(PropertyListingResult*)result];
+            [self.navigationController pushViewController:controller
+                                                 animated:YES];
+            
+            [_dataStore addToRecentSearches:_searchItem];
+            [self showRecentSearches];
+            
+        }
+        else if ([result isKindOfClass:[PropertyLocationsResult class]])
+        {
+            // display a list of suggested locations
+            _tableViewSource = [LocationsTableViewSource locationsTableViewSourceFromArray:[(PropertyLocationsResult*)result locations]];
+            [_tableViewSource attachToTableView:self.tableView];
+            _tableViewSource.delegate = self;
+        }
+        else if ([result isKindOfClass:[PropertyUnkownLocationResult class]])
+        {
+            self.userMessageLabel.text = @"The location given was not recognised.";
+            
+            // hide the locations / recent searches table
+            self.tableView.dataSource = nil;
+            [self.tableView reloadData];
+        }
+    };
+    
+    self.loadingIndicator.hidden = NO;
+    [self.loadingIndicator startAnimating];
+    
+    [_searchItem findPropertiesWithDataSource:_dataSource
+                                       result:success];
+}
+
+
 @end

@@ -15,6 +15,6 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *searchResultsTable;
 
--(void)setResult:(PropertyListingResult*) result;
+-(id)initWithResults:(PropertyListingResult*) result;
 
 @end
