@@ -11,6 +11,7 @@
 @implementation JSONFileDataSource
 
 - (void)findPropertiesForSearchString:(NSString *)searchString
+                           pageNumber: (NSNumber*) page
                               success:(JSONDataSourceSuccess)successResult
 {
     NSString* filename = [searchString isEqualToString:@"a"] ? @"AmbiguousSearchResults" : @"SearchResults";
@@ -21,5 +22,20 @@
                                                   error: nil];
     successResult(data);
 }
+
+- (void)findPropertiesForLatitude:(double)latitude
+                        longitude:(double)longitude
+                       pageNumber:(NSNumber *)page
+                          success:(JSONDataSourceSuccess)successResult
+{
+    NSString* path = [[NSBundle mainBundle] pathForResource: @"SearchResults"
+                                                     ofType: @"txt"];
+    NSString* data = [NSString stringWithContentsOfFile: path
+                                               encoding: NSUTF8StringEncoding
+                                                  error: nil];
+    successResult(data);
+}
+
+
 
 @end

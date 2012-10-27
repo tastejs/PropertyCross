@@ -8,11 +8,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Property Finder/GeolocationSearchItem.m"
-         timestampString = "372806514.968306"
+         timestampString = "373012781.433524"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "33"
-         endingLineNumber = "33"
+         startingLineNumber = "34"
+         endingLineNumber = "34"
          landmarkName = "-findPropertiesWithDataSource:result:"
          landmarkType = "5">
       </FileBreakpoint>

@@ -19,16 +19,24 @@
 {
     NSArray* _properties;
     PropertyListingResult* _result;
+    PropertyDataSource* _datasource;
+    int _pageNumber;
+    SearchItemBase* _searchItem;
 }
 
 #pragma mark - initialisation code
 
 - (id) initWithResults:(PropertyListingResult *)result
+            datasource:(PropertyDataSource *)datsource
+            searchItem:(SearchItemBase *)searchItem
 {
     self = [self initWithNibName:@"SearchResultsViewController"
                           bundle:nil];
     if (self)
     {
+        _pageNumber = 1;
+        _searchItem = searchItem;
+        _datasource = datsource;
         _result = result;
         _properties = result.properties;
         [self.searchResultsTable reloadData];
@@ -66,7 +74,7 @@
                                       reuseIdentifier:@"cell"];
     }
     
-    if (indexPath.row < _result.properties.count)
+    if (indexPath.row < _properties.count)
     {
         // render a property
         Property* property = _properties[indexPath.row];
@@ -80,7 +88,7 @@
         // render a load more indicator
         cell.textLabel.text = @"Load more ...";
         cell.detailTextLabel.Text = [NSString stringWithFormat:@"Showing %d of %@ matches",
-                                     _result.properties.count, _result.totalResults];
+                                     _properties.count, _result.totalResults];
         cell.imageView.image = nil;
     }
     
@@ -94,7 +102,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    BOOL loadMoreVisible = _result.properties.count < [_result.totalResults integerValue];
+    BOOL loadMoreVisible = _properties.count < [_result.totalResults integerValue];
     
     return _properties.count + (loadMoreVisible ? 1 : 0);
 }
@@ -103,7 +111,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row < _result.properties.count)
+    if (indexPath.row < _properties.count)
     {
         // property clicked
         Property* property = _properties[indexPath.row];
@@ -115,7 +123,28 @@
     else
     {
         // load more clicked
+        _pageNumber++;
         
+        PropertyDataSourceResultSuccess success = ^(PropertyDataSourceResult *result){
+            
+            // determine the type of returned result
+            if ([result isKindOfClass:[PropertyListingResult class]])
+            {
+                PropertyListingResult* listingResult = (PropertyListingResult*)result;
+                
+                // add the additional properties
+                NSMutableArray* mutableProperties = [NSMutableArray arrayWithArray:_properties];
+                [mutableProperties addObjectsFromArray:listingResult.properties];
+                _properties = [NSArray arrayWithArray:mutableProperties];
+                
+                // render the new results
+                [self.searchResultsTable reloadData];
+            }
+        };
+        
+        [_searchItem findPropertiesWithDataSource:_datasource
+                                       pageNumber:[NSNumber numberWithInt:_pageNumber]
+                                           result:success];
     }
 }
 

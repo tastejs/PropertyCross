@@ -17,7 +17,8 @@
 @property NSString* displayText;
 
 // executes the search that this item represents
--(void) findPropertiesWithDataSource: (PropertyDataSource*) propertyDataSource
+-(void) findPropertiesWithDataSource:(PropertyDataSource*) propertyDataSource
+                          pageNumber:(NSNumber *)page
                               result:(PropertyDataSourceResultSuccess) successResult;
 
 // copies the state of this search to the given entity

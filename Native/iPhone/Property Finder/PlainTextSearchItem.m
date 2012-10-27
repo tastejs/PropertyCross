@@ -27,12 +27,14 @@
 }
 
 - (void) findPropertiesWithDataSource:(PropertyDataSource *)propertyDataSource
+                           pageNumber:(NSNumber *)page
                                result:(PropertyDataSourceResultSuccess)successResult
 {
     PropertyDataSourceResultSuccess successBlock = ^(PropertyDataSourceResult *result){
         successResult(result);
     };
     [propertyDataSource findPropertiesForSearchString:self.searchText
+                                           pageNumber:page
                                               success:successBlock];
 }
 

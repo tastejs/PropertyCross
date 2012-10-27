@@ -29,19 +29,23 @@
 
 - (void)findPropertiesForLatitude:(double)latitude
                         longitude:(double)longitude
+                       pageNumber:(NSNumber *)page
                           success:(PropertyDataSourceResultSuccess)successResult
 {
     [_dataSource findPropertiesForLatitude:latitude
                                  longitude:longitude
+                                pageNumber:page
                                    success:^(NSString *result) {
         [self handleResult:result success:successResult];
     }];
 }
 
 - (void)findPropertiesForSearchString:(NSString *)searchString
+                           pageNumber:(NSNumber *)page
                               success:(PropertyDataSourceResultSuccess)successResult
 {
     [_dataSource findPropertiesForSearchString:searchString
+                                    pageNumber:page
                                        success:^(NSString *result) {
         [self handleResult:result success:successResult];
     }];

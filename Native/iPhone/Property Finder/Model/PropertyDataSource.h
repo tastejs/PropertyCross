@@ -22,11 +22,13 @@ typedef void(^PropertyDataSourceResultSuccess)(PropertyDataSourceResult* result)
 
 // finds properties which match the given plain-text string
 -(void)findPropertiesForSearchString: (NSString*) searchString
+                          pageNumber:(NSNumber *)page
                              success: (PropertyDataSourceResultSuccess) successResult;
 
 // finds properties which match the given geolocation
 -(void)findPropertiesForLatitude: (double) latitude
                        longitude: (double) longitude
+                      pageNumber:(NSNumber *)page
                          success: (PropertyDataSourceResultSuccess) successResult;
 
 @end

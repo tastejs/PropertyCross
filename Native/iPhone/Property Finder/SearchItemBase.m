@@ -13,6 +13,7 @@
 @implementation SearchItemBase
 
 - (void) findPropertiesWithDataSource:(PropertyDataSource *)propertyDataSource
+                           pageNumber:(NSNumber*)page
                                result:(PropertyDataSourceResultSuccess)successResult
 {
     // abstract method!

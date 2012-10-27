@@ -28,6 +28,7 @@
 }
 
 - (void)findPropertiesWithDataSource:(PropertyDataSource *)propertyDataSource
+                          pageNumber:(NSNumber *)page
                               result:(PropertyDataSourceResultSuccess)successResult
 {
     PropertyDataSourceResultSuccess successBlock = ^(PropertyDataSourceResult *result){
@@ -35,6 +36,7 @@
     };
     [propertyDataSource findPropertiesForLatitude:self.latitude
                                         longitude:self.longitude
+                                       pageNumber:page
                                           success:successBlock];
 }
 

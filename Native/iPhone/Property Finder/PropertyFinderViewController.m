@@ -183,7 +183,9 @@
         if ([result isKindOfClass:[PropertyListingResult class]])
         {
             // if properties were returned navigate to the results view controller
-            SearchResultsViewController* controller = [[SearchResultsViewController alloc] initWithResults:(PropertyListingResult*)result];
+            SearchResultsViewController* controller = [[SearchResultsViewController alloc] initWithResults:(PropertyListingResult*)result
+                                                                                                datasource:_dataSource
+                                                                                                searchItem:_searchItem];
             [self.navigationController pushViewController:controller
                                                  animated:YES];
             
@@ -212,6 +214,7 @@
     [self.loadingIndicator startAnimating];
     
     [_searchItem findPropertiesWithDataSource:_dataSource
+                                   pageNumber:@1
                                        result:success];
 }
 
