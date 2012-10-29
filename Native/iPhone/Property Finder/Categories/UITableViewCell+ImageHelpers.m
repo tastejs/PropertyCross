@@ -12,6 +12,8 @@
 
 - (void) loadImageFromURLInBackground:(NSString *)imageURL
 {
+    self.imageView.frame = CGRectMake(self.imageView.frame.origin.x, self.imageView.frame.origin.y, 60, 60);
+    
     dispatch_queue_t downloadQueue = dispatch_queue_create("image downloader", NULL);
     dispatch_async(downloadQueue, ^{
         NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:imageURL]];

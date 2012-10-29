@@ -39,6 +39,7 @@
         _datasource = datsource;
         _result = result;
         _properties = result.properties;
+        self.title = [NSString stringWithFormat:@"%d of %@ results", _properties.count, _result.totalResults];
         [self.searchResultsTable reloadData];
     }
     return self;
@@ -47,10 +48,6 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self)
-    {
-        self.title = @"Resuls";
-    }
     return self;
 }
 
@@ -58,6 +55,11 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Results"
+                                                                             style:UIBarButtonItemStyleBordered
+                                                                            target:self
+                                                                            action:nil];
     
     self.searchResultsTable.dataSource = self;
     self.searchResultsTable.delegate = self;
@@ -113,6 +115,8 @@
 {
     if (indexPath.row < _properties.count)
     {
+        [tableView deselectRowAtIndexPath:indexPath animated:NO];
+        
         // property clicked
         Property* property = _properties[indexPath.row];
         PropertyViewController* controller = [[PropertyViewController alloc] initWithProperty:property];
@@ -138,6 +142,7 @@
                 _properties = [NSArray arrayWithArray:mutableProperties];
                 
                 // render the new results
+                self.title = [NSString stringWithFormat:@"%d of %@ results", _properties.count, _result.totalResults];
                 [self.searchResultsTable reloadData];
             }
         };

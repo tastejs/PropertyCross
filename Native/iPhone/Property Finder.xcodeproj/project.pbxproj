@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		726CEB88163EE01C00860DD0 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 726CEB87163EE01C00860DD0 /* Icon.png */; };
+		726CEB8A163EE02000860DD0 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 726CEB89163EE02000860DD0 /* Icon@2x.png */; };
 		72AB49E11636FA8C006B5EF1 /* PropertyFinderDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 72AB49DF1636FA8C006B5EF1 /* PropertyFinderDataModel.xcdatamodeld */; };
 		72AB49EA1636FBEE006B5EF1 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72AB49E91636FBEE006B5EF1 /* CoreData.framework */; };
 		72AB49ED1637CA3A006B5EF1 /* SearchItemBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 72AB49EC1637CA3A006B5EF1 /* SearchItemBase.m */; };
@@ -53,6 +55,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		726CEB87163EE01C00860DD0 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		726CEB89163EE02000860DD0 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		72AB49E01636FA8C006B5EF1 /* PropertyFinderDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PropertyFinderDataModel.xcdatamodel; sourceTree = "<group>"; };
 		72AB49E91636FBEE006B5EF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		72AB49EB1637CA3A006B5EF1 /* SearchItemBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchItemBase.h; sourceTree = "<group>"; };
@@ -75,7 +79,7 @@
 		72AB4A1416391752006B5EF1 /* PersistentDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersistentDataStore.m; sourceTree = "<group>"; };
 		72AB4A161639A3D0006B5EF1 /* FavouritePropertyDataEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavouritePropertyDataEntity.h; sourceTree = "<group>"; };
 		72AB4A171639A3D1006B5EF1 /* FavouritePropertyDataEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavouritePropertyDataEntity.m; sourceTree = "<group>"; };
-		72B98E0E1627644300296302 /* Property Finder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Property Finder.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		72B98E0E1627644300296302 /* PropertyCross.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PropertyCross.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72B98E121627644300296302 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		72B98E141627644300296302 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		72B98E161627644300296302 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -181,9 +185,18 @@
 			name = SearchItem;
 			sourceTree = "<group>";
 		};
+		72AB4A1B163BBFED006B5EF1 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
 		72B98E031627644300296302 = {
 			isa = PBXGroup;
 			children = (
+				726CEB89163EE02000860DD0 /* Icon@2x.png */,
+				726CEB87163EE01C00860DD0 /* Icon.png */,
 				72B98E181627644300296302 /* Property Finder */,
 				72B98E111627644300296302 /* Frameworks */,
 				72B98E0F1627644300296302 /* Products */,
@@ -193,7 +206,7 @@
 		72B98E0F1627644300296302 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				72B98E0E1627644300296302 /* Property Finder.app */,
+				72B98E0E1627644300296302 /* PropertyCross.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -213,6 +226,7 @@
 		72B98E181627644300296302 /* Property Finder */ = {
 			isa = PBXGroup;
 			children = (
+				72AB4A1B163BBFED006B5EF1 /* Images */,
 				72AB4A1A163AB642006B5EF1 /* SearchItem */,
 				72AB4A19163AB60A006B5EF1 /* Persistence */,
 				72B98E191627644300296302 /* Supporting Files */,
@@ -314,7 +328,7 @@
 			);
 			name = "Property Finder";
 			productName = "Property Finder";
-			productReference = 72B98E0E1627644300296302 /* Property Finder.app */;
+			productReference = 72B98E0E1627644300296302 /* PropertyCross.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -358,6 +372,8 @@
 				72D05728162EDA9C00D41480 /* SearchResults.txt in Resources */,
 				72D057371630635B00D41480 /* AmbiguousSearchResults.txt in Resources */,
 				72AB4A1216389555006B5EF1 /* FavouritesViewController.xib in Resources */,
+				726CEB88163EE01C00860DD0 /* Icon.png in Resources */,
+				726CEB8A163EE02000860DD0 /* Icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -468,7 +484,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Property Finder/Property Finder-Prefix.pch";
 				INFOPLIST_FILE = "Property Finder/Property Finder-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = PropertyCross;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -479,7 +495,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Property Finder/Property Finder-Prefix.pch";
 				INFOPLIST_FILE = "Property Finder/Property Finder-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = PropertyCross;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
