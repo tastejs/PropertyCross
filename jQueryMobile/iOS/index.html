@@ -81,13 +81,14 @@
     <div data-role="content" data-theme="c" data-iscroll>
           
       <p>Use the form below to search for houses to buy. You can search by place-name, postcode, or click 'My location', to search in your current location!</p>      
-      <div>
+      <form data-bind="submit: executeSearch">
           <input type="search"
                   data-bind="value: searchDisplayString, enable: isSearchEnabled, valueUpdate:'afterkeydown'"/>
-          <button type="submit"
+          <button type="submit" data-inline="true"
                   data-bind="enable: isSearchEnabled, click: executeSearch">Go</button>
-          <button data-bind="enable: isSearchEnabled, click: searchMyLocation">My location</button>
-      </div>
+          <button data-bind="enable: isSearchEnabled, click: searchMyLocation"
+                  data-inline="true">My location</button>
+      </form>
       
       <div data-bind="visible: isSearchEnabled() == false">
         Searching...
