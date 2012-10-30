@@ -9,7 +9,7 @@
     </deployment-targets>
     <sdk-version>2.1.2.GA</sdk-version>
     <id>com.scottlogic.propertyfinder</id>
-    <name>Property Finder</name>
+    <name>PropertyCross</name>
     <version>1.0</version>
     <publisher>cprice</publisher>
     <url>http://www.scottlogic.co.uk</url>
@@ -17,7 +17,7 @@
     <copyright>2012 by cprice</copyright>
     <icon>appicon.png</icon>
     <persistent-wifi>false</persistent-wifi>
-    <prerendered-icon>false</prerendered-icon>
+    <prerendered-icon>true</prerendered-icon>
     <statusbar-style>default</statusbar-style>
     <statusbar-hidden>false</statusbar-hidden>
     <fullscreen>false</fullscreen>

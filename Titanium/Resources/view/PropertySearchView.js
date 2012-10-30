@@ -9,10 +9,10 @@ module.exports = function(viewModel) {
 	});
 
 	var instructions = Titanium.UI.createLabel({
-		text : "Use the form below to search for houses to buy:",
+		text : "Use the form below to search for houses to buy. You can search by place-name, postcode, or click 'My location', to search in your current location!",
 		textAlign : 'left',
 		font : {
-			fontSize : '16dip'
+			fontSize : '14dip'
 		},
 		left : '6dip',
 		right : '6dip',
@@ -72,7 +72,7 @@ module.exports = function(viewModel) {
 	});
 
 	var recentSearchesLabel = Titanium.UI.createLabel({
-		text : "Recent Searches",
+		text : "Recent searches:",
 		textAlign : 'left',
 		font : {
 			fontSize : '19dip',

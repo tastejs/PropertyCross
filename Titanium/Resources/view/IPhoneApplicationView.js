@@ -2,6 +2,7 @@ var _ = require("underscore");
 var ko = require("knockout");
 var AbstractApplicationView = require("view/AbstractApplicationView");
 var PropertyViewModel = require("viewModel/PropertyViewModel");
+var SearchResultsViewModel = require("viewModel/SearchResultsViewModel");
 var FavouritesViewModel = require("viewModel/FavouritesViewModel");
 
 function IPhoneApplicationView(applicationViewModel, propertySearchViewModel) {
@@ -26,7 +27,7 @@ function IPhoneApplicationView(applicationViewModel, propertySearchViewModel) {
 			});
 			nav.open(view.window);
 		}
-		if (!( viewModel instanceof FavouritesViewModel)) {
+		if (!( viewModel instanceof FavouritesViewModel || viewModel instanceof SearchResultsViewModel)) {
 			var favouriteButton = Titanium.UI.createButton();
 			if ( viewModel instanceof PropertyViewModel) {
 				favouriteButton.addEventListener('click', function() {
@@ -40,8 +41,8 @@ function IPhoneApplicationView(applicationViewModel, propertySearchViewModel) {
 
 				viewModel.isFavourite.subscribe(updateFavouriteButton);
 				updateFavouriteButton(viewModel.isFavourite());
-			} else {
-				favouriteButton.title = "Favourites";
+			} {
+				favouriteButton.title = "Favs";
 				favouriteButton.addEventListener('click', function() {
 					propertySearchViewModel.viewFavourites();
 				});
