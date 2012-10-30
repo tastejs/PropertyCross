@@ -1,0 +1,271 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1A12CA000000000000000000 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35CFA2800000000000000000 /* UIKit.framework */; };
+		E29919000000000000000000 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE55F1800000000000000000 /* MapKit.framework */; };
+		AB1F68000000000000000000 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6DC40800000000000000000 /* Foundation.framework */; };
+		73A5B7000000000000000000 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F628F800000000000000000 /* CoreGraphics.framework */; };
+		2967FE800000000000000000 /* PropertyFinderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4524D7000000000000000000 /* PropertyFinderViewController.xib */; };
+		F1EE4D800000000000000000 /* SearchResultsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAB260000000000000000000 /* SearchResultsViewController.xib */; };
+		BA749C800000000000000000 /* PropertyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D63175000000000000000000 /* PropertyViewController.xib */; };
+		82FAEB800000000000000000 /* FavouritesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9EB7C4000000000000000000 /* FavouritesViewController.xib */; };
+		4B813A800000000000000000 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 673E13000000000000000000 /* Default.png */; };
+		140789800000000000000000 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2FC462000000000000000000 /* Default@2x.png */; };
+		C0D100000000000000000000 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F84AB1000000000000000000 /* Icon.png */; };
+		4E52CF000000000000000000 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6A0FA7800000000000000000 /* Icon@2x.png */; };
+		16D91E000000000000000000 /* AppDelegate.h in Sources */ = {isa = PBXBuildFile; fileRef = 3295F6800000000000000000 /* AppDelegate.h */; };
+		8C28E3800000000000000000 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A7E5BC000000000000000000 /* AppDelegate.m */; };
+		54AF32800000000000000000 /* MainPageViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = 706C0B000000000000000000 /* MainPageViewController.h */; };
+		178A90000000000000000000 /* MainPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3581800000000000000000 /* MainPageViewController.m */; };
+		C9FEF8000000000000000000 /* SearchResultsViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = E5BBD0800000000000000000 /* SearchResultsViewController.h */; };
+		76C86E800000000000000000 /* SearchResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 928547000000000000000000 /* SearchResultsViewController.m */; };
+		3F4EBD800000000000000000 /* PropertyViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = 5B0B96000000000000000000 /* PropertyViewController.h */; };
+		EC1834000000000000000000 /* PropertyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D50C8000000000000000000 /* PropertyViewController.m */; };
+		B49E83000000000000000000 /* FavouritesViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = D05B5B800000000000000000 /* FavouritesViewController.h */; };
+		6167F9800000000000000000 /* FavouritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D24D2000000000000000000 /* FavouritesViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		DC3CB5800000000000000000 /* PropertyFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "PropertyFinder.app"; path = "PropertyFinder.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		35CFA2800000000000000000 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; name = "UIKit.framework"; path = "System/Library/Frameworks/UIKit.framework"; sourceTree = SDKROOT; };
+		FE55F1800000000000000000 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; name = "MapKit.framework"; path = "System/Library/Frameworks/MapKit.framework"; sourceTree = SDKROOT; };
+		C6DC40800000000000000000 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; name = "Foundation.framework"; path = "System/Library/Frameworks/Foundation.framework"; sourceTree = SDKROOT; };
+		8F628F800000000000000000 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; name = "CoreGraphics.framework"; path = "System/Library/Frameworks/CoreGraphics.framework"; sourceTree = SDKROOT; };
+		4524D7000000000000000000 /* PropertyFinderViewController.xib */ = {isa = PBXFileReference; name = "PropertyFinderViewController.xib"; path = "PropertyFinderViewController.xib"; sourceTree = "<group>"; };
+		DAB260000000000000000000 /* SearchResultsViewController.xib */ = {isa = PBXFileReference; name = "SearchResultsViewController.xib"; path = "SearchResultsViewController.xib"; sourceTree = "<group>"; };
+		D63175000000000000000000 /* PropertyViewController.xib */ = {isa = PBXFileReference; name = "PropertyViewController.xib"; path = "PropertyViewController.xib"; sourceTree = "<group>"; };
+		9EB7C4000000000000000000 /* FavouritesViewController.xib */ = {isa = PBXFileReference; name = "FavouritesViewController.xib"; path = "FavouritesViewController.xib"; sourceTree = "<group>"; };
+		673E13000000000000000000 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default.png"; path = "Default.png"; sourceTree = "<group>"; };
+		2FC462000000000000000000 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "Default@2x.png"; sourceTree = "<group>"; };
+		F84AB1000000000000000000 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon.png"; path = "Icon.png"; sourceTree = "<group>"; };
+		6A0FA7800000000000000000 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		3295F6800000000000000000 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "AppDelegate.h"; path = "AppDelegate.h"; sourceTree = "<group>"; };
+		A7E5BC000000000000000000 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "AppDelegate.m"; path = "AppDelegate.m"; sourceTree = "<group>"; };
+		706C0B000000000000000000 /* MainPageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "MainPageViewController.h"; path = "MainPageViewController.h"; sourceTree = "<group>"; };
+		1D3581800000000000000000 /* MainPageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "MainPageViewController.m"; path = "MainPageViewController.m"; sourceTree = "<group>"; };
+		E5BBD0800000000000000000 /* SearchResultsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "SearchResultsViewController.h"; path = "SearchResultsViewController.h"; sourceTree = "<group>"; };
+		928547000000000000000000 /* SearchResultsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "SearchResultsViewController.m"; path = "SearchResultsViewController.m"; sourceTree = "<group>"; };
+		5B0B96000000000000000000 /* PropertyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "PropertyViewController.h"; path = "PropertyViewController.h"; sourceTree = "<group>"; };
+		7D50C8000000000000000000 /* PropertyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "PropertyViewController.m"; path = "PropertyViewController.m"; sourceTree = "<group>"; };
+		D05B5B800000000000000000 /* FavouritesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "FavouritesViewController.h"; path = "FavouritesViewController.h"; sourceTree = "<group>"; };
+		7D24D2000000000000000000 /* FavouritesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "FavouritesViewController.m"; path = "FavouritesViewController.m"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		82A9C8800000000000000000 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1A12CA000000000000000000 /* UIKit.framework in Frameworks */,
+				E29919000000000000000000 /* MapKit.framework in Frameworks */,
+				AB1F68000000000000000000 /* Foundation.framework in Frameworks */,
+				73A5B7000000000000000000 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AA520CC00000000000000000 = {
+			isa = PBXGroup;
+			children = (
+				5A49B5000000000000000000 /* PropertyFinder */,
+				FD8896400000000000000000 /* Frameworks */,
+				571B83400000000000000000 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		571B83400000000000000000 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DC3CB5800000000000000000 /* PropertyFinder.app */,
+			);
+			name = "Products";
+			sourceTree = "<group>";
+		};
+		FD8896400000000000000000 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				35CFA2800000000000000000 /* UIKit.framework */,
+				FE55F1800000000000000000 /* MapKit.framework */,
+				C6DC40800000000000000000 /* Foundation.framework */,
+				8F628F800000000000000000 /* CoreGraphics.framework */,
+			);
+			name = "Frameworks";
+			sourceTree = "<group>";
+		};
+		5A49B5000000000000000000 /* PropertyFinder */ = {
+			isa = PBXGroup;
+			children = (
+				3295F6800000000000000000 /* AppDelegate.h */,
+				673E13000000000000000000 /* Default.png */,
+				2FC462000000000000000000 /* Default@2x.png */,
+				D05B5B800000000000000000 /* FavouritesViewController.h */,
+				9EB7C4000000000000000000 /* FavouritesViewController.xib */,
+				F84AB1000000000000000000 /* Icon.png */,
+				6A0FA7800000000000000000 /* Icon@2x.png */,
+				706C0B000000000000000000 /* MainPageViewController.h */,
+				4524D7000000000000000000 /* PropertyFinderViewController.xib */,
+				5B0B96000000000000000000 /* PropertyViewController.h */,
+				D63175000000000000000000 /* PropertyViewController.xib */,
+				E5BBD0800000000000000000 /* SearchResultsViewController.h */,
+				DAB260000000000000000000 /* SearchResultsViewController.xib */,
+				274C05800000000000000000 /* Supporting Files */,
+			);
+			name = "PropertyFinder";
+			sourceTree = "<group>";
+		};
+		274C05800000000000000000 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A7E5BC000000000000000000 /* AppDelegate.m */,
+				7D24D2000000000000000000 /* FavouritesViewController.m */,
+				1D3581800000000000000000 /* MainPageViewController.m */,
+				7D50C8000000000000000000 /* PropertyViewController.m */,
+				928547000000000000000000 /* SearchResultsViewController.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		13CBF2800000000000000000 /* PropertyFinder */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BA3905800000000000000000 /* Build configuration list for PBXNativeTarget "PropertyFinder" */;
+			buildPhases = (
+				2F733F000000000000000000 /* Sources */,
+				82A9C8800000000000000000 /* Frameworks */,
+				4B3017800000000000000000 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "PropertyFinder";
+			productName = "PropertyFinder";
+			productReference = DC3CB5800000000000000000 /* PropertyFinder.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		ECA97E000000000000000000 /* Project object */ = {
+			isa = PBXProject;
+			attributes = { };
+			buildConfigurationList = 67027C000000000000000000 /* Build configuration list for PBXProject "PropertyFinder" */;
+			compatibilityVersion = "Xcode 3.2";
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = AA520CC00000000000000000;
+			productRefGroup = 571B83400000000000000000 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				13CBF2800000000000000000 /* PropertyFinder */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4B3017800000000000000000 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2967FE800000000000000000 /* PropertyFinderViewController.xib in Resources */,
+				F1EE4D800000000000000000 /* SearchResultsViewController.xib in Resources */,
+				BA749C800000000000000000 /* PropertyViewController.xib in Resources */,
+				82FAEB800000000000000000 /* FavouritesViewController.xib in Resources */,
+				4B813A800000000000000000 /* Default.png in Resources */,
+				140789800000000000000000 /* Default@2x.png in Resources */,
+				C0D100000000000000000000 /* Icon.png in Resources */,
+				4E52CF000000000000000000 /* Icon@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2F733F000000000000000000 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				16D91E000000000000000000 /* AppDelegate.h in Sources */,
+				8C28E3800000000000000000 /* AppDelegate.m in Sources */,
+				54AF32800000000000000000 /* MainPageViewController.h in Sources */,
+				178A90000000000000000000 /* MainPageViewController.m in Sources */,
+				C9FEF8000000000000000000 /* SearchResultsViewController.h in Sources */,
+				76C86E800000000000000000 /* SearchResultsViewController.m in Sources */,
+				3F4EBD800000000000000000 /* PropertyViewController.h in Sources */,
+				EC1834000000000000000000 /* PropertyViewController.m in Sources */,
+				B49E83000000000000000000 /* FavouritesViewController.h in Sources */,
+				6167F9800000000000000000 /* FavouritesViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		89062C000000000000000000 /* MonoTouch */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				SDKROOT = iphoneos;
+			};
+			name = MonoTouch;
+		};
+		A4C304800000000000000000 /* MonoTouch */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				PRODUCT_NAME = "PropertyFinder";
+				WRAPPER_EXTENSION = app;
+			};
+			name = MonoTouch;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		67027C000000000000000000 /* Build configuration list for PBXProject "PropertyFinder" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				89062C000000000000000000 /* MonoTouch */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = MonoTouch;
+		};
+		BA3905800000000000000000 /* Build configuration list for PBXNativeTarget "PropertyFinder" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A4C304800000000000000000 /* MonoTouch */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = MonoTouch;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = ECA97E000000000000000000 /* Project object */;
+}

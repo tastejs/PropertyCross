@@ -8,6 +8,7 @@ using MonoTouch.UIKit;
 using PropertyFinder.Model;
 using PropertyFinder.Presenter;
 using System.Collections.Generic;
+using MonoTouch.CoreFoundation;
 
 namespace PropertyFinder
 {
@@ -76,7 +77,7 @@ namespace PropertyFinder
       _tableSource.SetProperties(properties, totalResult);
       searchResultsTable.ReloadData();
 
-      Title = string.Format("{0:d} of {1:d} matches", properties.Count, totalResult);
+      Title = string.Format("{0:d} of {1:d} results", properties.Count, totalResult);
     }
 
     public void SetLoadMoreVisible (bool visible)
@@ -143,7 +144,15 @@ namespace PropertyFinder
           cell.TextLabel.Text = property.FormattedPrice;
           cell.DetailTextLabel.Text = property.Title;
           cell.Accessory = UITableViewCellAccessory.DisclosureIndicator;
-          cell.ImageView.Image = UIImage.LoadFromData (NSData.FromUrl (new NSUrl (property.ThumbnailUrl)));
+          cell.ImageView.Frame = new RectangleF(cell.ImageView.Frame.Location, new SizeF(60,60));
+
+          DispatchQueue.DefaultGlobalQueue.DispatchAsync(() => {
+            UIImage image = UIImage.LoadFromData (NSData.FromUrl (new NSUrl (property.ThumbnailUrl)));
+            DispatchQueue.MainQueue.DispatchAsync(() => {
+              cell.ImageView.Image = image;
+              cell.SetNeedsLayout();
+            });
+          });
         }
         else
         {
@@ -164,6 +173,7 @@ namespace PropertyFinder
         int row = indexPath.Row;
         if (row < _properties.Count)
         {
+          tableView.DeselectRow(indexPath, false);
           var property = _properties [row];
           PropertySelected (this, new PropertyEventArgs (property));
         }

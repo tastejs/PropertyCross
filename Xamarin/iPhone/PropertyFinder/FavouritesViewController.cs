@@ -7,6 +7,7 @@ using MonoTouch.UIKit;
 using PropertyFinder.Presenter;
 using PropertyFinder.Model;
 using System.Collections.Generic;
+using MonoTouch.CoreFoundation;
 
 namespace PropertyFinder
 {
@@ -81,7 +82,15 @@ namespace PropertyFinder
         cell.TextLabel.Text = property.FormattedPrice;
         cell.DetailTextLabel.Text = property.Title;
         cell.Accessory = UITableViewCellAccessory.DisclosureIndicator;
-        cell.ImageView.Image = UIImage.LoadFromData (NSData.FromUrl (new NSUrl (property.ThumbnailUrl)));
+        cell.ImageView.Frame = new RectangleF(cell.ImageView.Frame.Location, new SizeF(60,60));
+
+        DispatchQueue.DefaultGlobalQueue.DispatchAsync(() => {
+            UIImage image = UIImage.LoadFromData (NSData.FromUrl (new NSUrl (property.ThumbnailUrl)));
+            DispatchQueue.MainQueue.DispatchAsync(() => {
+              cell.ImageView.Image = image;
+              cell.SetNeedsLayout();
+            });
+          });
       }
       #endregion
 

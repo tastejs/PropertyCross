@@ -1,18 +1,18 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhoneSimulator" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="PropertyFinder/PropertyFinderViewController.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release|iPhone" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="PropertyFinder/SearchResultsViewController.cs">
     <Files>
       <File FileName="PropertyFinder/AppDelegate.cs" Line="46" Column="64" />
       <File FileName="PropertyFinder/Main.cs" Line="17" Column="1" />
-      <File FileName="PropertyFinder/PropertyFinderViewController.cs" Line="159" Column="6" />
+      <File FileName="PropertyFinder/PropertyFinderViewController.cs" Line="162" Column="49" />
       <File FileName="PropertyFinder/GeoLocationService.cs" Line="17" Column="5" />
-      <File FileName="PropertyFinder/StatePersistenceService.cs" Line="20" Column="4" />
+      <File FileName="PropertyFinder/StatePersistenceService.cs" Line="8" Column="57" />
       <File FileName="PropertyFinder/NavigationService.cs" Line="24" Column="70" />
-      <File FileName="PropertyFinder/SearchResultsViewController.cs" Line="13" Column="2" />
+      <File FileName="PropertyFinder/SearchResultsViewController.cs" Line="82" Column="5" />
       <File FileName="PropertyFinder/PropertyFinderViewController.designer.cs" Line="1" Column="1" />
       <File FileName="PropertyFinder/PropertyViewController.designer.cs" Line="1" Column="1" />
       <File FileName="PropertyFinder/PropertyViewController.cs" Line="7" Column="1" />
-      <File FileName="../Common/Model/JsonWebPropertySearch.cs" Line="28" Column="31" />
+      <File FileName="../Common/Model/JsonWebPropertySearch.cs" Line="32" Column="36" />
       <File FileName="../Common/Model/JsonFilePropertySearch.cs" Line="23" Column="5" />
       <File FileName="../Common/Model/PropertyDataSourceResult.cs" Line="1" Column="1" />
       <File FileName="../Common/Model/PropertyDataSource.cs" Line="17" Column="6" />
@@ -20,7 +20,24 @@
       <File FileName="../Common/Presenter/SearchItem/PlainTextSearchItem.cs" Line="32" Column="73" />
       <File FileName="../Common/Model/IJsonPropertySearch.cs" Line="10" Column="108" />
       <File FileName="../Common/Presenter/SearchItem/SearchItemBase.cs" Line="22" Column="73" />
+      <File FileName="../Common/Presenter/Services/IStatePersistenceService.cs" Line="9" Column="38" />
+      <File FileName="../Common/Presenter/Services/PropertyFinderPersistentState.cs" Line="69" Column="5" />
+      <File FileName="../Common/Presenter/PropertyPresenter.cs" Line="41" Column="40" />
+      <File FileName="PropertyFinder/FavouritesViewController.cs" Line="72" Column="50" />
+      <File FileName="PropertyFinder/TableSourceBase.cs" Line="40" Column="22" />
     </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State expanded="True">
+          <Node name="PropertyFinder" expanded="True" selected="True">
+            <Node name="Model" expanded="True" />
+            <Node name="Presenter" expanded="True">
+              <Node name="Services" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>

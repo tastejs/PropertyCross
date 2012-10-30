@@ -74,7 +74,7 @@ namespace PropertyFinder.Presenter
       _geolocationService = geolocationService;
     }
 
-    public void SetView(View view)
+    public void SetView (View view)
     {
       _view = view;
       _view.SearchButtonClicked += View_SearchButtonClicked;
@@ -84,7 +84,7 @@ namespace PropertyFinder.Presenter
       _view.SearchTextChanged += View_SearchTextChanged;
       _view.RecentSearchSelected += View_RecentSearchSelected;
 
-      _view.DisplayRecentSearches(_state.RecentSearches);
+      _view.DisplayRecentSearches (_state.RecentSearches.Count > 0 ? _state.RecentSearches : null);
     }
 
     private void View_RecentSearchSelected (object sender, RecentSearchSelectedEventArgs e)

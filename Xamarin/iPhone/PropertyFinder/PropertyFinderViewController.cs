@@ -237,7 +237,7 @@ namespace PropertyFinder
 
       public override void ConfigureCell (UITableViewCell cell, RecentSearch recentSearch)
       {
-        cell.TextLabel.Text = string.Format ("{0:s} ({1:d})", recentSearch.Search.DisplayText, recentSearch.ResultsCount);
+        cell.TextLabel.Text = string.Format ("{0:s}", recentSearch.Search.DisplayText);
         cell.Accessory = UITableViewCellAccessory.DisclosureIndicator;
       }
     }

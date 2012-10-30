@@ -54,6 +54,7 @@ namespace PropertyFinder
     
     public override void RowSelected (UITableView tableView, NSIndexPath indexPath)
     {
+      tableView.DeselectRow(indexPath, false);
       T item = _items [indexPath.Row];
       ItemSelected(this, new ItemSelectedEventArgs<T>(item));
     }
