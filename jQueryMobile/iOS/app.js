@@ -81,11 +81,9 @@ define("app", function (require) {
         // forward navigation
         ko.applyBindings(viewModel, view[0]);
         $.mobile.changePage(view);
-        console.log("forward");
       } else {
         // backward navigation
         ko.cleanNode(previousView[0]);
-        console.log("backwards");
       }
 
       previousBackStackLength = backStackLength;
