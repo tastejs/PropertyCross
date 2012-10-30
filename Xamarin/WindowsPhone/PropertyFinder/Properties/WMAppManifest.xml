@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2009/deployment" AppPlatformVersion="7.1">
-  <App xmlns="" ProductID="{6b9d0b2f-fb1a-43b2-8cd6-9a757cc1c561}" Title="PropertyFinder" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="PropertyFinder author" Description="Sample description" Publisher="PropertyFinder" BitsPerPixel="32">
+  <App xmlns="" ProductID="{6b9d0b2f-fb1a-43b2-8cd6-9a757cc1c561}" Title="PropertyCross" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="PropertyFinder author" Description="Sample description" Publisher="PropertyFinder" BitsPerPixel="32">
     <IconPath IsRelative="true" IsResource="false">ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_GAMERSERVICES" />
@@ -26,7 +26,7 @@
         <TemplateType5>
           <BackgroundImageURI IsRelative="true" IsResource="false">ApplicationTileIcon.png</BackgroundImageURI>
           <Count>0</Count>
-          <Title>PropertyFinder</Title>
+          <Title>PropertyCross</Title>
         </TemplateType5>
       </PrimaryToken>
     </Tokens>
