@@ -15,28 +15,10 @@
   <script type="text/javascript" src="lib/iscroll.js"></script>
   <script type="text/javascript" src="lib/jquery.mobile.iscrollview.js"></script>
   <script type="text/javascript" src="lib/cordova-1.9.0.js"></script>
-  
-  <script src="namespaces.js" type="text/javascript"></script>
-  
-  <!-- model layer -->
-  <script src="model/Property.js" type="text/javascript"></script>
-  <script src="model/Location.js" type="text/javascript"></script>
-  <script src="model/PropertyDataSourceResponse.js" type="text/javascript"></script>
-  <script src="model/PropertyDataSource.js" type="text/javascript"></script>
-  <script src="model/JSONDataSource.js" type="text/javascript"></script>
 
-  <!-- view model layer -->
-  <script src="viewModel/util.js" type="text/javascript"></script>
-  <script src="viewModel/PropertyViewModel.js" type="text/javascript"></script>
-  <script src="viewModel/PropertySearchViewModel.js" type="text/javascript"></script>
-  <script src="viewModel/LocationViewModel.js" type="text/javascript"></script>
-  <script src="viewModel/GeolocationViewModel.js" type="text/javascript"></script>
-  <script src="viewModel/SearchResultsViewModel.js" type="text/javascript"></script>
-  <script src="viewModel/FavouritesViewModel.js" type="text/javascript"></script>
+  <script src="lib/require.js" type="text/javascript" data-main="app"></script>
+  <!--<script src="app.min.js" type="text/javascript"></script>-->
 
-  <!-- bootstrap -->
-  <script src="app.js" type="text/javascript"></script>
-  
   <!-- application specific styling -->
   <link rel="stylesheet" type="text/css" href="style.css" />  
 </head>
@@ -123,18 +105,9 @@
     </div>
     <div data-role="content" data-theme="c" data-iscroll>
       <div>
-        <ul data-role="listview"/>
-          <!-- ko foreach: properties, updateListviewOnChange:properties -->
-          <li>
-            <a data-bind="click: $parent.select">
-              <div class="thumbnail-container">
-                <img data-bind="attr: { src: thumbnailUrl }"/>
-              </div>
-              <h3>£<span data-bind="text: price"/></h3>
-              <p data-bind="text: title"></p>
-            </a>
-          </li>
-          <!-- /ko -->
+        <ul data-role="listview"
+            data-bind='template: { name: "propertyThumbnailView", foreach: properties },
+                      updateListviewOnChange:properties'/>
           <li data-bind="visible: properties().length !== totalResults">
             <a data-bind="click: loadMore">
               <h3>Load more ...</h3>
@@ -157,18 +130,9 @@
       <h1>Favourites</h1>
     </div>
     <div data-role="content" data-theme="c" data-iscroll>
-      <ul data-role="listview"/>
-        <!-- ko foreach: properties, updateListviewOnChange:properties -->
-        <li>
-          <a data-bind="click: $parent.select">
-            <div class="thumbnail-container">
-              <img data-bind="attr: { src: thumbnailUrl }"/>
-            </div>
-            <h3>£<span data-bind="text: price"/></h3>
-            <p data-bind="text: title"></p>
-          </a>
-        </li>
-        <!-- /ko -->
+      <ul data-role="listview"
+          data-bind='template: { name: "propertyThumbnailView", foreach: properties },
+                      updateListviewOnChange:properties'/>
       </ul>
     </div>
   </div>
@@ -179,11 +143,11 @@
     <div data-role="header" data-theme="b">
       <h1>Property</h1>
 
-      <!-- for the farourites button I want to bind the data-icon value to the view model. Unfortunately this cannot be done because
+      <!-- for the favourites button I want to bind the data-icon value to the view model. Unfortunately this cannot be done because
         the element that holds this class is a generated child of the item that is bound to. For this reason I have resorted to 
         creating the required markup manually -->
       <a  class="ui-btn-right ui-btn ui-btn-icon-left ui-btn-corner-all ui-shadow ui-btn-up-b"
-            data-bind="click: propertySearchViewModel.addToFavourites">
+            data-bind="click: propertySearchViewModel.addToFavourites.bind(propertySearchViewModel)">
           <span class="ui-btn-inner ui-btn-corner-all">
             <span class="ui-btn-text">Fave</span>
 

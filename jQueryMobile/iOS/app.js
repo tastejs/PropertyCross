@@ -1,95 +1,119 @@
-/// <reference path="..//intellisense.js" />
+define("app", function (require) {
+  var $ = require("lib/jquery");
+  var ko = require("lib/knockout");
+  var PropertySearchViewModel = require("viewModel/PropertySearchViewModel");
+  var util = require("viewModel/util");
+  var application = require("viewModel/ApplicationViewModel").Instance;
 
-/*global $, PropertyDataSource, PropertySearchViewModel, Location, PropertyViewModel, hydrateObject, ko, Model, ViewModel, window, localStorage, document, console*/
-
-// a custom bindign which is used to 'refresh' jQueryMobile listviews.
+// a custom bindings which is used to 'refresh' jQueryMobile listviews.
 // See: http://www.scottlogic.co.uk/blog/colin/2012/10/integrating-knockout-and-jquerymobile/
-ko.virtualElements.allowedBindings.updateListviewOnChange = true;
-ko.bindingHandlers.updateListviewOnChange = {
-  update: function (element, valueAccessor) {
-    ko.utils.unwrapObservable(valueAccessor());  //grab dependency
+  ko.virtualElements.allowedBindings.updateListviewOnChange = true;
+  ko.bindingHandlers.updateListviewOnChange = {
+    update:function (element, valueAccessor) {
+      // reference value to force update when value changes
+      valueAccessor();
 
-    var listview = $(element).parents()
-                             .andSelf()
-                             .filter("[data-role='listview']");
+      var listview = $(element).parents().andSelf()
+          .filter("[data-role='listview']");
 
-    if (listview) {
-      try {
-        $(listview).listview('refresh');
-      } catch (e) {
-        // if the listview is not initialised, the above call with throw an exception
-        // there doe snot appear to be any way to easily test for this state, so
-        // we just swallow the exception here.
+      if (listview.data("mobile-listview")) {
+        listview.listview('refresh');
       }
     }
-  }
-};
+  };
 
 // takes the JSON state and updates the view model state
-function setState(jsonState) {
-  var state = $.parseJSON(jsonState);
-  if (!state)
-    return;
-  if (state.favourites) {
-    $.each(state.favourites, function () {
-      propertySearchViewModel.favourites.push(hydrateObject(this));
-    });
+  function setState(jsonState) {
+    var state = $.parseJSON(jsonState);
+    if (!state)
+      return;
+    if (state.favourites) {
+      $.each(state.favourites, function () {
+        propertySearchViewModel.favourites.push(util.hydrateObject(this));
+      });
+    }
+    if (state.recentSearches) {
+      $.each(state.recentSearches, function () {
+        propertySearchViewModel.recentSearches.push(util.hydrateObject(this));
+      });
+    }
   }
-  if (state.recentSearches) {
-    $.each(state.recentSearches, function () {
-      propertySearchViewModel.recentSearches.push(hydrateObject(this));
-    });
-  }
-}
 
 // saves the current state
-function persistentStateChanged() {
-  var state = {
-        recentSearches: propertySearchViewModel.recentSearches,
-        favourites: propertySearchViewModel.favourites
-      },
-      jsonState = ko.toJSON(state);
+  function persistentStateChanged() {
+    var state = {
+          recentSearches:propertySearchViewModel.recentSearches,
+          favourites:propertySearchViewModel.favourites
+        },
+        jsonState = ko.toJSON(state);
 
-  localStorage["appState"] = jsonState;
-}
+    localStorage["appState"] = jsonState;
+  }
 
-// create the various view models
-var propertySearchViewModel = new ViewModel.PropertySearchViewModel(),
-    searchResultsViewModel = new ViewModel.SearchResultsViewModel(),
-    propertyViewModel = new ViewModel.PropertyViewModel(),
-    favouritesViewModel = new ViewModel.FavouritesViewModel(propertySearchViewModel),
-    propertyDataSource = new Model.PropertyDataSource({
-      dataSource: new Model.JSONDataSource()
+  // create the top-level view model
+  // N.B. This is kept as a global to avoid re-engineering the whole
+  // project and losing the focus of this article. However, this seems
+  // to be a hack to allow global state (i.e. favourites) to be stored
+  // somewhere other than the application level (i.e. in the
+  // ApplicationViewModel).
+  window.propertySearchViewModel = new PropertySearchViewModel();
+  propertySearchViewModel.maxRecentSearch = 3;
+
+  $.mobile.defaultPageTransition = "slide";
+
+  function initializeViewModels() {
+
+    $(document).bind("pagechange", function (event, args) {
+      if (args.options.reverse) {
+        application.back();
+      }
     });
 
-$.mobile.defaultPageTransition = "slide";
+    var previousBackStackLength = 0;
+    var previousView = null;
 
-function initializeViewModels() {
+    // subscribe to changes in the current view model, creating
+    // the required view
+    application.currentViewModel.subscribe(function (viewModel) {
+      var backStackLength = application.viewModelBackStack().length;
+      var view = $("#" + viewModel.template);
+      if (previousBackStackLength < backStackLength) {
+        // forward navigation
+        ko.applyBindings(viewModel, view[0]);
+        $.mobile.changePage(view);
+        console.log("forward");
+      } else {
+        // backward navigation
+        ko.cleanNode(previousView[0]);
+        console.log("backwards");
+      }
 
-  // bind each view model to a jQueryMobile page
-  ko.applyBindings(propertySearchViewModel, document.getElementById("propertySearchView"));
-  ko.applyBindings(searchResultsViewModel, document.getElementById("searchResultsView"));
-  ko.applyBindings(propertyViewModel, document.getElementById("propertyView"));
-  ko.applyBindings(favouritesViewModel, document.getElementById("favouritesView"));
+      previousBackStackLength = backStackLength;
+      previousView = view;
 
-  // handle changes in persistent state
-  propertySearchViewModel.favourites.subscribe(persistentStateChanged);
-  propertySearchViewModel.recentSearches.subscribe(persistentStateChanged);
+    });
 
-  // load app state if present
-  var state = localStorage["appState"];
-  if (state) {
-    setState(state);
-  }
-};
+    // handle changes in persistent state
+    propertySearchViewModel.favourites.subscribe(persistentStateChanged);
+    propertySearchViewModel.recentSearches.subscribe(persistentStateChanged);
+
+    // load app state if present
+    var state = localStorage["appState"];
+    if (state) {
+      setState(state);
+    }
+
+    application.navigateTo(propertySearchViewModel);
+  };
 
 // startup the app
-$(document).ready(function () {
-  if (window.device) {
-    document.addEventListener("deviceready", initializeViewModels, false);
-  } else {
-    // if there is no 'device' immediately create the view mdoels. This is useful
-    // for browser-based testing
-    initializeViewModels();
-  }
+  $(function () {
+    if (window.device) {
+      document.addEventListener("deviceready", initializeViewModels, false);
+    } else {
+      // if there is no 'device' immediately create the view models. This is useful
+      // for browser-based testing
+      initializeViewModels();
+    }
+  });
 });

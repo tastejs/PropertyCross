@@ -1,22 +1,20 @@
-/// <reference path="..//intellisense.js" />
+define("viewModel/FavouritesViewModel", function (require) {
+  var util = require("viewModel/util");
 
-/*global $, ViewModel */
+  function FavouritesViewModel(propertySearchViewModel) {
+    /// <summary>
+    /// The view model that backs the favourites view
+    /// </summary>
 
-ViewModel.FavouritesViewModel = function (propertySearchViewModel) {
-  /// <summary>
-  /// The view model that backs the favourites view
-  /// </summary>
+    // ----- framework fields
+    this.template = "favouritesView";
+    this.factoryName = "FavouritesViewModel";
 
-  // ----- framework fields
-  this.template = "favouritesView";
-  
-  // ----- public fields
-  this.properties = propertySearchViewModel.favourites;
+    // ----- public fields
+    this.properties = propertySearchViewModel.favourites;
+  }
 
-  // ----- public functions
+  util.registerFactory("FavouritesViewModel", FavouritesViewModel);
 
-  this.select = function (property) {
-    propertyViewModel.copy(property);
-    $.mobile.changePage("#" + propertyViewModel.template);
-  };
-};
+  return FavouritesViewModel;
+});
