@@ -18,7 +18,7 @@ namespace PropertyFinder
 
     public PropertyViewController (PropertyPresenter presenter) : base ("PropertyViewController", null)
     {
-      Title = "Property";
+      Title = "Property Details";
       _presenter = presenter;
 
       _favouriteButton = new UIBarButtonItem("+",
