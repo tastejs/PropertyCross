@@ -24,28 +24,19 @@ module.exports = function(viewModel) {
 		borderStyle : Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
 		left : '6dip',
 		right : '6dip',
-		top : '6dip'
+		top : '6dip',
+		returnKeyType: Titanium.UI.RETURNKEY_SEARCH
 	});
 	var searchDisplayStringSubscription = viewModel.searchDisplayString.subscribe(function(newValue) {
 		textField.value = newValue;
 	});
-	textField.addEventListener('change', function(e) {
+	textField.addEventListener('return', function(e) {
 		viewModel.searchDisplayString(textField.value);
-	});
-	window.add(textField);
-
-	var goButton = Titanium.UI.createButton({
-		title : 'Go',
-		left : '6dip',
-		right : '6dip',
-		top : '6dip'
-	});
-	goButton.addEventListener('click', function(e) {
 		// ensure the keyboard is hidden
 		textField.blur();
 		viewModel.executeSearch();
 	});
-	window.add(goButton);
+	window.add(textField);
 
 	var myLocationButton = Titanium.UI.createButton({
 		title : 'My Location',
@@ -248,7 +239,6 @@ module.exports = function(viewModel) {
 			activityIndicator.show();
 		}
 		textField.enabled = newValue;
-		goButton.enabled = newValue;
 		myLocationButton.enabled = newValue;
 	});
 
