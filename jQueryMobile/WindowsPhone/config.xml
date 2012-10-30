@@ -22,13 +22,12 @@
     <gap:platform name="blackberry" project="widgets"/>
   </gap:platforms>
 
-  <icon src="icon.png"/>
-  <icon src="icon@2x.png" width="114" height="114" />
+  <icon src="ApplicationIcon.png" gap:platform="winphone" />
+  <icon src="ApplicationTileIcon.png" gap:platform="winphone" gap:role="background" />
   
-  <gap:splash src="Default.png" width="320" height="480" />
+  <gap:splash src="SplashScreenImage.jpg"  gap:platform="winphone"/>
 
   <preference name="orientation" value="portrait" />
-  <preference name="webviewbounce" value="false" />
   <preference name="phonegap-version" value="1.9.0" />
 
   <feature name="http://api.phonegap.com/1.0/geolocation"/>
