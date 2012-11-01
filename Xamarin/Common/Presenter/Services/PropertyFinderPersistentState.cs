@@ -49,16 +49,23 @@ namespace PropertyFinder.Presenter
     /// <summary>
     /// Adds the given search to the RecentSearches list. 
     /// </summary>
-    public void AddSearchToRecent(RecentSearch search)
+    public void AddSearchToRecent (RecentSearch search)
     {
-      // if we already have this search saved, do nothing
+      // if we already have this search saved, move it to the top
       if (RecentSearches.Any (r => r.Search.DisplayText == search.Search.DisplayText))
-        return;
-
-      RecentSearches.Insert(0,search);
-      if (RecentSearches.Count > 4)
       {
-        RecentSearches.RemoveAt(RecentSearches.Count - 1);
+        var matchingSearch = RecentSearches.Single (r => r.Search.DisplayText == search.Search.DisplayText);
+        RecentSearches.Remove (matchingSearch);
+        RecentSearches.Insert (0, matchingSearch);
+      }
+      else
+      {
+        // otherwise, add it
+        RecentSearches.Insert (0, search);
+        if (RecentSearches.Count > 4)
+        {
+          RecentSearches.RemoveAt (RecentSearches.Count - 1);
+        }
       }
       _persistenceService.SaveState(this);
     }
