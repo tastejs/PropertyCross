@@ -64,6 +64,8 @@ Platforms To Add:
   * MoSync
   * Sencha Touch (with PhoneGap)
   * Kendo UI Mobile (with PhoneGap)
+  * DXTREME
+  * Adobe Mobile AIR
 
 The Application
 ---------------
