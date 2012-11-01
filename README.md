@@ -66,6 +66,7 @@ Platforms To Add:
   * Kendo UI Mobile (with PhoneGap)
   * DXTREME
   * Adobe Mobile AIR
+  * Moscrif
 
 The Application
 ---------------
