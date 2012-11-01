@@ -30,9 +30,10 @@ define("app", function (require) {
     // the required view
     application.currentViewModel.subscribe(function (viewModel) {
       var backStackLength = application.viewModelBackStack().length;
-      var view = viewCache[viewModel.template];
+      var viewName = application.currentView();
+      var view = viewCache[viewName];
       if (!view) {
-        view = viewCache[viewModel.template] = $("#" + viewModel.template);
+        view = viewCache[viewName] = $("#" + viewName);
         ko.applyBindings(viewModel, view[0]);
       }
       if (previousBackStackLength < backStackLength) {
@@ -60,9 +61,17 @@ define("app", function (require) {
     // load app state if present
     var state = localStorage["appState"];
     if (state) {
-      application.setState(state);
+      try {
+        application.setState(state);
+      }
+      catch(e) {
+        console.warn("Failed to load state", e);
+      }
     }
-  };
+
+    // navigate to home
+    application.navigateToHome();
+  }
 
   // startup the app
   $(function () {

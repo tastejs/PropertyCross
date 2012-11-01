@@ -32,11 +32,8 @@
 
     // Gets the template name for the top-most view model
     this.currentView = ko.computed(function () {
-      var view = "";
-      if (this.viewModelBackStack().length !== 0) {
-        view = this.viewModelBackStack()[this.viewModelBackStack().length - 1].template;
-      }
-      return view;
+      var viewModel = this.currentViewModel();
+      return viewModel ? viewModel.template : "";
     }, this);
 
     // ----- app view models
@@ -52,6 +49,13 @@
       /// Navigates to the given view model by placing it on the top of the back-stack.
       /// </summary>
       this.viewModelBackStack.push(viewModel);
+    };
+
+    this.navigateToHome = function () {
+      /// <summary>
+      /// Navigates to the home screen
+      /// </summary>
+      this.viewModelBackStack.push(propertySearchViewModel);
     };
 
     this.navigateToSearchResults = function (location, searchResults) {
@@ -83,21 +87,6 @@
       /// </summary>
       this.viewModelBackStack.pop();
     };
-//
-//    this.getState = function () {
-//      /// <summary>
-//      /// Gets the application state as a JSON string
-//      /// </summary>
-//
-//      var i, viewModel,
-//        state = ko.observableArray();
-//
-//      for (i = 0; i < that.viewModelBackStack().length; i++) {
-//        viewModel = that.viewModelBackStack()[i];
-//        state.push(viewModel);
-//      }
-//      return ko.toJSON(state);
-//    };
 
     this.setState = function (stateString) {
       /// <summary>
@@ -117,17 +106,6 @@
           that.recentSearches.push(util.hydrateObject(that, this));
         });
       }
-
-      this.navigateTo(propertySearchViewModel);
-
-//      var i, viewModel,
-//        state = $.parseJSON(stateString);
-//
-//      that.viewModelBackStack.removeAll();
-//      for (i = 0; i < state.length; i++) {
-//        viewModel = util.hydrateObject(this, state[i]);
-//        that.viewModelBackStack.push(viewModel);
-//      }
     };
 
     this.state = ko.computed(function() {
@@ -182,7 +160,7 @@
       if (this.recentSearches().length > this.maxRecentSearch) {
         this.recentSearches.pop();
       }
-      this.recentSearches.unshift(this.searchLocation);
+      this.recentSearches.unshift(searchLocation);
     }
   }
 
