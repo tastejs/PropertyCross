@@ -38,7 +38,7 @@ namespace PropertyFinder.Views
         {
 			footer.Visibility = visible ? ViewStates.Visible : ViewStates.Invisible;
         }
-        
+
 		private bool _loading;
 		public bool IsLoading
 		{
@@ -50,5 +50,12 @@ namespace PropertyFinder.Views
 
       	public event EventHandler LoadMoreClicked;
       	public event EventHandler<PropertyEventArgs> PropertySelected;
+
+		protected override void OnListItemClick(ListView l, View v, int position, long id)
+		{
+			var adapter = (SearchResultsAdapter) ListAdapter;
+			Property item = adapter.GetItem(position);
+			PropertySelected(this, new PropertyEventArgs(item));
+		}
 	}
 }	
