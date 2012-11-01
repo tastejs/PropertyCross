@@ -73,10 +73,13 @@ namespace PropertyFinder
 		{
 			
 			// aapt resource value: 0x7f030000
-			public const int PropertyFinderView = 2130903040;
+			public const int loadmore = 2130903040;
 			
 			// aapt resource value: 0x7f030001
-			public const int recent_search_row = 2130903041;
+			public const int PropertyFinderView = 2130903041;
+			
+			// aapt resource value: 0x7f030002
+			public const int recent_search_row = 2130903042;
 			
 			private Layout()
 			{
@@ -118,8 +121,14 @@ namespace PropertyFinder
 			// aapt resource value: 0x7f040005
 			public const int recent_searches_count_format = 2130968581;
 			
+			// aapt resource value: 0x7f04000a
+			public const int result_details = 2130968586;
+			
 			// aapt resource value: 0x7f040001
 			public const int search_description = 2130968577;
+			
+			// aapt resource value: 0x7f040009
+			public const int tap_load_more = 2130968585;
 			
 			// aapt resource value: 0x7f040003
 			public const int use_location_text = 2130968579;

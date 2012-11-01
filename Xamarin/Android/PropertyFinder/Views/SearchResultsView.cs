@@ -14,11 +14,19 @@ using PropertyFinder.Model;
 namespace PropertyFinder.Views
 {
 	[Activity]
-	public class SearchResultsView : Activity, SearchResultsPresenter.View
+	public class SearchResultsView : ListActivity, SearchResultsPresenter.View
 	{
+		private View footer;
+
 		protected override void OnCreate(Bundle bundle)
 		{
 			base.OnCreate(bundle);
+
+			LayoutInflater li = (LayoutInflater)GetSystemService(Context.LayoutInflaterService);
+			footer = li.Inflate(Resource.Layout.loadmore, null);
+
+			ListView.AddFooterView(footer);
+			ListAdapter = new RecentSearchAdapter(this, new List<RecentSearch>() {});
 		}
 
 		public void SetSearchResults(int totalResult, int pageNumber, int totalPages,
@@ -28,6 +36,7 @@ namespace PropertyFinder.Views
         
         public void SetLoadMoreVisible(bool visible)
         {
+			footer.Visibility = visible ? ViewStates.Visible : ViewStates.Invisible;
         }
         
 		private bool _loading;
