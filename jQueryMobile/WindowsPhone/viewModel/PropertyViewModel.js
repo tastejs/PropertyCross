@@ -20,7 +20,9 @@ define("viewModel/PropertyViewModel", function (require) {
     this.guid = ko.observable();
     this.summary = ko.observable();
     this.title = ko.observable();
-    this.isFavourite = ko.observable(false);
+    this.isFavourite = ko.computed(function() {
+        return !!application.getFavouriteByGuid(this.guid());
+      }, this);
 
     // ----- public functions
 
@@ -59,7 +61,9 @@ define("viewModel/PropertyViewModel", function (require) {
       /// <summary>
       /// Adds this property to the favourites list
       /// </summary>
-      application.addToFavourites(this);
+      var clone = new PropertyViewModel(application);
+      clone.initialize(this);
+      application.addToFavourites(clone);
     };
   }
 

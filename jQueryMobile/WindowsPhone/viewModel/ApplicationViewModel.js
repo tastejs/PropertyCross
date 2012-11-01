@@ -8,6 +8,7 @@
     /// The view model that manages the view model back-stack
     /// </summary>
     var that = this;
+    var viewModels = {};
 
     // ----- public fields
     // data stores
@@ -36,12 +37,6 @@
       return viewModel ? viewModel.template : "";
     }, this);
 
-    // ----- app view models
-    var searchResultsViewModel = new (require("viewModel/SearchResultsViewModel"))(this);
-    var propertyViewModel = new (require("viewModel/PropertyViewModel"))(this);
-    var favouritesViewModel = new (require("viewModel/FavouritesViewModel"))(this);
-    var propertySearchViewModel = new (require("viewModel/PropertySearchViewModel"))(this);
-
     // ----- public functions
 
     this.navigateTo = function (viewModel) {
@@ -55,30 +50,30 @@
       /// <summary>
       /// Navigates to the home screen
       /// </summary>
-      this.viewModelBackStack.push(propertySearchViewModel);
+      this.viewModelBackStack.push(viewModels.propertySearch);
     };
 
     this.navigateToSearchResults = function (location, searchResults) {
       /// <summary>
       /// Navigates to the search results.
       /// </summary>
-      searchResultsViewModel.initialize(location, searchResults);
-      this.navigateTo(searchResultsViewModel);
+      viewModels.searchResults.initialize(location, searchResults);
+      this.navigateTo(viewModels.searchResults);
     };
 
     this.navigateToProperty = function (property) {
       /// <summary>
       /// Navigates to the property.
       /// </summary>
-      propertyViewModel.initialize(property);
-      this.navigateTo(propertyViewModel);
+      viewModels.property.initialize(property);
+      this.navigateTo(viewModels.property);
     };
 
     this.navigateToFavourites = function () {
       /// <summary>
       /// Navigates to the favourites.
       /// </summary>
-      this.navigateTo(favouritesViewModel);
+      this.navigateTo(viewModels.favourites);
     };
 
     this.back = function () {
@@ -123,7 +118,7 @@
       /// </summary>
 
       return ko.utils.arrayFirst(this.favourites(), function (property) {
-        return property.guid() === guid();
+        return property.guid() === guid;
       });
     };
 
@@ -131,14 +126,12 @@
       /// <summary>
       /// Adds the given property view model to the list of favourites
       /// </summary>
-      var existingFavourite = this.getFavouriteByGuid(propertyViewModel.guid);
+      var existingFavourite = this.getFavouriteByGuid(propertyViewModel.guid());
 
       // add or remove
       if (!existingFavourite) {
-        propertyViewModel.isFavourite(true);
         this.favourites.push(propertyViewModel);
       } else {
-        propertyViewModel.isFavourite(false);
         this.favourites.remove(existingFavourite);
       }
     };
@@ -162,6 +155,12 @@
       }
       this.recentSearches.unshift(searchLocation);
     }
+
+    // ----- app view models
+    viewModels.searchResults = new (require("viewModel/SearchResultsViewModel"))(this);
+    viewModels.property = new (require("viewModel/PropertyViewModel"))(this);
+    viewModels.favourites = new (require("viewModel/FavouritesViewModel"))(this);
+    viewModels.propertySearch = new (require("viewModel/PropertySearchViewModel"))(this);
   }
 
   return ApplicationViewModel;
