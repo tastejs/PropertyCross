@@ -13,8 +13,6 @@ define("viewModel/GeolocationViewModel", function (require) {
     // ----- public fields
     this.lat = undefined;
     this.lon = undefined;
-    this.firstElement = ko.observable(false);
-    this.lastElement = ko.observable(false);
     this.displayString = undefined;
     this.totalResults = 0;
 
