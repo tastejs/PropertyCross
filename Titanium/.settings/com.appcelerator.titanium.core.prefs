@@ -1,5 +1,9 @@
 eclipse.preferences.version=1
-provisioning_profiles/development/49FC408E-7591-4893-A4C1-BC881E233440/appid=*
-provisioning_profiles/development/49FC408E-7591-4893-A4C1-BC881E233440/filepath=/Users/cprice/Library/MobileDevice/Provisioning Profiles/49FC408E-7591-4893-A4C1-BC881E233440.mobileprovision
-provisioning_profiles/development/49FC408E-7591-4893-A4C1-BC881E233440/name=iOS Team Provisioning Profile\: *
-provisioning_profiles/development/49FC408E-7591-4893-A4C1-BC881E233440/uuid=49FC408E-7591-4893-A4C1-BC881E233440
+provisioning_profiles/development/ADA5F860-A6E3-4231-8E27-E4F275477B2E/appid=*
+provisioning_profiles/development/ADA5F860-A6E3-4231-8E27-E4F275477B2E/filepath=/Users/cprice/Library/MobileDevice/Provisioning Profiles/ADA5F860-A6E3-4231-8E27-E4F275477B2E.mobileprovision
+provisioning_profiles/development/ADA5F860-A6E3-4231-8E27-E4F275477B2E/name=iOS Team Provisioning Profile\: *
+provisioning_profiles/development/ADA5F860-A6E3-4231-8E27-E4F275477B2E/uuid=ADA5F860-A6E3-4231-8E27-E4F275477B2E
+provisioning_profiles/distribution/ADA5F860-A6E3-4231-8E27-E4F275477B2E/appid=*
+provisioning_profiles/distribution/ADA5F860-A6E3-4231-8E27-E4F275477B2E/filepath=/Users/cprice/Library/MobileDevice/Provisioning Profiles/ADA5F860-A6E3-4231-8E27-E4F275477B2E.mobileprovision
+provisioning_profiles/distribution/ADA5F860-A6E3-4231-8E27-E4F275477B2E/name=iOS Team Provisioning Profile\: *
+provisioning_profiles/distribution/ADA5F860-A6E3-4231-8E27-E4F275477B2E/uuid=ADA5F860-A6E3-4231-8E27-E4F275477B2E

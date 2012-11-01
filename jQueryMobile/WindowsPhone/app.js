@@ -1,146 +1,105 @@
-/// <reference path="..//intellisense.js" />
+define("app", function (require) {
+  var $ = require("lib/jquery");
+  var ko = require("lib/knockout");
+  var application = new(require("viewModel/ApplicationViewModel"))();
 
-/*global $, PropertyDataSource, PropertySearchViewModel, Location, PropertyViewModel, hydrateObject, ko, Model, ViewModel, window, localStorage, document, console*/
-
-// a custom bindign which is used to 'refresh' jQueryMobile listviews.
+// a custom bindings which is used to 'refresh' jQueryMobile listviews.
 // See: http://www.scottlogic.co.uk/blog/colin/2012/10/integrating-knockout-and-jquerymobile/
-ko.virtualElements.allowedBindings.updateListviewOnChange = true;
-ko.bindingHandlers.updateListviewOnChange = {
-  update: function (element, valueAccessor) {
-    ko.utils.unwrapObservable(valueAccessor());  //grab dependency
+  ko.virtualElements.allowedBindings.updateListviewOnChange = true;
+  ko.bindingHandlers.updateListviewOnChange = {
+    update:function (element, valueAccessor) {
+      // reference value to force update when value changes
+      ko.utils.unwrapObservable(valueAccessor());
 
-    var listview = $(element).parents()
-                             .andSelf()
-                             .filter("[data-role='listview']");
+      var listview = $(element).parents().andSelf()
+          .filter("[data-role='listview']");
 
-    if (listview) {
-      try {
-        $(listview).listview('refresh');
-      } catch (e) {
-        // if the listview is not initialised, the above call with throw an exception
-        // there doe snot appear to be any way to easily test for this state, so
-        // we just swallow the exception here.
+      if (listview.data("mobile-listview")) {
+        listview.listview('refresh');
       }
     }
-  }
-};
+  };
 
-// takes the JSON state and updates the view model state
-function setState(jsonState) {
-  var state = $.parseJSON(jsonState);
-  if (!state)
-    return;
-  if (state.favourites) {
-    $.each(state.favourites, function () {
-      propertySearchViewModel.favourites.push(hydrateObject(this));
+  function initialize() {
+    var previousBackStackLength = 0;
+    var viewCache = {};
+
+    // subscribe to changes in the current view model, creating
+    // the required view
+    application.currentViewModel.subscribe(function (viewModel) {
+      var backStackLength = application.viewModelBackStack().length;
+      var viewName = application.currentView();
+      var view = viewCache[viewName];
+      if (!view) {
+        view = viewCache[viewName] = $("#" + viewName);
+        ko.applyBindings(viewModel, view[0]);
+      }
+      if (previousBackStackLength < backStackLength) {
+        // forward navigation
+        $.mobile.changePage(view);
+      } else {
+        // backward navigation
+      }
+
+      previousBackStackLength = backStackLength;
     });
-  }
-  if (state.recentSearches) {
-    $.each(state.recentSearches, function () {
-      propertySearchViewModel.recentSearches.push(hydrateObject(this));
+
+    // inform the application of jquery mobile's handling of backwards navigation
+    $(document).bind("pagechange", function (event, args) {
+      if (args.options.reverse) {
+        application.back();
+      }
     });
-  }
-}
 
-// saves the current state
-function persistentStateChanged() {
-  var state = {
-        recentSearches: propertySearchViewModel.recentSearches,
-        favourites: propertySearchViewModel.favourites
-      },
-      jsonState = ko.toJSON(state);
-
-  localStorage.setItem("appState", jsonState);
-}
-
-// create the various view models
-var propertySearchViewModel = new ViewModel.PropertySearchViewModel(),
-    searchResultsViewModel = new ViewModel.SearchResultsViewModel(),
-    propertyViewModel = new ViewModel.PropertyViewModel(),
-    favouritesViewModel = new ViewModel.FavouritesViewModel(propertySearchViewModel),
-    propertyDataSource = new Model.PropertyDataSource({
-      dataSource: new Model.JSONDataSource()
-    }),
-    updatingBackButtonListener = false;
-
-function initializeViewModels() {
-
-  // load app state if present
-  var state = localStorage.getItem("appState");
-  if (state) {
-    setState(state);
-  }
-
-
-  // bind each view model to a jQueryMobile page
-  ko.applyBindings(propertySearchViewModel, document.getElementById("propertySearchView"));
-  ko.applyBindings(searchResultsViewModel, document.getElementById("searchResultsView"));
-  ko.applyBindings(propertyViewModel, document.getElementById("propertyView"));
-  ko.applyBindings(favouritesViewModel, document.getElementById("favouritesView"));
-
-  // handle changes in persistent state
-  propertySearchViewModel.favourites.subscribe(persistentStateChanged);
-  propertySearchViewModel.recentSearches.subscribe(persistentStateChanged);
-
-
-
-  $(document).bind('pagechange', function () {
-
-    var currentPageId = ($.mobile.activePage).attr("id"),
-        backButtonRequired = false;
-
-    if (currentPageId !== "propertySearchView") {
-      backButtonRequired = true;
-    }
-
-    // for some reason when you add the evnet listener for the backbutton event, the supplied function
+    // for some reason when you add the event listener for the backbutton event, the supplied function
     // is invoked immediately, even though the back button was not pressed. Hence this boolean state
     // variable is used to detect this.
-    updatingBackButtonListener = true;
+    application.backButtonRequired.subscribe(function(backButtonRequired) {
+      var updatingBackButtonListener = true;
+      function onBackButton() {
+        if (updatingBackButtonListener)
+          return;
+        // the standard history.go(-1) and other methods for navigating back do not work, so we have to do it
+        // manually here
+        application.back();
+      }
+      if (backButtonRequired) {
+        document.addEventListener("backbutton", onBackButton, false);
+      } else {
+        document.removeEventListener("backbutton", onBackButton, false);
+      }
+      updatingBackButtonListener = false;
+    });
 
-    if (backButtonRequired) {
-      document.addEventListener("backbutton", onBackButton, false);
-    } else {
-      document.removeEventListener("backbutton", onBackButton, false);
+    // handle changes in persistent state
+    application.state.subscribe(function(state) {
+      localStorage.setItem("appState", state);
+    });
+
+    // load app state if present
+    var state = localStorage.getItem("appState");
+    if (state) {
+      try {
+        application.setState(state);
+      }
+      catch(e) {
+        console.warn("Failed to load state", e);
+      }
     }
 
-    updatingBackButtonListener = false;
-
-  });
-
-};
-
-function onBackButton() {
-
-  if (updatingBackButtonListener)
-    return;
-
-  // the standard history.go(-1) and other methods for navigating back do not work, so we have to do it
-  // manually here
-  var currentPageId = ($.mobile.activePage).attr("id");
-
-
-  if (currentPageId === "searchResultsView") {
-    $.mobile.changePage("#propertySearchView");
+    // navigate to home
+    application.navigateToHome();
   }
-  if (currentPageId === "favouritesView") {
-    $.mobile.changePage("#propertySearchView");
-  }
-  if (currentPageId === "propertyView") {
-    $.mobile.changePage("#searchResultsView");
-  }
-}
 
 // start the app
-var browserUA = navigator.userAgent.toLowerCase();
-if (browserUA.search('windows phone os 7') > -1) {
-  // on a device - wait for the PhoneGap device ready event
-  document.addEventListener("deviceready", initializeViewModels, false);
-} else {
-  // if there is we are not running on a phone - start the app immediately
-  $(document).ready(function () {
-    initializeViewModels();
-  });
-}
-
-
+  var browserUA = navigator.userAgent.toLowerCase();
+  if (browserUA.search('windows phone os 7') > -1) {
+    // on a device - wait for the PhoneGap device ready event
+    document.addEventListener("deviceready", initialize, false);
+  } else {
+    // if there is we are not running on a phone - start the app immediately
+    $(document).ready(function () {
+      initialize();
+    });
+  }
+});

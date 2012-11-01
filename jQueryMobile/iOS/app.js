@@ -1,95 +1,86 @@
-/// <reference path="..//intellisense.js" />
+define("app", function (require) {
+  var $ = require("lib/jquery");
+  var ko = require("lib/knockout");
+  var application = new(require("viewModel/ApplicationViewModel"))();
 
-/*global $, PropertyDataSource, PropertySearchViewModel, Location, PropertyViewModel, hydrateObject, ko, Model, ViewModel, window, localStorage, document, console*/
-
-// a custom bindign which is used to 'refresh' jQueryMobile listviews.
+// a custom bindings which is used to 'refresh' jQueryMobile listviews.
 // See: http://www.scottlogic.co.uk/blog/colin/2012/10/integrating-knockout-and-jquerymobile/
-ko.virtualElements.allowedBindings.updateListviewOnChange = true;
-ko.bindingHandlers.updateListviewOnChange = {
-  update: function (element, valueAccessor) {
-    ko.utils.unwrapObservable(valueAccessor());  //grab dependency
+  ko.virtualElements.allowedBindings.updateListviewOnChange = true;
+  ko.bindingHandlers.updateListviewOnChange = {
+    update:function (element, valueAccessor) {
+      // reference value to force update when value changes
+      ko.utils.unwrapObservable(valueAccessor());
 
-    var listview = $(element).parents()
-                             .andSelf()
-                             .filter("[data-role='listview']");
+      var listview = $(element).parents().andSelf()
+          .filter("[data-role='listview']");
 
-    if (listview) {
-      try {
-        $(listview).listview('refresh');
-      } catch (e) {
-        // if the listview is not initialised, the above call with throw an exception
-        // there doe snot appear to be any way to easily test for this state, so
-        // we just swallow the exception here.
+      if (listview.data("mobile-listview")) {
+        listview.listview('refresh');
       }
     }
-  }
-};
+  };
 
-// takes the JSON state and updates the view model state
-function setState(jsonState) {
-  var state = $.parseJSON(jsonState);
-  if (!state)
-    return;
-  if (state.favourites) {
-    $.each(state.favourites, function () {
-      propertySearchViewModel.favourites.push(hydrateObject(this));
-    });
-  }
-  if (state.recentSearches) {
-    $.each(state.recentSearches, function () {
-      propertySearchViewModel.recentSearches.push(hydrateObject(this));
-    });
-  }
-}
+  $.mobile.defaultPageTransition = "slide";
 
-// saves the current state
-function persistentStateChanged() {
-  var state = {
-        recentSearches: propertySearchViewModel.recentSearches,
-        favourites: propertySearchViewModel.favourites
-      },
-      jsonState = ko.toJSON(state);
+  function initialize() {
+    var previousBackStackLength = 0;
+    var viewCache = {};
 
-  localStorage["appState"] = jsonState;
-}
+    // subscribe to changes in the current view model, creating
+    // the required view
+    application.currentViewModel.subscribe(function (viewModel) {
+      var backStackLength = application.viewModelBackStack().length;
+      var viewName = application.currentView();
+      var view = viewCache[viewName];
+      if (!view) {
+        view = viewCache[viewName] = $("#" + viewName);
+        ko.applyBindings(viewModel, view[0]);
+      }
+      if (previousBackStackLength < backStackLength) {
+        // forward navigation
+        $.mobile.changePage(view);
+      } else {
+        // backward navigation
+      }
 
-// create the various view models
-var propertySearchViewModel = new ViewModel.PropertySearchViewModel(),
-    searchResultsViewModel = new ViewModel.SearchResultsViewModel(),
-    propertyViewModel = new ViewModel.PropertyViewModel(),
-    favouritesViewModel = new ViewModel.FavouritesViewModel(propertySearchViewModel),
-    propertyDataSource = new Model.PropertyDataSource({
-      dataSource: new Model.JSONDataSource()
+      previousBackStackLength = backStackLength;
     });
 
-$.mobile.defaultPageTransition = "slide";
+    // inform the application of jquery mobile's handling of backwards navigation
+    $(document).bind("pagechange", function (event, args) {
+      if (args.options.reverse) {
+        application.back();
+      }
+    });
 
-function initializeViewModels() {
+    // handle changes in persistent state
+    application.state.subscribe(function(state) {
+      localStorage["appState"] = state;
+    });
 
-  // bind each view model to a jQueryMobile page
-  ko.applyBindings(propertySearchViewModel, document.getElementById("propertySearchView"));
-  ko.applyBindings(searchResultsViewModel, document.getElementById("searchResultsView"));
-  ko.applyBindings(propertyViewModel, document.getElementById("propertyView"));
-  ko.applyBindings(favouritesViewModel, document.getElementById("favouritesView"));
+    // load app state if present
+    var state = localStorage["appState"];
+    if (state) {
+      try {
+        application.setState(state);
+      }
+      catch(e) {
+        console.warn("Failed to load state", e);
+      }
+    }
 
-  // handle changes in persistent state
-  propertySearchViewModel.favourites.subscribe(persistentStateChanged);
-  propertySearchViewModel.recentSearches.subscribe(persistentStateChanged);
-
-  // load app state if present
-  var state = localStorage["appState"];
-  if (state) {
-    setState(state);
+    // navigate to home
+    application.navigateToHome();
   }
-};
 
-// startup the app
-$(document).ready(function () {
-  if (window.device) {
-    document.addEventListener("deviceready", initializeViewModels, false);
-  } else {
-    // if there is no 'device' immediately create the view mdoels. This is useful
-    // for browser-based testing
-    initializeViewModels();
-  }
+  // startup the app
+  $(function () {
+    if (window.device) {
+      document.addEventListener("deviceready", initialize, false);
+    } else {
+      // if there is no 'device' immediately create the view models. This is useful
+      // for browser-based testing
+      initialize();
+    }
+  });
 });
