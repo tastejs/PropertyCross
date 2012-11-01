@@ -128,9 +128,10 @@ namespace PropertyFinder.Views
 			SearchButtonClicked(this, EventArgs.Empty);
 		}
 
-		private void RecentSearchItem_Clicked(object sender, EventArgs e)
+		private void RecentSearchItem_Clicked(object sender, AdapterView.ItemClickEventArgs e)
 		{
-			// todo - get recentsearch corresponding to position and fire recentsearchselected.
+			RecentSearch item = adapter.GetItem(e.Position);
+			RecentSearchSelected(this, new RecentSearchSelectedEventArgs(item));
 		}
 	}
 }
