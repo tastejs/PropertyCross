@@ -91,10 +91,8 @@ namespace PropertyFinder.Views
 		{
 			if(recentSearches != null)
 			{
-				foreach(RecentSearch searchItem in recentSearches)
-				{
-					adapter.Add(searchItem);
-				}
+				adapter = new RecentSearchAdapter(this, recentSearches);
+				recentSearchList.Adapter = adapter;
 			}
 		}
 
