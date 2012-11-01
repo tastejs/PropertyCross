@@ -4,6 +4,7 @@ using System.Linq;
 using System.Diagnostics;
 using PropertyFinder.ViewModel;
 using System.Collections.Generic;
+using System.Windows.Threading;
 
 namespace PropertyFinder.Model
 {
@@ -24,22 +25,8 @@ namespace PropertyFinder.Model
       parameters.Add("place_name", location);
       parameters.Add("page", pageNumber);
       string url = "http://api.nestoria.co.uk/api?" + ToQueryString(parameters);
-        
-      WebClient webClient = new WebClient();
-      webClient.DownloadStringCompleted += (s, e) =>
-      {
-        try
-        {
-          string result = e.Result;
-          callback(result);
-        }
-        catch (Exception ex)
-        {
-          error(ex);
-        }
-      };
 
-      webClient.DownloadStringAsync(new Uri(url));
+      ExecuteWebRequest(url, callback, error);
     }
 
     public void FindProperties(double latitude, double longitude, int pageNumber, Action<string> callback, Action<Exception> error)
@@ -49,9 +36,18 @@ namespace PropertyFinder.Model
       parameters.Add("page", pageNumber);
       string url = "http://api.nestoria.co.uk/api?" + ToQueryString(parameters);
 
+      ExecuteWebRequest(url, callback, error);
+    }
+
+    private void ExecuteWebRequest(string url, Action<string> callback, Action<Exception> error)
+    {
+      DispatcherTimer timer = new DispatcherTimer();
+
+      // create a web client to fetch the URL results
       WebClient webClient = new WebClient();
       webClient.DownloadStringCompleted += (s, e) =>
       {
+        timer.Stop();
         try
         {
           string result = e.Result;
@@ -63,7 +59,18 @@ namespace PropertyFinder.Model
         }
       };
 
+      // initiate the download
       webClient.DownloadStringAsync(new Uri(url));
+
+      // create a timeout timer      
+      timer.Interval = TimeSpan.FromSeconds(5);
+      timer.Start();
+      timer.Tick += (s, e) =>
+        {
+          timer.Stop();
+          webClient.CancelAsync();
+          error(new TimeoutException());
+        };
     }
 
     private string ToQueryString(Dictionary<string, object> parameters)
