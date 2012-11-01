@@ -1,6 +1,7 @@
 using PropertyFinder.Presenter;
-using Java.IO;
 using Android.Content;
+using System.Xml.Serialization;
+using System.IO;
 
 namespace PropertyFinder
 {
@@ -16,26 +17,33 @@ namespace PropertyFinder
 
 		public void SaveState(PropertyFinderPersistentState state)
 		{
-			/*FileOutputStream fos = context.OpenFileOutput(FileName, FileCreationMode.Private);
-			ObjectOutputStream os = new ObjectOutputStream(fos);
-			os.WriteObject(this);
-			os.Close(); */
+			using(var stream = context.OpenFileOutput(FileName, FileCreationMode.Private))
+			{
+				XmlSerializer serializer = new XmlSerializer(typeof(PropertyFinderPersistentState));
+				serializer.Serialize(stream, state);
+			}
 		}
 		
 		public PropertyFinderPersistentState LoadState()
 		{
 			PropertyFinderPersistentState state = null;
 
-			/*try
+			try
 			{
-				FileInputStream fis = context.OpenFileInput(FileName);
-				ObjectInputStream ins = new ObjectInputStream(fis);
-				state = (PropertyFinderPersistentState) ins.ReadObject();
-				ins.Close();
+				using(var stream = context.OpenFileInput(FileName))
+				using(var reader = new StreamReader(stream))
+				{
+					if(!reader.EndOfStream)
+					{
+						XmlSerializer serializer = new XmlSerializer(typeof(PropertyFinderPersistentState));
+						state = (PropertyFinderPersistentState) serializer.Deserialize(reader);
+						state.PersistenceService = this;
+					}
+				}
 			}
 			catch
 			{
-			}*/
+			}
 
 			if(state == null)
 				state = new PropertyFinderPersistentState(this);
