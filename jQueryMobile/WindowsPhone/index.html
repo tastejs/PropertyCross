@@ -21,27 +21,9 @@
   <link href="lib/plugins/app-bar/css/app-bar.css" rel="stylesheet" type="text/css" />
   <script src="lib/plugins/app-bar/js/app-bar.js" type="text/javascript"></script>
   <script src="lib/plugins/app-bar/js/jquery.easing.1.3.js" type="text/javascript"></script>
-  
-  <script src="namespaces.js" type="text/javascript"></script>
-  
-  <!-- model layer -->
-  <script src="model/Property.js" type="text/javascript"></script>
-  <script src="model/Location.js" type="text/javascript"></script>
-  <script src="model/PropertyDataSourceResponse.js" type="text/javascript"></script>
-  <script src="model/PropertyDataSource.js" type="text/javascript"></script>
-  <script src="model/JSONDataSource.js" type="text/javascript"></script>
 
-  <!-- view model layer -->
-  <script src="viewModel/util.js" type="text/javascript"></script>
-  <script src="viewModel/PropertyViewModel.js" type="text/javascript"></script>
-  <script src="viewModel/PropertySearchViewModel.js" type="text/javascript"></script>
-  <script src="viewModel/LocationViewModel.js" type="text/javascript"></script>
-  <script src="viewModel/GeolocationViewModel.js" type="text/javascript"></script>
-  <script src="viewModel/SearchResultsViewModel.js" type="text/javascript"></script>
-  <script src="viewModel/FavouritesViewModel.js" type="text/javascript"></script>
-    
-  <!-- bootstrap -->
-  <script src="app.js" type="text/javascript"></script>
+  <script src="lib/require.js" type="text/javascript" data-main="app"></script>
+  <!--<script src="app.min.js" type="text/javascript"></script>-->
 
   <!-- application specific styling -->
   <link rel="stylesheet" type="text/css" href="style/style.css" />  
@@ -49,7 +31,7 @@
 <body>
   <script id="locationTemplate" type="text/x-jquery-tmpl">
     <li>
-      <a data-bind="click: propertySearchViewModel.selectLocation">
+      <a data-bind="click: $parent.selectLocation">
         <span data-bind="text: displayString"/>
       </a>
     </li>
@@ -57,7 +39,7 @@
 
   <script id="locationWithCountTemplate" type="text/x-jquery-tmpl">
     <li>
-      <a data-bind="click: propertySearchViewModel.selectLocation">
+      <a data-bind="click: $parent.selectLocation">
         <span data-bind="text: displayString"/>
         <span class="ui-li-count" data-bind="text: totalResults"></span>
       </a>
@@ -135,16 +117,7 @@
         </p>
         <ul data-role="listview"
             class="property-list"/>
-          <!-- ko foreach: properties, updateListviewOnChange:properties -->
-          <li>
-            <a data-bind="click: $parent.select">
-              <div class="thumbnail-container">
-                <img data-bind="attr: { src: thumbnailUrl }"/>
-              </div>
-              <h3>£<span data-bind="text: price"/></h3>
-              <p data-bind="text: title"></p>
-            </a>
-          </li>
+          <!-- ko template: { name: "propertyThumbnailView", foreach: properties }, updateListviewOnChange:properties -->
           <!-- /ko -->
           <li data-bind="visible: properties().length !== totalResults">
             <a data-bind="click: loadMore">
@@ -169,16 +142,7 @@
     </div>
     <div data-role="content">
       <ul data-role="listview"/>
-        <!-- ko foreach: properties, updateListviewOnChange:properties -->
-        <li>
-          <a data-bind="click: $parent.select">
-            <div class="thumbnail-container">
-              <img data-bind="attr: { src: thumbnailUrl }"/>
-            </div>
-            <h3>£<span data-bind="text: price"/></h3>
-            <p data-bind="text: title"></p>
-          </a>
-        </li>
+        <!-- ko template: { name: "propertyThumbnailView", foreach: properties }, updateListviewOnChange:properties -->
         <!-- /ko -->
       </ul>
     </div>
@@ -208,7 +172,7 @@
         the element that holds this class is a generated child of the item that is bound to. For this reason I have resorted to 
         creating the required markup manually -->
         <div class="ui-app-bar-btn-panel">
-          <a data-bind="click : propertySearchViewModel.addToFavourites" class="ui-btn ui-btn-icon-top ui-btn-up-a">
+          <a data-bind="click : addToFavourites" class="ui-btn ui-btn-icon-top ui-btn-up-a">
             <span class="ui-btn-inner">
               <span class="ui-btn-text">favourites</span>
               <span data-bind="attr: { class: isFavourite() ? 'ui-icon ui-icon-favourited ui-icon-shadow'
