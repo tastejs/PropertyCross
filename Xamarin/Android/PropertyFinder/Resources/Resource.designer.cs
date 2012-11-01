@@ -79,7 +79,7 @@ namespace PropertyFinder
 		{
 			
 			// aapt resource value: 0x7f030000
-			public const int loadmore = 2130903040;
+			public const int load_more_footer = 2130903040;
 			
 			// aapt resource value: 0x7f030001
 			public const int property_search_row = 2130903041;
@@ -123,6 +123,9 @@ namespace PropertyFinder
 			
 			// aapt resource value: 0x7f040006
 			public const int favourites_view = 2130968582;
+			
+			// aapt resource value: 0x7f04000b
+			public const int no_result_details = 2130968587;
 			
 			// aapt resource value: 0x7f040004
 			public const int recent_searches = 2130968580;
