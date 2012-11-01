@@ -24,7 +24,7 @@ namespace PropertyFinder.ViewModel
     public override void FindProperties(PropertyDataSource dataSource,
       int pageNumber, Action<PropertyDataSourceResult> callback, Action<Exception> error)
     {
-      dataSource.FindProperties(Location.Latitude, Location.Longitude, 1, callback, error);
+      dataSource.FindProperties(Location.Latitude, Location.Longitude, pageNumber, callback, error);
     }
   }
 }

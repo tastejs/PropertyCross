@@ -31,7 +31,7 @@ namespace PropertyFinder.Presenter
     public override void FindProperties(PropertyDataSource dataSource,
       int pageNumber, Action<PropertyDataSourceResult> callback, Action<Exception> error)
     {
-      dataSource.FindProperties(SearchText, 1, callback, error);
+      dataSource.FindProperties(SearchText, pageNumber, callback, error);
     }
   }
 }

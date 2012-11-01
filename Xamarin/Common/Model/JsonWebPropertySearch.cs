@@ -1,12 +1,22 @@
 ﻿using System;
 using System.Net;
-using System.Diagnostics;
+using System.Linq;
 using PropertyFinder.Presenter;
+using System.Collections.Generic;
 
 namespace PropertyFinder.Model
 {
   public class JsonWebPropertySearch : IJsonPropertySearch
   {
+    private Dictionary<string,object> _commonParams = new Dictionary<string,object>()
+        {
+            {"country", "uk"},
+            {"pretty", 1},
+            {"action", "search_listings"},
+            {"encoding", "json"},
+            {"listing_type", "buy"}
+        };
+
     private IMarshalInvokeService _marshal;
 
     public JsonWebPropertySearch(IMarshalInvokeService marshal)
@@ -16,8 +26,10 @@ namespace PropertyFinder.Model
     
     public void FindProperties(string location, int pageNumber, Action<string> callback, Action<Exception> error)
     {
-      string url = "http://api.nestoria.co.uk/api?country=uk&pretty=1&action=search_listings&encoding=json&listing_type=buy&place_name="
-                    + location;
+      var parameters = new Dictionary<string,object>(_commonParams);
+      parameters.Add("place_name", location);
+      parameters.Add("page", pageNumber);
+      string url = "http://api.nestoria.co.uk/api?" + ToQueryString(parameters);
 
       WebClient webClient = new WebClient();
       webClient.DownloadStringCompleted += (s, e) =>
@@ -38,8 +50,10 @@ namespace PropertyFinder.Model
 
     public void FindProperties(double latitude, double longitude, int pageNumber, Action<string> callback, Action<Exception> error)
     {
-      string url = "http://api.nestoria.co.uk/api?country=uk&pretty=1&action=search_listings&encoding=json&listing_type=buy&centre_point=" +
-        latitude.ToString() + "," + longitude.ToString();
+      var parameters = new Dictionary<string, object>(_commonParams);
+      parameters.Add("centre_point", latitude.ToString() + "," + longitude.ToString());
+      parameters.Add("page", pageNumber);
+      string url = "http://api.nestoria.co.uk/api?" + ToQueryString(parameters);
 
       WebClient webClient = new WebClient();
       webClient.DownloadStringCompleted += (s, e) =>
@@ -56,6 +70,12 @@ namespace PropertyFinder.Model
       };
 
       webClient.DownloadStringAsync(new Uri(url));
+    }
+
+    private string ToQueryString(Dictionary<string, object> parameters)
+    {
+      return String.Join("&amp;", parameters.Keys.Select(
+          key => String.Format("{0}={1}", HttpUtility.UrlEncode(key), HttpUtility.UrlEncode(parameters[key].ToString()))).ToArray());
     }
   }
 }
