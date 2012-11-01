@@ -175,8 +175,8 @@
           <a data-bind="click : addToFavourites" class="ui-btn ui-btn-icon-top ui-btn-up-a">
             <span class="ui-btn-inner">
               <span class="ui-btn-text">favourites</span>
-              <span data-bind="attr: { class: isFavourite() ? 'ui-icon ui-icon-favourited ui-icon-shadow'
-                                                          : 'ui-icon ui-icon-addToFavourites ui-icon-shadow' }">&nbsp;</span>
+              <span class="ui-icon ui-icon-shadow"
+                    data-bind="css: { 'ui-icon-favourited': isFavourite(),  'ui-icon-addToFavourites': !isFavourite() }">&nbsp;</span>
             </span>
           </a>
           <span class="ui-app-bar-dots">...</span>
