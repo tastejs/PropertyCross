@@ -20,6 +20,7 @@ namespace PropertyFinder.Views
 		private EditText searchText;
 		private Button myLocationButton;
 		private Button startSearchButton;
+		private TextView messageText;
 		private ListView recentSearchList;
 		private RecentSearchAdapter adapter;
 
@@ -39,10 +40,12 @@ namespace PropertyFinder.Views
 			myLocationButton = (Button) FindViewById(Resource.Id.use_location);
 			myLocationButton.Click += LocationButton_Clicked; 
 
-			startSearchButton = (Button) FindViewById (Resource.Id.do_search);
+			startSearchButton = (Button) FindViewById(Resource.Id.do_search);
 			startSearchButton.Click += StartSearchButton_Clicked;
 
-			recentSearchList = (ListView) FindViewById (Resource.Id.recentsearches_list);
+			messageText = (TextView) FindViewById(Resource.Id.mainview_message);
+
+			recentSearchList = (ListView) FindViewById(Resource.Id.recentsearches_list);
 			recentSearchList.ItemClick += RecentSearchItem_Clicked;
 			adapter = new RecentSearchAdapter(this, new List<RecentSearch>());
 			recentSearchList.Adapter = adapter;
@@ -81,6 +84,7 @@ namespace PropertyFinder.Views
 
 		public void SetMessage(string msg)
 		{
+			messageText.Text = msg;
 		}
 
 		public void DisplaySuggestedLocations (List<PropertyFinder.Model.Location> locations)

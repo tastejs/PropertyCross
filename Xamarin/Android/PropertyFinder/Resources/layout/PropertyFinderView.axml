@@ -27,6 +27,12 @@
         android:text="@string/use_location_text"
         android:layout_marginBottom="4dp" />
     <TextView
+        android:id="@+id/mainview_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:layout_marginBottom="4dp" />
+    <TextView
         android:id="@+id/recentsearches_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
