@@ -26,36 +26,22 @@
 
       // iterate over each state property
       for (property in state) {
-        if (property === "template" ||
-            property === "factoryName" ||
-            property === undefined) {
-          continue;
-        }
-
         propertyValue = state[property];
 
         // if the view model property is a function - it might be a KO observable
-        if (viewModel[property] instanceof Function) {
-
-          // check if this is a KO observable
+        if (ko.isWriteableObservable(viewModel[property])) {
           unwrapped = ko.utils.unwrapObservable(viewModel[property]);
-
-          // if after unwrapping we do not get the same object back, then
-          // this is an observable
-          if (viewModel[property] !== unwrapped) {
-
-            // check if this is an array observable
-            if (unwrapped instanceof Array) {
-              $.each(propertyValue, function () {
-                viewModel[property].push(hydrateObject(application, this));
-              });
-            } else {
-              // otherwise set the value via the observable setter
-              viewModel[property](propertyValue);
-            }
+          // check if this is an array observable
+          if (unwrapped instanceof Array) {
+            $.each(propertyValue, function () {
+              viewModel[property].push(hydrateObject(application, this));
+            });
+          } else {
+            // otherwise set the value via the observable setter
+            viewModel[property](propertyValue);
           }
 
-        } else {
+        } else if (!(viewModel[property] instanceof Function)) {
           viewModel[property] = hydrateObject(application, propertyValue);
         }
       }
