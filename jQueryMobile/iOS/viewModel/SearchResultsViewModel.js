@@ -4,7 +4,7 @@ define("viewModel/SearchResultsViewModel", function (require) {
   var PropertyViewModel = require("./PropertyViewModel");
   var util = require("./util");
 
-  function SearchResultsViewModel() {
+  function SearchResultsViewModel(application) {
 
     var that = this;
 
@@ -15,31 +15,30 @@ define("viewModel/SearchResultsViewModel", function (require) {
     // ----- public properties
 
     this.isLoading = ko.observable(false);
-    this.totalResults = undefined;
+    this.totalResults = ko.observable();
     this.pageNumber = ko.observable(1);
-    this.searchLocation = undefined;
+    this.searchLocation = ko.observable(undefined)
     this.properties = ko.observableArray();
 
     // ----- public functions
 
     this.initialize = function (searchLocation, results) {
-      $.each(results.data, function () {
-        var viewModel = new PropertyViewModel();
-        viewModel.initialize(this);
-        that.properties.push(viewModel);
-      });
-
-      that.searchLocation = searchLocation;
-      that.totalResults = results.totalResults;
+      this.properties($.map(results.data, function(result) {
+        var viewModel = new PropertyViewModel(application);
+        viewModel.initialize(result);
+        return viewModel;
+      }));
+      that.searchLocation(searchLocation);
+      that.totalResults(results.totalResults);
     };
 
     this.loadMore = function () {
       this.pageNumber(this.pageNumber() + 1);
       this.isLoading(true);
-      this.searchLocation.executeSearch(this.pageNumber(), function (results) {
+      this.searchLocation().executeSearch(this.pageNumber(), function (results) {
         that.isLoading(false);
         $.each(results.data, function () {
-          var viewModel = new PropertyViewModel();
+          var viewModel = new PropertyViewModel(application);
           viewModel.initialize(this);
           that.properties.push(viewModel);
         });

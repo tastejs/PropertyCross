@@ -1,9 +1,8 @@
 define("viewModel/PropertyViewModel", function (require) {
   var ko = require("lib/knockout");
-  var application = require("viewModel/ApplicationViewModel").Instance;
   var util = require("viewModel/util");
 
-  function PropertyViewModel() {
+  function PropertyViewModel(application) {
     /// <summary>
     /// Represents a single property listing
     /// </summary>
@@ -13,14 +12,14 @@ define("viewModel/PropertyViewModel", function (require) {
     this.factoryName = "PropertyViewModel";
 
     // ----- public fields
-    this.price = undefined;
-    this.bedrooms = undefined;
-    this.bathrooms = undefined;
-    this.propertyType = undefined;
-    this.thumbnailUrl = undefined;
-    this.guid = undefined;
-    this.summary = undefined;
-    this.title = undefined;
+    this.price = ko.observable();
+    this.bedrooms = ko.observable();
+    this.bathrooms = ko.observable();
+    this.propertyType = ko.observable();
+    this.thumbnailUrl = ko.observable();
+    this.guid = ko.observable();
+    this.summary = ko.observable();
+    this.title = ko.observable();
     this.isFavourite = ko.observable(false);
 
     // ----- public functions
@@ -29,22 +28,22 @@ define("viewModel/PropertyViewModel", function (require) {
       /// <summary>
       /// Initializes this view model
       /// </summary>
-    var titleParts;
 
       // copy and format the properties required by the UI
-      this.price = property.price;
-      this.bedrooms = property.bedrooms;
-      this.bathrooms = property.bathrooms;
-      this.propertyType = property.propertyType;
-      this.thumbnailUrl = property.thumbnailUrl;
-      this.guid = property.guid;
-      this.summary = property.summary;
+      this.guid(ko.utils.unwrapObservable(property.guid));
+      this.price(ko.utils.unwrapObservable(property.price));
+      this.bedrooms(ko.utils.unwrapObservable(property.bedrooms));
+      this.bathrooms(ko.utils.unwrapObservable(property.bathrooms));
+      this.propertyType(ko.utils.unwrapObservable(property.propertyType));
+      this.thumbnailUrl(ko.utils.unwrapObservable(property.thumbnailUrl));
+      this.summary(ko.utils.unwrapObservable(property.summary));
 
       // simplify the title a bit
-      if (property.title) {
-        titleParts = property.title.split(",");
+      var title = ko.utils.unwrapObservable(property.title);
+      if (title) {
+        var titleParts = title.split(",");
         if (titleParts.length >= 2) {
-          this.title = titleParts[0] + ", " + titleParts[1];
+          this.title(titleParts[0] + ", " + titleParts[1]);
         }
       }
     };
@@ -53,9 +52,15 @@ define("viewModel/PropertyViewModel", function (require) {
       /// <summary>
       /// Selects this property, navigating to the property view
       /// </summary>
-      application.navigateTo(this);
+      application.navigateToProperty(this);
     };
 
+    this.addToFavourites = function() {
+      /// <summary>
+      /// Adds this property to the favourites list
+      /// </summary>
+      application.addToFavourites(this);
+    };
   }
 
   util.registerFactory("PropertyViewModel", PropertyViewModel);

@@ -25,7 +25,7 @@
 <body>
   <script id="locationTemplate" type="text/x-jquery-tmpl">
     <li>
-      <a data-bind="click: propertySearchViewModel.selectLocation">
+      <a data-bind="click: $parent.selectLocation">
         <span data-bind="text: displayString"/>
       </a>
     </li>
@@ -33,7 +33,7 @@
 
   <script id="locationWithCountTemplate" type="text/x-jquery-tmpl">
     <li>
-      <a data-bind="click: propertySearchViewModel.selectLocation">
+      <a data-bind="click: $parent.selectLocation">
         <span data-bind="text: displayString"/>
         <span class="ui-li-count" data-bind="text: totalResults"></span>
       </a>
@@ -105,15 +105,15 @@
     </div>
     <div data-role="content" data-theme="c" data-iscroll>
       <div>
-        <ul data-role="listview"
-            data-bind='template: { name: "propertyThumbnailView", foreach: properties },
-                      updateListviewOnChange:properties'/>
+        <ul data-role="listview"/>
+          <!-- ko template: { name: "propertyThumbnailView", foreach: properties }, updateListviewOnChange:properties -->
+          <!-- /ko -->
           <li data-bind="visible: properties().length !== totalResults">
             <a data-bind="click: loadMore">
               <h3>Load more ...</h3>
               <p class="results-summary">
                 Results for <span data-bind="with: searchLocation"><span data-bind="text: displayString"></span></span>, showing
-                <span data-bind="text: properties().length"></span> of 
+                <span data-bind="text: properties().length"></span> of
                 <span data-bind="text: totalResults"></span> properties
               </p>
             </a>
@@ -147,7 +147,7 @@
         the element that holds this class is a generated child of the item that is bound to. For this reason I have resorted to 
         creating the required markup manually -->
       <a  class="ui-btn-right ui-btn ui-btn-icon-left ui-btn-corner-all ui-shadow ui-btn-up-b"
-            data-bind="click: propertySearchViewModel.addToFavourites.bind(propertySearchViewModel)">
+            data-bind="click: addToFavourites">
           <span class="ui-btn-inner ui-btn-corner-all">
             <span class="ui-btn-text">Fave</span>
 

@@ -1,9 +1,8 @@
 define("viewModel/GeolocationViewModel", function (require) {
   var ko = require("lib/knockout");
-  var propertyDataSource = require("model/PropertyDataSource").Instance;
   var util = require("viewModel/util");
 
-  function GeolocationViewModel() {
+  function GeolocationViewModel(application) {
     /// <summary>
     /// The view model that backs the a search based on geolocation
     /// </summary>
@@ -34,7 +33,8 @@ define("viewModel/GeolocationViewModel", function (require) {
       /// <summary>
       /// Executes a search by the geolocation represented by this view model for the given page
       /// </summary>
-      propertyDataSource.findPropertiesByCoordinate(this.lat, this.lon, pageNumber, callback, errorCallback);
+      application.propertyDataSource.findPropertiesByCoordinate(
+          this.lat, this.lon, pageNumber, callback, errorCallback);
     };
 
   }

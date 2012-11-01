@@ -1,15 +1,12 @@
 define("viewModel/PropertySearchViewModel", function (require) {
   var $ = require("lib/jquery");
   var ko = require("lib/knockout");
-  var application = require("viewModel/ApplicationViewModel").Instance;
   var PropertySearchResponseCode = require("model/PropertySearchResponseCode");
   var LocationViewModel = require("viewModel/LocationViewModel");
-  var SearchResultsViewModel = require("viewModel/SearchResultsViewModel");
   var GeolocationViewModel = require("viewModel/GeolocationViewModel");
-  var FavouritesViewModel = require("viewModel/FavouritesViewModel");
   var util = require("viewModel/util");
   
-  function PropertySearchViewModel() {
+  function PropertySearchViewModel(application) {
     /// <summary>
     /// The 'top level' property search view model.
     /// </summary>
@@ -23,20 +20,18 @@ define("viewModel/PropertySearchViewModel", function (require) {
     this.factoryName = "PropertySearchViewModel";
 
     // ----- public fields
-    this.maxRecentSearch = 5;
     this.searchDisplayString = ko.observable("");
     this.userMessage = ko.observable();
-    this.searchLocation = undefined;
+    this.searchLocation = new LocationViewModel(application);
     this.isSearchEnabled = ko.observable(true);
     this.locationEnabled = ko.observable(true);
     this.locations = ko.observableArray();
-    this.favourites = ko.observableArray();
-    this.recentSearches = ko.observableArray();
+    this.recentSearches = application.recentSearches;
 
     // synchronised the search display string and the search-string
     this.searchDisplayString.subscribe(function () {
       if (synchroniseSearchStrings) {
-        var newLocation = new LocationViewModel();
+        var newLocation = new LocationViewModel(application);
         newLocation.initialise(that.searchDisplayString());
         that.searchLocation = newLocation;
       }
@@ -73,17 +68,15 @@ define("viewModel/PropertySearchViewModel", function (require) {
           } else {
             // if properties were found, navigate to the search results view model
             that.searchLocation.totalResults = results.totalResults;
-            that.updateRecentSearches();
-            var viewModel = new SearchResultsViewModel();
-            viewModel.initialize(that.searchLocation, results);
-            application.navigateTo(viewModel);
+            application.addToRecentSearches(that.searchLocation);
+            application.navigateToSearchResults(that.searchLocation, results);
           }
         } else if (results.responseCode === PropertySearchResponseCode.ambiguousLocation) {
 
           // if the location was ambiguous, display the list of options
           that.locations.removeAll();
           $.each(results.data, function () {
-            var viewModel = new LocationViewModel();
+            var viewModel = new LocationViewModel(application);
             viewModel.initialiseDisambiguated(this);
             that.locations.push(viewModel);
           });
@@ -98,29 +91,6 @@ define("viewModel/PropertySearchViewModel", function (require) {
       this.searchLocation.executeSearch(1, successCallback, errorCallback);
     };
 
-    this.updateRecentSearches = function () {
-      /// <summary>
-      /// Updates the recent search list
-      /// </summary>
-
-      // check to see whether this location already appears in the list
-      var locationPresent = false;
-      $.each(that.recentSearches(), function () {
-        if (this.displayString === that.searchLocation.displayString) {
-          locationPresent = true;
-        }
-      });
-      if (locationPresent) {
-        return;
-      }
-
-      // add this new item
-      if (that.recentSearches().length > that.maxRecentSearch) {
-        that.recentSearches.pop();
-      }
-      that.recentSearches.unshift(that.searchLocation);
-    };
-
     this.searchMyLocation = function () {
       /// <summary>
       /// Performs a search based on the current geolocation
@@ -133,7 +103,7 @@ define("viewModel/PropertySearchViewModel", function (require) {
       }
 
       function successCallback(result) {
-        var location = new GeolocationViewModel();
+        var location = new GeolocationViewModel(application);
         location.initialise(result.coords.latitude, result.coords.longitude);
 
         synchroniseSearchStrings = false;
@@ -170,41 +140,7 @@ define("viewModel/PropertySearchViewModel", function (require) {
       /// <summary>
       /// Navigates to the favourites view
       /// </summary>
-      var viewModel = new FavouritesViewModel(this);
-      application.navigateTo(viewModel);
-    };
-
-    this.getFavouriteByGuid = function (guid) {
-      /// <summary>
-      /// Gets the a favourite by GUID, returning null if it is not found
-      /// </summary>
-      var existingFavourite = null;
-
-      // check if it already favourite
-      $.each(that.favourites(), function () {
-        if (this.guid === guid) {
-          existingFavourite = this;
-        }
-      });
-
-      return existingFavourite;
-    };
-
-    this.addToFavourites = function (propertyViewModel) {
-      /// <summary>
-      /// Adds the given property view model to the list of favourites
-      /// </summary>
-      var existingFavourite = this.getFavouriteByGuid(propertyViewModel.guid);
-
-      // add or remove
-      if (!existingFavourite) {
-        propertyViewModel.isFavourite(true);
-        this.favourites.push(propertyViewModel);
-      } else {
-        propertyViewModel.isFavourite(false);
-        this.favourites.remove(existingFavourite);
-      }
-
+      application.navigateToFavourites(this.favourites);
     };
   }
 

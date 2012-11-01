@@ -100,7 +100,5 @@ define("model/PropertyDataSource", function (require) {
     };
   }
 
-  PropertyDataSource.Instance = new PropertyDataSource();
-
   return PropertyDataSource;
 });

@@ -8,7 +8,7 @@
       viewModels[name] = factory;
     },
 
-    hydrateObject: function hydrateObject(state) {
+    hydrateObject: function hydrateObject(application, state) {
       /// <summary>
       /// Takes a JSON representation of view model state and creates view model instances
       /// via their constructor function as indicated by the 'factoryName' property.
@@ -22,7 +22,7 @@
 
       var property, unwrapped, propertyValue,
       // create the required view model instance
-        viewModel = new viewModels[state.factoryName]();
+        viewModel = new viewModels[state.factoryName](application);
 
       // iterate over each state property
       for (property in state) {
@@ -47,7 +47,7 @@
             // check if this is an array observable
             if (unwrapped instanceof Array) {
               $.each(propertyValue, function () {
-                viewModel[property].push(hydrateObject(this));
+                viewModel[property].push(hydrateObject(application, this));
               });
             } else {
               // otherwise set the value via the observable setter
@@ -56,7 +56,7 @@
           }
 
         } else {
-          viewModel[property] = hydrateObject(propertyValue);
+          viewModel[property] = hydrateObject(application, propertyValue);
         }
       }
 
