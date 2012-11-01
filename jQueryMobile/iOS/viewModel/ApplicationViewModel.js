@@ -110,11 +110,11 @@
 
     this.state = ko.computed(function() {
       var state = {
-        recentSearches: propertySearchViewModel.recentSearches,
-        favourites: propertySearchViewModel.favourites
+        recentSearches: this.recentSearches(),
+        favourites: this.favourites()
       };
       return ko.toJSON(state);
-    });
+    }, this);
 
 
     this.getFavouriteByGuid = function (guid) {
@@ -123,7 +123,7 @@
       /// </summary>
 
       return ko.utils.arrayFirst(this.favourites(), function (property) {
-        return property.guid === guid;
+        return property.guid() === guid();
       });
     };
 
