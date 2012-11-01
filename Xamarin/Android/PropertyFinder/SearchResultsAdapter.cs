@@ -43,8 +43,8 @@ namespace PropertyFinder
 				
 				holder = new PropertySearchHolder()
 				{
-					SearchText = (TextView) view.FindViewById(Resource.Id.recent_search_text),
-					ResultsCount = (TextView) view.FindViewById(Resource.Id.recent_search_count)
+					PriceText = (TextView) view.FindViewById(Resource.Id.property_search_price),
+					DetailsText = (TextView) view.FindViewById(Resource.Id.property_search_details)
 				};
 				view.SetTag(Resource.Layout.recent_search_row, holder);
 			}
