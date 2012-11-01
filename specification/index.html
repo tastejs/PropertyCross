@@ -35,7 +35,9 @@
     <li>A &lsquo;Go&rsquo; button</li>
 
     <li>A region which either displays recent search terms or a list
-    of locations to pick from</li>
+    of locations to pick from. Recent searches should be displayed
+    in chronological order and limited to 4-6 items (depending on screen
+    size)</li>
 
     <li>A region which is used to report error
     messages</li>
@@ -92,7 +94,11 @@
   no response is received, with the page moving to the &ldquo;Error
   state&rdquo;.</p>
 
-  <h4>Location-based  search</h4>
+  <p>When a search is succesfully executed, it should be added to the recent searches
+  list of items as the first item. If a search is initiated by tapping a recent search item,
+  this item should be moved to the head of the list.
+
+  <h4>Location-based search</h4>
 
   <p>When the user touches the &lsquo;My location&rsquo; button a
   geo-location query is sent to Netoria. The response codes should be handled in the same
