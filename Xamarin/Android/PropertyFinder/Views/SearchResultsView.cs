@@ -17,13 +17,16 @@ namespace PropertyFinder.Views
 	public class SearchResultsView : ListActivity, SearchResultsPresenter.View
 	{
 		private View footer;
+		private TextView resultDetails;
 
 		protected override void OnCreate(Bundle bundle)
 		{
 			base.OnCreate(bundle);
 
 			LayoutInflater li = (LayoutInflater)GetSystemService(Context.LayoutInflaterService);
-			footer = li.Inflate(Resource.Layout.loadmore, null);
+			footer = li.Inflate(Resource.Layout.load_more_footer, null);
+			resultDetails = (TextView) footer.FindViewById(Resource.Id.result_details);
+			footer.Click += OnFooterClicked;
 
 			ListView.AddFooterView(footer);
 			ListAdapter = new SearchResultsAdapter(this, new List<Property>() {});
@@ -32,6 +35,10 @@ namespace PropertyFinder.Views
 		public void SetSearchResults(int totalResult, int pageNumber, int totalPages,
         	List<Property> properties, string searchLocation)
         {
+			resultDetails.Text = Java.Lang.String.Format(Resources.GetString(Resource.String.result_details),
+			                                             searchLocation,
+			                                             properties.Count,
+			                                             totalResult);
         }
         
         public void SetLoadMoreVisible(bool visible)
@@ -39,12 +46,11 @@ namespace PropertyFinder.Views
 			footer.Visibility = visible ? ViewStates.Visible : ViewStates.Invisible;
         }
 
-		private bool _loading;
 		public bool IsLoading
 		{
 			set
 			{
-				_loading = value;
+				footer.Enabled = !value;
 			}
 		}
 
@@ -56,6 +62,11 @@ namespace PropertyFinder.Views
 			var adapter = (SearchResultsAdapter) ListAdapter;
 			Property item = adapter.GetItem(position);
 			PropertySelected(this, new PropertyEventArgs(item));
+		}
+
+		private void OnFooterClicked(object sender, EventArgs e)
+		{
+			LoadMoreClicked(this, EventArgs.Empty);
 		}
 	}
 }	

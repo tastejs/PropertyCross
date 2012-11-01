@@ -37,38 +37,44 @@ namespace PropertyFinder
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f070003
-			public const int do_search = 2131165187;
-			
-			// aapt resource value: 0x7f07000a
-			public const int favourites_view_item = 2131165194;
-			
 			// aapt resource value: 0x7f070005
-			public const int mainview_message = 2131165189;
+			public const int do_search = 2131165189;
 			
-			// aapt resource value: 0x7f070001
-			public const int property_search_details = 2131165185;
-			
-			// aapt resource value: 0x7f070000
-			public const int property_search_price = 2131165184;
-			
-			// aapt resource value: 0x7f070009
-			public const int recent_search_count = 2131165193;
-			
-			// aapt resource value: 0x7f070008
-			public const int recent_search_text = 2131165192;
-			
-			// aapt resource value: 0x7f070006
-			public const int recentsearches_header = 2131165190;
+			// aapt resource value: 0x7f07000c
+			public const int favourites_view_item = 2131165196;
 			
 			// aapt resource value: 0x7f070007
-			public const int recentsearches_list = 2131165191;
+			public const int mainview_message = 2131165191;
+			
+			// aapt resource value: 0x7f070003
+			public const int property_search_details = 2131165187;
 			
 			// aapt resource value: 0x7f070002
-			public const int search = 2131165186;
+			public const int property_search_price = 2131165186;
+			
+			// aapt resource value: 0x7f07000b
+			public const int recent_search_count = 2131165195;
+			
+			// aapt resource value: 0x7f07000a
+			public const int recent_search_text = 2131165194;
+			
+			// aapt resource value: 0x7f070008
+			public const int recentsearches_header = 2131165192;
+			
+			// aapt resource value: 0x7f070009
+			public const int recentsearches_list = 2131165193;
+			
+			// aapt resource value: 0x7f070001
+			public const int result_details = 2131165185;
 			
 			// aapt resource value: 0x7f070004
-			public const int use_location = 2131165188;
+			public const int search = 2131165188;
+			
+			// aapt resource value: 0x7f070000
+			public const int tap_loadmore = 2131165184;
+			
+			// aapt resource value: 0x7f070006
+			public const int use_location = 2131165190;
 			
 			private Id()
 			{
