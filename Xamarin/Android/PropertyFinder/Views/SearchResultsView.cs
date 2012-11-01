@@ -26,7 +26,7 @@ namespace PropertyFinder.Views
 			footer = li.Inflate(Resource.Layout.loadmore, null);
 
 			ListView.AddFooterView(footer);
-			ListAdapter = new RecentSearchAdapter(this, new List<RecentSearch>() {});
+			ListAdapter = new SearchResultsAdapter(this, new List<Property>() {});
 		}
 
 		public void SetSearchResults(int totalResult, int pageNumber, int totalPages,

@@ -37,32 +37,38 @@ namespace PropertyFinder
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f070001
-			public const int do_search = 2131165185;
-			
-			// aapt resource value: 0x7f070008
-			public const int favourites_view_item = 2131165192;
-			
 			// aapt resource value: 0x7f070003
-			public const int mainview_message = 2131165187;
+			public const int do_search = 2131165187;
 			
-			// aapt resource value: 0x7f070007
-			public const int recent_search_count = 2131165191;
-			
-			// aapt resource value: 0x7f070006
-			public const int recent_search_text = 2131165190;
-			
-			// aapt resource value: 0x7f070004
-			public const int recentsearches_header = 2131165188;
+			// aapt resource value: 0x7f07000a
+			public const int favourites_view_item = 2131165194;
 			
 			// aapt resource value: 0x7f070005
-			public const int recentsearches_list = 2131165189;
+			public const int mainview_message = 2131165189;
+			
+			// aapt resource value: 0x7f070001
+			public const int property_search_details = 2131165185;
 			
 			// aapt resource value: 0x7f070000
-			public const int search = 2131165184;
+			public const int property_search_price = 2131165184;
+			
+			// aapt resource value: 0x7f070009
+			public const int recent_search_count = 2131165193;
+			
+			// aapt resource value: 0x7f070008
+			public const int recent_search_text = 2131165192;
+			
+			// aapt resource value: 0x7f070006
+			public const int recentsearches_header = 2131165190;
+			
+			// aapt resource value: 0x7f070007
+			public const int recentsearches_list = 2131165191;
 			
 			// aapt resource value: 0x7f070002
-			public const int use_location = 2131165186;
+			public const int search = 2131165186;
+			
+			// aapt resource value: 0x7f070004
+			public const int use_location = 2131165188;
 			
 			private Id()
 			{
@@ -76,10 +82,13 @@ namespace PropertyFinder
 			public const int loadmore = 2130903040;
 			
 			// aapt resource value: 0x7f030001
-			public const int PropertyFinderView = 2130903041;
+			public const int property_search_row = 2130903041;
 			
 			// aapt resource value: 0x7f030002
-			public const int recent_search_row = 2130903042;
+			public const int PropertyFinderView = 2130903042;
+			
+			// aapt resource value: 0x7f030003
+			public const int recent_search_row = 2130903043;
 			
 			private Layout()
 			{
