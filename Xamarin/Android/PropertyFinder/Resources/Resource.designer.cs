@@ -37,29 +37,29 @@ namespace PropertyFinder
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f060001
-			public const int do_search = 2131099649;
+			// aapt resource value: 0x7f070001
+			public const int do_search = 2131165185;
 			
-			// aapt resource value: 0x7f060007
-			public const int favourites_view_item = 2131099655;
+			// aapt resource value: 0x7f070007
+			public const int favourites_view_item = 2131165191;
 			
-			// aapt resource value: 0x7f060006
-			public const int recent_search_count = 2131099654;
+			// aapt resource value: 0x7f070006
+			public const int recent_search_count = 2131165190;
 			
-			// aapt resource value: 0x7f060005
-			public const int recent_search_text = 2131099653;
+			// aapt resource value: 0x7f070005
+			public const int recent_search_text = 2131165189;
 			
-			// aapt resource value: 0x7f060003
-			public const int recentsearches_header = 2131099651;
+			// aapt resource value: 0x7f070003
+			public const int recentsearches_header = 2131165187;
 			
-			// aapt resource value: 0x7f060004
-			public const int recentsearches_list = 2131099652;
+			// aapt resource value: 0x7f070004
+			public const int recentsearches_list = 2131165188;
 			
-			// aapt resource value: 0x7f060000
-			public const int search = 2131099648;
+			// aapt resource value: 0x7f070000
+			public const int search = 2131165184;
 			
-			// aapt resource value: 0x7f060002
-			public const int use_location = 2131099650;
+			// aapt resource value: 0x7f070002
+			public const int use_location = 2131165186;
 			
 			private Id()
 			{
@@ -83,8 +83,8 @@ namespace PropertyFinder
 		public partial class Menu
 		{
 			
-			// aapt resource value: 0x7f050000
-			public const int favourites_view = 2131034112;
+			// aapt resource value: 0x7f060000
+			public const int favourites_view = 2131099648;
 			
 			private Menu()
 			{
@@ -122,6 +122,17 @@ namespace PropertyFinder
 			public const int use_location_text = 2130968579;
 			
 			private String()
+			{
+			}
+		}
+		
+		public partial class Style
+		{
+			
+			// aapt resource value: 0x7f050000
+			public const int PropertyFinderTheme = 2131034112;
+			
+			private Style()
 			{
 			}
 		}
