@@ -1,4 +1,4 @@
-define("model/JSONDataSource", function (require) {
+define(function (require) {
   var $ = require("lib/jquery");
   return function () {
     /// <summary>

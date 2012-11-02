@@ -1,4 +1,4 @@
-﻿﻿define("viewModel/util", function (require) {
+﻿define(function (require) {
   var $ = require("lib/jquery");
   var ko = require("lib/knockout");
   var viewModels = {};

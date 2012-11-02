@@ -1,4 +1,4 @@
-define("model/Location", function () {
+define(function () {
   return function (config) {
     /// <summary>
     /// A model that represents a location. This is composed of a human readable display string and a
