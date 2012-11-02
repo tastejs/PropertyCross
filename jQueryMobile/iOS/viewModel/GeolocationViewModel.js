@@ -1,4 +1,4 @@
-define("viewModel/GeolocationViewModel", function (require) {
+define(function (require) {
   var ko = require("lib/knockout");
   var util = require("viewModel/util");
 

@@ -1,4 +1,4 @@
-define("viewModel/FavouritesViewModel", function (require) {
+define(function (require) {
   var util = require("viewModel/util");
 
   function FavouritesViewModel(application) {

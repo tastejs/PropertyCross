@@ -1,4 +1,4 @@
-﻿define("model/PropertySearchResponseCode", function () {
+﻿define(function () {
   return {
     propertiesFound: 1,
     ambiguousLocation: 2,

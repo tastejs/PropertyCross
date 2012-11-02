@@ -1,4 +1,4 @@
-define("app", function (require) {
+define(function (require) {
   var $ = require("lib/jquery");
   var ko = require("lib/knockout");
   var application = new(require("viewModel/ApplicationViewModel"))();
