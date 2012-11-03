@@ -56,7 +56,11 @@ namespace PropertyFinder
 			Property item = data[position];
 			holder.PriceText.Text = item.FormattedPrice;
 			
-			holder.DetailsText.Text = item.Summary;
+			holder.DetailsText.Text = Java.Lang.String.Format(
+				context.Resources.GetString(Resource.String.property_summary),
+				item.ShortTitle,
+				item.Bedrooms,
+				item.PropertyType);
 			
 			return view;
 		}

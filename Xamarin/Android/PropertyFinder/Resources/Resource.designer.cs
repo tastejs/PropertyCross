@@ -130,8 +130,11 @@ namespace PropertyFinder
 			// aapt resource value: 0x7f040006
 			public const int favourites_view = 2130968582;
 			
-			// aapt resource value: 0x7f04000b
-			public const int no_result_details = 2130968587;
+			// aapt resource value: 0x7f04000c
+			public const int no_result_details = 2130968588;
+			
+			// aapt resource value: 0x7f040009
+			public const int property_summary = 2130968585;
 			
 			// aapt resource value: 0x7f040004
 			public const int recent_searches = 2130968580;
@@ -139,14 +142,14 @@ namespace PropertyFinder
 			// aapt resource value: 0x7f040005
 			public const int recent_searches_count_format = 2130968581;
 			
-			// aapt resource value: 0x7f04000a
-			public const int result_details = 2130968586;
+			// aapt resource value: 0x7f04000b
+			public const int result_details = 2130968587;
 			
 			// aapt resource value: 0x7f040001
 			public const int search_description = 2130968577;
 			
-			// aapt resource value: 0x7f040009
-			public const int tap_load_more = 2130968585;
+			// aapt resource value: 0x7f04000a
+			public const int tap_load_more = 2130968586;
 			
 			// aapt resource value: 0x7f040003
 			public const int use_location_text = 2130968579;
