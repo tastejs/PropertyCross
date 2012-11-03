@@ -28,6 +28,10 @@ namespace PropertyFinder
 				{
 					Activity.StartActivity(typeof(SearchResultsView));
 				}
+				else if(presenter is PropertyPresenter)
+				{
+					Activity.StartActivity(typeof(PropertyView));
+				}
 			}
 		}
 	}
