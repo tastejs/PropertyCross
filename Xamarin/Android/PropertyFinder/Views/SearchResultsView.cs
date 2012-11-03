@@ -44,6 +44,8 @@ namespace PropertyFinder.Views
 			                                             searchLocation,
 			                                             properties.Count,
 			                                             totalResult);
+
+			ListAdapter = new SearchResultsAdapter(this, properties);
         }
         
         public void SetLoadMoreVisible(bool visible)

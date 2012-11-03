@@ -59,6 +59,7 @@
     <Compile Include="Views\SearchResultsView.cs" />
     <Compile Include="SearchResultsAdapter.cs" />
     <Compile Include="PropertyFinderApplication.cs" />
+    <Compile Include="Utils\DownloadImageTask.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -164,5 +165,6 @@
     <Folder Include="Views\" />
     <Folder Include="Resources\menu\" />
     <Folder Include="Resources\values-v11\" />
+    <Folder Include="Utils\" />
   </ItemGroup>
 </Project>

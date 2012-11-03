@@ -43,6 +43,7 @@ namespace PropertyFinder
 				
 				holder = new PropertySearchHolder()
 				{
+					PropertyThumbnail = (ImageView) view.FindViewById(Resource.Id.property_thumb),
 					PriceText = (TextView) view.FindViewById(Resource.Id.property_search_price),
 					DetailsText = (TextView) view.FindViewById(Resource.Id.property_search_details)
 				};
@@ -61,12 +62,17 @@ namespace PropertyFinder
 				item.ShortTitle,
 				item.Bedrooms,
 				item.PropertyType);
+
+
+			var task = new DownloadImageTask(holder.PropertyThumbnail);
+			task.Execute(item.ImageUrl);
 			
 			return view;
 		}
 		
 		private class PropertySearchHolder : Java.Lang.Object
 		{
+			public ImageView PropertyThumbnail { get; set; }
 			public TextView PriceText { get; set; }
 			public TextView DetailsText { get; set; }
 		}
