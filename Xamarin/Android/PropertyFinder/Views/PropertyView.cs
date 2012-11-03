@@ -19,12 +19,20 @@ namespace PropertyFinder
 	public class PropertyView : Activity, PropertyPresenter.View
 	{		
 		private PropertyPresenter presenter;
+		private TextView priceText;
+		private TextView locationText;
+		private ImageView propertyImage;
+		private TextView summaryText;
 
 		protected override void OnCreate(Bundle bundle)
 		{
 			base.OnCreate(bundle);
 
 			SetContentView(Resource.Layout.property_view);
+			priceText = (TextView) FindViewById(Resource.Id.property_price);
+			locationText = (TextView) FindViewById(Resource.Id.property_location);
+			propertyImage = (ImageView) FindViewById(Resource.Id.property_image);
+			summaryText = (TextView) FindViewById(Resource.Id.property_details);
 
 			var app = (PropertyFinderApplication)Application;
 			presenter = (PropertyPresenter) app.Presenter;
@@ -33,6 +41,16 @@ namespace PropertyFinder
 
 		public void SetProperty(Property property)
 		{
+			priceText.Text = property.FormattedPrice;
+			locationText.Text = property.ShortTitle;
+
+			var task = new DownloadImageTask(propertyImage);
+			task.Execute(property.ImageUrl);
+
+			summaryText.Text = Java.Lang.String.Format(
+				Resources.GetString(Resource.String.property_details),
+				property.Bedrooms,
+				property.PropertyType);
 		}
 
 		private bool _fave;
