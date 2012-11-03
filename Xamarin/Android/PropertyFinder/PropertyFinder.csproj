@@ -61,6 +61,7 @@
     <Compile Include="PropertyFinderApplication.cs" />
     <Compile Include="Utils\DownloadImageTask.cs" />
     <Compile Include="Views\PropertyView.cs" />
+    <Compile Include="Views\FavouritesView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

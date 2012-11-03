@@ -32,6 +32,10 @@ namespace PropertyFinder
 				{
 					Activity.StartActivity(typeof(PropertyView));
 				}
+				else if(presenter is FavouritesPresenter)
+				{
+					Activity.StartActivity(typeof(FavouritesView));
+				}
 			}
 		}
 	}
