@@ -60,6 +60,7 @@
     <Compile Include="SearchResultsAdapter.cs" />
     <Compile Include="PropertyFinderApplication.cs" />
     <Compile Include="Utils\DownloadImageTask.cs" />
+    <Compile Include="Views\PropertyView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -76,6 +77,7 @@
     <AndroidResource Include="Resources\values\themes.xml" />
     <AndroidResource Include="Resources\layout\property_search_row.axml" />
     <AndroidResource Include="Resources\layout\load_more_footer.axml" />
+    <AndroidResource Include="Resources\layout\property_view.axml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\Common\Model\IJsonPropertySearch.cs">
