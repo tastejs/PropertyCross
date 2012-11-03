@@ -10,6 +10,6 @@
 	<string name="favourites_add">Add to Favourites</string>
 	<string name="favourites_remove">Remove from Favourites</string>
 	<string name="tap_load_more">Tap to load more...</string>
-	<string name="result_details">Results for (%1$s), showing (%2$d) of (%3$d) properties.</string>
+	<string name="result_details">Results for %1$s, showing %2$d of %3$d properties.</string>
 	<string name="no_result_details">No results.</string>
 </resources>

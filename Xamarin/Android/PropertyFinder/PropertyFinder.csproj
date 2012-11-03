@@ -58,6 +58,7 @@
     <Compile Include="RecentSearchAdapter.cs" />
     <Compile Include="Views\SearchResultsView.cs" />
     <Compile Include="SearchResultsAdapter.cs" />
+    <Compile Include="PropertyFinderApplication.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

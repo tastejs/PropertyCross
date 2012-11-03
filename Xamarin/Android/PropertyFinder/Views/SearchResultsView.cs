@@ -18,6 +18,7 @@ namespace PropertyFinder.Views
 	{
 		private View footer;
 		private TextView resultDetails;
+		private SearchResultsPresenter presenter;
 
 		protected override void OnCreate(Bundle bundle)
 		{
@@ -30,6 +31,10 @@ namespace PropertyFinder.Views
 
 			ListView.AddFooterView(footer);
 			ListAdapter = new SearchResultsAdapter(this, new List<Property>() {});
+
+			var app = (PropertyFinderApplication)Application;
+			presenter = (SearchResultsPresenter) app.Presenter;
+			presenter.SetView(this);
 		}
 
 		public void SetSearchResults(int totalResult, int pageNumber, int totalPages,

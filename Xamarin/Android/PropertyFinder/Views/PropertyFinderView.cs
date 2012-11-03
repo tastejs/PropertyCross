@@ -50,12 +50,16 @@ namespace PropertyFinder.Views
 			adapter = new RecentSearchAdapter(this, new List<RecentSearch>());
 			recentSearchList.Adapter = adapter;
 
+			var app = (PropertyFinderApplication)Application;
+
 			presenter = 
 				new PropertyFinderPresenter(state,
 				                            source,
-				                            new NavigationService(),
+				                            new NavigationService(app) { Activity = this },
 				                            geoLocationService);
 			presenter.SetView(this);
+
+			app.Presenter = presenter;
 		}
 
 		public override bool OnCreateOptionsMenu(IMenu menu)
