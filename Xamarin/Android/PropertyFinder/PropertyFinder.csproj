@@ -78,6 +78,7 @@
     <AndroidResource Include="Resources\layout\property_search_row.axml" />
     <AndroidResource Include="Resources\layout\load_more_footer.axml" />
     <AndroidResource Include="Resources\layout\property_view.axml" />
+    <AndroidResource Include="Resources\menu\favourites_toggle.xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\Common\Model\IJsonPropertySearch.cs">

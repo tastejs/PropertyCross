@@ -39,6 +39,37 @@ namespace PropertyFinder
 			presenter.SetView(this);
 		}
 
+		public override bool OnCreateOptionsMenu(IMenu menu)
+		{
+			MenuInflater.Inflate(Resource.Menu.favourites_toggle, menu);
+			return true;
+		}
+
+		public override bool OnPrepareOptionsMenu(IMenu menu)
+		{
+			IMenuItem addItem = menu.FindItem(Resource.Id.favourites_add_item);
+			addItem.SetVisible(!IsFavourited);
+
+			IMenuItem removeItem = menu.FindItem(Resource.Id.favourites_remove_item);
+			removeItem.SetVisible(IsFavourited);
+
+			return true;
+		}
+		
+		public override bool OnOptionsItemSelected(IMenuItem item)
+		{
+			if( (item.ItemId == Resource.Id.favourites_add_item && !IsFavourited) ||
+			   (item.ItemId == Resource.Id.favourites_remove_item && IsFavourited) )
+			{
+				ToggleFavourite(this, EventArgs.Empty);
+				return true;
+			}
+			else
+			{
+				return base.OnOptionsItemSelected(item);
+			}
+		}
+
 		public void SetProperty(Property property)
 		{
 			priceText.Text = property.FormattedPrice;
@@ -53,10 +84,9 @@ namespace PropertyFinder
 				property.PropertyType);
 		}
 
-		private bool _fave;
 		public bool IsFavourited
 		{
-			set { _fave = value; }
+			get; set;
 		}
 		
 		public event EventHandler ToggleFavourite;

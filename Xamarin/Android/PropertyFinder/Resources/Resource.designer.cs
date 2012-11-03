@@ -41,7 +41,13 @@ namespace PropertyFinder
 			public const int do_search = 2131165194;
 			
 			// aapt resource value: 0x7f070011
-			public const int favourites_view_item = 2131165201;
+			public const int favourites_add_item = 2131165201;
+			
+			// aapt resource value: 0x7f070012
+			public const int favourites_remove_item = 2131165202;
+			
+			// aapt resource value: 0x7f070013
+			public const int favourites_view_item = 2131165203;
 			
 			// aapt resource value: 0x7f07000c
 			public const int mainview_message = 2131165196;
@@ -123,7 +129,10 @@ namespace PropertyFinder
 		{
 			
 			// aapt resource value: 0x7f060000
-			public const int favourites_view = 2131099648;
+			public const int favourites_toggle = 2131099648;
+			
+			// aapt resource value: 0x7f060001
+			public const int favourites_view = 2131099649;
 			
 			private Menu()
 			{
