@@ -46,6 +46,7 @@
     <Reference Include="Newtonsoft.Json.MonoDroid">
       <HintPath>..\lib\Newtonsoft.Json.MonoDroid.dll</HintPath>
     </Reference>
+    <Reference Include="Mono.Android.Support.v4" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Resources\Resource.designer.cs" />
@@ -170,5 +171,9 @@
     <Folder Include="Resources\menu\" />
     <Folder Include="Resources\values-v11\" />
     <Folder Include="Utils\" />
+    <Folder Include="SupportLib\" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidJavaLibrary Include="SupportLib\android-support-v4.jar" />
   </ItemGroup>
 </Project>
