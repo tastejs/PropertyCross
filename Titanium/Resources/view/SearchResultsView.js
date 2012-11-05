@@ -1,5 +1,5 @@
-var _ = require("underscore");
-var ko = require("knockout");
+var _ = require("lib/underscore");
+var ko = require("lib/knockout");
 
 function createRow(imageUrl, title, description) {
 	var row = Ti.UI.createTableViewRow({

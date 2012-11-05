@@ -1,6 +1,6 @@
 var util = require("viewModel/util");
 
-function FavouritesViewModel(propertySearchViewModel) {
+  function FavouritesViewModel(application) {
 	/// <summary>
 	/// The view model that backs the favourites view
 	/// </summary>
@@ -10,7 +10,7 @@ function FavouritesViewModel(propertySearchViewModel) {
 	this.factoryName = "FavouritesViewModel";
 
 	// ----- public fields
-	this.properties = propertySearchViewModel.favourites;
+    this.properties = application.favourites;
 }
 
 util.registerFactory("FavouritesViewModel", FavouritesViewModel);

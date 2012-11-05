@@ -1,9 +1,9 @@
-var _ = require("underscore");
+var _ = require("lib/underscore");
 var Property = require("model/Property");
 var Location = require("model/Location");
 var PropertyDataSourceResponse = require("model/PropertyDataSourceResponse");
 var PropertySearchResponseCode = require("model/PropertySearchResponseCode");
-var JSONDataSource = require(Ti.Platform.osname == 'mobileweb' ? "model/JSONFileDataSource" : "model/JSONDataSource");
+var JSONDataSource = require("model/JSONDataSource");
 
 function PropertyDataSource(config) {
 	/// <summary>
@@ -94,7 +94,5 @@ function PropertyDataSource(config) {
 		}, errorCallback);
 	};
 }
-
-PropertyDataSource.Instance = new PropertyDataSource();
 
 module.exports = PropertyDataSource;

@@ -1,14 +1,20 @@
-﻿var ko = require("knockout");
+﻿var _ = require("lib/underscore");
+var ko = require("lib/knockout");
 var util = require("viewModel/util");
 
 function ApplicationViewModel() {
 	/// <summary>
 	/// The view model that manages the view model back-stack
 	/// </summary>
-
 	var that = this;
+  var viewModels = {};
 
 	// ----- public fields
+  // data stores
+  this.propertyDataSource = new(require("model/PropertyDataSource"))();
+  this.favourites = ko.observableArray();
+  this.recentSearches = ko.observableArray();
+  this.maxRecentSearch = 5;
 
 	// the back stack that represents the applications current state
 	this.viewModelBackStack = ko.observableArray();
@@ -26,11 +32,8 @@ function ApplicationViewModel() {
 
 	// Gets the template name for the top-most view model
 	this.currentView = ko.computed(function() {
-		var view = "";
-		if (this.viewModelBackStack().length !== 0) {
-			view = this.viewModelBackStack()[this.viewModelBackStack().length - 1].template;
-		}
-		return view;
+    var viewModel = this.currentViewModel();
+    return viewModel ? viewModel.template : "";
 	}, this);
 
 	// ----- public functions
@@ -42,6 +45,36 @@ function ApplicationViewModel() {
 		this.viewModelBackStack.push(viewModel);
 	};
 
+    this.navigateToHome = function () {
+      /// <summary>
+      /// Navigates to the home screen
+      /// </summary>
+      this.viewModelBackStack.push(viewModels.propertySearch);
+    };
+
+    this.navigateToSearchResults = function (location, searchResults) {
+      /// <summary>
+      /// Navigates to the search results.
+      /// </summary>
+      viewModels.searchResults.initialize(location, searchResults);
+      this.navigateTo(viewModels.searchResults);
+    };
+
+    this.navigateToProperty = function (property) {
+      /// <summary>
+      /// Navigates to the property.
+      /// </summary>
+      viewModels.property.initialize(property);
+      this.navigateTo(viewModels.property);
+    };
+
+    this.navigateToFavourites = function () {
+      /// <summary>
+      /// Navigates to the favourites.
+      /// </summary>
+      this.navigateTo(viewModels.favourites);
+    };
+
 	this.back = function() {
 		/// <summary>
 		/// Navigates backwards.
@@ -49,37 +82,84 @@ function ApplicationViewModel() {
 		this.viewModelBackStack.pop();
 	};
 
-	this.getState = function() {
+    this.setState = function (stateString) {
 		/// <summary>
-		/// Gets the application state as a JSON string
+      /// Sets the application based on the given JSON string
 		/// </summary>
 
-		var
-		i, viewModel, state = ko.observableArray();
+		var state = JSON.parse(stateString);
+      if (!state)
+        return;
+      if (state.favourites) {
+        _.forEach(state.favourites, function (obj) {
+          that.favourites.push(util.hydrateObject(that, obj));
+        });
+      }
+      if (state.recentSearches) {
+        _.forEach(state.recentSearches, function (obj) {
+          that.recentSearches.push(util.hydrateObject(that, obj));
+        });
+      }
+    };
 
-		for ( i = 0; i < that.viewModelBackStack().length; i++) {
-			viewModel = that.viewModelBackStack()[i];
-			state.push(viewModel);
-		}
+    this.state = ko.computed(function() {
+      var state = {
+        recentSearches: this.recentSearches(),
+        favourites: this.favourites()
+      };
 		return ko.toJSON(state);
+    }, this);
+
+
+    this.getFavouriteByGuid = function (guid) {
+      /// <summary>
+      /// Gets the a favourite by GUID, returning null if it is not found
+      /// </summary>
+
+      return ko.utils.arrayFirst(this.favourites(), function (property) {
+        return property.guid() === guid;
+      });
 	};
 
-	this.setState = function(stateString) {
+    this.addToFavourites = function (propertyViewModel) {
 		/// <summary>
-		/// Sets the application based on the given JSON string
+      /// Adds the given property view model to the list of favourites
 		/// </summary>
+      var existingFavourite = this.getFavouriteByGuid(propertyViewModel.guid());
 
-		var
-		i, viewModel, state = JSON.parse(stateString);
-
-		that.viewModelBackStack.removeAll();
-		for ( i = 0; i < state.length; i++) {
-			viewModel = util.hydrateObject(state[i]);
-			that.viewModelBackStack.push(viewModel);
+      // add or remove
+      if (!existingFavourite) {
+        this.favourites.push(propertyViewModel);
+      } else {
+        this.favourites.remove(existingFavourite);
 		}
 	};
+
+    this.addToRecentSearches = function (searchLocation) {
+      /// <summary>
+      /// Add to the recent search list
+      /// </summary>
+
+      // check to see whether this location already appears in the list
+      var locationPresent = ko.utils.arrayFirst(this.recentSearches(), function (recentLocation) {
+        return recentLocation.displayString === searchLocation.displayString;
+      });
+      if (locationPresent) {
+        return;
 }
 
-ApplicationViewModel.Instance = new ApplicationViewModel();
+      // add this new item
+      if (this.recentSearches().length > this.maxRecentSearch) {
+        this.recentSearches.pop();
+      }
+      this.recentSearches.unshift(searchLocation);
+    }
+
+    // ----- app view models
+    viewModels.searchResults = new (require("viewModel/SearchResultsViewModel"))(this);
+    viewModels.property = new (require("viewModel/PropertyViewModel"))(this);
+    viewModels.favourites = new (require("viewModel/FavouritesViewModel"))(this);
+    viewModels.propertySearch = new (require("viewModel/PropertySearchViewModel"))(this);
+  }
 
 module.exports = ApplicationViewModel;

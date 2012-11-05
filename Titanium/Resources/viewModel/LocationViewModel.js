@@ -1,8 +1,7 @@
-var ko = require("knockout");
-var propertyDataSource = require("model/PropertyDataSource").Instance;
+var ko = require("lib/knockout");
 var util = require("viewModel/util");
 
-function LocationViewModel() {
+  function LocationViewModel(application) {
 	/// <summary>
 	/// The view model that backs the a search based on a location string
 	/// </summary>
@@ -17,9 +16,6 @@ function LocationViewModel() {
 
 	// this string displayed to the end-user
 	this.displayString = undefined;
-
-	this.firstElement = ko.observable(false);
-	this.lastElement = ko.observable(false);
 	this.totalResults = 0;
 
 	// ----- framework functions
@@ -45,7 +41,7 @@ function LocationViewModel() {
 		/// <summary>
 		/// Executes a search by the search string represented by this view model for the given page
 		/// </summary>
-		propertyDataSource.findProperties(this.searchString, pageNumber, callback, errorCallback);
+      application.propertyDataSource.findProperties(this.searchString, pageNumber, callback, errorCallback);
 	};
 }
 

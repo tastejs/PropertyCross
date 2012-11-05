@@ -1,9 +1,9 @@
 ﻿define(function (require, exports, module) {
-  var $ = require("lib/jquery");
+  var _ = require("lib/underscore");
   var ko = require("lib/knockout");
   var viewModels = {};
 
-  return {
+  module.exports = {
     registerFactory: function (name, factory) {
       viewModels[name] = factory;
     },
@@ -16,7 +16,7 @@
 
       // if state is a primitive type, rather than an object - no 
       // need to hydrate;
-      if (!(state instanceof Object)) {
+		if ( !_.isObject(state) ) {
         return state;
       }
 
@@ -32,16 +32,16 @@
         if (ko.isWriteableObservable(viewModel[property])) {
           unwrapped = ko.utils.unwrapObservable(viewModel[property]);
           // check if this is an array observable
-          if (unwrapped instanceof Array) {
-            $.each(propertyValue, function () {
-              viewModel[property].push(hydrateObject(application, this));
+					if ( _.isArray(unwrapped)) {
+            _.each(propertyValue, function (value) {
+              viewModel[property].push(hydrateObject(application, value));
             });
           } else {
             // otherwise set the value via the observable setter
             viewModel[property](propertyValue);
           }
 
-        } else if (!(viewModel[property] instanceof Function)) {
+        } else if (! _.isFunction(viewModel[property])) {
           viewModel[property] = hydrateObject(application, propertyValue);
         }
       }

@@ -1,5 +1,5 @@
-var _ = require("underscore");
-var ko = require("knockout");
+var _ = require("lib/underscore");
+var ko = require("lib/knockout");
 var AbstractApplicationView = require("view/AbstractApplicationView");
 var PropertyViewModel = require("viewModel/PropertyViewModel");
 var SearchResultsViewModel = require("viewModel/SearchResultsViewModel");

@@ -1,5 +1,5 @@
 define(function (require, exports, module) {
-  var $ = require("lib/jquery");
+  var _ = require("lib/underscore");
   var ko = require("lib/knockout");
   var PropertySearchResponseCode = require("model/PropertySearchResponseCode");
   var LocationViewModel = require("viewModel/LocationViewModel");
@@ -37,8 +37,7 @@ define(function (require, exports, module) {
       }
     });
 
-
-    // ----- public functions 
+    // ----- public functions
 
     this.executeSearch = function () {
       /// <summary>
@@ -75,9 +74,9 @@ define(function (require, exports, module) {
 
           // if the location was ambiguous, display the list of options
           that.locations.removeAll();
-          $.each(results.data, function () {
+				_.forEach(results.data, function(item) {
             var viewModel = new LocationViewModel(application);
-            viewModel.initialiseDisambiguated(this);
+					viewModel.initialiseDisambiguated(item);
             that.locations.push(viewModel);
           });
 

@@ -1,5 +1,5 @@
 define(function (require, exports, module) {
-  var $ = require("lib/jquery");
+  var _ = require("lib/underscore");
   var ko = require("lib/knockout");
   var PropertyViewModel = require("./PropertyViewModel");
   var util = require("./util");
@@ -23,11 +23,11 @@ define(function (require, exports, module) {
     // ----- public functions
 
     this.initialize = function (searchLocation, results) {
-      this.properties($.map(results.data, function(result) {
+		_.each(results.data, function(property) {
         var viewModel = new PropertyViewModel(application);
-        viewModel.initialize(result);
-        return viewModel;
-      }));
+        viewModel.initialize(property);
+			that.properties.push(viewModel);
+      });
       that.searchLocation(searchLocation);
       that.totalResults(results.totalResults);
     };
@@ -37,9 +37,9 @@ define(function (require, exports, module) {
       this.isLoading(true);
       this.searchLocation().executeSearch(this.pageNumber(), function (results) {
         that.isLoading(false);
-        $.each(results.data, function () {
+			_.each(results.data, function(property) {
           var viewModel = new PropertyViewModel(application);
-          viewModel.initialize(this);
+				viewModel.initialize(property);
           that.properties.push(viewModel);
         });
         that.pageNumber(that.pageNumber() + 1);

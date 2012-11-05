@@ -1,12 +1,11 @@
 define(function (require, exports, module) {
-  var $ = require("lib/jquery");
+  var _ = require("lib/underscore");
   var Property = require("model/Property");
   var Location = require("model/Location");
   var PropertyDataSourceResponse = require("model/PropertyDataSourceResponse");
   var PropertySearchResponseCode = require("model/PropertySearchResponseCode");
   var JSONDataSource = require("model/JSONDataSource");
     
-
   function PropertyDataSource(config) {
     /// <summary>
     /// A service that allows property searches, returning the results as JavaScript objects. This class
@@ -35,7 +34,7 @@ define(function (require, exports, module) {
           responseCode === "101" || /* best guess location */
           responseCode === "110" /* large location, 1000 matches max */) {
 
-        $.each(result.response.listings, function (index, value) {
+			  _.each(result.response.listings, function(value) {
           property = new Property({
             guid: value.guid,
             title: value.title,
@@ -59,7 +58,7 @@ define(function (require, exports, module) {
       } else if (responseCode === "200" || /* ambiguous location */
                   responseCode === "202"/* mis-spelled location */) {
 
-        $.each(result.response.locations, function (index, value) {
+			  _.each(result.response.locations, function(value) {
           location = new Location({
             longTitle: value.long_title,
             placeName: value.place_name,

@@ -1,5 +1,6 @@
 ﻿define(function (require, exports, module) {
   var $ = require("lib/jquery");
+  var _ = require("lib/underscore");
   var ko = require("lib/knockout");
   var util = require("viewModel/util");
 
@@ -92,13 +93,13 @@
       if (!state)
         return;
       if (state.favourites) {
-        $.each(state.favourites, function () {
-          that.favourites.push(util.hydrateObject(that, this));
+        _.forEach(state.favourites, function (obj) {
+          that.favourites.push(util.hydrateObject(that, obj));
         });
       }
       if (state.recentSearches) {
-        $.each(state.recentSearches, function () {
-          that.recentSearches.push(util.hydrateObject(that, this));
+        _.forEach(state.recentSearches, function (obj) {
+          that.recentSearches.push(util.hydrateObject(that, obj));
         });
       }
     };
