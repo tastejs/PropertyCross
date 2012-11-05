@@ -1,4 +1,4 @@
-﻿define(function (require) {
+﻿define(function (require, exports, module) {
   var $ = require("lib/jquery");
   var ko = require("lib/knockout");
   var viewModels = {};

@@ -1,4 +1,4 @@
-﻿define(function (require) {
+﻿define(function (require, exports, module) {
   var $ = require("lib/jquery");
   var ko = require("lib/knockout");
   var util = require("viewModel/util");
@@ -163,5 +163,5 @@
     viewModels.propertySearch = new (require("viewModel/PropertySearchViewModel"))(this);
   }
 
-  return ApplicationViewModel;
+  module.exports = ApplicationViewModel;
 });

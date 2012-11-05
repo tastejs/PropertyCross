@@ -1,4 +1,4 @@
-define(function (require) {
+define(function (require, exports, module) {
   var $ = require("lib/jquery");
   var Property = require("model/Property");
   var Location = require("model/Location");
@@ -100,5 +100,5 @@ define(function (require) {
     };
   }
 
-  return PropertyDataSource;
+  module.exports = PropertyDataSource;
 });

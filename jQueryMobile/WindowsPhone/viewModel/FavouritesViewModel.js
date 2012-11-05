@@ -1,4 +1,4 @@
-define(function (require) {
+define(function (require, exports, module) {
   var util = require("viewModel/util");
 
   function FavouritesViewModel(application) {
@@ -16,5 +16,5 @@ define(function (require) {
 
   util.registerFactory("FavouritesViewModel", FavouritesViewModel);
 
-  return FavouritesViewModel;
+  module.exports = FavouritesViewModel;
 });

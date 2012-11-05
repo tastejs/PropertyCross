@@ -1,5 +1,5 @@
-define(function () {
-  return function (config) {
+define(function (require, exports, module) {
+  module.exports = function (config) {
     /// <summary>
     /// A model that represents a single property listing.
     /// </summary>

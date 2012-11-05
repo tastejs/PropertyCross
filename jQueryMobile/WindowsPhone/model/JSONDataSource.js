@@ -1,6 +1,6 @@
-define(function (require) {
+define(function (require, exports, module) {
   var $ = require("lib/jquery");
-  return function () {
+  module.exports = function () {
     /// <summary>
     /// A service that allows property searches, returning the results in JSON format. This service
     /// uses the Nestoria APIs.

@@ -1,6 +1,6 @@
-﻿define(function (require) {
+﻿define(function (require, exports, module) {
   var $ = require("lib/jquery");
-  return function () {
+  module.exports = function () {
     /// <summary>
     /// A test version of JSONDataSource, which returns 'canned' responses.
     /// </summary>

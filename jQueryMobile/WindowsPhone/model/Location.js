@@ -1,5 +1,5 @@
-define(function () {
-  return function (config) {
+define(function (require, exports, module) {
+  module.exports = function (config) {
     /// <summary>
     /// A model that represents a location. This is composed of a human readable display string and a
     /// placename, which is the string sent to Nestoria in order to perform a search.

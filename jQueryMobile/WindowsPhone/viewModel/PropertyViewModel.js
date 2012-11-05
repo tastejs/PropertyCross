@@ -1,4 +1,4 @@
-define(function (require) {
+define(function (require, exports, module) {
   var ko = require("lib/knockout");
   var util = require("viewModel/util");
 
@@ -69,5 +69,5 @@ define(function (require) {
 
   util.registerFactory("PropertyViewModel", PropertyViewModel);
 
-  return PropertyViewModel;
+  module.exports = PropertyViewModel;
 });
