@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <resources>
     <style name="PropertyFinderTheme" parent="@android:style/Theme.Holo">
-        <!-- Any customizations for your app running on post 3.0 devices here -->
+        <!-- Any customizations for your app running on post 3.0 devices here -->        
+		<item name="android:actionBarStyle">@style/ActionBar</item>
     </style>
 </resources>

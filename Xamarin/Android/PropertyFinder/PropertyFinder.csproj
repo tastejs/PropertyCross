@@ -87,6 +87,9 @@
     <AndroidResource Include="Resources\drawable-xhdpi\nostar.png" />
     <AndroidResource Include="Resources\drawable-mdpi\nostar.png" />
     <AndroidResource Include="Resources\drawable-hdpi\nostar.png" />
+    <AndroidResource Include="Resources\drawable-v14\actionbar_background.xml" />
+    <AndroidResource Include="Resources\drawable\actionbar_background.xml" />
+    <AndroidResource Include="Resources\drawable-mdpi\actionbar_tile.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\Common\Model\IJsonPropertySearch.cs">
@@ -181,6 +184,8 @@
     <Folder Include="Resources\drawable-hdpi\" />
     <Folder Include="Resources\drawable-mdpi\" />
     <Folder Include="Resources\drawable-xhdpi\" />
+    <Folder Include="Resources\drawable-v14\" />
+    <Folder Include="Resources\drawable\" />
   </ItemGroup>
   <ItemGroup>
     <AndroidJavaLibrary Include="SupportLib\android-support-v4.jar" />
