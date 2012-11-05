@@ -81,6 +81,12 @@
     <AndroidResource Include="Resources\layout\load_more_footer.axml" />
     <AndroidResource Include="Resources\layout\property_view.axml" />
     <AndroidResource Include="Resources\menu\favourites_toggle.xml" />
+    <AndroidResource Include="Resources\drawable-hdpi\star.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\star.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\star.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\nostar.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\nostar.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\nostar.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\Common\Model\IJsonPropertySearch.cs">
@@ -172,6 +178,9 @@
     <Folder Include="Resources\values-v11\" />
     <Folder Include="Utils\" />
     <Folder Include="SupportLib\" />
+    <Folder Include="Resources\drawable-hdpi\" />
+    <Folder Include="Resources\drawable-mdpi\" />
+    <Folder Include="Resources\drawable-xhdpi\" />
   </ItemGroup>
   <ItemGroup>
     <AndroidJavaLibrary Include="SupportLib\android-support-v4.jar" />

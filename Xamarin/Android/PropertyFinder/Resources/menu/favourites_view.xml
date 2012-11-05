@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-<item android:id="@+id/favourites_view_item" android:title="@string/favourites_view" />
+<item android:id="@+id/favourites_view_item" android:title="@string/favourites_view"
+		android:icon="@drawable/star" android:showAsAction="ifRoom|withText" />
 </menu>
-

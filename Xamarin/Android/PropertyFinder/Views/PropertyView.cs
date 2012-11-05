@@ -12,6 +12,7 @@ using Android.Widget;
 
 using PropertyFinder.Model;
 using PropertyFinder.Presenter;
+using Android.Support.V4.App;
 
 namespace PropertyFinder
 {
@@ -84,9 +85,15 @@ namespace PropertyFinder
 				property.PropertyType);
 		}
 
+		private bool _fave;
 		public bool IsFavourited
 		{
-			get; set;
+			get { return _fave; }
+			set
+			{
+				_fave = value;
+				ActivityCompat.InvalidateOptionsMenu(this);
+			}
 		}
 		
 		public event EventHandler ToggleFavourite;
