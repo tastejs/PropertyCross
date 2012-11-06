@@ -21,10 +21,11 @@ namespace PropertyFinder
 	public class PropertyView : Activity, PropertyPresenter.View
 	{		
 		private PropertyPresenter presenter;
-		private TextView priceText;
-		private TextView locationText;
+		private TextView titleText;
 		private ImageView propertyImage;
-		private TextView summaryText;
+		private TextView priceText;
+		private TextView overviewText;
+		private TextView descriptionText;
 		private Bitmap placeholder;
 
 		protected override void OnCreate(Bundle bundle)
@@ -32,10 +33,10 @@ namespace PropertyFinder
 			base.OnCreate(bundle);
 
 			SetContentView(Resource.Layout.property_view);
-			priceText = (TextView) FindViewById(Resource.Id.property_price);
-			locationText = (TextView) FindViewById(Resource.Id.property_location);
+			titleText = (TextView)FindViewById(Resource.Id.property_title);
 			propertyImage = (ImageView) FindViewById(Resource.Id.property_image);
-			summaryText = (TextView) FindViewById(Resource.Id.property_details);
+			priceText = (TextView) FindViewById(Resource.Id.property_price);
+			overviewText = (TextView) FindViewById(Resource.Id.property_overview);
 
 			placeholder = BitmapFactory.DecodeResource(Resources, Resource.Drawable.Icon);
 
@@ -77,17 +78,15 @@ namespace PropertyFinder
 
 		public void SetProperty(Property property)
 		{
-			priceText.Text = property.FormattedPrice;
-			locationText.Text = property.ShortTitle;
+			titleText.Text = property.ShortTitle;
 
 			BitmapUtils.Download(property.ImageUrl, propertyImage, Resources, placeholder);
 
-			var task = new DownloadImageTask(propertyImage);
-			task.Execute(property.ImageUrl);
+			priceText.Text = property.FormattedPrice;
 
-			summaryText.Text = Java.Lang.String.Format(
+			overviewText.Text = Java.Lang.String.Format(
 				Resources.GetString(Resource.String.property_details),
-				property.Bedrooms,
+				property.BedBathroomText,
 				property.PropertyType);
 		}
 
