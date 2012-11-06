@@ -1,5 +1,4 @@
 define(function (require, exports, module) {
-  var _ = require("lib/underscore");
   var Property = require("model/Property");
   var Location = require("model/Location");
   var PropertyDataSourceResponse = require("model/PropertyDataSourceResponse");
@@ -34,7 +33,7 @@ define(function (require, exports, module) {
           responseCode === "101" || /* best guess location */
           responseCode === "110" /* large location, 1000 matches max */) {
 
-        _.each(result.response.listings, function (value) {
+        result.response.listings.forEach(function (value) {
           property = new Property({
             guid:value.guid,
             title:value.title,
@@ -58,7 +57,7 @@ define(function (require, exports, module) {
       } else if (responseCode === "200" || /* ambiguous location */
           responseCode === "202"/* mis-spelled location */) {
 
-        _.each(result.response.locations, function (value) {
+        result.response.locations.forEach(function (value) {
           location = new Location({
             longTitle:value.long_title,
             placeName:value.place_name,

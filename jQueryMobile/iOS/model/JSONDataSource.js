@@ -1,6 +1,6 @@
 define(function (require, exports, module) {
   module.exports = function () {
-    var _ = require("lib/underscore");
+    var $ = require("lib/jquery");
 
     /// <summary>
     /// A service that allows property searches, returning the results in JSON format. This service

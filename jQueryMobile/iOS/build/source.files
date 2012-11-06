@@ -2,7 +2,6 @@
 ./lib/jquery.js
 ./lib/knockout.js
 ./model/JSONDataSource.js
-./model/JSONFileDataSource.js
 ./model/Location.js
 ./model/Property.js
 ./model/PropertyDataSource.js

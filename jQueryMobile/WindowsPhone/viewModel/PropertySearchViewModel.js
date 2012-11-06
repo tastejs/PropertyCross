@@ -1,5 +1,4 @@
 define(function (require, exports, module) {
-  var _ = require("lib/underscore");
   var ko = require("lib/knockout");
   var PropertySearchResponseCode = require("model/PropertySearchResponseCode");
   var LocationViewModel = require("viewModel/LocationViewModel");
@@ -74,7 +73,7 @@ define(function (require, exports, module) {
 
           // if the location was ambiguous, display the list of options
           that.locations.removeAll();
-          _.forEach(results.data, function (item) {
+          results.data.forEach(function (item) {
             var viewModel = new LocationViewModel(application);
             viewModel.initialiseDisambiguated(item);
             that.locations.push(viewModel);
