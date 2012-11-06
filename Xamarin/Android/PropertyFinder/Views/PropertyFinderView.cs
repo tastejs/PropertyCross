@@ -23,6 +23,8 @@ namespace PropertyFinder.Views
 		private TextView messageText;
 		private ListView recentSearchList;
 		private RecentSearchAdapter adapter;
+		private View mainView;
+		private ProgressBar progress;
 
 		protected override void OnCreate (Bundle bundle)
 		{
@@ -49,6 +51,10 @@ namespace PropertyFinder.Views
 			recentSearchList.ItemClick += RecentSearchItem_Clicked;
 			adapter = new RecentSearchAdapter(this, new List<RecentSearch>());
 			recentSearchList.Adapter = adapter;
+
+			progress = (ProgressBar) FindViewById(Resource.Id.progress);
+			progress.Visibility = ViewStates.Invisible;
+			mainView = FindViewById(Resource.Id.propview);
 
 			var app = (PropertyFinderApplication)Application;
 
@@ -111,6 +117,8 @@ namespace PropertyFinder.Views
 				searchText.Enabled = !value;
 				myLocationButton.Enabled = !value;
 				startSearchButton.Enabled = !value;
+				progress.Visibility = value ? ViewStates.Visible : ViewStates.Invisible;
+				mainView.Visibility = !value ? ViewStates.Visible : ViewStates.Invisible;
 			}
 		}
 
