@@ -34,7 +34,7 @@ namespace PropertyFinder
 		protected override void OnListItemClick(ListView l, View v, int position, long id)
 		{
 			var adapter = (SearchResultsAdapter) ListAdapter;
-			Property item = adapter.GetItem(position);
+			Property item = adapter[position];
 			PropertySelected(this, new PropertyEventArgs(item));
 		}
 

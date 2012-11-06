@@ -16,14 +16,13 @@ using Android.Graphics;
 
 namespace PropertyFinder
 {
-	public class SearchResultsAdapter : ArrayAdapter<Property>
+	public class SearchResultsAdapter : BaseAdapter<Property>
 	{
 		private Context context;
 		private IList<Property> data;
 		private Bitmap placeholder;
 
 		public SearchResultsAdapter (Context c, IList<Property> d)
-			: base(c, Android.Resource.Layout.SimpleListItem1, d)
 		{
 			this.context = c;
 			this.data = d;
@@ -67,11 +66,41 @@ namespace PropertyFinder
 				item.Bedrooms,
 				item.PropertyType);
 
-			BitmapUtils.Download(item.ImageUrl, holder.PropertyThumbnail, Context.Resources, placeholder);
+			BitmapUtils.Download(item.ImageUrl, holder.PropertyThumbnail, context.Resources, placeholder);
 
 			return view;
 		}
-		
+
+		public override Property this[int position]
+		{
+			get
+			{
+				return data[position];
+			}
+		}
+
+		public override long GetItemId(int position)
+		{
+			return position;
+		}
+
+		public void AddRange(IList<Property> properties)
+		{
+			bool hasChangedData = false;
+			foreach(Property property in properties)
+			{
+				if(!data.Contains(property))
+				{
+					data.Add(property);
+					hasChangedData = true;
+				}
+			}
+			if(hasChangedData)
+			{
+				NotifyDataSetChanged();
+			}
+		}
+
 		private class PropertySearchHolder : Java.Lang.Object
 		{
 			public ImageView PropertyThumbnail { get; set; }
