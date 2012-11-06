@@ -3,8 +3,8 @@ var ko = require("lib/knockout");
 var AbstractApplicationView = require("view/AbstractApplicationView");
 var PropertyViewModel = require("viewModel/PropertyViewModel");
 
-function AndroidApplicationView(applicationViewModel, propertySearchViewModel) {
-	AbstractApplicationView.call(this, applicationViewModel, propertySearchViewModel);
+function AndroidApplicationView(applicationViewModel) {
+	AbstractApplicationView.call(this, applicationViewModel);
 
 	var that = this;
 	var nav;
@@ -44,20 +44,20 @@ function AndroidApplicationView(applicationViewModel, propertySearchViewModel) {
 			});
 			menuItem.addEventListener("click", function(e) {
 				var viewModel = applicationViewModel.currentViewModel();
-				propertySearchViewModel.addToFavourites(viewModel);
+				viewModel.addToFavourites();
 			});
 			menuItem = menu.add({
 				title : "Remove from Favourites"
 			});
 			menuItem.addEventListener("click", function(e) {
 				var viewModel = applicationViewModel.currentViewModel();
-				propertySearchViewModel.addToFavourites(viewModel);
+				viewModel.addToFavourites();
 			});
 			menuItem = menu.add({
 				title : "View Favourites"
 			});
 			menuItem.addEventListener("click", function(e) {
-				propertySearchViewModel.viewFavourites();
+				applicationViewModel.navigateToFavourites();
 			});
 		};
 

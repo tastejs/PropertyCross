@@ -15,7 +15,7 @@ module.exports = function() {
 		/// </summary>
 		var client = Ti.Network.createHTTPClient({
 			onload : function(e) {
-				Titanium.API.log("response(" + this.status + "):" + this.responseText);
+				//Titanium.API.log("response(" + this.status + "):" + this.responseText);
 				callback(JSON.parse(this.responseText));
 			},
 			onerror : function(e) {
@@ -26,7 +26,7 @@ module.exports = function() {
 		var url = uri + "?" + _.map(params, function (value, key) {
 			return key + "=" + value;
 		}).join("&");
-		Titanium.API.log("request:" + url);
+		//Titanium.API.log("request:" + url);
 		client.open("GET", url);
 		client.send();
 	}

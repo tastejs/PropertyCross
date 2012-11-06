@@ -10,7 +10,7 @@ function createRow(imageUrl, title, description) {
 	row.className = 'myrows';
 	// use an image view rather than a plain view
 	row.add(Ti.UI.createImageView({
-		url : imageUrl,
+		image : imageUrl,
 		top : '11dip',
 		left : '6dip',
 		width : '80dip',
@@ -57,10 +57,10 @@ module.exports = function(viewModel) {
 
 	function updateRows(properties) {
 		var rows = _.map(properties, function(property) {
-			return createRow(property.thumbnailUrl, '£ ' + property.price, property.title + ' ' + property.bedrooms + ' bed ' + property.propertyType);
+			return createRow(property.thumbnailUrl(), '£ ' + property.price(), property.title() + ' ' + property.bedrooms() + ' bed ' + property.propertyType());
 		});
 		if (viewModel.properties().length < viewModel.totalResults) {
-			rows.push(createRow("/pull-icon.png", "Tap to load more...", "Results for " + viewModel.searchLocation.displayString + ", showing " + viewModel.properties().length + " of " + viewModel.totalResults + " properties"));
+			rows.push(createRow("/pull-icon.png", "Tap to load more...", "Results for " + viewModel.searchLocation.displayString() + ", showing " + viewModel.properties().length + " of " + viewModel.totalResults + " properties"));
 		}
 		tableView.setData(rows);
 	}

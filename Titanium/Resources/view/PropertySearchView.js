@@ -95,7 +95,6 @@ module.exports = function(viewModel) {
 		viewModel.selectLocation.call(viewModel.recentSearches()[e.index]);
 	});
 	function updateRecentSearches(items) {
-		Titanium.API.log("updateRecentSearches:" + items.length);
 		recentSearchesTableView.setData(_.map(items, function(item) {
 			// create first row
 			var row = Ti.UI.createTableViewRow({
@@ -202,10 +201,15 @@ module.exports = function(viewModel) {
 	locationsView.add(locationsTableView);
 
 	function toggleLocations() {
+		var attached = _.contains(window.children, locationsView);
 		if (viewModel.locations().length > 0) {
-			window.add(locationsView);
+			if (!attached) {
+				window.add(locationsView);
+			}
 		} else {
-			window.remove(locationsView);
+			if (attached) {
+				window.remove(locationsView);
+			}
 		}
 	}
 

@@ -31,14 +31,14 @@ module.exports = function(viewModel) {
 			row.className = 'myrows';
 			// use an image view rather than a plain view
 			row.add(Ti.UI.createImageView({
-				url : property.thumbnailUrl,
+				image : property.thumbnailUrl(),
 				top : '11dip',
 				left : '6dip',
 				width : '80dip',
 				height : '60dip'
 			}));
 			row.add(Titanium.UI.createLabel({
-				text : '£ ' + property.price,
+				text : '£ ' + property.price(),
 				textAlign : 'left',
 				font : {
 					fontSize : '16dip',
@@ -48,7 +48,7 @@ module.exports = function(viewModel) {
 				left : '100dip'
 			}));
 			row.add(Titanium.UI.createLabel({
-				text : property.title + ' ' + property.bedrooms + ' bed ' + property.propertyType,
+				text : property.title() + ' ' + property.bedrooms() + ' bed ' + property.propertyType(),
 				textAlign : 'left',
 				font : {
 					fontSize : '12dip',

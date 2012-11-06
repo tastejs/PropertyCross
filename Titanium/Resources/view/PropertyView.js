@@ -16,7 +16,7 @@ module.exports = function(viewModel) {
 	});
 
 	var price = Titanium.UI.createLabel({
-		text : '£ ' + viewModel.price,
+		text : '£ ' + viewModel.price(),
 		textAlign : 'left',
 		font : {
 			fontSize : '19dip',
@@ -27,7 +27,7 @@ module.exports = function(viewModel) {
 	view.add(price);
 
 	var title = Titanium.UI.createLabel({
-		text : viewModel.title,
+		text : viewModel.title(),
 		textAlign : 'left',
 		font : {
 			fontSize : '16dip'
@@ -37,14 +37,14 @@ module.exports = function(viewModel) {
 	view.add(title);
 
 	var image = Ti.UI.createImageView({
-		image : viewModel.thumbnailUrl,
+		image : viewModel.thumbnailUrl(),
 		height : '50%',
 		width : Ti.UI.FILL
 	});
 	view.add(image);
 
 	var description = Titanium.UI.createLabel({
-		text : viewModel.bedrooms + ' bed ' + viewModel.propertyType,
+		text : viewModel.bedrooms() + ' bed ' + viewModel.propertyType(),
 		textAlign : 'left',
 		font : {
 			fontSize : '16dip'

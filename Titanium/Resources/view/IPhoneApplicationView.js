@@ -5,8 +5,8 @@ var PropertyViewModel = require("viewModel/PropertyViewModel");
 var SearchResultsViewModel = require("viewModel/SearchResultsViewModel");
 var FavouritesViewModel = require("viewModel/FavouritesViewModel");
 
-function IPhoneApplicationView(applicationViewModel, propertySearchViewModel) {
-	AbstractApplicationView.call(this, applicationViewModel, propertySearchViewModel);
+function IPhoneApplicationView(applicationViewModel) {
+	AbstractApplicationView.call(this, applicationViewModel);
 
 	var that = this;
 	var nav;
@@ -25,30 +25,28 @@ function IPhoneApplicationView(applicationViewModel, propertySearchViewModel) {
 			view.window.addEventListener('close', function() {
 				applicationViewModel.back();
 			});
-			nav.open(view.window);
 		}
 		if (!( viewModel instanceof FavouritesViewModel || viewModel instanceof SearchResultsViewModel)) {
 			var favouriteButton = Titanium.UI.createButton();
 			if ( viewModel instanceof PropertyViewModel) {
 				favouriteButton.addEventListener('click', function() {
 					var viewModel = applicationViewModel.currentViewModel();
-					propertySearchViewModel.addToFavourites(viewModel);
+					viewModel.addToFavourites();
 				});
 				function updateFavouriteButton(isFavourite) {
 					favouriteButton.image = isFavourite ? '/yellow-star.png' : '/white-star.png';
 				}
-
-
 				viewModel.isFavourite.subscribe(updateFavouriteButton);
 				updateFavouriteButton(viewModel.isFavourite());
-			} {
+			} else {
 				favouriteButton.title = "Favs";
 				favouriteButton.addEventListener('click', function() {
-					propertySearchViewModel.viewFavourites();
+					applicationViewModel.navigateToFavourites();
 				});
 			}
 			view.window.setRightNavButton(favouriteButton);
 		}
+		nav.open(view.window);
 	};
 
 	this.navigateBackwards = function(view) {

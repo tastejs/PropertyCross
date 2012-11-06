@@ -2,21 +2,19 @@ var _ = require("lib/underscore");
 var ko = require("lib/knockout");
 var util = require("viewModel/util");
 
-function AbstractApplicationView(applicationViewModel, propertySearchViewModel) {
+function AbstractApplicationView(application) {
 	var that = this;
-
-	this.viewStack = [];
+	var previousBackStackLength = 0;
 
 	// subscribe to changes in the current view model, creating
 	// the required view
-	var previousBackStackLength = 0;
-	applicationViewModel.currentViewModel.subscribe(function(viewModel) {
-		var backStackLength = applicationViewModel.viewModelBackStack().length, view;
-
+	application.currentViewModel.subscribe(function(viewModel) {
+		var backStackLength = application.viewModelBackStack().length;
 		if (previousBackStackLength < backStackLength) {
+			var viewName = application.currentView();
+			var upperCamelCase = viewName[0].toUpperCase() + viewName.substr(1);
+			var view = new (require("view/" + upperCamelCase))(viewModel);
 			// forward navigation
-			var upperCamelCase = viewModel.template[0].toUpperCase() + viewModel.template.substr(1);
-			view = new (require("view/" + upperCamelCase))(viewModel);
 			that.navigateForwards(viewModel, view);
 			that.viewStack.push(view);
 		} else {
@@ -27,44 +25,17 @@ function AbstractApplicationView(applicationViewModel, propertySearchViewModel) 
 		}
 
 		previousBackStackLength = backStackLength;
-
 	});
 	
+	this.viewStack = [];
+
 	this.navigateForwards = function(viewModel, view) {
 		// no-op
 	};
-	
+
 	this.navigateBackwards = function(view) {
 		// no-op
 	};
-
-	// handle changes in persistent state
-	function persistentStateChanged() {
-		var state = {
-			recentSearches : propertySearchViewModel.recentSearches,
-			favourites : propertySearchViewModel.favourites
-		}, jsonState = ko.toJSON(state);
-
-		Ti.App.Properties.setString('appState', jsonState);
-	}
-
-
-	propertySearchViewModel.favourites.subscribe(persistentStateChanged);
-	propertySearchViewModel.recentSearches.subscribe(persistentStateChanged);
-
-	var state = Ti.App.Properties.getString('appState');
-	if (state && ( state = JSON.parse(state))) {
-		if (state.favourites) {
-			_.each(state.favourites, function(item) {
-				propertySearchViewModel.favourites.push(util.hydrateObject(item));
-			});
-		}
-		if (state.recentSearches) {
-			_.each(state.recentSearches, function(item) {
-				propertySearchViewModel.recentSearches.push(util.hydrateObject(item));
-			});
-		}
-	}
 }
 
-module.exports = AbstractApplicationView;
+module.exports = AbstractApplicationView;  

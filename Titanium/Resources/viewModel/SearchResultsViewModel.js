@@ -1,9 +1,9 @@
 var _ = require("lib/underscore");
 var ko = require("lib/knockout");
-  var PropertyViewModel = require("./PropertyViewModel");
-  var util = require("./util");
+var PropertyViewModel = require("viewModel/PropertyViewModel");
+var util = require("viewModel/util");
 
-  function SearchResultsViewModel(application) {
+function SearchResultsViewModel(application) {
 
 	var that = this;
 
@@ -14,30 +14,30 @@ var ko = require("lib/knockout");
 	// ----- public properties
 
 	this.isLoading = ko.observable(false);
-    this.totalResults = ko.observable();
+	this.totalResults = ko.observable();
 	this.pageNumber = ko.observable(1);
-    this.searchLocation = ko.observable(undefined)
+	this.searchLocation = ko.observable(undefined)
 	this.properties = ko.observableArray();
 
 	// ----- public functions
 
 	this.initialize = function(searchLocation, results) {
-		_.each(results.data, function(property) {
-        var viewModel = new PropertyViewModel(application);
+		this.properties(_.map(results.data, function(property) {
+			var viewModel = new PropertyViewModel(application);
 			viewModel.initialize(property);
-			that.properties.push(viewModel);
-		});
-      that.searchLocation(searchLocation);
-      that.totalResults(results.totalResults);
+			return viewModel;
+		}));
+		that.searchLocation(searchLocation);
+		that.totalResults(results.totalResults);
 	};
 
 	this.loadMore = function() {
 		this.pageNumber(this.pageNumber() + 1);
 		this.isLoading(true);
-      this.searchLocation().executeSearch(this.pageNumber(), function (results) {
+		this.searchLocation().executeSearch(this.pageNumber(), function(results) {
 			that.isLoading(false);
 			_.each(results.data, function(property) {
-          var viewModel = new PropertyViewModel(application);
+				var viewModel = new PropertyViewModel(application);
 				viewModel.initialize(property);
 				that.properties.push(viewModel);
 			});
