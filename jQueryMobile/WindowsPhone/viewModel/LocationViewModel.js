@@ -1,7 +1,7 @@
 define(function (require, exports, module) {
   var ko = require("lib/knockout");
   var util = require("viewModel/util");
-  
+
   function LocationViewModel(application) {
     /// <summary>
     /// The view model that backs the a search based on a location string

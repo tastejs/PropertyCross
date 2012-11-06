@@ -1,7 +1,7 @@
 define(function (require) {
   var $ = require("lib/jquery");
   var ko = require("lib/knockout");
-  var application = new(require("viewModel/ApplicationViewModel"))();
+  var application = new (require("viewModel/ApplicationViewModel"))();
 
 // a custom bindings which is used to 'refresh' jQueryMobile listviews.
 // See: http://www.scottlogic.co.uk/blog/colin/2012/10/integrating-knockout-and-jquerymobile/
@@ -54,8 +54,9 @@ define(function (require) {
     // for some reason when you add the event listener for the backbutton event, the supplied function
     // is invoked immediately, even though the back button was not pressed. Hence this boolean state
     // variable is used to detect this.
-    application.backButtonRequired.subscribe(function(backButtonRequired) {
+    application.backButtonRequired.subscribe(function (backButtonRequired) {
       var updatingBackButtonListener = true;
+
       function onBackButton() {
         if (updatingBackButtonListener)
           return;
@@ -63,6 +64,7 @@ define(function (require) {
         // manually here
         application.back();
       }
+
       if (backButtonRequired) {
         document.addEventListener("backbutton", onBackButton, false);
       } else {
@@ -72,7 +74,7 @@ define(function (require) {
     });
 
     // handle changes in persistent state
-    application.state.subscribe(function(state) {
+    application.state.subscribe(function (state) {
       localStorage.setItem("appState", state);
     });
 
@@ -82,7 +84,7 @@ define(function (require) {
       try {
         application.setState(state);
       }
-      catch(e) {
+      catch (e) {
         console.warn("Failed to load state", e);
       }
     }

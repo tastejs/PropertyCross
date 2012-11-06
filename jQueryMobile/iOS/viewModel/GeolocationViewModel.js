@@ -9,7 +9,7 @@ define(function (require, exports, module) {
 
     // ----- framework fields
     this.factoryName = "GeolocationViewModel";
-    
+
     // ----- public fields
     this.lat = undefined;
     this.lon = undefined;

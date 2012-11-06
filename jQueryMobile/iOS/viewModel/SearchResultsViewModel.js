@@ -1,8 +1,8 @@
 define(function (require, exports, module) {
   var _ = require("lib/underscore");
   var ko = require("lib/knockout");
-  var PropertyViewModel = require("./PropertyViewModel");
-  var util = require("./util");
+  var PropertyViewModel = require("viewModel/PropertyViewModel");
+  var util = require("viewModel/util");
 
   function SearchResultsViewModel(application) {
 
@@ -23,11 +23,11 @@ define(function (require, exports, module) {
     // ----- public functions
 
     this.initialize = function (searchLocation, results) {
-		_.each(results.data, function(property) {
+      this.properties(_.map(results.data, function (property) {
         var viewModel = new PropertyViewModel(application);
         viewModel.initialize(property);
-			that.properties.push(viewModel);
-      });
+        return viewModel;
+      }));
       that.searchLocation(searchLocation);
       that.totalResults(results.totalResults);
     };
@@ -37,9 +37,9 @@ define(function (require, exports, module) {
       this.isLoading(true);
       this.searchLocation().executeSearch(this.pageNumber(), function (results) {
         that.isLoading(false);
-			_.each(results.data, function(property) {
+        _.each(results.data, function (property) {
           var viewModel = new PropertyViewModel(application);
-				viewModel.initialize(property);
+          viewModel.initialize(property);
           that.properties.push(viewModel);
         });
         that.pageNumber(that.pageNumber() + 1);

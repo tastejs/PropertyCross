@@ -15,14 +15,14 @@ define(function (require, exports, module) {
       /// http://code.google.com/p/jquery-jsonp/
       /// </summary>
       $.jsonp({
-        dataType: "jsonp",
-        data: params,
-        url: uri,
-        timeout: 5000,
-        success: function (result) {
+        dataType:"jsonp",
+        data:params,
+        url:uri,
+        timeout:5000,
+        success:function (result) {
           callback(result);
         },
-        error: function (jqXHR, textStatus, errorThrown) {
+        error:function (jqXHR, textStatus, errorThrown) {
           errorCallback("datasource error [" + textStatus + "] [" + errorThrown + "]");
         }
       });
@@ -36,14 +36,14 @@ define(function (require, exports, module) {
       /// </summary>
       var query = "http://api.nestoria.co.uk/api",
           params = {
-            country: "uk",
-            pretty: "1",
-            action: "search_listings",
-            encoding: "json",
-            listing_type: "buy",
-            page: pageNumber,
-            place_name: location,
-            callback: "_jqjsp"
+            country:"uk",
+            pretty:"1",
+            action:"search_listings",
+            encoding:"json",
+            listing_type:"buy",
+            page:pageNumber,
+            place_name:location,
+            callback:"_jqjsp"
           };
 
       ajaxRequest(query, params, callback, errorCallback);
@@ -55,14 +55,14 @@ define(function (require, exports, module) {
       /// </summary>
       var query = "http://api.nestoria.co.uk/api",
           params = {
-            country: "uk",
-            pretty: "1",
-            action: "search_listings",
-            encoding: "json",
-            listing_type: "buy",
-            page: pageNumber,
-            centre_point: latitude + "," + longitude,
-            callback: "_jqjsp"
+            country:"uk",
+            pretty:"1",
+            action:"search_listings",
+            encoding:"json",
+            listing_type:"buy",
+            page:pageNumber,
+            centre_point:latitude + "," + longitude,
+            callback:"_jqjsp"
           };
 
       ajaxRequest(query, params, callback, errorCallback);

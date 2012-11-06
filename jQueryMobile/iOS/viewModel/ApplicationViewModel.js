@@ -13,7 +13,7 @@
 
     // ----- public fields
     // data stores
-    this.propertyDataSource = new(require("model/PropertyDataSource"))();
+    this.propertyDataSource = new (require("model/PropertyDataSource"))();
     this.favourites = ko.observableArray();
     this.recentSearches = ko.observableArray();
     this.maxRecentSearch = 5;
@@ -104,10 +104,10 @@
       }
     };
 
-    this.state = ko.computed(function() {
+    this.state = ko.computed(function () {
       var state = {
-        recentSearches: this.recentSearches(),
-        favourites: this.favourites()
+        recentSearches:this.recentSearches(),
+        favourites:this.favourites()
       };
       return ko.toJSON(state);
     }, this);

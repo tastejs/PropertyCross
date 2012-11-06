@@ -4,11 +4,11 @@
   var viewModels = {};
 
   module.exports = {
-    registerFactory: function (name, factory) {
+    registerFactory:function (name, factory) {
       viewModels[name] = factory;
     },
 
-    hydrateObject: function hydrateObject(application, state) {
+    hydrateObject:function hydrateObject(application, state) {
       /// <summary>
       /// Takes a JSON representation of view model state and creates view model instances
       /// via their constructor function as indicated by the 'factoryName' property.
@@ -16,13 +16,13 @@
 
       // if state is a primitive type, rather than an object - no 
       // need to hydrate;
-		if ( !_.isObject(state) ) {
+      if (!_.isObject(state)) {
         return state;
       }
 
       var property, unwrapped, propertyValue,
       // create the required view model instance
-        viewModel = new viewModels[state.factoryName](application);
+          viewModel = new viewModels[state.factoryName](application);
 
       // iterate over each state property
       for (property in state) {
@@ -32,7 +32,7 @@
         if (ko.isWriteableObservable(viewModel[property])) {
           unwrapped = ko.utils.unwrapObservable(viewModel[property]);
           // check if this is an array observable
-					if ( _.isArray(unwrapped)) {
+          if (_.isArray(unwrapped)) {
             _.each(propertyValue, function (value) {
               viewModel[property].push(hydrateObject(application, value));
             });
@@ -41,7 +41,7 @@
             viewModel[property](propertyValue);
           }
 
-        } else if (! _.isFunction(viewModel[property])) {
+        } else if (!_.isFunction(viewModel[property])) {
           viewModel[property] = hydrateObject(application, propertyValue);
         }
       }

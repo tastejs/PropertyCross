@@ -20,9 +20,9 @@ define(function (require, exports, module) {
     this.guid = ko.observable();
     this.summary = ko.observable();
     this.title = ko.observable();
-    this.isFavourite = ko.computed(function() {
-        return !!application.getFavouriteByGuid(this.guid());
-      }, this);
+    this.isFavourite = ko.computed(function () {
+      return !!application.getFavouriteByGuid(this.guid());
+    }, this);
 
     // ----- public functions
 
@@ -57,7 +57,7 @@ define(function (require, exports, module) {
       application.navigateToProperty(this);
     };
 
-    this.addToFavourites = function() {
+    this.addToFavourites = function () {
       /// <summary>
       /// Adds this property to the favourites list
       /// </summary>

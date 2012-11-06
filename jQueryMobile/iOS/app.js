@@ -1,7 +1,7 @@
 define(function (require) {
   var $ = require("lib/jquery");
   var ko = require("lib/knockout");
-  var application = new(require("viewModel/ApplicationViewModel"))();
+  var application = new (require("viewModel/ApplicationViewModel"))();
 
 // a custom bindings which is used to 'refresh' jQueryMobile listviews.
 // See: http://www.scottlogic.co.uk/blog/colin/2012/10/integrating-knockout-and-jquerymobile/
@@ -54,7 +54,7 @@ define(function (require) {
     });
 
     // handle changes in persistent state
-    application.state.subscribe(function(state) {
+    application.state.subscribe(function (state) {
       localStorage["appState"] = state;
     });
 
@@ -64,7 +64,7 @@ define(function (require) {
       try {
         application.setState(state);
       }
-      catch(e) {
+      catch (e) {
         console.warn("Failed to load state", e);
       }
     }

@@ -5,7 +5,7 @@ define(function (require, exports, module) {
   var LocationViewModel = require("viewModel/LocationViewModel");
   var GeolocationViewModel = require("viewModel/GeolocationViewModel");
   var util = require("viewModel/util");
-  
+
   function PropertySearchViewModel(application) {
     /// <summary>
     /// The 'top level' property search view model.
@@ -13,7 +13,7 @@ define(function (require, exports, module) {
 
     // ----- private fields
     var synchroniseSearchStrings = true,
-      that = this;
+        that = this;
 
     // ----- framework fields
     this.template = "propertySearchView";
@@ -74,9 +74,9 @@ define(function (require, exports, module) {
 
           // if the location was ambiguous, display the list of options
           that.locations.removeAll();
-				_.forEach(results.data, function(item) {
+          _.forEach(results.data, function (item) {
             var viewModel = new LocationViewModel(application);
-					viewModel.initialiseDisambiguated(item);
+            viewModel.initialiseDisambiguated(item);
             that.locations.push(viewModel);
           });
 

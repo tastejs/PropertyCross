@@ -1,7 +1,7 @@
 ﻿define(function (require, exports, module) {
   module.exports = {
-    propertiesFound: 1,
-    ambiguousLocation: 2,
-    unknownLocation: 3
+    propertiesFound:1,
+    ambiguousLocation:2,
+    unknownLocation:3
   };
 });
