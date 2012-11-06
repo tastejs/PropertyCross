@@ -10,6 +10,7 @@ PropertyCross makes use of the Nestoria APIs for searching property listings. Th
 * [Search Results Page](#search-results-page)
 * [Property Listing Page](#property-listing-page)
 * [Favourites Page](#favourites-page)
+* [Misc](#misc)
 
 ##Property Search Page
 
@@ -130,6 +131,6 @@ Tapping on a property navigates to the Property Listing page.
 
 It should be possible to navigate from this page back to the Property Search page via a button or hardware back button depending on target platform.
 
-
+##Misc
 
 Screen mock-ups created via Balsamiq: https://propertycross.mybalsamiq.com
