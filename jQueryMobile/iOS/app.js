@@ -76,10 +76,10 @@ define(function (require) {
   // startup the app
   $(function () {
     if (window.device) {
+      // on a device - wait for the PhoneGap device ready event
       document.addEventListener("deviceready", initialize, false);
     } else {
-      // if there is no 'device' immediately create the view models. This is useful
-      // for browser-based testing
+      // if there is we are not running on a phone - start the app immediately
       initialize();
     }
   });

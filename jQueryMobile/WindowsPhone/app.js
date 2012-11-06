@@ -92,16 +92,14 @@ define(function (require) {
     // navigate to home
     application.navigateToHome();
   }
-
-// start the app
-  var browserUA = navigator.userAgent.toLowerCase();
-  if (browserUA.search('windows phone os 7') > -1) {
-    // on a device - wait for the PhoneGap device ready event
-    document.addEventListener("deviceready", initialize, false);
-  } else {
-    // if there is we are not running on a phone - start the app immediately
-    $(document).ready(function () {
+  // startup the app
+  $(function () {
+    if (window.device) {
+      // on a device - wait for the PhoneGap device ready event
+      document.addEventListener("deviceready", initialize, false);
+    } else {
+      // if there is we are not running on a phone - start the app immediately
       initialize();
-    });
-  }
+    }
+  });
 });
