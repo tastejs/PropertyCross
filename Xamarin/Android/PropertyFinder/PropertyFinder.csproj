@@ -83,15 +83,21 @@
     <AndroidResource Include="Resources\layout\load_more_footer.axml" />
     <AndroidResource Include="Resources\layout\property_view.axml" />
     <AndroidResource Include="Resources\menu\favourites_toggle.xml" />
-    <AndroidResource Include="Resources\drawable-hdpi\star.png" />
-    <AndroidResource Include="Resources\drawable-mdpi\star.png" />
-    <AndroidResource Include="Resources\drawable-xhdpi\star.png" />
-    <AndroidResource Include="Resources\drawable-xhdpi\nostar.png" />
-    <AndroidResource Include="Resources\drawable-mdpi\nostar.png" />
-    <AndroidResource Include="Resources\drawable-hdpi\nostar.png" />
     <AndroidResource Include="Resources\drawable-v14\actionbar_background.xml" />
     <AndroidResource Include="Resources\drawable\actionbar_background.xml" />
     <AndroidResource Include="Resources\drawable-mdpi\actionbar_tile.png" />
+    <AndroidResource Include="Resources\drawable-hdpi-v11\nostar.png" />
+    <AndroidResource Include="Resources\drawable-hdpi-v11\star.png" />
+    <AndroidResource Include="Resources\drawable-mdpi-v11\nostar.png" />
+    <AndroidResource Include="Resources\drawable-mdpi-v11\star.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi-v11\nostar.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi-v11\star.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\nostar.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\star.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\nostar.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\star.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\nostar.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\star.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\Common\Model\IJsonPropertySearch.cs">
@@ -188,6 +194,9 @@
     <Folder Include="Resources\drawable-xhdpi\" />
     <Folder Include="Resources\drawable-v14\" />
     <Folder Include="Resources\drawable\" />
+    <Folder Include="Resources\drawable-hdpi-v11\" />
+    <Folder Include="Resources\drawable-mdpi-v11\" />
+    <Folder Include="Resources\drawable-xhdpi-v11\" />
   </ItemGroup>
   <ItemGroup>
     <AndroidJavaLibrary Include="SupportLib\android-support-v4.jar" />
