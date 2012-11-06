@@ -11,6 +11,8 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using PropertyFinder.Model;
+using Android.Graphics.Drawables;
+using Android.Graphics;
 
 namespace PropertyFinder
 {
@@ -18,19 +20,21 @@ namespace PropertyFinder
 	{
 		private Context context;
 		private IList<Property> data;
-		
+		private Bitmap placeholder;
+
 		public SearchResultsAdapter (Context c, IList<Property> d)
 			: base(c, Android.Resource.Layout.SimpleListItem1, d)
 		{
 			this.context = c;
 			this.data = d;
+			placeholder = BitmapFactory.DecodeResource(context.Resources, Resource.Drawable.Icon);
 		}
 
 		public override int Count
 		{
 			get { return data.Count; }
 		}
-		
+
 		public override View GetView(int position, View convertView, ViewGroup parent)
 		{
 			View view = convertView;
@@ -51,7 +55,7 @@ namespace PropertyFinder
 			}
 			else
 			{
-				holder = (PropertySearchHolder) view.GetTag(Resource.Layout.recent_search_row);
+				holder = (PropertySearchHolder)view.GetTag(Resource.Layout.recent_search_row);
 			}
 			
 			Property item = data[position];
@@ -63,10 +67,14 @@ namespace PropertyFinder
 				item.Bedrooms,
 				item.PropertyType);
 
+			if(BitmapUtils.CancelPotentialDownload(item.ImageUrl, holder.PropertyThumbnail))
+			{
+				var task = new DownloadImageTask(holder.PropertyThumbnail);
+				var drawable = new AsyncDrawable(context.Resources, placeholder, task);
+				holder.PropertyThumbnail.SetImageDrawable(drawable);
+				task.Execute(item.ImageUrl);
+			}
 
-			var task = new DownloadImageTask(holder.PropertyThumbnail);
-			task.Execute(item.ImageUrl);
-			
 			return view;
 		}
 		

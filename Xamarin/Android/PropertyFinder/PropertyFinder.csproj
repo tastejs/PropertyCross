@@ -63,6 +63,8 @@
     <Compile Include="Utils\DownloadImageTask.cs" />
     <Compile Include="Views\PropertyView.cs" />
     <Compile Include="Views\FavouritesView.cs" />
+    <Compile Include="Utils\BitmapUtils.cs" />
+    <Compile Include="Utils\AsyncDrawable.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
