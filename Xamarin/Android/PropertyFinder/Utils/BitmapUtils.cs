@@ -1,12 +1,25 @@
 using System;
 using Android.Widget;
 using Android.Graphics.Drawables;
+using Android.Graphics;
+using Android.Content.Res;
 
 namespace PropertyFinder
 {
 	public static class BitmapUtils
 	{
-		public static bool CancelPotentialDownload(string url, ImageView imageView)
+		public static void Download(string url, ImageView imageView, Resources resources, Bitmap placeholder)
+		{
+			if(CancelPotentialDownload(url, imageView))
+			{
+				var task = new DownloadImageTask(imageView);
+				var drawable = new AsyncDrawable(resources, placeholder, task);
+				imageView.SetImageDrawable(drawable);
+				task.Execute(url);
+			}
+		}
+
+		private static bool CancelPotentialDownload(string url, ImageView imageView)
 		{
 			DownloadImageTask task = GetTask(imageView);
 			if (task != null)

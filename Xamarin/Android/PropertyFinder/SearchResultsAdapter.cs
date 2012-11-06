@@ -67,13 +67,7 @@ namespace PropertyFinder
 				item.Bedrooms,
 				item.PropertyType);
 
-			if(BitmapUtils.CancelPotentialDownload(item.ImageUrl, holder.PropertyThumbnail))
-			{
-				var task = new DownloadImageTask(holder.PropertyThumbnail);
-				var drawable = new AsyncDrawable(context.Resources, placeholder, task);
-				holder.PropertyThumbnail.SetImageDrawable(drawable);
-				task.Execute(item.ImageUrl);
-			}
+			BitmapUtils.Download(item.ImageUrl, holder.PropertyThumbnail, Context.Resources, placeholder);
 
 			return view;
 		}

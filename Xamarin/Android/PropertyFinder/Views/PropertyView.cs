@@ -13,6 +13,7 @@ using Android.Widget;
 using PropertyFinder.Model;
 using PropertyFinder.Presenter;
 using Android.Support.V4.App;
+using Android.Graphics;
 
 namespace PropertyFinder
 {
@@ -24,6 +25,7 @@ namespace PropertyFinder
 		private TextView locationText;
 		private ImageView propertyImage;
 		private TextView summaryText;
+		private Bitmap placeholder;
 
 		protected override void OnCreate(Bundle bundle)
 		{
@@ -34,6 +36,8 @@ namespace PropertyFinder
 			locationText = (TextView) FindViewById(Resource.Id.property_location);
 			propertyImage = (ImageView) FindViewById(Resource.Id.property_image);
 			summaryText = (TextView) FindViewById(Resource.Id.property_details);
+
+			placeholder = BitmapFactory.DecodeResource(Resources, Resource.Drawable.Icon);
 
 			var app = (PropertyFinderApplication)Application;
 			presenter = (PropertyPresenter) app.Presenter;
@@ -75,6 +79,8 @@ namespace PropertyFinder
 		{
 			priceText.Text = property.FormattedPrice;
 			locationText.Text = property.ShortTitle;
+
+			BitmapUtils.Download(property.ImageUrl, propertyImage, Resources, placeholder);
 
 			var task = new DownloadImageTask(propertyImage);
 			task.Execute(property.ImageUrl);
