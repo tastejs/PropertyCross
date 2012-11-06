@@ -42,12 +42,12 @@
             <uses-sdk targetSdkVersion="14"/>
             <application android:debuggable="false"
                 android:icon="@drawable/appicon"
-                android:label="Property Finder" android:name="PropertyFinderApplication">
+                android:label="Property Cross" android:name="PropertycrossApplication">
                 <!-- TI_APPLICATION -->
                 <activity
                     android:configChanges="keyboardHidden|orientation"
-                    android:label="Property Finder"
-                    android:name=".PropertyFinderActivity" android:theme="@style/Theme.MyTheme">
+                    android:label="Property Cross"
+                    android:name=".PropertycrossActivity" android:theme="@style/Theme.MyTheme">
                     <intent-filter>
                         <action android:name="android.intent.action.MAIN"/>
                         <category android:name="android.intent.category.LAUNCHER"/>
