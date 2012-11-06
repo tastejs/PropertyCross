@@ -92,7 +92,6 @@
     <AndroidResource Include="Resources\drawable-v14\actionbar_background.xml" />
     <AndroidResource Include="Resources\drawable\actionbar_background.xml" />
     <AndroidResource Include="Resources\drawable-mdpi\actionbar_tile.png" />
-    <AndroidResource Include="Resources\layout-land\PropertyFinderView.axml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\Common\Model\IJsonPropertySearch.cs">
@@ -189,7 +188,6 @@
     <Folder Include="Resources\drawable-xhdpi\" />
     <Folder Include="Resources\drawable-v14\" />
     <Folder Include="Resources\drawable\" />
-    <Folder Include="Resources\layout-land\" />
   </ItemGroup>
   <ItemGroup>
     <AndroidJavaLibrary Include="SupportLib\android-support-v4.jar" />
