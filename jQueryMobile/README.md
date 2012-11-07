@@ -25,13 +25,5 @@ PhoneGap Build can host public projects if each build is hosted in it's own Gith
 * [iOS Version](https://github.com/chrisprice/PropertyCross-jQM-iOS)
 * [Windows Phone Version](https://github.com/chrisprice/PropertyCross-jQM-WindowsPhone)
 
-Conclusions
-===========
-
-TODO: expand
- - In order to deliver WP look and feel needed to duplicate the HTML
- - No decent Android support
- - iOS UI is no real match for native
- - If the WP UI was not specialised the app would have ~100% code share
 
 
