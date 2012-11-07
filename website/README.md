@@ -1,0 +1,53 @@
+# Website
+
+This folder contains comntent that will eventually be used within the website.
+
+# Native
+
+# Xamarin
+
+## Overview
+
+Xamarin have two commercial products, _MonoTouch_ for iOS development and _Mono for Android_. The Xamarin frameworks allow you to write applications using C# and the .NET framework. For each platform Xamarin provide bindings to the native platform APIs. As a result Xamarin applications make use of the native UI for each mobile platform. Xamarin do not provide a Windows Phone product because the C# and .NET code used for Android and iOS development is natively portable to Windows Phone.
+
+The PropertyCross implementation makes use of the Model View Presenter (MVP) pattern in order to share as much UI logic as possible. The Model and Presenter code is shared across all three mobile platforms, with the View code, which makes use of native UI components, being distinct for each platform. This is reflected in the code-sharing statistics.
+
+For build instructions see: https://github.com/ColinEberhardt/PropertyFinderCrossPlatform/tree/master/Xamarin
+
+## Screenshots
+
+_see subfolders ..._
+
+## Code sharing metrics
+
+<table>
+  <tr>
+    <th>Component</th>
+    <th>Bytes</th>
+    <th>%age</th>
+  </tr>
+  <tr>
+    <th>Common</th>
+    <td>-</td>
+    <td>-</td>
+  </tr>
+  <tr>
+    <th>Android</th>
+    <td>-</td>
+    <td>-</td>
+  </tr>
+  <tr>
+    <th>Windows Phone</th>
+    <td>-</td>
+    <td>-</td>
+  </tr>
+  <tr>
+    <th>iOS</th>
+    <td>-</td>
+    <td>-</td>
+  </tr>
+</table>
+
+# jQuery Mobile
+
+# Titanium
