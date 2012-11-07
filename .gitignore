@@ -12,3 +12,11 @@
 *.xcbkptlist
 .*
 
+/Xamarin/WindowsPhone/packages/SilverlightToolkitWP.4.2012.10.9
+/Xamarin/WindowsPhone/packages/Newtonsoft.Json.4.5.10
+/Native/WindowsPhone/packages/SilverlightToolkitWP.4.2012.10.9
+/Native/WindowsPhone/packages/Newtonsoft.Json.4.5.10
+/Xamarin/WindowsPhone/PropertyFinder/Toolkit.Content
+/Native/WindowsPhone/PropertyFinder/Toolkit.Content
+/Native/WindowsPhone/*.suo
+/Native/WindowsPhone/PropertyFinder/PropertyFinder.csproj.user
