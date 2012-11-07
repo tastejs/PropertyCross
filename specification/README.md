@@ -129,6 +129,8 @@ The favourites page renders a list of the properties that the user has ‘favour
 
 Tapping on a property navigates to the Property Listing page.
 
+If there are no favourites currently available, the page should display the message "You have not added any properties to your favourites".
+
 It should be possible to navigate from this page back to the Property Search page via a button or hardware back button depending on target platform.
 
 ##Misc
