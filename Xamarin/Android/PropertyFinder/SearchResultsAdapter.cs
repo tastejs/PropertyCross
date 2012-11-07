@@ -26,7 +26,7 @@ namespace PropertyFinder
 		{
 			this.context = c;
 			this.data = d;
-			placeholder = BitmapFactory.DecodeResource(context.Resources, Resource.Drawable.Icon);
+			placeholder = BitmapFactory.DecodeResource(context.Resources, Resource.Drawable.ic_launcher);
 		}
 
 		public override int Count

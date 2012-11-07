@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="app_name">PropertyFinder</string>
+	<string name="app_name">PropertyCross</string>
 	<string name="search_description">Use the form below to search for houses to buy:</string>
 	<string name="do_search_text">Go</string>
 	<string name="use_location_text">My Location</string>

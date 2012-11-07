@@ -38,7 +38,7 @@ namespace PropertyFinder
 			priceText = (TextView) FindViewById(Resource.Id.property_price);
 			overviewText = (TextView) FindViewById(Resource.Id.property_overview);
 
-			placeholder = BitmapFactory.DecodeResource(Resources, Resource.Drawable.Icon);
+			placeholder = BitmapFactory.DecodeResource(Resources, Resource.Drawable.ic_launcher);
 
 			var app = (PropertyFinderApplication)Application;
 			presenter = (PropertyPresenter) app.Presenter;

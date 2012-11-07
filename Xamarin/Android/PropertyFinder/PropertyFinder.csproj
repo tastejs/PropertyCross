@@ -73,7 +73,6 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
-    <AndroidResource Include="Resources\drawable\Icon.png" />
     <AndroidResource Include="Resources\layout\PropertyFinderView.axml" />
     <AndroidResource Include="Resources\layout\recent_search_row.axml" />
     <AndroidResource Include="Resources\menu\favourites_view.xml" />
@@ -98,6 +97,11 @@
     <AndroidResource Include="Resources\drawable-mdpi\star.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\nostar.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\star.png" />
+    <AndroidResource Include="Resources\drawable\ic_launcher.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_launcher.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\ic_launcher.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_launcher.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_launcher.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\Common\Model\IJsonPropertySearch.cs">
@@ -197,6 +201,7 @@
     <Folder Include="Resources\drawable-hdpi-v11\" />
     <Folder Include="Resources\drawable-mdpi-v11\" />
     <Folder Include="Resources\drawable-xhdpi-v11\" />
+    <Folder Include="Resources\drawable-ldpi\" />
   </ItemGroup>
   <ItemGroup>
     <AndroidJavaLibrary Include="SupportLib\android-support-v4.jar" />
