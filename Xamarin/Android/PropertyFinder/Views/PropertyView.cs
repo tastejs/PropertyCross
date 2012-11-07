@@ -25,7 +25,7 @@ namespace PropertyFinder
 		private TextView locationText;
 		private ImageView propertyImage;
 		private TextView overviewText;
-		private TextView descriptionText;
+		private TextView informationText;
 		private Bitmap placeholder;
 
 		protected override void OnCreate(Bundle bundle)
@@ -37,6 +37,7 @@ namespace PropertyFinder
 			locationText = (TextView)FindViewById(Resource.Id.property_location);
 			propertyImage = (ImageView) FindViewById(Resource.Id.property_image);
 			overviewText = (TextView) FindViewById(Resource.Id.property_overview);
+			informationText = (TextView) FindViewById(Resource.Id.property_information);
 
 			placeholder = BitmapFactory.DecodeResource(Resources, Resource.Drawable.ic_launcher);
 
@@ -87,6 +88,8 @@ namespace PropertyFinder
 				Resources.GetString(Resource.String.property_details),
 				property.BedBathroomText,
 				property.PropertyType);
+
+			informationText.Text = property.Summary;
 		}
 
 		private bool _fave;

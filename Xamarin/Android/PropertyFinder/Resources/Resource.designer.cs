@@ -49,26 +49,29 @@ namespace PropertyFinder
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f07000c
-			public const int do_search = 2131165196;
-			
-			// aapt resource value: 0x7f070013
-			public const int favourites_add_item = 2131165203;
+			// aapt resource value: 0x7f07000d
+			public const int do_search = 2131165197;
 			
 			// aapt resource value: 0x7f070014
-			public const int favourites_remove_item = 2131165204;
+			public const int favourites_add_item = 2131165204;
 			
 			// aapt resource value: 0x7f070015
-			public const int favourites_view_item = 2131165205;
+			public const int favourites_remove_item = 2131165205;
 			
-			// aapt resource value: 0x7f07000e
-			public const int mainview_message = 2131165198;
+			// aapt resource value: 0x7f070016
+			public const int favourites_view_item = 2131165206;
 			
-			// aapt resource value: 0x7f070009
-			public const int progress = 2131165193;
+			// aapt resource value: 0x7f07000f
+			public const int mainview_message = 2131165199;
+			
+			// aapt resource value: 0x7f07000a
+			public const int progress = 2131165194;
 			
 			// aapt resource value: 0x7f070007
 			public const int property_image = 2131165191;
+			
+			// aapt resource value: 0x7f070009
+			public const int property_information = 2131165193;
 			
 			// aapt resource value: 0x7f070006
 			public const int property_location = 2131165190;
@@ -88,32 +91,32 @@ namespace PropertyFinder
 			// aapt resource value: 0x7f070002
 			public const int property_thumb = 2131165186;
 			
-			// aapt resource value: 0x7f07000a
-			public const int propview = 2131165194;
+			// aapt resource value: 0x7f07000b
+			public const int propview = 2131165195;
+			
+			// aapt resource value: 0x7f070013
+			public const int recent_search_count = 2131165203;
 			
 			// aapt resource value: 0x7f070012
-			public const int recent_search_count = 2131165202;
-			
-			// aapt resource value: 0x7f070011
-			public const int recent_search_text = 2131165201;
-			
-			// aapt resource value: 0x7f07000f
-			public const int recentsearches_header = 2131165199;
+			public const int recent_search_text = 2131165202;
 			
 			// aapt resource value: 0x7f070010
-			public const int recentsearches_list = 2131165200;
+			public const int recentsearches_header = 2131165200;
+			
+			// aapt resource value: 0x7f070011
+			public const int recentsearches_list = 2131165201;
 			
 			// aapt resource value: 0x7f070001
 			public const int result_details = 2131165185;
 			
-			// aapt resource value: 0x7f07000b
-			public const int search = 2131165195;
+			// aapt resource value: 0x7f07000c
+			public const int search = 2131165196;
 			
 			// aapt resource value: 0x7f070000
 			public const int tap_loadmore = 2131165184;
 			
-			// aapt resource value: 0x7f07000d
-			public const int use_location = 2131165197;
+			// aapt resource value: 0x7f07000e
+			public const int use_location = 2131165198;
 			
 			private Id()
 			{
