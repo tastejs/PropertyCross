@@ -21,9 +21,9 @@ namespace PropertyFinder
 	public class PropertyView : Activity, PropertyPresenter.View
 	{		
 		private PropertyPresenter presenter;
-		private TextView titleText;
+		private TextView priceText; 
+		private TextView locationText;
 		private ImageView propertyImage;
-		private TextView priceText;
 		private TextView overviewText;
 		private TextView descriptionText;
 		private Bitmap placeholder;
@@ -33,9 +33,9 @@ namespace PropertyFinder
 			base.OnCreate(bundle);
 
 			SetContentView(Resource.Layout.property_view);
-			titleText = (TextView)FindViewById(Resource.Id.property_title);
-			propertyImage = (ImageView) FindViewById(Resource.Id.property_image);
 			priceText = (TextView) FindViewById(Resource.Id.property_price);
+			locationText = (TextView)FindViewById(Resource.Id.property_location);
+			propertyImage = (ImageView) FindViewById(Resource.Id.property_image);
 			overviewText = (TextView) FindViewById(Resource.Id.property_overview);
 
 			placeholder = BitmapFactory.DecodeResource(Resources, Resource.Drawable.ic_launcher);
@@ -78,11 +78,10 @@ namespace PropertyFinder
 
 		public void SetProperty(Property property)
 		{
-			titleText.Text = property.ShortTitle;
+			priceText.Text = property.FormattedPrice;
+			locationText.Text = property.ShortTitle;
 
 			BitmapUtils.Download(property.ImageUrl, propertyImage, Resources, placeholder);
-
-			priceText.Text = property.FormattedPrice;
 
 			overviewText.Text = Java.Lang.String.Format(
 				Resources.GetString(Resource.String.property_details),

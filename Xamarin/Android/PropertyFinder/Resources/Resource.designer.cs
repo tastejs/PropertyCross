@@ -67,14 +67,17 @@ namespace PropertyFinder
 			// aapt resource value: 0x7f070009
 			public const int progress = 2131165193;
 			
+			// aapt resource value: 0x7f070007
+			public const int property_image = 2131165191;
+			
 			// aapt resource value: 0x7f070006
-			public const int property_image = 2131165190;
+			public const int property_location = 2131165190;
 			
 			// aapt resource value: 0x7f070008
 			public const int property_overview = 2131165192;
 			
-			// aapt resource value: 0x7f070007
-			public const int property_price = 2131165191;
+			// aapt resource value: 0x7f070005
+			public const int property_price = 2131165189;
 			
 			// aapt resource value: 0x7f070003
 			public const int property_search_details = 2131165187;
@@ -84,9 +87,6 @@ namespace PropertyFinder
 			
 			// aapt resource value: 0x7f070002
 			public const int property_thumb = 2131165186;
-			
-			// aapt resource value: 0x7f070005
-			public const int property_title = 2131165189;
 			
 			// aapt resource value: 0x7f07000a
 			public const int propview = 2131165194;
