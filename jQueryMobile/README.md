@@ -20,6 +20,11 @@ Because jQuery Mobile uses HTML / JavaScript all the various applications can be
 to build the application for the app store you can use the PhoneGap Build (https://build.phonegap.com/) service. Each version
 of the application has a config.xml file which PhoneGap Build uses to configure the application.
 
+PhoneGap Build can host public projects if each build is hosted in it's own Github public repository. Unfortunately that's not how this project is structured so it's neccessary to use proxy repositories. Instructions for doing this along with example repositories can be found at -
+
+* [iOS Version](https://github.com/chrisprice/PropertyCross-jQM-iOS)
+* [Windows Phone Version](https://github.com/chrisprice/PropertyCross-jQM-WindowsPhone)
+
 Conclusions
 ===========
 
