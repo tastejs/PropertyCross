@@ -66,7 +66,7 @@ namespace PropertyFinder
 				item.Bedrooms,
 				item.PropertyType);
 
-			BitmapUtils.Download(item.ImageUrl, holder.PropertyThumbnail, context.Resources, placeholder);
+			BitmapUtils.Download(item.ThumbnailUrl, holder.PropertyThumbnail, context.Resources, placeholder);
 
 			return view;
 		}
