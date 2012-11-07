@@ -16,8 +16,7 @@ function find(root, filter, callback) {
       var stats = fs.statSync(itemPath);
       if (!filter(item, itemPath, stats)) {
         return;
-      }
-      if (stats.isDirectory()) {
+      } else if (stats.isDirectory()) {
         return innerFind(itemPath);
       } else {
         return itemPath;
