@@ -4,6 +4,8 @@ This specification details the form and functionality of the PropertyCross appli
 
 PropertyCross makes use of the Nestoria APIs for searching property listings. This specification details how these APIs should be used.
 
+All versions of the application shoudl be fixed to a portrait orientation.
+
 ##Contents
 
 * [Property Search Page](#property-search-page)
