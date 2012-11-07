@@ -58,7 +58,7 @@
         <RowDefinition Height="*"/>
       </Grid.RowDefinitions>
 
-      <TextBlock Text="UK Property Finder"
+      <TextBlock Text="Property Finder"
                  FontSize="{StaticResource PhoneFontSizeLarge}"
                  Margin="0,30,0,0"/>
 
