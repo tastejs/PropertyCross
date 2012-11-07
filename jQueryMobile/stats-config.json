@@ -1,0 +1,15 @@
+{
+  "shared": [
+    "iOS/model/*.js",
+    "iOS/viewModel/*.js"
+  ],
+  "iOS":[
+    "iOS/app.js",
+    "iOS/index.html"
+  ],
+  "Android": null,
+  "WindowsPhone":[
+    "WindowsPhone/app.js",
+    "WindowsPhone/index.html"
+  ]
+}
