@@ -1,8 +1,5 @@
 {
-  "shared": [
-    "iOS/model/*.js",
-    "iOS/viewModel/*.js"
-  ],
+  "shared": "Common/*.js",
   "iOS":[
     "iOS/app.js",
     "iOS/index.html"
