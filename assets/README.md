@@ -1,6 +1,6 @@
 # Assets
 
-This folder contains a number of assets that are used across the rarious implementations
+This folder contains a number of assets that are used across the various implementations
 
 ## Icons
 
