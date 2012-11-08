@@ -20,3 +20,5 @@
 /Native/WindowsPhone/PropertyFinder/Toolkit.Content
 /Native/WindowsPhone/*.suo
 /Native/WindowsPhone/PropertyFinder/PropertyFinder.csproj.user
+
+node_modules
