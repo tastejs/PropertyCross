@@ -20,7 +20,7 @@ function countChars(root, filter, callback) {
   }
   find(root, filter, function (files) {
     var count = files.map(function(file) {
-      return fs.readFileSync(file).length;
+      return fs.readFileSync(file).toString().match(/\n/g).length;
     }).reduce(function (sum, chars) {
           return sum + chars;
         }, 0);
