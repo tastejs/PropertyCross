@@ -17,26 +17,26 @@ The Apps
   </tr>
   <tr>
     <th>Native</th>
-    <td>?</td>
+    <td>Y</td>
     <td>~</td>
-    <td>?</td>
+    <td>Y</td>
   </tr>
   <tr>
     <th>jQueryMobile</th>
-    <td>?</td>
+    <td>Y</td>
     <td>~</td>
-    <td>?</td>
+    <td>Y</td>
   </tr>
   <tr>
     <th>Xamarin / Mono</th>
-    <td>?</td>
+    <td>Y</td>
     <td>~</td>
-    <td>?</td>
+    <td>Y</td>
   </tr>
   <tr>
     <th>Titanium</th>
-    <td>?</td>
-    <td>?</td>
+    <td>Y</td>
+    <td>Y</td>
     <td>n/a</td>
   </tr>
   <tr>
@@ -53,7 +53,7 @@ The Apps
   </tr>
 </table>
 
-? = implemented, x = not yet implemented, ~ = in progress, n/a = not supported by the framework
+Y = implemented, x = not yet implemented, ~ = in progress, n/a = not supported by the framework
 
 # Application Details
 
