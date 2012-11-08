@@ -23,11 +23,12 @@
 
   <!-- jquery mobile styling -->
   <link rel="stylesheet" href="lib/jquery.mobile-1.2.0.min.css" />
-  <link rel="stylesheet" href="lib/android-theme.css" />
+  <!-- jQM Metro plugins styling -->
+  <link href="lib/jquery.mobile.iscrollview.css" rel="stylesheet" type="text/css" />
   <!-- application specific styling -->
   <link rel="stylesheet" type="text/css" href="style/style.css" />
 </head>
-<body class="android">
+<body>
   <script id="locationTemplate" type="text/x-jquery-tmpl">
     <li>
       <a data-bind="click: $parent.selectLocation">
@@ -58,14 +59,14 @@
   </script>
 
   <!-- Renders the property finder front page-->
-  <div data-role="page" data-theme="a"
+  <div data-role="page" data-theme="b"
         id="propertySearchView">
-    <div data-role="header" data-theme="a">
+    <div data-role="header" data-theme="b">
       <h1>Property Finder</h1>
       <a data-bind="click: viewFavourites"
         data-icon="grid" class="ui-btn-right">Fave</a>
     </div>
-    <div data-role="content" data-theme="a" data-iscroll>
+    <div data-role="content" data-theme="c" data-iscroll>
           
       <p>Use the form below to search for houses to buy. You can search by place-name, postcode, or click 'My location', to search in your current location!</p>      
       <form data-bind="submit: executeSearch">
@@ -103,12 +104,12 @@
   </div>
 
   <!-- a page which renders a list of search results -->
-  <div data-role="page" data-theme="a" data-add-back-btn="true"
+  <div data-role="page" data-theme="b" data-add-back-btn="true"
         id="searchResultsView">
-    <div data-role="header" data-theme="a">
+    <div data-role="header" data-theme="b">
       <h1>Results</h1>
     </div>
-    <div data-role="content" data-theme="a" data-iscroll>
+    <div data-role="content" data-theme="c" data-iscroll>
       <div>
         <ul data-role="listview"/>
           <!-- ko template: { name: "propertyThumbnailView", foreach: properties }, updateListviewOnChange:properties -->
@@ -129,12 +130,12 @@
   </div>
 
   <!-- a page which renders the users favourites -->
-  <div data-role="page" data-theme="a" data-add-back-btn="true"
+  <div data-role="page" data-theme="b" data-add-back-btn="true"
         id="favouritesView">
-    <div data-role="header" data-theme="a">
+    <div data-role="header" data-theme="b">
       <h1>Favourites</h1>
     </div>
-    <div data-role="content" data-theme="a" data-iscroll>
+    <div data-role="content" data-theme="c" data-iscroll>
       <ul data-role="listview"
           data-bind='template: { name: "propertyThumbnailView", foreach: properties },
                       updateListviewOnChange:properties'/>
@@ -143,9 +144,9 @@
   </div>
 
   <!-- a page which renders a property -->
-  <div data-role="page" data-theme="a" data-add-back-btn="true"
+  <div data-role="page" data-theme="b" data-add-back-btn="true"
         id="propertyView">
-    <div data-role="header" data-theme="a">
+    <div data-role="header" data-theme="b">
       <h1>Property</h1>
 
       <!-- for the favourites button I want to bind the data-icon value to the view model. Unfortunately this cannot be done because
@@ -162,7 +163,7 @@
         </span>
         </a>
     </div>
-    <div data-role="content" data-theme="a" class="propertyView" data-iscroll>
+    <div data-role="content" data-theme="c" class="propertyView" data-iscroll>
       <h1 data-bind="text: title"></h1>
       <img data-bind="attr: { src: thumbnailUrl }"/>
       <ul class="propertyView">
