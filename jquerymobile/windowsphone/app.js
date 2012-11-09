@@ -92,14 +92,13 @@ define(function (require) {
     // navigate to home
     application.navigateToHome();
   }
+
   // startup the app
-  $(function () {
-    if (window.device) {
-      // on a device - wait for the PhoneGap device ready event
-      document.addEventListener("deviceready", initialize, false);
-    } else {
-      // if there is we are not running on a phone - start the app immediately
-      initialize();
-    }
-  });
+  if (window.WRAPPED) {
+    // on a device - wait for the PhoneGap device ready event
+    document.addEventListener("deviceready", initialize, false);
+  } else {
+    // if there is we are not running on a phone - start the app immediately
+    $(initialize);
+  }
 });

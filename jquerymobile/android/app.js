@@ -74,13 +74,11 @@ define(function (require) {
   }
 
   // startup the app
-  $(function () {
-    if (window.device) {
+  if (window.WRAPPED) {
       // on a device - wait for the PhoneGap device ready event
       document.addEventListener("deviceready", initialize, false);
-    } else {
+  } else {
       // if there is we are not running on a phone - start the app immediately
-      initialize();
-    }
-  });
+    $(initialize);
+  }
 });
