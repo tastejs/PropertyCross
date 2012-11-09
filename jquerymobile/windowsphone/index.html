@@ -156,20 +156,15 @@
   <!-- a page which renders a property -->
   <div data-role="page" data-theme="a"
         id="propertyView">
-    <div data-role="header">
-      <h1>Property</h1>
-    </div>
     <div data-role="content" class="propertyView">
-      <h1 data-bind="text: title"></h1>
-      <img data-bind="attr: { src: thumbnailUrl }"/>
-      <ul class="propertyView">
-        <li class="price">£<span data-bind="text: price"/></li>
-        <li class="propertyType">
-          <span data-bind="text: bedrooms"></span> bed
-          <span data-bind="text: propertyType"></span><span data-bind="visible: bathrooms !== ''">, <span data-bind="text: bathrooms"></span> bathroom</span>
-        </li>
-      </ul>
-      <span data-bind="text: summary"></span>
+      <h2>£<span data-bind="text: price"/></h2>
+      <h3 data-bind="text: title"></h3>
+      <img data-bind="attr: { src: thumbnailUrl }"></img>
+      <p>
+        <span data-bind="text: bedrooms"></span> bed
+        <span data-bind="text: propertyType"></span><span data-bind="visible: bathrooms !== ''">, <span data-bind="text: bathrooms"></span> bathroom</span>
+      </p>
+      <p data-bind="text: summary"></p>
     </div>
     
       <div class="ui-app-bar ui-app-bar-a">
