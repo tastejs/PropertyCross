@@ -1,6 +1,7 @@
 var build = require('../build/build');
 
 build({
+  basePath: __dirname,
   librarySources:[
     'lib/cordova-1.9.0.js',
     'lib/jquery-1.8.2.min.js',

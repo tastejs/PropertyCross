@@ -5,6 +5,7 @@ var exec = require('child_process').exec;
 /*
 Example config -
   var config = {
+    basePath: __dirname,
     librarySources:[
       'lib\\jquery-1.8.2.min.js',
       'lib\\jquery.mobile-1.2.0.min.js',
@@ -21,7 +22,17 @@ Example config -
   };
 */
 module.exports = function (config) {
-  var compressedSource = 'sources.min.js';
+  var baseRelativePath = path.relative('.', config.basePath);
+  function rebasePath(oldPath) {
+    return path.join(baseRelativePath, oldPath);
+  }
+  config.librarySources = config.librarySources.map(rebasePath);
+  config.sourceFolders = config.sourceFolders.map(rebasePath);
+  config.sourceFiles = config.sourceFiles.map(rebasePath);
+  config.entryModule = rebasePath(config.entryModule);
+  config.outputFile = rebasePath(config.outputFile);
+
+  var compressedSource = rebasePath('sources.min.js');
   var sourceFolderFiles = config.sourceFolders.map(function (folder) {
     return fs.readdirSync(folder).map(function (file) {
       return path.join(folder, file);
@@ -30,7 +41,7 @@ module.exports = function (config) {
   var sources = sourceFolderFiles.reduce(function (allFiles, folderFiles) {
     return allFiles.concat(folderFiles);
   }, config.sourceFiles);
-  runAMDCompiler(sources, config.entryModule, compressedSource, function (error, stdout, stderr) {
+  runAMDCompiler(baseRelativePath, sources, config.entryModule, compressedSource, function (error, stdout, stderr) {
     if (error != null) {
       return console.log('exec error: ' + error, stdout, stderr);
     }
@@ -47,12 +58,13 @@ function runCompiler(args, callback) {
   exec('java -jar ' + compiler + ' ' + args.join(' '), callback);
 }
 
-function runAMDCompiler(sourceFiles, entryModule, outputFile, callback) {
+function runAMDCompiler(baseRelativePath, sourceFiles, entryModule, outputFile, callback) {
   var args = [
     "--compilation_level=SIMPLE_OPTIMIZATIONS",
     "--js_output_file=" + outputFile,
-    "--process_common_js_modules" ,
-    "--transform_amd_modules" ,
+    "--common_js_module_path_prefix=" + baseRelativePath,
+    "--process_common_js_modules",
+    "--transform_amd_modules",
     "--common_js_entry_module=" + entryModule,
     "--output_wrapper='(function(){%output%})();'"
   ];
