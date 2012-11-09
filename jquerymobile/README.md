@@ -14,8 +14,8 @@ Building the Application
 
 We're using the [PhoneGap Build](https://build.phonegap.com/) service to produce binaries for each platform. Unfortunately it requires each project be hosted in it's own repository and that's not how this project is structured, so we've had to setup proxy repositories for each platform. The repositories that we use for testing can be found at -
 
-* Android - [Repo](https://github.com/chrisprice/PropertyCross-jQM-Android), [PhoneGap Build](https://github.com/chrisprice/PropertyCross-jQM-Android)
-* iOS - [Repo](https://github.com/chrisprice/PropertyCross-jQM-iOS), [PhoneGap Build](https://github.com/chrisprice/PropertyCross-jQM-iOS)
+* Android - [Repo](https://github.com/chrisprice/PropertyCross-jQM-Android), [PhoneGap Build](https://build.phonegap.com/apps/239778/builds)
+* iOS - [Repo](https://github.com/chrisprice/PropertyCross-jQM-iOS), [PhoneGap Build](https://build.phonegap.com/apps/238689/builds)
 * Windows Phone - [Repo](https://github.com/chrisprice/PropertyCross-jQM-WindowsPhone), [PhoneGap Build](https://build.phonegap.com/apps/238693/builds)
 
 The Android and Windows Phone binaries should install on your device without any problems but due to the way iOS works, the signed iOS builds will only work on our devices. If you want to test on iOS, you can setup your own PhoneGap Build app (for free!), point it at the github repository for iOS and finally configure it to use your own iOS developer certificate/distribution profile.
