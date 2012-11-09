@@ -74,7 +74,7 @@ define(function (require) {
   }
 
   // startup the app
-  if (window.WRAPPED) {
+  if (/\/www\//.test(location)) {
       // on a device - wait for the PhoneGap device ready event
       document.addEventListener("deviceready", initialize, false);
   } else {
