@@ -10,4 +10,5 @@ module.exports = function (config) {
   this.title = config.title;
   this.thumbnailUrl = config.thumbnailUrl;
   this.imgUrl = config.imgUrl;
+  this.summary = config.summary;
 }; 

@@ -149,7 +149,7 @@
   <div data-role="page" data-theme="b" data-add-back-btn="true"
         id="propertyView">
     <div data-role="header" data-theme="b">
-      <h1>Property</h1>
+      <h1>Property Details</h1>
 
       <!-- for the favourites button I want to bind the data-icon value to the view model. Unfortunately this cannot be done because
         the element that holds this class is a generated child of the item that is bound to. For this reason I have resorted to 
@@ -166,16 +166,14 @@
         </a>
     </div>
     <div data-role="content" data-theme="c" class="propertyView" data-iscroll>
-      <h1 data-bind="text: title"></h1>
-      <img data-bind="attr: { src: thumbnailUrl }"/>
-      <ul class="propertyView">
-        <li class="price">£<span data-bind="text: price"/></li>
-        <li class="propertyType">
-          <span data-bind="text: bedrooms"></span> bed
-          <span data-bind="text: propertyType"></span><span data-bind="visible: bathrooms !== ''">, <span data-bind="text: bathrooms"></span> bathroom</span>
-        </li>
-      </ul>
-      <span data-bind="text: summary"></span>
+      <h1>£<span data-bind="text: price"/></h1>
+      <h3 data-bind="text: title"></h3>
+      <img data-bind="attr: { src: thumbnailUrl }"></img>
+      <p>
+        <span data-bind="text: bedrooms"></span> bed
+        <span data-bind="text: propertyType"></span><span data-bind="visible: bathrooms !== ''">, <span data-bind="text: bathrooms"></span> bathroom</span>
+      </p>
+      <p data-bind="text: summary"></p>
     </div>
   </div>
 
