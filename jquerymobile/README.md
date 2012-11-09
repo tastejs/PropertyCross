@@ -1,8 +1,7 @@
 jQuery Mobile PropertyCross
 ==========================
 
-This is an implementation of the PropertyCross application using [jQuery Mobile](http://jquerymobile.com/), a free and open source framework for creating mobile UIs
-that mimic the native look and feel of iOS application using HTML.
+This is an implementation of the PropertyCross application using [jQuery Mobile](http://jquerymobile.com/), a free and open source framework for creating mobile UIs that mimic the native look and feel of iOS application using HTML.
 
 Because jQuery Mobile is a HTML UI framework this project uses a number of other frameworks:
 
@@ -13,17 +12,16 @@ Because jQuery Mobile is a HTML UI framework this project uses a number of other
 Building the Application
 ========================
 
-Because jQuery Mobile uses HTML / JavaScript all the various applications can be run within a desktop or mobile browser. In order
-to build the application for the app store you can use the PhoneGap Build (https://build.phonegap.com/) service. Each version
-of the application has a config.xml file which PhoneGap Build uses to configure the application.
-
-PhoneGap Build can host public projects if each build is hosted in it's own Github public repository. Unfortunately that's not how this project is structured so it's neccessary to use proxy repositories. 
-
-The repositories that we use for testing can be found at -
+We're using the [PhoneGap Build](https://build.phonegap.com/) service to produce binaries for each platform. Unfortunately it requires each project be hosted in it's own repository and that's not how this project is structured, so we've had to setup proxy repositories for each platform. The repositories that we use for testing can be found at -
 
 * Android - [Repo](https://github.com/chrisprice/PropertyCross-jQM-Android), [PhoneGap Build](https://github.com/chrisprice/PropertyCross-jQM-Android)
 * iOS - [Repo](https://github.com/chrisprice/PropertyCross-jQM-iOS), [PhoneGap Build](https://github.com/chrisprice/PropertyCross-jQM-iOS)
 * Windows Phone - [Repo](https://github.com/chrisprice/PropertyCross-jQM-WindowsPhone), [PhoneGap Build](https://build.phonegap.com/apps/238693/builds)
+
+The Android and Windows Phone binaries should install on your device without any problems but due to the way iOS works, the signed iOS builds will only work on our devices. If you want to test on iOS, you can setup your own PhoneGap Build app (for free!), point it at the github repository for iOS and finally configure it to use your own iOS developer certificate/distribution profile.
+
+If you just want to test in a desktop or mobile browser then your in luck, as jQuery Mobile just uses HTML / JavaScript all the applications can be run by uncommenting the DEVELOPMENT block and commeting out the RELEASE block in the `index.html` file. 
+
 
 The scripts that I use to maintain those repositories (not pretty) -
 
