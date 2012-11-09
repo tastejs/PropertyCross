@@ -67,6 +67,7 @@ Platforms To Add:
   * DXTREME
   * Adobe Mobile AIR
   * Moscrif
+  * [Trigger.io](https://trigger.io/)
 
 The Application
 ---------------
