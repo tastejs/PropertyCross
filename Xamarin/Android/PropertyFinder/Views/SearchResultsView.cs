@@ -35,6 +35,7 @@ namespace PropertyFinder.Views
 			var app = (PropertyFinderApplication)Application;
 			presenter = (SearchResultsPresenter) app.Presenter;
 			presenter.SetView(this);
+			app.CurrentActivity = this;
 		}
 
 		public void SetSearchResults(int totalResult, int pageNumber, int totalPages,

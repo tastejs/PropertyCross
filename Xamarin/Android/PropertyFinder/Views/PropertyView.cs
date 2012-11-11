@@ -44,6 +44,7 @@ namespace PropertyFinder
 			var app = (PropertyFinderApplication)Application;
 			presenter = (PropertyPresenter) app.Presenter;
 			presenter.SetView(this);
+			app.CurrentActivity = this;
 		}
 
 		public override bool OnCreateOptionsMenu(IMenu menu)

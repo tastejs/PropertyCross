@@ -10,8 +10,6 @@ namespace PropertyFinder
 	{
 		private PropertyFinderApplication application;
 
-		public Activity Activity { get; set; }
-
 		public NavigationService(PropertyFinderApplication app)
 		{
 			application = app;
@@ -23,19 +21,23 @@ namespace PropertyFinder
 			if(presenter != oldPresenter)
 			{
 				application.Presenter = presenter;
+				Intent i = null;
 
 				if(presenter is SearchResultsPresenter)
 				{
-					Activity.StartActivity(typeof(SearchResultsView));
+					i = new Intent(application.CurrentActivity, typeof(SearchResultsView));
 				}
 				else if(presenter is PropertyPresenter)
 				{
-					Activity.StartActivity(typeof(PropertyView));
+					i = new Intent(application.CurrentActivity, typeof(PropertyView));
 				}
 				else if(presenter is FavouritesPresenter)
 				{
-					Activity.StartActivity(typeof(FavouritesView));
+					i = new Intent(application.CurrentActivity, typeof(FavouritesView));
 				}
+
+				if(i != null)
+					application.CurrentActivity.StartActivity(i);
 			}
 		}
 	}

@@ -8,16 +8,16 @@ namespace PropertyFinder
 	public class StatePersistenceService : IStatePersistenceService
 	{
 		private readonly string FileName = "data.txt";
-		private Context context;
+		private PropertyFinderApplication application;
 
-		public StatePersistenceService(Context c)
+		public StatePersistenceService(PropertyFinderApplication application)
 		{
-			this.context = c;
+			this.application = application;
 		}
 
 		public void SaveState(PropertyFinderPersistentState state)
 		{
-			using(var stream = context.OpenFileOutput(FileName, FileCreationMode.Private))
+			using(var stream = application.CurrentActivity.OpenFileOutput(FileName, FileCreationMode.Private))
 			{
 				XmlSerializer serializer = new XmlSerializer(typeof(PropertyFinderPersistentState));
 				serializer.Serialize(stream, state);
@@ -30,7 +30,7 @@ namespace PropertyFinder
 
 			try
 			{
-				using(var stream = context.OpenFileInput(FileName))
+				using(var stream = application.CurrentActivity.OpenFileInput(FileName))
 				using(var reader = new StreamReader(stream))
 				{
 					if(!reader.EndOfStream)

@@ -29,6 +29,7 @@ namespace PropertyFinder
 			var app = (PropertyFinderApplication)Application;
 			presenter = (FavouritesPresenter) app.Presenter;
 			presenter.SetView(this);
+			app.CurrentActivity = this;
 		}
 
 		protected override void OnListItemClick(ListView l, View v, int position, long id)

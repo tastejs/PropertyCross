@@ -10,6 +10,7 @@ using Android.OS;
 using PropertyFinder.Presenter;
 using System.Collections.Generic;
 using PropertyFinder.Model;
+using Android.Support.V4.App;
 
 namespace PropertyFinder.Views
 {
@@ -30,9 +31,11 @@ namespace PropertyFinder.Views
 		{
 			base.OnCreate (bundle);
 
-			var source = new PropertyDataSource(new JsonWebPropertySearch(new MarshalInvokeService(this)));
+			var app = (PropertyFinderApplication)Application;
+
+			var source = new PropertyDataSource(new JsonWebPropertySearch(new MarshalInvokeService(app)));
 			var geoLocationService = new GeoLocationService((LocationManager)GetSystemService(Context.LocationService));
-			var stateService = new StatePersistenceService(this);
+			var stateService = new StatePersistenceService(app);
 			PropertyFinderPersistentState state = stateService.LoadState();
 
 			SetContentView (Resource.Layout.PropertyFinderView);
@@ -56,16 +59,15 @@ namespace PropertyFinder.Views
 			progress.Visibility = ViewStates.Invisible;
 			mainView = FindViewById(Resource.Id.propview);
 
-			var app = (PropertyFinderApplication)Application;
-
 			presenter = 
 				new PropertyFinderPresenter(state,
 				                            source,
-				                            new NavigationService(app) { Activity = this },
+				                            new NavigationService(app),
 				                            geoLocationService);
 			presenter.SetView(this);
 
 			app.Presenter = presenter;
+			app.CurrentActivity = this;
 		}
 
 		public override bool OnCreateOptionsMenu(IMenu menu)

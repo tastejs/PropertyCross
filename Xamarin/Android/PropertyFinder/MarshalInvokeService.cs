@@ -7,16 +7,16 @@ namespace PropertyFinder
 {
 	public class MarshalInvokeService : IMarshalInvokeService
 	{
-		private Activity activity;
+		private PropertyFinderApplication application;
 
-		public MarshalInvokeService(Activity activity)
+		public MarshalInvokeService(PropertyFinderApplication application)
 		{
-			this.activity = activity;
+			this.application = application;
 		}
 
 		public void Invoke (Action action)
 		{
-			activity.RunOnUiThread(() => action());
+			application.CurrentActivity.RunOnUiThread(() => action());
 		}
 	}
 }

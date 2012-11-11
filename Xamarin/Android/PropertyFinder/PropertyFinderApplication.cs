@@ -22,6 +22,12 @@ namespace PropertyFinder
 			get;
 			set; 
 		}
+
+		public Activity CurrentActivity
+		{
+			get;
+			set;
+		}
 	}
 }
 
