@@ -216,6 +216,9 @@ namespace PropertyFinder
 			// aapt resource value: 0x7f050001
 			public const int ActionBar = 2131034113;
 			
+			// aapt resource value: 0x7f050003
+			public const int ActionBar_MenuTextStyle = 2131034115;
+			
 			// aapt resource value: 0x7f050002
 			public const int ActionBar_TitleText = 2131034114;
 			

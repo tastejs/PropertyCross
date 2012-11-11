@@ -3,6 +3,7 @@
     <style name="PropertyFinderTheme" parent="@android:style/Theme.Light">
         <!-- Any customizations for your app running on pre-3.0 devices here -->
 		<item name="android:actionBarStyle">@style/ActionBar</item>
+        <item name="android:actionMenuTextAppearance">@style/ActionBar.MenuTextStyle</item>
     </style>
 
     <style name="ActionBar" parent="@android:style/Widget.Holo.ActionBar">
@@ -13,5 +14,9 @@
     
     <style name="ActionBar.TitleText" parent="@android:style/TextAppearance">
         <item name="android:textColor">@android:color/white</item>
-    </style>    
+    </style>
+    
+    <style name="ActionBar.MenuTextStyle" parent="android:style/TextAppearance">
+    	<item name="android:textColor">@android:color/white</item>
+	</style>    
 </resources>

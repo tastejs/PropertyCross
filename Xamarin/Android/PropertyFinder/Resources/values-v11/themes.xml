@@ -3,5 +3,6 @@
     <style name="PropertyFinderTheme" parent="@android:style/Theme.Holo.Light">
         <!-- Any customizations for your app running on post 3.0 devices here -->        
 		<item name="android:actionBarStyle">@style/ActionBar</item>
+        <item name="android:actionMenuTextAppearance">@style/ActionBar.MenuTextStyle</item>
     </style>
 </resources>
