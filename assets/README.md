@@ -5,7 +5,7 @@ This folder contains a number of assets that are used across the various impleme
 ## Icons
 
   * `Icon66x66.png` - Windows Phone small app icon
-  * `Icon163x163.png` - Windows Phone large app icon
+  * `Icon173x173.png` - Windows Phone large app icon
   * `Icon.png` - iPhone icon
   * `Icon@2x.png` - iPhone retina icon
   * `Icon96x96.png` - Android xhdpi  icon
