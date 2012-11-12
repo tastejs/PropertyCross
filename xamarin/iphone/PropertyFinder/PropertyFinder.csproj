@@ -84,6 +84,9 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="monotouch" />
+    <Reference Include="Newtonsoft.Json.MonoTouch">
+      <HintPath>..\lib\NewtonsoftJson\Debug\Newtonsoft.Json.MonoTouch.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -201,12 +204,6 @@
     <InterfaceDefinition Include="FavouritesViewController.xib" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ItemGroup>
-    <ProjectReference Include="..\lib\NewtonsoftJson\Newtonsoft.Json\Newtonsoft.Json.MonoTouch.csproj">
-      <Project>{12448CD5-D860-4C1C-8B9F-139F3794B9BC}</Project>
-      <Name>Newtonsoft.Json.MonoTouch</Name>
-    </ProjectReference>
-  </ItemGroup>
   <ItemGroup>
     <Folder Include="Presenter\" />
     <Folder Include="Model\" />

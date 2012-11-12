@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PropertyFinder", "PropertyFinder\PropertyFinder.csproj", "{8A920BF5-B269-4BC6-AA28-3FF650CF36B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Newtonsoft.Json.MonoTouch", "lib\NewtonsoftJson\Newtonsoft.Json\Newtonsoft.Json.MonoTouch.csproj", "{12448CD5-D860-4C1C-8B9F-139F3794B9BC}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|iPhoneSimulator = Debug|iPhoneSimulator
@@ -15,18 +13,6 @@ Global
 		AppStore|iPhone = AppStore|iPhone
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{12448CD5-D860-4C1C-8B9F-139F3794B9BC}.Ad-Hoc|iPhone.ActiveCfg = Debug|Any CPU
-		{12448CD5-D860-4C1C-8B9F-139F3794B9BC}.Ad-Hoc|iPhone.Build.0 = Debug|Any CPU
-		{12448CD5-D860-4C1C-8B9F-139F3794B9BC}.AppStore|iPhone.ActiveCfg = Debug|Any CPU
-		{12448CD5-D860-4C1C-8B9F-139F3794B9BC}.AppStore|iPhone.Build.0 = Debug|Any CPU
-		{12448CD5-D860-4C1C-8B9F-139F3794B9BC}.Debug|iPhone.ActiveCfg = Debug|Any CPU
-		{12448CD5-D860-4C1C-8B9F-139F3794B9BC}.Debug|iPhone.Build.0 = Debug|Any CPU
-		{12448CD5-D860-4C1C-8B9F-139F3794B9BC}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
-		{12448CD5-D860-4C1C-8B9F-139F3794B9BC}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
-		{12448CD5-D860-4C1C-8B9F-139F3794B9BC}.Release|iPhone.ActiveCfg = Release|Any CPU
-		{12448CD5-D860-4C1C-8B9F-139F3794B9BC}.Release|iPhone.Build.0 = Release|Any CPU
-		{12448CD5-D860-4C1C-8B9F-139F3794B9BC}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{12448CD5-D860-4C1C-8B9F-139F3794B9BC}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 		{8A920BF5-B269-4BC6-AA28-3FF650CF36B2}.Ad-Hoc|iPhone.ActiveCfg = Ad-Hoc|iPhone
 		{8A920BF5-B269-4BC6-AA28-3FF650CF36B2}.Ad-Hoc|iPhone.Build.0 = Ad-Hoc|iPhone
 		{8A920BF5-B269-4BC6-AA28-3FF650CF36B2}.AppStore|iPhone.ActiveCfg = AppStore|iPhone
