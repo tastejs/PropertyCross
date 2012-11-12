@@ -3,7 +3,6 @@ var build = require('../build/build');
 build({
   basePath: __dirname,
   librarySources:[
-// building cordova with simple optimisations caused it to fail on the device
     'lib/jquery-1.8.2.min.js',
     'lib/jquery.jsonp-2.1.4.min.js',
     'lib/jquery.mobile-1.2.0.min.js',
