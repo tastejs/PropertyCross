@@ -1,3 +1,7 @@
+# PropertyCross
+
+Helping you select a cross-platform mobile framework.
+
 # Introduction
 
 Developers are increasingly finding themselves having to author applications for a diverse range of mobile devices (iOS, Android, Windows Phone, ...), each of which have their own 'native' development languages, tools and environment. Cross platform technologies provide the potential to share skills and code, making this an easier (and less costly) process.
@@ -53,9 +57,21 @@ To help solve this problem PropertyCross presents a non-trivial application, for
 
 Y = implemented, x = not yet implemented, ~ = in progress, n/a = not supported by the framework
 
+(potentially replace with a list of frameworks together with icons to illustrate coverage)
+
 This project was heavily inspired by [TodoMVC](http://todomvc.com/), which allows comparison of JavaScript frameworks.
 
+# Selecting a Framework
+
+(copied from ToDoMVC) Once you've downloaded the latest release and played around with the apps, you'll want to decide on a specific framework to try out.
+
+Study the syntax required for defining models, views and (where applicable) controllers and classes in the frameworks you're interested in and try your hand at editing the code to see how it feels using it first-hand.
+
+Please ensure that if you're happy with this, you do spend more time investigating the framework (including reading the official docs, the source and its complete feature list). There's often a lot more to a framework than what we present in our examples. (end - copied from ToDoMVC) 
+
 # The Application
+
+(reduce an listify)
 
 The app, which is implemented by each framework for each mobile platform, is a tool for searching UK property listings. This application was selected because it is non-trivial, multi-screen and makes use of a number of device capabilities including page navigation, geolocation, storage and web services.
 
@@ -63,13 +79,17 @@ The aim, when implementing this application with each framework, is to provide a
 
  * Shares as much code as possible.
  * Is well structured and uses a UI design pattern, e.g. MVVM, MVC, MVP ...
- * Provides a user experience that is in keeping with each platform.
+ * Strictly adheres to the UI guidelines of each platform (where possible).
 
-To expand on the last point, each mobile platform has its own identity - Android (Roboto), Windows Phone (Metro), iOS (Apple / skeuomorphic). In order for an application to be well received by its users, it is important that it 'fits' with other applications that alreayd exist on that platform. For this reason, we feel that it is important thta a cross-platform framework can deliver a different, and appropriate experience on each platform.
 
 # Get Involved
 
-We welcome community contributions to this project. There are a great many cross-platform frameworks that could be added to the current list, including RhoMobile, AppMobi, MoSync, Kendo UI Mobile,DXTREME, Moscrif ... If you want to add an implementation, just fork this project and have a go! Also, if you are interested in adding BlackBerrty implementations of the currently supported frameworks, that would be great!
+(reword to make more inviting - use words like 'extend')
+
+We welcome community contributions to this project. There are a great many cross-platform frameworks that could be added to the current list, including RhoMobile, AppMobi, MoSync, Kendo UI Mobile, DXTREME, Moscrif ... If you want to add an implementation, just fork this project and have a go! Also, if you are interested in adding BlackBerrty implementations of the currently supported frameworks, that would be great!
+
+- Social media buttons
+- Fork me on github
 
 
 # Application Details
@@ -156,6 +176,11 @@ _see subfolders ..._
     <td>-</td>
   </tr>
 </table>
+
+- social media buttons
+- download / fork / github call to action
+- navigation, list all frameworks on each page so that they can easily navigate between them? - or just back navigation via logo perhaps?
+- APK / XAP file download.
 
 ## jQuery Mobile
 
