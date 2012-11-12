@@ -75,10 +75,10 @@ define(function (require) {
 
   // startup the app
   if (/\/www\//.test(location)) {
-      // on a device - wait for the PhoneGap device ready event
-      document.addEventListener("deviceready", initialize, false);
+    // on a device - wait for the PhoneGap device ready event
+    document.addEventListener("deviceready", initialize, false);
   } else {
-      // if there is we are not running on a phone - start the app immediately
+    // if there is we are not running on a phone - start the app immediately
     $(initialize);
   }
 });
