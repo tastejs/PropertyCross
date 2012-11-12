@@ -24,6 +24,17 @@ div.propertyView img
   background-color: #aaa;
 }
 
-.ui-page {
-      background: transparent;
-    }
+div.propertyView h1
+{
+  margin: 10px 0;
+}
+
+div.propertyView h3
+{
+  margin: 5px 0;
+}
+
+.ui-page
+{
+  background: transparent;
+}
