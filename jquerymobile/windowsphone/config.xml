@@ -28,8 +28,8 @@
   <gap:splash src="SplashScreenImage.jpg"  gap:platform="winphone"/>
 
   <preference name="orientation" value="portrait" />
-  <!-- use old version 1.8.0 in newer versions the back button is broken, requires investigation -->
-  <preference name="phonegap-version" value="1.8.0" />
+  <!-- use old version 1.9.0 in newer versions the back button is broken, requires investigation -->
+  <preference name="phonegap-version" value="1.9.0" />
 
   <feature name="http://api.phonegap.com/1.0/geolocation"/>
   <feature name="http://api.phonegap.com/1.0/network"/>
