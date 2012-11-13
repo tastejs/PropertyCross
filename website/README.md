@@ -2,6 +2,11 @@
 
 Helping you select a cross-platform mobile framework.
 
+* [Download the PropertyCross project](https://github.com/ColinEberhardt/PropertyFinderCrossPlatform/archive/master.zip)
+* [View Project on github] (https://github.com/ColinEberhardt/PropertyFinderCrossPlatform)
+
+- Social media buttons
+
 # Introduction
 
 Developers are increasingly finding themselves having to author applications for a diverse range of mobile devices (iOS, Android, Windows Phone, ...), each of which have their own 'native' development languages, tools and environment. Cross platform technologies provide the potential to share skills and code, making this an easier (and less costly) process.
@@ -63,36 +68,25 @@ This project was heavily inspired by [TodoMVC](http://todomvc.com/), which allow
 
 # Selecting a Framework
 
-(copied from ToDoMVC) Once you've downloaded the latest release and played around with the apps, you'll want to decide on a specific framework to try out.
+The APK and XAP files for the Android and Windows Phone versions of each framework are available within the project download. For iPhone you will have to build and sign the projects yourself in order to deploy them onto your own device.
 
-Study the syntax required for defining models, views and (where applicable) controllers and classes in the frameworks you're interested in and try your hand at editing the code to see how it feels using it first-hand.
+Some of the frameworks deliver a native user inteface, whereas others construct a native-like interface using HTML5 technologies. When selecting a framework it is important to test the end-user experience that the framework delivers and ensure you are happy with any compromises.
 
-Please ensure that if you're happy with this, you do spend more time investigating the framework (including reading the official docs, the source and its complete feature list). There's often a lot more to a framework than what we present in our examples. (end - copied from ToDoMVC) 
+The code-sharing which can be realistically achieved with each framework varies considerably. To aid in this comparison there is a build script which produces code metrics for guidance. Although, as developers I am sure you are aware that [lines-of-code metrics are flawed](http://www.google.co.uk/search?hl=en&q=loc+count+flawed) ;-) 
+
+It is also worth investing quite a bit of time familiarising yourself with tools provided by each framework. The cost and quality of these tools various considerably.
 
 # The Application
 
-(reduce an listify)
-
-The app, which is implemented by each framework for each mobile platform, is a tool for searching UK property listings. This application was selected because it is non-trivial, multi-screen and makes use of a number of device capabilities including page navigation, geolocation, storage and web services.
-
-The aim, when implementing this application with each framework, is to provide an application which:
-
- * Shares as much code as possible.
- * Is well structured and uses a UI design pattern, e.g. MVVM, MVC, MVP ...
- * Strictly adheres to the UI guidelines of each platform (where possible).
-
+The app, which is implemented by each framework for each mobile platform, is a tool for searching UK property listings.  This application was selected because it is non-trivial, multi-screen and makes use of a number of device capabilities including page navigation, geolocation, storage and web services. For more detail regarding the goals of this application see the [PropertyCross specifications](https://github.com/ColinEberhardt/PropertyFinderCrossPlatform/tree/master/specification).
 
 # Get Involved
 
-(reword to make more inviting - use words like 'extend')
-
-We welcome community contributions to this project. There are a great many cross-platform frameworks that could be added to the current list, including RhoMobile, AppMobi, MoSync, Kendo UI Mobile, DXTREME, Moscrif ... If you want to add an implementation, just fork this project and have a go! Also, if you are interested in adding BlackBerrty implementations of the currently supported frameworks, that would be great!
-
-- Social media buttons
-- Fork me on github
+This project is hosted on github, and you are welcome to extend it.  There are a great many cross-platform frameworks that could be added to the current list, also, if you are interested in adding BlackBerrty implementations of the currently supported frameworks, that would be a welcome addition. For more detailed notes on implementation see the [PropertyCross specifications](https://github.com/ColinEberhardt/PropertyFinderCrossPlatform/tree/master/specification).
 
 
-# Application Details
+
+`--------  seperate page ----------------`
 
 ## Native
 
@@ -132,6 +126,9 @@ Note: There is no code shared between native implementations, therefore these me
     <td>-</td>
   </tr>
 </table>
+
+`--------  seperate page ----------------`
+
 
 ## Xamarin
 
@@ -181,6 +178,9 @@ _see subfolders ..._
 - download / fork / github call to action
 - navigation, list all frameworks on each page so that they can easily navigate between them? - or just back navigation via logo perhaps?
 - APK / XAP file download.
+
+`--------  seperate page ----------------`
+
 
 ## jQuery Mobile
 
