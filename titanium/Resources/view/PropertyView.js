@@ -22,6 +22,7 @@ module.exports = function (viewModel) {
       fontSize:'19dip',
       fontWeight:'bold'
     },
+    top:'6dip',
     width:Ti.UI.FILL
   });
   view.add(price);
@@ -32,6 +33,7 @@ module.exports = function (viewModel) {
     font:{
       fontSize:'16dip'
     },
+    top:'6dip',
     width:Ti.UI.FILL
   });
   view.add(title);
@@ -39,19 +41,32 @@ module.exports = function (viewModel) {
   var image = Ti.UI.createImageView({
     image:viewModel.thumbnailUrl(),
     height:'50%',
+    top:'6dip',
     width:Ti.UI.FILL
   });
   view.add(image);
 
   var description = Titanium.UI.createLabel({
-    text:viewModel.bedrooms() + ' bed ' + viewModel.propertyType(),
+    text:viewModel.bedrooms() + ' bed ' + viewModel.propertyType()  + ', ' + viewModel.bathrooms() + ' bathroom',
     textAlign:'left',
     font:{
       fontSize:'16dip'
     },
+    top:'6dip',
     width:Ti.UI.FILL
   });
   view.add(description);
+
+  var summary = Titanium.UI.createLabel({
+    text:viewModel.summary(),
+    textAlign:'left',
+    font:{
+      fontSize:'16dip'
+    },
+    top:'6dip',
+    width:Ti.UI.FILL
+  });
+  view.add(summary);
 
   window.add(view);
 
