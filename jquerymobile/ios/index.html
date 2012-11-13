@@ -78,7 +78,7 @@
                   data-inline="true">My location</button>
       </form>
       
-      <div data-bind="visible: isSearchEnabled() == false">
+      <div data-bind="visible: isSearchEnabled() == false" style="display:none">
         Searching...
       </div>
       
@@ -86,7 +86,7 @@
       <p data-bind="text:userMessage"/>
       
       <!-- a list of locations that the user can pick from -->
-      <div data-bind="visible: locations().length > 0">
+      <div data-bind="visible: locations().length > 0" style="display:none">
         <h4>Please select a location below:</h4>
         <ul data-role="listview" data-inset="true"
             data-bind='template: { name: "locationTemplate", foreach: locations },
@@ -94,7 +94,7 @@
       </div>
 
       <!-- the last 4 recent searches -->
-      <div data-bind="visible: recentSearches().length > 0 && locations().length === 0">
+      <div data-bind="visible: recentSearches().length > 0 && locations().length === 0" style="display:none">
         <h4>Recent searches:</h4>
         <ul data-role="listview" data-inset="true"
             data-bind='template: { name: "locationWithCountTemplate", foreach: recentSearches },
