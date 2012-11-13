@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ItemRenderer
+    xmlns:fx="http://ns.adobe.com/mxml/2009"
+    xmlns:s="library://ns.adobe.com/flex/spark"
+>
+    <fx:Declarations>
+        <s:NumberFormatter id="formatter" fractionalDigits="0" />
+    </fx:Declarations>
+
+    <s:Image
+        id="thumbnail"
+        left="5" top="5"
+        height="100%"
+        source="{data.thumbnailURL}"
+    />
+    <s:VGroup
+        id="labelGroup"
+        left="{thumbnail.x + thumbnail.width + 5}"
+        verticalCenter="0"
+        width="{button.x - labelGroup.x - 5}"
+    >
+        <s:Label
+            width="100%"
+            text="£{formatter.format(data.price)}"
+        />
+        <s:Label
+            width="100%"
+            maxDisplayedLines="1"
+            text="{data.title}"
+        />
+    </s:VGroup>
+    <s:Button
+        id="button"
+        right="5"
+        verticalCenter="0"
+        width="10"
+        height="10"
+    />
+</s:ItemRenderer>

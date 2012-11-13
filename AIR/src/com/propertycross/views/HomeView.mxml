@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View
+    xmlns:fx="http://ns.adobe.com/mxml/2009"
+    xmlns:s="library://ns.adobe.com/flex/spark"
+    xmlns:parsley="http://www.spicefactory.org/parsley"
+
+    title="Property Finder"
+>
+    <s:layout>
+        <s:VerticalLayout
+            paddingTop="10"
+            paddingBottom="10"
+            paddingLeft="10"
+            paddingRight="10"
+            gap="10"
+        />
+    </s:layout>
+    <fx:Script>
+        <![CDATA[
+            import com.propertycross.models.Location;
+
+            import com.propertycross.presentationModels.HomeViewPM;
+
+            [Bindable]
+            public var model:HomeViewPM;
+        ]]>
+    </fx:Script>
+
+    <fx:Declarations>
+        <parsley:FastInject objectId="homeViewPM" property="model" />
+    </fx:Declarations>
+
+    <s:actionContent>
+        <s:Button
+            label="Fave"
+            click="model.goToFavourites()"
+        />
+    </s:actionContent>
+
+    <s:Label
+        width="100%"
+        text="Use the form below to search for houses to buy.  You can search by place-name, postcode, or click 'My location', to search in your current location!"
+    />
+
+    <s:TextInput
+        width="100%"
+        text="@{model.locationName}"
+        enter="model.executeSearch()"
+    />
+
+    <s:HGroup>
+        <s:Button
+            label="Go"
+            click="model.executeSearch()"
+        />
+        <s:Button
+            label="My location"
+            visible="{model.canSearchMyLocation}"
+            includeInLayout="{model.canSearchMyLocation}"
+            click="model.searchMyLocation()"
+        />
+    </s:HGroup>
+
+    <s:Label
+        text="Recent searches:"
+    />
+
+    <s:List
+        id="recentSearches"
+        width="100%"
+        dataProvider="{model.recentSearches}"
+        change="model.executeSearch(recentSearches.selectedItem as Location)"
+    >
+        <s:itemRenderer>
+            <fx:Component>
+                <s:ItemRenderer>
+                    <s:layout>
+                        <s:HorizontalLayout
+                            paddingTop="5"
+                            paddingBottom="5"
+                            paddingLeft="5"
+                            paddingRight="5"
+                            verticalAlign="middle"
+                        />
+                    </s:layout>
+                    <s:Label text="{data.name}" />
+                    <s:Spacer width="100%" />
+                    <s:Label text="{data.totalResults}" />
+                </s:ItemRenderer>
+            </fx:Component>
+        </s:itemRenderer>
+    </s:List>
+
+</s:View>

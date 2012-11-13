@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View
+    xmlns:fx="http://ns.adobe.com/mxml/2009"
+    xmlns:s="library://ns.adobe.com/flex/spark"
+    xmlns:parsley="http://www.spicefactory.org/parsley"
+
+    title="Results"
+>
+    <fx:Script>
+        <![CDATA[
+            import com.propertycross.models.Property;
+
+            import com.propertycross.presentationModels.SearchResultsViewPM;
+
+            [Bindable]
+            public var model:SearchResultsViewPM;
+        ]]>
+    </fx:Script>
+
+    <fx:Declarations>
+        <parsley:FastInject objectId="searchResultsViewPM" property="model" />
+    </fx:Declarations>
+
+    <s:navigationContent>
+        <s:Button
+            label="Back"
+            click="model.back()"
+        />
+    </s:navigationContent>
+
+    <s:List
+        id="propertyList"
+        width="100%"
+        height="100%"
+        horizontalScrollPolicy="off"
+        itemRenderer="com.propertycross.renderers.PropertyListItemRenderer"
+        dataProvider="{model.properties}"
+        change="model.viewProperty(propertyList.selectedItem as Property)"
+    />
+
+</s:View>

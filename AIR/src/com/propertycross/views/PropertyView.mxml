@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View
+    xmlns:fx="http://ns.adobe.com/mxml/2009"
+    xmlns:s="library://ns.adobe.com/flex/spark"
+    xmlns:parsley="http://www.spicefactory.org/parsley"
+
+    title="Property"
+>
+    <s:layout>
+        <s:VerticalLayout />
+    </s:layout>
+
+    <fx:Script>
+        <![CDATA[
+            import com.propertycross.models.Property;
+
+            import com.propertycross.presentationModels.PropertyViewPM;
+
+            private var _model:PropertyViewPM;
+            [Bindable]
+            public function get model():PropertyViewPM
+            {
+                return _model;
+            }
+            public function set model(value:PropertyViewPM):void
+            {
+                _model = value;
+                if (_model)
+                {
+                    _model.property = data as Property;
+                }
+            }
+
+            override public function get data():Object
+            {
+                return super.data;
+            }
+            override public function set data(value:Object):void
+            {
+                super.data = value;
+                if (model)
+                {
+                    model.property = value as Property;
+                }
+            }
+        ]]>
+    </fx:Script>
+
+    <fx:Declarations>
+        <parsley:FastInject objectId="propertyViewPM" property="model" />
+        <s:NumberFormatter id="formatter" fractionalDigits="0" />
+    </fx:Declarations>
+
+    <s:navigationContent>
+        <s:Button
+            label="Back"
+            click="model.back()"
+        />
+    </s:navigationContent>
+
+    <s:actionContent>
+        <s:Button
+            label="Fave"
+            click="model.addToFavourites()"
+        />
+    </s:actionContent>
+
+    <s:Label
+        width="100%"
+        text="{model.title}"
+    />
+
+    <s:Image
+        width="100%"
+        source="{model.imageURL}"
+    />
+
+    <s:Label
+        width="100%"
+        text="£{formatter.format(model.price)}"
+    />
+
+    <s:Label
+        width="100%"
+        text="{model.bedroomCount + ' bed house, ' + model.bathroomCount + ' bathroom'}"
+    />
+
+    <s:Label
+        width="100%"
+        text="{model.summary}"
+    />
+
+</s:View>
