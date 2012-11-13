@@ -23,6 +23,14 @@ define(function (require, exports, module) {
     this.isFavourite = ko.computed(function () {
       return !!application.getFavouriteByGuid(this.guid());
     }, this);
+    this.stats = ko.computed(function () {
+      var stats = this.bedrooms() + ' bed ' + this.propertyType();
+      var bathrooms = this.bathrooms();
+      if (bathrooms) {
+        stats += ', ' + bathrooms + ' ' + (bathrooms > 1 ? 'bathrooms' : 'bathroom');
+      }
+      return stats;
+    }, this);
 
     // ----- public functions
 
@@ -43,7 +51,7 @@ define(function (require, exports, module) {
       // simplify the title a bit
       var title = ko.utils.unwrapObservable(property.title);
       if (title) {
-        var titleParts = title.split(",");
+        var titleParts = title.split(", ");
         if (titleParts.length >= 2) {
           this.title(titleParts[0] + ", " + titleParts[1]);
         }

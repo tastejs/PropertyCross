@@ -47,7 +47,7 @@ module.exports = function (viewModel) {
   view.add(image);
 
   var description = Titanium.UI.createLabel({
-    text:viewModel.bedrooms() + ' bed ' + viewModel.propertyType()  + ', ' + viewModel.bathrooms() + ' bathroom',
+    text:viewModel.stats(),
     textAlign:'left',
     font:{
       fontSize:'16dip'
