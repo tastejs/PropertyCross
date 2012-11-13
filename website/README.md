@@ -98,34 +98,19 @@ The iOS application is built using Xcode, the Windows Phone application is built
 
 ### Screenshots
 
-_see subfolders ..._
+_see subfolders https://github.com/ColinEberhardt/PropertyFinderCrossPlatform/tree/master/website/screenshots/native_
+_there are 4 screenshots per platform_
 
 ### Code sharing metrics
 
 Note: There is no code shared between native implementations, therefore these metrics simply give a rough indication of the relative quantity of code within each native implementation.
 
-<table>
-  <tr>
-    <th>Component</th>
-    <th>Bytes</th>
-    <th>%age</th>
-  </tr>
-  <tr>
-    <th>Android</th>
-    <td>-</td>
-    <td>-</td>
-  </tr>
-  <tr>
-    <th>Windows Phone</th>
-    <td>-</td>
-    <td>-</td>
-  </tr>
-  <tr>
-    <th>iOS</th>
-    <td>-</td>
-    <td>-</td>
-  </tr>
-</table>
+_pie chart with 4 segments_
+
+- Social media buttons?
+- download / fork / github call to action?
+- navigation, list all frameworks on each page so that they can easily navigate between them? - or just back navigation via logo perhaps?
+- APK / XAP file download.
 
 `--------  seperate page ----------------`
 
@@ -146,38 +131,9 @@ _see subfolders ..._
 
 ### Code sharing metrics
 
-<table>
-  <tr>
-    <th>Component</th>
-    <th>Bytes</th>
-    <th>%age</th>
-  </tr>
-  <tr>
-    <th>Common</th>
-    <td>-</td>
-    <td>-</td>
-  </tr>
-  <tr>
-    <th>Android</th>
-    <td>-</td>
-    <td>-</td>
-  </tr>
-  <tr>
-    <th>Windows Phone</th>
-    <td>-</td>
-    <td>-</td>
-  </tr>
-  <tr>
-    <th>iOS</th>
-    <td>-</td>
-    <td>-</td>
-  </tr>
-</table>
+_pie chart with 4 segments_
 
-- social media buttons
-- download / fork / github call to action
-- navigation, list all frameworks on each page so that they can easily navigate between them? - or just back navigation via logo perhaps?
-- APK / XAP file download.
+
 
 `--------  seperate page ----------------`
 
@@ -198,33 +154,7 @@ _see subfolders ..._
 
 ### Code sharing metrics
 
-<table>
-  <tr>
-    <th>Component</th>
-    <th>Bytes</th>
-    <th>%age</th>
-  </tr>
-  <tr>
-    <th>Common</th>
-    <td>-</td>
-    <td>-</td>
-  </tr>
-  <tr>
-    <th>Android</th>
-    <td>-</td>
-    <td>-</td>
-  </tr>
-  <tr>
-    <th>Windows Phone</th>
-    <td>-</td>
-    <td>-</td>
-  </tr>
-  <tr>
-    <th>iOS</th>
-    <td>-</td>
-    <td>-</td>
-  </tr>
-</table>
+_pie chart with 4 segments_
 
 
 
