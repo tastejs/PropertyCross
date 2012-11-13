@@ -18,6 +18,14 @@ async.series([
   
   generateIcons.bind(null, "assets/icon-base-173x173.png", [
     // ["FRAMEWORK-OVERLAY", "TARGET", WIDTH],
+    ["assets/frameworks/air.png", "air/src/com/propertycross/assets/icon16x16.png", 16],
+    ["assets/frameworks/air.png", "air/src/com/propertycross/assets/icon32x32.png", 32],
+    ["assets/frameworks/air.png", "air/src/com/propertycross/assets/icon36x36.png", 36],
+    ["assets/frameworks/air.png", "air/src/com/propertycross/assets/icon48x48.png", 48],
+    ["assets/frameworks/air.png", "air/src/com/propertycross/assets/icon57x57.png", 57],
+    ["assets/frameworks/air.png", "air/src/com/propertycross/assets/icon72x72.png", 72],
+    ["assets/frameworks/air.png", "air/src/com/propertycross/assets/icon114x114.png", 114],
+    ["assets/frameworks/air.png", "air/src/com/propertycross/assets/icon128x128.png", 128],
     ["assets/frameworks/jquerymobile.png", "jquerymobile/assets/icons/36x36.png", 36],
     ["assets/frameworks/jquerymobile.png", "jquerymobile/assets/icons/48x48.png", 48],
     ["assets/frameworks/jquerymobile.png", "jquerymobile/assets/icons/72x72.png", 72],
@@ -40,6 +48,7 @@ async.series([
 
   generateSplashscreens.bind(null, "assets/splashscreen-bottom-640x640.png", [
     // ["TARGET", WIDTH, HEIGHT],
+    ["air/src/com/propertycross/assets/splash.png", 320, 480],
     ["jquerymobile/assets/splashscreens/200x320.png", 200, 320],
     ["jquerymobile/assets/splashscreens/320x480.png", 320, 480],
     ["jquerymobile/assets/splashscreens/480x800.png", 480, 800],
