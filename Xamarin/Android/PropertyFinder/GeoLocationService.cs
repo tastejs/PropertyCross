@@ -9,6 +9,8 @@ namespace PropertyFinder
 	{
 		private LocationManager manager;
 		private Action<GeoLocation> pendingCallback;
+		private long FIVE_MINUTES = 1000 * 60 * 5;
+		private static readonly DateTime Epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 
 		public GeoLocationService(LocationManager m)
 		{
@@ -18,14 +20,47 @@ namespace PropertyFinder
 		public void GetLocation(Action<GeoLocation> callback)
 		{
 			pendingCallback = callback;
-			if(!manager.IsProviderEnabled(LocationManager.GpsProvider))
+
+			Criteria c = new Criteria()
+			{
+				Accuracy = Accuracy.Fine,
+			};
+
+			string provider = manager.GetBestProvider(c, true);
+			if(string.IsNullOrEmpty(provider))
 			{
 				DoCallback(null);
 			}
 			else
 			{
-				manager.RequestLocationUpdates(LocationManager.GpsProvider, 1000, 10, this);
+				Location l = manager.GetLastKnownLocation(provider);
+				if(IsLastLocationAccurateEnough(l) && pendingCallback != null)
+				{
+					DoCallback(ToGeolocation(l));
+				}
+
+				manager.RequestLocationUpdates(provider, 1000, 10, this);
 			}
+		}
+
+		private bool IsLastLocationAccurateEnough(Location l)
+		{
+			return l != null &&
+				l.Time >= UnixTimeNow() - FIVE_MINUTES;
+		}
+
+		private long UnixTimeNow()
+		{
+			return (DateTime.Now.Ticks - Epoch.Ticks) / TimeSpan.TicksPerMillisecond;
+		}
+
+		private GeoLocation ToGeolocation(Location location)
+		{
+			return new GeoLocation ()
+			{
+				Latitude = location.Latitude,
+				Longitude = location.Longitude
+			};
 		}
 
 		public void OnLocationChanged (Location location)
@@ -34,12 +69,7 @@ namespace PropertyFinder
 
 			if (location != null && pendingCallback != null)
 			{
-				GeoLocation g = new GeoLocation ()
-				{
-					Latitude = location.Latitude,
-					Longitude = location.Longitude
-				};
-				DoCallback(g);
+				DoCallback(ToGeolocation(location));
 			}
 		}
 		
