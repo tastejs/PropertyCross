@@ -2,6 +2,7 @@ using System;
 
 using Android.App;
 using Android.Content;
+using Android.Content.PM;
 using Android.Locations;
 using Android.Runtime;
 using Android.Views;
@@ -13,7 +14,7 @@ using PropertyFinder.Model;
 
 namespace PropertyFinder.Views
 {
-	[Activity]
+	[Activity (ScreenOrientation = ScreenOrientation.Portrait)]	
 	public class SearchResultsView : ListActivity, SearchResultsPresenter.View
 	{
 		private View footer;

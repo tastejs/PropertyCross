@@ -2,6 +2,7 @@ using System;
 
 using Android.App;
 using Android.Content;
+using Android.Content.PM;
 using Android.Locations;
 using Android.Runtime;
 using Android.Views;
@@ -14,7 +15,7 @@ using Android.Support.V4.App;
 
 namespace PropertyFinder.Views
 {
-	[Activity (MainLauncher = true, WindowSoftInputMode = SoftInput.StateHidden)]
+	[Activity (MainLauncher = true, WindowSoftInputMode = SoftInput.StateHidden, ScreenOrientation = ScreenOrientation.Portrait)]
 	public class PropertyFinderView : Activity, PropertyFinderPresenter.View
 	{
 		private PropertyFinderPresenter presenter;
