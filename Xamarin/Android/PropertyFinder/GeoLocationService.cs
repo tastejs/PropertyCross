@@ -5,7 +5,7 @@ using PropertyFinder.Presenter;
 
 namespace PropertyFinder
 {
-	public class GeoLocationService : ILocationListener, IGeoLocationService
+	public class GeoLocationService : Java.Lang.Object, ILocationListener, IGeoLocationService
 	{
 		private LocationManager manager;
 		private Action<GeoLocation> pendingCallback;
@@ -56,15 +56,10 @@ namespace PropertyFinder
 		{
 		}
 
-		private void Unsubscribe()
+		public void Unsubscribe()
 		{
 			if (manager != null)
 				manager.RemoveUpdates(this);
-		}
-
-		public void Dispose()
-		{
-			Unsubscribe();
 		}
 
 		private void DoCallback(GeoLocation g)
@@ -72,7 +67,5 @@ namespace PropertyFinder
 			pendingCallback(g);
 			pendingCallback = null;
 		}
-
-		public IntPtr Handle { get { return new IntPtr (); } }
 	}
 }

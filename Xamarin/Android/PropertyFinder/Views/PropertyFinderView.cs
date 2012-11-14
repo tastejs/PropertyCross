@@ -27,6 +27,7 @@ namespace PropertyFinder.Views
 		private RecentSearchAdapter adapter;
 		private View mainView;
 		private ProgressBar progress;
+		private GeoLocationService geoLocationService;
 
 		protected override void OnCreate (Bundle bundle)
 		{
@@ -35,7 +36,7 @@ namespace PropertyFinder.Views
 			var app = (PropertyFinderApplication)Application;
 
 			var source = new PropertyDataSource(new JsonWebPropertySearch(new MarshalInvokeService(app)));
-			var geoLocationService = new GeoLocationService((LocationManager)GetSystemService(Context.LocationService));
+			geoLocationService = new GeoLocationService((LocationManager)GetSystemService(Context.LocationService));
 			var stateService = new StatePersistenceService(app);
 			PropertyFinderPersistentState state = stateService.LoadState();
 
@@ -69,6 +70,12 @@ namespace PropertyFinder.Views
 
 			app.Presenter = presenter;
 			app.CurrentActivity = this;
+		}
+
+		protected override void OnPause()
+		{
+			base.OnPause();
+			geoLocationService.Unsubscribe();
 		}
 
 		public override bool OnCreateOptionsMenu(IMenu menu)
