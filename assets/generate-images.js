@@ -33,7 +33,7 @@ function exec(tmpl, config, callback) {
 
 function generateIcons(background, icons) {
   icons.forEach(function(config) {
-    exec("convert {background} {overlay} -composite -resize {width}x{height}! {result}", {
+    exec("convert {background} {overlay} -composite -resize {width}x{height}! -define png:exclude-chunks=date {result}", {
       background: background,
       overlay: config[0],
       width: config[2],
@@ -50,7 +50,7 @@ function generateSplashscreens(source, splashscreens) {
   splashscreens.forEach(function(config) {
     var width = config[1], height = config[2];
     var nominalHeight = height / width * 640;
-    exec("convert -size {nominalWidth}x{nominalHeight} canvas:black {source} -geometry +0+{offset} -composite -resize {width}x{height}! {result}", {
+    exec("convert -size {nominalWidth}x{nominalHeight} canvas:black {source} -geometry +0+{offset} -composite -resize {width}x{height}! -define png:exclude-chunks=date {result}", {
       nominalWidth: 640,
       nominalHeight: nominalHeight,
       offset: nominalHeight - 640,
