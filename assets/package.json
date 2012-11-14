@@ -1,0 +1,14 @@
+{
+  "name": "generate-images",
+  "version": "0.0.0",
+  "main": "generate-images.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "async": "~0.1.22",
+    "mustache": "~0.7.0"
+  },
+  "license": "BSD",
+  "description": "This folder contains a script to generate assets that are used across the various implementations."
+}
