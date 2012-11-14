@@ -18,3 +18,12 @@ From project root, run -
 ```
 [/]> node build/thumbnail.js
 ```
+
+###Generate assets (icons and splashscreens)
+
+This process additionally requires [ImageMagick](http://www.imagemagick.org/script/binary-releases.php) on the path.
+
+From project root, run -
+```
+[/]> node build/generate-assets.js
+```

@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "main": "na.js",
   "dependencies": {
-    "magician": "~0.1.1"
+    "magician": "~0.1.1",
+    "async": "~0.1.22",
+    "mustache": "~0.7.0"
   },
   "devDependencies": {},
   "scripts": {
