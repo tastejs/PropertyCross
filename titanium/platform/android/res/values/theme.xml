@@ -2,6 +2,5 @@
 <resources>
 <!-- A simple theme based on the default theme for Android API level 10 and below -->
 <style name="Theme.MyTheme" parent="android:Theme">
-	<item name="android:windowBackground">@drawable/background</item>
 </style>
 </resources>

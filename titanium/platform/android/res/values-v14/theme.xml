@@ -2,6 +2,5 @@
 <resources>
 <!-- For API level 14 and above, use the Holo theme -->
 <style name="Theme.MyTheme" parent="android:Theme.Holo">
-	<item name="android:windowBackground">@drawable/background</item>
 </style>
 </resources>

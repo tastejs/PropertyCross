@@ -36,6 +36,7 @@ function AndroidApplicationView(applicationViewModel) {
   };
 
   // handle favourites
+  // use action bar when supported - http://jira.appcelerator.org/browse/TIMOB-2371
   if (Ti.Platform.osname === "android") {
     Titanium.Android.currentActivity.onCreateOptionsMenu = function (e) {
       var menu = e.menu;

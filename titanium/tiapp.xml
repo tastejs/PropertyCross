@@ -29,12 +29,6 @@
         <orientations device="iphone">
             <orientation>Ti.UI.PORTRAIT</orientation>
         </orientations>
-        <orientations device="ipad">
-            <orientation>Ti.UI.PORTRAIT</orientation>
-            <orientation>Ti.UI.UPSIDE_PORTRAIT</orientation>
-            <orientation>Ti.UI.LANDSCAPE_LEFT</orientation>
-            <orientation>Ti.UI.LANDSCAPE_RIGHT</orientation>
-        </orientations>
     </iphone>
     <android xmlns:android="http://schemas.android.com/apk/res/android">
         <tool-api-level>14</tool-api-level>
@@ -46,6 +40,7 @@
                 <!-- TI_APPLICATION -->
                 <activity
                     android:configChanges="keyboardHidden|orientation"
+                    android:screenOrientation="portrait"
                     android:label="Property Cross"
                     android:name=".PropertycrossActivity" android:theme="@style/Theme.MyTheme">
                     <intent-filter>

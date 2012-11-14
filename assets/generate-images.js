@@ -24,7 +24,6 @@ generateSplashscreens("splashscreen-bottom-640x640.png", [
   ["../jquerymobile/ios/assets/splashscreens/screen-iphone-portrait.png", 320, 480],
   ["../jquerymobile/ios/assets/splashscreens/screen-iphone-portrait-2x.png", 640, 960],
   ["../jquerymobile/windowsphone/SplashScreenImage.jpg", 480, 800],
-  ["../titanium/Resources/android/Default.png", 320, 480],
   ["../titanium/Resources/iphone/Default.png", 320, 480],
   ["../titanium/Resources/iphone/Default@2x.png", 640, 960]
 ]);
