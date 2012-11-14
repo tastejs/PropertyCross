@@ -1,37 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<widget xmlns		= "http://www.w3.org/ns/widgets"
-	xmlns:gap	= "http://phonegap.com/ns/1.0"
-	id = "com.scottlogic.propertyfinder.jqm.windowsphone"
-	version = "1.0.0">
+<widget xmlns="http://www.w3.org/ns/widgets"
+	    xmlns:gap="http://phonegap.com/ns/1.0"
+	    id="com.propertycross.jquerymobile.windowsphone"
+	    version="1.0.0">
 
-  <name>PropertyCross</name>
+    <name>PropertyCross</name>
 
-  <description>
-    Part of the PropertyCross project, the Windows Phone version of the jQuery Mobile implementation.
-  </description>
+    <description>
+        Part of the PropertyCross project, the Windows Phone version of the jQuery Mobile implementation.
+    </description>
 
-  <author href="http://www.scottlogic.co.uk/blog/colin/"
-		email="ceberhardt@scottlogic.co.uk">
-    Colin Eberhardt
-  </author>
+    <author href="http://propertycross.com">
+        Colin Eberhardt, Chris Price
+    </author>
 
-  <gap:platforms>
-    <gap:platform name="android" minVersion="2.1" />
-    <gap:platform name="webos" />
-    <gap:platform name="symbian.wrt" />
-    <gap:platform name="blackberry" project="widgets"/>
-  </gap:platforms>
+    <feature name="http://api.phonegap.com/1.0/geolocation" />
+    <feature name="http://api.phonegap.com/1.0/network" />
 
-  <icon src="ApplicationIcon.png" gap:platform="winphone" />
-  <icon src="ApplicationTileIcon.png" gap:platform="winphone" gap:role="background" />
-  
-  <gap:splash src="SplashScreenImage.jpg"  gap:platform="winphone"/>
+    <preference name="phonegap-version"           value="1.9.0" />
+    <preference name="orientation"                value="portrait" />
 
-  <preference name="orientation" value="portrait" />
-  <!-- use old version 1.9.0 in newer versions the back button is broken, requires investigation -->
-  <preference name="phonegap-version" value="1.9.0" />
+    <icon src="ApplicationIcon.png"     gap:platform="winphone" />
+    <icon src="ApplicationTileIcon.png" gap:platform="winphone" gap:role="background" />
 
-  <feature name="http://api.phonegap.com/1.0/geolocation"/>
-  <feature name="http://api.phonegap.com/1.0/network"/>
+    <gap:splash src="SplashScreenImage.jpg"  gap:platform="winphone"/>
 
 </widget>
