@@ -7,7 +7,9 @@ generateIcons("icon-base-173x173.png", [
   ["frameworks/jquerymobile.png", "../jquerymobile/ios/assets/icons/icon-57.png", 57],
   ["frameworks/jquerymobile.png", "../jquerymobile/ios/assets/icons/icon-72.png", 72],
   ["frameworks/jquerymobile.png", "../jquerymobile/ios/assets/icons/icon-57-2x.png", 114],
-  ["frameworks/jquerymobile.png", "../jquerymobile/ios/assets/icons/icon-72-2x.png", 144]
+  ["frameworks/jquerymobile.png", "../jquerymobile/ios/assets/icons/icon-72-2x.png", 144],
+  ["frameworks/jquerymobile.png", "../jquerymobile/windowsphone/ApplicationIcon.png", 66],
+  ["frameworks/jquerymobile.png", "../jquerymobile/windowsphone/ApplicationTileIcon.png", 173]
 ]);
 
 generateSplashscreens("splashscreen-bottom-640x640.png", [
@@ -17,7 +19,8 @@ generateSplashscreens("splashscreen-bottom-640x640.png", [
   ["../jquerymobile/android/assets/splashscreens/480x800.png", 480, 800],
   ["../jquerymobile/android/assets/splashscreens/720x1280.png", 720, 1280],
   ["../jquerymobile/ios/assets/splashscreens/screen-iphone-portrait.png", 320, 480],
-  ["../jquerymobile/ios/assets/splashscreens/screen-iphone-portrait-2x.png", 640, 960]
+  ["../jquerymobile/ios/assets/splashscreens/screen-iphone-portrait-2x.png", 640, 960],
+  ["../jquerymobile/windowsphone/SplashScreenImage.jpg", 480, 800]
 ]);
 
 
