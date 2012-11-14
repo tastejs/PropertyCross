@@ -1,38 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<widget xmlns		= "http://www.w3.org/ns/widgets"
-	xmlns:gap	= "http://phonegap.com/ns/1.0"
-	id = "com.scottlogic.propertyfinder.jqm.ios"
-	version = "1.0.0">
+<widget xmlns="http://www.w3.org/ns/widgets"
+	    xmlns:gap="http://phonegap.com/ns/1.0"
+	    id="com.propertycross.jquerymobile.ios"
+	    version="1.0.0">
 
-  <name>PropertyCross</name>
+    <name>Property Cross</name>
 
-  <description>
-    Part of the PropertyCross project, the iOS version of the jQuery Mobile implementation.
-  </description>
+    <description>
+        Part of the PropertyCross project, the iOS version of the jQuery Mobile implementation.
+    </description>
 
-  <author href="http://www.scottlogic.co.uk/blog/colin/"
-		email="ceberhardt@scottlogic.co.uk">
-    Colin Eberhardt
-  </author>
+    <author href="http://propertycross.com">
+        Colin Eberhardt, Chris Price
+    </author>
 
-  <gap:platforms>
-    <gap:platform name="android" minVersion="2.1" />
-    <gap:platform name="webos" />
-    <gap:platform name="symbian.wrt" />
-    <gap:platform name="blackberry" project="widgets"/>
-  </gap:platforms>
+    <feature name="http://api.phonegap.com/1.0/geolocation" />
+    <feature name="http://api.phonegap.com/1.0/network" />
 
-  <icon src="icon.png"/>
-  <icon src="icon@2x.png" width="114" height="114" />
-  
-  <gap:splash src="Default.png" width="320" height="480" />
+    <preference name="phonegap-version"           value="2.1.0" />
+    <preference name="orientation"                value="portrait" />
+    <preference name="webviewbounce"              value="false" />
+    <preference name="prerendered-icon"           value="true" />
+    <preference name="auto-hide-splash-screen"    value="false" />
 
-  <preference name="orientation" value="portrait" />
-  <preference name="webviewbounce" value="false" />
-  <preference name="phonegap-version" value="2.1.0" />
-  <preference name="prerendered-icon" value="true" />
+    <icon src="assets/icons/icon-72-2x.png" />
+    <icon src="assets/icons/icon-57.png"            gap:platform="ios"        width="57" height="57" />
+    <icon src="assets/icons/icon-72.png"            gap:platform="ios"        width="72" height="72" />
+    <icon src="assets/icons/icon-57-2x.png"         gap:platform="ios"        width="114" height="114" />
+    <icon src="assets/icons/icon-72-2x.png"         gap:platform="ios"        width="144" height="144" />
 
-  <feature name="http://api.phonegap.com/1.0/geolocation"/>
-  <feature name="http://api.phonegap.com/1.0/network"/>
+    <gap:splash src="assets/splashscreens/screen-iphone-portrait.png"    gap:platform="ios"     width="320" height="480" />
+    <gap:splash src="assets/splashscreens/screen-iphone-portrait-2x.png" gap:platform="ios"     width="640" height="960" />
 
 </widget>

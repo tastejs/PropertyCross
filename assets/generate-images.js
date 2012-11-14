@@ -3,7 +3,11 @@ generateIcons("icon-base-173x173.png", [
   ["frameworks/jquerymobile.png", "../jquerymobile/android/assets/icons/36x36.png", 36],
   ["frameworks/jquerymobile.png", "../jquerymobile/android/assets/icons/48x48.png", 48],
   ["frameworks/jquerymobile.png", "../jquerymobile/android/assets/icons/72x72.png", 72],
-  ["frameworks/jquerymobile.png", "../jquerymobile/android/assets/icons/96x96.png", 96]
+  ["frameworks/jquerymobile.png", "../jquerymobile/android/assets/icons/96x96.png", 96],
+  ["frameworks/jquerymobile.png", "../jquerymobile/ios/assets/icons/icon-57.png", 57],
+  ["frameworks/jquerymobile.png", "../jquerymobile/ios/assets/icons/icon-72.png", 72],
+  ["frameworks/jquerymobile.png", "../jquerymobile/ios/assets/icons/icon-57-2x.png", 114],
+  ["frameworks/jquerymobile.png", "../jquerymobile/ios/assets/icons/icon-72-2x.png", 144]
 ]);
 
 generateSplashscreens("splashscreen-bottom-640x640.png", [
@@ -11,7 +15,9 @@ generateSplashscreens("splashscreen-bottom-640x640.png", [
   ["../jquerymobile/android/assets/splashscreens/200x320.png", 200, 320],
   ["../jquerymobile/android/assets/splashscreens/320x480.png", 320, 480],
   ["../jquerymobile/android/assets/splashscreens/480x800.png", 480, 800],
-  ["../jquerymobile/android/assets/splashscreens/720x1280.png", 720, 1280]
+  ["../jquerymobile/android/assets/splashscreens/720x1280.png", 720, 1280],
+  ["../jquerymobile/ios/assets/splashscreens/screen-iphone-portrait.png", 320, 480],
+  ["../jquerymobile/ios/assets/splashscreens/screen-iphone-portrait-2x.png", 640, 960]
 ]);
 
 

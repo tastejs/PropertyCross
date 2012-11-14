@@ -76,7 +76,11 @@ define(function (require) {
   // startup the app
   if (/\/www\//.test(location)) {
     // on a device - wait for the PhoneGap device ready event
-    document.addEventListener("deviceready", initialize, false);
+    document.addEventListener("deviceready", function() {
+      initialize();
+      // hide the splash screen
+      navigator.splashscreen.hide();
+    }, false);
   } else {
     // if there is we are not running on a phone - start the app immediately
     $(initialize);
