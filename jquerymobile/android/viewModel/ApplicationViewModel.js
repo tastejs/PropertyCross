@@ -145,15 +145,15 @@
       var locationPresent = ko.utils.arrayFirst(this.recentSearches(), function (recentLocation) {
         return recentLocation.displayString === searchLocation.displayString;
       });
-      if (locationPresent) {
-        return;
-      }
+      this.recentSearches.remove(locationPresent);
 
-      // add this new item
+      // add to the top of the list
+      this.recentSearches.unshift(searchLocation);
+
+      // bound the list
       if (this.recentSearches().length > this.maxRecentSearch) {
         this.recentSearches.pop();
       }
-      this.recentSearches.unshift(searchLocation);
     }
 
     // ----- app view models

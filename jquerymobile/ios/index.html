@@ -62,13 +62,13 @@
   <div data-role="page" data-theme="b"
         id="propertySearchView">
     <div data-role="header" data-theme="b">
-      <h1>Property Finder</h1>
+      <h1>PropertyCross</h1>
       <a data-bind="click: viewFavourites"
         data-icon="grid" class="ui-btn-right">Fave</a>
     </div>
     <div data-role="content" data-theme="c" data-iscroll>
           
-      <p>Use the form below to search for houses to buy. You can search by place-name, postcode, or click 'My location', to search in your current location!</p>      
+      <p>Use the form below to search for houses to buy. You can search by place-name, postcode, or click 'My location', to search in your current location</p>
       <form data-bind="submit: executeSearch">
           <input type="search"
                   data-bind="value: searchDisplayString, enable: isSearchEnabled, valueUpdate:'afterkeydown'"/>
@@ -107,7 +107,7 @@
   <div data-role="page" data-theme="b" data-add-back-btn="true"
         id="searchResultsView">
     <div data-role="header" data-theme="b">
-      <h1>Results</h1>
+      <h1 data-bind="text: properties().length + ' of ' + totalResults() + ' matches'"></h1>
     </div>
     <div data-role="content" data-theme="c" data-iscroll>
       <div>

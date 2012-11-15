@@ -64,10 +64,10 @@
   <div data-role="page" data-theme="a"
         id="propertySearchView">
     <div data-role="header">
-      <h1>Property Finder</h1>
+      <h1>PropertyCross</h1>
     </div>
     <div data-role="content">
-      <p>Use the form below to search for houses to buy. You can search by place-name, postcode, or click 'My location', to search in your current location!</p>      
+      <p>Use the form below to search for houses to buy. You can search by place-name, postcode, or click 'My location', to search in your current location</p>
       <form data-bind="submit: executeSearch">
           <input type="search"
                   data-bind="value: searchDisplayString, enable: isSearchEnabled, valueUpdate:'afterkeydown'"/>
@@ -112,11 +112,7 @@
         id="searchResultsView">
     <div data-role="content">
       <div>
-        <p class="results-summary">
-          Results for <span data-bind="with: searchLocation"><span data-bind="text: displayString"></span></span>, showing
-          <span data-bind="text: properties().length"></span> of 
-          <span data-bind="text: totalResults"></span> properties
-        </p>
+        <p class="results-summary" data-bind="text: properties().length + ' of ' + totalResults() + ' matches'"></p>
         <ul data-role="listview"
             class="property-list"/>
           <!-- ko template: { name: "propertyThumbnailView", foreach: properties }, updateListviewOnChange:properties -->
