@@ -40,9 +40,7 @@ function createRow(imageUrl, title, description) {
 
 module.exports = function (viewModel) {
 
-  var window = Ti.UI.createWindow({
-    title:"Results"
-  });
+  var window = Ti.UI.createWindow();
   var tableView = Titanium.UI.createTableView();
   tableView.addEventListener('click', function (e) {
     if (e.index === viewModel.properties().length) {
@@ -54,24 +52,31 @@ module.exports = function (viewModel) {
 
   window.add(tableView);
   this.window = window;
+  
+  function updateTitle() {
+  	window.title =  viewModel.properties().length + ' of ' + viewModel.totalResults() + ' matches';
+  }
 
   function updateRows(properties) {
     var rows = _.map(properties, function (property) {
       return createRow(property.thumbnailUrl(), '£ ' + property.price(), property.title() + ' ' + property.bedrooms() + ' bed ' + property.propertyType());
     });
-    if (viewModel.properties().length < viewModel.totalResults) {
-      rows.push(createRow("/pull-icon.png", "Tap to load more...", "Results for " + viewModel.searchLocation.displayString() + ", showing " + viewModel.properties().length + " of " + viewModel.totalResults + " properties"));
+    if (viewModel.properties().length < viewModel.totalResults()) {
+      rows.push(createRow("/pull-icon.png", "Tap to load more...", 
+      	"Results for " + viewModel.searchLocation().displayString + ", showing " + viewModel.properties().length + " of " + viewModel.totalResults() + " properties"));
     }
     tableView.setData(rows);
+    updateTitle();
   }
 
-  var propertiesSubscription = viewModel.properties.subscribe(function (properties) {
-    updateRows(properties);
-  });
+  var propertiesSubscription = viewModel.properties.subscribe(updateRows);
   updateRows(viewModel.properties());
+
+  var totalResultsSubscription = viewModel.totalResults.subscribe(updateTitle);
 
   this.dispose = function () {
     propertiesSubscription.dispose();
+    totalResultsSubscription.dispose();
   };
 
 };

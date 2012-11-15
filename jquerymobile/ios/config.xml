@@ -4,7 +4,7 @@
 	    id="com.propertycross.jquerymobile.ios"
 	    version="1.0.0">
 
-    <name>Property Cross</name>
+    <name>PropertyCross</name>
 
     <description>
         Part of the PropertyCross project, the iOS version of the jQuery Mobile implementation.
