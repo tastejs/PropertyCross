@@ -4,12 +4,12 @@ var ko = require("lib/knockout");
 module.exports = function (viewModel) {
 
   var window = Titanium.UI.createWindow({
-    title:'Property Finder',
+    title:'PropertyCross',
     layout:'vertical'
   });
 
   var instructions = Titanium.UI.createLabel({
-    text:"Use the form below to search for houses to buy. You can search by place-name, postcode, or click 'My location', to search in your current location!",
+    text:"Use the form below to search for houses to buy. You can search by place-name, postcode, or click 'My location', to search in your current location",
     textAlign:'left',
     font:{
       fontSize:'14dip'
