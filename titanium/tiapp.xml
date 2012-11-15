@@ -8,13 +8,13 @@
         <target device="blackberry">false</target>
     </deployment-targets>
     <sdk-version>2.1.2.GA</sdk-version>
-    <id>com.scottlogic.propertyfinder</id>
+    <id>com.propertycross.titanium</id>
     <name>PropertyCross</name>
     <version>1.0</version>
     <publisher>cprice</publisher>
-    <url>http://www.scottlogic.co.uk</url>
+    <url>http://propertycross.com</url>
     <description>not specified</description>
-    <copyright>2012 by cprice</copyright>
+    <copyright>2012 by Chris Price</copyright>
     <icon>appicon.png</icon>
     <persistent-wifi>false</persistent-wifi>
     <prerendered-icon>true</prerendered-icon>
