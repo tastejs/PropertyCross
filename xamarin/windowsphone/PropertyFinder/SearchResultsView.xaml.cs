@@ -54,7 +54,7 @@ namespace PropertyFinder
       {
         _properties.Add(property);
       }
-      searchText.Text = searchLocation;
+
       propertiesShown.Text = properties.Count.ToString();
       totalProperties.Text = totalResult.ToString();
       this.pageNumber.Text = pageNumber.ToString();
