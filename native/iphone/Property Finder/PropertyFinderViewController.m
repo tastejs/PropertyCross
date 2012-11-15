@@ -55,7 +55,7 @@
         JSONWebDataSource* dataSource = [[JSONWebDataSource alloc] init];
         _dataSource = [[PropertyDataSource alloc] initWithDataSource:dataSource];
         
-        self.title = @"Property Finder";
+        self.title = @"PropertyCross";
     }
     return self;
 }
