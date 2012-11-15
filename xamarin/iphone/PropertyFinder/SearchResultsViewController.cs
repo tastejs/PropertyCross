@@ -77,7 +77,7 @@ namespace PropertyFinder
       _tableSource.SetProperties(properties, totalResult);
       searchResultsTable.ReloadData();
 
-      Title = string.Format("{0:d} of {1:d} results", properties.Count, totalResult);
+      Title = string.Format("{0:d} of {1:d} matches", properties.Count, totalResult);
     }
 
     public void SetLoadMoreVisible (bool visible)

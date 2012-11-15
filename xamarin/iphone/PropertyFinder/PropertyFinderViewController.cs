@@ -23,7 +23,7 @@ namespace PropertyFinder
     public PropertyFinderViewController (PropertyFinderPresenter presenter)
       : base ("PropertyFinderViewController", null)
     {
-      Title = "Property Finder";
+      Title = "PropertyCross";
 
       _presenter = presenter;
     }
