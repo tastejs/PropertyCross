@@ -35,14 +35,13 @@
             <RowDefinition Height="Auto"/>
           </Grid.RowDefinitions>
 
-          <TextBlock TextWrapping="Wrap">
-            <Run Foreground="#AAA">Showing results for </Run>
-            <Run Text="{Binding SearchText}"></Run>
-            <Run Foreground="#AAA">, showing </Run>
+          <TextBlock TextWrapping="Wrap"
+                     FontSize="{StaticResource PhoneFontSizeMedium}">
+            <Run Foreground="#AAA">Showing </Run>
             <Run Text="{Binding Properties.Count}"></Run>
             <Run Foreground="#AAA"> of </Run>
             <Run Text="{Binding TotalResults}"></Run>
-            <Run Foreground="#AAA"> matching properties</Run>
+            <Run Foreground="#AAA"> matches</Run>
           </TextBlock>
 
           <ItemsControl ItemsSource="{Binding Properties}"

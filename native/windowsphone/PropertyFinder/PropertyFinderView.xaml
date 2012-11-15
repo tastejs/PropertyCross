@@ -63,7 +63,7 @@
         <RowDefinition Height="*"/>
       </Grid.RowDefinitions>
 
-      <TextBlock Text="Property Finder"
+      <TextBlock Text="PropertyCross"
                  FontSize="{StaticResource PhoneFontSizeLarge}"
                  Margin="0,30,0,0"/>
 
