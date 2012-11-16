@@ -21,34 +21,18 @@ define(function (require) {
   };
 
   function initialize() {
-    var previousBackStackLength = 0;
     var viewCache = {};
 
     // subscribe to changes in the current view model, creating
     // the required view
     application.currentViewModel.subscribe(function (viewModel) {
-      var backStackLength = application.viewModelBackStack().length;
       var viewName = application.currentView();
       var view = viewCache[viewName];
       if (!view) {
         view = viewCache[viewName] = $("#" + viewName);
         ko.applyBindings(viewModel, view[0]);
       }
-      if (previousBackStackLength < backStackLength) {
-        // forward navigation
-        $.mobile.changePage(view);
-      } else {
-        // backward navigation
-      }
-
-      previousBackStackLength = backStackLength;
-    });
-
-    // inform the application of jquery mobile's handling of backwards navigation
-    $(document).bind("pagechange", function (event, args) {
-      if (args.options.reverse) {
-        application.back();
-      }
+      $.mobile.changePage(view);
     });
 
     // for some reason when you add the event listener for the backbutton event, the supplied function
