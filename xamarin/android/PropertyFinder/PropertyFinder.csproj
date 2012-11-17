@@ -97,7 +97,6 @@
     <AndroidResource Include="Resources\drawable-mdpi\star.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\nostar.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\star.png" />
-    <AndroidResource Include="Resources\drawable\ic_launcher.png" />
     <AndroidResource Include="Resources\drawable-hdpi\ic_launcher.png" />
     <AndroidResource Include="Resources\drawable-ldpi\ic_launcher.png" />
     <AndroidResource Include="Resources\drawable-mdpi\ic_launcher.png" />

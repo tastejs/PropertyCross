@@ -1,10 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 	android:versionCode="1" android:versionName="1.0"
-	package="PropertyFinder.PropertyFinder"
-	android:icon="@drawable/ic_launcher">
+	package="PropertyFinder.PropertyFinder">
 	<uses-sdk android:minSdkVersion="8" android:targetSdkVersion="12" />
-	<application android:label="PropertyFinder" android:theme="@style/PropertyFinderTheme"></application>
+	<application android:label="PropertyFinder"
+		android:theme="@style/PropertyFinderTheme"
+		android:icon="@drawable/ic_launcher"></application>
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 	<uses-permission android:name="android.permission.INTERNET" />
 </manifest>
