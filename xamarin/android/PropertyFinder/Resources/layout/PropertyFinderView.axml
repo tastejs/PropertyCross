@@ -23,7 +23,8 @@
             android:id="@+id/search"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp" />
+            android:layout_marginBottom="4dp"
+            android:inputType="text" />
         <Button
             android:id="@+id/do_search"
             android:layout_width="fill_parent"
