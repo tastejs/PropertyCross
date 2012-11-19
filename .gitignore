@@ -19,10 +19,10 @@
 /Xamarin/WindowsPhone/PropertyFinder/Toolkit.Content
 /Native/WindowsPhone/PropertyFinder/Toolkit.Content
 /Native/WindowsPhone/*.suo
-/Native/WindowsPhone/PropertyFinder/PropertyFinder.csproj.user
-/xamarin/android/PropertyFinder/Bin
-/xamarin/android/PropertyFinder/obj
-/xamarin/android/PropertyFinder.suo
-/xamarin/android/PropertyFinder.userprefs
+/Native/WindowsPhone/PropertyCross/PropertyCross.csproj.user
+/xamarin/android/PropertyCross/Bin
+/xamarin/android/PropertyCross/obj
+/xamarin/android/PropertyCross.suo
+/xamarin/android/PropertyCross.userprefs
 
 node_modules

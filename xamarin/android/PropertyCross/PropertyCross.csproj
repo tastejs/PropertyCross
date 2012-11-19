@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2B7B26B5-AC5D-4765-A61B-C80A88B14D7C}</ProjectGuid>
+    <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <RootNamespace>com.propertycross.xamarin.android</RootNamespace>
+    <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
+    <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
+    <AndroidResgenClass>Resource</AndroidResgenClass>
+    <AndroidApplication>True</AndroidApplication>
+    <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
+    <AssemblyName>PropertyFinder</AssemblyName>
+    <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>False</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>False</ConsolePause>
+    <AndroidLinkMode>None</AndroidLinkMode>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>True</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AndroidUseSharedRuntime>False</AndroidUseSharedRuntime>
+    <ConsolePause>False</ConsolePause>
+    <AndroidLinkMode>SdkOnly</AndroidLinkMode>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="Mono.Android" />
+    <Reference Include="Newtonsoft.Json.MonoDroid">
+      <HintPath>..\lib\Newtonsoft.Json.MonoDroid.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Android.Support.v4" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Resources\Resource.designer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="MarshalInvokeService.cs" />
+    <Compile Include="StatePersistenceService.cs" />
+    <Compile Include="GeoLocationService.cs" />
+    <Compile Include="NavigationService.cs" />
+    <Compile Include="Views\PropertyFinderView.cs" />
+    <Compile Include="RecentSearchAdapter.cs" />
+    <Compile Include="Views\SearchResultsView.cs" />
+    <Compile Include="SearchResultsAdapter.cs" />
+    <Compile Include="PropertyFinderApplication.cs" />
+    <Compile Include="Utils\DownloadImageTask.cs" />
+    <Compile Include="Views\PropertyView.cs" />
+    <Compile Include="Views\FavouritesView.cs" />
+    <Compile Include="Utils\BitmapUtils.cs" />
+    <Compile Include="Utils\AsyncDrawable.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AboutResources.txt" />
+    <None Include="Assets\AboutAssets.txt" />
+    <None Include="Properties\AndroidManifest.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\values\Strings.xml" />
+    <AndroidResource Include="Resources\layout\PropertyFinderView.axml" />
+    <AndroidResource Include="Resources\layout\recent_search_row.axml" />
+    <AndroidResource Include="Resources\menu\favourites_view.xml" />
+    <AndroidResource Include="Resources\values-v11\themes.xml" />
+    <AndroidResource Include="Resources\values\themes.xml" />
+    <AndroidResource Include="Resources\layout\property_search_row.axml" />
+    <AndroidResource Include="Resources\layout\load_more_footer.axml" />
+    <AndroidResource Include="Resources\layout\property_view.axml" />
+    <AndroidResource Include="Resources\menu\favourites_toggle.xml" />
+    <AndroidResource Include="Resources\drawable-v14\actionbar_background.xml" />
+    <AndroidResource Include="Resources\drawable\actionbar_background.xml" />
+    <AndroidResource Include="Resources\drawable-mdpi\actionbar_tile.png" />
+    <AndroidResource Include="Resources\drawable-hdpi-v11\nostar.png" />
+    <AndroidResource Include="Resources\drawable-hdpi-v11\star.png" />
+    <AndroidResource Include="Resources\drawable-mdpi-v11\nostar.png" />
+    <AndroidResource Include="Resources\drawable-mdpi-v11\star.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi-v11\nostar.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi-v11\star.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\nostar.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\star.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\nostar.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\star.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\nostar.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\star.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_launcher.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\ic_launcher.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_launcher.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_launcher.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\Common\Model\IJsonPropertySearch.cs">
+      <Link>Model\IJsonPropertySearch.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Model\JsonFilePropertySearch.cs">
+      <Link>Model\JsonFilePropertySearch.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Model\JsonWebPropertySearch.cs">
+      <Link>Model\JsonWebPropertySearch.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Model\Location.cs">
+      <Link>Model\Location.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Model\Property.cs">
+      <Link>Model\Property.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Model\PropertyDataSource.cs">
+      <Link>Model\PropertyDataSource.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Model\PropertyDataSourceResult.cs">
+      <Link>Model\PropertyDataSourceResult.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Model\PropertyListingsResult.cs">
+      <Link>Model\PropertyListingsResult.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Model\PropertyLocationsResult.cs">
+      <Link>Model\PropertyLocationsResult.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Model\PropertyUnknownLocationResult.cs">
+      <Link>Model\PropertyUnknownLocationResult.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Model\Util.cs">
+      <Link>Model\Util.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Presenter\Events\LocationSelectedEventArgs.cs">
+      <Link>Presenter\Events\LocationSelectedEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Presenter\Events\PropertyEventArgs.cs">
+      <Link>Presenter\Events\PropertyEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Presenter\Events\SearchTextChangedEventArgs.cs">
+      <Link>Presenter\Events\SearchTextChangedEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Presenter\FavouritesPresenter.cs">
+      <Link>Presenter\FavouritesPresenter.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Presenter\PropertyFinderPresenter.cs">
+      <Link>Presenter\PropertyFinderPresenter.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Presenter\PropertyPresenter.cs">
+      <Link>Presenter\PropertyPresenter.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Presenter\RecentSearch.cs">
+      <Link>Presenter\RecentSearch.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Presenter\SearchItem\GeoLocationSearchItem.cs">
+      <Link>Presenter\SearchItem\GeoLocationSearchItem.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Presenter\SearchItem\PlainTextSearchItem.cs">
+      <Link>Presenter\SearchItem\PlainTextSearchItem.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Presenter\SearchItem\SearchItemBase.cs">
+      <Link>Presenter\SearchItem\SearchItemBase.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Presenter\SearchResultsPresenter.cs">
+      <Link>Presenter\SearchResultsPresenter.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Presenter\Services\IGeoLocationService.cs">
+      <Link>Presenter\Services\IGeoLocationService.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Presenter\Services\IMarshalInvokeService.cs">
+      <Link>Presenter\Services\IMarshalInvokeService.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Presenter\Services\INavigationService.cs">
+      <Link>Presenter\Services\INavigationService.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Presenter\Services\IStatePersistenceService.cs">
+      <Link>Presenter\Services\IStatePersistenceService.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Presenter\Services\PropertyFinderPersistentState.cs">
+      <Link>Presenter\Services\PropertyFinderPersistentState.cs</Link>
+    </Compile>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="Views\" />
+    <Folder Include="Resources\menu\" />
+    <Folder Include="Resources\values-v11\" />
+    <Folder Include="Utils\" />
+    <Folder Include="SupportLib\" />
+    <Folder Include="Resources\drawable-hdpi\" />
+    <Folder Include="Resources\drawable-mdpi\" />
+    <Folder Include="Resources\drawable-xhdpi\" />
+    <Folder Include="Resources\drawable-v14\" />
+    <Folder Include="Resources\drawable\" />
+    <Folder Include="Resources\drawable-hdpi-v11\" />
+    <Folder Include="Resources\drawable-mdpi-v11\" />
+    <Folder Include="Resources\drawable-xhdpi-v11\" />
+    <Folder Include="Resources\drawable-ldpi\" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidJavaLibrary Include="SupportLib\android-support-v4.jar" />
+  </ItemGroup>
+</Project>

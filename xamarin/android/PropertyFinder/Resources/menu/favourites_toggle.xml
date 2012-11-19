@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-<item android:id="@+id/favourites_add_item" android:title="@string/favourites_add"
- 		android:icon="@drawable/nostar" android:showAsAction="ifRoom|withText" />
-<item android:id="@+id/favourites_remove_item" android:title="@string/favourites_remove"
-		android:icon="@drawable/star" android:showAsAction="ifRoom|withText" />
-</menu>
