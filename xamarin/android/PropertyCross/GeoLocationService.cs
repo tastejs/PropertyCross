@@ -1,20 +1,28 @@
 using System;
+using System.Timers;
 using Android.Locations;
 using Android.OS;
 using PropertyFinder.Presenter;
+using System.ComponentModel;
 
 namespace com.propertycross.xamarin.android
 {
-	public class GeoLocationService : Java.Lang.Object, ILocationListener, IGeoLocationService
+	public class GeoLocationService : Java.Lang.Object, ILocationListener, IGeoLocationService, IDisposable
 	{
+		private static readonly long FIVE_MINUTES = 1000 * 60 * 5;
+		private static readonly long SEVEN_SECONDS = 1000 * 7;
+		private static readonly DateTime Epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 		private LocationManager manager;
 		private Action<GeoLocation> pendingCallback;
-		private long FIVE_MINUTES = 1000 * 60 * 5;
-		private static readonly DateTime Epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+		private Timer timer;
+		private IMarshalInvokeService marshal;
 
-		public GeoLocationService(LocationManager m)
+		public GeoLocationService(LocationManager locationManager, IMarshalInvokeService marshalService)
 		{
-			manager = m;
+			manager = locationManager;
+			marshal = marshalService;
+			timer = new Timer(SEVEN_SECONDS);
+			timer.Elapsed += OnTimeout;
 		}
 
 		public void GetLocation(Action<GeoLocation> callback)
@@ -34,12 +42,13 @@ namespace com.propertycross.xamarin.android
 			else
 			{
 				Location l = manager.GetLastKnownLocation(provider);
-				if(IsLastLocationAccurateEnough(l) && pendingCallback != null)
+				if(IsLastLocationAccurateEnough(l))
 				{
 					DoCallback(ToGeolocation(l));
 				}
 
 				manager.RequestLocationUpdates(provider, 1000, 10, this);
+				timer.Start();
 			}
 		}
 
@@ -63,11 +72,20 @@ namespace com.propertycross.xamarin.android
 			};
 		}
 
-		public void OnLocationChanged (Location location)
+		private void OnTimeout(object sender, ElapsedEventArgs e)
 		{
-			Unsubscribe ();
+			marshal.Invoke(() =>
+			{
+				Unsubscribe();
+				DoCallback(null);
+			});
+		}
 
-			if (location != null && pendingCallback != null)
+		public void OnLocationChanged(Location location)
+		{
+			Unsubscribe();
+
+			if (location != null)
 			{
 				DoCallback(ToGeolocation(location));
 			}
@@ -90,12 +108,23 @@ namespace com.propertycross.xamarin.android
 		{
 			if (manager != null)
 				manager.RemoveUpdates(this);
+			timer.Stop();
 		}
 
 		private void DoCallback(GeoLocation g)
 		{
-			pendingCallback(g);
-			pendingCallback = null;
+			if(pendingCallback != null)
+			{
+				pendingCallback(g);
+				pendingCallback = null;
+			}
+		}
+
+		public void Dispose()
+		{
+			base.Dispose();
+			timer.Elapsed -= OnTimeout;
+			timer.Dispose();
 		}
 	}
 }

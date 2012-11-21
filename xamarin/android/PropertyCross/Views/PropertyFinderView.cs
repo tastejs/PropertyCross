@@ -35,8 +35,9 @@ namespace com.propertycross.xamarin.android.Views
 
 			var app = (PropertyFinderApplication)Application;
 
-			var source = new PropertyDataSource(new JsonWebPropertySearch(new MarshalInvokeService(app)));
-			geoLocationService = new GeoLocationService((LocationManager)GetSystemService(Context.LocationService));
+			var uiMarshal = new MarshalInvokeService(app);
+			var source = new PropertyDataSource(new JsonWebPropertySearch(uiMarshal));
+			geoLocationService = new GeoLocationService((LocationManager)GetSystemService(Context.LocationService), uiMarshal);
 			var stateService = new StatePersistenceService(app);
 			PropertyFinderPersistentState state = stateService.LoadState();
 
@@ -76,6 +77,12 @@ namespace com.propertycross.xamarin.android.Views
 		{
 			base.OnPause();
 			geoLocationService.Unsubscribe();
+		}
+
+		protected override void OnDestroy()
+		{
+			base.OnDestroy();
+			geoLocationService.Dispose();
 		}
 
 		public override bool OnCreateOptionsMenu(IMenu menu)
