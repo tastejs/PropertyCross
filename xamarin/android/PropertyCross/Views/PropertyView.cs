@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
+using Android.Graphics;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
@@ -13,13 +12,19 @@ using Android.Widget;
 
 using PropertyFinder.Model;
 using PropertyFinder.Presenter;
-using Android.Support.V4.App;
-using Android.Graphics;
+
+using Com.Actionbarsherlock.App;
+using Com.Actionbarsherlock.View;
+
+using IMenu = global::Com.Actionbarsherlock.View.IMenu;
+using IMenuItem = global::Com.Actionbarsherlock.View.IMenuItem;
+using MenuItem = global::Com.Actionbarsherlock.View.MenuItem;
+using MenuInflater = global::Com.Actionbarsherlock.View.MenuInflater;
 
 namespace com.propertycross.xamarin.android.Views
 {
 	[Activity (ScreenOrientation = ScreenOrientation.Portrait)]				
-	public class PropertyView : Activity, PropertyPresenter.View
+	public class PropertyView : SherlockActivity, PropertyPresenter.View
 	{		
 		private PropertyPresenter presenter;
 		private TextView priceText; 
@@ -50,7 +55,7 @@ namespace com.propertycross.xamarin.android.Views
 
 		public override bool OnCreateOptionsMenu(IMenu menu)
 		{
-			MenuInflater.Inflate(Resource.Menu.favourites_toggle, menu);
+			SupportMenuInflater.Inflate(Resource.Menu.favourites_toggle, menu);
 			return true;
 		}
 
@@ -101,11 +106,10 @@ namespace com.propertycross.xamarin.android.Views
 			set
 			{
 				_fave = value;
-				ActivityCompat.InvalidateOptionsMenu(this);
+				SupportInvalidateOptionsMenu();
 			}
 		}
 		
 		public event EventHandler ToggleFavourite;
 	}
 }
-

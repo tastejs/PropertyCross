@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<resources>
-    <style name="PropertyCrossTheme" parent="@android:style/Theme.Holo.Light">
-        <!-- Any customizations for your app running on post 3.0 devices here -->        
-		<item name="android:actionBarStyle">@style/ActionBar</item>
-        <item name="android:actionMenuTextAppearance">@style/ActionBar.MenuTextStyle</item>
-    </style>
-</resources>

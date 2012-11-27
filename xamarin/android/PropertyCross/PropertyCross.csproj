@@ -16,6 +16,7 @@
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <AssemblyName>PropertyFinder</AssemblyName>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
+    <TargetFrameworkVersion>v4.0.3</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
@@ -76,7 +77,6 @@
     <AndroidResource Include="Resources\layout\PropertyFinderView.axml" />
     <AndroidResource Include="Resources\layout\recent_search_row.axml" />
     <AndroidResource Include="Resources\menu\favourites_view.xml" />
-    <AndroidResource Include="Resources\values-v11\themes.xml" />
     <AndroidResource Include="Resources\values\themes.xml" />
     <AndroidResource Include="Resources\layout\property_search_row.axml" />
     <AndroidResource Include="Resources\layout\load_more_footer.axml" />
@@ -85,22 +85,16 @@
     <AndroidResource Include="Resources\drawable-v14\actionbar_background.xml" />
     <AndroidResource Include="Resources\drawable\actionbar_background.xml" />
     <AndroidResource Include="Resources\drawable-mdpi\actionbar_tile.png" />
-    <AndroidResource Include="Resources\drawable-hdpi-v11\nostar.png" />
-    <AndroidResource Include="Resources\drawable-hdpi-v11\star.png" />
-    <AndroidResource Include="Resources\drawable-mdpi-v11\nostar.png" />
-    <AndroidResource Include="Resources\drawable-mdpi-v11\star.png" />
-    <AndroidResource Include="Resources\drawable-xhdpi-v11\nostar.png" />
-    <AndroidResource Include="Resources\drawable-xhdpi-v11\star.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_launcher.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\ic_launcher.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_launcher.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_launcher.png" />
     <AndroidResource Include="Resources\drawable-hdpi\nostar.png" />
     <AndroidResource Include="Resources\drawable-hdpi\star.png" />
     <AndroidResource Include="Resources\drawable-mdpi\nostar.png" />
     <AndroidResource Include="Resources\drawable-mdpi\star.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\nostar.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\star.png" />
-    <AndroidResource Include="Resources\drawable-hdpi\ic_launcher.png" />
-    <AndroidResource Include="Resources\drawable-ldpi\ic_launcher.png" />
-    <AndroidResource Include="Resources\drawable-mdpi\ic_launcher.png" />
-    <AndroidResource Include="Resources\drawable-xhdpi\ic_launcher.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\Common\Model\IJsonPropertySearch.cs">
@@ -189,7 +183,6 @@
   <ItemGroup>
     <Folder Include="Views\" />
     <Folder Include="Resources\menu\" />
-    <Folder Include="Resources\values-v11\" />
     <Folder Include="Utils\" />
     <Folder Include="SupportLib\" />
     <Folder Include="Resources\drawable-hdpi\" />
@@ -197,12 +190,17 @@
     <Folder Include="Resources\drawable-xhdpi\" />
     <Folder Include="Resources\drawable-v14\" />
     <Folder Include="Resources\drawable\" />
-    <Folder Include="Resources\drawable-hdpi-v11\" />
-    <Folder Include="Resources\drawable-mdpi-v11\" />
-    <Folder Include="Resources\drawable-xhdpi-v11\" />
     <Folder Include="Resources\drawable-ldpi\" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidJavaLibrary Include="SupportLib\android-support-v4.jar" />
+    <AndroidJavaLibrary Include="..\lib\android-support-v4.jar">
+      <Link>SupportLib\android-support-v4.jar</Link>
+    </AndroidJavaLibrary>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ActionBarSherlock\ActionBarSherlock.csproj">
+      <Project>{2D5471B2-8255-4E47-97E9-EEB28678CC82}</Project>
+      <Name>ActionBarSherlock</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

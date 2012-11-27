@@ -11,11 +11,13 @@ using Android.OS;
 using PropertyFinder.Presenter;
 using System.Collections.Generic;
 using PropertyFinder.Model;
+using Com.Actionbarsherlock.App;
+using Com.Actionbarsherlock.View;
 
 namespace com.propertycross.xamarin.android.Views
 {
 	[Activity (ScreenOrientation = ScreenOrientation.Portrait)]	
-	public class SearchResultsView : ListActivity, SearchResultsPresenter.View
+	public class SearchResultsView : SherlockListActivity, SearchResultsPresenter.View
 	{
 		private View footer;
 		private TextView resultDetails;

@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PropertyCross", "PropertyCross\PropertyCross.csproj", "{2B7B26B5-AC5D-4765-A61B-C80A88B14D7C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActionBarSherlock", "ActionBarSherlock\ActionBarSherlock.csproj", "{2D5471B2-8255-4E47-97E9-EEB28678CC82}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{2B7B26B5-AC5D-4765-A61B-C80A88B14D7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2B7B26B5-AC5D-4765-A61B-C80A88B14D7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2B7B26B5-AC5D-4765-A61B-C80A88B14D7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D5471B2-8255-4E47-97E9-EEB28678CC82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D5471B2-8255-4E47-97E9-EEB28678CC82}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D5471B2-8255-4E47-97E9-EEB28678CC82}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D5471B2-8255-4E47-97E9-EEB28678CC82}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = PropertyCross\PropertyCross.csproj
@@ -154,6 +160,6 @@ Global
 		$27.MessageStyle = $28
 		$28.LineAlign = 0
 		$27.inheritsSet = Mono
-		outputpath = ..\..\xamarin\android\build\bin
+		outputpath = ..\android\build\bin
 	EndGlobalSection
 EndGlobal

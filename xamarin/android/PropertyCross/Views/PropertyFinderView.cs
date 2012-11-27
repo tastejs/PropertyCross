@@ -1,5 +1,7 @@
 using System;
 
+using System.Collections.Generic;
+
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
@@ -8,15 +10,22 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+
 using PropertyFinder.Presenter;
-using System.Collections.Generic;
 using PropertyFinder.Model;
-using Android.Support.V4.App;
+
+using Com.Actionbarsherlock.App;
+using Com.Actionbarsherlock.View;
+
+using IMenu = global::Com.Actionbarsherlock.View.IMenu;
+using IMenuItem = global::Com.Actionbarsherlock.View.IMenuItem;
+using MenuItem = global::Com.Actionbarsherlock.View.MenuItem;
+using MenuInflater = global::Com.Actionbarsherlock.View.MenuInflater;
 
 namespace com.propertycross.xamarin.android.Views
 {
 	[Activity (MainLauncher = true, WindowSoftInputMode = SoftInput.StateHidden, ScreenOrientation = ScreenOrientation.Portrait)]
-	public class PropertyFinderView : Activity, PropertyFinderPresenter.View
+	public class PropertyFinderView : SherlockActivity, PropertyFinderPresenter.View
 	{
 		private PropertyFinderPresenter presenter;
 		private EditText searchText;
@@ -87,7 +96,7 @@ namespace com.propertycross.xamarin.android.Views
 
 		public override bool OnCreateOptionsMenu(IMenu menu)
 		{
-			MenuInflater.Inflate(Resource.Menu.favourites_view, menu);
+			SupportMenuInflater.Inflate(Resource.Menu.favourites_view, menu);
 			return true;
 		}
 

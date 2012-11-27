@@ -12,11 +12,13 @@ using Android.Views;
 using Android.Widget;
 using PropertyFinder.Presenter;
 using PropertyFinder.Model;
+using Com.Actionbarsherlock.App;
+using Com.Actionbarsherlock.View;
 
 namespace com.propertycross.xamarin.android.Views
 {
 	[Activity (ScreenOrientation = ScreenOrientation.Portrait)]			
-	public class FavouritesView : ListActivity, FavouritesPresenter.View
+	public class FavouritesView : SherlockListActivity, FavouritesPresenter.View
 	{		
 		private FavouritesPresenter presenter;
 

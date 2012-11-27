@@ -24,5 +24,7 @@
 /xamarin/android/PropertyCross/obj
 /xamarin/android/PropertyCross.suo
 /xamarin/android/PropertyCross.userprefs
+/xamarin/android/ActionBarSherlock/bin
+/xamarin/android/ActionBarSherlock/obj
 
 node_modules

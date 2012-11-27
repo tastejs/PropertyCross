@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <resources>
-    <style name="PropertyCrossTheme" parent="@android:style/Theme.Light">
+    <style name="PropertyCrossTheme" parent="Theme.Sherlock.Light.DarkActionBar">
         <!-- Any customizations for your app running on pre-3.0 devices here -->
 		<item name="android:actionBarStyle">@style/ActionBar</item>
         <item name="android:actionMenuTextAppearance">@style/ActionBar.MenuTextStyle</item>
     </style>
 
-    <style name="ActionBar" parent="@android:style/Widget.Holo.ActionBar">
+    <style name="ActionBar" parent="Widget.Sherlock.Light.ActionBar.Solid.Inverse">
 		<item name="android:background">@drawable/actionbar_background</item>
 		<item name="android:icon">@drawable/ic_launcher</item>
         <item name="android:titleTextStyle">@style/ActionBar.TitleText</item>
