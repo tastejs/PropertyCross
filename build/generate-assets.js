@@ -38,6 +38,17 @@ async.series([
     ["titanium/Resources/iphone/Default.png", 320, 480],
     ["titanium/Resources/iphone/Default@2x.png", 640, 960]
   ])
+  
+  /*
+  * To do: copy star.png and nostar.png to the following locations with the following size configurations:
+  * xamarin/android/PropertyCross/Resources/drawable-xhdpi/ 64x64
+  * xamarin/android/PropertyCross/Resources/drawable-hdpi/ 48x48
+  * xamarin/android/PropertyCross/Resources/drawable-mdpi/ 32x32
+  *
+  * To do: copy actionbar_tile.png to the following locations with the following size configurations:
+  * xamarin/android/PropertyCross/Resources/drawable-mdpi/ 6x6
+  */
+  
 ], function(err) {
   if (err) {
     console.error(err);
