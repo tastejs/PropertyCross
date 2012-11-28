@@ -37,7 +37,7 @@ To help solve this problem PropertyCross presents a non-trivial application, for
   <tr>
     <th>Xamarin / Mono</th>
     <td>Y</td>
-    <td>~</td>
+    <td>Y</td>
     <td>Y</td>
   </tr>
   <tr>

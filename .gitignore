@@ -19,6 +19,6 @@
 /Xamarin/WindowsPhone/PropertyFinder/Toolkit.Content
 /Native/WindowsPhone/PropertyFinder/Toolkit.Content
 /Native/WindowsPhone/*.suo
-/Native/WindowsPhone/PropertyFinder/PropertyFinder.csproj.user
+/Native/WindowsPhone/PropertyCross/PropertyCross.csproj.user
 
 node_modules
