@@ -19,7 +19,11 @@ async.series([
     ["assets/frameworks/jquerymobile.png", "jquerymobile/windowsphone/ApplicationTileIcon.png", 173],
     ["assets/frameworks/titanium.png", "titanium/Resources/android/appicon.png", 128],
     ["assets/frameworks/titanium.png", "titanium/Resources/iphone/appicon.png", 57],
-    ["assets/frameworks/titanium.png", "titanium/Resources/iphone/appicon@2x.png", 114]
+    ["assets/frameworks/titanium.png", "titanium/Resources/iphone/appicon@2x.png", 114],
+    ["assets/frameworks/xamarin.png", "xamarin/android/PropertyCross/Resources/drawable-hdpi/ic_launcher.png", 72],
+    ["assets/frameworks/xamarin.png", "xamarin/android/PropertyCross/Resources/drawable-ldpi/ic_launcher.png", 36],
+    ["assets/frameworks/xamarin.png", "xamarin/android/PropertyCross/Resources/drawable-mdpi/ic_launcher.png", 48],
+    ["assets/frameworks/xamarin.png", "xamarin/android/PropertyCross/Resources/drawable-xhdpi/ic_launcher.png", 96],
   ]),
 
   generateSplashscreens.bind(null, "assets/splashscreen-bottom-640x640.png", [
