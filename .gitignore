@@ -20,11 +20,5 @@
 /Native/WindowsPhone/PropertyFinder/Toolkit.Content
 /Native/WindowsPhone/*.suo
 /Native/WindowsPhone/PropertyCross/PropertyCross.csproj.user
-/xamarin/android/PropertyCross/Bin
-/xamarin/android/PropertyCross/obj
-/xamarin/android/PropertyCross.suo
-/xamarin/android/PropertyCross.userprefs
-/xamarin/android/ActionBarSherlock/bin
-/xamarin/android/ActionBarSherlock/obj
 
 node_modules
