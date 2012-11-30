@@ -40,21 +40,21 @@ async.series([
   ]),
 
   generateOther.bind(null, "assets/star.png", [
-    // ["FRAMEWORK-OVERLAY", "TARGET", WIDTH],
+    // ["TARGET", WIDTH (, HEIGHT)],
     ["xamarin/android/PropertyCross/Resources/drawable-xhdpi/star.png", 64],
     ["xamarin/android/PropertyCross/Resources/drawable-hdpi/star.png", 48],
     ["xamarin/android/PropertyCross/Resources/drawable-mdpi/star.png", 32]
   ]),
 
   generateOther.bind(null, "assets/nostar.png", [
-    // ["FRAMEWORK-OVERLAY", "TARGET", WIDTH],
+    // ["TARGET", WIDTH (, HEIGHT)],
     ["xamarin/android/PropertyCross/Resources/drawable-xhdpi/nostar.png", 64],
     ["xamarin/android/PropertyCross/Resources/drawable-hdpi/nostar.png", 48],
     ["xamarin/android/PropertyCross/Resources/drawable-mdpi/nostar.png", 32]
   ]),
 
   generateOther.bind(null, "assets/actionbar_tile.png", [
-    // ["FRAMEWORK-OVERLAY", "TARGET", WIDTH],
+    // ["TARGET", WIDTH (, HEIGHT)],
     ["xamarin/android/PropertyCross/Resources/drawable-mdpi/actionbar_tile.png", 6]
   ])
   
