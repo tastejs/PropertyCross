@@ -23,7 +23,7 @@ async.series([
     ["assets/frameworks/xamarin.png", "xamarin/android/PropertyCross/Resources/drawable-hdpi/ic_launcher.png", 72],
     ["assets/frameworks/xamarin.png", "xamarin/android/PropertyCross/Resources/drawable-ldpi/ic_launcher.png", 36],
     ["assets/frameworks/xamarin.png", "xamarin/android/PropertyCross/Resources/drawable-mdpi/ic_launcher.png", 48],
-    ["assets/frameworks/xamarin.png", "xamarin/android/PropertyCross/Resources/drawable-xhdpi/ic_launcher.png", 96],
+    ["assets/frameworks/xamarin.png", "xamarin/android/PropertyCross/Resources/drawable-xhdpi/ic_launcher.png", 96]
   ]),
 
   generateSplashscreens.bind(null, "assets/splashscreen-bottom-640x640.png", [
@@ -37,17 +37,26 @@ async.series([
     ["jquerymobile/windowsphone/SplashScreenImage.jpg", 480, 800],
     ["titanium/Resources/iphone/Default.png", 320, 480],
     ["titanium/Resources/iphone/Default@2x.png", 640, 960]
+  ]),
+
+  generateOther.bind(null, "assets/star.png", [
+    // ["FRAMEWORK-OVERLAY", "TARGET", WIDTH],
+    ["xamarin/android/PropertyCross/Resources/drawable-xhdpi/star.png", 64],
+    ["xamarin/android/PropertyCross/Resources/drawable-hdpi/star.png", 48],
+    ["xamarin/android/PropertyCross/Resources/drawable-mdpi/star.png", 32]
+  ]),
+
+  generateOther.bind(null, "assets/nostar.png", [
+    // ["FRAMEWORK-OVERLAY", "TARGET", WIDTH],
+    ["xamarin/android/PropertyCross/Resources/drawable-xhdpi/nostar.png", 64],
+    ["xamarin/android/PropertyCross/Resources/drawable-hdpi/nostar.png", 48],
+    ["xamarin/android/PropertyCross/Resources/drawable-mdpi/nostar.png", 32]
+  ]),
+
+  generateOther.bind(null, "assets/actionbar_tile.png", [
+    // ["FRAMEWORK-OVERLAY", "TARGET", WIDTH],
+    ["xamarin/android/PropertyCross/Resources/drawable-mdpi/actionbar_tile.png", 6]
   ])
-  
-  /*
-  * To do: copy star.png and nostar.png to the following locations with the following size configurations:
-  * xamarin/android/PropertyCross/Resources/drawable-xhdpi/ 64x64
-  * xamarin/android/PropertyCross/Resources/drawable-hdpi/ 48x48
-  * xamarin/android/PropertyCross/Resources/drawable-mdpi/ 32x32
-  *
-  * To do: copy actionbar_tile.png to the following locations with the following size configurations:
-  * xamarin/android/PropertyCross/Resources/drawable-mdpi/ 6x6
-  */
   
 ], function(err) {
   if (err) {
@@ -65,6 +74,20 @@ function generateIcons(background, icons, callback) {
           width: config[2],
           height: config[2],
           result: config[1]
+        },
+        callback);
+  }, callback);
+}
+
+function generateOther(source, config, callback) {
+  async.forEachLimit(config, CONCURRENCY_LIMIT, function(config, callback) {
+    renderAndExec(
+        "convert {{{source}}} -resize {{{width}}}x{{{height}}}! -define png:exclude-chunks=date {{{result}}}",
+        {
+          source: source,
+          width: config[1],
+          height: config[2] || config[1],
+          result: config[0]
         },
         callback);
   }, callback);
