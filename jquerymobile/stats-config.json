@@ -1,12 +1,16 @@
 {
-  "shared": "Common/*.js",
-  "iOS":[
-    "ios/app.js",
-    "ios/index.html"
+  "shared": [
+    "model/*.js",
+    "viewModel/*.js",
+    "style/*.css",
+    "app.js",
+    "index.html"
   ],
+  "iOS":null,
   "Android": null,
   "WindowsPhone":[
-    "windowsphone/app.js",
-    "windowsphone/index.html"
+    "style-windowsphone/*.css",
+    "app-windowsphone.js",
+    "index-windowsphone.html"
   ]
 }

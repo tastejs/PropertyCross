@@ -1,0 +1,181 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <title>PropertyCross</title>
+
+  <meta name="viewport" content="width=device-width, user-scalable=no" />
+
+  <script type="text/javascript" src="lib/jquery-1.8.2.min.js"></script>
+  <script type="text/javascript" src="lib/jquery.mobile-1.2.0.min.js"></script>
+  <script type="text/javascript" src="lib/jquery.jsonp-2.1.4.min.js"></script>
+  <script type="text/javascript" src="lib/knockout-2.2.0rc.debug.js"></script>
+  <script type="text/javascript" src="lib/plugins/progress-bar/js/progress-bar.js"></script>
+  <script type="text/javascript" src="lib/plugins/app-bar/js/app-bar.js"></script>
+  <script type="text/javascript" src="lib/plugins/app-bar/js/jquery.easing.1.3.js"></script>
+  <!-- Automatically included by PhoneGap Build -->
+  <script type="text/javascript" src="phonegap.js"></script>
+  <!-- NO-OP in RELEASE -->
+  <script type="text/javascript" src="lib/require.js" data-main="app-windowsphone"></script>
+  <!-- NO-OP in DEBUG -->
+  <script type="text/javascript" src="app.min.js"></script>
+
+  <!-- jquery mobile styling -->
+  <link rel="stylesheet" href="lib/jquery.mobile.metro.theme.css" title="default" />
+  <!-- jQM Metro plugins styling -->
+  <link href="lib/plugins/progress-bar/css/progress-bar.css" rel="stylesheet" type="text/css" />
+  <link href="lib/plugins/app-bar/css/app-bar.css" rel="stylesheet" type="text/css" />
+  <!-- application specific styling -->
+  <link rel="stylesheet" type="text/css" href="style-windowsphone/style.css" />
+</head>
+<body>
+  <script id="locationTemplate" type="text/x-jquery-tmpl">
+    <li>
+      <a data-bind="click: $parent.selectLocation">
+        <span data-bind="text: displayString"/>
+      </a>
+    </li>
+  </script>
+
+  <script id="locationWithCountTemplate" type="text/x-jquery-tmpl">
+    <li>
+      <a data-bind="click: $parent.selectLocation">
+        <span data-bind="text: displayString"/>
+        <span class="ui-li-count" data-bind="text: totalResults"></span>
+      </a>
+    </li>
+  </script>
+
+  <script id="propertyThumbnailView" type="text/x-jquery-tmpl">
+    <li>
+      <a data-bind="click: select">
+        <div class="thumbnail-container">
+          <img data-bind="attr: { src: thumbnailUrl }"/>
+        </div>
+        <h3>£<span data-bind="text: price"/></h3>
+        <p data-bind="text: title"></p>
+      </a>
+    </li>
+  </script>
+
+  <!-- Renders the property finder front page-->
+  <div data-role="page" data-theme="a"
+        id="propertySearchView">
+    <div data-role="header">
+      <h1>PropertyCross</h1>
+    </div>
+    <div data-role="content">
+      <p>Use the form below to search for houses to buy. You can search by place-name, postcode, or click 'My location', to search in your current location</p>
+      <form data-bind="submit: executeSearch">
+          <input type="search"
+                  data-bind="value: searchDisplayString, enable: isSearchEnabled, valueUpdate:'afterkeydown'"/>
+          <button type="submit" data-inline="true"
+                  data-bind="enable: isSearchEnabled, click: executeSearch">Go</button>
+          <button data-bind="enable: isSearchEnabled, click: searchMyLocation"
+                  data-inline="true">My location</button>
+      </form>
+      
+      <div data-role="progress-bar" indeterminate="true"
+           data-bind="visible: isSearchEnabled() == false"></div>
+
+      
+      <!-- a message that indicates search failure etc ... -->
+      <p data-bind="text:userMessage"/>
+      
+      <!-- a list of locations that the user can pick from -->
+      <div data-bind="visible: locations().length > 0">
+        <h4>Please select a location below:</h4>
+        <ul data-role="listview" data-inset="true"
+            data-bind='template: { name: "locationTemplate", foreach: locations },
+                       updateListviewOnChange:locations'/>
+      </div>
+
+      <!-- the last 4 recent searches -->
+      <div data-bind="visible: recentSearches().length > 0 && locations().length === 0">
+        <h4>Recent searches:</h4>
+        <ul data-role="listview" data-inset="true"
+            class="recent-search-list"
+            data-bind='template: { name: "locationWithCountTemplate", foreach: recentSearches },
+                      updateListviewOnChange:recentSearches'/>
+      </div>
+    </div>
+    <div data-role='app-bar' >
+      <a data-bind="click:viewFavourites"
+          data-icon='favourites'>favourites</a>
+    </div>
+  </div>
+
+  <!-- a page which renders a list of search results -->
+  <div data-role="page"data-theme="a" 
+        id="searchResultsView">
+    <div data-role="content">
+      <div>
+        <p class="results-summary" data-bind="text: properties().length + ' of ' + totalResults() + ' matches'"></p>
+        <ul data-role="listview"
+            class="property-list"/>
+          <!-- ko template: { name: "propertyThumbnailView", foreach: properties }, updateListviewOnChange:properties -->
+          <!-- /ko -->
+          <li data-bind="visible: properties().length !== totalResults">
+            <a data-bind="click: loadMore">
+              <h3>Load more ...</h3>
+              <p class="results-summary">
+                Results for <span data-bind="with: searchLocation"><span data-bind="text: displayString"></span></span>, showing
+                <span data-bind="text: properties().length"></span> of 
+                <span data-bind="text: totalResults"></span> properties
+              </p>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- a page which renders the users favourites -->
+  <div data-role="page" data-theme="a"
+        id="favouritesView">
+    <div data-role="header">
+      <h1>Favourites</h1>
+    </div>
+    <div data-role="content">
+      <ul data-role="listview"/>
+        <!-- ko template: { name: "propertyThumbnailView", foreach: properties }, updateListviewOnChange:properties -->
+        <!-- /ko -->
+      </ul>
+    </div>
+  </div>
+
+  <!-- a page which renders a property -->
+  <div data-role="page" data-theme="a"
+        id="propertyView">
+    <div data-role="content" class="propertyView">
+      <h2>£<span data-bind="text: price"/></h2>
+      <h3 data-bind="text: title"></h3>
+      <img data-bind="attr: { src: thumbnailUrl }" />
+      <p>
+        <span data-bind="text: stats"></span>
+      </p>
+      <p data-bind="text: summary"></p>
+    </div>
+    
+      <div class="ui-app-bar ui-app-bar-a">
+      <!-- for the favourites button I want to bind the data-icon value to the view model. Unfortunately this cannot be done because
+        the element that holds this class is a generated child of the item that is bound to. For this reason I have resorted to 
+        creating the required markup manually -->
+        <div class="ui-app-bar-btn-panel">
+          <a data-bind="click : addToFavourites" class="ui-btn ui-btn-icon-top ui-btn-up-a">
+            <span class="ui-btn-inner">
+              <span class="ui-btn-text">favourites</span>
+              <span class="ui-icon ui-icon-shadow"
+                    data-bind="css: { 'ui-icon-favourited': isFavourite(),  'ui-icon-addToFavourites': !isFavourite() }">&nbsp;</span>
+            </span>
+          </a>
+          <span class="ui-app-bar-dots">...</span>
+        </div>
+      
+    </div>
+    </div>
+  </div>
+
+ 
+
+</body>
+</html>
