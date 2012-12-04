@@ -20,7 +20,7 @@ define(function (require) {
     }
   };
 
-  $.mobile.defaultPageTransition = "slide";
+  $.mobile.defaultPageTransition = /android/i.test(navigator.userAgent) ? "none" : "slide";
 
   function initialize() {
     var previousBackStackLength = 0;
