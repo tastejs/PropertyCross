@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View
+    xmlns:fx="http://ns.adobe.com/mxml/2009"
+    xmlns:s="library://ns.adobe.com/flex/spark"
+    xmlns:parsley="http://www.spicefactory.org/parsley"
+
+    title="Favourites"
+>
+    <fx:Script>
+        <![CDATA[
+            import com.propertycross.air.models.Property;
+
+            import com.propertycross.air.presentationModels.FavouritesViewPM;
+
+            [Bindable]
+            public var model:FavouritesViewPM;
+        ]]>
+    </fx:Script>
+
+    <fx:Declarations>
+        <parsley:FastInject objectId="favouritesViewPM" property="model" />
+    </fx:Declarations>
+
+    <s:navigationContent>
+        <s:Button
+            label="Search"
+            click="model.back()"
+            includeInLayout="{model.osRequiresSoftBackButton}"
+            visible="{model.osRequiresSoftBackButton}"
+        />
+    </s:navigationContent>
+
+    <s:List
+        id="propertyList"
+        styleName="propertyList"
+        width="100%"
+        height="100%"
+        itemRenderer="com.propertycross.air.renderers.PropertyListItemRenderer"
+        dataProvider="{model.favourites}"
+        change="model.viewProperty(propertyList.selectedItem as Property)"
+    />
+
+</s:View>
