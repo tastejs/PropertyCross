@@ -177,7 +177,6 @@ package com.propertycross.presentationModels
 
         public function searchMyLocation():void
         {
-            searching = true;
             this.error = null;
             state = DEFAULT_STATE;
             if (!Geolocation.isSupported)
@@ -186,6 +185,7 @@ package com.propertycross.presentationModels
                 state = ERROR_STATE;
                 return;
             }
+            searching = true;
             _geolocation = new Geolocation();
             if (_geolocation.muted)
             {
