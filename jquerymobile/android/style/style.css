@@ -1,0 +1,40 @@
+.thumbnail-container
+{
+  padding: 0 10px 0 0;
+  text-align: center;
+  float: left;
+}
+
+.thumbnail-container img
+{
+  width: 60px;
+  height: 60px;
+}
+
+.results-summary span
+{
+  font-weight: bold;
+}
+
+div.propertyView img 
+{
+  padding: 2px;
+  margin: 5px;
+  width: 95%;
+  background-color: #aaa;
+}
+
+div.propertyView h1
+{
+  margin: 10px 0;
+}
+
+div.propertyView h3
+{
+  margin: 5px 0;
+}
+
+.ui-page
+{
+  background: transparent;
+}

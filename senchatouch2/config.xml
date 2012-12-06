@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget xmlns="http://www.w3.org/ns/widgets"
+	    xmlns:gap="http://phonegap.com/ns/1.0"
+	    id="com.propertycross.senchatouch2"
+	    version="1.0.0">
+
+    <name>PropertyCross</name>
+
+    <description>
+        Part of the PropertyCross project, the SenchaTouch2 implementation.
+    </description>
+
+    <author href="http://propertycross.com">
+        Joel Smith, Mark Rhodes
+    </author>
+
+    <feature name="http://api.phonegap.com/1.0/geolocation" />
+    <feature name="http://api.phonegap.com/1.0/network" />
+
+    <preference name="phonegap-version"           value="2.1.0" />
+    <preference name="target-device"              value="handset" />
+    <preference name="orientation"                value="portrait" />
+    <preference name="webviewbounce"              value="false" />
+    <preference name="prerendered-icon"           value="true" />
+
+    <icon src="resources/icons/ApplicationIcon.png" />
+
+    <gap:splash src="resources/loading/Default.png" />
+
+</widget>

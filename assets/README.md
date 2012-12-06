@@ -1,0 +1,1 @@
+These are the base assets for use by the `build/generate-assets.js` script. To generate new assets see the `build/README.md`.

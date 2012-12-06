@@ -1,0 +1,15 @@
+{
+  "shared":null,
+  "iOS":[
+    "iphone/*.h",
+    "iphone/*.m",
+    "iphone/*.mm",
+    "iphone/*.cpp",
+    "iphone/*.c"
+  ],
+  "Android":null,
+  "WindowsPhone":{
+    "include":["windowsphone/*.cs", "windowsphone/*.xaml"],
+    "exclude":"*.xaml.cs"
+  }
+}

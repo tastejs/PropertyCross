@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="app_name">PropertyCross</string>
+	<string name="search_description">Use the form below to search for houses to buy. You can search by place-name, postcode, or click \'My location\', to search in your current location!</string>
+	<string name="do_search_text">Go</string>
+	<string name="use_location_text">My Location</string>
+	<string name="recent_searches">Recent Searches</string>
+	<string name="recent_searches_count_format">(%1$d)</string>
+	<string name="favourites_view">Favourites</string>
+	<string name="favourites_add">Add to Favourites</string>
+	<string name="favourites_remove">Remove from Favourites</string>
+	<string name="property_summary">%1$s %2$d bed %3$s</string>
+	<string name="property_details">%1$s %2$s</string>
+	<string name="tap_load_more">Tap to load more&#8230;</string>
+	<string name="result_details">Results for %1$s, showing %2$d of %3$d properties.</string>
+	<string name="no_result_details">No results.</string>
+	<string name="property_img_description">A picture of the property.</string>
+</resources>

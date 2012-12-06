@@ -1,0 +1,3 @@
+[submodule "senchatouch2/build/package"]
+	path = senchatouch2/build/package
+	url = https://github.com/chrisprice/PropertyCross-ST2
