@@ -10,6 +10,9 @@ package com.propertycross.presentationModels
     import mx.collections.ArrayList;
     import mx.collections.IList;
 
+    [Event(name="search", type="com.propertycross.events.SearchEvent")]
+
+    [ManagedEvents("search")]
     public class SearchResultsViewPM extends BasePM
     {
         //------------------------------------
@@ -23,6 +26,16 @@ package com.propertycross.presentationModels
 
         //------------------------------------
         //
+        ///  Class Variables
+        //
+        //------------------------------------
+
+        private var _currentLocation:String;
+        private var _lastResult:SearchResult;
+
+
+        //------------------------------------
+        //
         ///  Properties
         //
         //------------------------------------
@@ -31,12 +44,27 @@ package com.propertycross.presentationModels
         //  properties
         //----------------------------------
 
-        private var _properties:IList;
+        private var _properties:ArrayList;
         [Bindable("propertiesChanged")]
         public function get properties():IList
         {
             return _properties;
         }
+
+        //----------------------------------
+        //  title
+        //----------------------------------
+
+        [Bindable("propertiesChanged")]
+        public function get title():String
+        {
+            if (!_lastResult)
+            {
+                return "No results";
+            }
+            return _lastResult.page * _lastResult.pageSize + " of " + _lastResult.totalResults;
+        }
+
 
         //------------------------------------
         //
@@ -48,7 +76,20 @@ package com.propertycross.presentationModels
         public function onPropertySearchResult(result:SearchResult,
                                                event:SearchEvent):void
         {
-            _properties = new ArrayList(result.properties);
+            if (event.page == 0 || event.location != _currentLocation)
+            {
+                _properties = new ArrayList(result.properties);
+                _currentLocation = event.location;
+            }
+            else if (event.page > _lastResult.page)
+            {
+                _properties.addAll(new ArrayList(result.properties));
+            }
+            else
+            {
+                return;
+            }
+            _lastResult = result;
             dispatchEvent(new Event(PROPERTIES_CHANGED));
         }
 
@@ -59,6 +100,11 @@ package com.propertycross.presentationModels
                 return;
             }
             navigator.pushView(PropertyView, property);
+        }
+
+        public function loadMore():void
+        {
+            dispatchEvent(new SearchEvent(_currentLocation, _lastResult.page + 1));
         }
     }
 }

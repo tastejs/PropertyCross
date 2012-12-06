@@ -18,11 +18,11 @@
     <fx:Script>
         <![CDATA[
             import com.propertycross.contexts.PropertyFinderContext;
-
             import com.propertycross.events.NavigatorCreatedEvent;
 
             private function onApplicationComplete():void
             {
+                // share the navigator so that PMs have a handle
                 dispatchEvent(new NavigatorCreatedEvent(navigator));
             }
         ]]>

@@ -1,10 +1,9 @@
 package com.propertycross.presentationModels
 {
     import com.propertycross.events.AddFavouriteEvent;
+    import com.propertycross.models.Property;
 
     import flash.events.Event;
-
-    import com.propertycross.models.Property;
 
     [Event(name="addFavourite", type="com.propertycross.events.AddFavouriteEvent")]
 
@@ -17,7 +16,9 @@ package com.propertycross.presentationModels
         //
         //------------------------------------
 
-        private static const PROPERTY_CHANGED : String = "propertyInstanceChanged";
+        private static const PROPERTY_CHANGED:String = "propertyInstanceChanged";
+
+        private static const SEPARATOR:String = ",";
 
 
         //------------------------------------
@@ -42,6 +43,7 @@ package com.propertycross.presentationModels
                 return;
             }
             _property = value;
+            _title = createTitle(_property);
             dispatchEvent(new Event(PROPERTY_CHANGED));
         }
 
@@ -49,10 +51,11 @@ package com.propertycross.presentationModels
         //  title
         //----------------------------------
 
+        private var _title:String;
         [Bindable("propertyInstanceChanged")]
         public function get title():String
         {
-            return _property ? _property.title : null;
+            return _title;
         }
 
         //----------------------------------
@@ -115,6 +118,16 @@ package com.propertycross.presentationModels
         public function addToFavourites():void
         {
             dispatchEvent(new AddFavouriteEvent(property));
+        }
+
+        private function createTitle(property:Property):String
+        {
+            if (!property)
+            {
+                return "No property selected";
+            }
+            var parts:Array = property.title.split(SEPARATOR);
+            return parts[0] + SEPARATOR + parts[1];
         }
     }
 }

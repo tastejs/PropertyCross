@@ -4,10 +4,16 @@
     xmlns:s="library://ns.adobe.com/flex/spark"
     xmlns:parsley="http://www.spicefactory.org/parsley"
 
-    title="Property"
+    title="Property Details"
 >
     <s:layout>
-        <s:VerticalLayout />
+        <s:VerticalLayout
+            paddingTop="30"
+            paddingBottom="20"
+            paddingLeft="20"
+            paddingRight="20"
+            gap="10"
+        />
     </s:layout>
 
     <fx:Script>
@@ -53,8 +59,10 @@
 
     <s:navigationContent>
         <s:Button
-            label="Back"
+            label="Results"
             click="model.back()"
+            includeInLayout="{model.osRequiresSoftBackButton}"
+            visible="{model.osRequiresSoftBackButton}"
         />
     </s:navigationContent>
 
@@ -66,23 +74,26 @@
     </s:actionContent>
 
     <s:Label
-        width="100%"
-        text="{model.title}"
-    />
-
-    <s:Image
-        width="100%"
-        source="{model.imageURL}"
-    />
-
-    <s:Label
+        styleName="propertyTitle"
         width="100%"
         text="£{formatter.format(model.price)}"
     />
 
     <s:Label
         width="100%"
-        text="{model.bedroomCount + ' bed house, ' + model.bathroomCount + ' bathroom'}"
+        text="{model.title}"
+    />
+
+    <s:Image
+        id="image"
+        width="100%" height="{(image.width / 4 ) * 3}"
+        scaleMode="stretch"
+        source="{model.imageURL}"
+    />
+
+    <s:Label
+        width="100%"
+        text="{model.bedroomCount + ' bed, ' + model.bathroomCount + ' bathroom'}"
     />
 
     <s:Label

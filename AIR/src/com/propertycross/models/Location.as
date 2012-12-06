@@ -8,10 +8,13 @@ package com.propertycross.models
         //
         //------------------------------------
 
-        public function Location(name:String, totalResults:int = 0)
+        public function Location(id:String,
+                                 name:String = null,
+                                 totalResults:int = 0)
         {
+            _id = id;
             _name = name;
-            _totalResults = totalResults;
+            this.totalResults = totalResults;
         }
 
 
@@ -20,6 +23,16 @@ package com.propertycross.models
         ///  Properties
         //
         //------------------------------------
+
+        //----------------------------------
+        //  id
+        //----------------------------------
+
+        private var _id:String;
+        public function get id():String
+        {
+            return _id;
+        }
 
         //----------------------------------
         //  name
@@ -35,10 +48,6 @@ package com.propertycross.models
         //  totalResults
         //----------------------------------
 
-        private var _totalResults:int;
-        public function get totalResults():int
-        {
-            return _totalResults;
-        }
+        public var totalResults:int;
     }
 }

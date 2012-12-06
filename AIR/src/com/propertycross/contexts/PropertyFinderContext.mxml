@@ -5,7 +5,7 @@
 >
     <fx:Script>
         <![CDATA[
-            import com.propertycross.commands.SearchCommand;
+            import com.propertycross.services.SearchCommand;
 
             import com.propertycross.controllers.FavouritesController;
             import com.propertycross.controllers.RecentSearchesController;

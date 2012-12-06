@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ItemRenderer
+    xmlns:fx="http://ns.adobe.com/mxml/2009"
+    xmlns:s="library://ns.adobe.com/flex/spark"
+    xmlns:assets="com.propertycross.assets.*"
+    height="40"
+>
+    <s:HGroup
+        width="100%"
+        verticalCenter="0"
+        paddingTop="10"
+        paddingBottom="10"
+        paddingLeft="10"
+        paddingRight="10"
+        verticalAlign="middle"
+    >
+        <s:Label text="{data.name}" />
+
+        <s:Label
+            styleName="recentSearchesCount"
+            visible="{data.totalResults != 0}"
+            includeInLayout="{data.totalResults != 0}"
+            text="({data.totalResults})"
+        />
+
+        <s:Spacer width="100%" />
+
+        <assets:Arrow
+            id="arrow"
+            width="7"
+            height="10"
+            verticalCenter="-20"
+         />
+    </s:HGroup>
+
+    <s:Line
+        width="100%"
+        xFrom="0" xTo="{width}"
+        yFrom="{height}" yTo="{height}"
+    >
+        <s:stroke>
+            <s:SolidColorStroke color="#cccccc" weight="1" />
+        </s:stroke>
+    </s:Line>
+
+</s:ItemRenderer>

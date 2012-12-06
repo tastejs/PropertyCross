@@ -8,10 +8,15 @@ package com.propertycross.models
         //
         //------------------------------------
 
-        public function SearchResult(properties:Array, totalResults:int)
+        public function SearchResult(properties:Array,
+                                     locations:Array,
+                                     totalResults:int,
+                                     page:uint)
         {
             _properties = properties;
+            _locations = locations;
             _totalResults = totalResults;
+            _page = page;
         }
 
 
@@ -32,6 +37,25 @@ package com.propertycross.models
         }
 
         //----------------------------------
+        //  locations
+        //----------------------------------
+
+        private var _locations:Array;
+        public function get locations():Array
+        {
+            return _locations;
+        }
+
+        //----------------------------------
+        //  ambiguousLocation
+        //----------------------------------
+
+        public function get ambiguousLocation():Boolean
+        {
+            return _locations && _locations.length > 1;
+        }
+
+        //----------------------------------
         //  totalResults
         //----------------------------------
 
@@ -39,6 +63,25 @@ package com.propertycross.models
         public function get totalResults():int
         {
             return _totalResults;
+        }
+
+        //----------------------------------
+        //  page
+        //----------------------------------
+
+        private var _page:uint;
+        public function get page():uint
+        {
+            return _page;
+        }
+
+        //----------------------------------
+        //  pageSize
+        //----------------------------------
+
+        public function get pageSize():uint
+        {
+            return 20;
         }
     }
 }

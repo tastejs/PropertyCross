@@ -3,13 +3,18 @@
     xmlns:fx="http://ns.adobe.com/mxml/2009"
     xmlns:s="library://ns.adobe.com/flex/spark"
     xmlns:parsley="http://www.spicefactory.org/parsley"
+    xmlns:assets="com.propertycross.assets.*"
 
-    title="Results"
+    title="{model.title} results"
 >
+    <s:layout>
+        <s:VerticalLayout />
+    </s:layout>
+
     <fx:Script>
         <![CDATA[
             import com.propertycross.models.Property;
-
+            import com.propertycross.models.SearchResult;
             import com.propertycross.presentationModels.SearchResultsViewPM;
 
             [Bindable]
@@ -23,19 +28,56 @@
 
     <s:navigationContent>
         <s:Button
-            label="Back"
+            label="Search"
             click="model.back()"
+            includeInLayout="{model.osRequiresSoftBackButton}"
+            visible="{model.osRequiresSoftBackButton}"
         />
     </s:navigationContent>
 
-    <s:List
-        id="propertyList"
-        width="100%"
-        height="100%"
-        horizontalScrollPolicy="off"
-        itemRenderer="com.propertycross.renderers.PropertyListItemRenderer"
-        dataProvider="{model.properties}"
-        change="model.viewProperty(propertyList.selectedItem as Property)"
-    />
+    <s:Scroller  width="100%" height="100%">
+        <s:VGroup width="100%" gap="0">
+            <s:List
+                id="propertyList"
+                width="100%"
+                verticalScrollPolicy="off"
+                horizontalScrollPolicy="off"
+                itemRenderer="com.propertycross.renderers.PropertyListItemRenderer"
+                dataProvider="{model.properties}"
+                change="model.viewProperty(propertyList.selectedItem as Property)"
+            />
+            <s:SkinnableContainer
+                id="loadMore"
+                width="100%" height="50"
+                mouseDown="loadMore.setStyle('backgroundColor', 0xE0E0E0)"
+                mouseUp="loadMore.setStyle('backgroundColor', 0xFFFFFF)"
+                mouseOut="loadMore.setStyle('backgroundColor', 0xFFFFFF)"
+                click="model.loadMore()"
+            >
+                <s:layout>
+                    <s:HorizontalLayout
+                        paddingLeft="10"
+                        paddingRight="10"
+                        paddingTop="10"
+                        paddingBottom="10"
+                        verticalAlign="middle"
+                    />
+                </s:layout>
+                <s:VGroup height="100%" verticalAlign="middle">
+                    <s:Label text="Load more ..." />
+                    <s:Label
+                        styleName="propertyListItemTitle"
+                        text="Showing {model.title} matches"
+                    />
+                </s:VGroup>
+                <s:Spacer width="100%" />
+                <assets:Arrow
+                    id="arrow"
+                    width="7"
+                    height="10"
+                 />
+            </s:SkinnableContainer>
+        </s:VGroup>
+    </s:Scroller>
 
 </s:View>

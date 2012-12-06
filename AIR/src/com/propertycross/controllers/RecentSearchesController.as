@@ -72,15 +72,22 @@ package com.propertycross.controllers
         public function onPropertySearchResult(result:SearchResult,
                                                event:SearchEvent):void
         {
-            var search:Location = new Location(event.location, result.totalResults);
+            if (result.ambiguousLocation)
+            {
+                return;
+            }
+            var search:Location = result.locations[0];
+            search.totalResults = result.totalResults;
+            // check the search hasn't already been stored
             for each (var location : Location in _searches)
             {
                 if (location.name == search.name)
                 {
+                    location.totalResults = search.totalResults;
                     return;
                 }
             }
-            _searches.addItem(search);
+            _searches.addItemAt(search, 0);
             _persistenceManager.setProperty(RECENT_SEARCHES,
                                             JSON.stringify(_searches.toArray()));
         }
@@ -101,7 +108,7 @@ package com.propertycross.controllers
                                            index:int,
                                            array:Array):Location
         {
-            return new Location(item.name, item.totalResults);
+            return new Location(item.id, item.name, item.totalResults);
         }
     }
 }

@@ -19,10 +19,11 @@ package com.propertycross.events
         //
         //------------------------------------
 
-        public function SearchEvent(location:String)
+        public function SearchEvent(location:String, page:uint = 1)
         {
             super(SEARCH);
             _location = location;
+            _page = page;
         }
 
 
@@ -42,6 +43,16 @@ package com.propertycross.events
             return _location;
         }
 
+        //----------------------------------
+        //  page
+        //----------------------------------
+
+        private var _page:uint;
+        public function get page():uint
+        {
+            return _page;
+        }
+
 
         //------------------------------------
         //
@@ -51,7 +62,7 @@ package com.propertycross.events
 
         override public function clone():Event
         {
-            return new SearchEvent(location);
+            return new SearchEvent(location, page);
         }
     }
 }

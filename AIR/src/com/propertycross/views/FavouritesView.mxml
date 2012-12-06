@@ -23,13 +23,16 @@
 
     <s:navigationContent>
         <s:Button
-            label="Back"
+            label="Search"
             click="model.back()"
+            includeInLayout="{model.osRequiresSoftBackButton}"
+            visible="{model.osRequiresSoftBackButton}"
         />
     </s:navigationContent>
 
     <s:List
         id="propertyList"
+        styleName="propertyList"
         width="100%"
         height="100%"
         itemRenderer="com.propertycross.renderers.PropertyListItemRenderer"
