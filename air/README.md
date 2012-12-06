@@ -2,9 +2,8 @@ AIR PropertyCross
 =================
 
 This is an implementation of the PropertyCross application using Adobe Integrated Runtime (AIR), the SDK for which is freely 
-available from Adobe (http://www.adobe.com/devnet/air/air-sdk-download.html).  It also uses the Flex and Parsley frameworks, 
-both of which are also freely available from Apache (http://incubator.apache.org/flex/) and Spicefactory 
-(http://www.spicefactory.org/parsley/)
+available from [Adobe](http://www.adobe.com/devnet/air/air-sdk-download.html).  It also uses the Flex and Parsley frameworks, 
+both of which are also freely available from [Apache](http://incubator.apache.org/flex/) and [Spicefactory](http://www.spicefactory.org/parsley/).
 
 AIR allows you to develop Android and iOS applications using ActionScript.  It uses the Flash Player virtual
 machine (with an extended API) to abstract away from the underlying hardware, with access to device capabilities such as 
