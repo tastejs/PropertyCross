@@ -135,14 +135,14 @@
     <!-- The icon the system uses for the application. For at least one resolution,
     specify the path to a PNG file included in the AIR package. Optional. -->
     <icon>
-        <image16x16>com/propertycross/assets/icon16x16.png</image16x16>
-        <image32x32>com/propertycross/assets/icon32x32.png</image32x32>
-        <image36x36>com/propertycross/assets/icon36x36.png</image36x36>
-        <image48x48>com/propertycross/assets/icon48x48.png</image48x48>
-        <image57x57>com/propertycross/assets/icon57x57.png</image57x57>
-        <image72x72>com/propertycross/assets/icon72x72.png</image72x72>
-        <image114x114>com/propertycross/assets/icon114x114.png</image114x114>
-        <image128x128>com/propertycross/assets/icon128x128.png</image128x128>
+        <image16x16>com/propertycross/air/assets/icon16x16.png</image16x16>
+        <image32x32>com/propertycross/air/assets/icon32x32.png</image32x32>
+        <image36x36>com/propertycross/air/assets/icon36x36.png</image36x36>
+        <image48x48>com/propertycross/air/assets/icon48x48.png</image48x48>
+        <image57x57>com/propertycross/air/assets/icon57x57.png</image57x57>
+        <image72x72>com/propertycross/air/assets/icon72x72.png</image72x72>
+        <image114x114>com/propertycross/air/assets/icon114x114.png</image114x114>
+        <image128x128>com/propertycross/air/assets/icon128x128.png</image128x128>
     </icon>
 
     <!-- Whether the application handles the update when a user double-clicks an update version
