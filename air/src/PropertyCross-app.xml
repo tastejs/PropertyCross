@@ -18,11 +18,11 @@
     <id>com.propertycross.air</id>
 
     <!-- Used as the filename for the application. Required. -->
-    <filename>PropertyFinderAIR</filename>
+    <filename>PropertyCross</filename>
 
     <!-- The name that is displayed in the AIR application installer.
     May have multiple values for each language. See samples or xsd schema file. Optional. -->
-    <name>PropertyFinderAIR</name>
+    <name>PropertyCross</name>
 
     <!-- A string value of the format <0-999>.<0-999>.<0-999> that represents application version which can be used to check for application upgrade.
     Values can also be 1-part or 2-part. It is not necessary to have a 3-part value.
@@ -184,21 +184,18 @@
     <!-- </fileTypes> -->
 
     <!-- iOS specific capabilities -->
-    <!-- <iPhone> -->
+    <iPhone>
         <!-- A list of plist key/value pairs to be added to the application Info.plist -->
-        <!-- <InfoAdditions>
+        <InfoAdditions>
             <![CDATA[
-                <key>UIDeviceFamily</key>
-                <array>
-                    <string>1</string>
-                    <string>2</string>
-                </array>
-                <key>UIStatusBarStyle</key>
-                <string>UIStatusBarStyleBlackOpaque</string>
-                <key>UIRequiresPersistentWiFi</key>
-                <string>YES</string>
+	            <key>UIDeviceFamily</key>
+	            <array>
+	                <string>1</string>
+	            </array>
+                <key>UIPrerenderedIcon</key>
+                <true />
             ]]>
-        </InfoAdditions> -->
+        </InfoAdditions>
         <!-- A list of plist key/value pairs to be added to the application Entitlements.plist -->
         <!-- <Entitlements>
             <![CDATA[
@@ -210,37 +207,13 @@
             ]]>
         </Entitlements> -->
     <!-- Display Resolution for the app (either "standard" or "high"). Optional. Default "standard" -->
-    <!-- <requestedDisplayResolution></requestedDisplayResolution> -->
-    <!-- </iPhone> -->
+        <requestedDisplayResolution>high</requestedDisplayResolution>
+    </iPhone>
 
     <!-- Specify Android specific tags that get passed to AndroidManifest.xml file. -->
-    <!--<android> -->
-    <!--	<manifestAdditions>
+    <android>
+        <manifestAdditions>
         <![CDATA[
-            <manifest android:installLocation="auto">
-                <uses-permission android:name="android.permission.INTERNET"/>
-                <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-                <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-                <uses-feature android:required="true" android:name="android.hardware.touchscreen.multitouch"/>
-                <application android:enabled="true">
-                    <activity android:excludeFromRecents="false">
-                        <intent-filter>
-                            <action android:name="android.intent.action.MAIN"/>
-                            <category android:name="android.intent.category.LAUNCHER"/>
-                        </intent-filter>
-                    </activity>
-                </application>
-            </manifest>
-        ]]>
-        </manifestAdditions> -->
-        <!-- Color depth for the app (either "32bit" or "16bit"). Optional. Default 16bit before namespace 3.0, 32bit after -->
-        <!-- <colorDepth></colorDepth> -->
-    <!-- </android> -->
-    <!-- End of the schema for adding the android specific tags in AndroidManifest.xml file -->
-
-<android>
-        <colorDepth>16bit</colorDepth>
-        <manifestAdditions><![CDATA[
             <manifest android:installLocation="auto">
                 <!--See the Adobe AIR documentation for more information about setting Google Android permissions-->
                 <!--Removing the permission android.permission.INTERNET will have the side effect
@@ -260,16 +233,11 @@
                 <!--<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>-->
                 <!--<uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>-->
             </manifest>
-
-        ]]></manifestAdditions>
+        ]]>
+        </manifestAdditions>
+        <!-- Color depth for the app (either "32bit" or "16bit"). Optional. Default 16bit before namespace 3.0, 32bit after -->
+        <colorDepth>16bit</colorDepth>
     </android>
-    <iPhone>
-        <InfoAdditions><![CDATA[
-            <key>UIDeviceFamily</key>
-            <array>
-                <string>1</string>
-            </array>
-        ]]></InfoAdditions>
-        <requestedDisplayResolution>high</requestedDisplayResolution>
-    </iPhone>
+    <!-- End of the schema for adding the android specific tags in AndroidManifest.xml file -->
+
 </application>
