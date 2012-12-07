@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Object
+    xmlns:fx="http://ns.adobe.com/mxml/2009"
+    xmlns="http://www.spicefactory.org/parsley"
+>
+    <fx:Script>
+        <![CDATA[
+            import com.propertycross.air.services.SearchCommand;
+
+            import com.propertycross.air.controllers.FavouritesController;
+            import com.propertycross.air.controllers.RecentSearchesController;
+
+            import com.propertycross.air.presentationModels.FavouritesViewPM;
+            import com.propertycross.air.presentationModels.HomeViewPM;
+            import com.propertycross.air.presentationModels.PropertyViewPM;
+            import com.propertycross.air.presentationModels.SearchResultsViewPM;
+        ]]>
+    </fx:Script>
+
+    <fx:Declarations>
+
+        <!-- Controllers -->
+        <Object id="favouritesController" type="{FavouritesController}" />
+        <Object id="recentSearchesController" type="{RecentSearchesController}" />
+
+        <!-- Presentation Models -->
+        <Object id="homeViewPM" type="{HomeViewPM}" />
+        <Object id="favouritesViewPM" type="{FavouritesViewPM}" />
+        <Object id="searchResultsViewPM" type="{SearchResultsViewPM}" />
+        <Object id="propertyViewPM" type="{PropertyViewPM}" />
+
+        <!-- Commands -->
+        <MapCommand type="{SearchCommand}" />
+
+    </fx:Declarations>
+</Object>

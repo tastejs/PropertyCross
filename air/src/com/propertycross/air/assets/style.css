@@ -1,0 +1,90 @@
+@namespace s "library://ns.adobe.com/flex/spark";
+@namespace view "view.*";
+@namespace mx "library://ns.adobe.com/flex/mx";
+
+s|ActionBar
+{
+    titleAlign: center;
+}
+s|List
+{
+    backgroundColor: #ffffff;
+    contentBackgroundAlpha: 0;
+}
+
+.descriptionText
+{
+    fontSize: 13;
+}
+
+.recentSearches,
+.locations
+{
+    backgroundColor: #ffffff;
+    contentBackgroundAlpha: 0;
+    borderColor: #cccccc;
+    borderVisible: true;
+    borderAlpha: 1;
+    fontSize: 13;
+}
+.recentSearchesCount
+{
+    color: #888888;
+}
+
+.propertyListItemValue
+{
+    fontSize: 13;
+}
+.propertyListItemTitle
+{
+    fontSize: 13;
+    color: #888888;
+}
+
+.propertyTitle
+{
+    fontSize: 24;
+}
+
+@media (os-platform: "IOS")
+{
+    s|ActionBar
+    {
+        defaultButtonAppearance: beveled;
+    }
+}
+
+@media (application-dpi: 240)
+{
+    .descriptionText,
+    .recentSearches,
+    .locations,
+    .propertyListItemValue,
+    .propertyListItemTitle
+    {
+        fontSize: 21;
+    }
+
+    .propertyTitle
+    {
+        fontSize: 32;
+    }
+}
+
+@media (application-dpi: 320)
+{
+    .descriptionText,
+        .recentSearches,
+        .locations,
+        .propertyListItemValue,
+        .propertyListItemTitle
+    {
+        fontSize: 29;
+    }
+
+    .propertyTitle
+    {
+        fontSize: 40;
+    }
+}

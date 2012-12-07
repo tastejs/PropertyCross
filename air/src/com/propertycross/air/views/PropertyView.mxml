@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View
+    xmlns:fx="http://ns.adobe.com/mxml/2009"
+    xmlns:s="library://ns.adobe.com/flex/spark"
+    xmlns:parsley="http://www.spicefactory.org/parsley"
+
+    title="Property Details"
+>
+    <s:layout>
+        <s:VerticalLayout
+            paddingTop="30"
+            paddingBottom="20"
+            paddingLeft="20"
+            paddingRight="20"
+            gap="10"
+        />
+    </s:layout>
+
+    <fx:Script>
+        <![CDATA[
+            import com.propertycross.air.models.Property;
+
+            import com.propertycross.air.presentationModels.PropertyViewPM;
+
+            private var _model:PropertyViewPM;
+            [Bindable]
+            public function get model():PropertyViewPM
+            {
+                return _model;
+            }
+            public function set model(value:PropertyViewPM):void
+            {
+                _model = value;
+                if (_model)
+                {
+                    _model.property = data as Property;
+                }
+            }
+
+            override public function get data():Object
+            {
+                return super.data;
+            }
+            override public function set data(value:Object):void
+            {
+                super.data = value;
+                if (model)
+                {
+                    model.property = value as Property;
+                }
+            }
+        ]]>
+    </fx:Script>
+
+    <fx:Declarations>
+        <parsley:FastInject objectId="propertyViewPM" property="model" />
+        <s:NumberFormatter id="formatter" fractionalDigits="0" />
+    </fx:Declarations>
+
+    <s:navigationContent>
+        <s:Button
+            label="Results"
+            click="model.back()"
+            includeInLayout="{model.osRequiresSoftBackButton}"
+            visible="{model.osRequiresSoftBackButton}"
+        />
+    </s:navigationContent>
+
+    <s:actionContent>
+        <s:Button
+            label="Fave"
+            click="model.addToFavourites()"
+        />
+    </s:actionContent>
+
+    <s:Label
+        styleName="propertyTitle"
+        width="100%"
+        text="£{formatter.format(model.price)}"
+    />
+
+    <s:Label
+        width="100%"
+        text="{model.title}"
+    />
+
+    <s:Image
+        id="image"
+        width="100%" height="{(image.width / 4 ) * 3}"
+        scaleMode="stretch"
+        source="{model.imageURL}"
+    />
+
+    <s:Label
+        width="100%"
+        text="{model.bedroomCount + ' bed, ' + model.bathroomCount + ' bathroom'}"
+    />
+
+    <s:Label
+        width="100%"
+        text="{model.summary}"
+    />
+
+</s:View>
