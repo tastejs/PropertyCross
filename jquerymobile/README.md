@@ -12,13 +12,18 @@ Because jQuery Mobile is a HTML UI framework this project uses a number of other
 Building the Application
 ========================
 
-We're using the [PhoneGap Build](https://build.phonegap.com/) service to produce binaries for each platform. Unfortunately it requires each project be hosted in it's own repository and that's not how this project is structured, so we've had to setup proxy repositories. The repositories that we use for testing can be found at -
+## Browser
+
+If you just want to test in a desktop or mobile browser then your in luck, as jQuery Mobile just uses HTML / JavaScript all the applications can be run as is in your browser. 
+
+## Native Binaries
+
+We're using the [PhoneGap Build](https://build.phonegap.com/) service to produce binaries for each platform. First the source needs to be appropriately packaged using the build.sh script (this removes the require.js dependency which doesn't work with PGB). Then unfortunately PGB requires each project be hosted in it's own repository and that's not how this project is structured, so we've had to setup proxy repositories. The repositories that we use for testing can be found at -
 
 * Android/iOS - [Repo](https://github.com/chrisprice/PropertyCross-jQM), [PhoneGap Build](https://build.phonegap.com/apps/258007/builds)
 * Windows Phone - [Repo](https://github.com/chrisprice/PropertyCross-jQM-WindowsPhone), [PhoneGap Build](https://build.phonegap.com/apps/238693/builds)
 
 The Android and Windows Phone binaries should install on your device without any problems but due to the way iOS works, the signed iOS builds will only work on our devices. If you want to test on iOS, you can setup your own PhoneGap Build app (for free!), point it at the github repository for iOS and finally configure it to use your own iOS developer certificate/distribution profile.
 
-If you just want to test in a desktop or mobile browser then your in luck, as jQuery Mobile just uses HTML / JavaScript all the applications can be run as is in your browser. 
 
 
