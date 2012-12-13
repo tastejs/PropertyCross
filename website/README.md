@@ -11,9 +11,9 @@ Helping you select a cross-platform mobile framework.
 
 ** we should cut this down a lot, it has the appearance of a wall of text when you load it up **
 
-Developers are increasingly finding themselves having to author applications for a diverse range of mobile devices (iOS, Android, Windows Phone, ...), each of which have their own 'native' development languages, tools and environment. Cross platform technologies provide the potential to share skills and code, making this an easier (and less costly) process.
+Developers are now finding themselves having to author applications for a diverse range of mobile platforms (iOS, Android, Windows Phone, ...), each of which have their own 'native' development languages, tools and environment.
 
-Whilst HTML5 is the 'poster child' of cross platform mobile development, there are actually a large number of alternative technologies out there, each with their own strengths and weaknesses. Some allow you to create applications with a great user experience, but the development environment is a mess, while others offer little scope for code re-use between devices.
+There is an ever growing list of cross-platform frameworks that allow you to minimise the cost and effort of developing mobile apps, but which to choose?
 
 To help solve this problem PropertyCross presents a non-trivial application, for searching UK property listings, developed using a range of cross-platform technologies and frameworks. Our aim is to provide developers with a practical insight into the strengths and weaknesses of each framework.
 
