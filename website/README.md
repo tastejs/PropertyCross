@@ -70,7 +70,7 @@ This project was heavily inspired by [TodoMVC](http://todomvc.com/), which allow
 
 The APK and XAP files for the Android and Windows Phone versions of each framework are available within the project download. For iPhone you will have to build and sign the projects yourself in order to deploy them onto your own device.
 
-Some of the frameworks deliver a native user inteface, whereas others construct a native-like interface using HTML5 technologies. When selecting a framework it is important to test the end-user experience that the framework delivers and ensure you are happy with any compromises.
+Some of the frameworks deliver a native user interface, whereas others construct a native-like interface using HTML5 technologies. When selecting a framework it is important to test the end-user experience that the framework delivers and ensure you are happy with any compromises.
 
 The code-sharing which can be realistically achieved with each framework varies considerably. To aid in this comparison there is a build script which produces code metrics for guidance. Although, as developers I am sure you are aware that [lines-of-code metrics are flawed](http://www.google.co.uk/search?hl=en&q=loc+count+flawed) ;-) 
 
@@ -92,7 +92,7 @@ This project is hosted on github, and you are welcome to extend it.  There are a
 
 ### Overview
 
-The native implementations of the PropertyCross application are included as a benchmark for comparison. These implementations illustrate the tools and technologies that are used for native development on each mobile platform. The native implementations also prvide a target for the user experience that should be aimed for with the cross-platform frameworks, with the assumption being that the use of native implementation technologies will provide the best user experience.
+The native implementations of the PropertyCross application are included as a benchmark for comparison. These implementations illustrate the tools and technologies that are used for native development on each mobile platform. The native implementations also provide a target for the user experience that should be aimed for with the cross-platform frameworks, with the assumption being that the use of native implementation technologies will provide the best user experience.
 
 The iOS application is built using Xcode, the Windows Phone application is built using Visual Studio together with the Windows Phone 7 SDKs, and the Android version is built using Eclipse.
 
@@ -144,7 +144,7 @@ _pie chart with 4 segments_
 
 [jQuery Mobile](http://jquerymobile.com) is a HTML5 framework which makes it easy to create websites that mimic the iOS look and feel. This is achieved by providing HTML that is marked up with various jQuery Mobile specific attributes, which is then processed to generate the final markup. Within PropertyCross jQuery Mobile is combined with [KnockoutJS](http://knockoutjs.com/), which provides a presentation model (MVVM), [RequireJS](http://requirejs.org/), for dependency management, and [Cordova / PhoneGap](http://phonegap.com/), which packages the HTML / JavaScript within a native wrapper for app-store deployment. Cordova also provides a set of APIs for accessing native phone functionalities which are not available via HTML specifications.
 
-The JavaScript Model and ViewModel code is shared across all mobile platforms, whereas the HTML files, which make up the View, are specific for each platform. This allows the UI for each platform to be tailored to the requirements of each platform. The iOS version uses the out-of-the-box jQuery Mobile styles, whereas Windows Phone uses the [jquery-metro-theme](http://sgrebnov.github.com/jqmobile-metro-theme/) extensions to support the Metro UI style together with Windows Phone specific features such as athe app-bar.
+The JavaScript Model and ViewModel code is shared across all mobile platforms, whereas the HTML files, which make up the View, are specific for each platform. This allows the UI for each platform to be tailored to the requirements of each platform. The iOS version uses the out-of-the-box jQuery Mobile styles, whereas Windows Phone uses the [jquery-metro-theme](http://sgrebnov.github.com/jqmobile-metro-theme/) extensions to support the Metro UI style together with Windows Phone specific features such as the app-bar.
 
 We were unable to find a suitable theme or plugin for the Android version, as a result, the Android version uses the iOS style.
 
@@ -161,3 +161,23 @@ _pie chart with 4 segments_
 
 
 ## Titanium
+
+[Appcelerator Titanium](http://www.appcelerator.com/) is a JavaScript-based development platform for iOS and Android development. The JavaScript code is compiled into a native code on each platform, and the UI for a Titanium application is entirely native. Titanium development uses the Titanium Studio IDE, and depending on your OS, the Android SDKs and Xcode are also required.
+
+The Titanium APIs provide an abstraction layer for the Android and iOS UI elements, allowing you to write your view code against the Titanium abstraction. Although, there are some view concepts which have not been abstracted, meaning that developers have to write platform specific view code.
+
+The Titanium version of the PropertyCross application uses the Model-View-ViewModel (MVVM) pattern, however, Titanium lacks a binding framework, so the View JavaScript code subscribes to the various ViewModel properties.
+
+## Adobe Air
+
+The [Adobe Integrated Runtime](http://www.adobe.com/products/air.html) (AIR) is a cross-platform runtime for Adobe Flash and  Apache Flex. This runtime allows developers to build applications written in ActionScript (A strongly-typed superset of JavaScript) that run on iOS and Android devices.
+
+The Adobe Air APIs provide an abstraction layer for the Android and iOS UI elements, allowing re-use of all your view code.
+
+## Sencha Touch
+
+[Sencha Touch](http://www.sencha.com/products/touch) is a framework for building cross-platform mobile application using HTML5 technologies.
+
+ - What is the IDE? What does the code look like? 
+
+
