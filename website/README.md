@@ -168,16 +168,22 @@ The Titanium APIs provide an abstraction layer for the Android and iOS UI elemen
 
 The Titanium version of the PropertyCross application uses the Model-View-ViewModel (MVVM) pattern, however, Titanium lacks a binding framework, so the View JavaScript code subscribes to the various ViewModel properties.
 
+To view the code and detailed build steps, [see the github source](https://github.com/ColinEberhardt/PropertyFinderCrossPlatform/tree/master/titanium).
+
 ## Adobe Air
 
 The [Adobe Integrated Runtime](http://www.adobe.com/products/air.html) (AIR) is a cross-platform runtime for Adobe Flash and  Apache Flex. This runtime allows developers to build applications written in ActionScript (A strongly-typed superset of JavaScript) that run on iOS and Android devices.
 
 The Adobe Air APIs provide an abstraction layer for the Android and iOS UI elements, allowing re-use of all your view code.
 
+To view the code and detailed build steps, [see the github source](https://github.com/ColinEberhardt/PropertyFinderCrossPlatform/tree/master/air).
+
 ## Sencha Touch
 
 [Sencha Touch](http://www.sencha.com/products/touch) is a framework for building cross-platform mobile application using HTML5 technologies.
 
  - What is the IDE? What does the code look like? 
+
+To view the code and detailed build steps, [see the github source](https://github.com/ColinEberhardt/PropertyFinderCrossPlatform/tree/master/senchatouch2).
 
 
