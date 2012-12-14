@@ -15,7 +15,7 @@ Progress ...
   </tr>
   <tr>
     <th>jQueryMobile</th>
-    <td>N</td>
+    <td>Y</td>
     <td>N</td>
     <td>Y</td>
   </tr>
@@ -27,19 +27,19 @@ Progress ...
   </tr>
   <tr>
     <th>Titanium</th>
-    <td>N</td>
+    <td>Y</td>
     <td>N</td>
     <td>n/a</td>
   </tr>
   <tr>
     <th>Adobe AIR</th>
-    <td>N</td>
+    <td>Y</td>
     <td>N</td>
     <td>n/a</td>
   </tr>
   <tr>
     <th>Sencha Touch</th>
-    <td>N</td>
+    <td>Y</td>
     <td>N</td>
     <td>n/a</td>
   </tr>
