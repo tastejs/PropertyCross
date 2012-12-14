@@ -172,9 +172,9 @@ To view the code and detailed build steps, [see the github source](https://githu
 
 ## Adobe Air
 
-The [Adobe Integrated Runtime](http://www.adobe.com/products/air.html) (AIR) is a cross-platform runtime for Adobe Flash and  Apache Flex. This runtime allows developers to build applications written in ActionScript (A strongly-typed superset of JavaScript) that run on iOS and Android devices.
-
-The Adobe Air APIs provide an abstraction layer for the Android and iOS UI elements, allowing re-use of all your view code.
+The [Adobe Integrated Runtime]((http://www.adobe.com/products/air.html) (AIR) is a cross-platform runtime for iOS and Android.  It allows you to develop using ActionScript (a objected-oriented, strongly typed relative of JavaScript) by providing  the Flash Player virtual machine to abstract away from the underlying hardware, with an extended API available to access device capabilities such as GPS and camera.  Furthermore, this allows developers to use the [Apache Flex](http://incubator.apache.org/flex/) enterprise application framework which provides its own UI components (and an associated UI framework), data binding, advanced data structures and other essential utilities.  Flex also introduces the MXML language for the declarative creation of user interfaces.
+ 
+The PropertyCross implementation uses the Presentation Model with services following the Command Pattern.  For better separation of concerns, the [Spicelib Parsley](www.spicefactory.org/parsley) inversion-of-control framework providing, amongst other things, dependency injection and a messaging framework, was used.  All code is shared between platforms, with styling differences managed using media queries in the CSS stylesheet.
 
 To view the code and detailed build steps, [see the github source](https://github.com/ColinEberhardt/PropertyFinderCrossPlatform/tree/master/air).
 
