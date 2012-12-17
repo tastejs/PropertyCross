@@ -68,8 +68,8 @@
 
     <s:actionContent>
         <s:Button
-            label="Fave"
-            click="model.addToFavourites()"
+            label="{model.favouriteLabel}"
+            click="model.toggleFavouriteStatus()"
         />
     </s:actionContent>
 

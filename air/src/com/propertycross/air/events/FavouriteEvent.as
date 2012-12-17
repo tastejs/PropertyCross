@@ -1,10 +1,10 @@
 package com.propertycross.air.events
 {
-    import flash.events.Event;
-
     import com.propertycross.air.models.Property;
 
-    public class AddFavouriteEvent extends Event
+    import flash.events.Event;
+
+    public class FavouriteEvent extends Event
     {
         //------------------------------------
         //
@@ -13,6 +13,7 @@ package com.propertycross.air.events
         //------------------------------------
 
         public static const ADD_FAVOURITE:String = "addFavourite";
+        public static const REMOVE_FAVOURITE:String = "removeFavourite";
 
 
         //------------------------------------
@@ -21,9 +22,9 @@ package com.propertycross.air.events
         //
         //------------------------------------
 
-        public function AddFavouriteEvent(property:Property)
+        public function FavouriteEvent(type:String, property:Property)
         {
-            super(ADD_FAVOURITE);
+            super(type);
             _property = property;
         }
 
@@ -53,7 +54,7 @@ package com.propertycross.air.events
 
         override public function clone():Event
         {
-            return new AddFavouriteEvent(property);
+            return new FavouriteEvent(type, property);
         }
     }
 }

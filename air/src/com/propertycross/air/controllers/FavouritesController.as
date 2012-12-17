@@ -1,10 +1,8 @@
 package com.propertycross.air.controllers
 {
-    import com.propertycross.air.events.AddFavouriteEvent;
+    import com.propertycross.air.models.Property;
 
     import flash.events.EventDispatcher;
-
-    import com.propertycross.air.models.Property;
 
     import mx.collections.ArrayCollection;
     import mx.collections.IList;
@@ -68,17 +66,45 @@ package com.propertycross.air.controllers
         //
         //------------------------------------
 
-        [MessageHandler]
-        public function onAddFavourite(event:AddFavouriteEvent):void
+        [MessageHandler(type="com.propertycross.air.events.FavouriteEvent",
+                        selector="addFavourite",
+                        messageProperties="property")]
+        public function onAddFavourite(property:Property):void
         {
             for each (var favourite : Property in _favourites)
             {
-                if (favourite.guid == event.property.guid)
+                if (favourite.guid == property.guid)
                 {
                     return;
                 }
             }
-            _favourites.addItem(event.property);
+            _favourites.addItem(property);
+            updatePersistedFavourites();
+        }
+
+        [MessageHandler(type="com.propertycross.air.events.FavouriteEvent",
+                        selector="removeFavourite",
+                        messageProperties="property")]
+        public function onRemoveFavourite(property:Property):void
+        {
+            for each (var favourite : Property in _favourites)
+            {
+                if (favourite.guid == property.guid)
+                {
+                    _favourites.removeItemAt(_favourites.getItemIndex(favourite));
+                    updatePersistedFavourites();
+                    break;
+                }
+            }
+        }
+
+        public function isFavourite(property:Property):Boolean
+        {
+            return _favourites.getItemIndex(property) != -1;
+        }
+
+        private function updatePersistedFavourites():void
+        {
             _persistenceManager.setProperty(FAVOURITES,
                                             JSON.stringify(_favourites.toArray()));
         }

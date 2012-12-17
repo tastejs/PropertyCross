@@ -1,13 +1,15 @@
 package com.propertycross.air.presentationModels
 {
-    import com.propertycross.air.events.AddFavouriteEvent;
+    import com.propertycross.air.controllers.FavouritesController;
+    import com.propertycross.air.events.FavouriteEvent;
     import com.propertycross.air.models.Property;
 
     import flash.events.Event;
 
-    [Event(name="addFavourite", type="com.propertycross.air.events.AddFavouriteEvent")]
+    [Event(name="addFavourite", type="com.propertycross.air.events.FavouriteEvent")]
+    [Event(name="removeFavourite", type="com.propertycross.air.events.FavouriteEvent")]
 
-    [ManagedEvents("addFavourite")]
+    [ManagedEvents("addFavourite,removeFavourite")]
     public class PropertyViewPM extends BasePM
     {
         //------------------------------------
@@ -17,6 +19,7 @@ package com.propertycross.air.presentationModels
         //------------------------------------
 
         private static const PROPERTY_CHANGED:String = "propertyInstanceChanged";
+        private static const IS_FAVOURITE_CHANGED:String = "isFavouriteChanged";
 
         private static const SEPARATOR:String = ",";
 
@@ -26,6 +29,13 @@ package com.propertycross.air.presentationModels
         ///  Properties
         //
         //------------------------------------
+
+        //----------------------------------
+        //  favouritesController
+        //----------------------------------
+
+        [Inject]
+        public var favouritesController:FavouritesController;
 
         //----------------------------------
         //  property
@@ -108,6 +118,26 @@ package com.propertycross.air.presentationModels
             return _property ? _property.summary : null;
         }
 
+        //----------------------------------
+        //  favouriteLabel
+        //----------------------------------
+
+        [Bindable("propertyInstanceChanged")]
+        [Bindable("isFavouriteChanged")]
+        public function get favouriteLabel():String
+        {
+            return isFavourite ? "Un-fave" : "Fave";
+        }
+
+        //----------------------------------
+        //  isFavourite
+        //----------------------------------
+
+        protected function get isFavourite():Boolean
+        {
+            return favouritesController.isFavourite(_property);
+        }
+
 
         //------------------------------------
         //
@@ -115,9 +145,12 @@ package com.propertycross.air.presentationModels
         //
         //------------------------------------
 
-        public function addToFavourites():void
+        public function toggleFavouriteStatus():void
         {
-            dispatchEvent(new AddFavouriteEvent(property));
+            var type:String = isFavourite ? FavouriteEvent.REMOVE_FAVOURITE
+                                          : FavouriteEvent.ADD_FAVOURITE;
+            dispatchEvent(new FavouriteEvent(type, property));
+            dispatchEvent(new Event(IS_FAVOURITE_CHANGED));
         }
 
         private function createTitle(property:Property):String
