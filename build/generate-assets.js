@@ -5,6 +5,17 @@ var render = require('mustache').render;
 var CONCURRENCY_LIMIT = 5;
 
 async.series([
+  generateFrameworkLogos.bind(null, "assets/tech-icons/templates/tech_badge_bg.png",
+                                                  "assets/tech-icons/templates/tech_badge_mask.png",
+                                                  "assets/tech-icons/templates/tech_badge_fg.png", [
+    ["xamarin"],
+    ["air"],
+    ["titanium"],
+    ["jquerymobile"],
+    ["sencha"],
+    ["native"]
+  ]),
+  
   generateIcons.bind(null, "assets/icon-base-173x173.png", [
     // ["FRAMEWORK-OVERLAY", "TARGET", WIDTH],
     ["assets/frameworks/jquerymobile.png", "jquerymobile/assets/icons/36x36.png", 36],
@@ -65,6 +76,51 @@ async.series([
     console.error(err);
   }
 });
+
+function generateFrameworkLogos(background, mask, foreground, icons, callback) {
+  async.forEachLimit(icons, CONCURRENCY_LIMIT, function(config, callback) {
+    var maskedImage = "website/tech-icons/" + config[0] + "-masked.png",
+          withBackground = "website/tech-icons/" + config[0] + "-with-background.png",
+          complete = "website/tech-icons/" + config[0] + "-complete.png";    
+            
+    async.series([
+      function(callback) {
+        // mask the logo
+        renderAndExec(
+            "convert    {{{icon}}}  {{{mask}}} -alpha Off  -compose CopyOpacity -composite -define png:exclude-chunks=date {{{result}}}",
+            {
+              icon: "assets/tech-icons/" + config[0] + ".png",
+              mask: mask,
+              result:  maskedImage
+            },
+            callback);
+      },
+      function(callback) {
+        // compose with background
+        renderAndExec(
+            "convert   {{{background}}} {{{overlay}}} -composite -define png:exclude-chunks=date {{{result}}}",
+            {
+              background: background,
+              overlay: maskedImage,
+              result: withBackground
+            },
+            callback);
+      },
+      function(callback) {
+        // compose with foreground
+        renderAndExec(
+            "convert   {{{background}}} {{{overlay}}} -composite -define png:exclude-chunks=date {{{result}}}",
+            {
+              background: withBackground,
+              overlay: foreground,
+              result: complete
+            },
+            callback);
+      }
+    ], callback);
+    
+  }, callback);
+}
 
 function generateIcons(background, icons, callback) {
   async.forEachLimit(icons, CONCURRENCY_LIMIT, function(config, callback) {
