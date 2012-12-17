@@ -4,9 +4,9 @@
     "include":"iphone/PropertyFinder/*.cs",
     "exclude":"iphone/PropertyFinder/*.designer.cs"
   },
-  "Android": null,
+  "Android": "android/*.cs",
   "WindowsPhone":{
-    "include":["windowsphone/*.cs", "windowsphone/*.xaml"],
+    "include":["windowsphone/*.cs"],
     "exclude":"*.xaml.cs"
   }
 }
