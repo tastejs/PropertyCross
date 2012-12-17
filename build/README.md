@@ -1,9 +1,11 @@
 [Node](http://nodejs.org) and [npm](https://npmjs.org/) is a pre-requisite of all of these processes. Before trying to run any make sure you've run -
 ```
 [/build]> npm install magician
+[/build]> npm install async
+[/build]> npm install mustache
 ```
 
-This will install the [Magician](https://npmjs.org/package/magician) package.
+This will install the required packages.
 
 ###Generate CSV line-count stats
 
