@@ -206,7 +206,7 @@ package com.propertycross.air.presentationModels
         private function onGeolocationUpdate(event:GeolocationEvent):void
         {
             _geolocation.removeEventListener(GeolocationEvent.UPDATE,
-                onGeolocationUpdate);
+                                             onGeolocationUpdate);
             _geolocation = null;
 
             var id:String = _formatter.format(event.latitude)
@@ -225,6 +225,7 @@ package com.propertycross.air.presentationModels
                                              onGeolocationUpdate);
             _geolocation = null;
 
+            searching = false;
             error = "Establishing location timed out, please try again.";
             state = ERROR_STATE;
         }
