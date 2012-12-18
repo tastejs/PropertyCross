@@ -185,14 +185,15 @@ package com.propertycross.air.presentationModels
                 state = ERROR_STATE;
                 return;
             }
-            searching = true;
             _geolocation = new Geolocation();
             if (_geolocation.muted)
             {
                 error = "The use of location is currently disabled.";
                 state = ERROR_STATE;
+                _geolocation = null;
                 return;
             }
+            searching = true;
             _geolocation.addEventListener(GeolocationEvent.UPDATE,
                                           onGeolocationUpdate);
             _geolocation.setRequestedUpdateInterval(500);
