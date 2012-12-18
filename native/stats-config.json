@@ -1,8 +1,8 @@
 {
   "shared":null,
   "iOS":[
-    "iphone/*.h",
-    "iphone/*.m"
+    "ios/*.h",
+    "ios/*.m"
   ],
   "Android":null,
   "WindowsPhone":{
