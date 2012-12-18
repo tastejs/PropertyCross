@@ -5,14 +5,14 @@ var render = require('mustache').render;
 var CONCURRENCY_LIMIT = 5;
 
 async.series([
-  generateFrameworkLogos.bind(null, "assets/tech-icons/templates/tech_badge_bg.png",
-                                                  "assets/tech-icons/templates/tech_badge_mask.png",
-                                                  "assets/tech-icons/templates/tech_badge_fg.png", [
+  generateFrameworkLogos.bind(null, "assets/framework-icons/templates/tech_badge_bg.png",
+                                                  "assets/framework-icons/templates/tech_badge_mask.png",
+                                                  "assets/framework-icons/templates/tech_badge_fg.png", [
     ["xamarin"],
     ["air"],
     ["titanium"],
     ["jquerymobile"],
-    ["sencha"],
+    ["senchatouch2"],
     ["native"]
   ]),
   
@@ -79,17 +79,17 @@ async.series([
 
 function generateFrameworkLogos(background, mask, foreground, icons, callback) {
   async.forEachLimit(icons, CONCURRENCY_LIMIT, function(config, callback) {
-    var maskedImage = "website/tech-icons/" + config[0] + "-masked.png",
-          withBackground = "website/tech-icons/" + config[0] + "-with-background.png",
-          complete = "website/tech-icons/" + config[0] + "-complete.png";    
+    var maskedImage = "website/framework-icons/" + config[0] + "-masked-temp.png",
+          withBackground = "website/framework-icons/" + config[0] + "-with-background-temp.png",
+          complete = "website/framework-icons/" + config[0] + "-complete.png";    
             
     async.series([
       function(callback) {
         // mask the logo
         renderAndExec(
-            "convert    {{{icon}}}  {{{mask}}} -alpha Off  -compose CopyOpacity -composite -define png:exclude-chunks=date {{{result}}}",
+            "convert    {{{icon}}}  {{{mask}}} -alpha Off  -compose CopyOpacity -composite {{{result}}}",
             {
-              icon: "assets/tech-icons/" + config[0] + ".png",
+              icon: "assets/framework-icons/" + config[0] + ".png",
               mask: mask,
               result:  maskedImage
             },
@@ -98,7 +98,7 @@ function generateFrameworkLogos(background, mask, foreground, icons, callback) {
       function(callback) {
         // compose with background
         renderAndExec(
-            "convert   {{{background}}} {{{overlay}}} -composite -define png:exclude-chunks=date {{{result}}}",
+            "convert   {{{background}}} {{{overlay}}} -composite  {{{result}}}",
             {
               background: background,
               overlay: maskedImage,
@@ -172,6 +172,15 @@ function generateSplashscreens(source, splashscreens, callback) {
 
 function renderAndExec(template, data, callback) {
   var cmd = render(template, data);
+  exec(cmd, function(err) {
+    if (err) {
+      console.error("Failed to execute " + cmd + "\n");
+    }
+    callback(err);
+  });
+}
+
+function exec(cmd, callback) {
   exec(cmd, function(err) {
     if (err) {
       console.error("Failed to execute " + cmd + "\n");
