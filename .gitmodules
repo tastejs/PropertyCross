@@ -7,3 +7,6 @@
 [submodule "jquerymobile/build/package-windowsphone"]
 	path = jquerymobile/build/package-windowsphone
 	url = https://github.com/chrisprice/PropertyCross-jQM-WindowsPhone.git
+[submodule "website/twitter-bootstrap"]
+	path = website/twitter-bootstrap
+	url = https://github.com/twitter/bootstrap.git

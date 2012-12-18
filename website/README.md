@@ -1,3 +1,13 @@
+# Website Build Instructions
+
+The website is hosted using the GitHub Pages feature, a rebased squashed version of this folder is hosted at the root of the gh-pages branch.
+
+To rebuild the less run -
+
+  website> npm install -g less
+  website> lessc less/main.less > less/main.css
+
+
 # PropertyCross
 
 Helping you select a cross-platform mobile framework.

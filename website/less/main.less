@@ -1,0 +1,157 @@
+@import "../twitter-bootstrap/less/bootstrap";
+@import "../twitter-bootstrap/less/responsive";
+
+@import "variables";
+
+body {
+  background-image: url('../images/bg-tile.png');
+}
+
+a {
+  font-weight: bold;
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background-image: url('../images/hr.png');
+}
+
+header {
+
+  &.strip {
+    margin: 20px 0;
+  }
+
+  &.strip h3 {
+    vertical-align: middle;
+  }
+
+  &.strip small {
+    color: @textColor;
+    font-family: @sansFontFamily;
+    vertical-align: middle;
+  }
+
+  &.jumbotron {
+    margin: 80px 0 20px;
+    position: relative;
+  }
+
+  &.jumbotron img {
+    height: 305px;
+    width: 305px;
+    position: absolute;
+    top: -70px;
+    right: 0;
+    margin: 10px;
+    margin-bottom: 0;
+  }
+  
+  h1 {
+    font-size: 80px;
+    line-height: 1;
+  }
+
+  &.jumbotron .lead {
+  }
+
+  h1>i, h3>i {
+    font-style: normal;
+    color: @orange;
+  }
+
+  a {
+    color: @textColor;
+
+    &:hover {
+      color: @textColor;
+      text-decoration: none;
+    }
+  }
+
+  hr {
+    margin: 0;
+  }
+}
+
+.btn {
+  margin: 0 5px 5px 0;
+}
+
+.btns {
+  margin: 20px 0;
+}
+
+.pie {
+  >div {
+    border-left: 1px dashed @grayLight;
+    text-align: center;
+
+    .table td {
+      text-align: center;
+      border-top: 0;
+    }
+  }
+}
+
+.overview .table {
+  img {
+    width: 40px;
+    height: 40px;
+  }
+  td:first-child {
+    width: 40px;
+  }
+  tr:first-child>td {
+    border-top: 0;
+  }
+  td {
+    vertical-align: middle;
+    text-align: center;
+  }
+  td:nth-child(2) {
+    text-align: left;
+  }
+}
+
+.screenshots {
+  .btn {
+    margin: 13px 0;
+  }
+  .span3 {
+    text-align: center;
+  }
+  a {
+    >img {
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      *border-right-width: 2px;
+      *border-bottom-width: 2px;
+      .border-radius(6px);
+      .box-shadow(0 5px 10px rgba(0,0,0,.2));
+    }
+  }
+}
+
+.others {
+  img {
+    width: 50px;
+    height: 50px;
+    margin: 8px 8px 8px 0;
+  }
+}
+
+footer {
+  margin-bottom: @baseLineHeight;
+  line-height: 64px;
+
+  img {
+    width: 48px;
+    height: 48px;
+    margin: 0 8px;
+    border-radius: 3px;
+  }
+}
+
+@import "responsive";

@@ -1,0 +1,74 @@
+---
+layout: default
+---
+<header class="strip">
+  <a href="..">
+    <h3>
+      Property<i>Cross</i><small> | Helping you <b>select</b> a cross-platform mobile framework</small>
+    </h3>
+  </a>
+  <hr/>
+  <h1>
+    {{ page.title }} <img src="{{ site.baseurl }}/tech-icons/{{ page.framework }}-complete.png"/>
+  </h1>
+</header>
+
+<div class="row">
+  <div class="span7">
+    <h4>
+      Overview
+    </h4>
+
+    {{ content }}
+
+    <p class="btns">
+      <button class="btn btn-large btn-primary" type="button">Download the project</button>
+      <button class="btn btn-large btn-primary" type="button">View Project on github</button>
+    </p>
+  </div>
+  <div class="span5 pie">
+    <div>
+      <h4>
+        Code Sharing Metrics
+      </h4>
+      <img src="../images/pie_bg.png"/>
+      <table class="table">
+        <tr>
+          <td><img src="../images/windowsphone_legend.png"/></td>
+          <td><img src="../images/android_legend.png"/></td>
+        </tr>
+        <tr>
+          <td><img src="../images/ios_legend.png"/></td>
+          <td><img src="../images/common_legend.png"/></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="span12">
+    <hr/>
+  </div>
+</div>
+
+{% for platform_hash in page.platforms %}
+  {% for platform in platform_hash %}
+    {% include screenshots.html %}
+  {% endfor %}
+{% endfor %}
+
+<div class="others">
+  <div class="row">
+    <div class="span3">
+      <h4>Other Frameworks</h4>
+    </div>
+    {% for post in site.posts reversed %}
+    <div class="span3">
+      <a href="{{ site.baseurl }}{{ post.url }}">
+        <img src="{{ site.baseurl }}/tech-icons/{{ post.framework }}-complete.png"/>{{ post.title }}
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+</div>
