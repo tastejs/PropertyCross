@@ -1,4 +1,4 @@
-baseurl: /PropertyFinderCrossPlatform
+baseurl: http://propertycross.com
 permalink: /:title
 safe: true
 lsi: false
@@ -7,7 +7,7 @@ debug: false
 
 name: PropertyCross
 description: Helping you select a cross-platform mobile framework
-url: http://colineberhardt.github.com/PropertyFinderCrossPlatform
+url: http://propertycross.com
 
 extensions:
   android: apk
