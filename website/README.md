@@ -9,5 +9,5 @@ To rebuild the less run -
 
 To push the website folder to the gh-pages branch -
 
-  > git update-ref gh-pages `git commit-tree master:website -m "Update website"`
-  > git push origin gh-pages:gh-pages
+  > git update-ref refs/heads/gh-pages `git commit-tree master:website -m "Update website"`
+  > git push upstream gh-pages:gh-pages
