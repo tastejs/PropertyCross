@@ -1,3 +1,23 @@
+#Terminology
+
+Please try to stick to these terms to avoid confusion -
+
+* framework - The technology/product used to implement the cross-platform application.
+* platform - The operating system the application targets. One of -
+  * android - When referencing the Android operating system.
+  * ios - When referencing the iOS operating system.
+  * windowsphone - When referencing the Windows Phone operating system.
+
+#Package Names
+
+When namespacing code or creating app identifiers please stick to the following convention -
+
+`com.propertycross.{framework}[.{platform}]`
+
+And for native implementations -
+
+`com.propertycross.{platform}`
+
 #Application Specification
 
 This specification details the form and functionality of the PropertyCross applications. Its intended purpose is to ensure that each PropertyCross implementation is as close to the others as possible (within the constraints imposed by the implementation framework). Regarding form, this specification details the UI controls that should be included on each screen, but does not mandate a specific layout. The intention of the PropertyCross project is that each implementation should match the native look and feel of each of the target platforms (Roboto, Metro, Apple-style), hence the ambiguity regarding the exact screen layout.
