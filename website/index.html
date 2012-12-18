@@ -3,7 +3,7 @@ layout: default
 title: Helping you select a cross-platform mobile framework
 ---
 <header class="jumbotron">
-  <img src="{{ site.baseurl }}/images/logo.png"/>
+  <img src="{{ site.baseurl }}/images/logo.png" alt="{{ site.name }}" title="{{ site.name }}"/>
 
   <h1>
     Property<i>Cross</i>
@@ -34,21 +34,21 @@ title: Helping you select a cross-platform mobile framework
       <tbody>
       {% for post in site.posts reversed %}
       <tr>
-        <td><img src="{{ site.baseurl }}/framework-icons/{{ post.framework }}-complete.png"/></td>
+        <td><img src="{{ site.baseurl }}/framework-icons/{{ post.framework }}-complete.png" alt="{{ post.title }}" title="{{ post.title }}"/></td>
         <td><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></td>
         <td>
           {% if post.platforms contains 'android' %}
-          <img src="{{ site.baseurl }}/images/android-badge.png"/>
+          <img src="{{ site.baseurl }}/images/android-badge.png" alt="{{ site.platforms.android }}" title="{{ site.platforms.android }}"/>
           {% endif %}
         </td>
         <td>
           {% if post.platforms contains 'ios' %}
-          <img src="{{ site.baseurl }}/images/ios-badge.png"/>
+          <img src="{{ site.baseurl }}/images/ios-badge.png" alt="{{ site.platforms.ios }}" title="{{ site.platforms.ios }}"/>
           {% endif %}
         </td>
         <td>
           {% if post.platforms contains 'windowsphone' %}
-          <img src="{{ site.baseurl }}/images/windowsphone-badge.png"/>
+          <img src="{{ site.baseurl }}/images/windowsphone-badge.png" alt="{{ site.platforms.windowsphone }}" title="{{ site.platforms.windowsphone }}"/>
           {% endif %}
         </td>
       </tr>
