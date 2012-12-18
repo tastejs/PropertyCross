@@ -3,11 +3,11 @@
   <div class="row">
     <div class="span9">
       <h4>
-        Screenshots <img src="{{ site.baseurl }}/images/{{ platform }}-badge.png"/>
+        Screenshots <img src="{{ site.baseurl }}/images/{{ platform }}-badge.png" alt="{{ site.platforms[platform] }}" title="{{ site.platforms[platform] }}"/>
       </h4>
     </div>
     <div class="span3">
-      <button class="btn btn-large btn-primary" type="button">Download {{ site.extensions[platform] | upcase }} format</button>
+      <button class="btn btn-large disabled" title="Not currently supported, for now you'll need to download the project and build from source" type="button">Download {{ site.extensions[platform] | upcase }} format</button>
     </div>
   </div>
 
