@@ -18,8 +18,9 @@ package com.propertycross.air.presentationModels
     import spark.formatters.NumberFormatter;
 
     [Event(name="search", type="com.propertycross.air.events.SearchEvent")]
+    [Event(name="searchByCoordinates", type="com.propertycross.air.events.SearchEvent")]
 
-    [ManagedEvents("search")]
+    [ManagedEvents("search,searchByCoordinates")]
     public class HomeViewPM extends BasePM
     {
         //------------------------------------
@@ -163,7 +164,8 @@ package com.propertycross.air.presentationModels
             state = ERROR_STATE;
         }
 
-        public function executeSearch(location:Location = null):void
+        public function executeSearch(location:Location = null,
+                                      searchByCoordinates:Boolean = false):void
         {
             if (!navigator)
             {
@@ -172,7 +174,10 @@ package com.propertycross.air.presentationModels
             searching = true;
             this.error = null;
             state = DEFAULT_STATE;
-            dispatchEvent(new SearchEvent(location ? location.id : locationName));
+
+            var type:String =
+                searchByCoordinates ? SearchEvent.SEARCH_BY_COORDINATES : SearchEvent.SEARCH;
+            dispatchEvent(new SearchEvent(type, location ? location.id : locationName));
         }
 
         public function searchMyLocation():void
@@ -206,29 +211,32 @@ package com.propertycross.air.presentationModels
 
         private function onGeolocationUpdate(event:GeolocationEvent):void
         {
-            _geolocation.removeEventListener(GeolocationEvent.UPDATE,
-                                             onGeolocationUpdate);
-            _geolocation = null;
+            tidyUpGeolocationSearch();
 
             var id:String = _formatter.format(event.latitude)
-                        + ", "
+                        + ","
                         + _formatter.format(event.longitude);
-            executeSearch(new Location(id));
+            executeSearch(new Location(id), true);
         }
 
         private function onTimeout(event:TimerEvent):void
         {
-            _geoTimer.removeEventListener(TimerEvent.TIMER_COMPLETE,
-                                          onTimeout);
-            _geoTimer.stop();
-
-            _geolocation.removeEventListener(GeolocationEvent.UPDATE,
-                                             onGeolocationUpdate);
-            _geolocation = null;
+            tidyUpGeolocationSearch();
 
             searching = false;
             error = "Establishing location timed out, please try again.";
             state = ERROR_STATE;
+        }
+
+        private function tidyUpGeolocationSearch():void
+        {
+            _geoTimer.stop();
+            _geoTimer.removeEventListener(TimerEvent.TIMER_COMPLETE,
+                                          onTimeout);
+
+            _geolocation.removeEventListener(GeolocationEvent.UPDATE,
+                                             onGeolocationUpdate);
+            _geolocation = null;
         }
     }
 }

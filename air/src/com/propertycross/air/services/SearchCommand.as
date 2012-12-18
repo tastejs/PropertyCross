@@ -5,13 +5,8 @@ package com.propertycross.air.services
     import com.propertycross.air.models.Property;
     import com.propertycross.air.models.SearchResult;
 
-    import flash.events.ErrorEvent;
-
-    import mx.collections.ArrayCollection;
-    import mx.collections.ListCollectionView;
     import mx.rpc.AsyncToken;
     import mx.rpc.Fault;
-    import mx.rpc.events.FaultEvent;
     import mx.rpc.http.HTTPService;
 
     public class SearchCommand
@@ -40,13 +35,7 @@ package com.propertycross.air.services
         {
             var service:HTTPService = new HTTPService();
             service.url = "http://api.nestoria.co.uk/api";
-            service.request = { country: "uk",
-                                pretty: "1",
-                                action: "search_listings",
-                                encoding: "json",
-                                listing_type: "buy",
-                                page: event.page,
-                                place_name: event.location };
+            service.request = getParams(event);
             return service.send();
         }
 
@@ -67,6 +56,31 @@ package com.propertycross.air.services
         public function error(fault:Fault):void
         {
             throw new Error(GENERAL_ERROR);
+        }
+
+        private function getParams(event:SearchEvent):Object
+        {
+            if (event.type == SearchEvent.SEARCH)
+            {
+                return { country: "uk",
+                         pretty: "1",
+                         action: "search_listings",
+                         encoding: "json",
+                         listing_type: "buy",
+                         page: event.page,
+                         place_name: event.location };
+            }
+            else if (event.type == SearchEvent.SEARCH_BY_COORDINATES)
+            {
+                return { country: "uk",
+                         pretty: "1",
+                         action: "search_listings",
+                         encoding: "json",
+                         listing_type: "buy",
+                         page: event.page,
+                         centre_point: event.location };
+            }
+            return null;
         }
 
         private static function asProperty(item:Object, index:int, array:Array):Property

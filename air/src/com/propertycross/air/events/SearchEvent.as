@@ -11,6 +11,7 @@ package com.propertycross.air.events
         //------------------------------------
 
         public static const SEARCH:String = "search";
+        public static const SEARCH_BY_COORDINATES:String = "searchByCoordinates";
 
 
         //------------------------------------
@@ -19,9 +20,9 @@ package com.propertycross.air.events
         //
         //------------------------------------
 
-        public function SearchEvent(location:String, page:uint = 1)
+        public function SearchEvent(type:String, location:String, page:uint = 1)
         {
-            super(SEARCH);
+            super(type);
             _location = location;
             _page = page;
         }
@@ -62,7 +63,7 @@ package com.propertycross.air.events
 
         override public function clone():Event
         {
-            return new SearchEvent(location, page);
+            return new SearchEvent(type, location, page);
         }
     }
 }

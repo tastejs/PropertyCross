@@ -104,7 +104,7 @@ package com.propertycross.air.presentationModels
 
         public function loadMore():void
         {
-            dispatchEvent(new SearchEvent(_currentLocation, _lastResult.page + 1));
+            dispatchEvent(new SearchEvent(SearchEvent.SEARCH, _currentLocation, _lastResult.page + 1));
         }
     }
 }
