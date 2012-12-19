@@ -41,6 +41,7 @@ namespace com.propertycross.xamarin.android.Views
 			SetContentView(Resource.Layout.property_view);
 
 			SupportActionBar.Title = Resources.GetString(Resource.String.property_title);
+			SupportActionBar.SetDisplayHomeAsUpEnabled(true);
 
 			priceText = (TextView) FindViewById(Resource.Id.property_price);
 			locationText = (TextView)FindViewById(Resource.Id.property_location);
@@ -75,6 +76,12 @@ namespace com.propertycross.xamarin.android.Views
 		
 		public override bool OnOptionsItemSelected(IMenuItem item)
 		{
+			if(item.ItemId == Android.Resource.Id.Home)
+			{
+				Finish();
+				return true;
+			}
+
 			if( (item.ItemId == Resource.Id.favourites_add_item && !IsFavourited) ||
 			   (item.ItemId == Resource.Id.favourites_remove_item && IsFavourited) )
 			{

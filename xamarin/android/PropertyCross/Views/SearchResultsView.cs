@@ -14,6 +14,8 @@ using PropertyFinder.Model;
 using Com.Actionbarsherlock.App;
 using Com.Actionbarsherlock.View;
 
+using IMenuItem = global::Com.Actionbarsherlock.View.IMenuItem;
+
 namespace com.propertycross.xamarin.android.Views
 {
 	[Activity (ScreenOrientation = ScreenOrientation.Portrait)]	
@@ -27,6 +29,8 @@ namespace com.propertycross.xamarin.android.Views
 		{
 			base.OnCreate(bundle);
 
+			SupportActionBar.SetDisplayHomeAsUpEnabled(true);
+
 			LayoutInflater li = (LayoutInflater)GetSystemService(Context.LayoutInflaterService);
 			footer = li.Inflate(Resource.Layout.load_more_footer, null);
 			resultDetails = (TextView) footer.FindViewById(Resource.Id.result_details);
@@ -39,6 +43,16 @@ namespace com.propertycross.xamarin.android.Views
 			presenter = (SearchResultsPresenter) app.Presenter;
 			presenter.SetView(this);
 			app.CurrentActivity = this;
+		}
+
+		public override bool OnOptionsItemSelected(IMenuItem item)
+		{
+			if(item.ItemId == Android.Resource.Id.Home)
+			{
+				Finish();
+				return true;
+			}
+			return base.OnOptionsItemSelected(item);
 		}
 
 		public void SetSearchResults(int totalResult, int pageNumber, int totalPages,
