@@ -48,9 +48,18 @@ function createPie(stats) {
   var sum = Object.keys(stats)
       .map(function(k) { return stats[k]; })
       .reduce(function (sum, v) { return sum + v; }, 0);
-  var offset = 0;
+  var offset = -Math.PI/2;
   var svgPaths = {};
-  Object.keys(stats).forEach(function(platform) {
+  Object.keys(stats).sort(function(a, b) {
+    // there should never be duplicate values
+    if (a === 'common') {
+      return 1;
+    } else if (b === 'common') {
+      return -1;
+    } else {
+      return  a > b ? 1 : -1;
+    }
+  }).forEach(function(platform) {
     svgPaths[platform] = {
       segment: segment(X, Y, R, offset, offset+=stats[platform]/sum*2*Math.PI),
       line: line(X, Y, R, offset)
@@ -61,6 +70,9 @@ function createPie(stats) {
 
 function segment(x, y, r, a1, a2) {
   var flag = (a2 - a1) > Math.PI;
+  if ((a2 - a1) % (2 * Math.PI) < 0.001) {
+    a2 -= Math.PI * 0.001;
+  }
   return [
     "M" + [x, y].join(','),
     "l" + [(r * Math.cos(a1)).toFixed(1), (r * Math.sin(a1)).toFixed(1)].join(','),

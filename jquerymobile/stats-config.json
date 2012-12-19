@@ -1,14 +1,7 @@
 {
   "common": [
     "model/*.js",
-    "viewModel/*.js"
-  ],
-  "ios":[
-    "style/*.css",
-    "app.js",
-    "index.html"
-  ],
-  "android":[
+    "viewModel/*.js",
     "style/*.css",
     "app.js",
     "index.html"
