@@ -26,6 +26,7 @@ namespace com.propertycross.xamarin.android.Views
 		{
 			base.OnCreate(bundle);
 
+			SupportActionBar.Title = Resources.GetString(Resource.String.favourites_view);
 			ListAdapter = new SearchResultsAdapter(this, new List<Property>() {});
 			
 			var app = (PropertyFinderApplication)Application;

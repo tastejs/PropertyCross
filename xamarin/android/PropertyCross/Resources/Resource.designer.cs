@@ -330,17 +330,20 @@ namespace com.propertycross.xamarin.android
 			// aapt resource value: 0x7f060008
 			public const int abs__holo_blue_light = 2131099656;
 			
-			// aapt resource value: 0x7f060009
-			public const int abs__primary_text_disable_only_holo_dark = 2131099657;
-			
 			// aapt resource value: 0x7f06000a
-			public const int abs__primary_text_disable_only_holo_light = 2131099658;
+			public const int abs__primary_text_disable_only_holo_dark = 2131099658;
 			
 			// aapt resource value: 0x7f06000b
-			public const int abs__primary_text_holo_dark = 2131099659;
+			public const int abs__primary_text_disable_only_holo_light = 2131099659;
 			
 			// aapt resource value: 0x7f06000c
-			public const int abs__primary_text_holo_light = 2131099660;
+			public const int abs__primary_text_holo_dark = 2131099660;
+			
+			// aapt resource value: 0x7f06000d
+			public const int abs__primary_text_holo_light = 2131099661;
+			
+			// aapt resource value: 0x7f060009
+			public const int row_detail_color = 2131099657;
 			
 			private Color()
 			{
@@ -804,11 +807,11 @@ namespace com.propertycross.xamarin.android
 			// aapt resource value: 0x7f04002c
 			public const int property_price = 2130968620;
 			
-			// aapt resource value: 0x7f04002a
-			public const int property_search_details = 2130968618;
-			
 			// aapt resource value: 0x7f04002b
-			public const int property_search_price = 2130968619;
+			public const int property_search_details = 2130968619;
+			
+			// aapt resource value: 0x7f04002a
+			public const int property_search_price = 2130968618;
 			
 			// aapt resource value: 0x7f040029
 			public const int property_thumb = 2130968617;
@@ -1025,17 +1028,20 @@ namespace com.propertycross.xamarin.android
 			// aapt resource value: 0x7f090010
 			public const int favourites_view = 2131296272;
 			
-			// aapt resource value: 0x7f090017
-			public const int no_result_details = 2131296279;
+			// aapt resource value: 0x7f090018
+			public const int no_result_details = 2131296280;
 			
 			// aapt resource value: 0x7f090014
 			public const int property_details = 2131296276;
 			
-			// aapt resource value: 0x7f090018
-			public const int property_img_description = 2131296280;
+			// aapt resource value: 0x7f090019
+			public const int property_img_description = 2131296281;
 			
 			// aapt resource value: 0x7f090013
 			public const int property_summary = 2131296275;
+			
+			// aapt resource value: 0x7f09001a
+			public const int property_title = 2131296282;
 			
 			// aapt resource value: 0x7f09000e
 			public const int recent_searches = 2131296270;
@@ -1045,6 +1051,9 @@ namespace com.propertycross.xamarin.android
 			
 			// aapt resource value: 0x7f090016
 			public const int result_details = 2131296278;
+			
+			// aapt resource value: 0x7f090017
+			public const int results_shown = 2131296279;
 			
 			// aapt resource value: 0x7f09000b
 			public const int search_description = 2131296267;

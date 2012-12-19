@@ -39,6 +39,9 @@ namespace com.propertycross.xamarin.android.Views
 			base.OnCreate(bundle);
 
 			SetContentView(Resource.Layout.property_view);
+
+			SupportActionBar.Title = Resources.GetString(Resource.String.property_title);
+
 			priceText = (TextView) FindViewById(Resource.Id.property_price);
 			locationText = (TextView)FindViewById(Resource.Id.property_location);
 			propertyImage = (ImageView) FindViewById(Resource.Id.property_image);

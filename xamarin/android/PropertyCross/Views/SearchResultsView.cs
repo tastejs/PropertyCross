@@ -50,6 +50,9 @@ namespace com.propertycross.xamarin.android.Views
 			                                             totalResult);
 
 			((SearchResultsAdapter) ListAdapter).AddRange(properties);
+			SupportActionBar.Title = Java.Lang.String.Format(Resources.GetString(Resource.String.results_shown),
+			                                                 properties.Count,
+			                                                 totalResult);
         }
         
         public void SetLoadMoreVisible(bool visible)

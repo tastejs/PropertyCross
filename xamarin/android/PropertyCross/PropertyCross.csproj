@@ -95,6 +95,7 @@
     <AndroidResource Include="Resources\drawable-mdpi\star.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\nostar.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\star.png" />
+    <AndroidResource Include="Resources\values\colors.xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\Common\Model\IJsonPropertySearch.cs">
@@ -191,11 +192,6 @@
     <Folder Include="Resources\drawable-v14\" />
     <Folder Include="Resources\drawable\" />
     <Folder Include="Resources\drawable-ldpi\" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidJavaLibrary Include="..\lib\android-support-v4.jar">
-      <Link>SupportLib\android-support-v4.jar</Link>
-    </AndroidJavaLibrary>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ActionBarSherlock\ActionBarSherlock.csproj">
