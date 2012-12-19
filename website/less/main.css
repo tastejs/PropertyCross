@@ -7614,21 +7614,13 @@ body {
 a {
   font-weight: bold;
 }
+a.btn {
+  font-weight: normal;
+}
 hr {
   border: 0;
   height: 1px;
   background-image: url('../images/hr.png');
-}
-header.strip {
-  margin: 20px 0;
-}
-header.strip h3 {
-  vertical-align: middle;
-}
-header.strip small {
-  color: #333333;
-  font-family: "Open Sans", sans-serif;
-  vertical-align: middle;
 }
 header.jumbotron {
   margin: 80px 0 20px;
@@ -7665,20 +7657,16 @@ header hr {
 .btn {
   margin: 0 5px 5px 0;
 }
+.btn.disabled {
+  color: #999999;
+}
 .btns {
   margin: 20px 0;
-}
-.pie > div {
-  border-left: 1px dashed #999999;
-  text-align: center;
-}
-.pie > div .table td {
-  text-align: center;
-  border-top: 0;
 }
 .overview .table img {
   width: 40px;
   height: 40px;
+  max-width: none;
 }
 .overview .table td:first-child {
   width: 40px;
@@ -7692,6 +7680,32 @@ header hr {
 }
 .overview .table td:nth-child(2) {
   text-align: left;
+}
+footer {
+  margin-bottom: 20px;
+  line-height: 64px;
+}
+footer img {
+  width: 48px;
+  height: 48px;
+  margin: 0 8px;
+  border-radius: 3px;
+}
+header.strip {
+  margin: 20px 0;
+}
+header.strip h3 {
+  vertical-align: middle;
+}
+header.strip small {
+  color: #333333;
+  font-family: "Open Sans", sans-serif;
+  vertical-align: middle;
+}
+.screenshots h4 > img {
+  margin: 0 8px;
+  height: 40px;
+  width: 40px;
 }
 .screenshots .btn {
   margin: 13px 0;
@@ -7712,19 +7726,41 @@ header hr {
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
 .others img {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   margin: 8px 8px 8px 0;
 }
-footer {
-  margin-bottom: 20px;
-  line-height: 64px;
+.pie > div {
+  border-left: 1px dashed #999999;
+  text-align: center;
 }
-footer img {
-  width: 48px;
-  height: 48px;
-  margin: 0 8px;
-  border-radius: 3px;
+.pie > div .chart {
+  position: relative;
+  height: 300px;
+  width: 300px;
+  margin-top: 24px;
+  margin-left: -150px;
+  left: 50%;
+}
+.pie > div .chart span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -7px;
+  margin-left: -120px;
+}
+.pie > div .chart img {
+  /* hide pattern image when svg isn't supported */
+
+  display: none;
+}
+.pie > div .table td {
+  text-align: center;
+  border-top: 0;
+}
+.pie > div p {
+  font-size: 10.5px;
+  margin: 0 24px;
 }
 header {
   /* Landscape phone to portrait tablet */
