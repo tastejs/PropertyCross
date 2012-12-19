@@ -9,4 +9,4 @@ platforms:
 
 The PropertyCross implementation does not use any additional tools or libraries beyond those supplied by Sencha, with one exception – it makes use of PhoneGap Build to build and package the application as a native app (although it does not make use of the PhoneGap APIs itself).  This implementation also uses the default “Sencha” theme to style it – whereas other frameworks have attempted to mimic the default look and feel of native applications, Sencha Touch has opted for provided its own styling which provides a clean interface which looks the same on both iOS and Android browsers.
 
-To view the code and detailed build steps, [see the github source](https://github.com/ColinEberhardt/PropertyFinderCrossPlatform/tree/master/senchatouch2).
+To view the code and detailed build steps, [see the github source]({{ site.githuburl }}/tree/master/senchatouch2).
