@@ -179,12 +179,3 @@ function renderAndExec(template, data, callback) {
     callback(err);
   });
 }
-
-function exec(cmd, callback) {
-  exec(cmd, function(err) {
-    if (err) {
-      console.error("Failed to execute " + cmd + "\n");
-    }
-    callback(err);
-  });
-}
