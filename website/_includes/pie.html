@@ -1,0 +1,58 @@
+<div class="span5 pie">
+  <div>
+    <h4>
+      Code Sharing Metrics
+    </h4>
+    <div class="chart">
+      <svg style="left: -0.5px; " height="300" width="300">
+        <desc><span>Your browser does not support SVG</span></desc>
+        <defs>
+          <radialGradient id="shinyshiny">
+            <stop offset="80%" stop-color="#fff" stop-opacity="0"/>
+            <stop offset="92%" stop-color="#fff" stop-opacity="0.24"/>
+            <stop offset="93%" stop-color="#fff" stop-opacity="0.08"/>
+            <stop offset="94%" stop-color="#000" stop-opacity="0.08"/>
+            <stop offset="95%" stop-color="#000" stop-opacity="0.08"/>
+            <stop offset="96%" stop-color="#000" stop-opacity="0.12"/>
+            <stop offset="100%" stop-color="#000" stop-opacity="0.12"/>
+          </radialGradient>
+          <pattern id="background" width="54" height="40" patternUnits="userSpaceOnUse">
+            <image xlink:href="{{ site.baseurl }}/images/bg-tile.png" width="54" height="40"/>
+          </pattern>
+        </defs>
+        <g opacity="1.0">
+          <path fill="#d75432" stroke="none" d="M150,150L295,150A145,145,0,0,1,150,295Z"/>
+          <path fill="#1d9097" stroke="none" d="M150,150L150,295A145,145,0,0,1,47.46951672795059,47.46951672795062Z"/>
+          <path fill="#96c11f" stroke="none" d="M150,150L47.46951672795059,47.46951672795062A145,145,0,0,1,149.99999999999997,5Z"/>
+          <path fill="#fac606" stroke="none" d="M150,150L149.99999999999997,5A145,145,0,0,1,295,150Z"/>
+          <path fill="none" stroke="#ffffff" stroke-width="2.5" d="M150,150L295,150"/>
+          <path fill="none" stroke="#ffffff" stroke-width="2.5" d="M150,150L150,295"/>
+          <path fill="none" stroke="#ffffff" stroke-width="2.5" d="M150,150L47.46951672795059,47.46951672795062"/>
+          <path fill="none" stroke="#ffffff" stroke-width="2.5" d="M150,150L149.99999999999997,5"/>
+        </g>
+        <circle fill="url(#shinyshiny)" cx="150" cy="150" r="150"/>
+        <circle fill="url(#background)" cx="150" cy="150" r="150"/>
+      </svg>
+    </div>
+    <table class="table">
+      <tr>
+        <td>
+          <img src="../images/windowsphone_legend.png" alt="{{ site.platforms.windowsphone }}" title="{{ site.platforms.windowsphone }}"/>
+        </td>
+        <td>
+          <img src="../images/android_legend.png" alt="{{ site.platforms.android }}" title="{{ site.platforms.android }}"/>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <img src="../images/ios_legend.png" alt="{{ site.platforms.ios }}" title="{{ site.platforms.ios }}"/>
+        </td>
+        <td>
+          <a href="http://en.wikipedia.org/wiki/Common_(entertainer)">
+            <img src="../images/common_legend.png" alt="Common" title="Common"/>
+          </a>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

@@ -26,24 +26,7 @@ layout: default
       <a href="{{ site.githuburl }}/" class="btn btn-large btn-primary" type="button">View Project on github</a>
     </p>
   </div>
-  <div class="span5 pie">
-    <div>
-      <h4>
-        Code Sharing Metrics
-      </h4>
-      <img src="../images/pie_bg.png"/>
-      <table class="table">
-        <tr>
-          <td><img src="../images/windowsphone_legend.png"/></td>
-          <td><img src="../images/android_legend.png"/></td>
-        </tr>
-        <tr>
-          <td><img src="../images/ios_legend.png"/></td>
-          <td><img src="../images/common_legend.png"/></td>
-        </tr>
-      </table>
-    </div>
-  </div>
+  {% include pie.html %}
 </div>
 
 <div class="row">
