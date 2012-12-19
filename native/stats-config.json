@@ -1,11 +1,11 @@
 {
-  "shared":null,
-  "iOS":[
+  "common":null,
+  "ios":[
     "ios/*.h",
     "ios/*.m"
   ],
   "Android":null,
-  "WindowsPhone":{
+  "windowsphone":{
     "include":["windowsphone/*.cs"],
     "exclude":"*.xaml.cs"
   }

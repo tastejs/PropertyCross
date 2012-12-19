@@ -21,14 +21,30 @@
           </pattern>
         </defs>
         <g opacity="1.0">
-          <path fill="#d75432" stroke="none" d="M150,150L295,150A145,145,0,0,1,150,295Z"/>
-          <path fill="#1d9097" stroke="none" d="M150,150L150,295A145,145,0,0,1,47.46951672795059,47.46951672795062Z"/>
-          <path fill="#96c11f" stroke="none" d="M150,150L47.46951672795059,47.46951672795062A145,145,0,0,1,149.99999999999997,5Z"/>
-          <path fill="#fac606" stroke="none" d="M150,150L149.99999999999997,5A145,145,0,0,1,295,150Z"/>
-          <path fill="none" stroke="#ffffff" stroke-width="2.5" d="M150,150L295,150"/>
-          <path fill="none" stroke="#ffffff" stroke-width="2.5" d="M150,150L150,295"/>
-          <path fill="none" stroke="#ffffff" stroke-width="2.5" d="M150,150L47.46951672795059,47.46951672795062"/>
-          <path fill="none" stroke="#ffffff" stroke-width="2.5" d="M150,150L149.99999999999997,5"/>
+          {% if page.pie.android %}
+          <path fill="#96c11f" stroke="none" d="{{ page.pie.android.segment }}"/>
+          {% endif %}
+          {% if page.pie.common %}
+          <path fill="#fac606" stroke="none" d="{{ page.pie.common.segment }}"/>
+          {% endif %}
+          {% if page.pie.ios %}
+          <path fill="#d75432" stroke="none" d="{{ page.pie.ios.segment }}"/>
+          {% endif %}
+          {% if page.pie.windowsphone %}
+          <path fill="#1d9097" stroke="none" d="{{ page.pie.windowsphone.segment }}"/>
+          {% endif %}
+          {% if page.pie.android %}
+          <path fill="none" stroke="#ffffff" stroke-width="2.5" d="{{ page.pie.android.line }}"/>
+          {% endif %}
+          {% if page.pie.common %}
+          <path fill="none" stroke="#ffffff" stroke-width="2.5" d="{{ page.pie.common.line }}"/>
+          {% endif %}
+          {% if page.pie.ios %}
+          <path fill="none" stroke="#ffffff" stroke-width="2.5" d="{{ page.pie.ios.line }}"/>
+          {% endif %}
+          {% if page.pie.windowsphone %}
+          <path fill="none" stroke="#ffffff" stroke-width="2.5" d="{{ page.pie.windowsphone.line }}"/>
+          {% endif %}
         </g>
         <circle fill="url(#shinyshiny)" cx="150" cy="150" r="150"/>
         <circle fill="url(#background)" cx="150" cy="150" r="150"/>
@@ -37,20 +53,28 @@
     <table class="table">
       <tr>
         <td>
-          <img src="../images/windowsphone_legend.png" alt="{{ site.platforms.windowsphone }}" title="{{ site.platforms.windowsphone }}"/>
+          {% if page.pie.android %}
+          <img src="../images/android_legend.png" alt="{{ site.platforms.android }}" title="{{ site.platforms.android }}"/>
+          {% endif %}
         </td>
         <td>
-          <img src="../images/android_legend.png" alt="{{ site.platforms.android }}" title="{{ site.platforms.android }}"/>
+          {% if page.pie.common %}
+          <a href="http://en.wikipedia.org/wiki/Common_(entertainer)">
+            <img src="../images/common_legend.png" alt="Common" title="Common"/>
+          </a>
+          {% endif %}
         </td>
       </tr>
       <tr>
         <td>
+          {% if page.pie.ios %}
           <img src="../images/ios_legend.png" alt="{{ site.platforms.ios }}" title="{{ site.platforms.ios }}"/>
+          {% endif %}
         </td>
         <td>
-          <a href="http://en.wikipedia.org/wiki/Common_(entertainer)">
-            <img src="../images/common_legend.png" alt="Common" title="Common"/>
-          </a>
+          {% if page.pie.windowsphone %}
+          <img src="../images/windowsphone_legend.png" alt="{{ site.platforms.windowsphone }}" title="{{ site.platforms.windowsphone }}"/>
+          {% endif %}
         </td>
       </tr>
     </table>

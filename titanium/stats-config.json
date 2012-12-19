@@ -1,5 +1,5 @@
 {
-  "shared":{
+  "common":{
     "include":"Resources/*.js",
     "exclude":[
       "Resources/lib/*.js",
@@ -7,7 +7,7 @@
       "Resources/*IPhone*.js"
     ]
   },
-  "iOS":"Resources/*IPhone*.js",
-  "Android":"Resources/*Android*.js",
-  "WindowsPhone":null
+  "ios":"Resources/*IPhone*.js",
+  "android":"Resources/*Android*.js",
+  "windowsphone":null
 }

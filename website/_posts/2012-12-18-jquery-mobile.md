@@ -6,6 +6,12 @@ platforms:
 - android
 - ios
 - windowsphone
+pie:
+  common: { segment: 'M150,150l145.0,0.0A145,145,0,0,1,7.9,178.8z', line: 'M150,150l-142.1,28.8' }
+  ios: { segment: 'M150,150l-142.1,28.8A145,145,0,0,1,56.1,39.5z', line: 'M150,150l-93.9,-110.5' }
+  android: { segment: 'M150,150l-93.9,-110.5A145,145,0,0,1,201.2,14.4z', line: 'M150,150l51.2,-135.6' }
+  windowsphone: { segment: 'M150,150l51.2,-135.6A145,145,0,0,1,295.0,150.0z', line: 'M150,150l145.0,-0.0' }
+
 ---
 [jQuery Mobile](http://jquerymobile.com) is a HTML5 framework which makes it easy to create websites that mimic the iOS look and feel. This is achieved by providing HTML that is marked up with various jQuery Mobile specific attributes, which is then processed to generate the final markup. Within PropertyCross jQuery Mobile is combined with [KnockoutJS](http://knockoutjs.com/), which provides a presentation model (MVVM), [RequireJS](http://requirejs.org/), for dependency management, and [Cordova / PhoneGap](http://phonegap.com/), which packages the HTML / JavaScript within a native wrapper for app-store deployment. Cordova also provides a set of APIs for accessing native phone functionalities which are not available via HTML specifications.
 
