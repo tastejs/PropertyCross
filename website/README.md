@@ -6,6 +6,7 @@ To rebuild the less run -
 ```
 website> npm install -g less
 website> lessc less/main.less > less/main.css
+website> git commit -a -m "Update compiled css"
 ```
 
 To push the website folder to the gh-pages branch -
