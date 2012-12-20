@@ -61,22 +61,24 @@ function createPie(stats) {
     }
   }).forEach(function(platform) {
     svgPaths[platform] = {
-      segment: segment(X, Y, R, offset, offset+=stats[platform]/sum*2*Math.PI),
-      line: line(X, Y, R, offset)
+      segment: segment(X, Y, R, offset, offset+=stats[platform]/sum*2*Math.PI)
     };
+    if (Object.keys(stats).length > 1) {
+      svgPaths[platform].line = line(X, Y, R, offset);
+    }
   });
   return svgPaths;
 }
 
 function segment(x, y, r, a1, a2) {
   var flag = (a2 - a1) > Math.PI;
-  if ((a2 - a1) % (2 * Math.PI) < 0.001) {
-    a2 -= Math.PI * 0.001;
+  if ((a2 - a1) % (2 * Math.PI) < 0.0001) {
+    a2 -= Math.PI * 0.0001;
   }
   return [
     "M" + [x, y].join(','),
-    "l" + [(r * Math.cos(a1)).toFixed(1), (r * Math.sin(a1)).toFixed(1)].join(','),
-    "A" + [r, r, 0, +flag, 1, (x + r * Math.cos(a2)).toFixed(1), (y + r * Math.sin(a2)).toFixed(1)].join(','),
+    "l" + [(r * Math.cos(a1)).toFixed(2), (r * Math.sin(a1)).toFixed(2)].join(','),
+    "A" + [r, r, 0, +flag, 1, (x + r * Math.cos(a2)).toFixed(2), (y + r * Math.sin(a2)).toFixed(2)].join(','),
     "z"
   ].join('');
 }
@@ -84,6 +86,6 @@ function segment(x, y, r, a1, a2) {
 function line(x, y, r, a1) {
   return [
     "M" + [x, y].join(','),
-    "l" + [(r * Math.cos(a1)).toFixed(1), (r * Math.sin(a1)).toFixed(1)].join(',')
+    "l" + [(r * Math.cos(a1)).toFixed(2), (r * Math.sin(a1)).toFixed(2)].join(',')
   ].join('');
 }
