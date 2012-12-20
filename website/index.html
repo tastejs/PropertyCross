@@ -39,16 +39,25 @@ title: Helping you select a cross-platform mobile framework
         <td>
           {% if post.platforms contains 'android' %}
           <img src="{{ site.baseurl }}/images/android-badge.png" alt="{{ site.platforms.android }}" title="{{ site.platforms.android }}"/>
+          {% else %}
+          {% comment %} XXX HACK {% endcomment %}
+          {% if post.framework != 'native' %}
+          n/a
+          {% endif %}
           {% endif %}
         </td>
         <td>
           {% if post.platforms contains 'ios' %}
           <img src="{{ site.baseurl }}/images/ios-badge.png" alt="{{ site.platforms.ios }}" title="{{ site.platforms.ios }}"/>
+          {% else %}
+          n/a
           {% endif %}
         </td>
         <td>
           {% if post.platforms contains 'windowsphone' %}
           <img src="{{ site.baseurl }}/images/windowsphone-badge.png" alt="{{ site.platforms.windowsphone }}" title="{{ site.platforms.windowsphone }}"/>
+          {% else %}
+          n/a
           {% endif %}
         </td>
       </tr>
