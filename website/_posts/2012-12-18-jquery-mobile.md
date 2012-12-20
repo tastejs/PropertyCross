@@ -17,4 +17,4 @@ The JavaScript Model and ViewModel code is shared across all mobile platforms, w
 
 We were unable to find a suitable theme or plugin for the Android version, as a result, the Android version uses the iOS style.
 
-To view the code and detailed build steps, [see the github source]({{ site.githuburl }}/tree/master/jQueryMobile).
+To view the code and detailed build steps, [see the github source]({{ site.githuburl }}/tree/master/jquerymobile).
