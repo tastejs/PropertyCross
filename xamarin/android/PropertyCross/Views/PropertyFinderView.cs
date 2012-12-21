@@ -43,6 +43,7 @@ namespace com.propertycross.xamarin.android.Views
 			base.OnCreate (bundle);
 
 			var app = (PropertyFinderApplication)Application;
+			app.CurrentActivity = this;
 
 			var uiMarshal = new MarshalInvokeService(app);
 			var source = new PropertyDataSource(new JsonWebPropertySearch(uiMarshal));
@@ -79,7 +80,6 @@ namespace com.propertycross.xamarin.android.Views
 			presenter.SetView(this);
 
 			app.Presenter = presenter;
-			app.CurrentActivity = this;
 		}
 
 		protected override void OnPause()
