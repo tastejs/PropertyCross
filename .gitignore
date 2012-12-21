@@ -20,6 +20,8 @@
 /Native/WindowsPhone/PropertyFinder/Toolkit.Content
 /Native/WindowsPhone/*.suo
 /Native/WindowsPhone/PropertyCross/PropertyCross.csproj.user
+/native/android/PropertyCross/bin
+/native/android/PropertyCross/proguard-project.txt
+/native/android/PropertyCross/project.properties
 
-node_modules
-/rhomobile/bin
+node_modules/rhomobile/bin
