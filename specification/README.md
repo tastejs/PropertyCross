@@ -18,6 +18,16 @@ And for native implementations -
 
 `com.propertycross.{platform}`
 
+#Code Sharing
+
+The code sharing metrics are defined as the amount of code that can be shared
+across platforms in a given framework. A large amount of code share means
+that you can use more common code in a single framework when you develop for
+multiple platforms (e.g. Android, iOS).
+
+Code sharing statistics do not transfer across frameworks, only across platforms
+in a given framework.
+
 #Application Specification
 
 This specification details the form and functionality of the PropertyCross applications. Its intended purpose is to ensure that each PropertyCross implementation is as close to the others as possible (within the constraints imposed by the implementation framework). Regarding form, this specification details the UI controls that should be included on each screen, but does not mandate a specific layout. The intention of the PropertyCross project is that each implementation should match the native look and feel of each of the target platforms (Roboto, Metro, Apple-style), hence the ambiguity regarding the exact screen layout.
