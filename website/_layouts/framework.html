@@ -41,6 +41,30 @@ layout: default
   {% endfor %}
 {% endfor %}
 
+{% if page.contributors %}
+<footer>
+  <div class="row">
+    <div class="span12">
+      Framework example contributed by
+      {% for contributor in page.contributors %}
+        <a href="https://github.com/{{ contributor.username }}/">
+          {% comment %} keep on the same line to avoid extra whitespace {% endcomment %}
+          {% if contributor.hash %}<img src="http://www.gravatar.com/avatar/{{ contributor.hash }}"/>{% endif %}{{ contributor.name }}
+        </a>
+        {% unless forloop.last %}and{% endunless %}
+      {% endfor %}
+    </div>
+  </div>
+</footer>
+
+<div class="row">
+  <div class="span12">
+    <hr/>
+  </div>
+</div>
+
+{% endif %}
+
 <div class="others">
   <div class="row">
     <div class="span12">
