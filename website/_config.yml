@@ -7,7 +7,7 @@ debug: false
 
 name: PropertyCross
 description: Helping you select a cross-platform mobile framework
-githuburl: http://github.com/colineberhardt/PropertyFinderCrossPlatform
+githuburl: http://github.com/colineberhardt/PropertyCross
 
 platforms:
   android: Android
