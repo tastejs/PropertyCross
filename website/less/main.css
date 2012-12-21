@@ -7610,6 +7610,7 @@ a.badge:hover {
 }
 body {
   background-image: url('../images/bg-tile.png');
+  padding-bottom: 20px;
 }
 a {
   font-weight: bold;
@@ -7685,7 +7686,6 @@ header hr {
   text-align: left;
 }
 footer {
-  margin-bottom: 20px;
   line-height: 64px;
 }
 footer img {
