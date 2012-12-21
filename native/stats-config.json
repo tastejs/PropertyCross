@@ -4,7 +4,9 @@
     "ios/*.h",
     "ios/*.m"
   ],
-  "Android":null,
+  "Android":[
+		"android/PropertyCross/src*.java"
+	],
   "windowsphone":{
     "include":["windowsphone/*.cs"],
     "exclude":"*.xaml.cs"

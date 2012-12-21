@@ -1,0 +1,13 @@
+/windowsPhone/PropertyFinder/obj
+/windowsPhone/PropertyFinder/Bin
+/windowsPhone/packages/SilverlightToolkitWP.4.2012.10.9
+/windowsPhone/packages/Newtonsoft.Json.4.5.10
+/windowsPhone/PropertyFinder/Toolkit.Content
+/windowsPhone/*.suo
+/windowsPhone/PropertyCross/PropertyCross.csproj.user
+/android/PropertyCross/bin
+/android/PropertyCross/proguard-project.txt
+/android/PropertyCross/project.properties
+/android/PropertyCross/.*
+/android/ActionBarSherlock
+/android/PropertyCross/gen/com/ActionBarSherlock

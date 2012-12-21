@@ -47,6 +47,10 @@ async.series([
     ["assets/frameworks/jquerymobile.png", "jquerymobile/assets/icons/icon-72-2x.png", 144],
     ["assets/frameworks/jquerymobile.png", "jquerymobile/assets/icons/ApplicationIcon.png", 66],
     ["assets/frameworks/jquerymobile.png", "jquerymobile/assets/icons/ApplicationTileIcon.png", 173],
+    ["assets/frameworks/native.png", "native/android/PropertyCross/res/drawable-hdpi/ic_launcher.png", 72],
+    ["assets/frameworks/native.png", "native/android/PropertyCross/res/drawable-ldpi/ic_launcher.png", 36],
+    ["assets/frameworks/native.png", "native/android/PropertyCross/res/drawable-mdpi/ic_launcher.png", 48],
+    ["assets/frameworks/native.png", "native/android/PropertyCross/res/drawable-xhdpi/ic_launcher.png", 96],
     ["assets/frameworks/native.png", "native/ios/Icon.png", 57],
     ["assets/frameworks/native.png", "native/ios/Icon@2x.png", 114],
     ["assets/frameworks/native.png", "native/ios/Property Finder/Icon.png", 57],
@@ -96,11 +100,17 @@ async.series([
     // ["TARGET", WIDTH (, HEIGHT)],
     ["xamarin/android/PropertyCross/Resources/drawable-xhdpi/star.png", 64],
     ["xamarin/android/PropertyCross/Resources/drawable-hdpi/star.png", 48],
-    ["xamarin/android/PropertyCross/Resources/drawable-mdpi/star.png", 32]
+    ["xamarin/android/PropertyCross/Resources/drawable-mdpi/star.png", 32],
+    ["native/android/PropertyCross/res/drawable-hdpi/star.png", 48],
+    ["native/android/PropertyCross/res/drawable-mdpi/star.png", 32]
+    ["native/android/PropertyCross/res/drawable-xhdpi/star.png", 64],
   ]),
 
   generateOther.bind(null, "assets/nostar.png", [
     // ["TARGET", WIDTH (, HEIGHT)],
+    ["native/android/PropertyCross/res/drawable-hdpi/nostar.png", 48],
+    ["native/android/PropertyCross/res/drawable-mdpi/nostar.png", 32],
+    ["native/android/PropertyCross/res/drawable-xhdpi/nostar.png", 64],
     ["xamarin/android/PropertyCross/Resources/drawable-xhdpi/nostar.png", 64],
     ["xamarin/android/PropertyCross/Resources/drawable-hdpi/nostar.png", 48],
     ["xamarin/android/PropertyCross/Resources/drawable-mdpi/nostar.png", 32]
@@ -108,6 +118,7 @@ async.series([
 
   generateOther.bind(null, "assets/actionbar_tile.png", [
     // ["TARGET", WIDTH (, HEIGHT)],
+    ["native/android/PropertyCross/res/drawable-mdpi/actionbar_tile.png", 6],
     ["xamarin/android/PropertyCross/Resources/drawable-mdpi/actionbar_tile.png", 6]
   ])
   
