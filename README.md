@@ -1,5 +1,15 @@
-#PropertyCross
+#Introduction
 
-At some point this README file will probably contain a summary of the website content. 
+Developers are now finding themselves having to author applications for a diverse range of mobile platforms (iOS, Android, Windows Phone, …), each of which have their own ‘native’ development languages, tools and environment.
 
-For now, refer to this file for info: https://github.com/ColinEberhardt/PropertyFinderCrossPlatform/blob/master/website/README.md
+There is an ever growing list of cross-platform frameworks that allow you to minimise the cost and effort of developing mobile apps, but which to choose?
+
+To help solve this problem PropertyCross presents a non-trivial application, for searching UK property listings, developed using a range of cross-platform technologies and frameworks. Our aim is to provide developers with a practical insight into the strengths and weaknesses of each framework.
+
+For more information see the [PropertyCross website](http://propertcross.com).
+
+#Further Reading
+
+This section lists blog posts, articles and other related information:
+
+* [Introducing PropertyCross](http://www.scottlogic.co.uk/blog/colin/2012/12/introducing-propertycross-helping-you-select-a-cross-platform-mobile-framework/) - a blog post which covers some of the reasons why this project was started.
