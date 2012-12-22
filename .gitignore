@@ -23,5 +23,7 @@
 /native/android/PropertyCross/bin
 /native/android/PropertyCross/proguard-project.txt
 /native/android/PropertyCross/project.properties
+/native/android/ActionBarSherlock
+/native/android/PropertyCross/gen/com/ActionBarSherlock
 
 node_modules/rhomobile/bin
