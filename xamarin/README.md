@@ -14,4 +14,4 @@ Building the Application
 
 To build the iOS application you will need Xamarin MonoTouch (running on a Mac), for Android you will need Mono for Android and for the Windows Phone version you will need Visual Studio. Each project has a solution file (.sln) that is loaded in the respective IDE.
 
-The application is structured usng the Modle View Presenter pattern, which allows for sharing of presentation logic without the need for a binding framework. The shared code is located within the `Common` folder with each version of the application using file linking to include the code within the solution.
+The application is structured using the Model View Presenter pattern, which allows for sharing of presentation logic without the need for a binding framework. The shared code is located within the `Common` folder with each version of the application using file linking to include the code within the solution.
