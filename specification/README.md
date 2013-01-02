@@ -48,7 +48,7 @@ All versions of the application shoudl be fixed to a portrait orientation.
 
 ###Form
 
-![Property Search Page](/colineberhardt/PropertyFinderCrossPlatform/raw/master/specification/images/image01.png)
+![Property Search Page](/colineberhardt/PropertyCross/raw/master/specification/images/image01.png)
 
 The landing screen includes:
 
@@ -112,7 +112,7 @@ In error state, the search field behaves in exactly the same way as the initial 
 
 ###Form
 
-![Search Results Page](/colineberhardt/PropertyFinderCrossPlatform/raw/master/specification/images/image03.png)
+![Search Results Page](/colineberhardt/PropertyCross/raw/master/specification/images/image03.png)
 
 The search results page displays a list of properties in the order returned by the Nestoria APIs. The style of the list presentation is flexible dependant on the platform and framework used.
 
@@ -132,7 +132,7 @@ TODO: What happens is a ‘load more’ action results in a network error?
 
 ###Form
 
-![Search Results Page](/colineberhardt/PropertyFinderCrossPlatform/raw/master/specification/images/image02.png)
+![Search Results Page](/colineberhardt/PropertyCross/raw/master/specification/images/image02.png)
 
 The listing page displays:
 
@@ -153,7 +153,7 @@ It should be possible to navigate from this page back to the Search Results or F
 
 ###Form
 
-![Search Results Page](/colineberhardt/PropertyFinderCrossPlatform/raw/master/specification/images/image00.png)
+![Search Results Page](/colineberhardt/PropertyCross/raw/master/specification/images/image00.png)
 
 The favourites page renders a list of the properties that the user has ‘favourited’
 
