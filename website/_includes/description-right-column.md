@@ -4,4 +4,4 @@ The app, which is implemented by each framework for each mobile platform, is a t
 
 #### Get Involved
 
-This project is hosted on github, and you are welcome to extend it.  There are a great many cross-platform frameworks that could be added to the current list (MoSync, Qt, RhoMobile, Marmelade, Corona, jQTouch, Kendo UI, ...), also, if you are interested in adding BlackBerry implementations of the currently supported frameworks, that would be a welcome addition. For more detailed notes on implementation see the [PropertyCross specifications]({{ site.githuburl }}/tree/master/specification).
+It would be great to see the app implented in more cross-platform frameworks. If you're interested in contributing, a good place to start would be the [list of implementation requests]({{ site.githuburl }}/issues?labels=Framework+Request&page=1&state=open), or maybe you'd be interested in adding implementations of the currently supported frameworks for other platforms? It's all on GitHub at the link above, so fork away! For more detailed implementation notes see the [PropertyCross specifications]({{ site.githuburl }}/tree/master/specification).
