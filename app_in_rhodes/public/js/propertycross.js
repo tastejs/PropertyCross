@@ -5,7 +5,7 @@ function error_message(msg) {
 
 $(document).ready(function() {
 	$(".number_of_li").html($("#search_view_results li").size() - 1);
-	
+
 	$("#go").live('click', function() {
 			var search_text = $("#search_field").val().trim();
 			if (search_text.length == 0) {
@@ -15,7 +15,9 @@ $(document).ready(function() {
 				$("#error_message").html("");
 				var jqxhr = $.post("/app/PropertyCross/search_listings", {
 						"place_name": search_text
-					}, function(data) { });
+					}, function(data) {
+						$("#Searching_label").hide();
+					});
 			}
 
 		});
