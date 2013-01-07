@@ -1,5 +1,4 @@
 module BrowserHelper
-
   def placeholder(label=nil)
     "placeholder='#{label}'" if platform == 'apple'
   end
@@ -18,5 +17,9 @@ module BrowserHelper
 
   def is_bb6
     platform == 'blackberry' && (System::get_property('os_version').split('.')[0].to_i >= 6)
+  end
+
+  def has_network?
+    System::get_property('has_network')
   end
 end
