@@ -3,7 +3,6 @@ require 'helpers/browser_helper'
 require 'helpers/application_helper'
 require 'helpers/propertycross_helper'
 
-
 class PropertyCrossController < Rho::RhoController
   include BrowserHelper
   include ApplicationHelper
@@ -40,6 +39,10 @@ class PropertyCrossController < Rho::RhoController
       favourite = Favourite.find(:all, :conditions => {"guid"=>  property.guid})
       create_favourite_property(favourite.size, property)
     end
+  end
+
+  def remove_from_favourite
+    Favourite.delete_all(:conditions => {"guid"=> @params['guid']})
   end
 
   private
