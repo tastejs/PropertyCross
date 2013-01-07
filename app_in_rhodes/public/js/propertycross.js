@@ -22,4 +22,6 @@ $(document).ready(function() {
 
 		});
 
+	$("#fave_plus").live("click", function() {
+		});
 });
