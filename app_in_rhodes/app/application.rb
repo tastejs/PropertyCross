@@ -6,7 +6,7 @@ class AppApplication < Rho::RhoApplication
     # Super must be called *after* settings @tabs!
     @tabs = nil
     #To remove default toolbar uncomment next line:
-    #@@toolbar = nil
+    @@toolbar = nil
     super
 
     # Uncomment to set sync notification callback to /app/Settings/sync_notify.
