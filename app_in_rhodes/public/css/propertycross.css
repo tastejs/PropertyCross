@@ -1,3 +1,4 @@
-#Searching_label {display:none}
+#Searching_label, #property_object, #property_guid {display:none}
 
 .number_of_li {font-weight:bold}
+
