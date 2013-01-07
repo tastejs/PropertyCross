@@ -19,6 +19,10 @@ class PropertyCrossController < Rho::RhoController
     end
   end
 
+  def search_results_view
+    @listings = PropertyCross.find(:all)
+  end
+
   private
 
   def decide_redirection(application_response_code, result, place_name)
@@ -37,6 +41,7 @@ class PropertyCrossController < Rho::RhoController
       total_number_of_property = result["body"]["response"]["total_results"]
       PropertyCross.delete_all
       create_property_cross(listings)
+      WebView.navigate(url_for(:action => :search_results_view, :controller => :PropertyCross, :query => {:location => location, :total_results => total_number_of_property}))
     else
       WebView.execute_js("error_message('There were no properties found for the given location.');")
     end
