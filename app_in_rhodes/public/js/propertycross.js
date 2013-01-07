@@ -23,5 +23,10 @@ $(document).ready(function() {
 		});
 
 	$("#fave_plus").live("click", function() {
+			var property_object = $("#property_object").html().trim();
+			if (property_object.length > 0) {
+				var jqxhr = $.post("/app/PropertyCross/add_to_favourite", { "object": property_object }, function() {
+					})
+			}
 		});
 });
