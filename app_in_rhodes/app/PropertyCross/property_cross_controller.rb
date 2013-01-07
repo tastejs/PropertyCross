@@ -24,6 +24,8 @@ class PropertyCrossController < Rho::RhoController
   def decide_redirection(application_response_code, result, place_name)
     if application_response_code == "100" || application_response_code == "101"
       listings = result["body"]["response"]["listings"]
+    elsif  application_response_code == "201" || application_response_code == "500"
+      WebView.execute_js("error_message('The location given was not recognised.');")
     end
   end
 
