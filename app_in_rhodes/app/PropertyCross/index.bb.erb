@@ -1,0 +1,21 @@
+<div data-role="page">
+
+  <div data-role="header" data-position="inline">
+    <%= link_to "New", :action => :new %>
+    <h1>PropertyCrosses</h1>
+    <%= link_to "Home", RhoConfig::start_path %>
+  </div>
+
+  <div data-role="content">
+    <table>
+      <tr>
+      <% @propertycrosses.each do |obj| %>
+        
+            <td class="recordLabel"><%= link_to "#{obj.test}", :action => :show, :id => obj.object %></td>
+        
+      <% end %>
+      </tr>
+    </table>
+  </div>
+
+</div>
