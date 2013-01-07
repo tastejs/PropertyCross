@@ -1,0 +1,29 @@
+---
+sdkversion: 3.5.0
+name: PropertyCross
+version: 1.0
+vendor: rhomobile
+build: release
+bbver: 4.6
+applog: rholog.txt
+iphone:
+  configuration: Release
+  sdk: iphonesimulator6.0
+  provisionprofile: 
+  codesignidentity: 
+  entitlements: 
+  BundleIdentifier: com.propertycross.rhomobile
+  BundleURLScheme: appinrhodes
+wp:
+  productid: 70b046e0-3ae7-0130-7818-444619957129
+symbian:
+  uid: '0xe8e17fa0'
+android:
+  version: 2.1
+  android_title: 0
+capabilities:
+- gps
+extensions:
+- json
+- another-extension
+sdk: /Users/ceberhardt/.rvm/gems/ruby-1.9.3-p362/gems/rhodes-3.4.2

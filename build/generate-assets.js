@@ -15,7 +15,8 @@ async.series([
     ["jqtouch"],
     ["jquerymobile"],
     ["senchatouch2"],
-    ["native"]
+    ["native"],
+    ["rhomobile"]
   ]),
   
   generateIcons.bind(null, "assets/icon-base-173x173.png", [
@@ -72,6 +73,10 @@ async.series([
     ["jquerymobile/assets/splashscreens/screen-iphone-portrait.png", 320, 480],
     ["jquerymobile/assets/splashscreens/screen-iphone-portrait-2x.png", 640, 960],
     ["jquerymobile/assets/splashscreens/SplashScreenImage.jpg", 480, 800],
+    ["rhomobile/app/loading.png",320, 480],
+    ["rhomobile/app/loading@2x.png", 640, 960],
+    ["rhomobile/app/loading-568h@2x.png", 640, 1136],
+    ["rhomobile/app/loading.png",640, 960],
     ["titanium/Resources/iphone/Default.png", 320, 480],
     ["titanium/Resources/iphone/Default@2x.png", 640, 960],
     ["senchatouch2/resources/loading/Default.png", 320, 480]
