@@ -25,6 +25,9 @@ class PropertyCrossController < Rho::RhoController
 
   def property_view
     @property_detail = PropertyCross.find(:all, :conditions => {"object"=>  @params['object']}).first
+    if @property_detail == nil
+      @property_detail = PropertyCross.find(:all, :conditions => {"guid"=>  @params['object']}).first
+    end
     @favourite = Favourite.find(:all, :conditions => {"guid"=>  @property_detail.guid})
   end
 
