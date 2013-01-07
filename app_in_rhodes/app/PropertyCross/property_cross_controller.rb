@@ -19,4 +19,12 @@ class PropertyCrossController < Rho::RhoController
     end
   end
 
+  private
+
+  def decide_redirection(application_response_code, result, place_name)
+    if application_response_code == "100" || application_response_code == "101"
+      listings = result["body"]["response"]["listings"]
+    end
+  end
+
 end
