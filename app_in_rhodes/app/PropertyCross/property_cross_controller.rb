@@ -31,6 +31,14 @@ class PropertyCrossController < Rho::RhoController
     @favourite = Favourite.find(:all, :conditions => {"guid"=>  @property_detail.guid})
   end
 
+  def add_to_favourite
+    property =  PropertyCross.find(:all, :conditions => {"object"=>  @params['object']})
+    property.each do |property|
+      favourite = Favourite.find(:all, :conditions => {"guid"=>  property.guid})
+      create_favourite_property(favourite.size, property)
+    end
+  end
+
   private
 
   def decide_redirection(application_response_code, result, place_name)
