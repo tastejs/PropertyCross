@@ -41,6 +41,10 @@ class PropertyCrossController < Rho::RhoController
     end
   end
 
+  def favourities_list
+    @favourities_list = Favourite.find(:all)
+  end
+
   def remove_from_favourite
     Favourite.delete_all(:conditions => {"guid"=> @params['guid']})
   end
