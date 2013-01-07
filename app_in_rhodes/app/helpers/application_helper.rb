@@ -1,4 +1,3 @@
-
 module ApplicationHelper
   def strip_braces(str=nil)
     str ? str.gsub(/\{/, "").gsub(/\}/, "") : nil
@@ -125,5 +124,12 @@ module ApplicationHelper
   def caller_request_query_to_hash
     @caller_request = Rho::JSON.parse(@params['caller_request']) if @params['caller_request']
   end
-  
+
+  def thousand_separator(number)
+    number = number.to_s.reverse
+    number.gsub!(/(\d\d\d)(?=\d)(?!\d*\.)/) do |match|
+      $1 + ','
+    end
+    number = number.to_s.reverse
+  end
 end
