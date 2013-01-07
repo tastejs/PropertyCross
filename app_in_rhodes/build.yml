@@ -1,0 +1,24 @@
+#sdk: "C:/MotorolaRhoMobileSuite2.2.1.12/ruby/lib/ruby/gems/1.9.1/gems/rhodes-3.5.1.12"
+sdkversion: 3.5.0
+name: app_in_rhodes
+version: 1.0
+vendor: rhomobile
+build: debug
+bbver: 4.6
+applog: rholog.txt
+iphone:
+  configuration: Release
+  sdk: iphonesimulator5.0
+  provisionprofile:
+  codesignidentity:
+  entitlements:
+  BundleIdentifier: com.rhomobile.appinrhodes
+  BundleURLScheme: appinrhodes
+wp:
+  productid: '70b046e0-3ae7-0130-7818-444619957129'
+symbian:
+  uid: '0xe8e17fa0'
+android:
+  version: 2.1
+
+extensions: ["json", "another-extension"]
