@@ -32,5 +32,8 @@ $(document).ready(function() {
 		});
 
 	$("#fave_minus").live("click", function() {
+			var property_guid = $("#property_guid").html().trim();
+			var jqxhr = $.post("/app/PropertyCross/remove_from_favourite", { "guid": property_guid }, function() {
+				})
 		});
 });
