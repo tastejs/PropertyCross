@@ -1,6 +1,6 @@
-<div data-role="page" data-url="<%= Rho::RhoConfig.start_path %>/">
+<div data-role="page" data-url="<%= Rho::RhoConfig.start_path %>/" data-theme="b">
 
-  <div data-role="header" data-position="inline">
+  <div data-role="header" data-position="inline" data-theme="b">
     <h1>PropertyCross</h1>
     <% if SyncEngine::logged_in > 0 %>
     <a href="<%= url_for :controller => :Settings, :action => :do_sync %>" class="ui-btn-left" data-icon="refresh">
