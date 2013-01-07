@@ -79,4 +79,10 @@ class PropertyCrossController < Rho::RhoController
     end
   end
 
+  def create_favourite_property(favourite_size, property)
+    if favourite_size == 0
+      Favourite.create(property.vars.reject! {|k, v|  [:source_id, :object].include? k })
+    end
+  end
+
 end
