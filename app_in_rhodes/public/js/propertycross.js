@@ -34,6 +34,7 @@ $(document).ready(function() {
 	$("#fave_minus").live("click", function() {
 			var property_guid = $("#property_guid").html().trim();
 			var jqxhr = $.post("/app/PropertyCross/remove_from_favourite", { "guid": property_guid }, function() {
+					$('.fave_button_section').html("<a id='fave_plus' data-icon='plus' href='#' style='top:0.2em;' class='ui-btn-right ui-btn ui-btn-icon-left ui-btn-corner-all ui-shadow ui-btn-up-b' data-theme='b'><span class='ui-btn-inner ui-btn-corner-all'><span class='ui-btn-text'>Fave</span><span class='ui-icon ui-icon-plus ui-icon-shadow'></span></span></a>")
 				})
 		});
 });
