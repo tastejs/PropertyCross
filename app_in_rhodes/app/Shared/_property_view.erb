@@ -1,17 +1,30 @@
 <div data-role="header" data-position="inline" data-theme="b">
-    <a href="" data-icon="arrow-l" data-rel="back" class="ui-btn-left">Back</a>
-    <h1> Property Details </h1>
-    <div class="ui-btn-right fave_button_section" style='top:0.2em;'>
-    
-    </div>
+  <a href="" data-icon="arrow-l" data-rel="back" class="ui-btn-left">Back</a>
+  <h1> Property Details </h1>
+  <div class="ui-btn-right fave_button_section" style='top:0.2em;'>
+    <% if favourite.size == 0 %>
+      <a id="fave_plus" data-icon="plus" href="#" style='top:0.2em;' class="ui-btn-right ui-btn ui-btn-icon-left ui-btn-corner-all ui-shadow ui-btn-up-b" data-theme="b">
+        <span class="ui-btn-inner ui-btn-corner-all">
+          <span class="ui-btn-text">Fave</span>
+          <span class="ui-icon ui-icon-plus ui-icon-shadow"></span>
+        </span>
+      </a>
+    <% else %>
+      <a id="fave_minus" data-icon="minus" style='top:0.2em;' href="#" class="ui-btn-right ui-btn ui-btn-icon-left ui-btn-corner-all ui-shadow ui-btn-up-b" data-theme="b">
+        <span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Fave</span>
+          <span class="ui-icon ui-icon-minus ui-icon-shadow"></span>
+        </span>
+      </a>
+    <% end %>
   </div>
-  
+</div>
+
 <div data-role="content" data-theme="c">
-    <p id="property_object"> <%= property_detail.object %></p>
-    <p id="property_guid"> <%= property_detail.guid %> </p>
-    <h1> £ <%= thousand_separator(property_detail.price) %> </h1>
-    <h3> <%= property_detail.title%> </h3>
-    <img src="<%= @property_detail.img_url%>" style='width:35%;'/>
-    <div> <%= property_detail.bedroom_number %> bed, <%= property_detail.bathroom_number %> bathroom  </div> <br/>
-    <div> <%= property_detail.summary %> </div>
-  </div>
+  <p id="property_object"> <%= property_detail.object %></p>
+  <p id="property_guid"> <%= property_detail.guid %> </p>
+  <h1> £ <%= thousand_separator(property_detail.price) %> </h1>
+  <h3> <%= property_detail.title%> </h3>
+  <img src="<%= @property_detail.img_url%>" style='width:35%;'/>
+  <div> <%= property_detail.bedroom_number %> bed, <%= property_detail.bathroom_number %> bathroom  </div> <br/>
+  <div> <%= property_detail.summary %> </div>
+</div>
