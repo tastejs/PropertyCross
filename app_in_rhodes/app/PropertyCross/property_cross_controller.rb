@@ -23,6 +23,10 @@ class PropertyCrossController < Rho::RhoController
     @listings = PropertyCross.find(:all)
   end
 
+  def property_view
+    @property_detail = PropertyCross.find(:all, :conditions => {"object"=>  @params['object']}).first
+  end
+
   private
 
   def decide_redirection(application_response_code, result, place_name)
