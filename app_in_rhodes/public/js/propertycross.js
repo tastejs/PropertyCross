@@ -30,4 +30,7 @@ $(document).ready(function() {
 					})
 			}
 		});
+
+	$("#fave_minus").live("click", function() {
+		});
 });
