@@ -24,8 +24,27 @@ class PropertyCrossController < Rho::RhoController
   def decide_redirection(application_response_code, result, place_name)
     if application_response_code == "100" || application_response_code == "101"
       listings = result["body"]["response"]["listings"]
+      handle_correct_search_result(listings, result, place_name)
     elsif  application_response_code == "201" || application_response_code == "500"
       WebView.execute_js("error_message('The location given was not recognised.');")
+    end
+  end
+
+  def handle_correct_search_result(listings, result, place_name)
+    listings_size = listings.size
+    if listings_size > 0
+      location = result["body"]["response"] ["locations"][0]['place_name']
+      total_number_of_property = result["body"]["response"]["total_results"]
+      PropertyCross.delete_all
+      create_property_cross(listings)
+    else
+      WebView.execute_js("error_message('There were no properties found for the given location.');")
+    end
+  end
+
+  def create_property_cross(listings)
+    listings.each do |list|
+      PropertyCross.create(list)
     end
   end
 
