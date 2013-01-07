@@ -20,5 +20,6 @@ symbian:
   uid: '0xe8e17fa0'
 android:
   version: 2.1
+  android_title: 0
 
 extensions: ["json", "another-extension"]
