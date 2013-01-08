@@ -43,9 +43,16 @@ $(document).ready(function() {
 
 		});
 
-	$('.misspelt_place_li, .recent_search_li').live('click', function() { 
-		
+	$('.misspelt_place_li, .recent_search_li').live('click', function() {
+		var misspelt_place_name = $(this).find('.misspelt_place_name').html().trim();
+		var recent_search_by_my_location = $(this).find('.misspelt_place_name').attr("id");
+		$("#Searching_label").show();
+		if (recent_search_by_my_location == "recent_search_by_my_location") {
+			var jqxhr = $.post("/app/PropertyCross/my_location_result", { "place_name": misspelt_place_name }, function() { });
+		} 
+
 	});
+
 	$("#fave_plus").live("click", function() {
 			var property_object = $("#property_object").html().trim();
 			if (property_object.length > 0) {
