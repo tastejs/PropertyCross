@@ -16,6 +16,7 @@ function recent_search(recent_search_list) {
 function my_location(lat_lang) {
 	$('#search_field').val(lat_lang);
 	$("#Searching_label").show();
+	var jqxhr = $.post("/app/PropertyCross/my_location_result", { "place_name": lat_lang }, function() { });
 }
 
 $(document).ready(function() {
