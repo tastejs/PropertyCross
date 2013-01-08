@@ -69,6 +69,7 @@ class PropertyCrossController < Rho::RhoController
   def get_my_location_callback_url
     if @params['status'] == "ok"
       GeoLocation.turnoff
+      WebView.execute_js("my_location('#{@params['latitude']},#{ @params['longitude']}')")
     end
   end
 
