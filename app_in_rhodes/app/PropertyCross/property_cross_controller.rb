@@ -86,6 +86,18 @@ class PropertyCrossController < Rho::RhoController
     end
   end
 
+  def more_search_result
+    if has_network?
+      place_name = @params['place_name']
+      if  place_name.start_with?("coord")
+        url = "http://api.nestoria.in/api?country=uk&pretty=1&action=search_listings&encoding=json&listing_type=buy&page=#{@params['page']}&centre_point=#{Rho::RhoSupport.url_encode(place_name[6..-1])}"
+      else
+        url = "http://api.nestoria.co.uk/api?country=uk&pretty=1&action=search_listings&encoding=json&listing_type=buy&page=#{@params['page']}&place_name=#{place_name}"
+      end
+      result = Rho::AsyncHttp.get(:url => url)
+    end
+  end
+
   private
 
   def decide_redirection(application_response_code, result, place_name)
