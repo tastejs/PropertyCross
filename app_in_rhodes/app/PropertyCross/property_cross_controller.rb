@@ -49,6 +49,11 @@ class PropertyCrossController < Rho::RhoController
     Favourite.delete_all(:conditions => {"guid"=> @params['guid']})
   end
 
+  def favourite_property_view
+    @favourite = Favourite.find(:all, :conditions => {"guid"=> @params['guid']})
+    @property_detail = Favourite.find(:all, :conditions => {"guid"=> @params['guid']}).first
+  end
+
   private
 
   def decide_redirection(application_response_code, result, place_name)
