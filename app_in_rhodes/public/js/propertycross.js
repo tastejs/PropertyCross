@@ -43,6 +43,9 @@ $(document).ready(function() {
 
 		});
 
+	$('.misspelt_place_li, .recent_search_li').live('click', function() { 
+		
+	});
 	$("#fave_plus").live("click", function() {
 			var property_object = $("#property_object").html().trim();
 			if (property_object.length > 0) {
