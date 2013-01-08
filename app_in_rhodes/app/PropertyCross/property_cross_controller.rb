@@ -101,6 +101,7 @@ class PropertyCrossController < Rho::RhoController
           listings = result["body"]["response"]["listings"]
           create_property_cross(listings)
           search_result = more_search_result_design(result["body"]["response"]["listings"])
+          WebView.execute_js("more_search_result('#{search_result}');")
         end
       end
     end
