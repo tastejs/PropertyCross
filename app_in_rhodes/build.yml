@@ -21,5 +21,7 @@ symbian:
 android:
   version: 2.1
   android_title: 0
+capabilities:
+  - gps
 
 extensions: ["json", "another-extension"]
