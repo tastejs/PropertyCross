@@ -66,6 +66,12 @@ class PropertyCrossController < Rho::RhoController
     GeoLocation.set_notification("/app/PropertyCross/get_my_location_callback_url", "")
   end
 
+  def get_my_location_callback_url
+    if @params['status'] == "ok"
+      GeoLocation.turnoff
+    end
+  end
+
   private
 
   def decide_redirection(application_response_code, result, place_name)
