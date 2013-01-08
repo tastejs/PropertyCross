@@ -58,6 +58,7 @@ class PropertyCrossController < Rho::RhoController
     recent_search = RecentSearch.find(:all)
     if recent_search.size > 0
       recent_search_list = recent_search(recent_search.reverse)
+      WebView.execute_js("recent_search('#{recent_search_list}')")
     end
   end
 
