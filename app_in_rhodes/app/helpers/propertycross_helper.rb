@@ -30,13 +30,13 @@ module PropertycrossHelper
     end
     li_formation
   end
-  
+
   def more_search_result_design(more_search_results)
-     li_formation = ""
-     more_search_results.each do |more_search_result|
-       li_formation+='<li data-theme="c" class="ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-li-has-thumb ui-btn-up-c"><div class="ui-btn-inner ui-li"><div class="ui-btn-text"><a href="/app/PropertyCross/property_view?object='"#{more_search_result['guid']}"'" class="ui-link-inherit"><img src='"#{more_search_result["img_url"]}"' class="ui-li-thumb"><h3 class="ui-li-heading"> £ '"#{thousand_separator(more_search_result['price']).to_s}"'</h3><p class="ui-li-desc">'"#{more_search_result['title']}"'</p></a></div><span class="ui-icon ui-icon-arrow-r ui-icon-shadow"></span></div></li>'
-     end
-     li_formation
-   end
+    li_formation = ""
+    more_search_results.each do |more_search_result|
+      li_formation+='<li data-theme="c" class="ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-li-has-thumb ui-btn-up-c"><div class="ui-btn-inner ui-li"><div class="ui-btn-text"><a href="/app/PropertyCross/property_view?object='"#{more_search_result['guid']}"'" class="ui-link-inherit"><img src='"#{more_search_result["img_url"]}"' class="ui-li-thumb"><h3 class="ui-li-heading"> £ '"#{thousand_separator(more_search_result['price']).to_s}"'</h3><p class="ui-li-desc">'"#{more_search_result['title']}"'</p></a></div><span class="ui-icon ui-icon-arrow-r ui-icon-shadow"></span></div></li>'
+    end
+    li_formation
+  end
 
 end
