@@ -10,15 +10,21 @@
     <input type="search" id='search_field'/>
     <button data-inline="true" type="submit" id="go"> Go </button>
     <button data-inline="true" id='my_location'> My location </button>
-    
+
     <div id="Searching_label"> Searching... </div>
-       
+
     <div id="error_message"> </div>
-    
+
     <div id="recent_search">
       <div id="recent_search_list"></div>
     </div>
-            
+
   </div>
+
+  <script type='text/javascript'>
+    $(document).ready(function(){
+      var jqxhr = $.post("/app/PropertyCross/recent_search_list",function(){});
+    });
+  </script>
 
 </div>
