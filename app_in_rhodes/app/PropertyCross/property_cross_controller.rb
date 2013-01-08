@@ -56,6 +56,9 @@ class PropertyCrossController < Rho::RhoController
 
   def recent_search_list
     recent_search = RecentSearch.find(:all)
+    if recent_search.size > 0
+      recent_search_list = recent_search(recent_search.reverse)
+    end
   end
 
   private
