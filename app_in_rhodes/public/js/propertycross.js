@@ -9,6 +9,10 @@ function misspelt_location(place_name) {
 	$("#recent_search").hide();
 }
 
+function recent_search(recent_search_list) {
+	$("#recent_search_list").html(recent_search_list).trigger("create");
+}
+
 $(document).ready(function() {
 	$(".number_of_li").html($("#search_view_results li").size() - 1);
 
