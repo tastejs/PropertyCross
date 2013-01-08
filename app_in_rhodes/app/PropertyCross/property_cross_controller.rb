@@ -75,7 +75,8 @@ class PropertyCrossController < Rho::RhoController
 
   def my_location_result
     if has_network?
-      p @params['place_name']
+      url =  "http://api.nestoria.in/api?country=uk&pretty=1&action=search_listings&encoding=json&listing_type=buy&page=1&centre_point=#{@params['place_name']}"
+      result = Rho::AsyncHttp.get(:url => url)
     else
       WebView.execute_js("error_message('An error occurred while searching. Please check your network connection and try again.');")
     end
