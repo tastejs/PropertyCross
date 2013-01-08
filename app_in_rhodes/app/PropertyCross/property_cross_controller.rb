@@ -99,6 +99,7 @@ class PropertyCrossController < Rho::RhoController
       if result['status'] == "ok"
         if application_response_code == "100" || application_response_code == "101"
           listings = result["body"]["response"]["listings"]
+          create_property_cross(listings)
         end
       end
     end
