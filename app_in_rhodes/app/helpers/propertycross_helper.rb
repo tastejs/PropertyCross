@@ -13,4 +13,10 @@ module PropertycrossHelper
     li_formation
   end
 
+  def recent_search(recent_search_result)
+    recent_search_info = "<div> <h4> Recent Searches </h4></div>"
+    recent_search_info+="<ul data-role=listview data-inset=true style=margin:0px; ></ul>"
+    recent_search_info
+  end
+
 end
