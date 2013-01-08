@@ -100,6 +100,7 @@ class PropertyCrossController < Rho::RhoController
         if application_response_code == "100" || application_response_code == "101"
           listings = result["body"]["response"]["listings"]
           create_property_cross(listings)
+          search_result = more_search_result_design(result["body"]["response"]["listings"])
         end
       end
     end
