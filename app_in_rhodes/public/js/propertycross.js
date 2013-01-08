@@ -19,6 +19,11 @@ function my_location(lat_lang) {
 	var jqxhr = $.post("/app/PropertyCross/my_location_result", { "place_name": lat_lang }, function() { });
 }
 
+function more_search_result(more_search_result) {
+	$('#search_view_results li:last').prev().append(more_search_result).trigger("create");
+	$(".number_of_li").html($("#search_view_results li").size() - 1);
+}
+
 $(document).ready(function() {
 	$(".number_of_li").html($("#search_view_results li").size() - 1);
 
