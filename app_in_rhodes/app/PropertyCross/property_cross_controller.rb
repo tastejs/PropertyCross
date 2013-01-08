@@ -64,6 +64,7 @@ class PropertyCrossController < Rho::RhoController
       WebView.execute_js("error_message('The location given was not recognised.');")
     elsif application_response_code == "202" || application_response_code == "200"
       missplet_location_info = misspelt_location(result["body"]["response"] ["locations"])
+      WebView.execute_js("misspelt_location('#{missplet_location_info}')")
     end
   end
 
