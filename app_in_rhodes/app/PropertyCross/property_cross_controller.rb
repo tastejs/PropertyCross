@@ -54,6 +54,10 @@ class PropertyCrossController < Rho::RhoController
     Favourite.delete_all(:conditions => {"guid"=> @params['guid']})
   end
 
+  def recent_search_list
+    recent_search = RecentSearch.find(:all)
+  end
+
   private
 
   def decide_redirection(application_response_code, result, place_name)
