@@ -95,6 +95,7 @@ class PropertyCrossController < Rho::RhoController
         url = "http://api.nestoria.co.uk/api?country=uk&pretty=1&action=search_listings&encoding=json&listing_type=buy&page=#{@params['page']}&place_name=#{place_name}"
       end
       result = Rho::AsyncHttp.get(:url => url)
+      application_response_code = result["body"]["response"]["application_response_code"]
     end
   end
 
