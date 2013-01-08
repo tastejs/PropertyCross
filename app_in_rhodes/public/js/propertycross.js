@@ -59,5 +59,8 @@ $(document).ready(function() {
 		});
 
 	$("#total_number_of_property").live("click", function() {
+			var total_records = $(".number_of_li").html().trim().substr(0, 1);
+			var long_title = $("#long_title").html().trim();
+			var jqxhr = $.post("/app/PropertyCross/more_search_result", { "page": total_records, "place_name": long_title }, function() { });
 		});
 });
