@@ -93,10 +93,19 @@ class PropertyCrossController < Rho::RhoController
   end
 
   def handle_recent_search(place_name, count)
+    destroy_recent_search_list
     recent_search = RecentSearch.find(:all, :conditions => {"place_name"=> place_name})
     if recent_search.size == 0 && count != 0
       recent_search_hash = {"place_name"=> place_name, "count"=> count}
       RecentSearch.create(recent_search_hash)
+    end
+  end
+
+  def destroy_recent_search_list
+    recent_search_all = RecentSearch.find(:all)
+    if recent_search_all.size > 4
+      recent_search_name =  RecentSearch.find(:all).first
+      recent_search_name.destroy
     end
   end
 
