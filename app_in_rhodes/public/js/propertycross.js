@@ -13,6 +13,11 @@ function recent_search(recent_search_list) {
 	$("#recent_search_list").html(recent_search_list).trigger("create");
 }
 
+function my_location(lat_lang) {
+	$('#search_field').val(lat_lang);
+	$("#Searching_label").show();
+}
+
 $(document).ready(function() {
 	$(".number_of_li").html($("#search_view_results li").size() - 1);
 
