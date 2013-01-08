@@ -43,7 +43,7 @@ $(document).ready(function() {
 			if (property_object.length > 0) {
 				var jqxhr = $.post("/app/PropertyCross/add_to_favourite", { "object": property_object }, function() {
 						$('.fave_button_section').html("<a id='fave_minus' data-icon='minus' style='top:0.2em;' href='#' class='ui-btn-right ui-btn ui-btn-icon-left ui-btn-corner-all ui-shadow ui-btn-up-b' data-theme='b'><span class='ui-btn-inner ui-btn-corner-all'><span class='ui-btn-text'>Fave</span><span class='ui-icon ui-icon-minus ui-icon-shadow'></span></span></a>")
-					})
+					});
 			}
 		});
 
@@ -51,10 +51,13 @@ $(document).ready(function() {
 			var property_guid = $("#property_guid").html().trim();
 			var jqxhr = $.post("/app/PropertyCross/remove_from_favourite", { "guid": property_guid }, function() {
 					$('.fave_button_section').html("<a id='fave_plus' data-icon='plus' href='#' style='top:0.2em;' class='ui-btn-right ui-btn ui-btn-icon-left ui-btn-corner-all ui-shadow ui-btn-up-b' data-theme='b'><span class='ui-btn-inner ui-btn-corner-all'><span class='ui-btn-text'>Fave</span><span class='ui-icon ui-icon-plus ui-icon-shadow'></span></span></a>")
-				})
+				});
 		});
 
 	$("#my_location").live('click', function() {
 			var jqxhr = $.post("/app/PropertyCross/get_my_location", function() { });
+		});
+
+	$("#total_number_of_property").live("click", function() {
 		});
 });
