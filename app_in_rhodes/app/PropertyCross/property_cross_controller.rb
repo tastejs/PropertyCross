@@ -73,6 +73,14 @@ class PropertyCrossController < Rho::RhoController
     end
   end
 
+  def my_location_result
+    if has_network?
+      p @params['place_name']
+    else
+      WebView.execute_js("error_message('An error occurred while searching. Please check your network connection and try again.');")
+    end
+  end
+
   private
 
   def decide_redirection(application_response_code, result, place_name)
