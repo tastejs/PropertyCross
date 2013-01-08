@@ -1,6 +1,7 @@
 function error_message(msg) {
 	$("#Searching_label").hide();
 	$("#error_message").html(msg);
+	$("#recent_search").show();
 }
 
 function misspelt_location(place_name) {
