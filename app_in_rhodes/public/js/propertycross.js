@@ -3,6 +3,11 @@ function error_message(msg) {
 	$("#error_message").html(msg);
 }
 
+function misspelt_location(place_name) {
+	$("#error_message").html(place_name).trigger("create");
+	$("#recent_search").hide();
+}
+
 $(document).ready(function() {
 	$(".number_of_li").html($("#search_view_results li").size() - 1);
 
