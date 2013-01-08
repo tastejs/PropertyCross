@@ -62,6 +62,8 @@ class PropertyCrossController < Rho::RhoController
       handle_correct_search_result(listings, result, place_name)
     elsif  application_response_code == "201" || application_response_code == "500"
       WebView.execute_js("error_message('The location given was not recognised.');")
+    elsif application_response_code == "202" || application_response_code == "200"
+      missplet_location_info = misspelt_location(result["body"]["response"] ["locations"])
     end
   end
 
