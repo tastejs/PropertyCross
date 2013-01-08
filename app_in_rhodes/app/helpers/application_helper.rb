@@ -132,4 +132,22 @@ module ApplicationHelper
     end
     number = number.to_s.reverse
   end
+
+  def escape_javascript(javascript)
+    a = {
+      '\\' => '\\\\',
+      '</' => '<\/',
+      "\r\n" => '\n',
+      "\n" => '\n',
+      "\r" => '\n',
+      '"' => '\\"',
+      "'" => "\\'"
+    }
+    if javascript
+      result = javascript.gsub(/(\\|<\/|\r\n|\342\200\250|[\n\r"'])/u) {|match| a[match] }
+    else
+      ''
+    end
+  end
+
 end
