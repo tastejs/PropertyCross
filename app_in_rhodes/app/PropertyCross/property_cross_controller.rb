@@ -96,6 +96,9 @@ class PropertyCrossController < Rho::RhoController
       end
       result = Rho::AsyncHttp.get(:url => url)
       application_response_code = result["body"]["response"]["application_response_code"]
+      if result['status'] == "ok"
+        p result['status']
+      end
     end
   end
 
