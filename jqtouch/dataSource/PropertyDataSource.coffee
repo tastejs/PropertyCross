@@ -1,5 +1,4 @@
 define ["lib/zepto"], ($) ->
-
     class PropertyDataSource
         ###
             Asychronously returns an object which contains a "response" which is
@@ -9,9 +8,9 @@ define ["lib/zepto"], ($) ->
         findProperties: (placeNameOrCoords, pageNumber, callback) ->
             #Note: place_name takes precedence if non-empty otherwise centre_point used..
             placeName = if placeNameOrCoords.latitude and placeNameOrCoords.longitude then "" else placeNameOrCoords
-            $.ajax {
+            $.ajax
                 dataType: "jsonp"
-                data: {
+                data:
                     country: "uk"
                     pretty: "1"
                     encoding: "json"
@@ -20,7 +19,6 @@ define ["lib/zepto"], ($) ->
                     page: pageNumber
                     place_name: placeName
                     centre_point: "#{placeNameOrCoords.latitude},#{placeNameOrCoords.longitude}"
-                }
                 url: "http://api.nestoria.co.uk/api"
                 timeout: 5000
                 success: (result) ->
@@ -29,21 +27,18 @@ define ["lib/zepto"], ($) ->
                     toGiveBack
                     switch responseCode
                         when "100", "101", "110"
-                            toGiveBack = {
+                            toGiveBack =
                                 listings: response.listings
                                 location: response.locations[0]
                                 total_results: response.total_results
                                 response: "OK"
-                            }
                         else
-                            if response.locations?.length and response.locations.long_title
-                                toGiveBack = {
+                            if response.locations?.length and response.locations[0].long_title
+                                toGiveBack =
                                     locations: response.locations
                                     response: "AMBIGUOUS"
-                                }
                             else
                                 toGiveBack = response: "UNKNOWN"
                     callback toGiveBack
                 error: ->
                     callback response: "ERROR"
-            }

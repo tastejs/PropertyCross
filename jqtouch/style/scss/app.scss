@@ -64,3 +64,13 @@
         top: 8px;
     }
 }
+/* Fix bug in with input box jumping around when typed on Android */
+
+#jqt ul li {
+    -webkit-transform: none;
+    position: relative;
+    a {
+        -webkit-transform: none;
+    }
+}
+   

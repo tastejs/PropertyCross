@@ -1,4 +1,6 @@
-/* Zepto v1.0rc1 - polyfill zepto event detect fx ajax form touch - zeptojs.com/license */
+/* Zepto v1.0rc1 - polyfill zepto event detect fx ajax form touch - zeptojs.com/license
+    Note: minor edit made to make it reqireJS compatible without additional code.
+*/
 ;(function(undefined){
   if (String.prototype.trim === undefined) // fix for iOS 3.2
     String.prototype.trim = function(){ return this.replace(/^\s+/, '').replace(/\s+$/, '') }

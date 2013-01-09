@@ -42,3 +42,10 @@
   position: absolute;
   right: 15px;
   top: 8px; }
+
+/* Fix bug in with input box jumping around when typed on Android */
+#jqt ul li {
+  -webkit-transform: none;
+  position: relative; }
+  #jqt ul li a {
+    -webkit-transform: none; }

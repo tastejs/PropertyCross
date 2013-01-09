@@ -6,22 +6,17 @@
         <meta name="format-detection" content="email=no">
 
         <title>Property Finder</title>
-        
+
         <script>
-            (function(){
+            (function () {
                 function importStyleSheet(url) {
-                    document.write(
-                        '<style type="text/css">@import "' + url + '";</style>'
-                    );
+                    document.write('<style type="text/css">@import "' + url + '";</style>');
                 }
-                if(/android/i.test(navigator.userAgent)){
-                    importStyleSheet("themes/jqtouch.css");
-                } else {
-                    importStyleSheet("themes/apple.css");
-                }
+                importStyleSheet(/android/i.test(navigator.userAgent) ?
+                        "themes/jqtouch.css" : "themes/apple.css");
+                importStyleSheet("style/css/app.css");
             }());
         </script>
-        <style type="text/css">@import "style/css/app.css"</style>
         <script data-main="cs!main" src="lib/require.js"></script>
     </head>
     <body>
@@ -31,53 +26,51 @@
                     <h1>Property Finder</h1>
                     <a class="button" href="#favourites">Faves</a>
                 </div>
-                <div class="scroll">
-                    <div class="intro">
-                        Use the form below to search for houses to buy. You can search by place-name,
-                        postcode, or click 'My location', to search in your current location!
-                    </div>
-                    <form>
-                        <ul class="rounded">
-                            <li>
-                                <img class="loading" style="display: none;" data-bind="visible: searchInProgress()"
-                                    src="style/img/ajax-loader.gif" />
-                                <input type="text" data-bind="value: location" placeholder="Location" />
-                            </li>
-                        </ul>
-                    </form>
-                    <ul class="individual">
-                        <li>
-                            <a href="#" data-bind="click: stringSearch">GO</a>
-                        </li>
-                        <li>
-                            <a href="#" data-bind="click: geoSearch">My Location</a>
-                        </li>
-                    </ul>
-
-                    <div class="info" style="display:none" data-bind="visible: errorState().length > 0, text: errorState"></div>
-                    
-                    <h2 style="display:none" data-bind="visible: recentSearches().length > 0
-                            && possibleLocations().length === 0">Recent searches</h2>
-                    <ul style="display:none" class="rounded" data-bind="foreach: recentSearches,
-                            visible: recentSearches().length > 0 && possibleLocations().length === 0">
-                        <li class="arrow">
-                            <a href="#" data-bind="click: $root.recentSearch.bind($root, $data)">
-                                <span class="searchTerm" data-bind="text: long_title"></span>
-                                <small class="counter" data-bind="number: count"></small>
-                            </a>
-                        </li>
-                    </ul>
-                    
-                    <h2 style="display:none" data-bind="visible: possibleLocations().length > 0">Did you mean?</h2>
-                    <ul style="display:none" class="rounded"
-                            data-bind="foreach: possibleLocations, visible: possibleLocations().length > 0">
-                        <li class="arrow">
-                            <a href="#" data-bind="click: $root.searchWithName.bind($root, place_name)">
-                                <span data-bind="text: long_title"></span>
-                            </a>
-                        </li>
-                    </ul>
+                <div class="intro">
+                    Use the form below to search for houses to buy. You can search by place-name,
+                    postcode, or click 'My location', to search in your current location!
                 </div>
+                <form>
+                    <ul class="rounded">
+                        <li>
+                            <img class="loading" style="display: none;" data-bind="visible: searchInProgress()"
+                                src="style/img/ajax-loader.gif" />
+                            <input type="text" data-bind="value: location" placeholder="Location" />
+                        </li>
+                    </ul>
+                </form>
+                <ul class="individual">
+                    <li>
+                        <a href="#" data-bind="click: stringSearch">GO</a>
+                    </li>
+                    <li>
+                        <a href="#" data-bind="click: geoSearch">My Location</a>
+                    </li>
+                </ul>
+
+                <div class="info" style="display:none" data-bind="visible: errorState().length > 0, text: errorState"></div>
+                
+                <h2 style="display:none" data-bind="visible: recentSearches().length > 0
+                        && possibleLocations().length === 0">Recent searches</h2>
+                <ul style="display:none" class="rounded" data-bind="foreach: recentSearches,
+                        visible: recentSearches().length > 0 && possibleLocations().length === 0">
+                    <li class="arrow">
+                        <a href="#" data-bind="click: $root.recentSearch.bind($root, $data)">
+                            <span class="searchTerm" data-bind="text: long_title"></span>
+                            <small class="counter" data-bind="number: count"></small>
+                        </a>
+                    </li>
+                </ul>
+                
+                <h2 style="display:none" data-bind="visible: possibleLocations().length > 0">Did you mean?</h2>
+                <ul style="display:none" class="rounded"
+                        data-bind="foreach: possibleLocations, visible: possibleLocations().length > 0">
+                    <li class="arrow">
+                        <a href="#" data-bind="click: $root.searchWithName.bind($root, place_name)">
+                            <span data-bind="text: long_title"></span>
+                        </a>
+                    </li>
+                </ul>
             </div>
 
             <div id="favourites">

@@ -758,7 +758,7 @@ define(['lib/zepto'], function(Zepto) {
     //to create this.. 
     return new $.jQTouch({
         statusBar: 'black-translucent',
-        preloadImages: []
+        useAnimations: !$.os.android
     });
 });
 
