@@ -40,5 +40,6 @@
     <gap:splash src="assets/splashscreens/720x1280.png"                     gap:platform="android" gap:density="xhdpi" />
     <gap:splash src="assets/splashscreens/screen-iphone-portrait.png"       gap:platform="ios"     width="320" height="480" />
     <gap:splash src="assets/splashscreens/screen-iphone-portrait-2x.png"    gap:platform="ios"     width="640" height="960" />
+    <gap:splash src="assets/splashscreens/screen-iphone5-portrait.png"      gap:platform="ios"     width="640" height="1136" />
 
 </widget>
