@@ -1,0 +1,76 @@
+/* Custom App Styling */
+
+#jqt {
+    #home {
+        .intro {
+            margin: 10px;
+        }
+        .searchTerm {
+            display: inline-block;
+            max-width: 60%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+    ul.listings  {
+        li.listing a {
+            display: -webkit-box;
+            width: 100%;
+        }
+        img.thumbnail {
+            width: 60px;
+            height: 60px;
+            margin-right: 10px;
+        }
+        .title {
+            font-size: 12px; 
+        }
+        .loadMore {
+            text-align: center;
+        }
+        .numResults {
+            text-align: center;
+            font-size: 12px;
+            background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#EEE), to(#9C9EA0));
+            text-shadow: white 0 1px 0;
+            color: black;
+        }
+        .detail {
+            -webkit-box-flex: 1;
+            white-space: normal;
+        }
+    }
+    #listingDetail {
+        font-size: 18px;
+        > div:not(.toolbar) {
+            margin: 10px;
+            > div {
+                margin: 2px 0px;
+            }
+        }
+        img.detailImage {
+            width: 100%;
+        }
+        .roomDetail {
+            font-size: 14px;
+        }
+    }
+    .star {
+        font-size: 22px;
+    }
+    img.loading {
+        position: absolute;
+        right: 15px;
+        top: 8px;
+    }
+}
+/* Fix bug in with input box jumping around when typed on Android */
+
+#jqt ul li {
+    -webkit-transform: none;
+    position: relative;
+    a {
+        -webkit-transform: none;
+    }
+}
+   

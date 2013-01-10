@@ -1,0 +1,51 @@
+/* Custom App Styling */
+#jqt #home .intro {
+  margin: 10px; }
+#jqt #home .searchTerm {
+  display: inline-block;
+  max-width: 60%;
+  overflow: hidden;
+  text-overflow: ellipsis; }
+#jqt ul.listings li.listing a {
+  display: -webkit-box;
+  width: 100%; }
+#jqt ul.listings img.thumbnail {
+  width: 60px;
+  height: 60px;
+  margin-right: 10px; }
+#jqt ul.listings .title {
+  font-size: 12px; }
+#jqt ul.listings .loadMore {
+  text-align: center; }
+#jqt ul.listings .numResults {
+  text-align: center;
+  font-size: 12px;
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#eeeeee), to(#9c9ea0));
+  text-shadow: white 0 1px 0;
+  color: black; }
+#jqt ul.listings .detail {
+  -webkit-box-flex: 1;
+  white-space: normal; }
+#jqt #listingDetail {
+  font-size: 18px; }
+  #jqt #listingDetail > div:not(.toolbar) {
+    margin: 10px; }
+    #jqt #listingDetail > div:not(.toolbar) > div {
+      margin: 2px 0px; }
+  #jqt #listingDetail img.detailImage {
+    width: 100%; }
+  #jqt #listingDetail .roomDetail {
+    font-size: 14px; }
+#jqt .star {
+  font-size: 22px; }
+#jqt img.loading {
+  position: absolute;
+  right: 15px;
+  top: 8px; }
+
+/* Fix bug in with input box jumping around when typed on Android */
+#jqt ul li {
+  -webkit-transform: none;
+  position: relative; }
+  #jqt ul li a {
+    -webkit-transform: none; }
