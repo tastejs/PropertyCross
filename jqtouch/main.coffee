@@ -3,7 +3,6 @@ define ["lib/zepto", "lib/knockout", "cs!viewModel/ApplicationViewModel"], ($, k
         # Workaround for broken back button style - as suggested by @dhull on github.. 
         $(".back").removeClass("back").addClass "cancel"
     ko.applyBindings new AppVM()
-
+        
     # if running in phonegap - hide splashscreen when ready (for ios only)..
-    if /\/www\//.test location
-        document.addEventListener "deviceready", (-> navigator.splashscreen?.hide()), false
+    document.addEventListener "deviceready", (-> navigator.splashscreen?.hide()), false

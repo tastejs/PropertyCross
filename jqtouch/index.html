@@ -8,6 +8,7 @@
         <title>Property Finder</title>
 
         <script>
+             //Import stylesheets for platform..
             (function () {
                 function importStyleSheet(url) {
                     document.write('<style type="text/css">@import "' + url + '";</style>');
@@ -17,6 +18,8 @@
                 importStyleSheet("style/css/app.css");
             }());
         </script>
+        <!-- noop when running on browser -->
+        <script type="text/javascript" charset="utf-8" src="cordova-2.2.0.js"></script>
         <script data-main="cs!main" src="lib/require.js"></script>
     </head>
     <body>
