@@ -17,8 +17,9 @@ Supported Operating Systems
 ===========================
 * iOS 4.0 or greater (iPhone, iPod Touch, iPad)
 * Android 2.1 and greater
-* Blackberry
-* Windows CE and Windows 7 (soon on Windows 8)
+* BlackBerry 4.6, 4.7, 5.0, 6.0, 7.0
+* Windows Mobile 6.x Professional, 6.0 Standard, Windows CE 6 (soon on Windows 8)
+* Latest Windows Phone 7 devices
 
 The Advantages of Rhodes
 ========================
