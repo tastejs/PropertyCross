@@ -5,7 +5,7 @@ These QR codes are provided as a convenience for loading the apps directly onto 
 ### Android
 
 * jqtouch
-![jqtouch/android](https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=http://build.phonegap.com/apps/278057/install/?qr_key=GmmkcevXQWz1fHwCa1Lv&chld=L|1&choe=UTF-8)
+![jqtouch/android](https://chart.googleapis.com/chart?chs=220x220&cht=qr&chl=http://build.phonegap.com/apps/278057/install/?qr_key=GmmkcevXQWz1fHwCa1Lv&chld=L|1&choe=UTF-8)
 
 * jquerymobile
 ![jquerymobile/android](https://chart.googleapis.com/chart?cht=qr&chs=300x300&chl=https://github.com/downloads/ColinEberhardt/PropertyFinderCrossPlatform/PropertyCross-jquerymobile.apk)
@@ -24,7 +24,7 @@ These QR codes are provided as a convenience for loading the apps directly onto 
 These links will unfortunately only work for our test devices, you will need to build the projects with your own developer certificate and provisioning profile.
 
 * jqtouch
-![jqtouch/ios](https://chart.googleapis.com/chart?chs=400x400&cht=qr&chl=http://build.phonegap.com/apps/278057/install/?qr_key=GmmkcevXQWz1fHwCa1Lv&chld=L|1&choe=UTF-8)
+![jqtouch/ios](https://chart.googleapis.com/chart?chs=260x260&cht=qr&chl=http://build.phonegap.com/apps/278057/install/?qr_key=GmmkcevXQWz1fHwCa1Lv&chld=L|1&choe=UTF-8)
 
 * jquerymobile
 ![titanium/ios](https://chart.googleapis.com/chart?cht=qr&chs=400x400&chl=itms-services%3A%2F%2F%3Faction%3Ddownload-manifest%26url%3Dhttp%253A%252F%252Fplist-gen.appspot.com%252Fplist.jsp%253Furl%253Dhttps%25253A%25252F%25252Fgithub.com%25252Fdownloads%25252FColinEberhardt%25252FPropertyFinderCrossPlatform%25252FPropertyCross-jquerymobile.ipa%2526id%253Dcom.propertycross.jquerymobile.ios%2526ver%253D1.0.0%2526title%253DPropertyCross)
