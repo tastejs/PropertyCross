@@ -9,7 +9,7 @@ jQTouch provides a structure on which to base the HTML, the majority of the appl
 * [RequireJS](http://requirejs.org/) - a JavaScript file and module loader.
 * [PhoneGap](http://phonegap.com/) - used to wrap the code so that it can be installed as a native application.
 
-To aid the development process, this project makes use of (CoffeeScript)[http://coffeescript.org/] and (Sass)[http://sass-lang.com/) over JavaScript and CSS respectively.
+To aid the development process, this project makes use of [CoffeeScript](http://coffeescript.org/) and [Sass](http://sass-lang.com/) over JavaScript and CSS respectively.
 
 Building the Application
 ========================
