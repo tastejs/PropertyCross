@@ -17,7 +17,6 @@ import com.propertycross.android.events.UIEvent;
 import com.propertycross.android.model.JsonWebPropertySearch;
 import com.propertycross.android.model.Location;
 import com.propertycross.android.model.PropertyDataSource;
-import com.propertycross.android.presenter.IGeoLocationService;
 import com.propertycross.android.presenter.IMarshalInvokeService;
 import com.propertycross.android.presenter.PropertyFinderPersistentState;
 import com.propertycross.android.presenter.PropertyFinderPresenter;
@@ -39,7 +38,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class PropertyFinderView extends SherlockActivity implements PropertyFinderPresenter.View {
@@ -49,10 +47,8 @@ public class PropertyFinderView extends SherlockActivity implements PropertyFind
 	private Button myLocationButton;
 	private Button startSearchButton;
 	private TextView messageText;
-	private ProgressBar progress;
 	private ListView recentSearchList;
 	private RecentSearchAdapter adapter;
-	private View mainView;
 	private Callback<UIEvent> searchButtonClickedCallback;
 	private Callback<SearchTextChangedEvent> searchTextChangedCallback;
 	private Callback<UIEvent> myLocationClickedCallback;
@@ -134,12 +130,7 @@ public class PropertyFinderView extends SherlockActivity implements PropertyFind
 							new RecentSearchSelectedEvent(this, new RecentSearchSelectedEventArgs(item)));
 				}
 			  }
-		}); 
-		
-		progress = (ProgressBar) findViewById(R.id.progress);
-		progress.setVisibility(View.INVISIBLE);
-		
-		mainView = findViewById(R.id.propview);
+		});
 		
 		presenter = new PropertyFinderPresenter(
 				state,
@@ -198,11 +189,15 @@ public class PropertyFinderView extends SherlockActivity implements PropertyFind
 
 	@Override
 	public void setIsLoading(boolean isLoading) {
+		if (isLoading) {
+			messageText.setText(R.string.searching);
+		}
+		else {
+			messageText.setText(null);
+		}
 		searchText.setEnabled(!isLoading);
 		myLocationButton.setEnabled(!isLoading);
 		startSearchButton.setEnabled(!isLoading);
-		progress.setVisibility(isLoading ? View.VISIBLE : View.INVISIBLE);
-		mainView.setVisibility(!isLoading ? View.VISIBLE : View.INVISIBLE);
 	}
 
 	@Override

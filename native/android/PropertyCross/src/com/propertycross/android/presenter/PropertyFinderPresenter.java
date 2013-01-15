@@ -126,7 +126,6 @@ public class PropertyFinderPresenter {
 
 	private void searchForProperties() {
 		view.setIsLoading(true);
-		view.setMessage(null);
 		searchItem.findProperties(propertyDataSource, 1,
 				new Callback<PropertyDataSourceResult>() {
 
