@@ -11,6 +11,11 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
+        /* make space for large title */
+        .toolbar > h1 {
+            width: 200px;
+            margin: 1px 0 0 -100px;
+        }
     }
     ul.listings  {
         li.listing a {

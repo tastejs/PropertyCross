@@ -1,11 +1,16 @@
 /* Custom App Styling */
-#jqt #home .intro {
-  margin: 10px; }
-#jqt #home .searchTerm {
-  display: inline-block;
-  max-width: 60%;
-  overflow: hidden;
-  text-overflow: ellipsis; }
+#jqt #home {
+  /* make space for large title */ }
+  #jqt #home .intro {
+    margin: 10px; }
+  #jqt #home .searchTerm {
+    display: inline-block;
+    max-width: 60%;
+    overflow: hidden;
+    text-overflow: ellipsis; }
+  #jqt #home .toolbar > h1 {
+    width: 200px;
+    margin: 1px 0 0 -100px; }
 #jqt ul.listings li.listing a {
   display: -webkit-box;
   width: 100%; }
