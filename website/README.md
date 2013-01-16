@@ -16,3 +16,5 @@ To push the website folder to the gh-pages branch -
 ```
 
 The push will need to be forced as it won't be a fast forward commit (we're throwing away all history).
+
+The downloads are hosted separately on AWS S3, ask [chrisprice](http://github.com/chrisprice) if you need them updating. Following the initial upload of files (which are suffixed with -initial), subsequent uploads should be suffixed with the SHA1 hash of the commit from which they are generated.
