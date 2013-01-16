@@ -19,6 +19,7 @@ contributors:
   hash: b6fe36176ec7c9475374a5cd3b7bef1a
 downloads:
   android: https://s3-eu-west-1.amazonaws.com/propertycross/PropertyCross-jquerymobile-initial.apk
+  windowsphone: https://s3-eu-west-1.amazonaws.com/propertycross/PropertyCross-jquerymobile-initial.xap
 ---
 [jQuery Mobile](http://jquerymobile.com) is a HTML5 framework which makes it easy to create websites that mimic the iOS look and feel. This is achieved by providing HTML that is marked up with various jQuery Mobile specific attributes, which is then processed to generate the final markup. Within PropertyCross jQuery Mobile is combined with [KnockoutJS](http://knockoutjs.com/), which provides a presentation model (MVVM), [RequireJS](http://requirejs.org/), for dependency management, and [Cordova / PhoneGap](http://phonegap.com/), which packages the HTML / JavaScript within a native wrapper for app-store deployment. Cordova also provides a set of APIs for accessing native phone functionalities which are not available via HTML specifications.
 
