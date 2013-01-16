@@ -5,7 +5,7 @@ The website is hosted using the GitHub Pages feature, a rebased squashed version
 To rebuild the less run -
 ```
 website> npm install -g less
-website> lessc less/main.less > less/main.css
+website> lessc --yui-compress less/main.less > less/main.css
 website> git commit -a -m "Update compiled css"
 ```
 
