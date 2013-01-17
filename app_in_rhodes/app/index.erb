@@ -1,0 +1,30 @@
+<div data-role="page" data-url="<%= Rho::RhoConfig.start_path %>/" data-theme="b">
+
+  <div data-role="header" data-position="inline" data-theme="b">
+    <h1>PropertyCross</h1>
+    <a href="<%= url_for :controller => :PropertyCross, :action => :favourities_list %>" class="ui-btn-right" data-icon="grid">Fave</a>
+  </div>
+
+  <div data-role="content">
+    <p>Use the form below to search for houses to buy. You can search by place-name, postcode, or click 'My location', to search in your current location</p>
+    <input type="search" id='search_field'/>
+    <button data-inline="true" type="submit" id="go"> Go </button>
+    <button data-inline="true" id='my_location'> My location </button>
+
+    <div id="Searching_label"> Searching... </div>
+
+    <div id="error_message"> </div>
+
+    <div id="recent_search">
+      <div id="recent_search_list"></div>
+    </div>
+
+  </div>
+
+  <script type='text/javascript'>
+    $(document).ready(function(){
+      var jqxhr = $.post("/app/PropertyCross/recent_search_list",function(){});
+    });
+  </script>
+
+</div>

@@ -1,0 +1,31 @@
+<div data-role="page" data-url="<%= Rho::RhoConfig.start_path %>/" data-theme="b">
+
+  <div data-role="header" data-position="inline" data-theme="b">
+    <h1> <span class='number_of_li'> </span> of  <%= @params['total_results'] %> matches</h1>
+    <a href="" class="ui-btn-left" data-icon="arrow-l" data-rel="back">Back</a>
+  </div>
+
+  <div data-role="content" data-theme="c">
+    <ul data-role="listview" data-split-icon="arrow-r" data-split-theme="d" style='margin:0px;' id="search_view_results">
+      <% @listings.each do |list| %>
+        <li>
+          <a href="<%= url_for :action => :property_view, :controller => :PropertyCross, :query => {:object => list.object} %>">
+            <img src="<%= list.img_url%>" />
+            <h3> £ <%= thousand_separator(list.price) %></h3>
+            <p><%= list.title %></p>
+          </a>
+        </li>
+      <% end %>
+      <li id='total_number_of_property'>
+        <a href="#">
+          <h3>Load more ...</h3>
+          <p>
+            Results for <span id='long_title'>  <%= Rho::RhoSupport.url_decode(@params["location"]) %> </span>, showing
+            <span class='number_of_li'> </span> of  <span id='total_results'> <%= @params['total_results'] %> </span> properties
+          </p>
+        </a>
+      </li>
+    </ul>
+  </div>
+  
+</div>

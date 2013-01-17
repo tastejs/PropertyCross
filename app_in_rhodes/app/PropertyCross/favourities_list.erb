@@ -1,0 +1,22 @@
+<div data-role="page" data-theme="b">
+
+  <div data-role="header" data-position="inline" data-theme="b">
+    <h1> Favourities </h1>
+    <a href="" class="ui-btn-left" data-icon="arrow-l" data-rel="back">Back</a>
+  </div>
+
+  <div data-role="content" data-theme="c">
+    <ul data-role="listview" data-split-icon="arrow-r" data-split-theme="d" style='margin:0px;' id="search_view_results">
+      <% @favourities_list.each do |list| %>
+        <li>
+          <a href="<%= url_for :action => :favourite_property_view, :controller => :PropertyCross, :query => {:guid => list.guid} %>">
+            <img src="<%= list.img_url%>" />
+            <h3> £ <%= thousand_separator(list.price) %></h3>
+            <p><%= list.title %></p>
+          </a>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+    
+</div>
