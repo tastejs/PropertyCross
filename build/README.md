@@ -1,8 +1,6 @@
-[Node](http://nodejs.org) and [npm](https://npmjs.org/) are pre-requisites of all of these processes. Before trying to run any make sure you've run -
+[Node](http://nodejs.org) and [npm](https://npmjs.org/) are pre-requisites of all of these processes. Before trying to run any of the build scripts you need to download and install the various dependencies. The easiest way to do this is to run `npm install` from the build folder:
 ```
-[/build]> npm install magician
-[/build]> npm install async
-[/build]> npm install mustache
+[/build]> npm install
 ```
 
 This will install the required packages.
