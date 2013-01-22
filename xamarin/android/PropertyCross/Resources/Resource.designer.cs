@@ -765,17 +765,17 @@ namespace com.propertycross.xamarin.android
 			// aapt resource value: 0x7f040009
 			public const int disableHome = 2130968585;
 			
-			// aapt resource value: 0x7f040034
-			public const int do_search = 2130968628;
+			// aapt resource value: 0x7f040033
+			public const int do_search = 2130968627;
+			
+			// aapt resource value: 0x7f04003a
+			public const int favourites_add_item = 2130968634;
 			
 			// aapt resource value: 0x7f04003b
-			public const int favourites_add_item = 2130968635;
+			public const int favourites_remove_item = 2130968635;
 			
 			// aapt resource value: 0x7f04003c
-			public const int favourites_remove_item = 2130968636;
-			
-			// aapt resource value: 0x7f04003d
-			public const int favourites_view_item = 2130968637;
+			public const int favourites_view_item = 2130968636;
 			
 			// aapt resource value: 0x7f040006
 			public const int homeAsUp = 2130968582;
@@ -783,14 +783,11 @@ namespace com.propertycross.xamarin.android
 			// aapt resource value: 0x7f040002
 			public const int listMode = 2130968578;
 			
-			// aapt resource value: 0x7f040036
-			public const int mainview_message = 2130968630;
+			// aapt resource value: 0x7f040035
+			public const int mainview_message = 2130968629;
 			
 			// aapt resource value: 0x7f040001
 			public const int normal = 2130968577;
-			
-			// aapt resource value: 0x7f040031
-			public const int progress = 2130968625;
 			
 			// aapt resource value: 0x7f04002e
 			public const int property_image = 2130968622;
@@ -816,26 +813,26 @@ namespace com.propertycross.xamarin.android
 			// aapt resource value: 0x7f040029
 			public const int property_thumb = 2130968617;
 			
-			// aapt resource value: 0x7f040032
-			public const int propview = 2130968626;
-			
-			// aapt resource value: 0x7f04003a
-			public const int recent_search_count = 2130968634;
+			// aapt resource value: 0x7f040031
+			public const int propview = 2130968625;
 			
 			// aapt resource value: 0x7f040039
-			public const int recent_search_text = 2130968633;
-			
-			// aapt resource value: 0x7f040037
-			public const int recentsearches_header = 2130968631;
+			public const int recent_search_count = 2130968633;
 			
 			// aapt resource value: 0x7f040038
-			public const int recentsearches_list = 2130968632;
+			public const int recent_search_text = 2130968632;
+			
+			// aapt resource value: 0x7f040036
+			public const int recentsearches_header = 2130968630;
+			
+			// aapt resource value: 0x7f040037
+			public const int recentsearches_list = 2130968631;
 			
 			// aapt resource value: 0x7f040028
 			public const int result_details = 2130968616;
 			
-			// aapt resource value: 0x7f040033
-			public const int search = 2130968627;
+			// aapt resource value: 0x7f040032
+			public const int search = 2130968626;
 			
 			// aapt resource value: 0x7f040008
 			public const int showCustom = 2130968584;
@@ -855,8 +852,8 @@ namespace com.propertycross.xamarin.android
 			// aapt resource value: 0x7f040004
 			public const int useLogo = 2130968580;
 			
-			// aapt resource value: 0x7f040035
-			public const int use_location = 2130968629;
+			// aapt resource value: 0x7f040034
+			public const int use_location = 2130968628;
 			
 			// aapt resource value: 0x7f040000
 			public const int wrap_content = 2130968576;
@@ -1057,6 +1054,9 @@ namespace com.propertycross.xamarin.android
 			
 			// aapt resource value: 0x7f09000b
 			public const int search_description = 2131296267;
+			
+			// aapt resource value: 0x7f09001b
+			public const int searching = 2131296283;
 			
 			// aapt resource value: 0x7f090015
 			public const int tap_load_more = 2131296277;

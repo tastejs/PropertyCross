@@ -34,8 +34,6 @@ namespace com.propertycross.xamarin.android.Views
 		private TextView messageText;
 		private ListView recentSearchList;
 		private RecentSearchAdapter adapter;
-		private View mainView;
-		private ProgressBar progress;
 		private GeoLocationService geoLocationService;
 
 		protected override void OnCreate (Bundle bundle)
@@ -67,10 +65,6 @@ namespace com.propertycross.xamarin.android.Views
 			recentSearchList.ItemClick += RecentSearchItem_Clicked;
 			adapter = new RecentSearchAdapter(this, new List<RecentSearch>());
 			recentSearchList.Adapter = adapter;
-
-			progress = (ProgressBar) FindViewById(Resource.Id.progress);
-			progress.Visibility = ViewStates.Invisible;
-			mainView = FindViewById(Resource.Id.propview);
 
 			presenter = 
 				new PropertyFinderPresenter(state,
@@ -120,7 +114,11 @@ namespace com.propertycross.xamarin.android.Views
 
 		public void SetMessage(string msg)
 		{
-			messageText.Text = msg;
+			// Ignore null messages from the presenter.
+			if (msg != null)
+			{
+				messageText.Text = msg;
+			}
 		}
 
 		public void DisplaySuggestedLocations (List<PropertyFinder.Model.Location> locations)
@@ -143,8 +141,16 @@ namespace com.propertycross.xamarin.android.Views
 				searchText.Enabled = !value;
 				myLocationButton.Enabled = !value;
 				startSearchButton.Enabled = !value;
-				progress.Visibility = value ? ViewStates.Visible : ViewStates.Invisible;
-				mainView.Visibility = !value ? ViewStates.Visible : ViewStates.Invisible;
+
+				if (value)
+				{
+					messageText.Text = Resources.GetString(Resource.String.searching);
+				}
+				else
+				{
+					// Explicitly clear the message in the view.
+					messageText.Text = null;
+				}
 			}
 		}
 
