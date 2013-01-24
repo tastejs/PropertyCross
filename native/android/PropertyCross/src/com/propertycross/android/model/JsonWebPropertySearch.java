@@ -93,7 +93,7 @@ public class JsonWebPropertySearch implements IJsonPropertySearch {
 				builder.append(line);
 			}
 			
-			marshal.Invoke(new Callback<Void>() {
+			marshal.invoke(new Callback<Void>() {
 
 				@Override
 				public void complete(Void paramT) {
@@ -103,7 +103,7 @@ public class JsonWebPropertySearch implements IJsonPropertySearch {
 			
 		} catch (final Exception e) {
 			Log.d(TAG, e.getMessage());
-			marshal.Invoke(new Callback<Void>() {
+			marshal.invoke(new Callback<Void>() {
 
 				@Override
 				public void complete(Void paramT) {

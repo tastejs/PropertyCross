@@ -10,7 +10,6 @@ import com.propertycross.android.model.Property;
 import com.propertycross.android.model.PropertyDataSource;
 import com.propertycross.android.model.PropertyDataSourceResult;
 import com.propertycross.android.model.PropertyListingsResult;
-import com.propertycross.android.model.PropertyLocationsResult;
 import com.propertycross.android.presenter.searchitems.SearchItem;
 
 public class SearchResultsPresenter {

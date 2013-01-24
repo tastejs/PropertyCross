@@ -1,5 +1,7 @@
 package com.propertycross.android.presenter.searchitems;
 
+import java.text.DecimalFormat;
+
 import com.propertycross.android.events.Callback;
 import com.propertycross.android.model.PropertyDataSource;
 import com.propertycross.android.model.PropertyDataSourceResult;
@@ -8,17 +10,14 @@ import com.propertycross.android.presenter.GeoLocation;
 public class GeoLocationSearchItem extends SearchItem {
 	private GeoLocation location;
 	private String displayText;
+	private final DecimalFormat df = new DecimalFormat("#.##");
 
 	public GeoLocationSearchItem() {
 	}
 
 	public GeoLocationSearchItem(GeoLocation location) {
 		this.location = location;
-		this.displayText = String.format("{0:F2}, {1:F2}",
-				new Object[] {
-					Double.valueOf(location.getLatitude()),
-					Double.valueOf(location.getLongitude())
-				});
+		this.displayText = df.format(location.getLatitude()) + ", " + df.format(location.getLongitude());
 	}
 
 	public String getDisplayText() {

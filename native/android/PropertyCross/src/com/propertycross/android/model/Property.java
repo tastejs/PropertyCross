@@ -1,5 +1,7 @@
 package com.propertycross.android.model;
 
+import java.util.Locale;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -96,11 +98,11 @@ public class Property {
 	}
 	
 	public String getBedBathroomText() {
-		return String.format("%d bed, %d bathroom", bedrooms, bathrooms); 
+		return String.format(Locale.ENGLISH, "%d bed, %d bathroom", bedrooms, bathrooms); 
 	}
 	
 	public String getFormattedPrice() {
-		return String.format("£%,d", price);
+		return String.format(Locale.ENGLISH, "\u00A3%,d", price);
 	}
 	
 	public String getShortTitle() {

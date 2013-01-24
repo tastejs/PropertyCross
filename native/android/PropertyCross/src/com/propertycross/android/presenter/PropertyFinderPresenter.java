@@ -64,7 +64,7 @@ public class PropertyFinderPresenter {
 			
 			public void complete(SearchTextChangedEvent event) {
 				SearchTextChangedEventArgs args = (SearchTextChangedEventArgs) event.getArguments();
-				if (args.getText() != searchItem.getDisplayText())
+				if (!args.getText().equals(searchItem.getDisplayText()))
 					searchItem = new PlainTextSearchItem(args.getText());
 			}
 		});

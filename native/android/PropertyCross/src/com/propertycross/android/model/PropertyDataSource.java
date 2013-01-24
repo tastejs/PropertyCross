@@ -1,9 +1,7 @@
 package com.propertycross.android.model;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.JSONTokener;
 
 import com.propertycross.android.events.Callback;
 

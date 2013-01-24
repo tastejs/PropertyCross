@@ -13,7 +13,7 @@ public class MarshalInvokeService implements IMarshalInvokeService {
 		this.application = application;
 	}
 
-	public void Invoke(final Callback<Void> action)
+	public void invoke(final Callback<Void> action)
 	{
 		application.currentActivity.runOnUiThread(new Runnable() {
 

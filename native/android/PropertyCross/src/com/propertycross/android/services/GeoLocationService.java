@@ -7,6 +7,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 
 import com.propertycross.android.events.Callback;
 import com.propertycross.android.presenter.GeoLocation;
@@ -20,6 +21,7 @@ public class GeoLocationService implements IGeoLocationService, LocationListener
 	private LocationManager manager;
 	private Callback<GeoLocation> callback;
 	private IMarshalInvokeService marshal;
+	private CountDownTimer timer;
 	
 	public GeoLocationService(LocationManager locationManager, IMarshalInvokeService marshalService) {
 		this.manager = locationManager;
@@ -33,7 +35,7 @@ public class GeoLocationService implements IGeoLocationService, LocationListener
 		c.setAccuracy(Criteria.ACCURACY_FINE);
 		
 		String provider = manager.getBestProvider(c, true);
-		if(provider != null) {
+		if(provider == null) {
 			doCallback(null);
 		}
 		else {
@@ -43,6 +45,28 @@ public class GeoLocationService implements IGeoLocationService, LocationListener
 			}
 			
 			manager.requestLocationUpdates(provider, 1000, 10, this);
+			timer = new CountDownTimer(SEVEN_SECONDS, SEVEN_SECONDS) {
+
+				@Override
+				public void onFinish() {					
+					marshal.invoke(new Callback<Void>() {
+
+						@Override
+						public void complete(Void arg) {
+							unsubscribe();
+							doCallback(null);
+						}
+						
+					});
+				}
+
+				@Override
+				public void onTick(long millisUntilFinished) {
+					// not implemented.
+				}
+				
+			};
+			timer.start();
 		}
 	}
 	
@@ -90,6 +114,9 @@ public class GeoLocationService implements IGeoLocationService, LocationListener
 	public void unsubscribe() {
 		if (manager != null) {
 			manager.removeUpdates(this);
+		}
+		if (timer != null) {
+			timer.cancel();
 		}
 	}
 }
