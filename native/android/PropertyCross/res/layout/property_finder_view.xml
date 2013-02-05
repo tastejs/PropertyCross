@@ -3,8 +3,9 @@
     android:id="@+id/propview"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical"
-    android:layout_margin="16dp">
+    android:layout_gravity="top"
+    android:layout_margin="16dp"
+    android:orientation="vertical" >
 
     <TextView
         android:layout_width="fill_parent"
