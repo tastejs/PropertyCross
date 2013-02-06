@@ -14,11 +14,12 @@ async.series([
     ["titanium"],
     ["jqtouch"],
     ["jquerymobile"],
+    ["mgwt"],
     ["senchatouch2"],
     ["native"],
     ["rhomobile"]
   ]),
-  
+
   generateIcons.bind(null, "assets/icon-base-173x173.png", [
     // ["FRAMEWORK-OVERLAY", "TARGET", WIDTH],
     ["assets/frameworks/air.png", "air/src/com/propertycross/air/assets/icon16x16.png", 16],
@@ -51,6 +52,14 @@ async.series([
     ["assets/frameworks/native.png", "native/android/PropertyCross/res/drawable-ldpi/ic_launcher.png", 36],
     ["assets/frameworks/native.png", "native/android/PropertyCross/res/drawable-mdpi/ic_launcher.png", 48],
     ["assets/frameworks/native.png", "native/android/PropertyCross/res/drawable-xhdpi/ic_launcher.png", 96],
+    ["assets/frameworks/mgwt.png", "mgwt/src/main/webapp/assets/icons/36x36.png", 36],
+    ["assets/frameworks/mgwt.png", "mgwt/src/main/webapp/assets/icons/48x48.png", 48],
+    ["assets/frameworks/mgwt.png", "mgwt/src/main/webapp/assets/icons/72x72.png", 72],
+    ["assets/frameworks/mgwt.png", "mgwt/src/main/webapp/assets/icons/96x96.png", 96],
+    ["assets/frameworks/mgwt.png", "mgwt/src/main/webapp/assets/icons/icon-57.png", 57],
+    ["assets/frameworks/mgwt.png", "mgwt/src/main/webapp/assets/icons/icon-72.png", 72],
+    ["assets/frameworks/mgwt.png", "mgwt/src/main/webapp/assets/icons/icon-57-2x.png", 114],
+    ["assets/frameworks/mgwt.png", "mgwt/src/main/webapp/assets/icons/icon-72-2x.png", 144],
     ["assets/frameworks/native.png", "native/ios/Icon.png", 57],
     ["assets/frameworks/native.png", "native/ios/Icon@2x.png", 114],
     ["assets/frameworks/native.png", "native/ios/Property Finder/Icon.png", 57],
@@ -87,6 +96,12 @@ async.series([
     ["jquerymobile/assets/splashscreens/screen-iphone-portrait.png", 320, 480],
     ["jquerymobile/assets/splashscreens/screen-iphone-portrait-2x.png", 640, 960],
     ["jquerymobile/assets/splashscreens/SplashScreenImage.jpg", 480, 800],
+    ["mgwt/src/main/webapp/assets/splashscreens/200x320.png", 200, 320],
+    ["mgwt/src/main/webapp/assets/splashscreens/320x480.png", 320, 480],
+    ["mgwt/src/main/webapp/assets/splashscreens/480x800.png", 480, 800],
+    ["mgwt/src/main/webapp/assets/splashscreens/720x1280.png", 720, 1280],
+    ["mgwt/src/main/webapp/assets/splashscreens/screen-iphone-portrait.png", 320, 480],
+    ["mgwt/src/main/webapp/assets/splashscreens/screen-iphone-portrait-2x.png", 640, 960],
     ["rhomobile/app/loading.png",320, 480],
     ["rhomobile/app/loading@2x.png", 640, 960],
     ["rhomobile/app/loading-568h@2x.png", 640, 1136],
@@ -121,7 +136,7 @@ async.series([
     ["native/android/PropertyCross/res/drawable-mdpi/actionbar_tile.png", 6],
     ["xamarin/android/PropertyCross/Resources/drawable-mdpi/actionbar_tile.png", 6]
   ])
-  
+
 ], function(err) {
   if (err) {
     console.error(err);
@@ -132,8 +147,8 @@ function generateFrameworkLogos(background, mask, foreground, icons, callback) {
   async.forEachLimit(icons, CONCURRENCY_LIMIT, function(config, callback) {
     var maskedImage = "website/framework-icons/" + config[0] + "-masked-temp.png",
           withBackground = "website/framework-icons/" + config[0] + "-with-background-temp.png",
-          complete = "website/framework-icons/" + config[0] + "-complete.png";    
-            
+          complete = "website/framework-icons/" + config[0] + "-complete.png";
+
     async.series([
       function(callback) {
         // mask the logo
@@ -177,7 +192,7 @@ function generateFrameworkLogos(background, mask, foreground, icons, callback) {
         fs.unlink(withBackground, callback)
       }
     ], callback);
-    
+
   }, callback);
 }
 
