@@ -6,24 +6,12 @@
 /Xamarin/WindowsPhone/PropertyFinder/obj
 /Xamarin/WindowsPhone/PropertyFinder/obj
 /Xamarin/WindowsPhone/PropertyFinder/Bin
-/Native/WindowsPhone/PropertyFinder/obj
-/Native/WindowsPhone/PropertyFinder/Bin
 *.xcuserstate
 *.xcbkptlist
-.*
 
 /Xamarin/WindowsPhone/packages/SilverlightToolkitWP.4.2012.10.9
 /Xamarin/WindowsPhone/packages/Newtonsoft.Json.4.5.10
-/Native/WindowsPhone/packages/SilverlightToolkitWP.4.2012.10.9
-/Native/WindowsPhone/packages/Newtonsoft.Json.4.5.10
 /Xamarin/WindowsPhone/PropertyFinder/Toolkit.Content
-/Native/WindowsPhone/PropertyFinder/Toolkit.Content
-/Native/WindowsPhone/*.suo
-/Native/WindowsPhone/PropertyCross/PropertyCross.csproj.user
-/native/android/PropertyCross/bin
-/native/android/PropertyCross/proguard-project.txt
-/native/android/PropertyCross/project.properties
-/native/android/ActionBarSherlock
-/native/android/PropertyCross/gen/com/ActionBarSherlock
 
-node_modules/rhomobile/bin
+node_modules
+/rhomobile/bin
