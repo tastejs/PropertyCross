@@ -23,16 +23,11 @@ public class OrderedSearchesManagerTest {
     @Before
     public void cache() throws Throwable
     {
-        cache = new OrderedSearchesManager(storage, 3);
-    }
-
-    @Before
-    public void storage() throws Throwable
-    {
         Queue<Search> queue = new LinkedList<Search>();
         queue.add(new Search("locA", 1));
         queue.add(new Search("locB", 2));
         when(storage.load()).thenReturn(queue);
+        cache = new OrderedSearchesManager(storage, 3);
     }
 
     @Test

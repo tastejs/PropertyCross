@@ -19,18 +19,13 @@ public class OrderedPropertiesManagerTest {
     @Before
     public void cache() throws Throwable
     {
-        cache = new OrderedPropertiesManager(storage);
-    }
-
-    @Before
-    public void storage() throws Throwable
-    {
         List<Property> queue = new ArrayList<Property>();
         queue.add(new Property("0", "t0", "p0", "bd0", "bt0",
                 "ty0", "i0", "s0"));
         queue.add(new Property("1", "t1", "p1", "bd1", "bt1",
                 "ty1", "i1", "s1"));
         when(storage.favourites()).thenReturn(queue);
+        cache = new OrderedPropertiesManager(storage);
     }
 
     @Test
