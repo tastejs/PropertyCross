@@ -127,7 +127,7 @@ function generateFrameworkLogos(background, mask, foreground, icons, callback) {
       function(callback) {
         // mask the logo
         renderAndExec(
-            "convert    {{{icon}}}  {{{mask}}} -alpha Off  -compose CopyOpacity -composite png32:{{{result}}}",
+            "convert    \"{{{icon}}}\"  \"{{{mask}}}\" -alpha Off  -compose CopyOpacity -composite png32:\"{{{result}}}\"",
             {
               icon: "assets/framework-icons/" + config[0] + ".png",
               mask: mask,
@@ -138,7 +138,7 @@ function generateFrameworkLogos(background, mask, foreground, icons, callback) {
       function(callback) {
         // compose with background
         renderAndExec(
-            "convert   {{{background}}} {{{overlay}}} -composite png32:{{{result}}}",
+            "convert   \"{{{background}}}\" \"{{{overlay}}}\" -composite png32:\"{{{result}}}\"",
             {
               background: background,
               overlay: maskedImage,
@@ -149,7 +149,7 @@ function generateFrameworkLogos(background, mask, foreground, icons, callback) {
       function(callback) {
         // compose with foreground
         renderAndExec(
-            "convert   {{{background}}} {{{overlay}}} -composite -define png:exclude-chunks=date png32:{{{result}}}",
+            "convert   \"{{{background}}}\" \"{{{overlay}}}\" -composite -define png:exclude-chunks=date png32:\"{{{result}}}\"",
             {
               background: withBackground,
               overlay: foreground,
@@ -173,7 +173,7 @@ function generateFrameworkLogos(background, mask, foreground, icons, callback) {
 function generateIcons(background, icons, callback) {
   async.forEachLimit(icons, CONCURRENCY_LIMIT, function(config, callback) {
     renderAndExec(
-        "convert {{{background}}} {{{overlay}}} -composite -resize {{{width}}}x{{{height}}}! -define png:exclude-chunks=date  png32:{{{result}}}",
+        "convert \"{{{background}}}\" \"{{{overlay}}}\" -composite -resize {{{width}}}x{{{height}}}! -define png:exclude-chunks=date  png32:\"{{{result}}}\"",
         {
           background: background,
           overlay: config[0],
@@ -188,7 +188,7 @@ function generateIcons(background, icons, callback) {
 function generateOther(source, config, callback) {
   async.forEachLimit(config, CONCURRENCY_LIMIT, function(config, callback) {
     renderAndExec(
-        "convert {{{source}}} -resize {{{width}}}x{{{height}}}! -define png:exclude-chunks=date  png32:{{{result}}}",
+        "convert \"{{{source}}}\" -resize {{{width}}}x{{{height}}}! -define png:exclude-chunks=date  png32:\"{{{result}}}\"",
         {
           source: source,
           width: config[1],
@@ -204,7 +204,7 @@ function generateSplashscreens(source, splashscreens, callback) {
     var width = config[1], height = config[2];
     var nominalHeight = height / width * 640;
     renderAndExec(
-        "convert -size {{{nominalWidth}}}x{{{nominalHeight}}} canvas:black {{{source}}} -geometry +0+{{{offset}}} -composite -resize {{{width}}}x{{{height}}}! -define png:exclude-chunks=date  {{{result}}}",
+        "convert -size {{{nominalWidth}}}x{{{nominalHeight}}} canvas:black \"{{{source}}}\" -geometry +0+{{{offset}}} -composite -resize {{{width}}}x{{{height}}}! -define png:exclude-chunks=date  \"{{{result}}}\"",
         {
           nominalWidth: 640,
           nominalHeight: nominalHeight,
