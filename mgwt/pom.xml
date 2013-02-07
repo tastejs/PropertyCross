@@ -13,6 +13,7 @@
         <gwtversion>2.5.0</gwtversion>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <gwt.test.mode>htmlunit</gwt.test.mode>
+        <netbeans.hint.deploy.server>Tomcat</netbeans.hint.deploy.server>
     </properties>
 
     <build>
