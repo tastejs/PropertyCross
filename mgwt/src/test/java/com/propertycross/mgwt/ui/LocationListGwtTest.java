@@ -7,10 +7,10 @@ import com.google.gwt.user.client.ui.HasValue;
 import com.google.gwt.user.client.ui.Label;
 import com.googlecode.mgwt.ui.client.widget.CellList;
 import com.googlecode.mgwt.ui.client.widget.celllist.CellSelectedEvent;
-import com.propertycross.mgwt.MgwtTestCase;
+import com.propertycross.mgwt.PropertyCrossTestCase;
 import com.propertycross.mgwt.locations.Location;
 
-public class LocationListGwtTest extends MgwtTestCase {
+public class LocationListGwtTest extends PropertyCrossTestCase {
 
     private List<Location> results = new ArrayList<Location>();
     private HasValue<String> searchBox;

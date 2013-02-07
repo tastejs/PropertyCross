@@ -5,13 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.json.client.*;
-import com.propertycross.mgwt.MgwtTestCase;
+import com.propertycross.mgwt.PropertyCrossTestCase;
 import com.propertycross.mgwt.locations.Location;
 import com.propertycross.mgwt.nestoria.RequestSender.Callback;
 import com.propertycross.mgwt.nestoria.Response.Code;
 import com.propertycross.mgwt.properties.Property;
 
-public class ResponseHandlerGwtTest extends MgwtTestCase {
+public class ResponseHandlerGwtTest extends PropertyCrossTestCase {
 
     private ResponseParser parser = new ResponseHandler();
     private Callback callback;

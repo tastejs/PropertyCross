@@ -5,10 +5,10 @@ import java.util.LinkedList;
 import java.util.List;
 import com.google.gwt.core.shared.GWT;
 import com.googlecode.mgwt.storage.client.Storage;
-import com.propertycross.mgwt.MgwtTestCase;
+import com.propertycross.mgwt.PropertyCrossTestCase;
 import com.propertycross.mgwt.locations.Search;
 
-public class MgwtStorageGwtTest extends MgwtTestCase {
+public class MgwtStorageGwtTest extends PropertyCrossTestCase {
 
     private final String json = "[" +
 		"{\"id\":\"0\", \"title\":\"t0\", \"price\":\"p0\", " +

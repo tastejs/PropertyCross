@@ -7,11 +7,11 @@ import com.google.gwt.user.client.ui.HasValue;
 import com.google.gwt.user.client.ui.Label;
 import com.googlecode.mgwt.ui.client.widget.CellList;
 import com.googlecode.mgwt.ui.client.widget.celllist.CellSelectedEvent;
-import com.propertycross.mgwt.MgwtTestCase;
+import com.propertycross.mgwt.PropertyCrossTestCase;
 import com.propertycross.mgwt.locations.Search;
 import com.propertycross.mgwt.locations.SearchesManager;
 
-public class RecentSearchesListGwtTest extends MgwtTestCase {
+public class RecentSearchesListGwtTest extends PropertyCrossTestCase {
 
     private HasValue<String> searchBox;
     private MockHasWidgets panel = new MockHasWidgets();

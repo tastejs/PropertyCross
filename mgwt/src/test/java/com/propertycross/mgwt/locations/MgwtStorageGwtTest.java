@@ -4,9 +4,9 @@ import java.util.LinkedList;
 import java.util.Queue;
 import com.google.gwt.core.client.GWT;
 import com.googlecode.mgwt.storage.client.Storage;
-import com.propertycross.mgwt.MgwtTestCase;
+import com.propertycross.mgwt.PropertyCrossTestCase;
 
-public class MgwtStorageGwtTest extends MgwtTestCase {
+public class MgwtStorageGwtTest extends PropertyCrossTestCase {
 
     private final String json = "[" +
 		"{\"location\":\"locA\", \"hits\":2}," +
