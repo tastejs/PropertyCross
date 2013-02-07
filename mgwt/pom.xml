@@ -3,11 +3,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.propertycross</groupId>
+	<groupId>com.propertycross.mgwt</groupId>
     <artifactId>mgwt-demo</artifactId>
-    <version>1.0-SNAPSHOT</version>
+	<version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>mgwt-demo</name>
+    <name>Property Cross MGWT Demo</name>
 
     <properties>
         <gwtversion>2.5.0</gwtversion>
@@ -78,6 +78,49 @@
         <outputDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF/classes</outputDirectory>
     </build>
 
+    <profiles>
+        <profile>
+            <id>phonegap-build</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.github.chrisprice</groupId>
+                        <artifactId>phonegap-build-maven-plugin</artifactId>
+                        <version>0.0.4</version>
+                        <executions>
+                            <execution>
+                                <id>phonegap-build</id>
+                                <goals>
+                                    <goal>clean</goal>
+                                    <goal>build</goal>
+                                </goals>
+                                <configuration>
+                                    <keys>com.scottlogic.mobile.certificates:ios-team</keys>
+                                    <platforms>
+                                        <platform>android</platform>
+                                        <platform>ios</platform>
+                                    </platforms>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+            <dependencies>
+                <dependency>
+                    <groupId>com.scottlogic.mobile.certificates</groupId>
+                    <artifactId>ios-team</artifactId>
+                    <version>1.0.1</version>
+                    <type>zip</type>
+                    <scope>provided</scope>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
+
     <dependencies>
         <dependency>
             <groupId>com.googlecode.mgwt</groupId>
@@ -125,10 +168,9 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.propertycross</groupId>
-            <version>1.0-SNAPSHOT</version>
-            <artifactId>easy-mock-wrapper</artifactId>
-            <type>pom</type>
+            <groupId>com.propertycross.mgwt</groupId>
+            <artifactId>easy-gwt-mock</artifactId>
+            <version>e15d9a93fd52</version>
         </dependency>
     </dependencies>
 
