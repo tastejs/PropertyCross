@@ -1,3 +1,14 @@
+## MGWT PropertyCross
+
+This is an implementation of the PropertyCross application using [MGWT](http://www.m-gwt.com/), a mobile extension to [GWT](https://developers.google.com/web-toolkit/) which allows you to write mobile apps in Java with GWT.
+
+MGWT works on all kind of mobile devices that support webkit (like iPhone, iPad, iPod, Android, Blackberry, ...)
+
+* Native support for touchevent the GWT Way
+* Animations built in with GWT MVP
+* lots and lots of widgets
+* specific theme for each plattform (iOS, Android, ...)
+
 ## Build Instructions
 
 * To build this project you'll first need [Maven](http://maven.apache.org/) installed.
