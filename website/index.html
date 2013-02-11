@@ -42,10 +42,7 @@ layout: default
           {% if post.platforms contains 'android' %}
           <img src="{{ site.baseurl }}/images/android-badge.png" alt="{{ site.platforms.android }}" title="{{ site.platforms.android }}"/>
           {% else %}
-          {% comment %} XXX HACK {% endcomment %}
-          {% if post.framework != 'native' %}
           n/a
-          {% endif %}
           {% endif %}
         </td>
         <td>

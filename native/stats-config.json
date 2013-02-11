@@ -4,7 +4,7 @@
     "ios/*.h",
     "ios/*.m"
   ],
-  "Android":[
+  "android":[
 		"android/PropertyCross/src*.java"
 	],
   "windowsphone":{
