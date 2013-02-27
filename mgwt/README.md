@@ -17,6 +17,12 @@ mgwt works on all kind of mobile devices that support webkit (like iPhone, iPad,
 * Then run -
 `mgwt> mvn clean install`
 
+## Eclipse
+
+* Create an 'empty' project pointing it at the directory with the mgwt code
+* Configure => Convert to Maven Project ...
+* Google => Web Toolkit Settings ... - Check the "Use Google Web Toolkit" checkbox
+
 ## Credits
 
 [easy-gwt-mock](http://code.google.com/p/easy-gwt-mock/source/list)

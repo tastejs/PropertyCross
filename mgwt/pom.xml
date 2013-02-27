@@ -167,11 +167,6 @@
             <version>1.3</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>com.propertycross.mgwt</groupId>
-            <artifactId>easy-gwt-mock</artifactId>
-            <version>e15d9a93fd52</version>
-        </dependency>
     </dependencies>
 
 </project>
