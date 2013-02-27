@@ -28,6 +28,25 @@ public interface Response {
 		}
 
 	}
+	
+	public final class AmbiguousLocation implements Response {
+
+		private final List<Location> locations;
+		
+		public AmbiguousLocation(List<Location> location) {
+	    super();
+	    this.locations = location;
+    }
+
+		public List<Location> getLocations() {
+    	return locations;
+    }
+
+		@Override
+    public void process(Callback callback) {
+			callback.onNoLocation(locations);
+    }		
+	}
 
 	public final class ListingsFound implements Response {
 

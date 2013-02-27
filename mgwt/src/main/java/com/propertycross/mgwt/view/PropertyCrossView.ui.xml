@@ -17,5 +17,7 @@
     <p ui:field="isLoadingIndicator">Searching ...</p>
     
     <p ui:field="userMessage"></p>
+    
+    <mgwt-widgets:CellList ui:field="cellList"></mgwt-widgets:CellList>
 	</g:HTMLPanel>
 </ui:UiBinder> 

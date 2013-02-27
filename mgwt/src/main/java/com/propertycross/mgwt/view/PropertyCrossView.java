@@ -1,5 +1,6 @@
 package com.propertycross.mgwt.view;
 
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,13 +18,22 @@ import com.google.gwt.user.client.ui.HTMLPanel;
 import com.googlecode.mgwt.dom.client.event.tap.TapEvent;
 import com.googlecode.mgwt.dom.client.event.tap.TapHandler;
 import com.googlecode.mgwt.ui.client.widget.Button;
+import com.googlecode.mgwt.ui.client.widget.CellList;
 import com.googlecode.mgwt.ui.client.widget.MSearchBox;
+import com.googlecode.mgwt.ui.client.widget.celllist.CellSelectedEvent;
+import com.googlecode.mgwt.ui.client.widget.celllist.CellSelectedHandler;
 
 import com.propertycross.mgwt.activity.PropertyCrossActivity;
 import com.propertycross.mgwt.activity.PropertyCrossActivity.ViewEventHandler;
+import com.propertycross.mgwt.locations.Location;
+import com.propertycross.mgwt.properties.Property;
 
 public class PropertyCrossView extends Composite implements PropertyCrossActivity.View {
 
+	private final LocationCell cell = new LocationCell();
+	
+	private List<Location> locations;
+	
 	private static PropertyCrossViewUiBinder uiBinder = GWT.create(PropertyCrossViewUiBinder.class);
 
 	interface PropertyCrossViewUiBinder extends UiBinder<HTMLPanel, PropertyCrossView> {
@@ -41,11 +51,21 @@ public class PropertyCrossView extends Composite implements PropertyCrossActivit
 	Element userMessage;
 	@UiField
 	Element isLoadingIndicator;
+	@UiField(provided = true)
+	CellList<Location> cellList = new CellList<Location>(cell);
 
 	public PropertyCrossView() {
 		initWidget(uiBinder.createAndBindUi(this));
 		
 		setLoadingIndicatorVisible(false);
+		
+		cellList.addCellSelectedHandler(new CellSelectedHandler() {
+      @Override
+      public void onCellSelected(CellSelectedEvent event) {
+        Location location = locations.get(event.getIndex());
+        eventHandler.locationSelected(location);
+      }
+    });
 
 		goButton.addTapHandler(new TapHandler() {
 			@Override
@@ -87,6 +107,12 @@ public class PropertyCrossView extends Composite implements PropertyCrossActivit
 	@Override
   public void setIsLoading(boolean isLoading) {
 		setLoadingIndicatorVisible(isLoading);
+  }
+
+	@Override
+  public void displaySuggestedLocations(List<Location> locations) {
+		this.locations = locations;
+		cellList.render(locations);
   }
 
 }

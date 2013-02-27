@@ -7,6 +7,8 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.googlecode.mgwt.mvp.client.MGWTAbstractActivity;
 import com.propertycross.mgwt.MgwtAppEntryPoint;
+import com.propertycross.mgwt.activity.searchitem.PlainTextSearchItem;
+import com.propertycross.mgwt.activity.searchitem.SearchItemBase;
 import com.propertycross.mgwt.locations.Location;
 import com.propertycross.mgwt.nestoria.QueryBuilder;
 import com.propertycross.mgwt.nestoria.RequestSender;
@@ -20,7 +22,7 @@ public class PropertyCrossActivity extends MGWTAbstractActivity {
 
 	private String searchText;
 
-	private final RequestSender requestSender = new GwtRequestSender();
+	private SearchItemBase searchItem;
 	
 	private final PropertyCrossPage page = new PropertyCrossPage();
 	
@@ -37,12 +39,19 @@ public class PropertyCrossActivity extends MGWTAbstractActivity {
 		 * Sets whether to display a loading indicator
 		 */
 		void setIsLoading(boolean isLoading);
+		
+		/**
+		 * Displays a list of suggested locations when the user supplies a plain-text search.
+		 */
+		void displaySuggestedLocations(List<Location> locations);
 	}
 
 	public interface ViewEventHandler {
 		void searchButtonClicked();
 
 		void searchTextChanged(String searchText);
+		
+		void locationSelected(Location location);
 	}
 	
 	private final ViewEventHandler viewEventHandler = new ViewEventHandler() {
@@ -54,8 +63,14 @@ public class PropertyCrossActivity extends MGWTAbstractActivity {
 
 		@Override
 		public void searchTextChanged(String newSearchText) {
-			searchText = newSearchText;
+			searchItem = new PlainTextSearchItem(newSearchText);
 		}
+
+		@Override
+    public void locationSelected(Location location) {
+			searchItem = new PlainTextSearchItem(location.getDisplayName(), location.getName());
+			searchForProperties();
+    }
 	};
 
 	@Override
@@ -70,9 +85,7 @@ public class PropertyCrossActivity extends MGWTAbstractActivity {
 		view.setIsLoading(true);
   	view.setMessage("");
   	
-  	QueryBuilder q = new QueryBuilder(requestSender);
-    q.setPlaceName(searchText);
-    q.doQuery(new QueryCallback());
+  	searchItem.doQuery(new QueryCallback());
   }
 
 	private final class QueryCallback implements RequestSender.Callback {
@@ -95,7 +108,7 @@ public class PropertyCrossActivity extends MGWTAbstractActivity {
 
 		@Override
 		public void onNoLocation(List<Location> suggested) {
-			Window.alert("no location");
+			view.displaySuggestedLocations(suggested);
 		}
 
 		@Override

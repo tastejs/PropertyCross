@@ -26,7 +26,7 @@ final class ResponseHandler implements ResponseParser {
             case UNAMIBIGUOUS:
             case BEST_GUESS:
             case LARGE:
-                List<Property> results = parseResults(json);
+                List<Property> results = parsePropertyListings(json);
                 return new Response.ListingsFound(
                     results,
                     locs.get(0),
@@ -34,6 +34,9 @@ final class ResponseHandler implements ResponseParser {
                     toInt(json, "total_results", results.size()),
                     toInt(json, "total_pages", 0)                    
                 );
+            case AMBIGUOUS:
+            case MISSPELLED:
+            		return new Response.AmbiguousLocation(locs);
             default:
                 return new Response.NoLocation(locs);
         }
@@ -67,7 +70,7 @@ final class ResponseHandler implements ResponseParser {
         return Integer.parseInt(val.isString().stringValue());
     }
 
-    private List<Property> parseResults(JSONObject json) throws ParseException
+    private List<Property> parsePropertyListings(JSONObject json) throws ParseException
     {
         JSONArray arr = json.get("listings").isArray();
         List<Property> list = new ArrayList<Property>(arr.size());

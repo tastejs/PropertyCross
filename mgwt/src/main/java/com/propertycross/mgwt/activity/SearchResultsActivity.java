@@ -30,6 +30,7 @@ public class SearchResultsActivity extends MGWTAbstractActivity {
 	public interface View extends AbstractView<ViewEventHandler> {
 		void setSearchResult(int totalResult, int pageNumber, int totalPages, List<Property> properties,
 		    String searchLocation);
+		
 	}
 
 	public interface ViewEventHandler {
