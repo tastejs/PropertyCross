@@ -8,12 +8,10 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.web.bindery.event.shared.SimpleEventBus;
 import com.googlecode.mgwt.mvp.client.AnimatableDisplay;
 import com.googlecode.mgwt.mvp.client.AnimatingActivityManager;
-import com.googlecode.mgwt.mvp.client.Animation;
 import com.googlecode.mgwt.mvp.client.history.MGWTPlaceHistoryHandler;
 import com.googlecode.mgwt.storage.client.LocalStorageGwtImpl;
 import com.googlecode.mgwt.storage.client.Storage;
@@ -21,11 +19,6 @@ import com.googlecode.mgwt.ui.client.MGWT;
 import com.googlecode.mgwt.ui.client.MGWTSettings;
 import com.googlecode.mgwt.ui.client.MGWTSettings.ViewPort;
 import com.googlecode.mgwt.ui.client.MGWTSettings.ViewPort.DENSITY;
-import com.googlecode.mgwt.ui.client.animation.AnimationHelper;
-import com.googlecode.mgwt.ui.client.widget.Button;
-import com.googlecode.mgwt.ui.client.widget.LayoutPanel;
-import com.propertycross.mgwt.environment.Environment;
-import com.propertycross.mgwt.environment.EnvironmentLookup;
 import com.propertycross.mgwt.locations.OrderedSearchesManager;
 import com.propertycross.mgwt.locations.SearchesManager;
 import com.propertycross.mgwt.nestoria.RequestSender;
@@ -45,37 +38,11 @@ public class MgwtAppEntryPoint implements EntryPoint {
     public static PlaceController placeController;
     private static AnimatableDisplay animatableDisplay;
 
-   // @Override
-    public void onModuleLoad2()
-    {
-   // set viewport and other settings for mobile
-      MGWT.applySettings(MGWTSettings.getAppSetting());
-
-      // build animation helper and attach it
-      AnimationHelper animationHelper = new AnimationHelper();
-      RootPanel.get().add(animationHelper);
-
-      // build some UI
-      LayoutPanel layoutPanel = new LayoutPanel();
-      Button button = new Button("Hello mgwt");
-      layoutPanel.add(button);
-
-      // animate
-      animationHelper.goTo(layoutPanel, Animation.SLIDE);
-    }
     
     @Override
     public void onModuleLoad()
     {
-        setExceptionHandler();
-
-        Environment env = new EnvironmentLookup(favourites).detect();
-
-       /* Window.setTitle(env.appName());
-
-        Navigation nav = env.createNavigator();
-
-        nav.goTo(new MainPage(nav, requestSender, recentSearches, favourites));*/
+//        setExceptionHandler();
         
         SimpleEventBus eventBus = new SimpleEventBus();
         placeController = new PlaceController(eventBus);

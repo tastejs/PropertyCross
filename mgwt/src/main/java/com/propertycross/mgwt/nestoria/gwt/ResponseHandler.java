@@ -31,7 +31,8 @@ final class ResponseHandler implements ResponseParser {
                     results,
                     locs.get(0),
                     toInt(json, "page", 1),
-                    toInt(json, "total_results", results.size())
+                    toInt(json, "total_results", results.size()),
+                    toInt(json, "total_pages", 0)                    
                 );
             default:
                 return new Response.NoLocation(locs);

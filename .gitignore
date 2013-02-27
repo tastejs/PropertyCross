@@ -22,4 +22,7 @@
 /Native/WindowsPhone/PropertyCross/PropertyCross.csproj.user
 
 node_modules
+mgwt/src/main/gwt-unitCache
+mgwt/src/main/webapp/PropertyCross
+mgwt/src/main/webapp/WEB-INF/deploy
 

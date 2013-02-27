@@ -1,9 +1,11 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
-  xmlns:mgwt-widgets="urn:import:com.googlecode.mgwt.ui.client.widget"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
-	
 	<g:HTMLPanel>
-		<mgwt-widgets:CellList ui:field="cellList"></mgwt-widgets:CellList>
+		<h1 ui:field="propertyPrice"></h1>
+		<h3 ui:field="propertyTitle"></h3>
+		<g:Image ui:field="propertyImage"></g:Image>
+		<p ui:field="propertyStats"></p>
+		<p ui:field="propertySummary"></p>
 	</g:HTMLPanel>
 </ui:UiBinder> 

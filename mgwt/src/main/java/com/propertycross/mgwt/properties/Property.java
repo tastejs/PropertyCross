@@ -10,6 +10,7 @@ public final class Property {
     private final String title;
     private final String price;
     private final String formattedPrice;
+    private final String bedBathroomText;
     private final String bedrooms;
     private final String bathrooms;
     private final String type;
@@ -23,6 +24,7 @@ public final class Property {
         this.title = title;
         this.price = price;
         formattedPrice = formatPrice(price);
+        bedBathroomText = createBedBathroomText(bedrooms, bathrooms);
         this.bedrooms = bedrooms;
         this.bathrooms = bathrooms;
         this.type = type;
@@ -30,7 +32,9 @@ public final class Property {
         this.summary = summary;
     }
 
-    public String id()
+    
+
+		public String id()
     {
         return guid;
     }
@@ -48,6 +52,11 @@ public final class Property {
     public String bedrooms()
     {
         return bedrooms;
+    }
+    
+    public String bedBathroomText()
+    {
+        return bedBathroomText;
     }
 
     public String summary()
@@ -74,6 +83,10 @@ public final class Property {
     {
         String[] s = price.split(" ");
         return "£" + s[0];
+    }
+    
+    private String createBedBathroomText(String bedrooms, String bathrooms) {
+	    return bedrooms + " bed, " + bathrooms + " bathroom";
     }
 
     public String title()

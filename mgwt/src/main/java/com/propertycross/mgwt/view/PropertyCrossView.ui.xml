@@ -14,6 +14,8 @@
       <mgwt:Button ui:field="myLocationButton">My location</mgwt:Button>
     </g:FlowPanel>
     
+    <p ui:field="isLoadingIndicator">Searching ...</p>
+    
     <p ui:field="userMessage"></p>
 	</g:HTMLPanel>
 </ui:UiBinder> 

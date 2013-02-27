@@ -10,6 +10,7 @@ import com.propertycross.mgwt.MgwtAppEntryPoint;
 import com.propertycross.mgwt.locations.Location;
 import com.propertycross.mgwt.nestoria.QueryBuilder;
 import com.propertycross.mgwt.nestoria.RequestSender;
+import com.propertycross.mgwt.nestoria.Response.ListingsFound;
 import com.propertycross.mgwt.nestoria.gwt.GwtRequestSender;
 import com.propertycross.mgwt.page.PropertyCrossPage;
 import com.propertycross.mgwt.place.SearchResultsPlace;
@@ -31,6 +32,11 @@ public class PropertyCrossActivity extends MGWTAbstractActivity {
 		 * problem.
 		 */
 		void setMessage(String message);
+		
+		/**
+		 * Sets whether to display a loading indicator
+		 */
+		void setIsLoading(boolean isLoading);
 	}
 
 	public interface ViewEventHandler {
@@ -61,18 +67,17 @@ public class PropertyCrossActivity extends MGWTAbstractActivity {
 
 	private void searchForProperties()
   {
+		view.setIsLoading(true);
   	view.setMessage("");
+  	
   	QueryBuilder q = new QueryBuilder(requestSender);
     q.setPlaceName(searchText);
-    q.doQuery(new QueryCallback(q));
+    q.doQuery(new QueryCallback());
   }
 
 	private final class QueryCallback implements RequestSender.Callback {
 
-		private final QueryBuilder query;
-
-		public QueryCallback(QueryBuilder query) {
-			this.query = query;
+		public QueryCallback() {
 		}
 
 		@Override
@@ -81,10 +86,11 @@ public class PropertyCrossActivity extends MGWTAbstractActivity {
 		}
 
 		@Override
-		public void onResultsFound(List<Property> results, Location location,
-		    int page, int totalResults) {
-			view.setMessage("found some properties: " + results.size());
-			MgwtAppEntryPoint.placeController.goTo(new SearchResultsPlace());
+		public void onResultsFound(ListingsFound response) {
+			
+			view.setIsLoading(false);
+			
+			MgwtAppEntryPoint.placeController.goTo(new SearchResultsPlace(response));
 		}
 
 		@Override
@@ -101,6 +107,7 @@ public class PropertyCrossActivity extends MGWTAbstractActivity {
 		public void onError(Throwable t) {
 			Window.alert(t.getMessage());
 		}
+
 
 	};
 
