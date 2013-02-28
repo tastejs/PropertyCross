@@ -2,52 +2,53 @@ package com.propertycross.mgwt.locations;
 
 public final class Search {
 
-    private final String location;
-    private final int numberProperties;
+	private final String displayText;
+	private final String searchText;
+	private final int numberProperties;
 
-    public Search(String location, int numberProperties)
-    {
-        this.location = location;
-        this.numberProperties = numberProperties;
-    }
+	public Search(String displayText, String searchText, int numberProperties) {
+		this.displayText = displayText;
+		this.searchText = searchText;
+		this.numberProperties = numberProperties;
+	}
 
-    public String location()
-    {
-        return location;
-    }
+	public String displayText() {
+		return displayText;
+	}
 
-    public int numberProperties()
-    {
-        return numberProperties;
-    }
+	public String searchText() {
+		return searchText;
+	}
 
-    @Override
-    public int hashCode()
-    {
-        int hash = 7;
-        hash = 97 * hash + (location != null ? location.hashCode() : 0);
-        hash = 97 * hash + numberProperties;
-        return hash;
-    }
+	public int numberProperties() {
+		return numberProperties;
+	}
 
-    @Override
-    public boolean equals(Object obj)
-    {
-        if(obj == null) return false;
-        if(getClass() != obj.getClass()) return false;
+	@Override
+  public int hashCode() {
+	  final int prime = 31;
+	  int result = 1;
+	  result = prime * result + ((searchText == null) ? 0 : searchText.hashCode());
+	  return result;
+  }
+	
+	@Override
+  public boolean equals(Object obj) {
+	  if (this == obj)
+		  return true;
+	  if (obj == null)
+		  return false;
+	  if (getClass() != obj.getClass())
+		  return false;
+	  Search other = (Search) obj;
+	  if (searchText == null) {
+		  if (other.searchText != null)
+			  return false;
+	  } else if (!searchText.equals(other.searchText))
+		  return false;
+	  return true;
+  }
 
-        Search o = (Search)obj;
-        if((location == null) ? (o.location != null)
-                : !location.equals(o.location)) return false;
-        if(numberProperties != o.numberProperties) return false;
-        return true;
-    }
-
-    @Override
-    public String toString()
-    {
-        return "Search{" + "location=" + location + ", numberProperties=" +
-                numberProperties + '}';
-    }
+	
 
 }

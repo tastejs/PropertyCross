@@ -22,13 +22,18 @@ import com.googlecode.mgwt.ui.client.widget.celllist.CellSelectedHandler;
 import com.propertycross.mgwt.activity.PropertyCrossActivity;
 import com.propertycross.mgwt.activity.PropertyCrossActivity.ViewEventHandler;
 import com.propertycross.mgwt.locations.Location;
+import com.propertycross.mgwt.locations.Search;
 import com.propertycross.mgwt.page.PageBase;
 
 public class PropertyCrossView extends ViewBase implements PropertyCrossActivity.View {
 
-	private final LocationCell cell = new LocationCell();
+	private final LocationCell locationCell = new LocationCell();
+	
+	private final RecentSearchCell recentSearchCell = new RecentSearchCell();
 	
 	private List<Location> locations;
+	
+	private List<Search> recentSearches;
 	
 	private static PropertyCrossViewUiBinder uiBinder = GWT.create(PropertyCrossViewUiBinder.class);
 
@@ -48,19 +53,33 @@ public class PropertyCrossView extends ViewBase implements PropertyCrossActivity
 	@UiField
 	Element isLoadingIndicator;
 	@UiField(provided = true)
-	CellList<Location> cellList = new CellList<Location>(cell);
+	CellList<Location> suggestedLocationsList = new CellList<Location>(locationCell);
+	@UiField(provided = true)
+	CellList<Search> recentSearchesList = new CellList<Search>(recentSearchCell);
+	@UiField
+	Element recentSearchesHeader;
+	@UiField
+	Element suggestedLocationsHeading;	
 
 	public PropertyCrossView(PageBase pageBase) {
 		super(pageBase);
 		initWidget(uiBinder.createAndBindUi(this));
 		
 		setLoadingIndicatorVisible(false);
+		suggestedLocationsHeading.getStyle().setDisplay(Display.NONE);
+		recentSearchesHeader.getStyle().setDisplay(Display.NONE);
 		
-		cellList.addCellSelectedHandler(new CellSelectedHandler() {
+		suggestedLocationsList.addCellSelectedHandler(new CellSelectedHandler() {
       @Override
       public void onCellSelected(CellSelectedEvent event) {
-        Location location = locations.get(event.getIndex());
-        eventHandler.locationSelected(location);
+        eventHandler.locationSelected(locations.get(event.getIndex()));
+      }
+    });
+		
+		recentSearchesList.addCellSelectedHandler(new CellSelectedHandler() {
+      @Override
+      public void onCellSelected(CellSelectedEvent event) {
+        eventHandler.recentSearchSelected(recentSearches.get(event.getIndex()));
       }
     });
 
@@ -108,8 +127,35 @@ public class PropertyCrossView extends ViewBase implements PropertyCrossActivity
 
 	@Override
   public void displaySuggestedLocations(List<Location> locations) {
-		this.locations = locations;
-		cellList.render(locations);
+		if (locations == null) {
+			suggestedLocationsList.setVisible(false);
+			suggestedLocationsHeading.getStyle().setDisplay(Display.NONE);
+		}	else {
+			suggestedLocationsList.setVisible(true);
+			suggestedLocationsHeading.getStyle().setDisplay(Display.BLOCK);
+			this.locations = locations;
+			suggestedLocationsList.render(locations);			
+		}
+		updateScrollingHost();
+  }
+
+	@Override
+  public void displayRecentSearches(List<Search> recentSearches) {
+		if (recentSearches == null) {
+			recentSearchesList.setVisible(false);
+			recentSearchesHeader.getStyle().setDisplay(Display.NONE);
+		} else {
+			recentSearchesList.setVisible(true);
+			recentSearchesHeader.getStyle().setDisplay(Display.BLOCK);
+			this.recentSearches = recentSearches;
+		  recentSearchesList.render(recentSearches);
+		}
+		updateScrollingHost();
+  }
+
+	@Override
+  public void setSearchText(String searchText) {
+		searchTextField.setText(searchText); 
   }
 
 }

@@ -30,9 +30,8 @@ public final class OrderedSearchesManager implements SearchesManager {
         return new ArrayList<Search>(cache);
     }
 
-    public void add(String location, int totalResults)
+    public void add(Search s)
     {
-        Search s = new Search(location, totalResults);
         removeSameLocationSearches(s);
         cache.add(s);
         while(cache.size() > historySize) {
@@ -45,7 +44,7 @@ public final class OrderedSearchesManager implements SearchesManager {
     {
         for(Iterator<Search> it = cache.iterator(); it.hasNext();) {
             Search s = it.next();
-            if(s.location().equalsIgnoreCase(newSearch.location())) {
+            if(s.displayText().equalsIgnoreCase(newSearch.displayText())) {
                 it.remove();
                 return;
             }

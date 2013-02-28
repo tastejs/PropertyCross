@@ -1,18 +1,24 @@
 package com.propertycross.mgwt.activity;
 
+import java.nio.channels.SeekableByteChannel;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.googlecode.mgwt.mvp.client.MGWTAbstractActivity;
+import com.googlecode.mgwt.storage.client.LocalStorageGwtImpl;
 import com.propertycross.mgwt.MgwtAppEntryPoint;
 import com.propertycross.mgwt.activity.searchitem.PlainTextSearchItem;
 import com.propertycross.mgwt.activity.searchitem.SearchItemBase;
 import com.propertycross.mgwt.locations.Location;
+import com.propertycross.mgwt.locations.OrderedSearchesManager;
+import com.propertycross.mgwt.locations.Search;
 import com.propertycross.mgwt.nestoria.RequestSender;
 import com.propertycross.mgwt.nestoria.Response.ListingsFound;
 import com.propertycross.mgwt.page.PropertyCrossPage;
 import com.propertycross.mgwt.place.SearchResultsPlace;
+import com.googlecode.mgwt.storage.client.Storage;
 
 public class PropertyCrossActivity extends MGWTAbstractActivity {
 
@@ -21,6 +27,10 @@ public class PropertyCrossActivity extends MGWTAbstractActivity {
 	private final PropertyCrossPage page = new PropertyCrossPage();
 
 	private View view;
+
+	private final Storage storage = new LocalStorageGwtImpl();
+
+	private OrderedSearchesManager searchesManager = new OrderedSearchesManager(storage, 5);
 
 	/**
 	 * The interface this activity requires from the associated view.
@@ -42,6 +52,16 @@ public class PropertyCrossActivity extends MGWTAbstractActivity {
 		 * plain-text search.
 		 */
 		void displaySuggestedLocations(List<Location> locations);
+
+		/**
+		 * Displays a list of recently performed searches.
+		 */
+		void displayRecentSearches(List<Search> recentSearches);
+		
+		/**
+		 * Sets the text displayed in the search field.
+		 */
+		void setSearchText(String searchText);
 	}
 
 	public interface ViewEventHandler {
@@ -50,6 +70,8 @@ public class PropertyCrossActivity extends MGWTAbstractActivity {
 		void searchTextChanged(String searchText);
 
 		void locationSelected(Location location);
+
+		void recentSearchSelected(Search search);
 	}
 
 	private final ViewEventHandler viewEventHandler = new ViewEventHandler() {
@@ -66,7 +88,15 @@ public class PropertyCrossActivity extends MGWTAbstractActivity {
 
 		@Override
 		public void locationSelected(Location location) {
+			view.displaySuggestedLocations(null);
 			searchItem = new PlainTextSearchItem(location.getDisplayName(), location.getName());
+			searchForProperties();
+		}
+
+		@Override
+		public void recentSearchSelected(Search search) {
+			searchItem = new PlainTextSearchItem(search.displayText(), search.searchText());
+			view.setSearchText(searchItem.getDisplayText());
 			searchForProperties();
 		}
 	};
@@ -76,6 +106,7 @@ public class PropertyCrossActivity extends MGWTAbstractActivity {
 
 		view = page.getView();
 		view.setEventHandler(viewEventHandler);
+		view.displayRecentSearches(searchesManager.recentSearches());
 		panel.setWidget(page);
 	}
 
@@ -100,13 +131,17 @@ public class PropertyCrossActivity extends MGWTAbstractActivity {
 		@Override
 		public void onResultsFound(ListingsFound response) {
 			view.setIsLoading(false);
+
+			searchesManager.add(new Search(searchItem.getDisplayText(), searchItem.getSearchText(), response
+			    .getTotalResults()));
+			view.displayRecentSearches(searchesManager.recentSearches());
 			MgwtAppEntryPoint.placeController.goTo(new SearchResultsPlace(response, searchItem));
 		}
 
 		@Override
 		public void onNoLocation(List<Location> suggested) {
 			view.setIsLoading(false);
-			view.setMessage("Please select a location below:");
+			view.displayRecentSearches(null);
 			view.displaySuggestedLocations(suggested);
 		}
 

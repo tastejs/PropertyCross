@@ -29,4 +29,9 @@ public class PlainTextSearchItem extends SearchItemBase {
     q.doQuery(c);
   }
 
+	@Override
+  public String getSearchText() {
+	  return searchText;
+  }
+
 }

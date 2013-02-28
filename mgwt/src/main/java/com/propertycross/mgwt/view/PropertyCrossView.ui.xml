@@ -18,6 +18,10 @@
     
     <p ui:field="userMessage"></p>
     
-    <mgwt-widgets:CellList ui:field="cellList"></mgwt-widgets:CellList>
+    <h4 ui:field="suggestedLocationsHeading">Please select a location below:</h4>
+    <mgwt-widgets:CellList ui:field="suggestedLocationsList"></mgwt-widgets:CellList>
+    
+    <h4 ui:field="recentSearchesHeader">Recent searches:</h4>
+    <mgwt-widgets:CellList ui:field="recentSearchesList"></mgwt-widgets:CellList>
 	</g:HTMLPanel>
 </ui:UiBinder> 

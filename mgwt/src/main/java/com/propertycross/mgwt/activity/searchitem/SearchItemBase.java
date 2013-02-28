@@ -20,11 +20,11 @@ public abstract class SearchItemBase {
   	this.pageNumber = pageNumber;
   }
 
-	
-
 	public String getDisplayText() {
   	return displayText;
   }
+	
+	public abstract String getSearchText();
 
 	private final String displayText;
 	
