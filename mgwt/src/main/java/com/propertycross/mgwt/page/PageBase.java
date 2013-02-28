@@ -2,7 +2,6 @@ package com.propertycross.mgwt.page;
 
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 import com.googlecode.mgwt.dom.client.event.tap.TapEvent;
@@ -39,10 +38,8 @@ public abstract class PageBase implements IsWidget {
 	
 	  headerBackButton = new HeaderButton();
 	  headerBackButton.setBackButton(true);
-	//  Image backImage = new Image("images/arrow-back@2x.png");
-	 // backImage.setSize("28px", "15px");
-	//  headerBackButton.getElement().getLastChild().appendChild(backImage.getElement());
-
+	  headerBackButton.setText("Back");
+	  
 	  main.add(headerPanel);
 	  main.add(scrollPanel);
 	
@@ -64,6 +61,10 @@ public abstract class PageBase implements IsWidget {
   @Override
   public Widget asWidget() {
     return main;
+  }
+  
+  public void updateScrollingHost() {
+  	scrollPanel.refresh();
   }
 
   protected void addBodyContent(Widget content, boolean scrollX) {

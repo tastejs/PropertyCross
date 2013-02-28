@@ -1,17 +1,8 @@
 package com.propertycross.mgwt;
 
-import java.util.Dictionary;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import com.google.gwt.activity.shared.Activity;
 import com.google.gwt.activity.shared.ActivityMapper;
 import com.google.gwt.place.shared.Place;
-import com.propertycross.mgwt.activity.PropertyActivity;
-import com.propertycross.mgwt.activity.PropertyCrossActivity;
-import com.propertycross.mgwt.activity.SearchResultsActivity;
 import com.propertycross.mgwt.place.PropertyCrossPlace;
 import com.propertycross.mgwt.place.SearchResultsPlace;
 

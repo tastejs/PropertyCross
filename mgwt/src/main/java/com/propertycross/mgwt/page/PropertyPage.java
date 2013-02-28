@@ -1,11 +1,7 @@
 package com.propertycross.mgwt.page;
 
-import com.propertycross.mgwt.view.PropertyCrossView;
-import com.propertycross.mgwt.view.PropertyView;
-import com.propertycross.mgwt.view.SearchResultsView;
 import com.propertycross.mgwt.activity.PropertyActivity;
-import com.propertycross.mgwt.activity.PropertyCrossActivity;
-import com.propertycross.mgwt.activity.SearchResultsActivity;
+import com.propertycross.mgwt.view.PropertyView;
 
 public class PropertyPage extends PageBase {
 
@@ -13,7 +9,7 @@ public class PropertyPage extends PageBase {
 
   public PropertyPage() {
     super(true);
-    view = new PropertyView();
+    view = new PropertyView(this);
     addBodyContent(view, false);
   }
   

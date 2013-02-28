@@ -2,6 +2,7 @@ package com.propertycross.mgwt.properties;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import com.googlecode.mgwt.storage.client.Storage;
 
 public final class OrderedPropertiesManager implements PropertiesManager {

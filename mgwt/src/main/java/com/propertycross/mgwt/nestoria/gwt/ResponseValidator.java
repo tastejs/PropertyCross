@@ -3,8 +3,8 @@ package com.propertycross.mgwt.nestoria.gwt;
 import com.google.gwt.json.client.JSONArray;
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONString;
-import com.propertycross.mgwt.nestoria.Response;
 import com.propertycross.mgwt.nestoria.RequestSender.Callback;
+import com.propertycross.mgwt.nestoria.Response;
 
 
 final class ResponseValidator implements ResponseParser {

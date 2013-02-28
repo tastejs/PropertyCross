@@ -25,6 +25,7 @@ public class PlainTextSearchItem extends SearchItemBase {
   public void doQuery(Callback c) {
 		QueryBuilder q = new QueryBuilder(requestSender);
     q.setPlaceName(searchText);
+    q.setPage(getPageNumber());
     q.doQuery(c);
   }
 

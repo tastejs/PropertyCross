@@ -4,10 +4,8 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.safehtml.client.SafeHtmlTemplates;
 import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
-import com.google.gwt.safehtml.shared.SafeUri;
 import com.googlecode.mgwt.ui.client.widget.celllist.Cell;
 import com.propertycross.mgwt.locations.Location;
-import com.propertycross.mgwt.properties.Property;
 
 public class LocationCell implements Cell<Location>{
 

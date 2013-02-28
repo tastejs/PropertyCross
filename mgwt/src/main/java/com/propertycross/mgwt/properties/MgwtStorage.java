@@ -2,6 +2,7 @@ package com.propertycross.mgwt.properties;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import com.google.gwt.json.client.JSONArray;
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONParser;

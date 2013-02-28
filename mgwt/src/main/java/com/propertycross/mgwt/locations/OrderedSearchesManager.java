@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Queue;
+
 import com.googlecode.mgwt.storage.client.Storage;
 
 public final class OrderedSearchesManager implements SearchesManager {

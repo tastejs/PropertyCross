@@ -1,7 +1,7 @@
 package com.propertycross.mgwt.page;
 
-import com.propertycross.mgwt.view.PropertyCrossView;
 import com.propertycross.mgwt.activity.PropertyCrossActivity;
+import com.propertycross.mgwt.view.PropertyCrossView;
 
 public class PropertyCrossPage extends PageBase {
 
@@ -9,7 +9,7 @@ public class PropertyCrossPage extends PageBase {
 
   public PropertyCrossPage() {
     super(false);
-    view = new PropertyCrossView();
+    view = new PropertyCrossView(this);
     addBodyContent(view, false);
   }
   

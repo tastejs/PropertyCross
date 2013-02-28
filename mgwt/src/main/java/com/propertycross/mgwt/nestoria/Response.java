@@ -1,6 +1,7 @@
 package com.propertycross.mgwt.nestoria;
 
 import java.util.List;
+
 import com.propertycross.mgwt.locations.Location;
 import com.propertycross.mgwt.nestoria.RequestSender.Callback;
 import com.propertycross.mgwt.properties.Property;

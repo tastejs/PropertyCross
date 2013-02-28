@@ -1,8 +1,6 @@
 package com.propertycross.mgwt.view;
 
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
@@ -13,7 +11,6 @@ import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.googlecode.mgwt.dom.client.event.tap.TapEvent;
 import com.googlecode.mgwt.dom.client.event.tap.TapHandler;
@@ -22,13 +19,12 @@ import com.googlecode.mgwt.ui.client.widget.CellList;
 import com.googlecode.mgwt.ui.client.widget.MSearchBox;
 import com.googlecode.mgwt.ui.client.widget.celllist.CellSelectedEvent;
 import com.googlecode.mgwt.ui.client.widget.celllist.CellSelectedHandler;
-
 import com.propertycross.mgwt.activity.PropertyCrossActivity;
 import com.propertycross.mgwt.activity.PropertyCrossActivity.ViewEventHandler;
 import com.propertycross.mgwt.locations.Location;
-import com.propertycross.mgwt.properties.Property;
+import com.propertycross.mgwt.page.PageBase;
 
-public class PropertyCrossView extends Composite implements PropertyCrossActivity.View {
+public class PropertyCrossView extends ViewBase implements PropertyCrossActivity.View {
 
 	private final LocationCell cell = new LocationCell();
 	
@@ -54,7 +50,8 @@ public class PropertyCrossView extends Composite implements PropertyCrossActivit
 	@UiField(provided = true)
 	CellList<Location> cellList = new CellList<Location>(cell);
 
-	public PropertyCrossView() {
+	public PropertyCrossView(PageBase pageBase) {
+		super(pageBase);
 		initWidget(uiBinder.createAndBindUi(this));
 		
 		setLoadingIndicatorVisible(false);

@@ -2,7 +2,12 @@ package com.propertycross.mgwt.locations;
 
 import java.util.LinkedList;
 import java.util.Queue;
-import com.google.gwt.json.client.*;
+
+import com.google.gwt.json.client.JSONArray;
+import com.google.gwt.json.client.JSONNumber;
+import com.google.gwt.json.client.JSONObject;
+import com.google.gwt.json.client.JSONParser;
+import com.google.gwt.json.client.JSONString;
 import com.googlecode.mgwt.storage.client.Storage;
 
 final class MgwtStorage implements SearchesStorage {

@@ -3,12 +3,13 @@ package com.propertycross.mgwt.nestoria.gwt;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
 import com.google.gwt.json.client.JSONArray;
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONValue;
 import com.propertycross.mgwt.locations.Location;
-import com.propertycross.mgwt.nestoria.Response;
 import com.propertycross.mgwt.nestoria.RequestSender.Callback;
+import com.propertycross.mgwt.nestoria.Response;
 import com.propertycross.mgwt.properties.Property;
 
 final class ResponseHandler implements ResponseParser {

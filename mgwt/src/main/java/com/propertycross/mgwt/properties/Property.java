@@ -1,8 +1,8 @@
 package com.propertycross.mgwt.properties;
 
-import com.google.gwt.safehtml.shared.SafeUri;
+import static com.google.gwt.safehtml.shared.UriUtils.fromString;
 
-import static com.google.gwt.safehtml.shared.UriUtils.*;
+import com.google.gwt.safehtml.shared.SafeUri;
 
 public final class Property {
 
