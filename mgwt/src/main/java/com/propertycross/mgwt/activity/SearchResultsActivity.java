@@ -6,7 +6,6 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.googlecode.mgwt.mvp.client.MGWTAbstractActivity;
-import com.propertycross.mgwt.Cache;
 import com.propertycross.mgwt.MgwtAppEntryPoint;
 import com.propertycross.mgwt.locations.Location;
 import com.propertycross.mgwt.nestoria.QueryBuilder;
@@ -30,7 +29,7 @@ public class SearchResultsActivity extends MGWTAbstractActivity {
 	public interface View extends AbstractView<ViewEventHandler> {
 		void setSearchResult(int totalResult, int pageNumber, int totalPages, List<Property> properties,
 		    String searchLocation);
-		
+
 	}
 
 	public interface ViewEventHandler {
@@ -40,9 +39,9 @@ public class SearchResultsActivity extends MGWTAbstractActivity {
 	private final ViewEventHandler viewEventHandler = new ViewEventHandler() {
 
 		@Override
-    public void propertySelected(Property property) {
-	    handlePropertySelected(property);
-    }
+		public void propertySelected(Property property) {
+			handlePropertySelected(property);
+		}
 
 	};
 
@@ -56,16 +55,9 @@ public class SearchResultsActivity extends MGWTAbstractActivity {
 		view.setEventHandler(viewEventHandler);
 
 		ListingsFound listingsResponse = this.place.getListingsResponse();
-		
-		if (listingsResponse!=null) {
-			Cache.LISTINGS_FOUND = listingsResponse;
-		} else {
-			listingsResponse = Cache.LISTINGS_FOUND;
-		}
-		
 		view.setSearchResult(listingsResponse.getTotalResults(), listingsResponse.getPage(),
 		    listingsResponse.getTotalPages(), listingsResponse.getListings(), listingsResponse.getListings().toString());
-		
+
 		panel.setWidget(page);
 	}
 

@@ -9,7 +9,7 @@ public abstract class SearchItemBase {
 	  this.displayText = displayText;
   }
 
-	protected String getDisplayText() {
+	public String getDisplayText() {
   	return displayText;
   }
 

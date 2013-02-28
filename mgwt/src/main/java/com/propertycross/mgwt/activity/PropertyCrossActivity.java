@@ -1,6 +1,8 @@
 package com.propertycross.mgwt.activity;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.Window;
@@ -19,8 +21,6 @@ import com.propertycross.mgwt.place.SearchResultsPlace;
 import com.propertycross.mgwt.properties.Property;
 
 public class PropertyCrossActivity extends MGWTAbstractActivity {
-
-	private String searchText;
 
 	private SearchItemBase searchItem;
 	
@@ -75,6 +75,7 @@ public class PropertyCrossActivity extends MGWTAbstractActivity {
 
 	@Override
 	public void start(AcceptsOneWidget panel, EventBus eventBus) {
+		
 		view = page.getView();
 		view.setEventHandler(viewEventHandler);
 		panel.setWidget(page);
@@ -95,36 +96,33 @@ public class PropertyCrossActivity extends MGWTAbstractActivity {
 
 		@Override
 		public void onTimeout() {
-			Window.alert("req timeout");
+			view.setIsLoading(false);
+			view.setMessage("An error occurred while searching. Please check your network connection and try again.");
 		}
 
 		@Override
-		public void onResultsFound(ListingsFound response) {
-			
-			view.setIsLoading(false);
-			
+		public void onResultsFound(ListingsFound response) {			
+			view.setIsLoading(false);			
 			MgwtAppEntryPoint.placeController.goTo(new SearchResultsPlace(response));
 		}
 
 		@Override
 		public void onNoLocation(List<Location> suggested) {
+			view.setIsLoading(false);
+			view.setMessage("Please select a location below:");
 			view.displaySuggestedLocations(suggested);
 		}
 
 		@Override
 		public void onNoLocation() {
-			Window.alert("no location");
+			view.setIsLoading(false);
+			view.setMessage("The location given was not recognised.");
 		}
 
 		@Override
 		public void onError(Throwable t) {
-			Window.alert(t.getMessage());
+			view.setIsLoading(false);
+			view.setMessage("An error occurred while searching. Please check your network connection and try again.");
 		}
-
-
 	};
-
-	
-
-
 }

@@ -6,21 +6,24 @@ import com.propertycross.mgwt.nestoria.Response.ListingsFound;
 
 public class SearchResultsPlace extends Place {
 	
-	private final ListingsFound listingsResponse;
+	private ListingsFound listingsResponse;
 	
 	public SearchResultsPlace(ListingsFound results) {
 		this.listingsResponse = results;
 	}
 	
+	public SearchResultsPlace() {
+  }
+
 	public ListingsFound getListingsResponse() {
   	return listingsResponse;
   }
-	
+		
   public static class SearchResultsPlaceTokenizer implements PlaceTokenizer<SearchResultsPlace> {
 
     @Override
     public SearchResultsPlace getPlace(String token) {
-      return new SearchResultsPlace(null);
+      return new SearchResultsPlace();
     }
 
     @Override

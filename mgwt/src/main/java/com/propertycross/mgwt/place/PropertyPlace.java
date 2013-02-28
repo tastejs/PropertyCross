@@ -13,7 +13,6 @@ public class PropertyPlace extends Place {
   }
 
 	public PropertyPlace(Property property) {
-	  super();
 	  this.property = property;
   }
 

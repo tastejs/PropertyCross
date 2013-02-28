@@ -39,9 +39,9 @@ public abstract class PageBase implements IsWidget {
 	
 	  headerBackButton = new HeaderButton();
 	  headerBackButton.setBackButton(true);
-	  Image backImage = new Image("images/arrow-back@2x.png");
-	  backImage.setSize("28px", "15px");
-	  headerBackButton.getElement().getLastChild().appendChild(backImage.getElement());
+	//  Image backImage = new Image("images/arrow-back@2x.png");
+	 // backImage.setSize("28px", "15px");
+	//  headerBackButton.getElement().getLastChild().appendChild(backImage.getElement());
 
 	  main.add(headerPanel);
 	  main.add(scrollPanel);

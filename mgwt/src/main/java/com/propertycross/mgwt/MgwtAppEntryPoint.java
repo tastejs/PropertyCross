@@ -29,76 +29,71 @@ import com.propertycross.mgwt.properties.PropertiesManager;
 
 public class MgwtAppEntryPoint implements EntryPoint {
 
-    private final Storage storage = new LocalStorageGwtImpl();
-    private final SearchesManager recentSearches =
-            new OrderedSearchesManager(storage, 5);
-    private final RequestSender requestSender = new GwtRequestSender();
-    private final PropertiesManager favourites = new OrderedPropertiesManager(storage);
-    
-    public static PlaceController placeController;
-    private static AnimatableDisplay animatableDisplay;
+	private final Storage storage = new LocalStorageGwtImpl();
+	private final SearchesManager recentSearches = new OrderedSearchesManager(storage, 5);
+	private final RequestSender requestSender = new GwtRequestSender();
+	private final PropertiesManager favourites = new OrderedPropertiesManager(storage);
 
-    
-    @Override
-    public void onModuleLoad()
-    {
-//        setExceptionHandler();
-        
-        SimpleEventBus eventBus = new SimpleEventBus();
-        placeController = new PlaceController(eventBus);
+	public static PlaceController placeController;
+	private static AnimatableDisplay animatableDisplay;
 
-        prepareViewPort();
+	@Override
+	public void onModuleLoad() {
+		// setExceptionHandler();
 
-        AppPlaceHistoryMapper historyMapper = GWT.create(AppPlaceHistoryMapper.class);
+		SimpleEventBus eventBus = new SimpleEventBus();
+		placeController = new PlaceController(eventBus);
 
-        animatableDisplay = GWT.create(AnimatableDisplay.class);
+		prepareViewPort();
 
-        PhoneActivityMapper appActivityMapper = new PhoneActivityMapper();
-        PhoneAnimationMapper appAnimationMapper = new PhoneAnimationMapper();
-        AnimatingActivityManager activityManager =
-            new AnimatingActivityManager(appActivityMapper, appAnimationMapper, eventBus);
+		AppPlaceHistoryMapper historyMapper = GWT.create(AppPlaceHistoryMapper.class);
 
-        activityManager.setDisplay(animatableDisplay);
-        RootPanel.get().add(animatableDisplay);
+		animatableDisplay = GWT.create(AnimatableDisplay.class);
 
+		PhoneActivityMapper appActivityMapper = new PhoneActivityMapper();
+		PhoneAnimationMapper appAnimationMapper = new PhoneAnimationMapper();
+		AnimatingActivityManager activityManager = new AnimatingActivityManager(
+		    new CachingActivityMapper(appActivityMapper), appAnimationMapper, eventBus);
 
-        AppHistoryObserver historyObserver = new AppHistoryObserver();
+		activityManager.setDisplay(animatableDisplay);
+		RootPanel.get().add(animatableDisplay);
 
-        MGWTPlaceHistoryHandler historyHandler = new MGWTPlaceHistoryHandler(historyMapper, historyObserver);
+		AppHistoryObserver historyObserver = new AppHistoryObserver();
 
-        historyHandler.register(placeController, eventBus, new PropertyCrossPlace());
-        historyHandler.handleCurrentHistory();
-    }
-    
-    private void prepareViewPort() {
-        ViewPort viewPort = new MGWTSettings.ViewPort();
-        viewPort.setTargetDensity(DENSITY.MEDIUM);
-        viewPort.setUserScaleAble(false).setMinimumScale(1.0).setMinimumScale(1.0).setMaximumScale(1.0);
-        viewPort.setWidthToDeviceWidth();
+		MGWTPlaceHistoryHandler historyHandler = new MGWTPlaceHistoryHandler(historyMapper, historyObserver);
 
-        MGWTSettings settings = new MGWTSettings();
-        settings.setViewPort(viewPort);
-        settings.setIconUrl("logo.png");
-        settings.setAddGlosToIcon(true);
-        settings.setFullscreen(true);
-        settings.setPreventScrolling(true);
+		historyHandler.register(placeController, eventBus, new PropertyCrossPlace());
+		historyHandler.handleCurrentHistory();
+	}
 
-        MGWT.applySettings(settings);
-      }
+	private void prepareViewPort() {
+		ViewPort viewPort = new MGWTSettings.ViewPort();
+		viewPort.setTargetDensity(DENSITY.MEDIUM);
+		viewPort.setUserScaleAble(false).setMinimumScale(1.0).setMinimumScale(1.0).setMaximumScale(1.0);
+		viewPort.setWidthToDeviceWidth();
 
-    private void setExceptionHandler()
-    {
-        GWT.setUncaughtExceptionHandler(new UncaughtExceptionHandler() {
+		MGWTSettings settings = new MGWTSettings();
+		settings.setViewPort(viewPort);
+		settings.setIconUrl("logo.png");
+		settings.setAddGlosToIcon(true);
+		settings.setFullscreen(true);
+		settings.setPreventScrolling(true);
 
-            private final Logger logger = Logger.getLogger("mgwt test");
+		MGWT.applySettings(settings);
+	}
 
-            @Override public void onUncaughtException(Throwable ex)
-            {
-                logger.log(Level.SEVERE, "uncaught", ex);
-                Window.alert("uncaught exception, see logs");
-            }
+	private void setExceptionHandler() {
+		GWT.setUncaughtExceptionHandler(new UncaughtExceptionHandler() {
 
-        });
-    }
+			private final Logger logger = Logger.getLogger("mgwt test");
+
+			@Override
+			public void onUncaughtException(Throwable ex) {
+				logger.log(Level.SEVERE, "uncaught", ex);
+				Window.alert("uncaught exception, see logs");
+			}
+
+		});
+	}
 
 }
