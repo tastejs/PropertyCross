@@ -33,10 +33,18 @@ namespace com.propertycross.xamarin.android.Views
 
 			ListAdapter = new SearchResultsAdapter(this, new List<Property>() {});
 			
-			var app = (PropertyFinderApplication)Application;
+			var app = PropertyFinderApplication.GetApplication(this);
 			presenter = (FavouritesPresenter) app.Presenter;
-			presenter.SetView(this);
 			app.CurrentActivity = this;
+		}
+
+		protected override void OnResume()
+		{
+			base.OnResume();
+			if (presenter != null)
+			{
+				presenter.SetView(this);
+			}
 		}
 
 		public override bool OnOptionsItemSelected(IMenuItem item)
