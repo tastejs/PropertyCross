@@ -65,9 +65,13 @@ public class PropertyCrossView extends ViewBase implements PropertyCrossActivity
 		super(pageBase);
 		initWidget(uiBinder.createAndBindUi(this));
 		
-		setLoadingIndicatorVisible(false);
-		suggestedLocationsHeading.getStyle().setDisplay(Display.NONE);
-		recentSearchesHeader.getStyle().setDisplay(Display.NONE);
+		goButton.getElement().getStyle().setDisplay(Display.INLINE_BLOCK);
+		myLocationButton.getElement().getStyle().setDisplay(Display.INLINE_BLOCK);
+		
+		showElement(isLoadingIndicator, false);
+		showElement(suggestedLocationsHeading, false);
+		showElement(recentSearchesHeader, false);
+		showElement(userMessage, false);
 		
 		suggestedLocationsList.addCellSelectedHandler(new CellSelectedHandler() {
       @Override
@@ -105,11 +109,11 @@ public class PropertyCrossView extends ViewBase implements PropertyCrossActivity
 		});
 	}
 	
-	private void setLoadingIndicatorVisible(boolean visible)
+	private void showElement(Element element, boolean show)
 	{
-		isLoadingIndicator.getStyle().setDisplay(visible ? Display.BLOCK : Display.NONE);
+		element.getStyle().setDisplay(show ? Display.BLOCK : Display.NONE);
 	}
-
+	
 	@Override
 	public void setEventHandler(final ViewEventHandler eventHandler) {
 		this.eventHandler = eventHandler;
@@ -122,17 +126,17 @@ public class PropertyCrossView extends ViewBase implements PropertyCrossActivity
 
 	@Override
   public void setIsLoading(boolean isLoading) {
-		setLoadingIndicatorVisible(isLoading);
+		showElement(isLoadingIndicator, false);
   }
 
 	@Override
   public void displaySuggestedLocations(List<Location> locations) {
 		if (locations == null) {
 			suggestedLocationsList.setVisible(false);
-			suggestedLocationsHeading.getStyle().setDisplay(Display.NONE);
+			showElement(suggestedLocationsHeading, false);
 		}	else {
 			suggestedLocationsList.setVisible(true);
-			suggestedLocationsHeading.getStyle().setDisplay(Display.BLOCK);
+			showElement(suggestedLocationsHeading, true);
 			this.locations = locations;
 			suggestedLocationsList.render(locations);			
 		}
@@ -141,7 +145,7 @@ public class PropertyCrossView extends ViewBase implements PropertyCrossActivity
 
 	@Override
   public void displayRecentSearches(List<Search> recentSearches) {
-		if (recentSearches == null) {
+		if (recentSearches == null || recentSearches.size() == 0) {
 			recentSearchesList.setVisible(false);
 			recentSearchesHeader.getStyle().setDisplay(Display.NONE);
 		} else {

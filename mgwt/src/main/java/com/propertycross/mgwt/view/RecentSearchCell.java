@@ -12,7 +12,7 @@ public class RecentSearchCell  implements Cell<Search>{
 	private static final Template TEMPLATE = GWT.create(Template.class);
   public interface Template extends SafeHtmlTemplates {
 
-      @SafeHtmlTemplates.Template("{0} - {1}"
+      @SafeHtmlTemplates.Template("<div class='recentSearchesListItem'>{0} <div class='totalPropertiesCount'>{1}</div></div>"
       )
       SafeHtml content(String location, int results);
 

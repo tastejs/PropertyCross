@@ -8,7 +8,7 @@ public class PropertyCrossPage extends PageBase {
   private final PropertyCrossView view;
 
   public PropertyCrossPage() {
-    super(false);
+    super(false, "PropertyCross");
     view = new PropertyCrossView(this);
     addBodyContent(view, false);
   }

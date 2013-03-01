@@ -13,26 +13,13 @@ import com.google.web.bindery.event.shared.SimpleEventBus;
 import com.googlecode.mgwt.mvp.client.AnimatableDisplay;
 import com.googlecode.mgwt.mvp.client.AnimatingActivityManager;
 import com.googlecode.mgwt.mvp.client.history.MGWTPlaceHistoryHandler;
-import com.googlecode.mgwt.storage.client.LocalStorageGwtImpl;
-import com.googlecode.mgwt.storage.client.Storage;
 import com.googlecode.mgwt.ui.client.MGWT;
 import com.googlecode.mgwt.ui.client.MGWTSettings;
 import com.googlecode.mgwt.ui.client.MGWTSettings.ViewPort;
 import com.googlecode.mgwt.ui.client.MGWTSettings.ViewPort.DENSITY;
-import com.propertycross.mgwt.locations.OrderedSearchesManager;
-import com.propertycross.mgwt.locations.SearchesManager;
-import com.propertycross.mgwt.nestoria.RequestSender;
-import com.propertycross.mgwt.nestoria.gwt.GwtRequestSender;
 import com.propertycross.mgwt.place.PropertyCrossPlace;
-import com.propertycross.mgwt.properties.OrderedPropertiesManager;
-import com.propertycross.mgwt.properties.PropertiesManager;
 
 public class MgwtAppEntryPoint implements EntryPoint {
-
-	private final Storage storage = new LocalStorageGwtImpl();
-	private final SearchesManager recentSearches = new OrderedSearchesManager(storage, 5);
-	private final RequestSender requestSender = new GwtRequestSender();
-	private final PropertiesManager favourites = new OrderedPropertiesManager(storage);
 
 	public static PlaceController placeController;
 	private static AnimatableDisplay animatableDisplay;
@@ -67,6 +54,8 @@ public class MgwtAppEntryPoint implements EntryPoint {
 	}
 
 	private void prepareViewPort() {
+		
+		
 		ViewPort viewPort = new MGWTSettings.ViewPort();
 		viewPort.setTargetDensity(DENSITY.MEDIUM);
 		viewPort.setUserScaleAble(false).setMinimumScale(1.0).setMinimumScale(1.0).setMaximumScale(1.0);

@@ -1,0 +1,61 @@
+.totalPropertiesCount
+{
+	float: right;
+	margin-right: 1em;
+}
+
+.recentSearchesListItem
+{
+	font-weight: bold;
+}
+
+.propertyListItem p
+{
+	font-size: 12px;
+	text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap
+}
+
+.propertyListItem h3
+{
+	padding-top: 0.5em;
+}
+
+
+.thumbnail-container
+{
+  padding: 0 10px 0 0;
+  text-align: center;
+  float: left;
+}
+
+.thumbnail-container img
+{
+  width: 60px;
+  height: 60px;
+}
+
+div.propertyView img 
+{
+  padding: 2px;
+  margin: 5px;
+  width: 95%;
+  background-color: #aaa;
+}
+
+div.propertyView h1
+{
+  padding: 10px 0;
+}
+
+div.propertyView h3
+{
+  margin: 5px 0;
+}
+
+div.propertyView
+{
+	margin: 0.3em;
+}
+

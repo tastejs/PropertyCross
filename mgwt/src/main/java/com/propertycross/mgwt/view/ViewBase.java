@@ -5,7 +5,7 @@ import com.propertycross.mgwt.page.PageBase;
 
 public abstract class ViewBase extends Composite {
 
-	private final PageBase pageBase;
+	protected final PageBase pageBase;
 
 	public ViewBase(PageBase pageBase) {
 	  super();

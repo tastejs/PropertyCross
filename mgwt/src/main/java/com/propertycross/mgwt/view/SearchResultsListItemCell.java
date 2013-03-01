@@ -12,16 +12,16 @@ public class SearchResultsListItemCell implements Cell<SearchResultsView.ListIte
 
 	private static final PropertyItemTemplate PROPERTY_ITEM_TEMPLATE = GWT.create(PropertyItemTemplate.class);
   public interface PropertyItemTemplate extends SafeHtmlTemplates {
-      @SafeHtmlTemplates.Template("<img src=\"{0}\" />" +
-          "<span><div>{1}</div><div>{2}</div></span>"
+      @SafeHtmlTemplates.Template("<div class='propertyListItem'><div class='thumbnail-container'><img src=\"{0}\" /></div>" +
+          "<h3>{1}</h3><p>{2}</p></span></div>"
       )
-      SafeHtml content(SafeUri imgUrl, String price, String summary);
+      SafeHtml content(SafeUri imgUrl, String price, String title);
   }
   
   private static final LoadMoreItemTemplate LOAD_MORE_ITEM_TEMPLATE = GWT.create(LoadMoreItemTemplate.class);
   public interface LoadMoreItemTemplate extends SafeHtmlTemplates {
-      @SafeHtmlTemplates.Template("<h3>Load More ...</h3>" +
-  "<p>Results for {0}, showing <span>{1}</span> of <span>{2}</span> properties"
+      @SafeHtmlTemplates.Template("<div class='propertyListItem'><h3>Load More ...</h3>" +
+  "<p>Results for <b>{0}</b>, showing <b>{1}</b> of <b>{2}</b> properties</div>"
       )
       SafeHtml content(String location, int displayedProperties, int totalProperties);
   }
@@ -33,7 +33,7 @@ public class SearchResultsListItemCell implements Cell<SearchResultsView.ListIte
 			SearchResultsView.PropertyContainer container = (SearchResultsView.PropertyContainer)listItem;
 			Property model = container.getProperty();			
 			safeHtmlBuilder.append(PROPERTY_ITEM_TEMPLATE.content(model.imgUrl(),
-					model.formattedPrice(), model.summary()));
+					model.formattedPrice(), model.title()));
 		} else if (listItem instanceof SearchResultsView.LoadMoreIndicator) {
 			SearchResultsView.LoadMoreIndicator loadMore = (SearchResultsView.LoadMoreIndicator)listItem;
 			safeHtmlBuilder.append(LOAD_MORE_ITEM_TEMPLATE.content(loadMore.getSearchString(),

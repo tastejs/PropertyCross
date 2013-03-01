@@ -8,7 +8,7 @@ public class PropertyPage extends PageBase {
   private final PropertyView view;
 
   public PropertyPage() {
-    super(true);
+    super(true, "Property Details");
     view = new PropertyView(this);
     addBodyContent(view, false);
   }

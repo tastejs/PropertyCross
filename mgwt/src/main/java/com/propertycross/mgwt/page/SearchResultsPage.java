@@ -8,7 +8,7 @@ public class SearchResultsPage extends PageBase {
   private final SearchResultsView view;
 
   public SearchResultsPage() {
-    super(true);
+  	super(true, "results");
     view = new SearchResultsView(this);
     addBodyContent(view, false);
   }

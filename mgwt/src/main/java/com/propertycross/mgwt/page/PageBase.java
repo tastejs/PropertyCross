@@ -24,16 +24,15 @@ public abstract class PageBase implements IsWidget {
   protected ScrollPanel scrollPanel;
   protected HeaderPanel headerPanel;
   protected HeaderButton headerBackButton;
-  protected HeaderButton headerMenuButton;
   protected HTML title;
 
-  public PageBase(boolean showBackButton) {
+  public PageBase(boolean showBackButton, String titleText) {
 
 	  main = new LayoutPanel();
 	  scrollPanel = new ScrollPanel();
 	  headerPanel = new HeaderPanel();
 	  title = new HTML();
-	  title.setHTML("PropertyCross");	  
+	  title.setHTML(titleText);	  
 	  headerPanel.setCenterWidget(title);	  
 	
 	  headerBackButton = new HeaderButton();
@@ -65,6 +64,10 @@ public abstract class PageBase implements IsWidget {
   
   public void updateScrollingHost() {
   	scrollPanel.refresh();
+  }
+  
+  public void setTitle(String titleText) {
+  	title.setHTML(titleText);	
   }
 
   protected void addBodyContent(Widget content, boolean scrollX) {

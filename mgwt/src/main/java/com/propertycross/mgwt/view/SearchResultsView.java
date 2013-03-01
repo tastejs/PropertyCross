@@ -109,7 +109,7 @@ public class SearchResultsView extends ViewBase implements SearchResultsActivity
 		}
 		listItems.add(new LoadMoreIndicator(properties.size(), totalResult, searchLocation));
 		cellList.render(listItems);	
-		
+		pageBase.setTitle(Integer.toString(properties.size()) + " of " + Integer.toString(totalResult) + " matches");
 		updateScrollingHost();
   }
 

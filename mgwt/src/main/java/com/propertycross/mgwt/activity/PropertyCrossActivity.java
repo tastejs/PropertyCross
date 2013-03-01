@@ -1,13 +1,12 @@
 package com.propertycross.mgwt.activity;
 
-import java.nio.channels.SeekableByteChannel;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.googlecode.mgwt.mvp.client.MGWTAbstractActivity;
 import com.googlecode.mgwt.storage.client.LocalStorageGwtImpl;
+import com.googlecode.mgwt.storage.client.Storage;
 import com.propertycross.mgwt.MgwtAppEntryPoint;
 import com.propertycross.mgwt.activity.searchitem.PlainTextSearchItem;
 import com.propertycross.mgwt.activity.searchitem.SearchItemBase;
@@ -18,7 +17,6 @@ import com.propertycross.mgwt.nestoria.RequestSender;
 import com.propertycross.mgwt.nestoria.Response.ListingsFound;
 import com.propertycross.mgwt.page.PropertyCrossPage;
 import com.propertycross.mgwt.place.SearchResultsPlace;
-import com.googlecode.mgwt.storage.client.Storage;
 
 public class PropertyCrossActivity extends MGWTAbstractActivity {
 

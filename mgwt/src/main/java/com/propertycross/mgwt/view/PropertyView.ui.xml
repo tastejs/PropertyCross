@@ -2,10 +2,12 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
 	<g:HTMLPanel>
-		<h1 ui:field="propertyPrice"></h1>
-		<h3 ui:field="propertyTitle"></h3>
-		<g:Image ui:field="propertyImage"></g:Image>
-		<p ui:field="propertyStats"></p>
-		<p ui:field="propertySummary"></p>
+		<div class='propertyView'>
+			<h1 ui:field="propertyPrice"></h1>
+			<h3 ui:field="propertyTitle"></h3>
+			<g:Image ui:field="propertyImage"></g:Image>
+			<p ui:field="propertyStats"></p>
+			<p ui:field="propertySummary"></p>
+		</div>
 	</g:HTMLPanel>
 </ui:UiBinder> 
