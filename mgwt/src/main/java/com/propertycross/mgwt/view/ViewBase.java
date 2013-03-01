@@ -15,4 +15,8 @@ public abstract class ViewBase extends Composite {
 	protected void updateScrollingHost() {
 		pageBase.updateScrollingHost();
 	}
+	
+	public void favouriteClicked() {
+		
+	}
 }

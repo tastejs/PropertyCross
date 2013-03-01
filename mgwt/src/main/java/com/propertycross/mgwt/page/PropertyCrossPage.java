@@ -6,11 +6,14 @@ import com.propertycross.mgwt.view.PropertyCrossView;
 public class PropertyCrossPage extends PageBase {
 
   private final PropertyCrossView view;
-
+  
   public PropertyCrossPage() {
-    super(false, "PropertyCross");
+    super(false, true, "PropertyCross");
+    
+    favouritesButton.setText("Fave");
+	  
     view = new PropertyCrossView(this);
-    addBodyContent(view, false);
+    addContent(view);
   }
   
   public PropertyCrossActivity.View getView() {

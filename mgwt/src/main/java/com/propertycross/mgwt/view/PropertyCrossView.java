@@ -162,4 +162,8 @@ public class PropertyCrossView extends ViewBase implements PropertyCrossActivity
 		searchTextField.setText(searchText); 
   }
 
+	@Override
+	public void favouriteClicked() {
+	  eventHandler.favouritesClicked();
+	}
 }

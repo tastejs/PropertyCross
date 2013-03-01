@@ -7,8 +7,11 @@ import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.safehtml.shared.SafeUri;
 import com.googlecode.mgwt.ui.client.widget.celllist.Cell;
 import com.propertycross.mgwt.properties.Property;
+import com.propertycross.mgwt.view.listitem.ListItem;
+import com.propertycross.mgwt.view.listitem.LoadMoreIndicator;
+import com.propertycross.mgwt.view.listitem.PropertyContainer;
 
-public class SearchResultsListItemCell implements Cell<SearchResultsView.ListItem>{
+public class SearchResultsListItemCell implements Cell<ListItem>{
 
 	private static final PropertyItemTemplate PROPERTY_ITEM_TEMPLATE = GWT.create(PropertyItemTemplate.class);
   public interface PropertyItemTemplate extends SafeHtmlTemplates {
@@ -27,22 +30,22 @@ public class SearchResultsListItemCell implements Cell<SearchResultsView.ListIte
   }
   
 	@Override
-  public void render(SafeHtmlBuilder safeHtmlBuilder, SearchResultsView.ListItem listItem) {
+  public void render(SafeHtmlBuilder safeHtmlBuilder, ListItem listItem) {
 		
-		if (listItem instanceof SearchResultsView.PropertyContainer) {
-			SearchResultsView.PropertyContainer container = (SearchResultsView.PropertyContainer)listItem;
+		if (listItem instanceof PropertyContainer) {
+			PropertyContainer container = (PropertyContainer)listItem;
 			Property model = container.getProperty();			
 			safeHtmlBuilder.append(PROPERTY_ITEM_TEMPLATE.content(model.imgUrl(),
 					model.formattedPrice(), model.title()));
-		} else if (listItem instanceof SearchResultsView.LoadMoreIndicator) {
-			SearchResultsView.LoadMoreIndicator loadMore = (SearchResultsView.LoadMoreIndicator)listItem;
+		} else if (listItem instanceof LoadMoreIndicator) {
+			LoadMoreIndicator loadMore = (LoadMoreIndicator)listItem;
 			safeHtmlBuilder.append(LOAD_MORE_ITEM_TEMPLATE.content(loadMore.getSearchString(),
 					loadMore.getDisplayedProperties(), loadMore.getTotalProperties()));
 		}
   }
 
 	@Override
-  public boolean canBeSelected(SearchResultsView.ListItem model) {
+  public boolean canBeSelected(ListItem model) {
 	  // TODO Auto-generated method stub
 	  return false;
   }

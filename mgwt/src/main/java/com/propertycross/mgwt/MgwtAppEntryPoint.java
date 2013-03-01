@@ -13,16 +13,27 @@ import com.google.web.bindery.event.shared.SimpleEventBus;
 import com.googlecode.mgwt.mvp.client.AnimatableDisplay;
 import com.googlecode.mgwt.mvp.client.AnimatingActivityManager;
 import com.googlecode.mgwt.mvp.client.history.MGWTPlaceHistoryHandler;
+import com.googlecode.mgwt.storage.client.LocalStorageGwtImpl;
+import com.googlecode.mgwt.storage.client.Storage;
 import com.googlecode.mgwt.ui.client.MGWT;
 import com.googlecode.mgwt.ui.client.MGWTSettings;
 import com.googlecode.mgwt.ui.client.MGWTSettings.ViewPort;
 import com.googlecode.mgwt.ui.client.MGWTSettings.ViewPort.DENSITY;
+import com.propertycross.mgwt.locations.OrderedSearchesManager;
 import com.propertycross.mgwt.place.PropertyCrossPlace;
+import com.propertycross.mgwt.properties.OrderedPropertiesManager;
 
 public class MgwtAppEntryPoint implements EntryPoint {
 
 	public static PlaceController placeController;
+	
 	private static AnimatableDisplay animatableDisplay;
+	
+	private static final Storage storage = new LocalStorageGwtImpl();
+
+	public static OrderedSearchesManager searchesManager = new OrderedSearchesManager(storage, 5);
+	
+	public static OrderedPropertiesManager propertiesManager = new OrderedPropertiesManager(storage);
 
 	@Override
 	public void onModuleLoad() {
@@ -40,7 +51,7 @@ public class MgwtAppEntryPoint implements EntryPoint {
 		PhoneActivityMapper appActivityMapper = new PhoneActivityMapper();
 		PhoneAnimationMapper appAnimationMapper = new PhoneAnimationMapper();
 		AnimatingActivityManager activityManager = new AnimatingActivityManager(
-		    new CachingActivityMapper(appActivityMapper), appAnimationMapper, eventBus);
+		    new HACKtivityMapper(appActivityMapper), appAnimationMapper, eventBus);
 
 		activityManager.setDisplay(animatableDisplay);
 		RootPanel.get().add(animatableDisplay);

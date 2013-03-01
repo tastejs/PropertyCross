@@ -8,9 +8,9 @@ public class SearchResultsPage extends PageBase {
   private final SearchResultsView view;
 
   public SearchResultsPage() {
-  	super(true, "results");
+  	super(true, false, "results");
     view = new SearchResultsView(this);
-    addBodyContent(view, false);
+    addContent(view);
   }
   
   public SearchResultsActivity.View getView() {

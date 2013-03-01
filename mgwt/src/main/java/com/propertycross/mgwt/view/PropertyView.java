@@ -14,6 +14,8 @@ import com.propertycross.mgwt.properties.Property;
 public class PropertyView extends ViewBase implements PropertyActivity.View{
 
 	private static PropertyViewUiBinder uiBinder = GWT.create(PropertyViewUiBinder.class);
+	
+	private ViewEventHandler eventHandler;
 
 	interface PropertyViewUiBinder extends UiBinder<Widget, PropertyView> {
 	}
@@ -34,13 +36,10 @@ public class PropertyView extends ViewBase implements PropertyActivity.View{
 	@UiField
 	Image propertyImage;
 	
-	
-
 
 	@Override
   public void setEventHandler(ViewEventHandler eventHandler) {
-	  // TODO Auto-generated method stub
-	  
+	  this.eventHandler = eventHandler;
   }
 
 	@Override
@@ -51,4 +50,15 @@ public class PropertyView extends ViewBase implements PropertyActivity.View{
 	  propertySummary.setInnerHTML(property.summary());
 	  propertyImage.setUrl(property.imgUrl());
   }
+
+	@Override
+  public void setFavourited(boolean isFavourited) {
+	  pageBase.setFavouriteButtonText(isFavourited ? "-" : "+");
+  }
+	
+	@Override
+	public void favouriteClicked() {
+	  super.favouriteClicked();
+	  this.eventHandler.toggleFavouriteState();
+	}
 }

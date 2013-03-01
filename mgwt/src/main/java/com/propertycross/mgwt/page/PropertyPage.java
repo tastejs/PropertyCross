@@ -6,11 +6,15 @@ import com.propertycross.mgwt.view.PropertyView;
 public class PropertyPage extends PageBase {
 
   private final PropertyView view;
+  
 
   public PropertyPage() {
-    super(true, "Property Details");
+    super(true, true, "Property Details");
+    
+    favouritesButton.setText("+");
+	  
     view = new PropertyView(this);
-    addBodyContent(view, false);
+    addContent(view);
   }
   
   public PropertyActivity.View getView() {

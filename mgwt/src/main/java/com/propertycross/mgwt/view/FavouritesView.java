@@ -10,32 +10,27 @@ import com.google.gwt.user.client.ui.Widget;
 import com.googlecode.mgwt.ui.client.widget.CellList;
 import com.googlecode.mgwt.ui.client.widget.celllist.CellSelectedEvent;
 import com.googlecode.mgwt.ui.client.widget.celllist.CellSelectedHandler;
-import com.propertycross.mgwt.activity.SearchResultsActivity;
-import com.propertycross.mgwt.activity.SearchResultsActivity.ViewEventHandler;
+import com.propertycross.mgwt.activity.FavouritesActivity;
+import com.propertycross.mgwt.activity.FavouritesActivity.ViewEventHandler;
 import com.propertycross.mgwt.page.PageBase;
 import com.propertycross.mgwt.properties.Property;
 import com.propertycross.mgwt.view.listitem.ListItem;
-import com.propertycross.mgwt.view.listitem.LoadMoreIndicator;
 import com.propertycross.mgwt.view.listitem.PropertyContainer;
 
-public class SearchResultsView extends ViewBase implements SearchResultsActivity.View {
-	
+public class FavouritesView extends ViewBase implements FavouritesActivity.View{
+
 	private final SearchResultsListItemCell cell = new SearchResultsListItemCell();
+	
+	private ArrayList<ListItem> listItems;
 	
 	private ViewEventHandler eventHandler;
 	
-	private List<ListItem> listItems;
+	private static FavouritesViewUiBinder uiBinder = GWT.create(FavouritesViewUiBinder.class);
 
-
-	private static SearchResultsViewUiBinder uiBinder = GWT.create(SearchResultsViewUiBinder.class);
-
-	interface SearchResultsViewUiBinder extends UiBinder<Widget, SearchResultsView> {
+	interface FavouritesViewUiBinder extends UiBinder<Widget, FavouritesView> {
 	}
-	
-	@UiField(provided = true)
-	CellList<ListItem> cellList = new CellList<ListItem>(cell);
 
-	public SearchResultsView(PageBase pageBase) {
+	public FavouritesView(PageBase pageBase) {
 		super(pageBase);
 		initWidget(uiBinder.createAndBindUi(this));
 		
@@ -46,13 +41,12 @@ public class SearchResultsView extends ViewBase implements SearchResultsActivity
       	if (listItem instanceof PropertyContainer) {
       		eventHandler.propertySelected(((PropertyContainer)listItem).getProperty());
       	}
-      	if (listItem instanceof LoadMoreIndicator) {
-      		eventHandler.loadMoreClicked();
-      	}
       }
     });
 	}
-
+	
+	@UiField(provided = true)
+	CellList<ListItem> cellList = new CellList<ListItem>(cell);
 
 	@Override
   public void setEventHandler(ViewEventHandler eventHandler) {
@@ -60,24 +54,12 @@ public class SearchResultsView extends ViewBase implements SearchResultsActivity
   }
 
 	@Override
-  public void setSearchResult(int totalResult, int pageNumber, int totalPages, List<Property> properties,
-      String searchLocation) {
-
+  public void setFavourites(List<Property> properties) {
 		listItems = new ArrayList<ListItem>();
 		for(Property property : properties) {
 			listItems.add(new PropertyContainer(property));
 		}
-		listItems.add(new LoadMoreIndicator(properties.size(), totalResult, searchLocation));
-		cellList.render(listItems);	
-		pageBase.setTitle(Integer.toString(properties.size()) + " of " + Integer.toString(totalResult) + " matches");
-		updateScrollingHost();
-  }
-
-
-	@Override
-  public void setLoadMoreVisible(boolean visible) {
-	  // TODO Auto-generated method stub
-	  
+	  cellList.render(listItems);
   }
 
 }
