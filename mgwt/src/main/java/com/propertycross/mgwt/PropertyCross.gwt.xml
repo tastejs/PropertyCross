@@ -5,6 +5,7 @@
 	<inherits name="com.google.gwt.user.User" />
 	<inherits name="com.google.gwt.activity.Activity" />
 	<inherits name="com.googlecode.mgwt.MGWT" />
+	<inherits name="com.google.gwt.i18n.I18N"/>
 	<inherits name="com.google.gwt.json.JSON" />
 	<inherits name='com.googlecode.gwtphonegap.PhoneGap' />
 	<inherits name="com.google.gwt.logging.Logging" />

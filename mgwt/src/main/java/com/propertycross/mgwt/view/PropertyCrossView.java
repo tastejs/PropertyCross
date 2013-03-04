@@ -94,6 +94,13 @@ public class PropertyCrossView extends ViewBase implements PropertyCrossActivity
 			}
 		});
 
+		myLocationButton.addTapHandler(new TapHandler() {
+			@Override
+			public void onTap(TapEvent event) {
+				eventHandler.myLocationButtonClicked();
+			}
+		});
+
 		searchTextField.addKeyUpHandler(new KeyUpHandler() {
 			@Override
 			public void onKeyUp(KeyUpEvent event) {

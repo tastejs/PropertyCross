@@ -1,14 +1,11 @@
 package com.propertycross.mgwt.activity.searchitem;
 
+import com.propertycross.mgwt.locations.Search;
 import com.propertycross.mgwt.nestoria.QueryBuilder;
-import com.propertycross.mgwt.nestoria.RequestSender;
 import com.propertycross.mgwt.nestoria.RequestSender.Callback;
-import com.propertycross.mgwt.nestoria.gwt.GwtRequestSender;
 
 public class PlainTextSearchItem extends SearchItemBase {
 
-	private final RequestSender requestSender = new GwtRequestSender();
-	
 	private final String searchText;
 	
 	public PlainTextSearchItem(String text) {
@@ -29,9 +26,11 @@ public class PlainTextSearchItem extends SearchItemBase {
     q.doQuery(c);
   }
 
+
 	@Override
-  public String getSearchText() {
-	  return searchText;
+  public Search createPersistentSearch(int resultsCount) {
+		return new Search(this.getDisplayText(), this.searchText,
+					    resultsCount);
   }
 
 }

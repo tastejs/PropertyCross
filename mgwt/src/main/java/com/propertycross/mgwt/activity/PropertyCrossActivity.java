@@ -2,10 +2,16 @@ package com.propertycross.mgwt.activity;
 
 import java.util.List;
 
+import com.google.gwt.core.client.Callback;
 import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.geolocation.client.Geolocation;
+import com.google.gwt.geolocation.client.Position.Coordinates;
+import com.google.gwt.geolocation.client.PositionError;
+import com.google.gwt.geolocation.client.Position;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.googlecode.mgwt.mvp.client.MGWTAbstractActivity;
 import com.propertycross.mgwt.MgwtAppEntryPoint;
+import com.propertycross.mgwt.activity.searchitem.GeolocationSearchItem;
 import com.propertycross.mgwt.activity.searchitem.PlainTextSearchItem;
 import com.propertycross.mgwt.activity.searchitem.SearchItemBase;
 import com.propertycross.mgwt.locations.Location;
@@ -58,6 +64,8 @@ public class PropertyCrossActivity extends MGWTAbstractActivity {
 
 	public interface ViewEventHandler {
 		void searchButtonClicked();
+		
+		void myLocationButtonClicked();
 
 		void searchTextChanged(String searchText);
 
@@ -89,7 +97,14 @@ public class PropertyCrossActivity extends MGWTAbstractActivity {
 
 		@Override
 		public void recentSearchSelected(Search search) {
-			searchItem = new PlainTextSearchItem(search.displayText(), search.searchText());
+			if (search.searchText().startsWith(GeolocationSearchItem.SEARCH_PREFIX)) {
+				String latLon = search.searchText().substring(4);
+				String[] components = latLon.split(",");
+				searchItem = new GeolocationSearchItem(Double.parseDouble(components[0]), Double.parseDouble(components[1]));
+			}
+			else {
+				searchItem = new PlainTextSearchItem(search.displayText(), search.searchText());
+			}
 			view.setSearchText(searchItem.getDisplayText());
 			searchForProperties();
 		}
@@ -98,6 +113,12 @@ public class PropertyCrossActivity extends MGWTAbstractActivity {
 		public void favouritesClicked() {
 			MgwtAppEntryPoint.placeController.goTo(new FavouritesPlace());
 		}
+
+		@Override
+    public void myLocationButtonClicked() {
+	    handleLocationButtonClicked();
+    }
+
 	};
 
 	@Override
@@ -111,10 +132,30 @@ public class PropertyCrossActivity extends MGWTAbstractActivity {
 	private void searchForProperties() {
 		view.setIsLoading(true);
 		view.setMessage("");
-
 		searchItem.doQuery(new QueryCallback());
 	}
+	
+	private void handleLocationButtonClicked() {
+		 Geolocation g = Geolocation.getIfSupported();
+		 view.setMessage("Finding location ...");
+     g.getCurrentPosition(new Callback<Position, PositionError>() {
 
+         @Override public void onSuccess(final Position result)
+         {
+        	 view.setMessage("");
+        	 Coordinates coordinates = result.getCoordinates();
+           searchItem = new GeolocationSearchItem(coordinates.getLatitude(), coordinates.getLongitude());
+           searchItem.doQuery(new QueryCallback());
+         }
+
+         @Override public void onFailure(PositionError ex)
+         {
+        	 view.setMessage("Unable to detect location.");
+         }
+
+     });
+  }
+	
 	private final class QueryCallback implements RequestSender.Callback {
 
 		public QueryCallback() {
@@ -129,9 +170,7 @@ public class PropertyCrossActivity extends MGWTAbstractActivity {
 		@Override
 		public void onResultsFound(ListingsFound response) {
 			view.setIsLoading(false);
-
-			MgwtAppEntryPoint.searchesManager.add(new Search(searchItem.getDisplayText(), searchItem.getSearchText(),
-			    response.getTotalResults()));
+			MgwtAppEntryPoint.searchesManager.add(searchItem.createPersistentSearch(response.getTotalResults()));
 			view.displayRecentSearches(MgwtAppEntryPoint.searchesManager.recentSearches());
 			MgwtAppEntryPoint.placeController.goTo(new SearchResultsPlace(response, searchItem));
 		}

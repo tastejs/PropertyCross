@@ -1,8 +1,13 @@
 package com.propertycross.mgwt.activity.searchitem;
 
+import com.propertycross.mgwt.locations.Search;
+import com.propertycross.mgwt.nestoria.RequestSender;
 import com.propertycross.mgwt.nestoria.RequestSender.Callback;
+import com.propertycross.mgwt.nestoria.gwt.GwtRequestSender;
 
 public abstract class SearchItemBase {
+	
+	protected final RequestSender requestSender = new GwtRequestSender();
 	
 	private int pageNumber;
 
@@ -24,9 +29,9 @@ public abstract class SearchItemBase {
   	return displayText;
   }
 	
-	public abstract String getSearchText();
-
 	private final String displayText;
 	
 	public abstract void doQuery(final Callback c);
+	
+	public abstract Search createPersistentSearch(int resultsCount);
 }
