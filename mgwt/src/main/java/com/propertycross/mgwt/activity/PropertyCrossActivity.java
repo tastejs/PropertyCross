@@ -5,9 +5,9 @@ import java.util.List;
 import com.google.gwt.core.client.Callback;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.geolocation.client.Geolocation;
+import com.google.gwt.geolocation.client.Position;
 import com.google.gwt.geolocation.client.Position.Coordinates;
 import com.google.gwt.geolocation.client.PositionError;
-import com.google.gwt.geolocation.client.Position;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.googlecode.mgwt.mvp.client.MGWTAbstractActivity;
 import com.propertycross.mgwt.MgwtAppEntryPoint;
@@ -22,6 +22,13 @@ import com.propertycross.mgwt.page.PropertyCrossPage;
 import com.propertycross.mgwt.place.FavouritesPlace;
 import com.propertycross.mgwt.place.SearchResultsPlace;
 
+/**
+ * An activity for the front-page of this application. This activity allows the
+ * user to search by a text string or their current location.
+ * 
+ * @author ceberhardt
+ * 
+ */
 public class PropertyCrossActivity extends MGWTAbstractActivity {
 
 	private SearchItemBase searchItem;
@@ -64,7 +71,7 @@ public class PropertyCrossActivity extends MGWTAbstractActivity {
 
 	public interface ViewEventHandler {
 		void searchButtonClicked();
-		
+
 		void myLocationButtonClicked();
 
 		void searchTextChanged(String searchText);
@@ -101,8 +108,7 @@ public class PropertyCrossActivity extends MGWTAbstractActivity {
 				String latLon = search.searchText().substring(4);
 				String[] components = latLon.split(",");
 				searchItem = new GeolocationSearchItem(Double.parseDouble(components[0]), Double.parseDouble(components[1]));
-			}
-			else {
+			} else {
 				searchItem = new PlainTextSearchItem(search.displayText(), search.searchText());
 			}
 			view.setSearchText(searchItem.getDisplayText());
@@ -115,9 +121,9 @@ public class PropertyCrossActivity extends MGWTAbstractActivity {
 		}
 
 		@Override
-    public void myLocationButtonClicked() {
-	    handleLocationButtonClicked();
-    }
+		public void myLocationButtonClicked() {
+			handleLocationButtonClicked();
+		}
 
 	};
 
@@ -134,28 +140,28 @@ public class PropertyCrossActivity extends MGWTAbstractActivity {
 		view.setMessage("");
 		searchItem.doQuery(new QueryCallback());
 	}
-	
+
 	private void handleLocationButtonClicked() {
-		 Geolocation g = Geolocation.getIfSupported();
-		 view.setMessage("Finding location ...");
-     g.getCurrentPosition(new Callback<Position, PositionError>() {
+		Geolocation g = Geolocation.getIfSupported();
+		view.setMessage("Finding location ...");
+		g.getCurrentPosition(new Callback<Position, PositionError>() {
 
-         @Override public void onSuccess(final Position result)
-         {
-        	 view.setMessage("");
-        	 Coordinates coordinates = result.getCoordinates();
-           searchItem = new GeolocationSearchItem(coordinates.getLatitude(), coordinates.getLongitude());
-           searchItem.doQuery(new QueryCallback());
-         }
+			@Override
+			public void onSuccess(final Position result) {
+				view.setMessage("");
+				Coordinates coordinates = result.getCoordinates();
+				searchItem = new GeolocationSearchItem(coordinates.getLatitude(), coordinates.getLongitude());
+				searchItem.doQuery(new QueryCallback());
+			}
 
-         @Override public void onFailure(PositionError ex)
-         {
-        	 view.setMessage("Unable to detect location.");
-         }
+			@Override
+			public void onFailure(PositionError ex) {
+				view.setMessage("Unable to detect location.");
+			}
 
-     });
-  }
-	
+		});
+	}
+
 	private final class QueryCallback implements RequestSender.Callback {
 
 		public QueryCallback() {

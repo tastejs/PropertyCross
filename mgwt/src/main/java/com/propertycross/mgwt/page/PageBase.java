@@ -6,6 +6,7 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 import com.googlecode.mgwt.dom.client.event.tap.TapEvent;
 import com.googlecode.mgwt.dom.client.event.tap.TapHandler;
+import com.googlecode.mgwt.ui.client.MGWT;
 import com.googlecode.mgwt.ui.client.widget.HeaderButton;
 import com.googlecode.mgwt.ui.client.widget.HeaderPanel;
 import com.googlecode.mgwt.ui.client.widget.LayoutPanel;
@@ -50,7 +51,7 @@ public abstract class PageBase implements IsWidget {
 		main.add(headerPanel);
 		main.add(scrollPanel);
 
-		if (showBackButton) {
+		if (showBackButton && !MGWT.getOsDetection().isAndroid()) {
 			headerPanel.setLeftWidget(headerBackButton);
 		}
 

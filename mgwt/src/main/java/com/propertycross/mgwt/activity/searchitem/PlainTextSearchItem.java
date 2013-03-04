@@ -9,13 +9,13 @@ public class PlainTextSearchItem extends SearchItemBase {
 	private final String searchText;
 	
 	public PlainTextSearchItem(String text) {
-		super(text);
+		super(text.trim());
 	  this.searchText = text;
 	}
 	
 	public PlainTextSearchItem(String displayText, String searchText) {
-	  super(displayText);
-	  this.searchText = searchText;
+	  super(displayText.trim());
+	  this.searchText = searchText.trim();
   }
 
 	@Override

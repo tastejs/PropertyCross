@@ -10,6 +10,9 @@ import com.propertycross.mgwt.page.FavouritesPage;
 import com.propertycross.mgwt.place.PropertyPlace;
 import com.propertycross.mgwt.properties.Property;
 
+/**
+ * An activity which allows the user to view their favourites.
+ */
 public class FavouritesActivity extends MGWTAbstractActivity {
 
 	private final FavouritesPage page = new FavouritesPage();

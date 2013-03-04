@@ -16,6 +16,11 @@ import com.propertycross.mgwt.place.PropertyPlace;
 import com.propertycross.mgwt.place.SearchResultsPlace;
 import com.propertycross.mgwt.properties.Property;
 
+/**
+ * An activity which renders a collection of search results.
+ * @author ceberhardt
+ *
+ */
 public class SearchResultsActivity extends MGWTAbstractActivity {
 
 	private final SearchResultsPage page = new SearchResultsPage();

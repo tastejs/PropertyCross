@@ -37,7 +37,7 @@ public class MgwtAppEntryPoint implements EntryPoint {
 
 	@Override
 	public void onModuleLoad() {
-		// setExceptionHandler();
+		setExceptionHandler();
 
 		SimpleEventBus eventBus = new SimpleEventBus();
 		placeController = new PlaceController(eventBus);
@@ -65,8 +65,6 @@ public class MgwtAppEntryPoint implements EntryPoint {
 	}
 
 	private void prepareViewPort() {
-		
-		
 		ViewPort viewPort = new MGWTSettings.ViewPort();
 		viewPort.setTargetDensity(DENSITY.MEDIUM);
 		viewPort.setUserScaleAble(false).setMinimumScale(1.0).setMinimumScale(1.0).setMaximumScale(1.0);
