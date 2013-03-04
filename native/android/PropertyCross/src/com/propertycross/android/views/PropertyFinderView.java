@@ -77,8 +77,9 @@ public class PropertyFinderView extends SherlockActivity implements PropertyFind
 	        @Override
 			public void afterTextChanged(Editable s) {
 	        	if (searchTextChangedCallback != null) {
+	        	    String searchTerm = s.toString().trim();	        	    
 	        		searchTextChangedCallback.complete(
-	        				new SearchTextChangedEvent(this, new SearchTextChangedEventArgs(s.toString())));
+	        				new SearchTextChangedEvent(this, new SearchTextChangedEventArgs(searchTerm)));
 	        	}
 	        }
 	        
