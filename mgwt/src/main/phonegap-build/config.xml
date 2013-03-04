@@ -22,7 +22,6 @@
     <preference name="orientation"                value="portrait" />
     <preference name="webviewbounce"              value="false" />
     <preference name="prerendered-icon"           value="true" />
-    <preference name="auto-hide-splash-screen"    value="false" />
 
     <icon src="assets/icons/icon-72-2x.png" />
     <icon src="assets/icons/36x36.png"              gap:platform="android"    gap:density="ldpi" />
