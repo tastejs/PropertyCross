@@ -71,16 +71,17 @@ define(function (require) {
 
     // navigate to home
     application.navigateToHome();
+    
+    // hide the splash screen (ios only)
+    if (navigator.splashscreen) {
+      navigator.splashscreen.hide();
+    }
   }
 
   // startup the app
   if (/\/www\//.test(location)) {
     // on a device - wait for the PhoneGap device ready event
     document.addEventListener("deviceready", initialize, false);
-    // hide the splash screen (ios only)
-    if (navigator.splashscreen) {
-      navigator.splashscreen.hide();
-    }
   } else {
     // if there is we are not running on a phone - start the app immediately
     $(initialize);
