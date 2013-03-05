@@ -61,7 +61,7 @@ public class PropertyFinderView extends SherlockActivity implements PropertyFind
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		PropertyFinderApplication app = (PropertyFinderApplication) getApplicationContext();
+		PropertyFinderApplication app = PropertyFinderApplication.getApplication(this);
 		app.currentActivity = this;
 		
 		IMarshalInvokeService marshal = new MarshalInvokeService(app);
@@ -77,7 +77,7 @@ public class PropertyFinderView extends SherlockActivity implements PropertyFind
 	        @Override
 			public void afterTextChanged(Editable s) {
 	        	if (searchTextChangedCallback != null) {
-	        	    String searchTerm = s.toString().trim();	        	    
+	        	    String searchTerm = s.toString().trim();
 	        		searchTextChangedCallback.complete(
 	        				new SearchTextChangedEvent(this, new SearchTextChangedEventArgs(searchTerm)));
 	        	}

@@ -33,7 +33,7 @@ public class FavouritesView
 		
 		setListAdapter(new SearchResultsAdapter(this, new ArrayList<Property>()));
 		
-		PropertyFinderApplication app = (PropertyFinderApplication) getApplicationContext();
+		PropertyFinderApplication app = PropertyFinderApplication.getApplication(this);
 		presenter = (FavouritesPresenter) app.presenter;
 		presenter.setView(this);
 		app.currentActivity = this;		

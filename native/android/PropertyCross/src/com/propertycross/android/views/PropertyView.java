@@ -45,7 +45,7 @@ public class PropertyView extends SherlockActivity implements PropertyPresenter.
 		
 		placeholder = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
 		
-		PropertyFinderApplication app = (PropertyFinderApplication) getApplicationContext();
+		PropertyFinderApplication app = PropertyFinderApplication.getApplication(this);
 		presenter = (PropertyPresenter) app.presenter;
 		presenter.setView(this);
 		app.currentActivity = this;
