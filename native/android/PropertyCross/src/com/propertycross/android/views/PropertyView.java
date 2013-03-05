@@ -1,9 +1,6 @@
 package com.propertycross.android.views;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockActivity;
@@ -14,19 +11,18 @@ import com.propertycross.android.events.Callback;
 import com.propertycross.android.events.UIEvent;
 import com.propertycross.android.model.Property;
 import com.propertycross.android.presenter.PropertyPresenter;
-import com.propertycross.android.util.BitmapUtils;
+import com.propertycross.android.util.NetworkedCacheableImageView;
 
 public class PropertyView extends SherlockActivity implements PropertyPresenter.View {
 
 	private PropertyPresenter presenter;
 	private TextView priceText;
 	private TextView locationText;
-	private ImageView propertyImage;
+	private NetworkedCacheableImageView propertyImage;
 	private TextView overviewText;
 	private TextView informationText;
 	private boolean isFavourited;
 	private Callback<UIEvent> toggleFavouriteCallback;
-	private Bitmap placeholder;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -39,11 +35,9 @@ public class PropertyView extends SherlockActivity implements PropertyPresenter.
 		
 		priceText = (TextView) findViewById(R.id.property_price);
 		locationText = (TextView) findViewById(R.id.property_location);
-		propertyImage = (ImageView) findViewById(R.id.property_image);
+		propertyImage = (NetworkedCacheableImageView) findViewById(R.id.property_image);
 		overviewText = (TextView) findViewById(R.id.property_overview);
 		informationText = (TextView) findViewById(R.id.property_information);
-		
-		placeholder = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
 		
 		PropertyFinderApplication app = PropertyFinderApplication.getApplication(this);
 		presenter = (PropertyPresenter) app.presenter;
@@ -90,8 +84,7 @@ public class PropertyView extends SherlockActivity implements PropertyPresenter.
 	public void setProperty(Property property) {
 		priceText.setText(property.getFormattedPrice());
 		locationText.setText(property.getShortTitle());
-		
-		BitmapUtils.download(property.getImageUrl(), propertyImage, getResources(), placeholder);
+		propertyImage.loadImage(property.getImageUrl(), false);
 		
 		overviewText.setText(String.format(
 				getResources().getString(R.string.property_details),
