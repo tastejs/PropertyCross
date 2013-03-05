@@ -40,7 +40,7 @@ namespace com.propertycross.xamarin.android.Views
 		{
 			base.OnCreate (bundle);
 
-			var app = (PropertyFinderApplication)Application;
+			var app = PropertyFinderApplication.GetApplication(this);
 			app.CurrentActivity = this;
 
 			var uiMarshal = new MarshalInvokeService(app);

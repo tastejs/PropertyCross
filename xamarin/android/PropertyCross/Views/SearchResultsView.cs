@@ -39,7 +39,7 @@ namespace com.propertycross.xamarin.android.Views
 			ListView.AddFooterView(footer);
 			ListAdapter = new SearchResultsAdapter(this, new List<Property>() {});
 
-			var app = (PropertyFinderApplication)Application;
+			var app = PropertyFinderApplication.GetApplication(this);
 			presenter = (SearchResultsPresenter) app.Presenter;
 			presenter.SetView(this);
 			app.CurrentActivity = this;

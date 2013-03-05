@@ -33,7 +33,7 @@ namespace com.propertycross.xamarin.android.Views
 
 			ListAdapter = new SearchResultsAdapter(this, new List<Property>() {});
 			
-			var app = (PropertyFinderApplication)Application;
+			var app = PropertyFinderApplication.GetApplication(this);
 			presenter = (FavouritesPresenter) app.Presenter;
 			presenter.SetView(this);
 			app.CurrentActivity = this;
