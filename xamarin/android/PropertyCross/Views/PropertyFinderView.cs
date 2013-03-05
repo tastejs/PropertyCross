@@ -163,7 +163,12 @@ namespace com.propertycross.xamarin.android.Views
 
 		private void SearchText_Changed(object sender, EventArgs e)
 		{
-			SearchTextChanged(this, new SearchTextChangedEventArgs(searchText.Text));
+			String searchTerm = searchText.Text;
+			if (searchTerm != null)
+			{
+				searchTerm = searchTerm.Trim();
+				SearchTextChanged(this, new SearchTextChangedEventArgs(searchTerm));
+			}
 		}
 
 		private void LocationButton_Clicked(object sender, EventArgs e)
