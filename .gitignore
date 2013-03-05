@@ -1,4 +1,5 @@
 *.DS_Store
-
+*.xcuserstate
+*.xcbkptlist
 node_modules
 /rhomobile/bin
