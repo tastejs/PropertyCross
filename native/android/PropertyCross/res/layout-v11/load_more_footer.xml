@@ -3,7 +3,7 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@android:drawable/list_selector_background">
+    android:background="?android:attr/selectableItemBackground">
     <TextView
         android:id="@+id/tap_loadmore"
         android:layout_width="fill_parent"

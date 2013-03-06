@@ -9,5 +9,3 @@
 /android/PropertyCross/proguard-project.txt
 /android/PropertyCross/project.properties
 /android/PropertyCross/.*
-/android/ActionBarSherlock
-/android/PropertyCross/gen/com/ActionBarSherlock

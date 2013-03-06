@@ -9,6 +9,7 @@
     
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -18,16 +19,21 @@
         android:name=".views.PropertyFinderApplication">
         <activity
             android:name="com.propertycross.android.views.PropertyFinderView"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.propertycross.android.views.SearchResultsView" />
-        <activity android:name="com.propertycross.android.views.PropertyView" />
-        <activity android:name="com.propertycross.android.views.FavouritesView" />
+        <activity android:name="com.propertycross.android.views.SearchResultsView"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.propertycross.android.views.PropertyView"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.propertycross.android.views.FavouritesView"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

@@ -66,7 +66,7 @@ public class JsonWebPropertySearch implements IJsonPropertySearch {
 		
 		while(i.hasNext()) {
 			entry = i.next();
-			sb.append(String.format("%s=%s", entry.getKey(), entry.getValue().toString()));
+			sb.append(String.format("%s=%s", entry.getKey(), getValueOf(entry)));
 			
 			if(i.hasNext()) {
 				sb.append("&");
@@ -74,6 +74,16 @@ public class JsonWebPropertySearch implements IJsonPropertySearch {
 		}
 		
 		return sb.toString();
+	}
+	
+	private String getValueOf(Entry<String, Object> entry) {
+	    Object value = entry.getValue();
+	    if (value == null) {
+	        return "";
+	    } else {
+	        return value.toString();
+	    }
+	    
 	}
 	
 	private void executeWebRequest(final String url, final Callback<String> complete, final Callback<Exception> error) {

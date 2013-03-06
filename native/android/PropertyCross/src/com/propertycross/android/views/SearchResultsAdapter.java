@@ -4,28 +4,23 @@ import java.util.List;
 
 import com.propertycross.android.R;
 import com.propertycross.android.model.Property;
-import com.propertycross.android.util.BitmapUtils;
+import com.propertycross.android.util.NetworkedCacheableImageView;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 public class SearchResultsAdapter extends BaseAdapter {
 
 	private Context context;
 	private List<Property> data;
-	private Bitmap placeholder;
 	
 	public SearchResultsAdapter(Context c, List<Property> data) {
 		this.context = c;
 		this.data = data;
-		placeholder = BitmapFactory.decodeResource(c.getResources(), R.drawable.ic_launcher);
 	}
 	
 	@Override
@@ -67,7 +62,7 @@ public class SearchResultsAdapter extends BaseAdapter {
 			view = li.inflate(R.layout.property_search_row, parent, false);
 			
 			holder = new PropertySearchHolder();
-			holder.PropertyThumbnail = (ImageView) view.findViewById(R.id.property_thumb);
+			holder.PropertyThumbnail = (NetworkedCacheableImageView) view.findViewById(R.id.property_thumb);
 			holder.PriceText = (TextView) view.findViewById(R.id.property_search_price);
 			holder.DetailsText = (TextView) view.findViewById(R.id.property_search_details);
 			
@@ -83,15 +78,15 @@ public class SearchResultsAdapter extends BaseAdapter {
 				context.getResources().getString(R.string.property_summary),
 				item.getShortTitle(),
 				item.getBedrooms(),
-				item.getPropertyType()));	
+				item.getPropertyType()));
 		
-		BitmapUtils.download(item.getThumbnailUrl(), holder.PropertyThumbnail, context.getResources(), placeholder);
+		holder.PropertyThumbnail.loadImage(item.getThumbnailUrl(), false);
 		
 		return view;
 	}
 	
 	private class PropertySearchHolder {
-		public ImageView PropertyThumbnail;
+		public NetworkedCacheableImageView PropertyThumbnail;
 		public TextView PriceText;
 		public TextView DetailsText;
 	}
