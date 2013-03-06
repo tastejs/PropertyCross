@@ -143,6 +143,12 @@ public class PropertyFinderView extends SherlockActivity implements PropertyFind
 	}
 	
 	@Override
+	protected void onResume() {
+	    super.onResume();
+	    setMessage(null);
+	}
+	
+	@Override
 	protected void onPause() {
 		super.onPause();
 		geoLocationService.unsubscribe();
@@ -192,9 +198,6 @@ public class PropertyFinderView extends SherlockActivity implements PropertyFind
 	public void setIsLoading(boolean isLoading) {
 		if (isLoading) {
 			messageText.setText(R.string.searching);
-		}
-		else {
-			messageText.setText(null);
 		}
 		searchText.setEnabled(!isLoading);
 		myLocationButton.setEnabled(!isLoading);
