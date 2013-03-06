@@ -171,7 +171,7 @@ public class StatePersistenceService implements IStatePersistenceService {
 					SearchItem searchItem = null;
 
 					if (search.has(Geolocation)) {
-						JSONObject g = j.getJSONObject(Geolocation);
+						JSONObject g = search.getJSONObject(Geolocation);
 						double lon = g.getDouble("longitude");
 						double lat = g.getDouble("latitude");
 						searchItem = new GeoLocationSearchItem(new GeoLocation(
@@ -179,7 +179,7 @@ public class StatePersistenceService implements IStatePersistenceService {
 					}
 
 					else if (search.has(Plaintext)) {
-						JSONObject p = j.getJSONObject(Plaintext);
+						JSONObject p = search.getJSONObject(Plaintext);
 						String searchText = p.getString("search_text");
 						searchItem = new PlainTextSearchItem(searchText);
 					}
