@@ -35,8 +35,15 @@ public class FavouritesView
 		
 		PropertyFinderApplication app = PropertyFinderApplication.getApplication(this);
 		presenter = (FavouritesPresenter) app.presenter;
-		presenter.setView(this);
 		app.currentActivity = this;		
+	}
+	
+	@Override
+	protected void onResume() {
+	    super.onResume();
+	    if (presenter != null) {
+	        presenter.setView(this);
+	    }
 	}
 	
 	@Override
@@ -61,7 +68,7 @@ public class FavouritesView
 	@Override
 	public void setFavourites(List<Property> properties) {
 		if(properties != null) {
-			((SearchResultsAdapter) getListAdapter()).addRange(properties);
+		    setListAdapter(new SearchResultsAdapter(this, properties));
 		}
 	}
 
