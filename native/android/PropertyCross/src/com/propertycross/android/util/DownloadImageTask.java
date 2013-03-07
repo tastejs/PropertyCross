@@ -1,63 +1,69 @@
 package com.propertycross.android.util;
 
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.ref.WeakReference;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
+import uk.co.senab.bitmapcache.BitmapLruCache;
+import uk.co.senab.bitmapcache.CacheableBitmapDrawable;
 
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.ImageView;
 
-public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+public class DownloadImageTask extends AsyncTask<String, Void, CacheableBitmapDrawable> {
 
-	private WeakReference<ImageView> imageRef;
-	private String url;
-	
-	public DownloadImageTask(ImageView image) {
-		imageRef = new WeakReference<ImageView>(image);
-		url = "";
-	}
-	
-	public String getUrl() {
-		return url;
-	}
+    private static final String TAG = "DownloadImageTask";
+    private final BitmapLruCache cache;
+    private final WeakReference<ImageView> imageRef;
+    private final BitmapFactory.Options decodeOptions;
 
-	@Override
-	protected Bitmap doInBackground(String... args) {
-		url = args[0];
-		Bitmap bitmap = null;
-		try {
-			HttpClient c = new DefaultHttpClient();
-			HttpGet g = new HttpGet(url);
-			HttpResponse r = c.execute(g);
-			
-			bitmap = BitmapFactory.decodeStream(r.getEntity().getContent());			
-		}
-		catch(Exception e) {
-			
-		}
-		
-		return bitmap;
-	}
-	
-	@Override
-	protected void onPostExecute(Bitmap result) {
-		Bitmap bitmap = result;
-		
-		if (isCancelled()) {
-			bitmap = null;
-		}
-		if (imageRef != null && bitmap != null) {
-			ImageView image = imageRef.get();
-			DownloadImageTask task = BitmapUtils.getTask(image);
-			
-			if (this == task && image != null) {
-				image.setImageBitmap(bitmap);
-			}
-		}
-	}	
+    DownloadImageTask(ImageView imageView, BitmapLruCache cache, BitmapFactory.Options decodeOpts) {
+        this.cache = cache;
+        imageRef = new WeakReference<ImageView>(imageView);
+        decodeOptions = decodeOpts;
+    }
+
+    @Override
+    protected CacheableBitmapDrawable doInBackground(String... params) {
+        try {
+            if (imageRef.get() == null) {
+                return null;
+            }
+
+            final String url = params[0];
+            CacheableBitmapDrawable result = cache.get(url, decodeOptions);
+
+            if (result == null) {
+                Log.d(TAG, "Downloading image from: " + url);
+
+                HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
+                InputStream is = new BufferedInputStream(conn.getInputStream());
+                result = cache.put(url, is, decodeOptions);
+            } else {
+                Log.d(TAG, "Got from Cache: " + url);
+            }
+
+            return result;
+
+        } catch (IOException e) {
+            Log.e(TAG, e.toString());
+        }
+
+        return null;
+    }
+
+    @Override
+    protected void onPostExecute(CacheableBitmapDrawable result) {
+        super.onPostExecute(result);
+
+        ImageView iv = imageRef.get();
+        if (iv != null) {
+            iv.setImageDrawable(result);
+        }
+    }
 }
