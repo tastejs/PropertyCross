@@ -20,6 +20,13 @@
 	top: 7px;;
 }
 
+.error-drawer > * {
+	background-color: #ffbbbb;
+	padding: 6px 3px;
+	border-top: solid 3px #f00;
+	border-bottom: solid 3px #f00;
+}
+
 .panel-row {
 	margin: 20px 20px 20px 20px;
 }

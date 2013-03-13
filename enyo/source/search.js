@@ -1,6 +1,11 @@
 enyo.kind({
 	name: "SearchPage",
 	kind: "FittableRows",
+
+	events: {
+		onGoResults: ""
+	},
+
 	components: [
 		{kind: "onyx.Toolbar", components: [
 			{content: "PropertyCross", classes: "header-center"},
@@ -17,25 +22,27 @@ enyo.kind({
 			{kind: "onyx.Button", content: "Go", onclick: "search"},
 			{kind: "onyx.Button", content: "My location"}
 		]},
-		{name: "recentBox", kind: "onyx.Groupbox", classes: "panel-row", style: "margin-bottom:20px", fit: true, layoutKind:"FittableRowsLayout", components: [
-			{kind: "onyx.GroupboxHeader", content: "Recent searches"},
-			{name: "recentList", kind: "List", fit: true, touch: true, onSetupItem: "setupRecentListItem", components: [
-				{name: "item", style: "font-size:20px;", classes: "item enyo-border-box", ontap: "recentListItemTap", components: [
-					{name: "listItemRecent", classes: "recent"},
-					{name: "listItemMatches", classes: "matches"}
+		{name: "searchError", kind: "onyx.Drawer", open: false, classes: "panel-row error-drawer", components: [
+			{name: "searchErrorContent", content: "There was a problem with your search."}
+		]},
+		{kind: "Panels", name:"searchBoxes", fit:true, realtimeFit: true, classes: "panel-row", style: "margin-bottom:20px", components: [
+			{name: "recentBox", kind: "onyx.Groupbox", style: "background-color: yellow", fit: true, layoutKind:"FittableRowsLayout", components: [
+				{kind: "onyx.GroupboxHeader", content: "Recent searches"},
+				{name: "recentList", kind: "List", fit: true, touch: true, onSetupItem: "setupRecentListItem", components: [
+					{name: "item1", style: "font-size:20px;", classes: "item enyo-border-box", ontap: "recentListItemTap", components: [
+						{name: "listItemRecent", classes: "recent"},
+						{name: "listItemMatches", classes: "matches"}
+					]}
+				]}
+			]},
+			{name: "suggestedBox", kind: "onyx.Groupbox",  style: "background-color: pink", fit: true, layoutKind:"FittableRowsLayout", components: [
+				{kind: "onyx.GroupboxHeader", content: "Suggested locations"},
+				{name: "suggestedList", kind: "List", fit: true, touch: true, onSetupItem: "setupSuggestedListItem", components: [
+					{name: "item2", style: "font-size:20px;", classes: "item enyo-border-box", ontap: "suggestedListItemTap", components: [
+						{name: "listItemSuggested", classes: "recent"}
+					]}
 				]}
 			]}
-		]},
-		{name: "suggestedBox", kind: "onyx.Groupbox", classes: "panel-row", style: "margin-bottom:20px", fit: true, layoutKind:"FittableRowsLayout", components: [
-			{kind: "onyx.GroupboxHeader", content: "Suggested locations"},
-			{name: "suggestedList", kind: "List", fit: true, touch: true, onSetupItem: "setupSuggestedListItem", components: [
-				{name: "item", style: "font-size:20px;", classes: "item enyo-border-box", ontap: "suggestedListItemTap", components: [
-					{name: "listItemSuggested", classes: "recent"}
-				]}
-			]}
-		]},
-		{name: "searchError", showing: false, classes: "panel-row", components: [
-			{content: "There was a problem with your search."}
 		]},
 		{name: "searchingPopup", style: "text-align:center", kind: "onyx.Popup", centered: true, floating: true, scrim: true, components: [
 			{kind: "onyx.Spinner"},
@@ -51,16 +58,21 @@ enyo.kind({
 		this.inherited(arguments);
 	},
 
+	rendered: function() {
+		this.inherited(arguments);
+		this.$.searchBoxes.setIndex(0);
+	},
+
 	setupRecentListItem: function (inSender, inEvent) {
 		var i = inEvent.index;
-		this.$.item.addRemoveClass("onyx-selected", inSender.isSelected(inEvent.index));
+		this.$.item1.addRemoveClass("onyx-selected", inSender.isSelected(inEvent.index));
 		this.$.listItemRecent.setContent(this.recentLocations[i].search);
 		this.$.listItemMatches.setContent(this.recentLocations[i].matches);
 	},
 
 	setupSuggestedListItem: function (inSender, inEvent) {
 		var i = inEvent.index;
-		this.$.item.addRemoveClass("onyx-selected", inSender.isSelected(inEvent.index));
+		this.$.item2.addRemoveClass("onyx-selected", inSender.isSelected(inEvent.index));
 		this.$.listItemSuggested.setContent(this.suggestedLocations[i].title);
 	},
 
@@ -89,6 +101,7 @@ enyo.kind({
 			this.$.searchingPopup.show();
 			var jsonp = new enyo.JsonpRequest({url:"http://api.nestoria.co.uk/api", callbackName:"callback"});
 			jsonp.response(this, "processResult");
+			jsonp.error(this, "processError");
 			jsonp.go({
 			                pretty : '1',
 			                action : 'search_listings',
@@ -98,6 +111,11 @@ enyo.kind({
 			                'place_name': searchVal
 			            });
 		}
+	},
+
+	processError: function(inSender, inResponse) {
+		this.$.searchingPopup.hide();
+		this.showSearchError("An error occurred while searching. Please check your network connection and try again.");
 	},
 
 	processResult: function(inSender, inResponse) {
@@ -111,19 +129,25 @@ enyo.kind({
 			case "101":
 			case "102":
 				console.log(">>>> Search results: " + this.searchResults.total_results);
-				this.addToSearchHistory({search: this.searchResults.locations[0].title, matches: this.searchResults.total_results});
+				if (this.searchResults.total_results !== 0) {
+					this.addToSearchHistory({search: this.searchResults.locations[0].title, matches: this.searchResults.total_results});
+				} else {
+					this.showSearchError("There were no properties found for the given location.");
+				}
 				this.showRecentList();
-		    break;
+				this.doGoResults();
+				break;
 			case "200":
 			case "202":
-		  	console.log(">>>> Ambiguous search.");
+				console.log(">>>> Ambiguous search.");
 				this.suggestedLocations = this.searchResults.locations;
 				this.$.suggestedList.setCount(this.suggestedLocations.length);
 				this.showSuggestedList();
-		    break;
-		  default:
-		    console.log(">>>> Search error.");
-				this.showSearchError();
+				break;
+			default:
+				console.log(">>>> Search error.");
+				this.showSearchError("The location given was not recognised.");
+				this.showRecentList();
 		}
 	},
 
@@ -143,22 +167,25 @@ enyo.kind({
 	},
 
 	showRecentList: function() {
-		this.$.searchError.setShowing(false);
-		this.$.suggestedBox.setShowing(false);
-		this.$.recentBox.setShowing(true);
-		this.$.recentList.refresh();
+		this.$.searchError.setOpen(false);
+		this.$.searchBoxes.setIndex(0);
+//		this.$.recentList.refresh();
 	},
 
 	showSuggestedList: function() {
-		this.$.searchError.setShowing(false);
-		this.$.suggestedBox.setShowing(true);
-		this.$.suggestedList.refresh();
-		this.$.recentBox.setShowing(false);
+		this.$.searchError.setOpen(false);
+		this.$.searchBoxes.setIndex(1);
+//		this.$.suggestedList.refresh();
 	},
 
-	showSearchError: function() {
-		this.$.searchError.setShowing(true);
-		this.$.suggestedBox.setShowing(false);
-		this.$.recentBox.setShowing(false);
+	showSearchError: function(msg) {
+		if (msg.length === 0) {
+			msg = "There was a problem with your search.";
+		}
+
+		this.$.searchErrorContent.setContent(msg);
+
+		this.$.searchError.setOpen(true);
+		this.$.searchBoxes.setIndex(0);
 	}
 });
