@@ -15,7 +15,18 @@ header {
   }
 }
 
-  .screenshots {
+.github-issue-count-button {
+  >span {
+    &::before {
+      content: '(';
+    }
+    &::after {
+      content: ')';
+    }
+  }
+}
+
+.screenshots {
   h4>img {
     margin: 0 8px;
     height: 40px;
