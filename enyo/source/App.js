@@ -11,7 +11,8 @@ enyo.kind({
 		this.setIndex(0);
 	},
 
-	showResults: function() {
+	showResults: function(inSender, inEvent) {
 		this.setIndex(1);
+		this.$.Results.initialize(inEvent);
 	}
 });

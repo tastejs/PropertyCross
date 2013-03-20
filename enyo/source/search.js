@@ -70,6 +70,12 @@ enyo.kind({
 		this.$.listItemMatches.setContent(this.recentLocations[i].matches);
 	},
 
+	recentListItemTap: function(inSender, inEvent) {
+		var i = inEvent.index;
+		this.$.searchInput.setValue(this.recentLocations[i].search);
+		this.search();
+	},
+
 	setupSuggestedListItem: function (inSender, inEvent) {
 		var i = inEvent.index;
 		this.$.item2.addRemoveClass("onyx-selected", inSender.isSelected(inEvent.index));
@@ -107,7 +113,7 @@ enyo.kind({
 			                action : 'search_listings',
 			                encoding : 'json',
 			                listing_type : 'buy',
-			                number_of_results: 1, //the minimum..
+//			                number_of_results: 1,
 			                'place_name': searchVal
 			            });
 		}
@@ -124,30 +130,24 @@ enyo.kind({
 		this.searchResults = inResponse.response;
 		var responseCode = this.searchResults.application_response_code;
 		console.log(">>>> Response: " + responseCode);
-		switch (responseCode) {
-			case "100":
-			case "101":
-			case "102":
-				console.log(">>>> Search results: " + this.searchResults.total_results);
-				if (this.searchResults.total_results !== 0) {
-					this.addToSearchHistory({search: this.searchResults.locations[0].title, matches: this.searchResults.total_results});
-				} else {
-					this.showSearchError("There were no properties found for the given location.");
-				}
-				this.showRecentList();
-				this.doGoResults();
-				break;
-			case "200":
-			case "202":
-				console.log(">>>> Ambiguous search.");
-				this.suggestedLocations = this.searchResults.locations;
-				this.$.suggestedList.setCount(this.suggestedLocations.length);
-				this.showSuggestedList();
-				break;
-			default:
-				console.log(">>>> Search error.");
-				this.showSearchError("The location given was not recognised.");
-				this.showRecentList();
+		if (responseCode === "100" || responseCode === "101" || responseCode === "102") {
+			console.log(">>>> Search results: " + this.searchResults.total_results);
+			if (this.searchResults.total_results !== 0) {
+				this.addToSearchHistory({search: this.searchResults.locations[0].title, matches: this.searchResults.total_results});
+			} else {
+				this.showSearchError("There were no properties found for the given location.");
+			}
+			this.showRecentList();
+			this.doGoResults(inResponse);
+		} else if (responseCode === "200" || responseCode === "202") {
+			console.log(">>>> Ambiguous search.");
+			this.suggestedLocations = this.searchResults.locations;
+			this.$.suggestedList.setCount(this.suggestedLocations.length);
+			this.showSuggestedList();
+		} else {
+			console.log(">>>> Search error.");
+			this.showSearchError("The location given was not recognised.");
+			this.showRecentList();
 		}
 	},
 
