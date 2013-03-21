@@ -27,9 +27,13 @@ enyo.kind({
 			]}
 		]},
 		{name: "moreDrawer", kind: "onyx.Drawer", open: false, components: [
-			{name: "moreButton", kind: "onyx.Button", style: "display:block;margin-left:20px;margin-bottom:20px;", showing: false, content: "Load more..."}
+			{name: "moreButton", kind: "onyx.Button", style: "display:block;margin-left:20px;margin-bottom:20px;", showing: false, content: "Load more...", onclick: "getMoreListings"}
 		]},
 
+		{name: "loadingPopup", style: "text-align:center", kind: "onyx.Popup", centered: true, floating: true, scrim: true, components: [
+			{kind: "onyx.Spinner"},
+			{content: "Loading...", style: "margin:12px"}
+		]},
 		{name: "loadingPopup", style: "text-align:center", kind: "onyx.Popup", centered: true, floating: true, scrim: true, components: [
 			{kind: "onyx.Spinner"},
 			{content: "Loading...", style: "margin:12px"}
@@ -37,6 +41,7 @@ enyo.kind({
 	],
 
 	listings: [],
+	listingsPage: {},
 
 	create: function () {
 		this.inherited(arguments);
@@ -51,12 +56,13 @@ enyo.kind({
 	},
 
 	initialize: function(json) {
+		this.listingsPage = json;
 		this.listings = [];
 		this.processResponse(json);
 	},
 
 	processResponse: function(json) {
-		this.$.resultsHeader.setContent(json.request.offset + parseInt(json.request.num_res, 10) + " of " + json.response.total_results + " matches");
+		this.$.resultsHeader.setContent(json.request.offset + json.response.listings.length + " of " + json.response.total_results + " matches");
 
 		this.listings = this.listings.concat(json.response.listings);
 		this.$.resultsList.setCount(this.listings.length);
@@ -71,5 +77,40 @@ enyo.kind({
 		this.$.listItemThumb.setAttribute('src', this.listings[i].thumb_url);
 		this.$.listItemPrice.setContent("&pound;" + this.listings[i].price);
 		this.$.listItemTitle.setContent(this.listings[i].title);
+	},
+
+	getMoreListings: function() {
+		this.$.loadingPopup.show();
+		this.listingsPage.request.page++;
+		var jsonp = new enyo.JsonpRequest({url:"http://api.nestoria.co.uk/api", callbackName:"callback"});
+		jsonp.response(this, "moreResult");
+		jsonp.error(this, "moreError");
+		jsonp.go({
+			pretty : '1',
+			action : 'search_listings',
+			encoding : 'json',
+			listing_type : 'buy',
+			'place_name': this.listingsPage.request.location,
+			'page': this.listingsPage.request.page
+		});
+		},
+
+	moreError: function(inSender, inResponse) {
+		this.$.loadingPopup.hide();
+//		this.showSearchError("An error occurred while searching. Please check your network connection and try again.");
+	},
+
+	moreResult: function(inSender, inResponse) {
+		this.$.loadingPopup.hide();
+
+		this.listingsPage = inResponse;
+		var responseCode = this.listingsPage.response.application_response_code;
+		console.log(">>>> Response: " + responseCode);
+		if (responseCode === "100" || responseCode === "101" || responseCode === "102") {
+			console.log(">>>> More results.");
+			this.processResponse(inResponse);
+		} else {
+			console.log(">>>> Search error.");
+		}
 	}
 });
