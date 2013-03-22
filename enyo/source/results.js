@@ -3,7 +3,8 @@ enyo.kind({
 	kind: "FittableRows",
 
 	events: {
-		onGoBack: ""
+		onGoBack: "",
+		onGoListing: ""
 	},
 
 	components: [
@@ -33,10 +34,6 @@ enyo.kind({
 		{name: "loadingPopup", style: "text-align:center", kind: "onyx.Popup", centered: true, floating: true, scrim: true, components: [
 			{kind: "onyx.Spinner"},
 			{content: "Loading...", style: "margin:12px"}
-		]},
-		{name: "loadingPopup", style: "text-align:center", kind: "onyx.Popup", centered: true, floating: true, scrim: true, components: [
-			{kind: "onyx.Spinner"},
-			{content: "Loading...", style: "margin:12px"}
 		]}
 	],
 
@@ -56,9 +53,11 @@ enyo.kind({
 	},
 
 	initialize: function(json) {
-		this.listingsPage = json;
-		this.listings = [];
-		this.processResponse(json);
+		if (typeof json.response !== "undefined") {
+			this.listingsPage = json;
+			this.listings = [];
+			this.processResponse(json);
+		}
 	},
 
 	processResponse: function(json) {
@@ -75,13 +74,15 @@ enyo.kind({
 		var i = inEvent.index;
 		this.$.item3.addRemoveClass("onyx-selected", inSender.isSelected(inEvent.index));
 		this.$.listItemThumb.setAttribute('src', this.listings[i].thumb_url);
-		this.$.listItemPrice.setContent("&pound;" + this.listings[i].price);
+		this.$.listItemPrice.setContent("&pound;" + numberWithCommas(this.listings[i].price));
 		this.$.listItemTitle.setContent(this.listings[i].title);
 	},
 
 	getMoreListings: function() {
 		this.$.loadingPopup.show();
+
 		this.listingsPage.request.page++;
+
 		var jsonp = new enyo.JsonpRequest({url:"http://api.nestoria.co.uk/api", callbackName:"callback"});
 		jsonp.response(this, "moreResult");
 		jsonp.error(this, "moreError");
@@ -97,6 +98,8 @@ enyo.kind({
 
 	moreError: function(inSender, inResponse) {
 		this.$.loadingPopup.hide();
+
+		console.log(">>>> More error.");
 //		this.showSearchError("An error occurred while searching. Please check your network connection and try again.");
 	},
 
@@ -110,7 +113,12 @@ enyo.kind({
 			console.log(">>>> More results.");
 			this.processResponse(inResponse);
 		} else {
-			console.log(">>>> Search error.");
+			console.log(">>>> More error.");
 		}
+	},
+
+	resultsListItemTap: function(inSender, inEvent) {
+		var i = inEvent.index;
+		this.doGoListing(this.listings[i]);
 	}
 });
