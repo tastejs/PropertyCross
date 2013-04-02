@@ -3,13 +3,17 @@ enyo.kind({
 	kind: "FittableRows",
 
 	events: {
-		onGoBack: ""
+		onGoBack: "",
+		onChangeFav: ""
 	},
+
+	listing: {},
 
 	components: [
 		{kind: "onyx.Toolbar", components: [
 			{name: "resultsHeader", content: "Property Details", classes: "header-center"},
-			{kind: "onyx.Button", content: "Back", classes:"header-button-left", ontap: "goBack"}
+			{kind: "onyx.Button", content: "Back", classes:"header-button-left", ontap: "goBack"},
+			{name: "fav", kind: "onyx.ToggleIconButton", src: "assets/fav.png", classes:"header-button-right", ontap: "changeFavorite"}
 		]},
 		{name: "resultsBox", fit: true, layoutKind:"FittableRowsLayout", components: [
 			{name: "propertyPrice", allowHtml: "true", style: "font-size:26px", classes: "panel-row"},
@@ -34,11 +38,20 @@ enyo.kind({
 
 	initialize: function(json) {
 		if (json !== {}) {
+			this.listing = json;
 			this.$.propertyPhoto.setAttribute('src', json.img_url);
 			this.$.propertyPrice.setContent("&pound;" + numberWithCommas(json.price));
 			this.$.propertyTitle.setContent(json.title);
 			this.$.propertyBedBath.setContent(json.bedroom_number + " bed, " + json.bathroom_number + " bath");
 			this.$.propertySummary.setContent(json.summary);
 		}
+	},
+
+	setFavorite: function(isFav) {
+	 this.$.fav.setValue(isFav);
+	},
+
+	changeFavorite: function(inSender, inEvent) {
+		this.doChangeFav(this.listing);
 	}
 });

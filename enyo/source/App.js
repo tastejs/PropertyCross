@@ -3,10 +3,13 @@ enyo.kind({
 	kind: "Panels",
 	classes: "enyo-fit",
 	components: [
-		{kind: "SearchPage", name: "Search", onGoResults: "showResults"},
-		{kind: "ResultsPage", name: "Results", onGoBack: "showSearch", onGoListing: "showListing"},
-		{kind: "ListingPage", name: "Listing", onGoBack: "showResults"}
+		{kind: "SearchPage", name: "Search", onGoResults: "showResults", onGoFaves: "showFaves"},
+		{kind: "ResultsPage", name: "Results", onGoBack: "showSearch", onGoListing: "showListingFromResults"},
+		{kind: "ListingPage", name: "Listing", onGoBack: "showListingSource", onChangeFav: "changeFav"},
+		{kind: "FavoritesPage", name: "Favorites", onGoBack: "showSearch", onGoListing: "showListingFromFavorites"}
 	],
+
+	listingSource: 1,
 
 	showSearch: function() {
 		this.setIndex(0);
@@ -17,9 +20,37 @@ enyo.kind({
 		this.$.Results.initialize(inEvent);
 	},
 
+	showListingFromResults: function(inSender, inEvent) {
+		this.listingSource = 1;
+		this.showListing(inSender, inEvent);
+	},
+
+	showListingFromFavorites: function(inSender, inEvent) {
+		this.listingSource = 3;
+		this.showListing(inSender, inEvent);
+	},
+
 	showListing: function(inSender, inEvent) {
 		this.setIndex(2);
 		this.$.Listing.initialize(inEvent);
+		this.$.Listing.setFavorite(this.$.Favorites.isFavorite(inEvent.guid));
+	},
+
+	changeFav: function(inSender, inEvent) {
+		this.$.Favorites.changeFavorite(inEvent);
+	},
+
+	showFaves: function(inSender, inEvent) {
+		this.setIndex(3);
+		this.$.Favorites.initialize();
+	},
+
+	showListingSource: function(inSender, inEvent) {
+		if (this.listingSource === 3) {
+			this.showFaves(inSender, inEvent);
+		} else {
+			this.showResults(inSender, inEvent);
+		}
 	}
 });
 
