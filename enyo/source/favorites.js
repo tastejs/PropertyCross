@@ -15,7 +15,7 @@ enyo.kind({
 		{name: "favoritesError", kind: "onyx.Drawer", open: false, classes: "panel-row error-drawer", components: [
 			{name: "favoritesErrorContent", content: "There was a problem loading the listings."}
 		]},
-		{name: "favoritesBox", kind: "onyx.Groupbox", classes: "panel-row", style: "background-color: pink", fit: true, layoutKind:"FittableRowsLayout", components: [
+		{name: "favoritesBox", kind: "onyx.Groupbox", classes: "panel-row", fit: true, layoutKind:"FittableRowsLayout", components: [
 			{kind: "onyx.GroupboxHeader", content: "Found locations"},
 			{name: "favoritesList", kind: "List", fit: true, touch: true, onSetupItem: "setupFavoritesListItem", components: [
 				{name: "item4", style: "font-size:20px;", classes: "item enyo-border-box", ontap: "favoritesListItemTap", components: [

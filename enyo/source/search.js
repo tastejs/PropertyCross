@@ -21,13 +21,13 @@ enyo.kind({
 		]},
 		{classes: "panel-row", components: [
 			{kind: "onyx.Button", content: "Go", onclick: "search"},
-			{kind: "onyx.Button", content: "My location"}
+			{kind: "onyx.Button", content: "My location", onclick: "geolocate"}
 		]},
 		{name: "searchError", kind: "onyx.Drawer", open: false, classes: "panel-row error-drawer", components: [
 			{name: "searchErrorContent", content: "There was a problem with your search."}
 		]},
 		{kind: "Panels", name:"searchBoxes", fit:true, realtimeFit: true, classes: "panel-row", style: "margin-bottom:20px", components: [
-			{name: "recentBox", kind: "onyx.Groupbox", style: "background-color: yellow", fit: true, layoutKind:"FittableRowsLayout", components: [
+			{name: "recentBox", kind: "onyx.Groupbox", fit: true, layoutKind:"FittableRowsLayout", components: [
 				{kind: "onyx.GroupboxHeader", content: "Recent searches"},
 				{name: "recentList", kind: "List", fit: true, touch: true, onSetupItem: "setupRecentListItem", components: [
 					{name: "item1", style: "font-size:20px;", classes: "item enyo-border-box", ontap: "recentListItemTap", components: [
@@ -36,7 +36,7 @@ enyo.kind({
 					]}
 				]}
 			]},
-			{name: "suggestedBox", kind: "onyx.Groupbox",  style: "background-color: pink", fit: true, layoutKind:"FittableRowsLayout", components: [
+			{name: "suggestedBox", kind: "onyx.Groupbox",  fit: true, layoutKind:"FittableRowsLayout", components: [
 				{kind: "onyx.GroupboxHeader", content: "Suggested locations"},
 				{name: "suggestedList", kind: "List", fit: true, touch: true, onSetupItem: "setupSuggestedListItem", components: [
 					{name: "item2", style: "font-size:20px;", classes: "item enyo-border-box", ontap: "suggestedListItemTap", components: [
@@ -95,9 +95,43 @@ enyo.kind({
 	},
 
 	searchInputKeypress: function(inSender, inEvent) {
-		if (inEvent.keyCode == 13) {
+		if (inEvent.keyCode == 13) {getCurrentPosition
 			this.search();
 //			inSender.hasNode().blur();
+		}
+	},
+
+	geoProcess: function(position) {
+//		var latitude = 51.684183;
+//	  var longitude = -3.431481;
+		var latitude = position.coords.latitude;
+	  var longitude = position.coords.longitude;
+		console.log(">>>> Geolocating...");
+		this.$.searchingPopup.show();
+		var jsonp = new enyo.JsonpRequest({url:"http://api.nestoria.co.uk/api", callbackName:"callback"});
+		jsonp.response(this, "processResult");
+		jsonp.error(this, "processError");
+		jsonp.go({
+		                pretty : '1',
+		                action : 'search_listings',
+		                encoding : 'json',
+		                listing_type : 'buy',
+		                'centre_point': latitude + "," + longitude
+		            });
+	},
+
+	geoError: function(err) {
+		this.showSearchError("Geolocation error: " + err.message);
+		console.log(">>>>>> Geolocation error: " + err.code + " > " + err.message);
+	},
+
+	geolocate: function() {
+		this.$.searchError.setOpen(false);
+
+		if ('geolocation' in navigator) {
+			navigator.geolocation.getCurrentPosition(enyo.bind(this, 'geoProcess'), enyo.bind(this, 'geoError'));
+		} else {
+			this.showSearchError("Geolocation not supported.");
 		}
 	},
 
@@ -114,7 +148,6 @@ enyo.kind({
 			                action : 'search_listings',
 			                encoding : 'json',
 			                listing_type : 'buy',
-//			                number_of_results: 1,
 			                'place_name': searchVal
 			            });
 		}
@@ -148,7 +181,7 @@ enyo.kind({
 		} else {
 			console.log(">>>> Search error.");
 			this.showSearchError("The location given was not recognised.");
-			this.showRecentList();
+//			this.showRecentList();
 		}
 	},
 

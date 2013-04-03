@@ -15,7 +15,7 @@ enyo.kind({
 		{name: "resultsError", kind: "onyx.Drawer", open: false, classes: "panel-row error-drawer", components: [
 			{name: "resultsErrorContent", content: "There was a problem loading the listings."}
 		]},
-		{name: "resultsBox", kind: "onyx.Groupbox", classes: "panel-row", style: "background-color: pink", fit: true, layoutKind:"FittableRowsLayout", components: [
+		{name: "resultsBox", kind: "onyx.Groupbox", classes: "panel-row", fit: true, layoutKind:"FittableRowsLayout", components: [
 			{kind: "onyx.GroupboxHeader", content: "Found locations"},
 			{name: "resultsList", kind: "List", fit: true, touch: true, onSetupItem: "setupResultsListItem", components: [
 				{name: "item3", style: "font-size:20px;", classes: "item enyo-border-box", ontap: "resultsListItemTap", components: [
