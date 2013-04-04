@@ -3,7 +3,6 @@ enyo.kind({
 	kind: "Panels",
 	classes: "enyo-fit",
 	components: [
-		{kind: "Storage"},
 		{kind: "SearchPage", name: "Search", onGoResults: "showResults", onGoFaves: "showFaves"},
 		{kind: "ResultsPage", name: "Results", onGoBack: "showSearch", onGoListing: "showListingFromResults"},
 		{kind: "ListingPage", name: "Listing", onGoBack: "showListingSource", onChangeFav: "changeFav"},
