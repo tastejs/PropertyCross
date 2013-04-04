@@ -3,6 +3,7 @@ enyo.kind({
 	kind: "Panels",
 	classes: "enyo-fit",
 	components: [
+		{kind: "Storage"},
 		{kind: "SearchPage", name: "Search", onGoResults: "showResults", onGoFaves: "showFaves"},
 		{kind: "ResultsPage", name: "Results", onGoBack: "showSearch", onGoListing: "showListingFromResults"},
 		{kind: "ListingPage", name: "Listing", onGoBack: "showListingSource", onChangeFav: "changeFav"},
@@ -17,7 +18,7 @@ enyo.kind({
 
 	showResults: function(inSender, inEvent) {
 		this.setIndex(1);
-		this.$.Results.initialize(inEvent);
+		this.$.Results.initialize(inEvent.data);
 	},
 
 	showListingFromResults: function(inSender, inEvent) {
@@ -32,12 +33,12 @@ enyo.kind({
 
 	showListing: function(inSender, inEvent) {
 		this.setIndex(2);
-		this.$.Listing.initialize(inEvent);
-		this.$.Listing.setFavorite(this.$.Favorites.isFavorite(inEvent.guid));
+		this.$.Listing.initialize(inEvent.data);
+		this.$.Listing.setFavorite(this.$.Favorites.isFavorite(inEvent.data.guid));
 	},
 
 	changeFav: function(inSender, inEvent) {
-		this.$.Favorites.changeFavorite(inEvent);
+		this.$.Favorites.changeFavorite(inEvent.data);
 	},
 
 	showFaves: function(inSender, inEvent) {

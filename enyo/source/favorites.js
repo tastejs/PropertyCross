@@ -37,6 +37,12 @@ enyo.kind({
 
 	create: function () {
 		this.inherited(arguments);
+		try {
+			this.favorites = Storage.get("favorites");
+		}
+		catch (e) {
+			this.favorites = [];
+		}
 	},
 
 	rendered: function() {
@@ -54,6 +60,12 @@ enyo.kind({
 	processFavorites: function() {
 		this.$.favoritesList.setCount(this.favorites.length);
 		this.$.favoritesList.refresh();
+
+		try {
+			Storage.set("favorites", this.favorites);
+		}
+		catch (e) {
+		}
 	},
 
 	setupFavoritesListItem: function(inSender, inEvent) {
@@ -66,7 +78,7 @@ enyo.kind({
 
 	favoritesListItemTap: function(inSender, inEvent) {
 		var i = inEvent.index;
-		this.doGoListing(this.favorites[i]);
+		this.doGoListing({data: this.favorites[i]});
 	},
 
 	changeFavorite: function(listing) {

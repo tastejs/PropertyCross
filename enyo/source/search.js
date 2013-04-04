@@ -57,11 +57,22 @@ enyo.kind({
 
 	create: function () {
 		this.inherited(arguments);
+
+		try {
+			this.recentLocations = Storage.get("recent");
+		}
+		catch (e) {
+			this.recentLocations = [];
+		}
+
 	},
 
 	rendered: function() {
 		this.inherited(arguments);
 		this.$.searchBoxes.setIndex(0);
+
+		this.$.recentList.setCount(this.recentLocations.length);
+		this.$.recentList.refresh();
 	},
 
 	setupRecentListItem: function (inSender, inEvent) {
@@ -95,7 +106,7 @@ enyo.kind({
 	},
 
 	searchInputKeypress: function(inSender, inEvent) {
-		if (inEvent.keyCode == 13) {getCurrentPosition
+		if (inEvent.keyCode == 13) {
 			this.search();
 //			inSender.hasNode().blur();
 		}
@@ -172,7 +183,7 @@ enyo.kind({
 				this.showSearchError("There were no properties found for the given location.");
 			}
 			this.showRecentList();
-			this.doGoResults(inResponse);
+			this.doGoResults({data: inResponse});
 		} else if (responseCode === "200" || responseCode === "202") {
 			console.log(">>>> Ambiguous search.");
 			this.suggestedLocations = this.searchResults.locations;
@@ -198,6 +209,13 @@ enyo.kind({
 
 		this.$.recentList.setCount(this.recentLocations.length);
 		this.$.recentList.refresh();
+
+		try {
+			Storage.set("recent", this.recentLocations);
+		}
+		catch (e) {
+		}
+
 	},
 
 	showRecentList: function() {

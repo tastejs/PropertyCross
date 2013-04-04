@@ -119,6 +119,6 @@ enyo.kind({
 
 	resultsListItemTap: function(inSender, inEvent) {
 		var i = inEvent.index;
-		this.doGoListing(this.listings[i]);
+		this.doGoListing({data: this.listings[i]});
 	}
 });

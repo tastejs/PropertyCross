@@ -33,7 +33,7 @@ enyo.kind({
 	},
 
 	goBack: function() {
-		this.doGoBack({});
+		this.doGoBack({data: {}});
 	},
 
 	initialize: function(json) {
@@ -52,6 +52,6 @@ enyo.kind({
 	},
 
 	changeFavorite: function(inSender, inEvent) {
-		this.doChangeFav(this.listing);
+		this.doChangeFav({data: this.listing});
 	}
 });
