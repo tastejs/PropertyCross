@@ -32,9 +32,9 @@ in a given framework.
 
 This specification details the form and functionality of the PropertyCross applications. Its intended purpose is to ensure that each PropertyCross implementation is as close to the others as possible (within the constraints imposed by the implementation framework). Regarding form, this specification details the UI controls that should be included on each screen, but does not mandate a specific layout. The intention of the PropertyCross project is that each implementation should match the native look and feel of each of the target platforms (Roboto, Metro, Apple-style), hence the ambiguity regarding the exact screen layout.
 
-PropertyCross makes use of the Nestoria APIs for searching property listings. This specification details how these APIs should be used.
+PropertyCross makes use of the [Nestoria APIs](http://www.nestoria.co.uk/help/api) for searching property listings. This specification details how these APIs should be used.
 
-All versions of the application shoudl be fixed to a portrait orientation.
+All versions of the application should be fixed to a portrait orientation.
 
 ##Contents
 
@@ -74,22 +74,41 @@ When the application is launched, recent searches should be displayed and the se
 
 ####Plain-text search
 
-When the user enters text into the search field, then hits ‘enter’ or commits the edit, the Nestoria APIs should be queried to find properties. The response code is processed as follows:
+When the user enters text into the search field, then hits ‘enter’ or commits the edit, the Nestoria APIs should be queried, using the [search-listings method](http://www.nestoria.co.uk/help/api-search-listings), to find properties. An example of this search, where properties within the city of 'leeds' are searched, is given below:
 
-* 100, 101, 110 – the query returned a list of properties, the application should check that one or more properties were returned and navigate to the Search Results page. In the case where the location matches, but no properties were found, the page moves to the “Error state”
-* 200, 202 – the search term was ambiguous. In this case Nestoria returns a list of suggested locations. The returned list of locations should be displayed to the user as detailed in the “Listed locations state”
+    http://api.nestoria.co.uk/api?country=uk&pretty=1&action=search_listings&encoding=json&listing_type=buy&page=1&place_name=leeds
+    
+[open the above link in your browser](http://api.nestoria.co.uk/api?country=uk&pretty=1&action=search_listings&encoding=json&listing_type=buy&page=1&place_name=leeds)
+
+
+The [Nestoria response code](http://www.nestoria.co.uk/help/api-return-codes) is processed as follows:
+
+* `100`, `101`, `110` – the query returned a list of properties, the application should check that one or more properties were returned and navigate to the Search Results page. In the case where the location matches, but no properties were found, the page moves to the “Error state”
+* `200`, `202` – the search term was ambiguous. In this case Nestoria returns a list of suggested locations. The returned list of locations should be displayed to the user as detailed in the “Listed locations state”
 * Other – any other response is considered an error, the page moves to the “Error state”
 The HTTP request sent to Nestoria should timeout after 5 seconds if no response is received, with the page moving to the “Error state”.
 
-When a search is succesfully executed, it should be added to the recent searches list of items as the first item. If a search is initiated by tapping a recent search item, this item should be moved to the head of the list.
+When a search is successfully executed, it should be added to the recent searches list of items as the first item. If a search is initiated by tapping a recent search item, this item should be moved to the head of the list.
 
 ####Location-based search
 
-When the user touches the ‘My location’ button a geo-location query is sent to Netoria. The response codes should be handled in the same way as the plain-text search.
+When the user touches the ‘My location’ button a geo-location query is sent to Nestoria. An example request is given below:
 
-If location is not enabled for the application, or the location cannot be found the page oves to teh “Error state”.
+    http://api.nestoria.co.uk/api?country=uk&pretty=1&action=search_listings&encoding=json&listing_type=buy&page=1&centre_point=51.684183,-3.431481
+    
+[open the above link in your browser](http://api.nestoria.co.uk/api?country=uk&pretty=1&action=search_listings&encoding=json&listing_type=buy&page=1&centre_point=51.684183,-3.431481)
+
+The response codes should be handled in the same way as the plain-text search.
+ 
+If location is not enabled for the application, or the location cannot be found the page moves to the “Error state”.
 
 ####Listed locations state
+
+An example of a query that returns a list of locations is given below:
+
+    http://api.nestoria.co.uk/api?country=uk&pretty=1&action=search_listings&encoding=json&listing_type=buy&page=1&place_name=newcr
+    
+[open the above link in your browser](http://api.nestoria.co.uk/api?country=uk&pretty=1&action=search_listings&encoding=json&listing_type=buy&page=1&place_name=newcr)
 
 In this state a list of suggested locations is displayed. Tapping on a location will cause the search text field to update with the text of the location and a search to be executed immediately.
 
