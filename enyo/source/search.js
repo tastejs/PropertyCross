@@ -45,10 +45,7 @@ enyo.kind({
 				]}
 			]}
 		]},
-		{name: "searchingPopup", style: "text-align:center", kind: "onyx.Popup", centered: true, floating: true, scrim: true, components: [
-			{kind: "onyx.Spinner"},
-			{content: "Searching...", style: "margin:12px"}
-		]}
+		{name: "searchingPopup", kind: "messagePopup", message: "Searching..."}
 	],
 
 	recentLocations: [],

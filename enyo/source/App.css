@@ -43,6 +43,13 @@
 	color:white;
 }
 
+.item > img {
+	display: inline-block;
+	width: 60px;
+	height: 60px;
+	background-image: url(../assets/home-w-60.png);
+}
+
 .item.onyx-selected {
 	background-color: MidnightBlue;
 }
@@ -116,4 +123,11 @@
 	position: absolute;
 	right:0;
 	top:3px;
+}
+
+.listing-image {
+	display:block;
+	width: 160px;
+	height: 120px;
+	background-image: url(../assets/home-b-160x120.png);
 }

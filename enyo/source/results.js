@@ -31,10 +31,7 @@ enyo.kind({
 			{name: "moreButton", kind: "onyx.Button", style: "display:block;margin-left:20px;margin-bottom:20px;", showing: false, content: "Load more...", onclick: "getMoreListings"}
 		]},
 
-		{name: "loadingPopup", style: "text-align:center", kind: "onyx.Popup", centered: true, floating: true, scrim: true, components: [
-			{kind: "onyx.Spinner"},
-			{content: "Loading...", style: "margin:12px"}
-		]}
+		{name: "loadingPopup", kind: "messagePopup", message: "Loading..."}
 	],
 
 	listings: [],
@@ -74,7 +71,7 @@ enyo.kind({
 		var i = inEvent.index;
 		this.$.item3.addRemoveClass("onyx-selected", inSender.isSelected(inEvent.index));
 		this.$.listItemThumb.setAttribute('src', this.listings[i].thumb_url);
-		this.$.listItemPrice.setContent("&pound;" + numberWithCommas(this.listings[i].price));
+		this.$.listItemPrice.setContent("&pound;" + Utils.numberWithCommas(this.listings[i].price));
 		this.$.listItemTitle.setContent(this.listings[i].title);
 	},
 

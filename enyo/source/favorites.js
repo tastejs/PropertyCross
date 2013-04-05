@@ -27,10 +27,7 @@ enyo.kind({
 				]}
 			]}
 		]},
-		{name: "loadingPopup", style: "text-align:center", kind: "onyx.Popup", centered: true, floating: true, scrim: true, components: [
-			{kind: "onyx.Spinner"},
-			{content: "Loading...", style: "margin:12px"}
-		]}
+		{name: "loadingPopup", kind: "messagePopup", message: "Loading..."}
 	],
 
 	favorites: [],
@@ -72,7 +69,7 @@ enyo.kind({
 		var i = inEvent.index;
 		this.$.item4.addRemoveClass("onyx-selected", inSender.isSelected(inEvent.index));
 		this.$.listItemThumb.setAttribute('src', this.favorites[i].thumb_url);
-		this.$.listItemPrice.setContent("&pound;" + numberWithCommas(this.favorites[i].price));
+		this.$.listItemPrice.setContent("&pound;" + Utils.numberWithCommas(this.favorites[i].price));
 		this.$.listItemTitle.setContent(this.favorites[i].title);
 	},
 
