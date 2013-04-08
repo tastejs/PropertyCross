@@ -34,7 +34,12 @@ This specification details the form and functionality of the PropertyCross appli
 
 PropertyCross makes use of the [Nestoria APIs](http://www.nestoria.co.uk/help/api) for searching property listings. This specification details how these APIs should be used.
 
-All versions of the application should be fixed to a portrait orientation.
+##General notes
+
+* All versions of the application should be fixed to a portrait orientation.
+* A back button should not be displayed on Android or Windows Phone devices
+* Caching should be employed in order to reduce network usage when scrolling the list of search results.
+
 
 ##Contents
 
@@ -56,6 +61,7 @@ The landing screen includes:
 * A text field for entry of search term
 * A ‘My location’ button
 * A ‘Go’ button
+* A loading indicator, for iOS this is a spinner or some suitable graphics within the search field, for Windows Phone this is the standard 'crawling dots' and for Android this is a spinner within the action bar
 * A region which either displays recent search terms or a list of locations to pick from. Recent searches should be displayed in chronological order and limited to 4-6 items (depending on screen size)
 * A region which is used to report error messages
 * A button which navigates to the favourites page
@@ -70,7 +76,7 @@ The following text is used:
 
 ####Initial state
 
-When the application is launched, recent searches should be displayed and the search entry field should be empty.Each recent search should be accompanied with the number of properties it matches.
+When the application is launched, recent searches should be displayed and the search entry field should be empty. Each recent search should be accompanied with the number of properties it matches.
 
 ####Plain-text search
 
@@ -100,7 +106,7 @@ When the user touches the ‘My location’ button a geo-location query is sent 
 
 The response codes should be handled in the same way as the plain-text search.
  
-If location is not enabled for the application, or the location cannot be found the page moves to the “Error state”.
+If location is not enabled for the application, or the location cannot be found after 5 seconds, the page moves to the “Error state”.
 
 ####Listed locations state
 
@@ -116,15 +122,18 @@ NOTE: The Nestoria API locations have two different text strings associated with
 
 If the user navigates back to the Property Search page then repeats the same search, again the location ‘key’ should be used. However, if the user edits the text within the search text field, the location ‘key’ is no longer used.
 
-####Error state
+####Error state and timeouts
+
+Both keywords and location-based search should timeout after a 5 second interval. 
 
 When the page is in error state neither recent searches nor locations are listed. A text based error message is displayed to the user as follows:
 
 * Zero properties returned - "There were no properties found for the given location."
 * Location not matched - "The location given was not recognised."
-* Network connection issues - "An error occurred while searching. Please check your network connection and try again."
+* Network connection issues / timeout - "An error occurred while searching. Please check your network connection and try again."
 * Location not enabled - "The use of location is currently disabled.”
-* Location not found - "Unable to detect current location. Please ensure location is turned on in your phone settings and try again.”
+* Location not found / timeout - "Unable to detect current location. Please ensure location is turned on in your phone settings and try again.”
+
 In error state, the search field behaves in exactly the same way as the initial state.
 
 ##Search Results Page
@@ -135,7 +144,7 @@ In error state, the search field behaves in exactly the same way as the initial 
 
 The search results page displays a list of properties in the order returned by the Nestoria APIs. The style of the list presentation is flexible dependant on the platform and framework used.
 
-The page title should indicate the number of properties displayed together with the total number of matches.
+The page title should indicate be of the form "x of y matches".
 
 ###Function
 
@@ -143,7 +152,8 @@ It should be possible to navigate from this page back to the Property Search pag
 
 When the user taps on a property listing the application navigates to the Property Listing page.
 
-At the bottom of the list, if there are more results available, a ‘Load more’ button or item should be rendered. When the user taps this item Nestoria is queried to obtain more items, with these being added to the list.
+At the bottom of the list, if there are more results available, a ‘Load more’ item should be rendered. This item should bear the text "Load more … \nResults for **#search_term#**, showing **x** of **y** properties". When the user taps this item, the "Load more ..." text turns into "Loading ..." and Nestoria is queried to obtain more items, with these being added to the list.
+
 
 TODO: What happens is a ‘load more’ action results in a network error?
 
@@ -164,7 +174,7 @@ The listing page displays:
 
 ###Function
 
-Tapping the favourites button should toggle the persisted favourite state of this property.
+Tapping the favourites button should toggle the persisted favourite state of this property. The button should provide a clear visual indication that a property is either currently a favourite,  or not.
 
 It should be possible to navigate from this page back to the Search Results or Favourites page via a button or hardware back button depending on target platform.
 
