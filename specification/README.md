@@ -37,7 +37,6 @@ PropertyCross makes use of the [Nestoria APIs](http://www.nestoria.co.uk/help/ap
 ##General notes
 
 * All versions of the application should be fixed to a portrait orientation.
-* A back button should not be displayed on Android or Windows Phone devices
 * Caching should be employed in order to reduce network usage when scrolling the list of search results.
 
 
