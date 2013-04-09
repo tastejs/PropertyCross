@@ -18,6 +18,7 @@
 
   <phone:PhoneApplicationPage.Resources>
     <conv:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+    <conv:BooleanNotConverter x:Key="BooleanNotConverter"/>
   </phone:PhoneApplicationPage.Resources>
 
   <Grid x:Name="LayoutRoot"
@@ -36,8 +37,8 @@
           </Grid.RowDefinitions>
 
           <TextBlock TextWrapping="Wrap"
-                     FontSize="{StaticResource PhoneFontSizeMedium}">
-            <Run Foreground="#AAA">Showing </Run>
+                     FontSize="{StaticResource PhoneFontSizeExtraLarge}"
+                     Margin="10,0,0,0">
             <Run Text="{Binding Properties.Count}"></Run>
             <Run Foreground="#AAA"> of </Run>
             <Run Text="{Binding TotalResults}"></Run>
@@ -45,10 +46,11 @@
           </TextBlock>
 
           <ItemsControl ItemsSource="{Binding Properties}"
+                        Margin="0,30,0,0"
                       Grid.Row="1">
             <ItemsControl.ItemsPanel>
               <ItemsPanelTemplate>
-                <tk:WrapPanel Orientation="Horizontal"/>
+                <StackPanel Orientation="Vertical"/>
               </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
@@ -64,25 +66,37 @@
             </ItemsControl.ItemTemplate>
           </ItemsControl>
 
-          <StackPanel Orientation="Vertical"
-                      Grid.Row="2"
-                      Visibility="{Binding LoadMoreVisible}"
-                      Margin="0,10,0,0">
-            <ProgressBar IsIndeterminate="True"
-                         Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibilityConverter}}"/>
-            <StackPanel Orientation="Horizontal"
-                      HorizontalAlignment="Right">
-              <TextBlock TextWrapping="Wrap"
-                     VerticalAlignment="Center">
-                <Run Text="{Binding PageNumber}"></Run>
-                <Run Foreground="#AAA"> of </Run>
+          <Button Visibility="{Binding LoadMoreVisible}"
+                  Grid.Row="2"
+                  IsEnabled="{Binding IsLoading, Converter={StaticResource BooleanNotConverter}}"
+                  Template="{StaticResource PropertyButtonTemplate}"
+                  CommandParameter="{Binding}"
+                  mm:MetroInMotion.Tilt="3"
+                  Command="{Binding LoadMoreCommand}">
+            <Border Style="{StaticResource ButtonBackgroundStyle}"
+                    mm:MetroInMotion.Tilt="2">
+              <StackPanel Orientation="Vertical"
+                    HorizontalAlignment="Left">
+                <TextBlock Text="Load more ..."
+                           FontSize="{StaticResource PhoneFontSizeLarge}"
+                           Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter='flip'}"/>
+                <TextBlock Text="Loading ..."
+                           FontSize="{StaticResource PhoneFontSizeLarge}"
+                           Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                <TextBlock TextWrapping="NoWrap"
+                          VerticalAlignment="Center"
+                          FontSize="{StaticResource PhoneFontSizeSmall}">
+                <Run Foreground="#AAA">Results for </Run>
+                <Run Text="{Binding SearchText}"></Run>
+                <Run Foreground="#AAA">, showing</Run>
+                <Run Text="{Binding Properties.Count}"></Run>
+                <Run Foreground="#AAA" > of </Run>
                 <Run Text="{Binding TotalPages}"></Run>
-              </TextBlock>
-              <Button Content="Load more ..."
-                      Margin="40,0,0,0"
-                      Command="{Binding LoadMoreCommand}"/>
-            </StackPanel>
-          </StackPanel>
+                <Run Foreground="#AAA" > properties </Run>
+                </TextBlock>
+              </StackPanel>
+            </Border>
+          </Button>     
           
         </Grid>
       </Grid>

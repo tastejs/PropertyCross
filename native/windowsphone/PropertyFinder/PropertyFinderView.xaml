@@ -64,8 +64,7 @@
       </Grid.RowDefinitions>
 
       <TextBlock Text="PropertyCross"
-                 FontSize="{StaticResource PhoneFontSizeLarge}"
-                 Margin="0,30,0,0"/>
+                 FontSize="{StaticResource PhoneFontSizeExtraLarge}"/>
 
       <TextBlock Text="Use the form below to search for houses to buy. You can search by place-name, postcode, or click 'My Location', to search in your current location!"
                  Grid.Row="1"
@@ -77,6 +76,7 @@
                   Grid.Row="2"
                   Margin="0,10,0,0">
         <TextBox Text="{Binding SearchText, Mode=TwoWay}"
+                 KeyDown="TextBox_KeyDown"
                  Width="200"
                  IsEnabled="{Binding IsLoading, Converter={StaticResource BooleanNotConverter}}"/>
         <Button Content="Go"
@@ -88,10 +88,11 @@
       </StackPanel>
       
       <!-- loading indicator -->
-      <ProgressBar Grid.Row="3"
-                   IsIndeterminate="True"
-                   Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibilityConverter}}"/>
-      
+      <Grid Height="8" Grid.Row="3">
+        <ProgressBar  IsIndeterminate="True"
+                      Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibilityConverter}}"/>
+      </Grid>
+
       <!-- error messages -->
       <TextBlock Text="{Binding UserMessage}"
                  TextWrapping="Wrap"

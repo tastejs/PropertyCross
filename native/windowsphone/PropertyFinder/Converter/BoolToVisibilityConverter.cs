@@ -10,7 +10,12 @@ namespace PropertyFinder.Converter
 
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-      return ((bool)value) ? Visibility.Visible : Visibility.Collapsed;
+      bool boolValue = ((bool)value);
+      if (parameter is String)
+      {
+        boolValue = !boolValue;
+      }
+      return boolValue ? Visibility.Visible : Visibility.Collapsed;
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
