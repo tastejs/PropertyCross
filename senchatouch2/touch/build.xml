@@ -1,0 +1,147 @@
+<project name="extjs" default="build" basedir=".">
+
+    <target name="init-antcontrib">
+        <taskdef resource="net/sf/antcontrib/antlib.xml">
+            <classpath>
+                <pathelement location="${cmd.dir}/lib/ant-contrib-1.0b3.jar"/>
+                <pathelement
+                        location="${cmd..dir}/lib/commons-httpclient-3.0.1.jar"/>
+                <pathelement
+                        location="${cmd.dir}/lib/commons-logging-1.0.4.jar"/>
+                <pathelement location="${cmd.dir}/lib/commons-codec-1.3.jar"/>
+            </classpath>
+        </taskdef>
+    </target>
+
+
+    <target name="init-sencha-cmd" depends="init-antcontrib">
+        <taskdef resource="com/sencha/ant/antlib.xml" classpath="${cmd.dir}/sencha.jar"/>
+    </target>
+
+    <target name="build" depends="init-sencha-cmd">
+        <property name="build.dir" location="${basedir}"/>
+        <property name="classpath.excludes"
+                  value="auth2/Auth.js,scroller/Infinite.js,locale,platform/src"/>
+        <!--
+            Produce base concatenation for standard distribution files
+        -->
+         <x-sencha-command>
+            compile
+            --ignore=${classpath.excludes}
+            --include-preprocessor-tags=true
+            --options=debug:true,product:touch,minVersion:3,logger:yes,charts:yes
+                concatenate
+                    --output-file=${build.dir}/sencha-touch-all-debug.js
+                and
+                union
+                    --tag=core
+                and
+                concatenate
+                    --output-file=${build.dir}/sencha-touch-debug.js
+                and
+                include
+                    +all
+                and
+                exclude
+                    --tag=core
+                and
+                metadata
+                    +append
+                    +alternates
+                    --base-path=${build.dir}
+                    --output-file=${build.dir}/sencha-touch-debug.js
+                and
+                metadata
+                    +append
+                    +alias
+                    --base-path=${build.dir}
+                    --output-file=${build.dir}/sencha-touch-debug.js
+                and
+            --options=debug:false,logger:no
+                union
+                    +all
+                and
+                concatenate
+                    +yui
+                    --output-file=${build.dir}/sencha-touch-all.js
+                and
+            --options=debug:true,minVersion:2,logger:yes
+                concatenate
+                    --output-file=${build.dir}/builds/sencha-touch-all-compat.js
+        </x-sencha-command>
+
+        <loadfile property="header.text" srcfile="${build.dir}/file-header.txt"/>
+        <property name="header.comment" value="${header.text}"/>
+
+        <!--
+            Apply yui compressor
+        -->
+        <x-compress-js
+                srcfile="${build.dir}/sencha-touch-debug.js"
+                outfile="${build.dir}/sencha-touch.js"/>
+
+        <!--
+            Add license headers
+        -->
+
+        <for param="file">
+            <path>
+                <fileset dir="${build.dir}" includes="*.js"/>
+                <fileset dir="${build.dir}/builds" includes="*.js"/>
+            </path>
+            <sequential>
+                <move file="@{file}" tofile="@{file}.tmp"/>
+                <concat destfile="@{file}">
+                    <header>${header.comment}</header>
+                    <fileset file="@{file}.tmp"/>
+                </concat>
+                <delete file="@{file}.tmp"/>
+            </sequential>
+        </for>
+    </target>
+
+    <target name="build-examples" depends="init-sencha-cmd">
+        <property name="build.dir" location="${basedir}"/>
+        <for param="example.app">
+            <dirset dir="${build.dir}/examples" includes="*"/>
+            <sequential>
+                <if>
+                    <available file="@{example.app}/.sencha/app/sencha.cfg"/>
+                    <then>
+                        <echo>*** Building @{example.app} ***</echo>
+                        
+                        <!--Update metadata files from current Cmd build-->
+                        <x-sencha-command>
+                            -sdk
+                            @{example.app}
+                            app
+                            upgrade
+                            -noframework
+                        </x-sencha-command>
+                        
+                        <!--Run app build with upgraded metadata files-->
+                        <x-sencha-command>
+                            -sdk
+                            @{example.app}
+                            config
+                            -p
+                            args.archive=@{example.app}/archive
+                            then
+                            config
+                            -p
+                            args.path=@{example.app}
+                            then
+                            ant
+                            -f
+                            @{example.app}/build.xml
+                            build
+                        </x-sencha-command>
+                    </then>
+                </if>
+            </sequential>
+        </for>
+    </target>
+
+
+
+</project>

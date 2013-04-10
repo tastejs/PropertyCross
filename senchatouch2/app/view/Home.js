@@ -15,7 +15,7 @@
             },
             {
                 xtype: 'formpanel',
-                scrollable: false,
+                scrollable: null,
                 margin: 10,
                 items: [
                     {
@@ -67,7 +67,7 @@
                 padding: '0 10 10',
                 xtype: 'dataview',
                 id: 'previousSearches',
-                scrollable: false,
+                scrollable: null,
                 store: 'searches',
                 defaultType: 'searcheslistitem',
                 useComponents: true
@@ -78,7 +78,7 @@
                 hidden: 'true',
                 ui: 'round',
                 id: 'didYouMean',
-                scrollable: false,
+                scrollable: null,
                 store: {
                     fields: ['place_name', 'long_title']
                 },
