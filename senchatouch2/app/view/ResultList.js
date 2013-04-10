@@ -25,7 +25,7 @@
                     var data = store.getData();
                     if(totalCount && data) {
                         var fmt = PropertyFinder.util.Format.number;
-                        this.setTitle("Showing " + fmt(data.length) + " of " + fmt(totalCount) + " matches");
+                        this.setTitle(fmt(data.length) + " of " + fmt(totalCount) + " matches");
                     }
                 }
             }
