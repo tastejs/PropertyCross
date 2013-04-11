@@ -2,7 +2,7 @@
 
 We have been unable to get the successfully produce a native package using the [native packaging guide](http://docs.sencha.com/touch/2-0/#!/guide/native_packaging) so have opted to build the native binary using PhoneGap instead. N.B. This doesn't seem to be an uncommon approach from a quick search of their forums but we would ideally use their tooling if it worked.
 
-* Install the [Sencha SDK Tools](http://www.sencha.com/products/sdk-tools/).
+* Install the [Sencha Cmd Tool](http://www.sencha.com/products/sencha-cmd/) (previously this required Sencha SDK tools for <= SenchaTouch 2.0).
 * Open a terminal (must be cmd on Windows) and run -
 `...\senchatouch2>sencha app build --environment package`
 * Create a zip archive out of the `build/package` folder and upload it to [PhoneGap Build](https://build.phonegap.com/).
