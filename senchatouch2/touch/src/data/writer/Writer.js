@@ -47,7 +47,7 @@ Ext.define('Ext.data.writer.Writer', {
          *     });
          *
          * The following data will be sent to the server:
-         * 
+         *
          *     {
          *         firstName: 'first name value',
          *         lastName: 'last name value',
@@ -86,6 +86,10 @@ Ext.define('Ext.data.writer.Writer', {
     },
 
     writeDate: function(field, date) {
+        if (!date) {
+            return null;
+        }
+
         var dateFormat = field.getDateFormat() || 'timestamp';
         switch (dateFormat) {
             case 'timestamp':

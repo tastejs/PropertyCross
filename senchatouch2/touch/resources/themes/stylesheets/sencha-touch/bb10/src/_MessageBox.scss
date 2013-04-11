@@ -1,0 +1,157 @@
+/**
+ * Includes default message box styles.
+ *
+ * @member Ext.MessageBox
+ */
+
+.x-msgbox {
+    padding: 0;
+    border: 0;
+    background: #fff;
+    @include border-radius(10px);
+
+    .x-msgbox-title {
+        @include box-shadow(none);
+        @include border-top-radius(5px);
+    }
+
+    .x-msgbox-buttons {
+        border: 1px solid red;
+        @include border-bottom-radius(5px);
+    }
+
+    .x-field-input {
+        padding: 0 10px 5px;
+    }
+}
+
+.x-form.x-floating,
+.x-panel.x-floating {
+    background: #fff;
+    padding: 0;
+    border: 0;
+}
+
+.x-msgbox-text {
+    padding: 10px;
+    font-size: 14px;
+}
+
+//  max-height: 90%;
+//  width: 100%;
+//  padding: 10px;
+//  border: 0;
+//  margin: 0;
+//  max-width: 100%;
+
+//  > .x-dock {
+//    max-width: 600px;
+//    margin: 0 auto;
+//  }
+
+//  .x-msgbox-buttons {
+//    .x-toolbar-inner {
+//      @include st-box-pack(end, important);
+//    }
+//  }
+
+//  .x-title {
+//    padding: 0 !important;
+//  }
+
+//  //icons
+//  .x-icon {
+//    margin: 0 0.8em 0 0.5em;
+//    background: #fff;
+//    -webkit-mask-size: 100%;
+//  }
+
+//  .x-msgbox-info {
+//    @include icon('info');
+//  }
+
+//  .x-msgbox-warning {
+//    @include icon('warning_black');
+//  }
+
+//  .x-msgbox-question {
+//    @include icon('help');
+//  }
+
+//  .x-msgbox-error {
+//    @include icon('minus_black2');
+//  }
+
+//  .x-title {
+//    font-size: $font-size-medium-large;
+//    font-weight: normal;
+//    line-height: 1.4em;
+//    margin: 0;
+//  }
+
+////  .x-toolbar.x-docked-top {
+////    height: 1.3em;
+////  }
+
+//  .x-field {
+//    margin-bottom: 1.2em;
+//    min-height: 2em;
+//    background: #fff;
+//  }
+
+//  .x-form-field {
+//    min-height: 1.5em;
+//    padding-right: 0 !important;
+//    -webkit-appearance: none;
+//  }
+//}
+
+//.x-msgbox-title {
+//  padding: 0 !important;
+//}
+
+//.x-msgbox-text {
+//  padding: 10px 0;
+//  text-align: left;
+//  line-height: 1.4em;
+//}
+
+////.x-msgbox-buttons {
+////  padding: 0.4em 0;
+////  height: auto;
+
+////  .x-button {
+////    margin: 0 0.5em;
+////    width: 45%;
+
+////    ~ .x-button {
+////      @include st-box-flex(1);
+////    }
+////  }
+////}
+
+////.x-msgbox-buttons .x-inner .x-button:first-child {
+////  margin-left: 0;
+////}
+
+////.x-msgbox-buttons .x-inner .x-button:last-child {
+////  margin-right: 0;
+////}
+
+////.x-msgbox-dark {
+////  .x-msgbox-input {
+////    border: .1em solid lighten($sheet-bg-color, 40%);
+////  }
+////}
+
+////.x-msgbox,
+////.x-floating {
+////  .x-center,
+////  .x-pack-center.x-layout-box {
+////    @include st-box-pack(start);
+////  }
+
+////  .x-innerhtml {
+////    margin: 1em 0;
+////  }
+////}

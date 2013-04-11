@@ -6,6 +6,8 @@ Ext.define('Ext.data.proxy.Sql', {
     extend: 'Ext.data.proxy.Client',
     alternateClassName: 'Ext.data.proxy.SQL',
 
+    isSQLProxy: true,
+
     config: {
         /**
          * @cfg {Object} reader
@@ -117,7 +119,7 @@ Ext.define('Ext.data.proxy.Sql', {
                     me.fireEvent('exception', me, operation);
                 }
 
-                if (filters.length) {
+                if (filters && filters.length) {
                     filtered = Ext.create('Ext.util.Collection', function(record) {
                         return record.getId();
                     });
@@ -323,7 +325,7 @@ Ext.define('Ext.data.proxy.Sql', {
                 result.setCount(count);
 
                 if (typeof callback == 'function') {
-                    callback.call(scope || me, result)
+                    callback.call(scope || me, result);
                 }
             },
             function(transaction, errors) {
@@ -332,7 +334,7 @@ Ext.define('Ext.data.proxy.Sql', {
                 result.setCount(0);
 
                 if (typeof callback == 'function') {
-                    callback.call(scope || me, result)
+                    callback.call(scope || me, result);
                 }
             }
         );
@@ -548,11 +550,15 @@ Ext.define('Ext.data.proxy.Sql', {
             case 'float':
                 return 'REAL';
             case 'bool':
-                return 'NUMERIC'
+                return 'NUMERIC';
         }
     },
 
     writeDate: function (field, date) {
+        if (Ext.isEmpty(date)) {
+            return null;
+        }
+
         var dateFormat = field.getDateFormat() || this.getDefaultDateFormat();
         switch (dateFormat) {
             case 'timestamp':

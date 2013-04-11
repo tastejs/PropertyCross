@@ -68,19 +68,39 @@ Ext.define('Ext.chart.series.Series', {
 
         /**
          * @cfg {Function} renderer
-         * A function that can be overridden to set custom styling properties to each rendered element.
-         * Passes in (sprite, record, attributes, index, store) to the function.
+         * A function that can be provided to set custom styling properties to each rendered element.
+         * It receives `(sprite, config, rendererData, index)` as parameters.
          *
-         * @param sprite The sprite affected by the renderer.
-         * @param record The store record associated with the sprite.
-         * @param attributes The list of attributes to be applied to the sprite.
-         * @param index The index of the sprite.
-         * @param store The store used by the series.
-         * @return {*} The resultant attributes.
+         * @param {Object} sprite The sprite affected by the renderer. The visual attributes are in `sprite.attr`.
+         * The data field is available in `sprite.getField()`.
+         * @param {Object} config The sprite configuration. It varies with the series and the type of sprite: 
+         * for instance, a Line chart sprite might have just the `x` and `y` properties while a Bar 
+         * chart sprite also has `width` and `height`. A `type` might be present too. For instance to
+         * draw each marker and each segment of a Line chart, the renderer is called with the
+         * `config.type` set to either `marker` or `line`. 
+         * @param {Object} rendererData A record with different properties depending on the type of chart.
+         * The only guaranteed property is `rendererData.store`, the store used by the series.
+         * In some cases, a store may not exist: for instance a Gauge chart may read its value directly
+         * from its configuration; in this case rendererData.store is null and the value is
+         * available in rendererData.value.
+         * @param {Number} index The index of the sprite. It is usually the index of the store record associated
+         * with the sprite, in which case the record can be obtained with `store.getData().items[index]`.
+         * If the chart is not associated with a store, the index represents the index of the sprite within
+         * the series. For instance a Gauge chart may have as many sprites as there are sectors in the 
+         * background of the gauge, plus one for the needle.
+         *
+         * @return {Object} The attributes that have been changed or added. Note: it is usually possible to
+         * add or modify the attributes directly into the `config` parameter and not return anything,
+         * but returning an object with only those attributes that have been changed may allow for
+         * optimizations in the rendering of some series. Example to draw every other item in red:
+         *
+         *      renderer: function (sprite, config, rendererData, index) {
+         *          if (index % 2 == 0) {
+         *              return { strokeStyle: 'red' };
+         *          }
+         *      }
          */
-        renderer: function (sprite, record, attributes, index, store) {
-            return attributes;
-        },
+        renderer: null,
 
         /**
          * @cfg {Boolean} showInLegend
@@ -632,7 +652,8 @@ Ext.define('Ext.chart.series.Series', {
 
     getDefaultSpriteConfig: function () {
         return {
-            type: this.seriesType
+            type: this.seriesType,
+            renderer: this.getRenderer()
         };
     },
 
@@ -671,8 +692,8 @@ Ext.define('Ext.chart.series.Series', {
             }
         }
 
-        if (sprite.setDataItems) {
-            sprite.setDataItems(me.getStore().getData());
+        if (sprite.setStore) {
+            sprite.setStore(me.getStore());
         }
 
         sprite.fx.on('animationstart', 'onSpriteAnimationStart', me);

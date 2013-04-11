@@ -164,7 +164,23 @@ Ext.define('Ext.layout.FlexBox', {
         var element = item.element;
 
         element.toggleCls('x-flexed', !!flex);
-        element.setStyle('-webkit-box-flex', flex);
+
+        if (!flex) {
+            flex = '';
+        }
+        else {
+            flex = String(flex);
+        }
+
+        if (Ext.browser.is.WebKit) {
+            element.dom.style.setProperty('-webkit-box-flex', flex, null);
+        }
+        else if (Ext.browser.is.IE) {
+            element.dom.style.setProperty('-ms-flex', flex + ' 0 0px', null);
+        }
+        else {
+            element.dom.style.setProperty('flex', flex + ' 0 0px', null);
+        }
     },
 
     convertPosition: function(position) {

@@ -361,8 +361,7 @@ Ext.define('Ext.Container', {
      * Changes the {@link #masked} configuration when its setter is called, which will convert the value
      * into a proper object/instance of {@link Ext.Mask}/{@link Ext.LoadMask}. If a mask already exists,
      * it will use that instead.
-     * @param masked
-     * @param currentMask
+     * @param {Boolean/Object/Ext.Mask/Ext.LoadMask} masked
      * @return {Object}
      */
     applyMasked: function(masked) {
@@ -674,17 +673,22 @@ Ext.define('Ext.Container', {
         var me = this,
             i, ln, item, newActiveItem;
 
-        newItems = Ext.Array.from(newItems);
-
-        ln = newItems.length;
-
-        for (i = 0; i < ln; i++) {
-            item = me.factoryItem(newItems[i]);
+        if (Ext.isArray(newItems)) {
+            for (i = 0, ln = newItems.length; i < ln; i++) {
+                item = me.factoryItem(newItems[i]);
+                this.doAdd(item);
+                if (!newActiveItem && !this.getActiveItem() && this.innerItems.length > 0 && item.isInnerItem()) {
+                    newActiveItem = item;
+                }
+            }
+        } else {
+            item = me.factoryItem(newItems);
             this.doAdd(item);
             if (!newActiveItem && !this.getActiveItem() && this.innerItems.length > 0 && item.isInnerItem()) {
                 newActiveItem = item;
             }
         }
+
         if (newActiveItem) {
             this.setActiveItem(newActiveItem);
         }
@@ -718,7 +722,7 @@ Ext.define('Ext.Container', {
     /**
      * Removes an item from this Container, optionally destroying it.
      * @param {Object} item The item to remove.
-     * @param {Boolean} destroy Calls the Component's {@link Ext.Component#destroy destroy} method if `true`.
+     * @param {Boolean} [destroy] Calls the Component's {@link Ext.Component#destroy destroy} method if `true`.
      * @return {Ext.Component} this
      */
     remove: function(item, destroy) {
@@ -792,7 +796,7 @@ Ext.define('Ext.Container', {
             i = 0,
             item;
 
-        if (destroy === undefined) {
+        if (typeof destroy != 'boolean') {
             destroy = this.getAutoDestroy();
         }
 
@@ -806,7 +810,6 @@ Ext.define('Ext.Container', {
 
             if (item && (everything || item.isInnerItem())) {
                 this.doRemove(item, i, destroy);
-
                 i--;
                 ln--;
             }
@@ -953,6 +956,12 @@ Ext.define('Ext.Container', {
     insert: function(index, item) {
         var me = this,
             i;
+
+        //<debug error>
+        if (typeof index != 'number') {
+            Ext.Logger.error("Invalid index of '" + index + "', must be a valid number");
+        }
+        //</debug>
 
         if (Ext.isArray(item)) {
             for (i = item.length - 1; i >= 0; i--) {
@@ -1302,7 +1311,7 @@ Ext.define('Ext.Container', {
     applyScrollable: function(config) {
         if (typeof config === 'boolean') {
             //<debug warn>
-            if (config === false && !this.heightLayoutSized) {
+            if (config === false && !(this.getHeight() !== null || this.heightLayoutSized || (this.getTop() !== null && this.getBottom() !== null))) {
                 Ext.Logger.warn("This container is set to scrollable: false but has no specified height. " +
                     "You may need to set the container to scrollable: null or provide a height.", this);
             }

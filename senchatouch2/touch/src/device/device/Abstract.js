@@ -2,7 +2,7 @@
  * @private
  */
 Ext.define('Ext.device.device.Abstract', {
-    extend: 'Ext.EventedBase',
+    mixins: ['Ext.mixin.Observable'],
 
     /**
      * @event schemeupdate

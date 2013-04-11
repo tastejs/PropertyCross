@@ -138,7 +138,7 @@ this file in most cases.
         
         <property name="build.options.native"
                   value="${build.options.native.debug},${build.options.native.logger},${build.options.native.minVersion},${build.options.native.product}"/>
-        
+     
         <!-- default the build environment to production if it is unset by this point -->
         <property name="args.environment" value="production"/>
         
@@ -373,7 +373,7 @@ The following properties can be used to modify the build process.
 For details about how these options affect your build, see
 
     ${basedir}/.sencha/app/build-impl.xml
-                            
+            
 These options can be stored in a local.properties file in this folder or in the
 local.properties file in the workspace.
 

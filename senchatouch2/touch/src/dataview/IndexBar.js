@@ -139,28 +139,28 @@ Ext.define('Ext.dataview.IndexBar', {
         this.callParent();
 
         this.innerElement.on({
-            touchstart: this.onTouchStart,
-            touchend: this.onTouchEnd,
-            touchmove: this.onTouchMove,
+            dragstart: this.onDragStart,
+            dragend: this.onDragEnd,
+            drag: this.onDrag,
             scope: this
         });
     },
 
     // @private
-    onTouchStart: function(e, t) {
+    onDragStart: function(e, t) {
         e.stopPropagation();
         this.innerElement.addCls(this.getBaseCls() + '-pressed');
         this.pageBox = this.innerElement.getPageBox();
-        this.onTouchMove(e);
+        this.onDrag(e);
     },
 
     // @private
-    onTouchEnd: function(e, t) {
+    onDragEnd: function(e, t) {
         this.innerElement.removeCls(this.getBaseCls() + '-pressed');
     },
 
     // @private
-    onTouchMove: function(e) {
+    onDrag: function(e) {
         var point = Ext.util.Point.fromEvent(e),
             target,
             pageBox = this.pageBox;

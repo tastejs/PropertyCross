@@ -8,7 +8,7 @@ Ext.define('Ext.util.Grouper', {
     extend: 'Ext.util.Sorter',
 
     isGrouper: true,
-    
+
     config: {
         /**
          * @cfg {Function} groupFn This function will be called for each item in the collection to
@@ -93,6 +93,6 @@ Ext.define('Ext.util.Grouper', {
 
     getGroupString: function(item) {
         var group = this.getGroupFn().call(this, item);
-        return typeof group != 'undefined' ? group.toString() : '';
+        return (group !== null && typeof group != 'undefined') ? group.toString() : '';
     }
 });

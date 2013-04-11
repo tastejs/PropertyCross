@@ -115,8 +115,19 @@ Ext.define('Ext.layout.Default', {
         var container = this.container,
             containerDom = container.innerElement.dom,
             itemDom = item.element.dom,
-            nextSibling = container.getInnerAt(index + 1),
-            nextSiblingDom = nextSibling ? nextSibling.element.dom : null;
+            nextSibling = index !== -1 ? container.getInnerAt(index + 1) : null,
+            nextSiblingDom = null,
+            translatable;
+
+        if (nextSibling) {
+            translatable = nextSibling.getTranslatable();
+            if (translatable && translatable.getUseWrapper()) {
+                nextSiblingDom = translatable.getWrapper().dom;
+            }
+            else {
+                nextSiblingDom = nextSibling ? nextSibling.element.dom : null;
+            }
+        }
 
         containerDom.insertBefore(itemDom, nextSiblingDom);
 
@@ -211,13 +222,6 @@ Ext.define('Ext.layout.Default', {
         }
     },
 
-    onAfterDockedChange:function(item, docked, oldDocked) {
-        var parent = item.getParent();
-        if(parent && docked) {
-            parent.getLayout().onAfterItemDockedChange(item, docked, oldDocked);
-        }
-    },
-
     onContainerSizeStateChange: function() {
         var dockWrapper = this.getDockWrapper();
 
@@ -255,7 +259,7 @@ Ext.define('Ext.layout.Default', {
             direction = positionDirectionMap[item.getDocked()],
             dockInnerWrapper = this.dockInnerWrapper,
             referenceDirection, i, dockedItem, index, previousItem, slice,
-            referenceItem, referenceDocked, referenceWrapper, newWrapper, nestedWrapper;
+            referenceItem, referenceDocked, referenceWrapper, newWrapper, nestedWrapper, oldInnerWrapper;
 
         this.monitorSizeStateChange();
         this.monitorSizeFlagsChange();
@@ -332,7 +336,9 @@ Ext.define('Ext.layout.Default', {
                     newWrapper.setInnerWrapper(nestedWrapper);
                 }
                 else {
-                    newWrapper.setInnerWrapper(referenceWrapper.getInnerWrapper());
+                    oldInnerWrapper = referenceWrapper.getInnerWrapper();
+                    referenceWrapper.setInnerWrapper(null);
+                    newWrapper.setInnerWrapper(oldInnerWrapper);
                     referenceWrapper.setInnerWrapper(newWrapper);
                 }
 

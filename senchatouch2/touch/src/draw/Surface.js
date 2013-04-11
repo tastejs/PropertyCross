@@ -93,7 +93,7 @@ Ext.define('Ext.draw.Surface', {
     /**
      * The reported device pixel density.
      */
-    devicePixelRatio: window.devicePixelRatio,
+    devicePixelRatio: window.devicePixelRatio || 1,
 
     statics: {
         /**

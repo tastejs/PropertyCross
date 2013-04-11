@@ -26,7 +26,7 @@ Ext.define('Ext.fx.layout.card.ScrollReveal', {
 
             outTranslate = outItem.setTranslatable(true).getTranslatable();
             inTranslate = inItem.setTranslatable(true).getTranslatable();
-            outTranslate.getWrapper().dom.style.setProperty('z-index', '100', '!important');
+            outTranslate.getWrapper().dom.style.setProperty('z-index', '100', 'important');
             outTranslate.translate({ x: 0, y: 0});
             inTranslate.translate({ x: 0, y: 0});
 

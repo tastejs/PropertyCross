@@ -15,7 +15,7 @@ Ext.define('Ext.behavior.Draggable', {
 
         if (config) {
             if (!draggable) {
-                component.setTranslatable(true);
+                component.setTranslatable(config.translatable);
                 this.draggable = draggable = new Ext.util.Draggable(config);
                 draggable.setTranslatable(component.getTranslatable());
                 draggable.setElement(component.renderElement);

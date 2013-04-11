@@ -56,7 +56,7 @@ Ext.define("Ext.chart.Markers", {
 
     /**
      *
-     * @param {String} id
+     * @param {String} category
      * @param {Mixed} index
      * @param {Boolean} [isWithoutTransform]
      */

@@ -32,7 +32,7 @@ Ext.define("Ext.chart.series.sprite.Scatter", {
             y = y * yy + dy;
             if (left <= x && x <= right && top <= y && y <= bottom) {
                 if (attr.renderer) {
-                    attr.renderer.call(this, markerCfg, this, i, this.getDataItems().items[i]);
+                    attr.renderer.call(this, this, markerCfg, {store:this.getStore()}, i);
                 }
                 markerCfg.translationX = x;
                 markerCfg.translationY = y;

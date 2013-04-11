@@ -553,6 +553,7 @@ Ext.define('Ext.app.Application', {
      * @param {String} name The name of the Controller.
      * @param {String} [profileName] Optional profile name. If passed, this is the same as calling
      * `getController('profileName.controllerName')`.
+     * @return {Ext.app.Controller} controller instance or undefined.
      */
     getController: function(name, profileName) {
         var instances = this.getControllerInstances(),

@@ -203,8 +203,8 @@ Ext.String = {
      *     alert(s); // '<div class="my-class">Some text</div>'
      *
      * @param {String} string The tokenized string to be formatted.
-     * @param {String} value1 The value to replace token {0}.
-     * @param {String} value2 Etc...
+     * @param {String...} values First param value to replace token `{0}`, then next
+     * param to replace `{1}` etc.
      * @return {String} The formatted string.
      */
     format: function(format) {

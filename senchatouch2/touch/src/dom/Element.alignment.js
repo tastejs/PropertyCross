@@ -63,7 +63,7 @@ Ext.dom.Element.addMembers({
      * Gets the x,y coordinates to align this element with another element.
      * @param {Mixed} element The element to align to.
      * @param {String} [position=tl-bl] (optional) The position to align to.
-     * @param {Array} offsets (optional) Offset the positioning by [x, y].
+     * @param {Array} [offsets] Offset the positioning by [x, y].
      * @return {Array} [x, y]
      */
     getAlignToXY: function(el, position, offsets, local) {

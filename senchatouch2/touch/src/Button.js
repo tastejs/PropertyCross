@@ -2,7 +2,7 @@
  * A simple class to display a button in Sencha Touch.
  *
  * There are various different styles of Button you can create by using the {@link #icon},
- * {@link #iconCls}, {@link #iconAlign}, {@link #iconMask}, {@link #ui}, and {@link #text}
+ * {@link #iconCls}, {@link #iconAlign}, {@link #ui}, and {@link #text}
  * configurations.
  *
  * ## Simple Button
@@ -21,13 +21,9 @@
  *
  *     @example miniphone
  *     var button = Ext.create('Ext.Button', {
- *         iconCls: 'refresh',
- *         iconMask: true
+ *         iconCls: 'refresh'
  *     });
  *     Ext.Viewport.add({ xtype: 'container', padding: 10, items: [button] });
- *
- * Note that the {@link #iconMask} configuration is required when you want to use any of the
- * bundled Pictos icons.
  *
  * Here are the included icons available (if {@link Global_CSS#$include-default-icons $include-default-icons}
  * is set to `true`):
@@ -59,7 +55,7 @@
  * - ![trash](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAYAAAA6/NlyAAAFBElEQVRoBe2aS4gdRRRA8+L/m0QIJkYNLlQUNOAvigpRcCEIcSsiCLoLLoILcaM7QVBX4koRshDxt9CFKCoiuvGDCP5QkxCiJhInRo2Ovzie80gPNWX1dL3uesM09IUz3V1169a9daur+031aG5ubkUpGY1GK7G1Dq4Cz9vKiIY74Sv8+72tkWQ7Ay4Bxo+Hu2E3/AuOZBf+ov2TsL6Ef5WNUsGazXvgEHQJMm77N/aeg3Mrh7seOweMM2bWYH+B2OES1/9g9w0oEnSngHHCYO+FGSgRXJ0NM/0idA565BRpKyxSt9J2B5xWY+Mw5Udq6uqKT6XimESlmX4d7sTnA4n6rKJjs7QSSgTrSno7nJyodtFyGr4AP4G6TeLIHweb4A44C0LR1xtgCzwP7aTtIkBvLlSfQjwNZyl7FNa0sU077V4DX0Js25X7cRjPzDb2Nd5FnK7xPbGXskdwxsxOLLRzdnwIj8GvkQFnypqobKLLrgGnOjMzP6cqJijzfn0NXPljmXRNWNC+dcBHM7HA2NELp10nwbaz5iC4OsdidTyrYp3a68ZFi7XJFfNsOBGcUmFnPpbiBWkVZefT7g+OXcTF0EUsFPtaje0Lw0LOzfoM49B4Gy36WMKwK+WDcC2cAmGwXK7YAAYdym9c+NiIdUOdnHODc6DjpPioix9LBvwtPE3QOzjWi7MjBS0M8CGY1huUA1ISg/4cNqXiqcqSwVqJ3AQ/QEmnpm3LR+IzsLYKMD4mA6bBOfAKuFpO28nS9v0Bcxckn9V1Ad9Pg2m/H5cONLT3Mf5fFGfX63hBQG8s7/LXxcdV0nvjMtgKp0MojuaroM60xYB8Z78ZTog6c515B1ylXey+ARe3/0tqFNCy0RjrkdvgOwhH0TeiB2A1uMBNGx9Ta+FZiP34mrIrQR39cECSUzqZYYIcR0mjJtmFwmHUvdenLjwmnUl7Eh05+LP40fjvoGTACYN1Rc6CecGhM7lw2lt+AA7Fg4fOespXgYO0j3pvnXmh3rY+/52+vrXtRSd841rQJ/WV1JVX9eNj14DnjeHnJVw8DBeAnX8A2ynfXwXN+cWUPQUOjNl6i7Jt1I9nCOe+1V0NT4AB/wkvw31QRIoFjDfnwRXgfVbJGZzsry44boTNUGVjlvOToPpV5FvbjXApKE7VLZ6UkpWlDGHH+96pV93/4TSsujGA8MeF51Xw6njuO3soKTth/UTnJQOeqONFlKsBW0SlfdVyDLh9NBkth4AzBqnXKkOGe52+DOeHDGcMUq9Vhgz3On0Zzg8ZzhikXqsMGe51+jKcHzKcMUi9Vhky3Ov0ZTg/ZDhjkHqtMmS41+nLcH7IcMYg9VplOWY4/Md88cEtHbDOVg5Xx9jpsM9Yx52JeAcw1ontTXRdcm9pFz3vBveHdNJN6YPVRhrnivtMlruZ5g7DFxBuXLut8j7sA/d43Yr5CIpJsYAJ7DN2/27Bsw1gwAb3I8wLOp+g4w6+nw/6HddOyszqWDg/Qv2bXFwH4+1SyhyUYtI1YLc85wXn/ORAagWdPVRKUqh3AJwtdTLeWq2rbCoP76cm3bjeLG6ELjZim03XJujyJqXF6rtmeDvGNzMN/ajEAZi2rKOD67t00jVgN7+3dnFgqdsu5XRc6tiS/eUGvBTTNengBIVZPuYG7LcYPjdluYk++bTw++pGyQ34bSy9B35Vs5zEYGfgJfg+x7H/ADoy2VfnrtXoAAAAAElFTkSuQmCC) trash
  * - ![user](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAYAAAA6/NlyAAAEWElEQVRoBe2aS0gVYRiGO1lmF8nQQlETutGFokAiqEV0ISKwgmrdMtzUpnW7drWKbFGbQAKpJIhuUGIUFUkW0T1Jq4V2U4ui7GLPexpDD+ecuX1jHqcPHseZ+f9vvnf++e8n0d/fPyZONjZOYqU1doLHRV3CiURCz5gMxTANJsJg+8XJJ+iBt9BHNdO1SCwRZR1GbAFRl8F8WAFLoRwGLME/ffAM7kETvIYPxPWDo7lFIhiheURaCVtgBywHXXOzbhJcggZoRvR7twy+76uELSEAtQsqySPwGdQN+KWDPHuh2DI2+TIVm3T455M9G0Bk6ktRvd4NBZaiTQUT3AQnSNW/VAFBzl/iZw0kq56FcOtuaQHB7QIv9ZVkrqZ2YA9Mck3pMYGZYKeh2sBz1SJb2mqcmfk0E0xQ6l9rwNoKcWjm11JwEYFVW6t1/K218mspeB5B5VsFluKnIuU88Kml4PGBo3DPqBGZiVkKNgvKRFkGJ5aCv2Z4xoi6bCm4DWUaXERhZhMJS8FfolDq+DSbRFgKjrIOa8poYpaCTQKK2sl/wSHfcFSNlll1sSzhn7ys3pAvLFP275lu+L1uKVhBPfYbgMf0zz2mc01mKfgbT7vi+kT/CeT3sv9s6XNYCtbg4CJ0pX9U4Kv3yXk3cO6UjGaCWX5Rg/UArqY8I8yp1qdPQ08YJ4Pzmgl2nCqwc2DVyKjunuddqkE0MVPBBKYSuQ7tJtEhFj9apDczU8FOVB0ctZiuHYUw9obMjbxErW2bmblgApTQengVIkq1B83QEsJH2qzmgp2n3ObYCEGndZ3krbcuXcUWiWACldCjoA0yv6a8J6HJb0Yv6SMRrAcj+gmHA+B3aneDPHXk/8jR3LR3a2rOfnAlTmfDVPDb6Khrq8bPDI5PoRPxZpMSk+1SgtOKpTa8l8BC0JaLmAkloA1xr/aOhJqEtINGWeqW7jjHXrQHbRdw4WxSJf8L8Aeh2m1QaWoBfiUsA61PTwGtUYeZ1qlP1zhan3YraBSnz/0mdAUVHqiEESoxKs0a2AxloJIMI5DsWU0vQH2z2oZToAnFI7+fu2/BiF3PgzbCKqgC1bXhNH3S6rba4BocR7TquifzLBih5XjcCSrROaAGKbJWHt9uJuGq67fgAki4zrNaVsGIzCP3dNgE20B1VJ+uro8UUz3Xr39UvxugCeEZl3UzCkZsBZn1+W6HRaB6qtZ4pJp2PtTna+58DFoR3sVxqHFxyM8euFsIW6EeXoDeoPrBXEEbAlpqqoN1kD9YY6rYxSQ4DGoE9KOSXBGZLk4NYB7CfigZEP1XMBfVEJ0BJUznIFevaSBzEEolOimYkyo4AfocclVYtrjViB0C9SzJEdE+jrn+CWcTrHvdUKuRUSm0gPrZ0W7tGjjMhTiIVWFWSbAGEnGxhAT/y+HhsL9oiVWFjo3FqnRVqrETrG5pFmiSEAuTYC3TFMVCLSIzTg9H6wuIXR2OneDfMJq1NmzzbS8AAAAASUVORK5CYII=) user
  *
- * You can also use other pictos icons by using the {@link Global_CSS#pictos-iconmask pictos-iconmask} mixin in your Sass.
+ * You can also use other pictos icons by using the {@link Global_CSS#icon icon} mixin in your Sass.
  *
  * ## Badges
  *
@@ -179,9 +175,6 @@
  *             {
  *                 xtype: 'toolbar',
  *                 docked: 'top',
- *                 defaults: {
- *                     iconMask: true
- *                 },
  *                 items: [
  *                     { xtype: 'spacer' },
  *                     { iconCls: 'action' },
@@ -200,9 +193,6 @@
  *                 xtype: 'toolbar',
  *                 docked: 'bottom',
  *                 ui: 'light',
- *                 defaults: {
- *                     iconMask: true
- *                 },
  *                 items: [
  *                     { xtype: 'spacer' },
  *                     { iconCls: 'reply' },
@@ -273,14 +263,6 @@ Ext.define('Ext.Button', {
         labelCls: Ext.baseCSSPrefix + 'button-label',
 
         /**
-         * @cfg {String} iconMaskCls
-         * @private
-         * The CSS class to add to the icon element as allowed by {@link #iconMask}.
-         * @accessor
-         */
-        iconMaskCls: Ext.baseCSSPrefix + 'icon-mask',
-
-        /**
          * @cfg {String} iconCls
          * Optional CSS class to add to the icon element. This is useful if you want to use a CSS
          * background image to create your Button icon.
@@ -309,7 +291,7 @@ Ext.define('Ext.Button', {
          * Url to the icon image to use if you want an icon to appear on your button.
          * @accessor
          */
-        icon: null,
+        icon: false,
 
         /**
          * @cfg {String} iconAlign
@@ -325,14 +307,6 @@ Ext.define('Ext.Button', {
          * Settings this to `true` defaults to 100ms.
          */
         pressedDelay: 0,
-
-        /**
-         * @cfg {Boolean} iconMask
-         * Whether or not to mask the icon with the `iconMask` configuration.
-         * This is needed if you want to use any of the bundled pictos icons in the Sencha Touch Sass.
-         * @accessor
-         */
-        iconMask: null,
 
         /**
          * @cfg {Function} handler
@@ -400,8 +374,7 @@ Ext.define('Ext.Button', {
         {
             tag: 'span',
             className: Ext.baseCSSPrefix + 'button-icon',
-            reference: 'iconElement',
-            hidden: true
+            reference: 'iconElement'
         },
         {
             tag: 'span',
@@ -517,12 +490,9 @@ Ext.define('Ext.Button', {
             me.showIconElement();
             element.setStyle('background-image', 'url(' + icon + ')');
             me.refreshIconAlign();
-            me.refreshIconMask();
-        }
-        else {
+        } else {
         	element.setStyle('background-image', '');
             me.hideIconElement();
-            me.setIconAlign(false);
         }
     },
 
@@ -537,12 +507,9 @@ Ext.define('Ext.Button', {
             me.showIconElement();
             element.replaceCls(oldIconCls, iconCls);
             me.refreshIconAlign();
-            me.refreshIconMask();
-        }
-        else {
+        } else {
 			element.removeCls(oldIconCls);
             me.hideIconElement();
-            me.setIconAlign(false);
         }
     },
 
@@ -566,28 +533,6 @@ Ext.define('Ext.Button', {
 
     refreshIconAlign: function() {
         this.updateIconAlign(this.getIconAlign());
-    },
-
-    /**
-     * @private
-     */
-    updateIconMaskCls: function(iconMaskCls, oldIconMaskCls) {
-        var element = this.iconElement;
-
-        if (this.getIconMask()) {
-            element.replaceCls(oldIconMaskCls, iconMaskCls);
-        }
-    },
-
-    /**
-     * @private
-     */
-    updateIconMask: function(iconMask) {
-        this.iconElement[iconMask ? "addCls" : "removeCls"](this.getIconMaskCls());
-    },
-
-    refreshIconMask: function() {
-        this.updateIconMask(this.getIconMask());
     },
 
     applyAutoEvent: function(autoEvent) {
@@ -619,22 +564,20 @@ Ext.define('Ext.Button', {
 
     /**
      * Used by `icon` and `iconCls` configurations to hide the icon element.
-     * We do this because Tab needs to change the visibility of the icon, not make
-     * it `display:none;`.
      * @private
      */
     hideIconElement: function() {
-        this.iconElement.hide();
+        this.iconElement.removeCls(Ext.baseCSSPrefix + 'shown');
+        this.iconElement.addCls(Ext.baseCSSPrefix + 'hidden');
     },
 
     /**
      * Used by `icon` and `iconCls` configurations to show the icon element.
-     * We do this because Tab needs to change the visibility of the icon, not make
-     * it `display:node;`.
      * @private
      */
     showIconElement: function() {
-        this.iconElement.show();
+        this.iconElement.removeCls(Ext.baseCSSPrefix + 'hidden');
+        this.iconElement.addCls(Ext.baseCSSPrefix + 'shown');
     },
 
     /**

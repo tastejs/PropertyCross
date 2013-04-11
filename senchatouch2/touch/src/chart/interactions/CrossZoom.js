@@ -175,7 +175,6 @@ Ext.define('Ext.chart.interactions.CrossZoom', {
                 cls: [],
                 iconCls: 'refresh',
                 text: 'Undo Zoom',
-                iconMask: true,
                 disabled: true,
                 handler: function () {
                     me.undoZoom();

@@ -13,7 +13,7 @@ Ext.define('Ext.tab.Tab', {
 
     config: {
         /**
-         * @cfg
+         * @cfg baseCls
          * @inheritdoc
          */
         baseCls: Ext.baseCSSPrefix + 'tab',
@@ -28,7 +28,7 @@ Ext.define('Ext.tab.Tab', {
 
         /**
          * @cfg {String} activeCls
-         * The CSS class to be applied to a Tab when it is active. 
+         * The CSS class to be applied to a Tab when it is active.
          * Providing your own CSS for this class enables you to customize the active state.
          * @accessor
          */
@@ -48,27 +48,6 @@ Ext.define('Ext.tab.Tab', {
          */
         title: '&nbsp;'
     },
-
-    // We need to override this so the `iconElement` is properly hidden using visibility
-    // when we render it.
-    template: [
-        {
-            tag: 'span',
-            reference: 'badgeElement',
-            hidden: true
-        },
-        {
-            tag: 'span',
-            className: Ext.baseCSSPrefix + 'button-icon',
-            reference: 'iconElement',
-            style: 'visibility: hidden !important'
-        },
-        {
-            tag: 'span',
-            reference: 'textElement',
-            hidden: true
-        }
-    ],
 
     updateIconCls : function(newCls, oldCls) {
         this.callParent([newCls, oldCls]);
@@ -96,14 +75,6 @@ Ext.define('Ext.tab.Tab', {
 
     updateTitle: function(title) {
         this.setText(title);
-    },
-
-    hideIconElement: function() {
-        this.iconElement.dom.style.setProperty('visibility', 'hidden', '!important');
-    },
-
-    showIconElement: function() {
-        this.iconElement.dom.style.setProperty('visibility', 'visible', '!important');
     },
 
     updateActive: function(active, oldActive) {

@@ -276,10 +276,6 @@ Ext.define('Ext.scroll.Scroller', {
     constructor: function(config) {
         var element = config && config.element;
 
-        if (Ext.os.is.Android4 && !Ext.browser.is.Chrome) {
-            this.onDrag = Ext.Function.createThrottled(this.onDrag, 20, this);
-        }
-
         this.listeners = {
             scope: this,
             touchstart: 'onTouchStart',
@@ -334,7 +330,9 @@ Ext.define('Ext.scroll.Scroller', {
     updateElement: function(element) {
         this.initialize();
 
-        element.addCls(this.cls);
+        if (!this.FixedHBoxStretching) {
+            element.addCls(this.cls);
+        }
 
         if (!this.getDisabled()) {
             this.attachListeneners();
@@ -445,10 +443,10 @@ Ext.define('Ext.scroll.Scroller', {
      * @private
      */
     updateDirection: function(direction) {
-        var isAxisEnabled = this.isAxisEnabledFlags;
+        var isAxisEnabledFlags = this.isAxisEnabledFlags;
 
-        isAxisEnabled.x = (direction === 'both' || direction === 'horizontal');
-        isAxisEnabled.y = (direction === 'both' || direction === 'vertical');
+        isAxisEnabledFlags.x = (direction === 'both' || direction === 'horizontal');
+        isAxisEnabledFlags.y = (direction === 'both' || direction === 'vertical');
     },
 
     /**
@@ -653,10 +651,12 @@ Ext.define('Ext.scroll.Scroller', {
      * Returns the container for this scroller
      */
     getContainer: function() {
-        var container = this.container;
+        var container = this.container,
+            element;
 
         if (!container) {
-            this.container = container = this.getElement().getParent();
+            element = this.getElement().getParent();
+            this.container = container = this.FixedHBoxStretching ? element.getParent() : element;
             //<debug error>
             if (!container) {
                 Ext.Logger.error("Making an element scrollable that doesn't have any container");
@@ -971,8 +971,8 @@ Ext.define('Ext.scroll.Scroller', {
 
         this.isDragging = false;
 
-        easingX = this.getAnimationEasing('x');
-        easingY = this.getAnimationEasing('y');
+        easingX = this.getAnimationEasing('x', e);
+        easingY = this.getAnimationEasing('y', e);
 
         if (easingX || easingY) {
             this.getTranslatable().animate(easingX, easingY);
@@ -985,20 +985,19 @@ Ext.define('Ext.scroll.Scroller', {
     /**
      * @private
      */
-    getAnimationEasing: function(axis) {
+    getAnimationEasing: function(axis, e) {
         if (!this.isAxisEnabled(axis)) {
             return null;
         }
 
         var currentPosition = this.position[axis],
-            flickStartPosition = this.flickStartPosition[axis],
-            flickStartTime = this.flickStartTime[axis],
             minPosition = this.getMinPosition()[axis],
             maxPosition = this.getMaxPosition()[axis],
             maxAbsVelocity = this.getMaxAbsoluteVelocity(),
             boundValue = null,
             dragEndTime = this.dragEndTime,
-            easing, velocity, duration;
+            velocity = e.flick.velocity[axis],
+            easing;
 
         if (currentPosition < minPosition) {
             boundValue = minPosition;
@@ -1019,15 +1018,6 @@ Ext.define('Ext.scroll.Scroller', {
             return easing;
         }
 
-        // Still within boundary, start deceleration
-        duration = dragEndTime - flickStartTime;
-
-        if (duration === 0) {
-            return null;
-        }
-
-        velocity = (currentPosition - flickStartPosition) / (dragEndTime - flickStartTime);
-
         if (velocity === 0) {
             return null;
         }
@@ -1043,7 +1033,7 @@ Ext.define('Ext.scroll.Scroller', {
         easing.setConfig({
             startTime: dragEndTime,
             startValue: -currentPosition,
-            startVelocity: -velocity,
+            startVelocity: velocity * 1.5,
             minMomentumValue: -maxPosition,
             maxMomentumValue: 0
         });
@@ -1125,11 +1115,16 @@ Ext.define('Ext.scroll.Scroller', {
             snapOffset = this.getSlotSnapOffset()[axis];
             maxPosition = this.getMaxPosition()[axis];
 
-            mod = (position - snapOffset) % snapSize;
+            mod = Math.floor((position - snapOffset) % snapSize);
 
-            if ((mod !== 0) && (position !== maxPosition)) {
-                if (Math.abs(mod) > snapSize / 2) {
-                    snapPosition = Math.min(maxPosition, position + ((mod > 0) ? snapSize - mod : mod - snapSize));
+            if (mod !== 0) {
+                if (position !== maxPosition) {
+                    if (Math.abs(mod) > snapSize / 2) {
+                        snapPosition = Math.min(maxPosition, position + ((mod > 0) ? snapSize - mod : mod - snapSize));
+                    }
+                    else {
+                        snapPosition = position - mod;
+                    }
                 }
                 else {
                     snapPosition = position - mod;
@@ -1173,7 +1168,8 @@ Ext.define('Ext.scroll.Scroller', {
 
     destroy: function() {
         var element = this.getElement(),
-            sizeMonitors = this.sizeMonitors;
+            sizeMonitors = this.sizeMonitors,
+            container;
 
         if (sizeMonitors) {
             sizeMonitors.element.destroy();
@@ -1182,7 +1178,10 @@ Ext.define('Ext.scroll.Scroller', {
 
         if (element && !element.isDestroyed) {
             element.removeCls(this.cls);
-            this.getContainer().removeCls(this.containerCls);
+            container = this.getContainer();
+            if (container && !container.isDestroyed) {
+                container.removeCls(this.containerCls);
+            }
         }
 
         Ext.destroy(this.getTranslatable());

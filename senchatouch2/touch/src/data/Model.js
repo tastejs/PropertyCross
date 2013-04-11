@@ -420,8 +420,12 @@ Ext.define('Ext.data.Model', {
          *     });
          *
          * @param {Number} id The id of the model to load
-         * @param {Object} config (optional) config object containing success, failure and callback functions, plus
-         * optional scope
+         * @param {Object} [config] Config object containing fields:
+         * @param {Function} config.success Called on success.
+         * @param {Function} config.failure Called on failure.
+         * @param {Function} config.callback Called after load.
+         * @param {Object} config.scope Value of `this` in the above functions.
+         * @param {Object} [scope] Same as `config.scope`.
          * @static
          * @inheritable
          */
@@ -593,7 +597,10 @@ Ext.define('Ext.data.Model', {
                 }
 
                 data[fieldName] = value;
-            }
+            } else if (Ext.isFunction(field._convert)) {
+				value = field._convert(value, me);
+				data[fieldName] = value;
+			}
         }
 
         if (me.associations.length) {
@@ -784,7 +791,7 @@ Ext.define('Ext.data.Model', {
             if (notEditing && modifiedCount) {
                 me.endEdit(false, modifiedFieldNames);
             }
-        } else {
+        } else if(modified) {
             field = fieldMap[fieldName];
             convert = field && field.getConvert();
             if (convert) {
@@ -951,12 +958,14 @@ Ext.define('Ext.data.Model', {
     /**
      * Saves the model instance using the configured proxy.
      *
-     * @param {Object/Function} options Options to pass to the proxy. Config object for {@link Ext.data.Operation}.
-     * If you pass a function, this will automatically become the callback method. For convenience the config
-     * object may also contain `success` and `failure` methods in addition to `callback` - they will all be invoked
-     * with the Model and Operation as arguments.
-     * @param {Object} scope The scope to run your callback method in. This is only used if you passed a function
-     * as the first argument.
+     * @param {Object/Function} [options] Options to pass to the proxy. Config object for {@link
+     * Ext.data.Operation}.  If you pass a function, this will automatically become the callback
+     * method. For convenience the config object may also contain `success` and `failure` methods in
+     * addition to `callback` - they will all be invoked with the Model and Operation as arguments.
+     *
+     * @param {Object} [scope] The scope to run your callback method in.  This is only used if you
+     * passed a function as the first argument.
+     *
      * @return {Ext.data.Model} The Model instance
      */
     save: function(options, scope) {
@@ -1118,6 +1127,7 @@ Ext.define('Ext.data.Model', {
      * If this Model instance has been {@link #join joined} to a {@link Ext.data.Store store}, the store's
      * `afterEdit` method is called.
      * @param {String[]} modifiedFieldNames Array of field names changed during edit.
+     * @param {Object} modified
      */
     afterEdit : function(modifiedFieldNames, modified) {
         this.notifyStores('afterEdit', modifiedFieldNames, modified);
@@ -1150,15 +1160,17 @@ Ext.define('Ext.data.Model', {
      */
     notifyStores: function(fn) {
         var args = Ext.Array.clone(arguments),
-            stores = this.stores,
-            ln = stores.length,
-            i, store;
+            stores = this.stores;
+        if (Ext.isArray(stores)) {
+            var ln = stores.length,
+                i, store;
 
-        args[0] = this;
-        for (i = 0; i < ln; ++i) {
-            store = stores[i];
-            if (store !== undefined && typeof store[fn] == "function") {
-                store[fn].apply(store, args);
+            args[0] = this;
+            for (i = 0; i < ln; ++i) {
+                store = stores[i];
+                if (store !== undefined && typeof store[fn] == "function") {
+                    store[fn].apply(store, args);
+                }
             }
         }
     },
@@ -1239,8 +1251,9 @@ Ext.define('Ext.data.Model', {
         var associations     = record.associations.items,
             associationCount = associations.length,
             associationData  = {},
+            recursiveAssociationQueue = [],
             associatedStore, associationName, associatedRecords, associatedRecord,
-            associatedRecordCount, association, id, i, j, type, allow;
+            associatedRecordCount, association, id, i, j, type, allow, recursiveAssociationItem;
 
         for (i = 0; i < associationCount; i++) {
             association = associations[i];
@@ -1264,6 +1277,7 @@ Ext.define('Ext.data.Model', {
                     associatedRecords = associatedStore.data.items;
                     associatedRecordCount = associatedRecords.length;
 
+                    recursiveAssociationQueue.length = 0;
                     //now we're finally iterating over the records in the association. We do this recursively
                     for (j = 0; j < associatedRecordCount; j++) {
                         associatedRecord = associatedRecords[j];
@@ -1276,8 +1290,19 @@ Ext.define('Ext.data.Model', {
                             ids.push(id);
 
                             associationData[associationName][j] = associatedRecord.getData();
-                            Ext.apply(associationData[associationName][j], this.prepareAssociatedData(associatedRecord, ids, associationType));
+                            recursiveAssociationQueue.push({
+                                associationName:associationName,
+                                j:j,
+                                associatedRecord:associatedRecord,
+                                ids:ids,
+                                associationType:associationType
+                            });
                         }
+                    }
+
+                    while (recursiveAssociationQueue.length > 0) {
+                        recursiveAssociationItem = recursiveAssociationQueue.shift();
+                        Ext.apply(associationData[recursiveAssociationItem.associationName][recursiveAssociationItem.j], this.prepareAssociatedData(recursiveAssociationItem.associatedRecord, recursiveAssociationItem.ids, recursiveAssociationItem.associationType));
                     }
                 }
             } else if (allow && (type.toLowerCase() == 'belongsto' || type.toLowerCase() == 'hasone')) {

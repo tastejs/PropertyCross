@@ -18,12 +18,10 @@
  *         items: [
  *             {
  *                 iconCls: 'add',
- *                 iconMask: true,
  *                 align: 'left'
  *             },
  *             {
  *                 iconCls: 'home',
- *                 iconMask: true,
  *                 align: 'right'
  *             }
  *         ]
@@ -46,7 +44,6 @@
  *             },
  *             {
  *                 iconCls: 'home',
- *                 iconMask: true,
  *                 align: 'right'
  *             }
  *         ]
@@ -126,7 +123,12 @@ Ext.define('Ext.TitleBar', {
          */
         defaultType: 'button',
 
-        height: '2.6em',
+        /**
+         * @cfg {String} minHeight
+         * The minimum height height of the Toolbar.
+         * @accessor
+         */
+        minHeight: null,
 
         /**
          * @cfg
@@ -148,17 +150,13 @@ Ext.define('Ext.TitleBar', {
         items: []
     },
 
+    hasCSSMinHeight: true,
+
     /**
      * The max button width in this toolbar
      * @private
      */
     maxButtonWidth: '40%',
-
-    constructor: function() {
-        this.refreshTitlePosition = Ext.Function.createThrottled(this.refreshTitlePosition, 50, this);
-
-        this.callParent(arguments);
-    },
 
     beforeInitialize: function() {
         this.applyItems = this.applyInitialItems;

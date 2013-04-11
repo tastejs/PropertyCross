@@ -44,7 +44,6 @@ Ext.define('Ext.util.TapRepeater', {
 
     /**
      * Creates new TapRepeater.
-     * @param {Mixed} el The element to listen on
      * @param {Object} config
      */
     constructor: function(config) {

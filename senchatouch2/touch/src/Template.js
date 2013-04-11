@@ -2,40 +2,21 @@
  * Represents an HTML fragment template. Templates may be {@link #compile precompiled} for greater performance.
  *
  * An instance of this class may be created by passing to the constructor either a single argument, or multiple
- * arguments:
+ * arguments. See the docs for {@link #constructor} for details.
  *
- * # Single argument: String/Array
+ * # Usage example
  *
- * The single argument may be either a String or an Array:
- *
- * - String:
- *
- *       var t = new Ext.Template("<div>Hello {0}.</div>");
- *       t.{@link #append}('some-element', ['foo']);
- *
- * - Array: An Array will be combined with `join('')`.
- *
- *       var t = new Ext.Template([
+ *       var t = new Ext.Template(
  *           '<div name="{id}">',
  *               '<span class="{cls}">{name:trim} {value:ellipsis(10)}</span>',
- *           '</div>'
- *       ]);
- *       t.{@link #compile}();
- *       t.{@link #append}('some-element', {id: 'myid', cls: 'myclass', name: 'foo', value: 'bar'});
- *
- * # Multiple arguments: String, Object, Array, ...
- *
- * Multiple arguments will be combined with `join('')`.
- *
- *     var t = new Ext.Template(
- *         '<div name="{id}">',
- *             '<span class="{cls}">{name} {value}</span>',
- *         '</div>',
- *         // a configuration object:
- *         {
- *             compiled: true      // {@link #compile} immediately
- *         }
- *     );
+ *           '</div>',
+ *           // a configuration object:
+ *           {
+ *               compiled: true      // compile immediately
+ *           }
+ *       );
+ *       t.compile();
+ *       t.append('some-element', {id: 'myid', cls: 'myclass', name: 'foo', value: 'bar'});
  *
  * # Notes
  *
@@ -67,10 +48,30 @@ Ext.define('Ext.Template', {
 
     /**
      * Creates new template.
-     * 
-     * @param {String...} html List of strings to be concatenated into template.
-     * Alternatively an array of strings can be given, but then no config object may be passed.
-     * @param {Object} config (optional) Config object.
+     *
+     * @param {Mixed[]/Mixed...} html List of strings to be concatenated into template and an
+     * optional config object.  One can either pass multiple arguments:
+     *
+     *     new Ext.Template(
+     *         '<div name="{id}">',
+     *             '<span class="{cls}">{name} {value}</span>',
+     *         '</div>',
+     *         { compiled: true }
+     *     );
+     *
+     * or an array of these same things:
+     *
+     *     new Ext.Template([
+     *         '<div name="{id}">',
+     *             '<span class="{cls}">{name} {value}</span>',
+     *         '</div>',
+     *         { compiled: true }
+     *     ]);
+     *
+     * Just a single string will also do for a simple template:
+     *
+     *     new Ext.Template('<div name="{id}">{name}</div>');
+     *
      */
     constructor: function(html) {
         var me = this,

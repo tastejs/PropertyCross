@@ -9,6 +9,7 @@ Ext.define('Ext.device.Purchases', {
     singleton: true,
 
     requires: [
+        'Ext.device.Communicator',
         'Ext.device.purchases.Sencha'
     ],
 
