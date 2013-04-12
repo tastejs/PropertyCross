@@ -38,7 +38,7 @@
                       MouseLeftButtonUp="FavouritesList_MouseLeftButtonUp">
           <ItemsControl.ItemsPanel>
             <ItemsPanelTemplate>
-              <tk:WrapPanel Orientation="Horizontal"/>
+              <StackPanel Orientation="Vertical"/>
             </ItemsPanelTemplate>
           </ItemsControl.ItemsPanel>
         </ItemsControl>

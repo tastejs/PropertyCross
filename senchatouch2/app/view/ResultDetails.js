@@ -28,7 +28,7 @@
             {
                 padding: '2 15 0 15',
                 style: 'font-size: 14px',
-                tpl: '<tpl if="bedroom_number">Bedrooms: {bedroom_number}<tpl if="bathroom_number">, </tpl></tpl><tpl if="bathroom_number">Bathrooms: {bathroom_number}</tpl>'
+                tpl: '<tpl if="bedroom_number">{bedroom_number} bed<tpl if="bathroom_number">, </tpl></tpl><tpl if="bathroom_number">{bathroom_number} bathroom</tpl><tpl if="property_type"> {property_type}</tpl>'
             },
             {
                 padding: '2 15 15 15',

@@ -208,7 +208,6 @@
     <Content Include="Images\addToFavourites.png" />
     <Content Include="Images\favourited.png" />
     <Content Include="Images\favourites.png" />
-    <Content Include="README_FIRST.txt" />
     <Content Include="SplashScreenImage.jpg" />
   </ItemGroup>
   <ItemGroup />

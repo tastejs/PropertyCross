@@ -38,3 +38,10 @@ div.propertyView h3
 {
   background: transparent;
 }
+
+.loadingIndicator
+{
+  float:right;
+  width:50px;
+  margin-top:5px;
+}

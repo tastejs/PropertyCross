@@ -55,20 +55,19 @@ namespace PropertyFinder
         _properties.Add(property);
       }
 
-      propertiesShown.Text = properties.Count.ToString();
-      totalProperties.Text = totalResult.ToString();
-      this.pageNumber.Text = pageNumber.ToString();
-      this.totalPages.Text = totalPages.ToString();
+      this.searchText.Text = searchLocation;
+      this.propertiesShown2.Text = this.propertiesShown.Text = properties.Count.ToString();
+      this.totalProperties2.Text = this.totalProperties.Text = totalResult.ToString();
     }
 
     public void AddSearchResults(int pageNumber, List<Property> properties)
     {
-      this.pageNumber.Text = pageNumber.ToString();
-
       foreach (var property in properties)
       {
         _properties.Add(property);
       }
+
+      this.propertiesShown2.Text = this.propertiesShown.Text = _properties.Count.ToString();
     }
 
     public bool IsLoading
@@ -76,7 +75,7 @@ namespace PropertyFinder
       set
       {
         loadMoreButton.IsEnabled = !value;
-        loadingIndicator.Visibility = value ? Visibility.Visible : Visibility.Collapsed;
+        loadMoreText.Text = value ? "Loading ..." : "Load more ...";
       }
     }
 

@@ -134,5 +134,13 @@ namespace PropertyFinder
       RecentSearch recentSearch = fe.DataContext as RecentSearch;
       RecentSearchSelected(this, new RecentSearchSelectedEventArgs(recentSearch));
     }
+
+    private void SearchText_KeyDown(object sender, KeyEventArgs e)
+    {
+      if (e.Key == Key.Enter)
+      {
+        SearchButtonClicked(this, EventArgs.Empty);
+      }
+    }
   }
 }

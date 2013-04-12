@@ -11,33 +11,41 @@
   <Application.Resources>
     <conv:UrlToImageSourceConverter x:Key="sourceConverter"/>
 
+    <ControlTemplate TargetType="Button" x:Key="PropertyButtonTemplate">
+      <ContentControl x:Name="ContentContainer"
+                      HorizontalContentAlignment="Left"
+                      ContentTemplate="{TemplateBinding ContentTemplate}"
+                      Content="{TemplateBinding Content}"/>
+    </ControlTemplate>
+
+    <Style TargetType="Border" x:Key="ButtonBackgroundStyle">
+      <Setter Property="Width" Value="460"/>
+      <Setter Property="Height" Value="100"/>
+      <Setter Property="Margin" Value="10,5"/>
+      <Setter Property="Padding" Value="10"/>
+      <Setter Property="Background" Value="#77888888"/>
+    </Style>
+
     <DataTemplate x:Key="propertyTemplate">
-      <Border Width="200" Height="250"
-              Margin="10" Padding="10"
-              Background="#77888888"
-              mm:MetroInMotion.Tilt="3">
-        <StackPanel Orientation="Vertical">
-          <Border Width="140" Height="120"
-                          Padding="2"
-                          Background="#aaa"
-                          HorizontalAlignment="Center">
+      <Border Style="{StaticResource ButtonBackgroundStyle}"
+              mm:MetroInMotion.Tilt="2">
+        <StackPanel Orientation="Horizontal">
+          <Border Width="80" Height="80"
+                  Padding="2" Margin="0,0,10,0"
+                  Background="#aaa"
+                  HorizontalAlignment="Center">
             <Image Source="{Binding Path=ThumbnailUrl, Converter={StaticResource sourceConverter}}"
                            Stretch="Fill"/>
           </Border>
-          <TextBlock Text="{Binding Path=FormattedPrice}"
-                             FontSize="30"/>
-          <StackPanel Orientation="Horizontal">
-            <TextBlock Text="{Binding Path=Bedrooms}"
-                               FontSize="22"/>
-            <TextBlock Text=" bed "
-                               FontSize="22"/>
-            <TextBlock Text="{Binding Path=PropertyType}"
-                               FontSize="22"/>
+          <StackPanel Orientation="Vertical" Width="350">
+            <TextBlock Text="{Binding Path=FormattedPrice}"
+                      FontSize="30"/>
+            <TextBlock Text="{Binding Path=Title}"
+                      Foreground="#aaa"
+                      TextWrapping="NoWrap"
+                      TextTrimming="WordEllipsis"
+                      FontSize="22"/>
           </StackPanel>
-          <TextBlock Text="{Binding Path=Title}"
-                             Foreground="#aaa"
-                            TextTrimming="WordEllipsis"
-                            FontSize="22"/>
         </StackPanel>
       </Border>
     </DataTemplate>
