@@ -58,7 +58,7 @@ enyo.kind({
 	},
 
 	processResponse: function(json) {
-		this.$.resultsHeader.setContent(json.request.offset + json.response.listings.length + " of " + json.response.total_results + " matches");
+		this.$.resultsHeader.setContent("Results " + (json.request.offset + 1) + " to " + (json.request.offset + json.response.listings.length) + " of " + json.response.total_results + " matches");
 
 		this.listings = this.listings.concat(json.response.listings);
 		this.$.resultsList.setCount(this.listings.length);
@@ -96,7 +96,7 @@ enyo.kind({
 	moreError: function(inSender, inResponse) {
 		this.$.loadingPopup.hide();
 
-		console.log(">>>> More error.");
+		enyo.log(">>>> More error.");
 //		this.showSearchError("An error occurred while searching. Please check your network connection and try again.");
 	},
 
@@ -105,12 +105,12 @@ enyo.kind({
 
 		this.listingsPage = inResponse;
 		var responseCode = this.listingsPage.response.application_response_code;
-		console.log(">>>> Response: " + responseCode);
+		enyo.log(">>>> Response: " + responseCode);
 		if (responseCode === "100" || responseCode === "101" || responseCode === "102") {
-			console.log(">>>> More results.");
+			enyo.log(">>>> More results.");
 			this.processResponse(inResponse);
 		} else {
-			console.log(">>>> More error.");
+			enyo.log(">>>> More error.");
 		}
 	},
 

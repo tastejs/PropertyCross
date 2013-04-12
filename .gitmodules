@@ -10,3 +10,12 @@
 [submodule "website/twitter-bootstrap"]
 	path = website/twitter-bootstrap
 	url = https://github.com/twitter/bootstrap.git
+[submodule "enyo/enyo"]
+	path = enyo/enyo
+	url = https://github.com/enyojs/enyo.git
+[submodule "enyo/lib/layout"]
+	path = enyo/lib/layout
+	url = https://github.com/enyojs/layout.git
+[submodule "enyo/lib/onyx"]
+	path = enyo/lib/onyx
+	url = https://github.com/enyojs/onyx.git

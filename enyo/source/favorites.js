@@ -9,7 +9,7 @@ enyo.kind({
 
 	components: [
 		{kind: "onyx.Toolbar", components: [
-			{name: "FavoritesHeader", content: "Favorites", classes: "header-center"},
+			{name: "favoritesHeader", content: "Favorites", classes: "header-center"},
 			{kind: "onyx.Button", content: "Back", classes:"header-button-left", ontap: "goBack"}
 		]},
 		{name: "favoritesError", kind: "onyx.Drawer", open: false, classes: "panel-row error-drawer", components: [
@@ -56,7 +56,6 @@ enyo.kind({
 
 	processFavorites: function() {
 		this.$.favoritesList.setCount(this.favorites.length);
-		this.$.favoritesList.refresh();
 
 		try {
 			Storage.set("favorites", this.favorites);

@@ -3,50 +3,55 @@ enyo.kind({
 	kind: "Panels",
 	classes: "enyo-fit",
 	components: [
-		{kind: "SearchPage", name: "Search", onGoResults: "showResults", onGoFaves: "showFaves"},
-		{kind: "ResultsPage", name: "Results", onGoBack: "showSearch", onGoListing: "showListingFromResults"},
-		{kind: "ListingPage", name: "Listing", onGoBack: "showListingSource", onChangeFav: "changeFav"},
-		{kind: "FavoritesPage", name: "Favorites", onGoBack: "showSearch", onGoListing: "showListingFromFavorites"}
+		{kind: "SearchPage", name: "search", onGoResults: "showResults", onGoFaves: "showFaves"},
+		{kind: "ResultsPage", name: "results", onGoBack: "showSearch", onGoListing: "showListingFromResults"},
+		{kind: "ListingPage", name: "listing", onGoBack: "showListingSource", onChangeFav: "changeFav"},
+		{kind: "FavoritesPage", name: "favorites", onGoBack: "showSearch", onGoListing: "showListingFromFavorites"}
 	],
 
-	listingSource: 1,
+	SEARCH_PAGE: 0,
+	RESULTS_PAGE: 1,
+	LISTING_PAGE: 2,
+	FAVORITES_PAGE: 3,
+
+	listingSource: this.RESULTS_PAGE,
 
 	showSearch: function() {
-		this.setIndex(0);
+		this.setIndex(this.SEARCH_PAGE);
 	},
 
 	showResults: function(inSender, inEvent) {
-		this.setIndex(1);
-		this.$.Results.initialize(inEvent.data);
+		this.setIndex(this.RESULTS_PAGE);
+		this.$.results.initialize(inEvent.data);
 	},
 
 	showListingFromResults: function(inSender, inEvent) {
-		this.listingSource = 1;
+		this.listingSource = this.RESULTS_PAGE;
 		this.showListing(inSender, inEvent);
 	},
 
 	showListingFromFavorites: function(inSender, inEvent) {
-		this.listingSource = 3;
+		this.listingSource = this.FAVORITES_PAGE;
 		this.showListing(inSender, inEvent);
 	},
 
 	showListing: function(inSender, inEvent) {
-		this.setIndex(2);
-		this.$.Listing.initialize(inEvent.data);
-		this.$.Listing.setFavorite(this.$.Favorites.isFavorite(inEvent.data.guid));
+		this.setIndex(this.LISTING_PAGE);
+		this.$.listing.initialize(inEvent.data);
+		this.$.listing.setFavorite(this.$.Favorites.isFavorite(inEvent.data.guid));
 	},
 
 	changeFav: function(inSender, inEvent) {
-		this.$.Favorites.changeFavorite(inEvent.data);
+		this.$.favorites.changeFavorite(inEvent.data);
 	},
 
 	showFaves: function(inSender, inEvent) {
-		this.setIndex(3);
-		this.$.Favorites.initialize();
+		this.setIndex(this.FAVOITES_PAGE);
+		this.$.favorites.initialize();
 	},
 
 	showListingSource: function(inSender, inEvent) {
-		if (this.listingSource === 3) {
+		if (this.listingSource === this.FAVORITES_PAGE) {
 			this.showFaves(inSender, inEvent);
 		} else {
 			this.showResults(inSender, inEvent);
