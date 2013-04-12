@@ -190,6 +190,8 @@
         // determine the type of returned result
         if ([result isKindOfClass:[PropertyListingResult class]])
         {
+            PropertyListingResult* propertyListingsResult = (PropertyListingResult*)result;
+            
             // if properties were returned navigate to the results view controller
             SearchResultsViewController* controller = [[SearchResultsViewController alloc] initWithResults:(PropertyListingResult*)result
                                                                                                 datasource:_dataSource
@@ -197,6 +199,7 @@
             [self.navigationController pushViewController:controller
                                                  animated:YES];
             
+            _searchItem.matches = propertyListingsResult.totalResults;
             [_dataStore addToRecentSearches:_searchItem];
             [self showRecentSearches];
             

@@ -16,6 +16,9 @@
 // the human-readble description of this search.
 @property NSString* displayText;
 
+// teh number of matching properties
+@property NSNumber* matches;
+
 // executes the search that this item represents
 -(void) findPropertiesWithDataSource:(PropertyDataSource*) propertyDataSource
                           pageNumber:(NSNumber *)page

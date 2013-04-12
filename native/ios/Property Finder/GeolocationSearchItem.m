@@ -25,6 +25,7 @@
     entity.longitude = [NSNumber numberWithDouble:self.longitude];
     entity.displayString = self.displayText;
     entity.isLocationSearch = [NSNumber numberWithBool:YES];
+    entity.matches = self.matches;
 }
 
 - (void)findPropertiesWithDataSource:(PropertyDataSource *)propertyDataSource

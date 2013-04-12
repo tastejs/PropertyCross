@@ -44,6 +44,7 @@
     entity.displayString = self.displayText;
     entity.timestamp = [NSDate date];
     entity.isLocationSearch = [NSNumber numberWithBool:NO];
+    entity.matches = self.matches;
 }
 
 @end
