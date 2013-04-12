@@ -114,7 +114,7 @@ enyo.kind({
 //	  var longitude = -3.431481;
 		var latitude = position.coords.latitude;
 	  var longitude = position.coords.longitude;
-		console.log(">>>> Geolocating...");
+		enyo.log(">>>> Geolocating...");
 		this.$.searchingPopup.show();
 		var jsonp = new enyo.JsonpRequest({url:"http://api.nestoria.co.uk/api", callbackName:"callback"});
 		jsonp.response(this, "processResult");
@@ -130,7 +130,7 @@ enyo.kind({
 
 	geoError: function(err) {
 		this.showSearchError("Geolocation error: " + err.message);
-		console.log(">>>>>> Geolocation error: " + err.code + " > " + err.message);
+		enyo.log(">>>>>> Geolocation error: " + err.code + " > " + err.message);
 	},
 
 	geolocate: function() {
@@ -146,7 +146,7 @@ enyo.kind({
 	search: function() {
 		var searchVal = this.$.searchInput.getValue();
 		if (searchVal.length) {
-			console.log(">>>> Searching...");
+			enyo.log(">>>> Searching...");
 			this.$.searchingPopup.show();
 			var jsonp = new enyo.JsonpRequest({url:"http://api.nestoria.co.uk/api", callbackName:"callback"});
 			jsonp.response(this, "processResult");
@@ -171,9 +171,9 @@ enyo.kind({
 
 		this.searchResults = inResponse.response;
 		var responseCode = this.searchResults.application_response_code;
-		console.log(">>>> Response: " + responseCode);
+		enyo.log(">>>> Response: " + responseCode);
 		if (responseCode === "100" || responseCode === "101" || responseCode === "102") {
-			console.log(">>>> Search results: " + this.searchResults.total_results);
+			enyo.log(">>>> Search results: " + this.searchResults.total_results);
 			if (this.searchResults.total_results !== 0) {
 				this.addToSearchHistory({search: this.searchResults.locations[0].title, matches: this.searchResults.total_results});
 			} else {
@@ -182,12 +182,12 @@ enyo.kind({
 			this.showRecentList();
 			this.doGoResults({data: inResponse});
 		} else if (responseCode === "200" || responseCode === "202") {
-			console.log(">>>> Ambiguous search.");
+			enyo.log(">>>> Ambiguous search.");
 			this.suggestedLocations = this.searchResults.locations;
 			this.$.suggestedList.setCount(this.suggestedLocations.length);
 			this.showSuggestedList();
 		} else {
-			console.log(">>>> Search error.");
+			enyo.log(">>>> Search error.");
 			this.showSearchError("The location given was not recognised.");
 //			this.showRecentList();
 		}
