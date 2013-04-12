@@ -70,18 +70,17 @@
           
       <p>Use the form below to search for houses to buy. You can search by place-name, postcode, or click 'My location', to search in your current location</p>
       <form data-bind="submit: executeSearch">
-          <input type="search"
-                  data-bind="value: searchDisplayString, enable: isSearchEnabled, valueUpdate:'afterkeydown'"/>
-          <button type="submit" data-inline="true"
-                  data-bind="enable: isSearchEnabled, click: executeSearch">Go</button>
-          <button data-bind="enable: isSearchEnabled, click: searchMyLocation"
-                  data-inline="true">My location</button>
+        <input type="search"
+                data-bind="value: searchDisplayString, enable: isSearchEnabled, valueUpdate:'afterkeydown'"/>
+        <img class="loadingIndicator"
+             data-bind="visible: isSearchEnabled() == false" style="display:none"
+             src="style/spinner.gif"/>
+        <button type="submit" data-inline="true"
+                data-bind="enable: isSearchEnabled, click: executeSearch">Go</button>
+        <button data-bind="enable: isSearchEnabled, click: searchMyLocation"
+                data-inline="true">My location</button>
       </form>
-      
-      <div data-bind="visible: isSearchEnabled() == false" style="display:none">
-        Searching...
-      </div>
-      
+            
       <!-- a message that indicates search failure etc ... -->
       <p data-bind="text:userMessage"/>
       
@@ -114,9 +113,10 @@
         <ul data-role="listview"/>
           <!-- ko template: { name: "propertyThumbnailView", foreach: properties }, updateListviewOnChange:properties -->
           <!-- /ko -->
-          <li data-bind="visible: properties().length !== totalResults">
+          <li data-bind="visible: properties().length !== totalResults()">
             <a data-bind="click: loadMore">
-              <h3>Load more ...</h3>
+              <h3 data-bind="visible: !isLoading()">Load more ...</h3>
+              <h3 data-bind="visible: isLoading()">Loading ...</h3>
               <p class="results-summary">
                 Results for <span data-bind="with: searchLocation"><span data-bind="text: displayString"></span></span>, showing
                 <span data-bind="text: properties().length"></span> of

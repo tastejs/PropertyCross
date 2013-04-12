@@ -24,7 +24,8 @@
                             {
                                 xtype: 'textfield',
                                 label: 'Location',
-                                name: 'place_name'
+                                name: 'place_name',
+                                id: 'placeNameText'
                             }
                         ],
                         margin: 10
