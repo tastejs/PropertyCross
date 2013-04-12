@@ -2,7 +2,8 @@
     extend: 'Ext.DataView',
     xtype: 'resultlist',
 	requires: ['Ext.plugin.ListPaging', 'PropertyFinder.util.Format', 'PropertyFinder.view.ResultListItem'],
-    config: {
+	config: {
+	    // TODO: ListPaging should not be used with DataView: http://www.sencha.com/forum/showthread.php?252338 - as a result using 2.0 version of ListPaging.js
 		plugins: [{ 
 			xclass: 'Ext.plugin.ListPaging' ,
 			autoPaging: true,

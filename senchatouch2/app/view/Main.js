@@ -13,6 +13,7 @@
         autoDestroy: false,
 
         navigationBar: {
+
             items: [
                 {
                     xtype: 'button',
