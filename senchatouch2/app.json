@@ -55,11 +55,22 @@
      *
      *      }
      */
+	 // Conditional theme logic would go here, but WP theme requires work:
     "css": [
         {
             "path": "resources/css/app.css",
             "update": "delta"
+//			"platform": ["chrome", "safari", "ios", "android", "firefox", "blackberry"],
+//			"theme": "Default"
         },
+		/*
+		{
+            "path": "resources/css/app.wp.css",
+            "update": "delta",
+			"platform": ["ie10"],
+			"theme": "Windows"
+		},
+		*/
 		{
             "path": "resources/css/additional.css",
             "update": "delta"
