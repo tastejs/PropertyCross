@@ -12,6 +12,7 @@
             resultList: 'resultlist',
             favesList: 'resultlist',
             resultdetails: 'resultdetails',
+            locationField: '#placeNameText',
             goButton: '#goButton',
             currLocationButton: '#currLocationButton',
             listFavesButton: '#listFavesButton',
@@ -40,6 +41,9 @@
             },
             goButton: {
                 tap: 'onGo'
+            },
+            locationField: {
+                action: 'onLocationEnter'
             },
             currLocationButton: {
                 tap: 'onCurrLocation'
@@ -282,10 +286,18 @@
         });
     },
 
-    onGo: function(button, event, opts) {
+    performSearch: function(elt) {
         this.resetHome();
-        var values = button.up('formpanel').getValues();
+        var values = elt.up('formpanel').getValues();
         this.makeRequest(values);
+    },
+
+    onGo: function(button, event, opts) {
+        this.performSearch(button);
+    },
+
+    onLocationEnter: function(textField, event, opts) {
+        this.performSearch(textField);
     },
 
     onFaveTap: function() {
