@@ -25,7 +25,10 @@
                     var data = store.getData();
                     if(totalCount && data) {
                         var fmt = PropertyFinder.util.Format.number;
-                        this.setTitle(fmt(data.length) + " of " + fmt(totalCount) + " matches");
+                        var xOfY = fmt(data.length) + " of " + fmt(totalCount);
+                        // Title is not read after first set, but parent doesn't exist initially.
+                        var titleLocation = this.parent ? this.parent.getNavigationBar() : this;
+                        titleLocation.setTitle(xOfY + " matches");
                     }
                 }
             }
