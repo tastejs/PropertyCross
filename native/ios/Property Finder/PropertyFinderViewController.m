@@ -92,9 +92,17 @@
     [self.searchText addTarget:self
                         action:@selector(searchTextDidChange:)
               forControlEvents:UIControlEventEditingChanged];
+    
+    self.searchText.delegate = self;
 }
 
 #pragma mark - user interaction handlers
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [self.searchText resignFirstResponder];
+    [self executeSearch];
+    return YES;
+}
 
 - (void) searchTextDidChange: (id)sender
 {
