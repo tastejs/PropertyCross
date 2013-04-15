@@ -1,17 +1,4 @@
 *.DS_Store
-/Xamarin/WindowsPhone/PropertyFinder.suo
-/Xamarin/iPhone/lib/NewtonsoftJson/Newtonsoft.Json/bin
-/Xamarin/WindowsPhone/packages/SilverlightToolkitWP.4.2012.6.25
-/Xamarin/WindowsPhone/packages/Newtonsoft.Json.4.5.9
-/Xamarin/WindowsPhone/PropertyFinder/obj
-/Xamarin/WindowsPhone/PropertyFinder/obj
-/Xamarin/WindowsPhone/PropertyFinder/Bin
-*.xcuserstate
-*.xcbkptlist
-
-/Xamarin/WindowsPhone/packages/SilverlightToolkitWP.4.2012.10.9
-/Xamarin/WindowsPhone/packages/Newtonsoft.Json.4.5.10
-/Xamarin/WindowsPhone/PropertyFinder/Toolkit.Content
 
 node_modules
 /rhomobile/bin
