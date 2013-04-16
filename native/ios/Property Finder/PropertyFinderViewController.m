@@ -181,6 +181,14 @@
 {
     self.userMessageLabel.text = nil;
     
+    PropertyDataSourceResultError error = ^(NSString* errorMessage) {
+        self.userMessageLabel.text = errorMessage;
+        
+        // hide the locations / recent searches table
+        self.tableView.dataSource = nil;
+        [self.tableView reloadData];
+    };
+    
     PropertyDataSourceResultSuccess success = ^(PropertyDataSourceResult *result){
         
         // stop the loading indicator
@@ -226,7 +234,8 @@
     
     [_searchItem findPropertiesWithDataSource:_dataSource
                                    pageNumber:@1
-                                       result:success];
+                                       result:success
+                                        error:error];
 }
 
 

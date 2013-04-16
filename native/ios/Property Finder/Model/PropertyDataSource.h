@@ -12,6 +12,8 @@
 
 typedef void(^PropertyDataSourceResultSuccess)(PropertyDataSourceResult* result);
 
+typedef void(^PropertyDataSourceResultError)(NSString* result);
+
 // Provides methods for querying a property database with the results
 // returned in the form of 'model' objects.
 @interface PropertyDataSource : NSObject
@@ -23,12 +25,14 @@ typedef void(^PropertyDataSourceResultSuccess)(PropertyDataSourceResult* result)
 // finds properties which match the given plain-text string
 -(void)findPropertiesForSearchString: (NSString*) searchString
                           pageNumber:(NSNumber *)page
-                             success: (PropertyDataSourceResultSuccess) successResult;
+                             success: (PropertyDataSourceResultSuccess) successResult
+                               error:(PropertyDataSourceResultError)errorResult;
 
 // finds properties which match the given geolocation
 -(void)findPropertiesForLatitude: (double) latitude
                        longitude: (double) longitude
                       pageNumber:(NSNumber *)page
-                         success: (PropertyDataSourceResultSuccess) successResult;
+                         success: (PropertyDataSourceResultSuccess) successResult
+                           error:(PropertyDataSourceResultError)errorResult;
 
 @end

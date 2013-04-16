@@ -179,7 +179,8 @@
         
         [_searchItem findPropertiesWithDataSource:_datasource
                                        pageNumber:[NSNumber numberWithInt:_pageNumber]
-                                           result:success];
+                                           result:success
+                                            error:nil];
     }
 }
 

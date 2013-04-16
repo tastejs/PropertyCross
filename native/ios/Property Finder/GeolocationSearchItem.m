@@ -31,6 +31,7 @@
 - (void)findPropertiesWithDataSource:(PropertyDataSource *)propertyDataSource
                           pageNumber:(NSNumber *)page
                               result:(PropertyDataSourceResultSuccess)successResult
+                               error:(PropertyDataSourceResultError)errorResult
 {
     PropertyDataSourceResultSuccess successBlock = ^(PropertyDataSourceResult *result){
         successResult(result);
@@ -38,7 +39,8 @@
     [propertyDataSource findPropertiesForLatitude:self.latitude
                                         longitude:self.longitude
                                        pageNumber:page
-                                          success:successBlock];
+                                          success:successBlock
+                                            error:errorResult];
 }
 
 @end

@@ -12,9 +12,12 @@
 
 + (id) plainTextSearchItemFromString:(NSString *)searchTerm
 {
+    NSString* trimmedSearchString = [searchTerm stringByTrimmingCharactersInSet:
+                                     [NSCharacterSet whitespaceCharacterSet]];
+    
     PlainTextSearchItem* item = [[PlainTextSearchItem alloc] init];
-    item.displayText = searchTerm;
-    item.searchText = searchTerm;
+    item.displayText = trimmedSearchString;
+    item.searchText = trimmedSearchString;
     return item;
 }
 
@@ -29,13 +32,15 @@
 - (void) findPropertiesWithDataSource:(PropertyDataSource *)propertyDataSource
                            pageNumber:(NSNumber *)page
                                result:(PropertyDataSourceResultSuccess)successResult
+                                error:(PropertyDataSourceResultError)errorResult
 {
     PropertyDataSourceResultSuccess successBlock = ^(PropertyDataSourceResult *result){
         successResult(result);
     };
     [propertyDataSource findPropertiesForSearchString:self.searchText
                                            pageNumber:page
-                                              success:successBlock];
+                                              success:successBlock
+                                                error:errorResult];
 }
 
 - (void)toRecentSearchDataEntity:(RecentSearchDataEntity *)entity

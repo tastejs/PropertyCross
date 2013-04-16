@@ -15,6 +15,7 @@
 - (void) findPropertiesWithDataSource:(PropertyDataSource *)propertyDataSource
                            pageNumber:(NSNumber*)page
                                result:(PropertyDataSourceResultSuccess)successResult
+                                error:(PropertyDataSourceResultError)errorResult
 {
     // abstract method!
     @throw [NSException exceptionWithName:NSInternalInconsistencyException
