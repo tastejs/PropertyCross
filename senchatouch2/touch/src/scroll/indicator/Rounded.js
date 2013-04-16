@@ -56,21 +56,23 @@ Ext.define('Ext.scroll.indicator.Rounded', {
     },
 
     doUpdateLength: function(length) {
-        var axis = this.getAxis(),
-            endElement = this.endElement,
-            middleElementStyle = this.middleElement.dom.style,
-            endElementLength = this.endElementLength,
-            endElementOffset = length - endElementLength,
-            middleElementLength = endElementOffset - this.startElementLength,
-            transformPropertyName = this.transformPropertyName;
+        if (!this.isDestroyed) {
+            var axis = this.getAxis(),
+                endElement = this.endElement,
+                middleElementStyle = this.middleElement.dom.style,
+                endElementLength = this.endElementLength,
+                endElementOffset = length - endElementLength,
+                middleElementLength = endElementOffset - this.startElementLength,
+                transformPropertyName = this.transformPropertyName;
 
-        if (axis === 'x') {
-            endElement.translate(endElementOffset, 0);
-            middleElementStyle[transformPropertyName] = 'translate3d(0, 0, 0) scaleX(' + middleElementLength + ')';
-        }
-        else {
-            endElement.translate(0, endElementOffset);
-            middleElementStyle[transformPropertyName] = 'translate3d(0, 0, 0) scaleY(' + middleElementLength + ')';
+            if (axis === 'x') {
+                endElement.translate(endElementOffset, 0);
+                middleElementStyle[transformPropertyName] = 'translate3d(0, 0, 0) scaleX(' + middleElementLength + ')';
+            }
+            else {
+                endElement.translate(0, endElementOffset);
+                middleElementStyle[transformPropertyName] = 'translate3d(0, 0, 0) scaleY(' + middleElementLength + ')';
+            }
         }
     }
 });

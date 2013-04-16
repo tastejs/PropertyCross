@@ -9,6 +9,12 @@ $dark-color: #2D2D2D !default;
 
 $include-default-icons: true !default;
 
+/**
+ * @var {color} $loading-spinner-color
+ * Background-color for the bars in the loading spinner.
+ */
+$loading-spinner-color: #aaa !default;
+
 ///**
 // * @var {boolean} $include-html-style
 // * Optionally remove included HTML styles/typography (for components with styleHtmlContent: true).

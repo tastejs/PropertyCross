@@ -32,34 +32,38 @@ Ext.define('Ext.scroll.indicator.ScrollPosition', {
     },
 
     doUpdateLength: function() {
-        var scrollOffset = this.barLength,
-            element = this.element;
+        if (!this.isDestroyed) {
+            var scrollOffset = this.barLength,
+                element = this.element;
 
-        this.callParent(arguments);
+            this.callParent(arguments);
 
-        if (this.getAxis() === 'x') {
-            element.setLeft(scrollOffset);
-        }
-        else {
-            element.setTop(scrollOffset);
+            if (this.getAxis() === 'x') {
+                element.setLeft(scrollOffset);
+            }
+            else {
+                element.setTop(scrollOffset);
+            }
         }
     },
 
     doSetOffset: function(offset) {
-        var barLength = this.barLength,
-            minLength = this.getMinLength(),
-            barDom = this.barElement.dom;
+        if (!this.isDestroyed) {
+            var barLength = this.barLength,
+                minLength = this.getMinLength(),
+                barDom = this.barElement.dom;
 
-        if (offset !== -10000) {
-            offset = Math.min(barLength - minLength, Math.max(offset, minLength - this.getLength()));
-            offset = barLength - offset;
-        }
+            if (offset !== -10000) {
+                offset = Math.min(barLength - minLength, Math.max(offset, minLength - this.getLength()));
+                offset = barLength - offset;
+            }
 
-        if (this.getAxis() === 'x') {
-            barDom.scrollLeft = offset;
-        }
-        else {
-            barDom.scrollTop = offset;
+            if (this.getAxis() === 'x') {
+                barDom.scrollLeft = offset;
+            }
+            else {
+                barDom.scrollTop = offset;
+            }
         }
     }
 });

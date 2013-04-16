@@ -40,7 +40,7 @@ Ext.define('Ext.data.proxy.Sql', {
     },
 
     updateModel: function(model) {
-        if (model && !this.getTable()) {
+        if (model) {
             var modelName = model.modelName,
                 defaultDateFormat = this.getDefaultDateFormat(),
                 table = modelName.slice(modelName.lastIndexOf('.') + 1);
@@ -52,7 +52,9 @@ Ext.define('Ext.data.proxy.Sql', {
             });
 
             this.setUniqueIdStrategy(model.getIdentifier().isUnique);
-            this.setTable(table);
+            if (!this.getTable()) {
+                this.setTable(table);
+            }
             this.setColumns(this.getPersistedModelColumns(model));
         }
 
@@ -72,7 +74,7 @@ Ext.define('Ext.data.proxy.Sql', {
                 me.createTable(transaction);
             }
 
-            me.insertRecords(records, transaction, function(resultSet, errors) {
+            me.insertRecords(records, transaction, function(resultSet) {
                 if (operation.process(operation.getAction(), resultSet) === false) {
                     me.fireEvent('exception', this, operation);
                 }

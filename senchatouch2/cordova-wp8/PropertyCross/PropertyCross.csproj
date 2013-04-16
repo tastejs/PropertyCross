@@ -153,17 +153,11 @@
     <Content Include="..\..\build\package\resources\css\app.css">
       <Link>www\resources\css\app.css</Link>
     </Content>
-    <Content Include="..\..\build\package\resources\css\app.wp.css">
-      <Link>www\resources\css\app.wp.css</Link>
-    </Content>
     <Content Include="..\..\build\package\resources\icons\ApplicationIcon.png">
       <Link>www\resources\icons\ApplicationIcon.png</Link>
     </Content>
     <Content Include="..\..\build\package\resources\loading\Default.png">
       <Link>www\resources\loading\Default.png</Link>
-    </Content>
-    <Content Include="..\..\build\package\sdk\sencha-touch.js">
-      <Link>www\sdk\sencha-touch.js</Link>
     </Content>
     <Content Include="ApplicationIcon.png" />
     <Resource Include="..\..\build\package\resources\loading\spinner.gif">

@@ -185,7 +185,7 @@ Ext.define('Ext.navigation.Bar', {
     updateView: function(newView) {
         var me = this,
             backButton = me.getBackButton(),
-            innerItems, i, backButtonText, item, title;
+            innerItems, i, backButtonText, item, title, titleText;
 
         me.getItems();
 
@@ -199,7 +199,13 @@ Ext.define('Ext.navigation.Bar', {
                 me.backButtonStack.push(title || '&nbsp;');
             }
 
-            me.setTitle(me.getTitleText());
+            titleText = me.getTitleText();
+
+            if (titleText === undefined) {
+                titleText = '';
+            }
+
+            me.setTitle(titleText);
 
             backButtonText = me.getBackButtonText();
             if (backButtonText) {

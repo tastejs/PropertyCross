@@ -34,7 +34,9 @@ Ext.define('Ext.data.proxy.WebStorage', {
          * @cfg {Boolean} enablePagingParams This can be set to true if you want the webstorage proxy to comply
          * to the paging params set on the store.
          */
-        enablePagingParams: false
+        enablePagingParams: false,
+
+		defaultDateFormat: 'Y-m-d H:i:s.u'
     },
 
     /**
@@ -430,7 +432,7 @@ Ext.define('Ext.data.proxy.WebStorage', {
 			case 'time':
 				return new Date(date);
 			default:
-				return Ext.Date.format(date, dateFormat);
+				return Ext.Date.format(Ext.isDate(date) ? date : new Date(date), dateFormat);
 		}
 	},
 

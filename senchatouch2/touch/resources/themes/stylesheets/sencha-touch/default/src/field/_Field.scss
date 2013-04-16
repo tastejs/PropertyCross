@@ -37,19 +37,24 @@ $form-clear-size: 2.2em;
     padding: .4em;
     min-height: $form-field-height;
     border-width: 0;
-    background: transparent;
     -webkit-appearance: none;
 }
 
-.x-item-disabled .x-form-label,
-.x-item-disabled input,
-.x-item-disabled .x-input-el,
-.x-item-disabled .x-spinner-body,
-.x-item-disabled select,
-.x-item-disabled textarea,
-.x-item-disabled .x-field-clear-container {
+.x-ie .x-input-el {
+  background: transparent;
+}
+
+.x-item-disabled {
+  .x-form-label,
+  input,
+  .x-input-el,
+  .x-spinner-body,
+  select,
+  textarea,
+  .x-field-clear-container {
     color: #b3b3b3;
     pointer-events: none;
+  }
 }
 
 .x-item-disabled .x-form-label {

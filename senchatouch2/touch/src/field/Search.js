@@ -57,5 +57,12 @@ Ext.define('Ext.field.Search', {
          * @inheritdoc
          */
 	    ui: 'search'
-    }
+    },
+
+    platformConfig: [{
+        platform: 'blackberry',
+        component: {
+            type: 'text'
+        }
+    }]
 });

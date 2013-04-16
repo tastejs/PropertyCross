@@ -22,7 +22,7 @@
       "version": "ca53c51d7615eb8c49850c488900745110fd6a2d",
       "parameters": {
         "appName": "PropertyCross",
-        "frameworkPath": "../../SenchaTouch/sencha-touch-2.2.0-rc/touch-2.2.0",
+        "frameworkPath": "touch",
         "appModels": "Results,Search",
         "appControllers": "Application",
         "appStores": "Favourites,Results,Searches",

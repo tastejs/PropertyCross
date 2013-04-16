@@ -372,7 +372,7 @@ Ext.define('Ext.field.Select', {
                 Ext.Viewport.add(listPanel);
             }
 
-            listPanel.showBy(this.getComponent(), (Ext.os.is.BlackBerry && Ext.os.version.getMajor() === 10) ? 't-b' : null);
+            listPanel.showBy(this.getComponent(), null);
             list.select(record, null, true);
         }
     },

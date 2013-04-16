@@ -3,3 +3,5 @@
 @import 'base';
 
 @import 'bb10/mixins/Class';
+
+@include st-loading-spinner(1em, $loading-spinner-color, .1em, .25em);

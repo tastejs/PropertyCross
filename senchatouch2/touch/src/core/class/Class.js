@@ -518,7 +518,7 @@
      */
     ExtClass.registerPreprocessor('platformConfig', function(Class, data, hooks) {
         var platformConfigs = data.platformConfig,
-            config = data.config,
+            config = data.config || {},
             platform, theme, platformConfig, i, ln, j , ln2;
 
         delete data.platformConfig;

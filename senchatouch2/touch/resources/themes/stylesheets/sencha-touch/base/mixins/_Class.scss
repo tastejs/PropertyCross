@@ -1,4 +1,8 @@
 /**
+ * @class Global_CSS
+ */
+
+/**
  * Adds basic styles to :before or :after pseudo-elements.
  *
  *     .my-element:after {
@@ -239,26 +243,33 @@
  *
  *     @include icon('attachment');
  *
- * @param {string} $name The name of the icon to be included.
+ * @param {string} $name The name of the icon to be included. This is then usable as the iconCls in your app.
+ * @param {string} $character The character
  * @param {string} $font-family The `font-family` used for this icon. Defaults to the `Pictos` font.
  */
-@mixin icon($name, $font-family: false) {
-    .x-tab .x-button-icon.#{$name},
-    .x-button .x-button-icon.#{$name} {
-        $character: icon-character-for-name($name);
+@mixin icon($name, $character: null, $font-family: null) {
+    $raw_character: icon-character-for-name($name);
 
-        &:before {
-            @include absolute-position;
-            text-align: center;
+    @if $character == null and $raw_character == null {
+        @debug "#icon: icon with name '#{$name}' not found.";
+    }
 
-            @if $font-family {
-                font-family: $font-family;
-            }
+    @if $character != null or $raw_character != null {
+        .x-tab .x-button-icon.#{$name},
+        .x-button .x-button-icon.#{$name} {
+            &:before {
+                @include absolute-position;
+                text-align: center;
 
-            @if $character {
-                content: "#{$character}";
-            } @else {
-                content: "#{$name}";
+                @if $font-family != null {
+                    font-family: $font-family;
+                }
+
+                @if $character != null {
+                    content: "#{$character}";
+                } @elseif $raw_character != null {
+                    content: "#{$raw_character}";
+                }
             }
         }
     }
@@ -285,13 +296,13 @@
     @include icon($name);
 }
 
-@mixin icon-font($name, $font-files, $eot : false) {
+@mixin icon-font($name, $font-files, $eot: false) {
     @include font-face($name, $font-files, $eot);
 
     .x-tab .x-button-icon,
     .x-button .x-button-icon {
         &:before {
-            font-family: 'Pictos';
+            font-family: $name;
         }
     }
 }
@@ -307,7 +318,7 @@
     @else if ($name == "lightning") { @return "e"; }
     @else if ($name == "rss") { @return "f"; }
     @else if ($name == "team") { @return "g"; }
-//    @else if ($name == "h") { @return "h"; }
+    @else if ($name == "help") { @return "h"; }
     @else if ($name == "info") { @return "i"; }
     @else if ($name == "attachment") { @return "j"; }
     @else if ($name == "heart") { @return "k"; }
@@ -325,6 +336,7 @@
     @else if ($name == "chat") { @return "w"; }
     @else if ($name == "settings2") { @return "x"; }
     @else if ($name == "settings") { @return "y"; }
+    @else if ($name == "tags") { @return "z"; }
 
     // Row 2
     @else if ($name == "attachment2") { @return "A"; }
@@ -338,10 +350,10 @@
     @else if ($name == "inbox") { @return "I"; }
     @else if ($name == "network") { @return "J"; }
     @else if ($name == "key") { @return "K"; }
-//    @else if ($name == "") { @return "L"; }
+    @else if ($name == "radio") { @return "L"; }
     @else if ($name == "mail") { @return "M"; }
     @else if ($name == "news") { @return "N"; }
-//    @else if ($name == "") { @return "O"; }
+    @else if ($name == "case") { @return "O"; }
     @else if ($name == "photos") { @return "P"; }
     @else if ($name == "power") { @return "Q"; }
     @else if ($name == "action") { @return "R"; }
@@ -351,7 +363,7 @@
     @else if ($name == "video") { @return "V"; }
     @else if ($name == "compose") { @return "W"; }
     @else if ($name == "truck") { @return "X"; }
-//    @else if ($name == "") { @return "Y"; }
+    @else if ($name == "chart2") { @return "Y"; }
     @else if ($name == "chart") { @return "Z"; }
 
     // Row 3
@@ -370,6 +382,7 @@
     @else if ($name == "battery") { @return "="; }
     @else if ($name == "left") { @return "["; }
     @else if ($name == "right") { @return "]"; }
+    @else if ($name == "calendar") { @return "\005C"; }
     @else if ($name == "shuffle") { @return ";"; }
     @else if ($name == "wireless") { @return "'"; }
     @else if ($name == "speedometer") { @return ","; }
@@ -407,13 +420,13 @@
     @else if ($name == "arrow_down") { @return "}"; }
     @else if ($name == "organize") { @return "I"; }
     @else if ($name == "bookmarks") { @return "I"; }
+    @else if ($name == "loop2") { @return "r"; }
     @else if ($name == "star") { @return "S"; }
     @else if ($name == "maps") { @return "@"; }
     @else if ($name == "reply") { @return "R"; }
 
     @else {
-        // @debug "#icon: icon with name '#{$name}' not found.";
-        @return false;
+        @return null;
     }
 }
 

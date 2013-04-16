@@ -222,9 +222,9 @@ Ext.define('Ext.form.Panel', {
          * @cfg {Object} scrollable
          * Possible values are true, false, and null. The true value indicates that
          * users can scroll the panel. The false value disables scrolling, but developers
-         * can enable it in the app. The null value indicates that the object cannot be 
+         * can enable it in the app. The null value indicates that the object cannot be
          * scrolled and that scrolling cannot be enabled for this object.
-         * 
+         *
          * Example:
          *      title: 'Sliders',
          *      xtype: 'formpanel',

@@ -9,7 +9,12 @@ Ext.define('Ext.event.recognizer.Tap', {
     handledEvents: ['tap', 'tapcancel'],
 
     config: {
-        moveDistance: 4
+        /**
+         * @cfg {Number} moveDistance
+         * The maximimum distance in pixels a touchstart event can travel and still be considered a tap event.
+         */
+
+        moveDistance: 8
     },
 
     onTouchStart: function(e) {

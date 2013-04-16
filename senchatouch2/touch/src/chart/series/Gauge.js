@@ -111,11 +111,18 @@ Ext.define('Ext.chart.series.Gauge', {
          *      colors: ['orange', 'blue', 'lightgray', 'red']
          *
          * It can be also an array of objects, each with the following properties:
-         * @param {Number} sectors.start The starting value of the sector. If omitted, it uses the previous sector's `end` value or the chart's `minimum`.
-         * @param {Number} sectors.end The ending value of the sector. If omitted, it uses the `maximum` defined for the chart.
-         * @param {String} sectors.label The label for this sector. Labels are styled using the series' {@link Ext.chart.series.Series#label label} config.
-         * @param {String} sectors.color The color of the sector. If omitted, it uses one of the `colors` defined for the series or for the chart.
-         * @param {Object} sectors.style An additional style object for the sector (for instance to set the opacity or to draw a line of a different color around the sector).
+         * 
+         * @cfg {Number} sectors.start The starting value of the sector. If omitted, it
+         * uses the previous sector's `end` value or the chart's `minimum`.
+         * @cfg {Number} sectors.end The ending value of the sector. If omitted, it uses
+         * the `maximum` defined for the chart.
+         * @cfg {String} sectors.label The label for this sector. Labels are styled using
+         * the series' {@link Ext.chart.series.Series#label label} config.
+         * @cfg {String} sectors.color The color of the sector. If omitted, it uses one
+         * of the `colors` defined for the series or for the chart.
+         * @cfg {Object} sectors.style An additional style object for the sector (for
+         * instance to set the opacity or to draw a line of a different color around the
+         * sector).
          *
          *      minimum: 0,
          *      maximum: 100,

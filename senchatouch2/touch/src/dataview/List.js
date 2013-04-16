@@ -975,6 +975,13 @@ Ext.define('Ext.dataview.List', {
         }
     },
 
+    applyVariableHeights: function(value) {
+        if (!this.getInfinite()) {
+            return true;
+        }
+        return value;
+    },
+
     applyDefaultType: function(defaultType) {
         if (!defaultType) {
             defaultType = this.getUseSimpleItems() ? 'simplelistitem' : 'listitem';
@@ -1098,19 +1105,20 @@ Ext.define('Ext.dataview.List', {
     },
 
     onStoreClear: function() {
-        var me = this;
+        var me = this,
+            scroller = me.container.getScrollable().getScroller(),
+            infinite = me.getInfinite();
 
         if (me.pinnedHeader) {
             me.pinnedHeader.translate(0, -10000);
         }
 
-        // Reset the scroller to go to the top
-        me.topItemIndex = 0;
-        me.container.getScrollable().getScroller().position.y = 0;
-
-        if (!me.getInfinite()) {
+        if (!infinite) {
             me.setItemsCount(0);
+            scroller.scrollTo(0, 0);
         } else {
+            me.topItemIndex = 0;
+            scroller.position.y = 0;
             me.updateAllListItems();
         }
     },

@@ -13,7 +13,13 @@ Ext.define('Ext.event.publisher.TouchGesture', {
 
     handledEvents: ['touchstart', 'touchmove', 'touchend', 'touchcancel'],
 
-    moveEventName: 'touchmove',
+    mouseToTouchMap: {
+        mousedown: 'touchstart',
+        mousemove: 'touchmove',
+        mouseup: 'touchend'
+    },
+
+    lastEventType: null,
 
     config: {
         moveThrottle: 0,
@@ -75,9 +81,43 @@ Ext.define('Ext.event.publisher.TouchGesture', {
         // All touch events bubble
         return true;
     },
-
     onEvent: function(e) {
-        this.eventProcessors[e.type].call(this, e);
+        var type = e.type,
+            lastEventType = this.lastEventType,
+            touchList = [e];
+
+        if (this.eventProcessors[type]) {
+            this.eventProcessors[type].call(this, e);
+            return;
+        }
+
+        if ('button' in e && e.button > 0) {
+            return;
+        }
+        else {
+            // Temporary fix for a recent Chrome bugs where events don't seem to bubble up to document
+            // when the element is being animated with webkit-transition (2 mousedowns without any mouseup)
+            if (type === 'mousedown' && lastEventType && lastEventType !== 'mouseup') {
+                var fixedEvent = document.createEvent("MouseEvent");
+                    fixedEvent.initMouseEvent('mouseup', e.bubbles, e.cancelable,
+                        document.defaultView, e.detail, e.screenX, e.screenY, e.clientX,
+                        e.clientY, e.ctrlKey, e.altKey, e.shiftKey, e.metaKey, e.metaKey,
+                        e.button, e.relatedTarget);
+
+                this.onEvent(fixedEvent);
+            }
+
+            if (type !== 'mousemove') {
+                this.lastEventType = type;
+            }
+
+            e.identifier = 1;
+            e.touches = (type !== 'mouseup') ? touchList : [];
+            e.targetTouches = (type !== 'mouseup') ? touchList : [];
+            e.changedTouches = touchList;
+
+            this.eventProcessors[this.mouseToTouchMap[type]].call(this, e);
+        }
     },
 
     registerRecognizer: function(recognizer) {
@@ -406,67 +446,9 @@ Ext.define('Ext.event.publisher.TouchGesture', {
             }
         });
     }
-    else if (!Ext.feature.has.Touch) {
+    else if (Ext.os.is.ChromeOS || !Ext.feature.has.Touch) {
         this.override({
-            moveEventName: 'mousemove',
-
-            mouseToTouchMap: {
-                mousedown: 'touchstart',
-                mousemove: 'touchmove',
-                mouseup: 'touchend'
-            },
-
-            touchToMouseMap: {
-                touchstart: 'mousedown',
-                touchmove: 'mousemove',
-                touchend: 'mouseup'
-            },
-
-            attachListener: function(eventName, doc) {
-                eventName = this.touchToMouseMap[eventName];
-
-                if (!eventName) {
-                    return;
-                }
-
-                return this.callOverridden([eventName, doc]);
-            },
-
-            lastEventType: null,
-
-            onEvent: function(e) {
-                if ('button' in e && e.button > 0) {
-                    return;
-                }
-
-                var type = e.type,
-                    lastEventType = this.lastEventType,
-                    touchList = [e];
-
-                // Temporary fix for a recent Chrome bugs where events don't seem to bubble up to document
-                // when the element is being animated
-                // with webkit-transition (2 mousedowns without any mouseup)
-                if (type === 'mousedown' && lastEventType && lastEventType !== 'mouseup') {
-                    var fixedEvent = document.createEvent("MouseEvent");
-                        fixedEvent.initMouseEvent('mouseup', e.bubbles, e.cancelable,
-                            document.defaultView, e.detail, e.screenX, e.screenY, e.clientX,
-                            e.clientY, e.ctrlKey, e.altKey, e.shiftKey, e.metaKey, e.metaKey,
-                            e.button, e.relatedTarget);
-
-                    this.onEvent(fixedEvent);
-                }
-
-                if (type !== 'mousemove') {
-                    this.lastEventType = type;
-                }
-
-                e.identifier = 1;
-                e.touches = (type !== 'mouseup') ? touchList : [];
-                e.targetTouches = (type !== 'mouseup') ? touchList : [];
-                e.changedTouches = touchList;
-
-                this.eventProcessors[this.mouseToTouchMap[e.type]].call(this, e);
-            }
+            handledEvents: ['touchstart', 'touchmove', 'touchend', 'touchcancel', 'mousedown', 'mousemove', 'mouseup']
         });
     }
 });
