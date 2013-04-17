@@ -51,9 +51,10 @@
     font-weight: bold;
 }
 
-/* "Load more" list paging */
-.x-list-paging-msg {
-    text-align: left !important;
+/* "Load more" list paging */ 
+.x-list-paging .x-list-paging-msg {
+    text-align: left;
+    color: black;
 }
 
     .x-list-paging-msg #listpaging-loadmore {
@@ -65,4 +66,12 @@
     /* Default 1em looks a bit empty.*/
 .x-list-paging {
     padding: 0.5em;
+    height: 65px;
+}
+
+.list-loading-text {
+    display:none;
+}
+.x-loading .list-loading-text {
+    display:block;
 }
