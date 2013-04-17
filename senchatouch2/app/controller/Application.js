@@ -140,7 +140,7 @@
         store.currentPage = 1;
         //Note: place_name takes precedence if defined and non-null..
         extraParams.place_name = values.place_name;
-        extraParams.centre_point = values.latitude + "," + values.longitude;
+        extraParams.centre_point = values.centre_point && this.formatCoord(values.centre_point);
 
         this.prepareResultsList(this.resultList);
     },
@@ -172,17 +172,26 @@
     },
 
     onCurrLocation: function(button, event, opts) {
-        var me = this;
+        var that = this;
         Ext.device.Geolocation.getCurrentPosition({
-            success: function(position) {
-                me.goToResultsList(position.coords);
+            timeout: 5000, // timeout in 5s (default: not documented)
+            maximumAge: 60000, // allow caching location for 1m (default: none)
+            success: function (position) {
+                // Must make a request to get count for this position - and show error if 0.
+                that.makeRequest({ centre_point: position.coords });
             },
             failure: function() {
                 //Note: doesn't differentiate between user disabled and location not found.
-                me.getErrorMessage().setHtml("Unable to detect current location. Please ensure location is turned on in your phone settings and try again");
-                me.getErrorMessage().show();
+                that.getErrorMessage().setHtml("Unable to detect current location. Please ensure location is turned on in your phone settings and try again");
+                that.getErrorMessage().show();
             }
         });
+    },
+
+    formatCoord: function(coords, precision) {
+        var lat = precision ? coords.latitude.toFixed(precision) : coords.latitude;
+        var lon = precision ? coords.longitude.toFixed(precision) : coords.longitude;
+        return lat + "," + lon;
     },
 
     onDidYouMean: function(list, index, node, record) {
@@ -200,8 +209,10 @@
         }, 200);
     },
 
-    addToPreviousSearches: function(placeName, displayName, totalResults) {
+    addToPreviousSearches: function(placeName, centre_point, displayName, totalResults) {
         var searches = Ext.getStore('searches');
+
+        // Place name is well defined even when searching for location - still use that as a key
 
         //sort out previous searches..
         var oldModel = searches.findRecord('place_name', placeName, 0, false, true, true);
@@ -214,8 +225,9 @@
             }
         }
         searches.add({
-            display_name: displayName,
+            display_name: centre_point ? this.formatCoord(centre_point, 2) : displayName,
             place_name: placeName,
+            centre_point: centre_point,
             count: totalResults,
             searchTimeMS: new Date().getTime()
         });
@@ -239,7 +251,8 @@
                 encoding : 'json',
                 listing_type : 'buy',
                 number_of_results: 1, //the minimum..
-                'place_name': values['place_name']
+                place_name: values.place_name,
+                centre_point: values.centre_point && this.formatCoord(values.centre_point)
             },
             success: function(result, request) {
                 var response = result.response;
@@ -255,7 +268,7 @@
                         that.getErrorMessage().setHtml("There were no properties found for the given location.");
                         that.getErrorMessage().show();
                     } else {
-                        that.addToPreviousSearches(response.locations[0].place_name, response.locations[0].long_title, response.total_results);
+                        that.addToPreviousSearches(response.locations[0].place_name, values.centre_point, response.locations[0].long_title, response.total_results);
                         that.goToResultsList(values);
                     }
                 } else  if(responseCode === "201" || /* unknown location */

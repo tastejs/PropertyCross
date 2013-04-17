@@ -5,6 +5,7 @@
         fields: [
             'display_name',
             'place_name',
+            'centre_point',
             'count', 
             'searchTimeMS'
         ],
