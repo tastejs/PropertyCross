@@ -20,8 +20,8 @@ Ext.define('Ext.scroll.indicator.ScrollPosition', {
 
     updateValue: function(value) {
         if (this.gapLength === 0) {
-            if (value > 1) {
-                value = value - 1;
+            if (value >= 1) {
+                value--;
             }
 
             this.setOffset(this.barLength * value);
@@ -31,36 +31,39 @@ Ext.define('Ext.scroll.indicator.ScrollPosition', {
         }
     },
 
-    updateLength: function() {
-        var scrollOffset = this.barLength,
-            barDom = this.barElement.dom,
-            element = this.element;
+    doUpdateLength: function() {
+        if (!this.isDestroyed) {
+            var scrollOffset = this.barLength,
+                element = this.element;
 
-        this.callParent(arguments);
+            this.callParent(arguments);
 
-        if (this.getAxis() === 'x') {
-            barDom.scrollLeft = scrollOffset;
-            element.setLeft(scrollOffset);
-        }
-        else {
-            barDom.scrollTop = scrollOffset;
-            element.setTop(scrollOffset);
+            if (this.getAxis() === 'x') {
+                element.setLeft(scrollOffset);
+            }
+            else {
+                element.setTop(scrollOffset);
+            }
         }
     },
 
-    setOffset: function(offset) {
-        var barLength = this.barLength,
-            minLength = this.getMinLength(),
-            barDom = this.barElement.dom;
+    doSetOffset: function(offset) {
+        if (!this.isDestroyed) {
+            var barLength = this.barLength,
+                minLength = this.getMinLength(),
+                barDom = this.barElement.dom;
 
-        offset = Math.min(barLength - minLength, Math.max(offset, minLength - this.getLength()));
-        offset = barLength - offset;
+            if (offset !== -10000) {
+                offset = Math.min(barLength - minLength, Math.max(offset, minLength - this.getLength()));
+                offset = barLength - offset;
+            }
 
-        if (this.getAxis() === 'x') {
-            barDom.scrollLeft = offset;
-        }
-        else {
-            barDom.scrollTop = offset;
+            if (this.getAxis() === 'x') {
+                barDom.scrollLeft = offset;
+            }
+            else {
+                barDom.scrollTop = offset;
+            }
         }
     }
 });

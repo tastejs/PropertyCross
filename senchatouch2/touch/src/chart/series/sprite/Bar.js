@@ -107,7 +107,8 @@ Ext.define("Ext.chart.series.sprite.Bar", {
         itemCfg.height = bottom - top;
         itemCfg.radius = this.attr.radius;
         if (this.attr.renderer) {
-            this.attr.renderer.call(this, itemCfg, this, index, this.getDataItems().items[index]);
+            changes = this.attr.renderer.call(this, this, itemCfg, {store:this.getStore()}, index);
+            Ext.apply(itemCfg, changes);
         }
         this.putMarker("items", itemCfg, index, !this.attr.renderer);
     },

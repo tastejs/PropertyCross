@@ -228,7 +228,7 @@ Ext.define('Ext.util.Collection', {
     },
 
     /**
-     * Adds an item to the collection. Fires the {@link #add} event when complete.
+     * Adds an item to the collection.
      * @param {String} key
      *
      * The key to associate with the item, or the new item.
@@ -399,7 +399,7 @@ Ext.define('Ext.util.Collection', {
         } else {
             if (filtered) {
                 if (me.getAutoFilter() && filterable.isFiltered.call(me, item)) {
-                    if (items.indexOf(oldItem) !== -1) {
+                    if (me.indexOf(oldItem) !== -1) {
                         Ext.Array.remove(items, oldItem);
                         Ext.Array.remove(keys, oldKey);
                         me.length--;
@@ -407,7 +407,7 @@ Ext.define('Ext.util.Collection', {
                     }
                     return null;
                 }
-                else if (items.indexOf(oldItem) === -1) {
+                else if (me.indexOf(oldItem) === -1) {
                     items.push(item);
                     keys.push(newKey);
                     me.indices[newKey] = me.length;
@@ -416,11 +416,14 @@ Ext.define('Ext.util.Collection', {
                 }
             }
 
-            index = me.items.indexOf(oldItem);
+            index = me.indexOf(oldItem);
 
             keys[index] = newKey;
             items[index] = item;
-            this.dirtyIndices = true;
+
+            if (newKey !== oldKey) {
+                this.dirtyIndices = true;
+            }
         }
 
         return returnItem;
@@ -428,8 +431,8 @@ Ext.define('Ext.util.Collection', {
 
     /**
      * Adds all elements of an Array or an Object to the collection.
-     * @param {Object/Array} objs An Object containing properties which will be added to the collection, or an Array of
-     * values, each of which are added to the collection. Functions references will be added to the collection if {@link
+     * @param {Object/Array} addItems An Object containing properties which will be added to the collection, or an Array of
+     * values, each of which are added to the collection. Functions references will be added to the collection if {@link}
      * Ext.util.MixedCollection#allowFunctions allowFunctions} has been set to `true`.
      */
     addAll: function(addItems) {
@@ -952,8 +955,8 @@ Ext.define('Ext.util.Collection', {
 
     /**
      * Returns a range of items in this collection
-     * @param {Number} [startIndex=0] The starting index.
-     * @param {Number} [endIndex=-1] The ending index. Defaults to the last item.
+     * @param {Number} [start=0] The starting index.
+     * @param {Number} [end=-1] The ending index. Defaults to the last item.
      * @return {Array} An array of items.
      */
     getRange: function(start, end) {

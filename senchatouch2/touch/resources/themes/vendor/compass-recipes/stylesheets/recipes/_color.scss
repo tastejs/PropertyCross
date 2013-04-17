@@ -83,7 +83,7 @@
     @if $inverse == true {
         $mode: reverse-color-mode($mode);
     }
-    
+
     @if ($mode == light) {
         @return rgba(lighten($flat_color, $contrast), opacity($color));
     } @else if ($mode == dark) {
@@ -115,7 +115,7 @@
 @function color-by-background($bg-color, $contrast: $default-text-contrast) {
     $bg-color: check-opacity($bg-color);
     $tmpmode: get-color-mode($bg-color);
-    
+
     @return color-offset($bg-color, $contrast, $tmpmode, $inverse: true);
 }
 
@@ -156,7 +156,7 @@
     } @else {
         color: color-by-background($bg-color, $contrast);
     }
-    
+
     @if $inset-text {
         @include inset-by-background($bg-color);
     }
@@ -169,7 +169,7 @@
     @if ($box == true) {
         @include box-shadow(color-offset($bg-color, $contrast, $mode: get-color-mode($bg-color)) 0 $offset 0);
     }
-    
+
     @include text-shadow(color-offset($bg-color, $contrast, $mode: get-color-mode($bg-color)) 0 $offset 0);
 }
 
@@ -190,7 +190,6 @@ $base-color: blue !default;
 $neutral-color: #ccc !default;
 $highlight-color: darken(safe-saturate($base-color, 15), 5) !default;
 
-$base-gradient: matte !default;
 $default-text-contrast: 85% !default;
 $color-mode: get-color-mode($neutral-color) !default;
 

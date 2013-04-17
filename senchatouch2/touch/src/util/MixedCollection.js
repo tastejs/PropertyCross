@@ -181,7 +181,7 @@ Ext.define('Ext.util.MixedCollection', {
 
     /**
      * Sorts this collection by **key**s.
-     * @param {String} [direction=ASC] 'ASC' or 'DESC'.
+     * @param {String} [dir=ASC] Sorting direction: 'ASC' or 'DESC'.
      * @param {Function} [fn] Comparison function that defines the sort order. Defaults to sorting by case insensitive
      * string.
      */

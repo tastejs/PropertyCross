@@ -37,6 +37,7 @@ Ext.define('Ext.util.paintmonitor.Abstract', {
         this.monitorElement = Ext.Element.create({
             classList: ['x-paint-monitor', this.monitorClass]
         }, true);
+
         element.appendChild(this.monitorElement);
         element.addCls('x-paint-monitored');
         this.bindListeners(true);

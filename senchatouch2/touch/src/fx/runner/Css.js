@@ -157,7 +157,6 @@ Ext.define('Ext.fx.runner.Css', {
 
                 if (ruleStyleCache[name] !== value) {
                     ruleStyleCache[name] = value;
-//                    console.log(name + " " + value);
 
                     if (value === null) {
                         ruleStyle.removeProperty(name);
@@ -176,28 +175,28 @@ Ext.define('Ext.fx.runner.Css', {
         var id, element, elementStyle, properties, name, value;
 
         for (id in styles) {
-//            console.log("-> ["+id+"]", "APPLY======================");
-            element = document.getElementById(id);
+            if (styles.hasOwnProperty(id)) {
+                element = document.getElementById(id);
 
-            if (!element) {
-                return this;
-            }
-
-            elementStyle = element.style;
-
-            properties = styles[id];
-
-            for (name in properties) {
-                value = this.formatValue(properties[name], name);
-                name = this.formatName(name);
-
-//                console.log("->-> ["+id+"]", name, value);
-
-                if (value === null) {
-                    elementStyle.removeProperty(name);
+                if (!element) {
+                    return this;
                 }
-                else {
-                    elementStyle.setProperty(name, value, 'important');
+
+                elementStyle = element.style;
+
+                properties = styles[id];
+                for (name in properties) {
+                    if (properties.hasOwnProperty(name)) {
+                        value = this.formatValue(properties[name], name);
+                        name = this.formatName(name);
+
+                        if (value === null) {
+                            elementStyle.removeProperty(name);
+                        }
+                        else {
+                            elementStyle.setProperty(name, value, 'important');
+                        }
+                    }
                 }
             }
         }
@@ -210,7 +209,7 @@ Ext.define('Ext.fx.runner.Css', {
             formattedName = cache[name];
 
         if (!formattedName) {
-            if (this.prefixedProperties[name]) {
+            if (this.prefixedProperties[name] && Ext.browser.is.WebKit) {
                 formattedName = this.vendorPrefix + name;
             }
             else {
@@ -229,6 +228,10 @@ Ext.define('Ext.fx.runner.Css', {
             transformMethods,
             method, i, ln,
             transformValues, values, unit;
+
+        if (value === null) {
+            return '';
+        }
 
         if (type == 'string') {
             if (this.lengthProperties[name]) {

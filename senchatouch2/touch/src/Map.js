@@ -141,9 +141,13 @@ Ext.define('Ext.Map', {
             map.setOptions(newOptions);
         }
         if (newOptions.center && !me.isPainted()) {
-            me.un('painted', 'setMapCenter', this);
-            me.on('painted', 'setMapCenter', this, { delay: 150, single: true, args: [newOptions.center] });
+            me.un('painted', 'doMapCenter', this);
+            me.on('painted', 'doMapCenter', this, { delay: 150, single: true });
         }
+    },
+
+    doMapCenter: function() {
+        this.setMapCenter(this.getMapOptions().center);
     },
 
     getMapOptions: function() {
@@ -205,15 +209,17 @@ Ext.define('Ext.Map', {
                 }, mapOptions);
             }
 
-            mapOptions = Ext.merge({
-                zoom: 12,
-                mapTypeId: gm.MapTypeId.ROADMAP
-            }, mapOptions);
+            mapOptions.zoom = mapOptions.zoom || 12;
+            mapOptions.mapTypeId = mapOptions.mapTypeId || gm.MapTypeId.ROADMAP;
 
             // This is done separately from the above merge so we don't have to instantiate
             // a new LatLng if we don't need to
             if (!mapOptions.hasOwnProperty('center')) {
                 mapOptions.center = new gm.LatLng(37.381592, -122.135672); // Palo Alto
+            }
+
+            if (mapOptions.center && mapOptions.center.latitude && !Ext.isFunction(mapOptions.center.lat)) {
+                mapOptions.center = new gm.LatLng(mapOptions.center.latitude, mapOptions.center.longitude);
             }
 
             if (element.dom.firstChild) {
@@ -232,10 +238,14 @@ Ext.define('Ext.Map', {
             event.addListener(map, 'zoom_changed', Ext.bind(me.onZoomChange, me));
             event.addListener(map, 'maptypeid_changed', Ext.bind(me.onTypeChange, me));
             event.addListener(map, 'center_changed', Ext.bind(me.onCenterChange, me));
-
-            me.fireEvent('maprender', me, map);
+            event.addListenerOnce(map, 'tilesloaded', Ext.bind(me.onTilesLoaded, me));
         }
     },
+
+	// @private
+	onTilesLoaded: function() {
+		this.fireEvent('maprender', this, this.map);
+	},
 
     // @private
     onGeoUpdate: function(geo) {
@@ -264,8 +274,8 @@ Ext.define('Ext.Map', {
 
         if (gm) {
             if (!me.isPainted()) {
-                me.un('painted', 'setMapCenter', this);
-                me.on('painted', 'setMapCenter', this, { delay: 150, single: true, args: [coordinates] });
+                me.un('painted', 'doMapCenter', this);
+                me.on('painted', 'doMapCenter', this, { delay: 150, single: true });
                 return;
             }
             coordinates = coordinates || new gm.LatLng(37.381592, -122.135672);

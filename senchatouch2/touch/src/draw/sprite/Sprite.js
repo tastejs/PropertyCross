@@ -341,6 +341,12 @@ Ext.define('Ext.draw.sprite.Sprite', {
         }
     },
 
+    /**
+     * @property {Object} attr
+     * The visual attributes of the sprite, e.g. strokeStyle, fillStyle, lineWidth...
+     */
+    attr: {},
+
     config: {
         parent: null
     },

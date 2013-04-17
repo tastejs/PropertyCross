@@ -8,13 +8,20 @@ Ext.define('Ext.mixin.Bindable', {
         id: 'bindable'
     },
 
-    bind: function(instance, boundMethod, bindingMethod, preventDefault) {
+    bind: function(instance, boundMethod, bindingMethod, preventDefault, extraArgs) {
         if (!bindingMethod) {
             bindingMethod = boundMethod;
         }
 
         var boundFn = instance[boundMethod],
-            fn;
+            fn, binding;
+
+        if (boundFn && boundFn.hasOwnProperty('$binding')) {
+            binding = boundFn.$binding;
+            if (binding.bindingMethod === bindingMethod && binding.bindingScope === this) {
+                return this;
+            }
+        }
 
         instance[boundMethod] = fn = function() {
             var binding = fn.$binding,
@@ -22,6 +29,10 @@ Ext.define('Ext.mixin.Bindable', {
                 args = Array.prototype.slice.call(arguments);
 
             args.push(arguments);
+
+            if (extraArgs) {
+                args.push.apply(args, extraArgs);
+            }
 
             if (!binding.preventDefault && scope[binding.bindingMethod].apply(scope, args) !== false) {
                 return binding.boundFn.apply(this, arguments);
@@ -61,7 +72,7 @@ Ext.define('Ext.mixin.Bindable', {
             }
 
             currentBinding = binding;
-            binding = binding.boundFn;
+            binding = boundFn.$binding;
         }
 
         return this;

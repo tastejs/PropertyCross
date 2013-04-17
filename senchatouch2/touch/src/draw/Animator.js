@@ -1,6 +1,6 @@
 /**
  * @class Ext.draw.Animator
- * 
+ *
  * Singleton class that manages the animation pool.
  */
 Ext.define('Ext.draw.Animator', {
@@ -10,15 +10,16 @@ Ext.define('Ext.draw.Animator', {
     frameCallbacks: {},
     frameCallbackId: 0,
     scheduled: 0,
-    frameStartTimeOffset: Ext.frameStartTime,
+    frameStartTimeOffset:Date.now(),
     animations: [],
+    running: false,
 
     /**
      *  Cross platform `animationTime` implementation.
      *  @return {Number}
      */
     animationTime: function () {
-        return Ext.frameStartTime - this.frameStartTimeOffset;
+        return Ext.AnimationQueue.frameStartTime - this.frameStartTimeOffset;
     },
 
     /**
@@ -164,8 +165,7 @@ Ext.define('Ext.draw.Animator', {
      */
     fireFrameCallbacks: function () {
         var callbacks = this.frameCallbacks,
-            once = [],
-            id, i, ln, fn, cb;
+            id, fn, cb;
 
         for (id in callbacks) {
             cb = callbacks[id];
@@ -173,86 +173,30 @@ Ext.define('Ext.draw.Animator', {
             if (Ext.isString(fn)) {
                 fn = cb.scope[fn];
             }
+
             fn.call(cb.scope);
-            if (cb.once) {
-                once.push(id);
+
+            if (callbacks[id] && cb.once) {
+                this.scheduled--;
+                delete callbacks[id];
             }
         }
-        for (i = 0, ln = once.length; i < ln; i++) {
-            this.scheduled--;
-            delete callbacks[once[i]];
+    },
+
+    handleFrame: function() {
+        this.step(this.animationTime());
+        this.fireFrameCallbacks();
+        if (!this.scheduled && this.empty()) {
+            Ext.AnimationQueue.stop(this.handleFrame, this);
+            this.running = false;
         }
-    }
-}, function () {
-    //Initialize the endless animation loop.
-    var looping = false,
-        frame = Ext.draw.Animator,
-        requestAnimationFramePolyfill = (function (global) {
-            return global.requestAnimationFrame ||
-                global.webkitRequestAnimationFrame ||
-                global.mozAnimationFrame ||
-                global.oAnimationFrame ||
-                global.msAnimationFrame ||
-                function (callback) { setTimeout(callback, 1); };
-        })(Ext.global),
-        animationStartTimePolyfill = (function (global) {
-            return (global.animationStartTime ? function () { return global.animationStartTime; } : null) ||
-                (global.webkitAnimationStartTime ? function () { return global.webkitAnimationStartTime; } : null) ||
-                (global.mozAnimationStartTime ? function () { return global.mozAnimationStartTime; } : null) ||
-                (global.oAnimationStartTime ? function () { return global.oAnimationStartTime; } : null) ||
-                (global.msAnimationStartTime ? function () { return global.msAnimationStartTime; } : null) ||
-                (Date.now ? function () { return Date.now(); } :
-                    function () { return +new Date(); });
+    },
 
-        })(Ext.global);
-
-    // <debug>
-    var startLooping, frames;
-    // </debug>
-
-    function animationLoop() {
-        Ext.frameStartTime = animationStartTimePolyfill();
-
-        // <debug>
-        if (startLooping === undefined) {
-            startLooping = Ext.frameStartTime;
-        }
-        // </debug>
-        frame.step(frame.animationTime());
-        frame.fireFrameCallbacks();
-        if (frame.scheduled || !frame.empty()) {
-            requestAnimationFramePolyfill(animationLoop);
-            // <debug>
-            frames++;
-            // </debug>
-        } else {
-            looping = false;
-            // <debug>
-            startLooping = undefined;
-            // </debug>
-        }
-        // <debug>
-        frame.framerate = frames * 1000 / (frame.animationTime() - startLooping);
-        // </debug>
-
-    }
-
-    // <debug>
-    frame.clearCounter = function () {
-        startLooping = frame.animationTime();
-        frames = 0;
-    };
-    // </debug>
-
-    frame.ignite = function () {
-        if (!looping) {
-            // <debug>
-            frames = 0;
-            // </debug>
-            looping = true;
-            requestAnimationFramePolyfill(animationLoop);
+    ignite: function() {
+        if (!this.running) {
+            this.running = true;
+            Ext.AnimationQueue.start(this.handleFrame, this);
             Ext.draw.Draw.updateIOS();
         }
-    };
-
+    }
 });

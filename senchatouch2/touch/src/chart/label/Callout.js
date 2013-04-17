@@ -96,7 +96,7 @@ Ext.define("Ext.chart.label.Callout", {
     },
 
     popUp: function (attr, changes) {
-        attr = attr.__proto__;
+        attr = Object.getPrototypeOf(attr);
         changes = this.setAttrs(attr, changes);
         if (this._next) {
             return this._next.popUp(attr, changes);

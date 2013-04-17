@@ -4,6 +4,7 @@
  */
 Ext.define('Ext.fx.runner.CssTransition', {
     extend: 'Ext.fx.runner.Css',
+    requires: ['Ext.AnimationQueue'],
 
     listenersAttached: false,
 
@@ -73,6 +74,7 @@ Ext.define('Ext.fx.runner.CssTransition', {
 
         animation.fireEvent('animationend', animation, element, isInterrupted);
         this.fireEvent('animationend', this, animation, element, isInterrupted);
+        Ext.AnimationQueue.stop(Ext.emptyFn, animation);
     },
 
     onAllAnimationsEnd: function(element) {
@@ -211,7 +213,7 @@ Ext.define('Ext.fx.runner.CssTransition', {
             iframeDocument.close();
 
             this.testElement = testElement = iframeDocument.createElement('div');
-            testElement.style.setProperty('position', 'absolute', '!important');
+            testElement.style.setProperty('position', 'absolute', 'important');
             iframeDocument.body.appendChild(testElement);
             this.testElementComputedStyle = window.getComputedStyle(testElement);
         }
@@ -225,6 +227,12 @@ Ext.define('Ext.fx.runner.CssTransition', {
             style = testElement.style;
 
         style.setProperty(name, value);
+
+        if (Ext.browser.is.Firefox) {
+            // We force a repaint of the element in Firefox to make sure the computedStyle to be updated
+            testElement.offsetHeight;
+        }
+
         value = computedStyle.getPropertyValue(name);
         style.removeProperty(name);
 
@@ -240,7 +248,7 @@ Ext.define('Ext.fx.runner.CssTransition', {
             element, elementId, from, to, before,
             fromPropertyNames, toPropertyNames,
             doApplyTo, message,
-            runningData,
+            runningData, elementData,
             i, j, ln, animation, propertiesLength, sessionNameMap,
             computedStyle, formattedName, name, toFormattedValue,
             computedValue, fromFormattedValue, isLengthProperty,
@@ -256,6 +264,9 @@ Ext.define('Ext.fx.runner.CssTransition', {
             animation = animations[i];
             animation = Ext.factory(animation, Ext.fx.Animation);
             element = animation.getElement();
+
+            // Empty function to prevent idleTasks from running while we animate.
+            Ext.AnimationQueue.start(Ext.emptyFn, animation);
 
             computedStyle = window.getComputedStyle(element.dom);
 
@@ -355,20 +366,22 @@ Ext.define('Ext.fx.runner.CssTransition', {
 
             animation.on('stop', 'onAnimationStop', this);
 
-            fromData[elementId] = from = Ext.apply(Ext.Object.chain(before), from);
+            elementData = Ext.apply({}, before);
+            Ext.apply(elementData, from);
 
             if (runningNameList.length > 0) {
                 fromPropertyNames = Ext.Array.difference(runningNameList, fromPropertyNames);
                 toPropertyNames = Ext.Array.merge(fromPropertyNames, toPropertyNames);
-                from['transition-property'] = fromPropertyNames;
+                elementData['transition-property'] = fromPropertyNames;
             }
 
-            toData[elementId] = to = Ext.Object.chain(to);
+            fromData[elementId] = elementData;
+            toData[elementId] = Ext.apply({}, to);
 
-            to['transition-property'] = toPropertyNames;
-            to['transition-duration'] = data.duration;
-            to['transition-timing-function'] = data.easing;
-            to['transition-delay'] = data.delay;
+            toData[elementId]['transition-property'] = toPropertyNames;
+            toData[elementId]['transition-duration'] = data.duration;
+            toData[elementId]['transition-timing-function'] = data.easing;
+            toData[elementId]['transition-delay'] = data.delay;
 
             animation.startTime = Date.now();
         }

@@ -340,9 +340,9 @@ Ext.DateExtras = {
 
     /**
      * An object hash containing default date values used during date parsing.
-     * 
+     *
      * The following properties are available:
-     * 
+     *
      * - `y`: {@link Number} - The default year value. Defaults to `undefined`.
      * - `m`: {@link Number} - The default 1-based month value. Defaults to `undefined`.
      * - `d`: {@link Number} - The default day value. Defaults to `undefined`.
@@ -358,7 +358,7 @@ Ext.DateExtras = {
      * It is the responsibility of the developer to account for this.
      *
      * Example Usage:
-     * 
+     *
      *     @example
      *     // set default day value to the first day of the month
      *     Ext.Date.defaults.d = 1;
@@ -574,10 +574,10 @@ Ext.DateExtras = {
      * @param {Number} year 4-digit year.
      * @param {Number} month 1-based month-of-year.
      * @param {Number} day Day of month.
-     * @param {Number} hour (optional) Hour.
-     * @param {Number} minute (optional) Minute.
-     * @param {Number} second (optional) Second.
-     * @param {Number} millisecond (optional) Millisecond.
+     * @param {Number} [hour] Hour.
+     * @param {Number} [minute] Minute.
+     * @param {Number} [second] Second.
+     * @param {Number} [millisecond] Millisecond.
      * @return {Boolean} `true` if the passed parameters do not cause a Date "rollover", `false` otherwise.
      */
     isValid : function(y, m, d, h, i, s, ms) {
@@ -607,7 +607,7 @@ Ext.DateExtras = {
      * the current date's year, month, day or DST-adjusted zero-hour time value will be used instead.
      * Keep in mind that the input date string must precisely match the specified format string
      * in order for the parse operation to be successful (failed parse operations return a `null` value).
-     * 
+     *
      * Example:
      *
      *     // dt = Fri May 25 2007 (current date)
@@ -1069,7 +1069,7 @@ Ext.DateExtras = {
 
     /**
      * Get the offset from GMT of the current date (equivalent to the format specifier 'O').
-     * 
+     *
      *     @example
      *     var dt = new Date('9/17/2011');
      *     alert(Ext.Date.getGMTOffset(dt));
@@ -1171,12 +1171,12 @@ Ext.DateExtras = {
      * Get the last day of the current month, adjusted for leap year.  The returned value
      * is the numeric day index within the week (0-6) which can be used in conjunction with
      * the {@link #monthNames} array to retrieve the textual day name.
-     * 
+     *
      *     @example
      *     var dt = new Date('1/10/2007'),
      *         lastDay = Ext.Date.getLastDayOfMonth(dt);
      *     alert(Ext.Date.dayNames[lastDay]); // 'Wednesday'
-     * 
+     *
      * @param {Date} date The date.
      * @return {Number} The day number (0-6).
      */
@@ -1187,12 +1187,12 @@ Ext.DateExtras = {
 
     /**
      * Get the date of the first day of the month in which this date resides.
-     * 
+     *
      *     @example
      *     var dt = new Date('1/10/2007'),
      *         lastDate = Ext.Date.getFirstDateOfMonth(dt);
      *     alert(lastDate); // Mon Jan 01 2007 00:00:00 GMT-0800 (PST)
-     * 
+     *
      * @param {Date} date The date.
      * @return {Date}
      */
@@ -1517,6 +1517,7 @@ var utilDate = Ext.DateExtras;
 Ext.apply(Ext.Date, utilDate);
 
 //<deprecated product=touch since="2.0">
+Ext.ns("Ext.util");
 Ext.apply(Ext.util.Date, utilDate);
 //</deprecated>
 

@@ -1,34 +1,91 @@
 /**
- * A DataItem is a container for {@link Ext.dataview.DataView} with useComponents: true. It ties together
- * {@link Ext.data.Model records} to its contained Components via a {@link #dataMap dataMap} configuration.
+ * A ListItem is a container for {@link Ext.dataview.List} with 
+ * useSimpleItems: false. 
+ * 
+ * ListItem configures and updates the {@link Ext.data.Model records} for  
+ * the sub-component items in a list. 
+ *   
+ * Overwrite the `updateRecord()` method to set a sub-component's value. 
+ * Sencha Touch calls `updateRecord()` whenever the data in the list updates.
  *
- * For example, lets say you have a `text` configuration which, when applied, gets turned into an instance of an
- * Ext.Component. We want to update the {@link #html} of a sub-component when the 'text' field of the record gets
- * changed.
+ * The `updatedata` event fires after `updateRecord()` runs.
  *
- * As you can see below, it is simply a matter of setting the key of the object to be the getter of the config
- * (`getText`), and then give that property a value of an object, which then has 'setHtml' (the `html` setter) as the key,
- * and 'text' (the field name) as the value. You can continue this for a as many sub-components as you wish.
+ * *Note*: Use of ListItem increases overhead since it generates more markup than
+ * using the List class with useSimpleItems: true. This overhead is more
+ * noticeable in Internet Explorer. If at all possible, use
+ * {@link Ext.dataview.component.SimpleListItem} instead.
+ * 
+ * The following example shows how to configure and update sub-component items
+ * in a list:
  *
- *     dataMap: {
- *         // When the record is updated, get the text configuration, and
- *         // call {@link #setHtml} with the 'text' field of the record.
- *         getText: {
- *             setHtml: 'text'
+ *     Ext.define('Twitter.view.TweetListItem', {
+ *         extend: 'Ext.dataview.component.ListItem',
+ *         xtype : 'tweetlistitem',
+ *         requires: [
+ *             'Ext.Img'
+ *         ],
+ *         config: {
+ *             userName: {
+ *                 cls: 'username'
+ *             },
+ *             text: {
+ *                 cls: 'text'
+ *             },
+ *             avatar: {
+ *                 docked: 'left',
+ *                 xtype : 'image',
+ *                 cls   : 'avatar',
+ *                 width: '48px',
+ *                 height: '48px'
+ *             },
+ *             layout: {
+ *                 type: 'vbox'
+ *             }
  *         },
- *
- *         // When the record is updated, get the userName configuration, and
- *         // call {@link #setHtml} with the 'from_user' field of the record.
- *         getUserName: {
- *             setHtml: 'from_user'
+ *     
+ *         applyUserName: function(config) {
+ *             return Ext.factory(config, Ext.Component, this.getUserName());
  *         },
+ *     
+ *         updateUserName: function(newUserName) {
+ *             if (newUserName) {
+ *                 this.insert(0, newUserName);
+ *             }
+ *         },
+ *     
+ *         applyText: function(config) {
+ *             return Ext.factory(config, Twitter.view.TweetListItemText, this.getText());
+ *         },
+ *     
+ *         updateText: function(newText) {
+ *             if (newText) {
+ *                 this.add(newText);
+ *             }
+ *         },
+ *     
+ *         applyAvatar: function(config) {
+ *             return Ext.factory(config, Ext.Img, this.getAvatar());
+ *         },
+ *     
+ *         updateAvatar: function(newAvatar) {
+ *             if (newAvatar) {
+ *                 this.add(newAvatar);
+ *             }
+ *         },
+ *     
+ *         updateRecord: function(record) {     
+ *             if (!record) {
+ *                 return;
+ *             }
  *
- *         // When the record is updated, get the avatar configuration, and
- *         // call `setSrc` with the 'profile_image_url' field of the record.
- *         getAvatar: {
- *             setSrc: 'profile_image_url'
+ *             this.getUserName().setHtml(record.get('username'));
+ *             this.getText().setHtml(record.get('text'));
+ *             this.getAvatar().setSrc(record.get('avatar_url'));
+ *             this.callParent(arguments);
+ *
  *         }
- *     }
+ *     });
+ *
  */
 Ext.define('Ext.dataview.component.ListItem', {
     extend: 'Ext.dataview.component.DataItem',
@@ -54,8 +111,7 @@ Ext.define('Ext.dataview.component.ListItem', {
         header: {
             xtype: 'component',
             cls: 'x-list-header',
-            html: ' ',
-            hidden: true
+            html: ' '
         },
 
         tpl: null,
@@ -85,9 +141,7 @@ Ext.define('Ext.dataview.component.ListItem', {
     },
 
     updateHeader: function(header, oldHeader) {
-        if (header) {
-            this.element.getFirstChild().insertFirst(header.element);
-        } else if (oldHeader) {
+        if (oldHeader) {
             oldHeader.destroy();
         }
     },

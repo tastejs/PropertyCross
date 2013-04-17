@@ -316,11 +316,12 @@ Ext.define('Ext.mixin.Sortable', {
     },
 
     /**
-     * This method returns the index that a given item would be inserted into a given array based
-     * on the current sorters.
+     * This method returns the index that a given item would be inserted into a
+     * given array based on the current sorters.
      * @param {Array} items The array that you want to insert the item into.
      * @param {Mixed} item The item that you want to insert into the items array.
-     * @return {Number} The index for the given item in the given array based on the current sorters.
+     * @return {Number} The index for the given item in the given array based on
+     * the current sorters.
      */
     findInsertionIndex: function(items, item, sortFn) {
         var start = 0,

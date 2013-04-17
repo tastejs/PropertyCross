@@ -1,5 +1,5 @@
 Ext.define('PropertyFinder.view.ResultListItem', {
-    extend: 'Ext.dataview.component.DataItem',
+    extend: 'Ext.dataview.component.ListItem',
     xtype: 'resultlistitem',
 	
 	requires: ['Ext.Img', 'PropertyFinder.util.Format'],

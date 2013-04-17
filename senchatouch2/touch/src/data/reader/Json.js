@@ -236,7 +236,7 @@ Ext.define('Ext.data.reader.Json', {
         if (!data) {
             this.fireEvent('exception', this, response, 'JSON object not found');
 
-            Ext.Logger.error('JSON object not found');
+            Ext.Logger.warn('JSON object not found');
         }
         //</debug>
 

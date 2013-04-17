@@ -104,14 +104,17 @@ Ext.define('Ext.chart.series.Pie', {
             items = store.getData().items,
             sprites = me.getSprites(),
             labelField = me.getLabelField(),
-            i, ln, labels;
+            hidden = me.getHidden(),
+            i, ln, labels, sprite;
         if (sprites.length > 0 && labelField) {
             labels = [];
             for (i = 0, ln = items.length; i < ln; i++) {
                 labels.push(items[i].get(labelField));
             }
             for (i = 0, ln = sprites.length; i < ln; i++) {
-                sprites[i].setAttributes({label: labels[i]});
+                sprite = sprites[i];
+                sprite.setAttributes({label: labels[i]});
+                sprite.putMarker('labels', {hidden:hidden[i]}, sprite.attr.attributeId);
             }
         }
     },

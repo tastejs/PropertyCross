@@ -76,7 +76,7 @@ Ext.define('Ext.util.AbstractMixedCollection', {
      * or if the key of the stored items is in a property called `id`,
      * the MixedCollection will be able to _derive_ the key for the new item.
      * In this case just pass the new item in this parameter.
-     * @param {Object} o The item to add.
+     * @param {Object} obj The item to add.
      * @return {Object} The item added.
      */
     add: function(key, obj){
@@ -265,7 +265,7 @@ Ext.define('Ext.util.AbstractMixedCollection', {
      * Inserts an item at the specified index in the collection. Fires the `{@link #event-add}` event when complete.
      * @param {Number} index The index to insert the item at.
      * @param {String} key The key to associate with the new item, or the item itself.
-     * @param {Object} o (optional) If the second parameter was a key, the new item.
+     * @param {Object} [obj] If the second parameter was a key, the new item.
      * @return {Object} The item inserted.
      */
     insert: function(index, key, obj){
@@ -487,7 +487,7 @@ Ext.define('Ext.util.AbstractMixedCollection', {
      * @param {String} property The property to collect on.
      * @param {String} [root] Optional 'root' property to extract the first argument from. This is used mainly when
      * summing fields in records, where the fields are all stored inside the `data` object.
-     * @param {Boolean} allowBlank (optional) Pass `true` to allow `null`, `undefined`, or empty string values.
+     * @param {Boolean} [allowNull] Pass `true` to allow `null`, `undefined`, or empty string values.
      * @return {Array} The unique values.
      */
     collect: function(property, root, allowNull) {
@@ -531,8 +531,8 @@ Ext.define('Ext.util.AbstractMixedCollection', {
 
     /**
      * Returns a range of items in this collection.
-     * @param {Number} [startIndex=0] (optional) The starting index.
-     * @param {Number} [endIndex=-1] (optional) The ending index.
+     * @param {Number} [start=0] The starting index.
+     * @param {Number} [end=-1] The ending index.
      * @return {Array} An array of items
      */
     getRange: function(start, end){

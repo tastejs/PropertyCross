@@ -125,11 +125,11 @@ Ext.define('Ext.field.Number', {
         var minValue = this.getMinValue(),
             maxValue = this.getMaxValue();
 
-        if (Ext.isNumber(minValue)) {
+        if (Ext.isNumber(minValue) && Ext.isNumber(value)) {
             value = Math.max(value, minValue);
         }
 
-        if (Ext.isNumber(maxValue)) {
+        if (Ext.isNumber(maxValue) && Ext.isNumber(value)) {
             value = Math.min(value, maxValue);
         }
 

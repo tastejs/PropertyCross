@@ -365,5 +365,9 @@ Ext.define('Ext.event.Dispatcher', {
         }
 
         return stacks;
+    },
+
+    getPublisher: function (name) {
+        return this.getPublishers()[name];
     }
 });

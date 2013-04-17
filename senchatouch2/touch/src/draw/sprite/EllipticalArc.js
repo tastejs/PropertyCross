@@ -15,7 +15,7 @@
  *         fillStyle: 'blue',
  *         startAngle: 0,
  *         endAngle: Math.PI,
- *         anticlockwise: true,
+ *         anticlockwise: true
  *       }]
  *     });
  *     Ext.Viewport.setLayout('fit');
