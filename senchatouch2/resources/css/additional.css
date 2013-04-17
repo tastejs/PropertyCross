@@ -50,3 +50,19 @@
     border: 1px solid #DEDEDE;
     font-weight: bold;
 }
+
+/* "Load more" list paging */
+.x-list-paging-msg {
+    text-align: left !important;
+}
+
+    .x-list-paging-msg #listpaging-loadmore {
+    }
+
+    .x-list-paging-msg #listpaging-results {
+        font-size: 75%;
+    }
+    /* Default 1em looks a bit empty.*/
+.x-list-paging {
+    padding: 0.5em;
+}

@@ -5,9 +5,9 @@
 	config: {
 		plugins: [{ 
 			xclass: 'Ext.plugin.ListPaging' ,
-			autoPaging: true,
-			loadMoreText: '',
-			noMoreRecordsText: ''
+			autoPaging: false,
+			loadMoreText: 'Load more results',
+			noMoreRecordsText: 'No more results'
 		}],
 		
         title: 'Results',
@@ -31,12 +31,17 @@
                     var store = this.getStore();
                     var totalCount = store.getTotalCount();
                     var data = store.getData();
+                    var pagingPlugin = this.getPlugins()[0];
                     if(totalCount && data) {
                         var fmt = PropertyFinder.util.Format.number;
                         var xOfY = fmt(data.length) + " of " + fmt(totalCount);
                         // Title is not read after first set, but parent doesn't exist initially.
                         var titleLocation = this.parent ? this.parent.getNavigationBar() : this;
                         titleLocation.setTitle(xOfY + " matches");
+                        var params = store.getProxy().getExtraParams();
+                        var searchTerm = params.place_name || "current location";
+                        pagingPlugin.setLoadMoreText("<span id='listpaging-loadmore'>Load more...</span><br>" 
+                            + "<span id='listpaging-results'>Results for " + searchTerm + ", showing " + xOfY + " properties</span>");
                     }
                 }
             }
