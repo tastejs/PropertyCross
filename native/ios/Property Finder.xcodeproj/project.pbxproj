@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7220D61A1718630500F21A64 /* RecentSearchDataEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 7220D6191718630500F21A64 /* RecentSearchDataEntity.m */; };
 		726CEB88163EE01C00860DD0 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 726CEB87163EE01C00860DD0 /* Icon.png */; };
 		726CEB8A163EE02000860DD0 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 726CEB89163EE02000860DD0 /* Icon@2x.png */; };
 		72AB49E11636FA8C006B5EF1 /* PropertyFinderDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 72AB49DF1636FA8C006B5EF1 /* PropertyFinderDataModel.xcdatamodeld */; };
@@ -17,7 +18,6 @@
 		72AB49FC16385420006B5EF1 /* UIImage+UIImageHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 72AB49FB16385420006B5EF1 /* UIImage+UIImageHelpers.m */; };
 		72AB49FE16388982006B5EF1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72AB49FD16388982006B5EF1 /* CoreLocation.framework */; };
 		72AB4A0716388C92006B5EF1 /* GeolocationSearchItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 72AB4A0616388C92006B5EF1 /* GeolocationSearchItem.m */; };
-		72AB4A0D16388FB3006B5EF1 /* RecentSearchDataEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 72AB4A0C16388FB2006B5EF1 /* RecentSearchDataEntity.m */; };
 		72AB4A1116389555006B5EF1 /* FavouritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72AB4A0F16389554006B5EF1 /* FavouritesViewController.m */; };
 		72AB4A1216389555006B5EF1 /* FavouritesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72AB4A1016389555006B5EF1 /* FavouritesViewController.xib */; };
 		72AB4A1516391753006B5EF1 /* PersistentDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 72AB4A1416391752006B5EF1 /* PersistentDataStore.m */; };
@@ -55,6 +55,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7220D6181718630500F21A64 /* RecentSearchDataEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentSearchDataEntity.h; sourceTree = "<group>"; };
+		7220D6191718630500F21A64 /* RecentSearchDataEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentSearchDataEntity.m; sourceTree = "<group>"; };
 		726CEB87163EE01C00860DD0 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		726CEB89163EE02000860DD0 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		72AB49E01636FA8C006B5EF1 /* PropertyFinderDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PropertyFinderDataModel.xcdatamodel; sourceTree = "<group>"; };
@@ -70,8 +72,6 @@
 		72AB49FD16388982006B5EF1 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		72AB4A0516388C91006B5EF1 /* GeolocationSearchItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeolocationSearchItem.h; sourceTree = "<group>"; };
 		72AB4A0616388C92006B5EF1 /* GeolocationSearchItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeolocationSearchItem.m; sourceTree = "<group>"; };
-		72AB4A0B16388FB2006B5EF1 /* RecentSearchDataEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentSearchDataEntity.h; sourceTree = "<group>"; };
-		72AB4A0C16388FB2006B5EF1 /* RecentSearchDataEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentSearchDataEntity.m; sourceTree = "<group>"; };
 		72AB4A0E16389554006B5EF1 /* FavouritesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavouritesViewController.h; sourceTree = "<group>"; };
 		72AB4A0F16389554006B5EF1 /* FavouritesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavouritesViewController.m; sourceTree = "<group>"; };
 		72AB4A1016389555006B5EF1 /* FavouritesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FavouritesViewController.xib; sourceTree = "<group>"; };
@@ -161,11 +161,11 @@
 		72AB4A19163AB60A006B5EF1 /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
+				7220D6181718630500F21A64 /* RecentSearchDataEntity.h */,
+				7220D6191718630500F21A64 /* RecentSearchDataEntity.m */,
 				72AB49DF1636FA8C006B5EF1 /* PropertyFinderDataModel.xcdatamodeld */,
 				72AB4A161639A3D0006B5EF1 /* FavouritePropertyDataEntity.h */,
 				72AB4A171639A3D1006B5EF1 /* FavouritePropertyDataEntity.m */,
-				72AB4A0B16388FB2006B5EF1 /* RecentSearchDataEntity.h */,
-				72AB4A0C16388FB2006B5EF1 /* RecentSearchDataEntity.m */,
 				72AB4A1316391751006B5EF1 /* PersistentDataStore.h */,
 				72AB4A1416391752006B5EF1 /* PersistentDataStore.m */,
 			);
@@ -408,10 +408,10 @@
 				72AB49F916385306006B5EF1 /* UITableViewCell+ImageHelpers.m in Sources */,
 				72AB49FC16385420006B5EF1 /* UIImage+UIImageHelpers.m in Sources */,
 				72AB4A0716388C92006B5EF1 /* GeolocationSearchItem.m in Sources */,
-				72AB4A0D16388FB3006B5EF1 /* RecentSearchDataEntity.m in Sources */,
 				72AB4A1116389555006B5EF1 /* FavouritesViewController.m in Sources */,
 				72AB4A1516391753006B5EF1 /* PersistentDataStore.m in Sources */,
 				72AB4A181639A3D2006B5EF1 /* FavouritePropertyDataEntity.m in Sources */,
+				7220D61A1718630500F21A64 /* RecentSearchDataEntity.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

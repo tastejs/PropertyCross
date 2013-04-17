@@ -22,6 +22,7 @@
     PropertyDataSource* _datasource;
     int _pageNumber;
     SearchItemBase* _searchItem;
+    BOOL _isLoading;
 }
 
 #pragma mark - initialisation code
@@ -88,9 +89,33 @@
     else
     {
         // render a load more indicator
-        cell.textLabel.text = @"Load more ...";
-        cell.detailTextLabel.Text = [NSString stringWithFormat:@"Showing %d of %@ matches",
-                                     _properties.count, _result.totalResults];
+        cell.textLabel.text = _isLoading ? @"Loading ..." : @"Load more ...";
+        
+        // Create the attributes
+        UIFont *boldFont = [UIFont boldSystemFontOfSize:13.0f];
+        UIFont *regularFont = [UIFont systemFontOfSize:13.0f];
+        NSDictionary *regularFontAttributes = @{ NSFontAttributeName : regularFont};
+        NSDictionary *boldFontAttributes = @{ NSFontAttributeName : boldFont};
+        
+        NSString* propertiesCountText =[NSString stringWithFormat:@"%d", _properties.count];
+        NSString* totalResultsText =[NSString stringWithFormat:@"%@", _result.totalResults];
+        
+        // Create the attributed string
+        NSString* text = [NSString stringWithFormat:@"Results for %@, showing %@ of %@ properties",
+                          _searchItem.displayText, propertiesCountText, totalResultsText];
+        NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:text
+                                               attributes:regularFontAttributes];
+        
+        // make certain components bold
+        [attributedText setAttributes:boldFontAttributes
+                                range:NSMakeRange(12,totalResultsText.length)];
+        [attributedText setAttributes:boldFontAttributes
+                                range:NSMakeRange(12 + totalResultsText.length + 10, propertiesCountText.length)];
+        [attributedText setAttributes:boldFontAttributes
+                                range:NSMakeRange(12 + totalResultsText.length + 10 + propertiesCountText.length + 4, totalResultsText.length)];
+        
+        cell.detailTextLabel.font = [UIFont systemFontOfSize:13.0f];
+        cell.detailTextLabel.attributedText =attributedText;
         cell.imageView.image = nil;
     }
     
@@ -128,8 +153,13 @@
     {
         // load more clicked
         _pageNumber++;
+        _isLoading = YES;
+        
+        // reload the label to update the 'loading' indicator. This could potentially be optimized.
+        [self.searchResultsTable reloadData];
         
         PropertyDataSourceResultSuccess success = ^(PropertyDataSourceResult *result){
+            _isLoading = NO;
             
             // determine the type of returned result
             if ([result isKindOfClass:[PropertyListingResult class]])
@@ -149,7 +179,8 @@
         
         [_searchItem findPropertiesWithDataSource:_datasource
                                        pageNumber:[NSNumber numberWithInt:_pageNumber]
-                                           result:success];
+                                           result:success
+                                            error:nil];
     }
 }
 

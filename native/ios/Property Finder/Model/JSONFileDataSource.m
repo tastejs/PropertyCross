@@ -10,9 +10,10 @@
 
 @implementation JSONFileDataSource
 
-- (void)findPropertiesForSearchString:(NSString *)searchString
+- (void)findPropertiesForSearchString: (NSString *)searchString
                            pageNumber: (NSNumber*) page
-                              success:(JSONDataSourceSuccess)successResult
+                              success: (JSONDataSourceSuccess)successResult
+                                error: (JSONDataSourceError) errorResult
 {
     NSString* filename = [searchString isEqualToString:@"a"] ? @"AmbiguousSearchResults" : @"SearchResults";
     NSString* path = [[NSBundle mainBundle] pathForResource: filename
@@ -23,10 +24,11 @@
     successResult(data);
 }
 
-- (void)findPropertiesForLatitude:(double)latitude
-                        longitude:(double)longitude
-                       pageNumber:(NSNumber *)page
-                          success:(JSONDataSourceSuccess)successResult
+- (void)findPropertiesForLatitude: (double)latitude
+                        longitude: (double)longitude
+                       pageNumber: (NSNumber *)page
+                          success: (JSONDataSourceSuccess)successResult
+                            error: (JSONDataSourceError)errorResult
 {
     NSString* path = [[NSBundle mainBundle] pathForResource: @"SearchResults"
                                                      ofType: @"txt"];

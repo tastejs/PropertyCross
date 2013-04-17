@@ -10,6 +10,8 @@
 
 typedef void(^JSONDataSourceSuccess)(NSString* result);
 
+typedef void(^JSONDataSourceError)(NSString* result);
+
 // a protocol which provides methods for querying a property database with the results
 // returned in JSON string format
 @protocol JSONDataSourceProtocol <NSObject>
@@ -17,12 +19,14 @@ typedef void(^JSONDataSourceSuccess)(NSString* result);
 // finds properties which match the given plain-text string
 -(void)findPropertiesForSearchString: (NSString*) searchString
                           pageNumber: (NSNumber*) page
-                             success: (JSONDataSourceSuccess) successResult;
+                             success: (JSONDataSourceSuccess) successResult
+                               error: (JSONDataSourceError) errorResult;
 
 // find properties at the given geolocation
 -(void)findPropertiesForLatitude: (double) latitude
                        longitude: (double) longitude
                       pageNumber: (NSNumber*) page
-                         success: (JSONDataSourceSuccess) successResult;
+                         success: (JSONDataSourceSuccess) successResult
+                           error: (JSONDataSourceError) errorResult;
 
 @end
