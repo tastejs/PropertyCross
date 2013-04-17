@@ -123,13 +123,26 @@ Ext.define('Ext.chart.series.Line', {
         smooth: false,
 
         /**
+         * @cfg {Boolean} step
+         * If set to `true`, the line uses steps instead of straight lines to connect the dots.
+         * It is ignored if `smooth` is true.
+         */
+        step: false,
+
+        /**
          * @cfg {Boolean} fill
          * If set to `true`, the area underneath the line is filled with the color defined as follows, listed by priority:
          * - The color that is configured for this series ({@link Ext.chart.series.Series#colors}).
          * - The color that is configured for this chart ({@link Ext.chart.AbstractChart#colors}).
          * - The fill color that is set in the {@link #style} config.
-         * - The stroke color that is set in the {@link #style} config, or the same color as the line .
+         * - The stroke color that is set in the {@link #style} config, or the same color as the line.
+         *
+         * Note: Do not confuse `series.config.fill` (which is a boolean) with `series.style.fill' (which is an alias
+         * for the `fillStyle` property and contains a color). For compatibility with previous versions of the API,
+         * if `config.fill` is undefined but a `style.fill' color is provided, `config.fill` is considered true.
+         * So the default value below must be undefined, not false.
          */
+         fill: undefined,
 
         aggregator: { strategy: 'double' }
     },
@@ -152,23 +165,35 @@ Ext.define('Ext.chart.series.Line', {
     getDefaultSpriteConfig: function () {
         var me = this,
             parentConfig = me.callSuper(arguments),
-            style;
+            style = me.getStyle(),
+            fillArea = false;
 
         if (typeof me.config.fill != 'undefined') {
-            // If config.fill is present, set or clear style.fillStyle accordingly
-            // because that's what is used by the Line sprite to fill below the line.
-            style = this.getStyle();
+            // If config.fill is present but there is no fillStyle, then use the
+            // strokeStyle to fill (and paint the area the same color as the line).
             if (me.config.fill) {
+                fillArea = true;
                 if (typeof style.fillStyle == 'undefined') {
                     style.fillStyle = style.strokeStyle;
                 }
             }
-            else {
-                delete style.fillStyle;
+        } else {
+            // For compatibility with previous versions of the API, if config.fill
+            // is undefined but style.fillStyle is provided, we fill the area.
+            if (style.fillStyle) {
+                fillArea = true;
             }
         }
 
+        // If we don't fill, then delete the fillStyle because that's what is used by
+        // the Line sprite to fill below the line.
+        if (!fillArea) {
+            delete style.fillStyle;
+        }
+
         return Ext.apply(parentConfig || {}, {
+            fillArea: fillArea,
+            step: me.config.step,
             smooth: me.config.smooth
         });
     }

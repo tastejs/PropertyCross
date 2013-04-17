@@ -436,7 +436,7 @@ var noArgs = [],
          *
          *     Ext.define('My.CatOverride', {
          *         override: 'My.Cat',
-         *         
+         *
          *         constructor: function() {
          *             alert("I'm going to be a cat!");
          *
@@ -465,7 +465,8 @@ var noArgs = [],
                 enumerables = Ext.enumerables,
                 target = me.prototype,
                 cloneFunction = Ext.Function.clone,
-                name, index, member, statics, names, previous;
+                currentConfig = target.config,
+                name, index, member, statics, names, previous, newConfig, prop;
 
             if (arguments.length === 2) {
                 name = members;
@@ -483,7 +484,16 @@ var noArgs = [],
                         statics = members[name];
                     }
                     else if (name == 'config') {
-                        me.addConfig(members[name], true);
+                        newConfig = members[name];
+                        //<debug error>
+                        for (prop in newConfig) {
+                            if (!(prop in currentConfig)) {
+                                throw new Error("Attempting to override a non-existant config property. This is not " +
+                                    "supported, you must extend the Class.");
+                            }
+                        }
+                        //</debug>
+                        me.addConfig(newConfig, true);
                     }
                     else {
                         names.push(name);
@@ -821,7 +831,7 @@ var noArgs = [],
          *      });
          *
          *      alert(My.Derived2.method(10)); // now alerts 40
-         * 
+         *
          * To override a method and replace it and also call the superclass method, use
          * {@link #callSuper}. This is often done to patch a method to fix a bug.
          *
@@ -870,40 +880,40 @@ var noArgs = [],
          * This method is used by an override to call the superclass method but bypass any
          * overridden method. This is often done to "patch" a method that contains a bug
          * but for whatever reason cannot be fixed directly.
-         * 
+         *
          * Consider:
-         * 
+         *
          *      Ext.define('Ext.some.Class', {
          *          method: function () {
          *              console.log('Good');
          *          }
          *      });
-         * 
+         *
          *      Ext.define('Ext.some.DerivedClass', {
          *          method: function () {
          *              console.log('Bad');
-         * 
+         *
          *              // ... logic but with a bug ...
-         *              
+         *
          *              this.callParent();
          *          }
          *      });
-         * 
+         *
          * To patch the bug in `DerivedClass.method`, the typical solution is to create an
          * override:
-         * 
+         *
          *      Ext.define('App.paches.DerivedClass', {
          *          override: 'Ext.some.DerivedClass',
-         *          
+         *
          *          method: function () {
          *              console.log('Fixed');
-         * 
+         *
          *              // ... logic but with bug fixed ...
          *
          *              this.callSuper();
          *          }
          *      });
-         * 
+         *
          * The patch method cannot use `callParent` to call the superclass `method` since
          * that would call the overridden method containing the bug. In other words, the
          * above patch would only produce "Fixed" then "Good" in the console log, whereas,
@@ -947,7 +957,7 @@ var noArgs = [],
 
         /**
          * Call the original method that was previously overridden with {@link Ext.Base#override},
-         * 
+         *
          * This method is deprecated as {@link #callParent} does the same thing.
          *
          *     Ext.define('My.Cat', {
@@ -979,9 +989,8 @@ var noArgs = [],
          * @deprecated Use callParent instead
          */
         callOverridden: function(args) {
-            var method;
-
-            return (method = this.callOverridden.caller) && method.$previous.apply(this, args || noArgs);
+            var method = this.callOverridden.caller;
+            return method  && method.$previous.apply(this, args || noArgs);
         },
 
         /**

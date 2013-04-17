@@ -125,7 +125,7 @@ Ext.define('Ext.field.Spinner', {
         groupButtons: true,
 
         /**
-         * @cfg
+         * @cfg component
          * @inheritdoc
          */
         component: {
@@ -153,8 +153,7 @@ Ext.define('Ext.field.Spinner', {
     updateComponent: function(newComponent) {
         this.callParent(arguments);
 
-        var innerElement = this.innerElement,
-            cls = this.getCls();
+        var cls = this.getCls();
 
         if (newComponent) {
             this.spinDownButton = Ext.Element.create({
@@ -300,6 +299,15 @@ Ext.define('Ext.field.Spinner', {
     reset: function() {
         this.setValue(this.getDefaultValue());
     },
+
+//    setValue: function(value){
+//        this.callSuper(arguments);
+
+        // @TODO: Isn't this already done by the framework by default?
+//        if(Ext.getThemeName() == 'WP'){
+//            this.getComponent().element.dom.setAttribute('value',value);
+//        }
+//    },
 
     // @private
     destroy: function() {

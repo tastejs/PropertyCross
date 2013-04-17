@@ -1,0 +1,87 @@
+/**
+ * @class Ext.Toolbar
+ */
+
+.x-toolbar {
+    min-height: 45px;
+}
+
+.x-toolbar,
+.x-tabbar {
+    border-width: 0 !important;
+    @include box-shadow(0 1px 0 0 #C4C4C4);
+}
+
+.x-toolbar-plain,
+.x-tabbar-plain {
+    background-color: #FFFFFF;
+}
+
+.x-toolbar-light,
+.x-tabbar-light {
+    @include background(linear-gradient(85deg, color-stops(#005F9A, #0AACE5)));
+}
+
+.x-toolbar-neutral,
+.x-tabbar-neutral,
+.x-toolbar-dark,
+.x-tabbar-dark {
+    @include background(linear-gradient(color-stops(#323232, #252525)));
+}
+
+.x-title {
+    color: #fafafa;
+    font-size: 18px;
+    font-weight: normal;
+}
+
+///**
+// * @var {color} $toolbar-base-color
+// * The primary color variable from which toolbars derive their light and dark UIs.
+// */
+//$toolbar-base-color: $base-color !default;
+
+///**
+// * @var {measurement} $toolbar-spacing
+// * Space between items in a toolbar (like buttons and fields)
+// */
+//$toolbar-spacing: .2em !default;
+
+//.x-toolbar {
+//    padding: 0 $toolbar-spacing;
+//    margin-bottom: 0.2em;
+//    background-color: transparent;
+//    border-width: 0 !important;
+
+//    &.x-docked-left {
+//        width: 7em;
+//        padding: $toolbar-spacing;
+//    }
+
+//    &.x-docked-right {
+//        width: 7em;
+//        padding: $toolbar-spacing;
+//    }
+
+//    &.x-docked-bottom {
+//        background-color: $background-color;
+//    }
+//}
+
+//.x-toolbar-inner {
+//    height: 100% !important;
+//}
+
+//.x-title {
+//    line-height: 32px;
+//    font-size: $font-size-extra-large;
+//    color: $foreground-color;
+//    text-align: left;
+//    margin: 0 0.3em;
+//    padding: 0 5px;
+//    font-weight: normal;
+//}
+
+//.x-field-select .x-component-outer .x-input-el {
+////    color: $phone-contrast-foreground-color !important;
+//}

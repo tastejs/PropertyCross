@@ -17,7 +17,6 @@
     <feature name="http://api.phonegap.com/1.0/geolocation" />
     <feature name="http://api.phonegap.com/1.0/network" />
 
-    <preference name="phonegap-version"           value="2.1.0" />
     <preference name="target-device"              value="handset" />
     <preference name="orientation"                value="portrait" />
     <preference name="webviewbounce"              value="false" />

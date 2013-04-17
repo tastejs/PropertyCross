@@ -63,12 +63,14 @@ Ext.define('Ext.plugin.ListPaging', {
         ].join(''),
 
         /**
-         * @cfg
+         * @cfg {Object} loadMoreCmp
          * @private
          */
         loadMoreCmp: {
             xtype: 'component',
-            baseCls: Ext.baseCSSPrefix + 'list-paging'
+            baseCls: Ext.baseCSSPrefix + 'list-paging',
+            scrollDock: 'bottom',
+            hidden: true
         },
 
         /**
@@ -115,6 +117,8 @@ Ext.define('Ext.plugin.ListPaging', {
         this.setScroller(scroller);
         this.bindStore(list.getStore());
 
+        this.addLoadMoreCmp();
+
         // We provide our own load mask so if the Store is autoLoading already disable the List's mask straight away,
         // otherwise if the Store loads later allow the mask to show once then remove it thereafter
         if (store) {
@@ -138,20 +142,18 @@ Ext.define('Ext.plugin.ListPaging', {
     bindStore: function(newStore, oldStore) {
         if (oldStore) {
             oldStore.un({
-                load: this.onStoreLoad,
                 beforeload: this.onStoreBeforeLoad,
+                load: this.onStoreLoad,
                 scope: this
             });
         }
 
         if (newStore) {
             newStore.on({
-                load: this.onStoreLoad,
                 beforeload: this.onStoreBeforeLoad,
+                load: this.onStoreLoad,
                 scope: this
             });
-
-//            this.disableDataViewMask(newStore);
         }
     },
 
@@ -195,6 +197,7 @@ Ext.define('Ext.plugin.ListPaging', {
                 cssPrefix: Ext.baseCSSPrefix,
                 message: this.getLoadMoreText()
             }),
+            scrollDock: 'bottom',
             listeners: {
                 tap: {
                     fn: this.loadNextPage,
@@ -212,7 +215,12 @@ Ext.define('Ext.plugin.ListPaging', {
      * If we're using autoPaging and detect that the user has scrolled to the bottom, kick off loading of the next page
      */
     onScrollEnd: function(scroller, x, y) {
+        var list = this.getList();
+
         if (!this.getLoading() && y >= scroller.maxPosition.y) {
+            this.currentScrollToTopOnRefresh = list.getScrollToTopOnRefresh();
+            list.setScrollToTopOnRefresh(false);
+
             this.loadNextPage();
         }
     },
@@ -248,24 +256,25 @@ Ext.define('Ext.plugin.ListPaging', {
      * @private
      */
     onStoreLoad: function(store) {
-        var loadCmp  = this.addLoadMoreCmp(),
+        var loadCmp  = this.getLoadMoreCmp(),
             template = this.getLoadTpl(),
             message  = this.storeFullyLoaded() ? this.getNoMoreRecordsText() : this.getLoadMoreText();
 
-        this.getLoadMoreCmp().show();
-        this.setLoading(false);
-
-        //restores scroll position after a Store load
-        if (this.scrollY) {
-            this.getScroller().scrollTo(null, this.scrollY);
-            delete this.scrollY;
+        if (store.getCount()) {
+            loadCmp.show();
         }
+        this.setLoading(false);
 
         //if we've reached the end of the data set, switch to the noMoreRecordsText
         loadCmp.setHtml(template.apply({
             cssPrefix: Ext.baseCSSPrefix,
             message: message
         }));
+
+        if (this.currentScrollToTopOnRefresh !== undefined) {
+            this.getList().setScrollToTopOnRefresh(this.currentScrollToTopOnRefresh);
+            delete this.currentScrollToTopOnRefresh;
+        }
     },
 
     /**
@@ -312,11 +321,6 @@ Ext.define('Ext.plugin.ListPaging', {
         var me = this;
         if (!me.storeFullyLoaded()) {
             me.setLoading(true);
-
-            //keep a cache of the current scroll position as we'll need to reset it after the List is
-            //updated with new data
-            me.scrollY = me.getScroller().position.y;
-
             me.getList().getStore().nextPage({ addRecords: true });
         }
     }

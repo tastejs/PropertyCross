@@ -30,8 +30,10 @@
                     id: 'faveButton',
                     align: 'right',
                     hidden: true,
-					iconCls: 'star',
-					iconMask: true,
+                    // Icon's don't work on WP8 app
+                    text: Ext.browser.is.IE ? 'Favourite' : undefined,
+                    iconCls: Ext.browser.is.IE ? undefined : 'star',
+                    iconMask: Ext.browser.is.IE ? undefined : true,
                     showAnimation: Ext.os.is.Android ? false : {
                         type: 'fadeIn',
                         duration: 200

@@ -220,13 +220,31 @@ Ext.define('Ext.form.Panel', {
 
         /**
          * @cfg {Object} scrollable
+         * Possible values are true, false, and null. The true value indicates that
+         * users can scroll the panel. The false value disables scrolling, but developers
+         * can enable it in the app. The null value indicates that the object cannot be
+         * scrolled and that scrolling cannot be enabled for this object.
+         *
+         * Example:
+         *      title: 'Sliders',
+         *      xtype: 'formpanel',
+         *      iconCls: Ext.filterPlatform('blackberry') ? 'list' : null,
+         *      scrollable: true,
+         *      items: [ ...
          * @inheritdoc
          */
         scrollable: {
             translatable: {
                 translationMethod: 'scrollposition'
             }
-        }
+        },
+
+        /**
+         * @cfg {Boolean} trackResetOnLoad
+         * If set to true, {@link #reset}() resets to the last loaded or {@link #setValues}() data instead of
+         * when the form was first created.
+         */
+        trackResetOnLoad:false
     },
 
     getElementConfig: function() {
@@ -263,7 +281,7 @@ Ext.define('Ext.form.Panel', {
 
     /**
      * Loads matching fields from a model instance into this form.
-     * @param {Ext.data.Model} instance The model instance.
+     * @param {Ext.data.Model} record The model instance.
      * @return {Ext.form.Panel} This form.
      */
     setRecord: function(record) {
@@ -323,14 +341,14 @@ Ext.define('Ext.form.Panel', {
      * @param {String} options.method
      * The form method to use (defaults to the form's {@link #method}, or POST if not defined).
      *
-     * @param {String/Object} params
+     * @param {String/Object} options.params
      * The params to pass when submitting this form (defaults to this forms {@link #baseParams}).
      * Parameters are encoded as standard HTTP parameters using {@link Ext#urlEncode}.
      *
-     * @param {Object} headers
+     * @param {Object} options.headers
      * Request headers to set for the action.
      *
-     * @param {Boolean} [autoAbort=false]
+     * @param {Boolean} [options.autoAbort=false]
      * `true` to abort any pending Ajax request prior to submission.
      * __Note:__ Has no effect when `{@link #standardSubmit}` is enabled.
      *
@@ -338,7 +356,7 @@ Ext.define('Ext.form.Panel', {
      * `true` to submit all fields regardless of disabled state.
      * __Note:__ Has no effect when `{@link #standardSubmit}` is enabled.
      *
-     * @param {String/Object} [waitMsg]
+     * @param {String/Object} [options.waitMsg]
      * If specified, the value which is passed to the loading {@link #masked mask}. See {@link #masked} for
      * more information.
      *
@@ -439,6 +457,7 @@ Ext.define('Ext.form.Panel', {
                 callback: function(callbackOptions, success, response) {
                     var me = this,
                         responseText = response.responseText,
+						statusResult = Ext.Ajax.parseStatus(response.status, response),
                         failureFn;
 
                     me.setMasked(false);
@@ -451,8 +470,12 @@ Ext.define('Ext.form.Panel', {
                     };
 
                     if (success) {
-                        response = Ext.decode(responseText);
-                        success = !!response.success;
+						if (statusResult && responseText.length == 0) {
+							success = true;
+						} else {
+                        	response = Ext.decode(responseText);
+                        	success = !!response.success;
+						}
                         if (success) {
                             if (Ext.isFunction(options.success)) {
                                 options.success.call(options.scope || me, me, response, responseText);
@@ -496,6 +519,7 @@ Ext.define('Ext.form.Panel', {
      */
     setValues: function(values) {
         var fields = this.getFields(),
+            me = this,
             name, field, value, ln, i, f;
 
         values = values || {};
@@ -541,6 +565,10 @@ Ext.define('Ext.form.Panel', {
                             field.setValue(value);
                         }
                     }
+
+                    if (me.getTrackResetOnLoad()) {
+                       field.resetOriginalValue();
+                    }
                 }
             }
         }
@@ -561,8 +589,8 @@ Ext.define('Ext.form.Panel', {
      *         ]
      *     }
      *
-     * @param {Boolean} enabled `true` to return only enabled fields.
-     * @param {Boolean} all `true` to return all fields even if they don't have a
+     * @param {Boolean} [enabled] `true` to return only enabled fields.
+     * @param {Boolean} [all] `true` to return all fields even if they don't have a
      * {@link Ext.field.Field#name name} configured.
      * @return {Object} Object mapping field name to its value.
      */
@@ -596,7 +624,7 @@ Ext.define('Ext.form.Panel', {
                 } else {
                     // Check if the value already exists
                     bucket = values[name];
-                    if (bucket) {
+                    if (!Ext.isEmpty(bucket)) {
                         // if it does and it isn't an array, we need to make it into an array
                         // so we can push more
                         if (!isArray(bucket)) {
@@ -808,7 +836,6 @@ Ext.define('Ext.form.Panel', {
     },
 
     /**
-     * @private
      * @return {Boolean/Ext.field.Field} The next field if one exists, or `false`.
      * @private
      */

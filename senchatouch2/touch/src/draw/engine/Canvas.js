@@ -211,15 +211,18 @@ Ext.define('Ext.draw.engine.Canvas', {
         var canvas = Ext.Element.create({
                 tag: 'canvas',
                 cls: 'x-surface'
-            }), name, overrides = Ext.draw.engine.Canvas.contextOverrides,
+            }),
+            overrides = Ext.draw.engine.Canvas.contextOverrides,
             ctx = canvas.dom.getContext('2d'),
             backingStoreRatio = ctx.webkitBackingStorePixelRatio ||
                 ctx.mozBackingStorePixelRatio ||
                 ctx.msBackingStorePixelRatio ||
                 ctx.oBackingStorePixelRatio ||
-                ctx.backingStorePixelRatio || 1;
+                ctx.backingStorePixelRatio || 1,
+            name;
 
-        this.devicePixelRatio /= backingStoreRatio;
+        // Windows Phone does not currently support backingStoreRatio
+        this.devicePixelRatio /= (Ext.os.is.WindowsPhone) ? window.innerWidth / window.screen.width : backingStoreRatio;
 
         if (ctx.ellipse) {
             delete overrides.ellipse;
@@ -399,7 +402,7 @@ Ext.define('Ext.draw.engine.Canvas', {
              * connected to the previous point by a straight line.  If two radii are provided, the
              * first controls the width of the arc's ellipse, and the second controls the height. If
              * only one is provided, or if they are the same, the arc is from a circle.
-             * 
+             *
              * In the case of an ellipse, the rotation argument controls the clockwise inclination
              * of the ellipse relative to the x-axis.
              * @ignore

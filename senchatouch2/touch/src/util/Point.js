@@ -111,7 +111,7 @@ Ext.define('Ext.util.Point', {
 
     /**
      * Compare this point and another point.
-     * @param {Ext.util.Point/Object} The point to compare with, either an instance
+     * @param {Ext.util.Point/Object} point The point to compare with, either an instance
      * of {@link Ext.util.Point} or an object with `x` and `y` properties.
      * @return {Boolean} Returns whether they are equivalent.
      */
@@ -121,7 +121,7 @@ Ext.define('Ext.util.Point', {
 
     /**
      * Whether the given point is not away from this point within the given threshold amount.
-     * @param {Ext.util.Point/Object} The point to check with, either an instance
+     * @param {Ext.util.Point/Object} point The point to check with, either an instance
      * of {@link Ext.util.Point} or an object with `x` and `y` properties.
      * @param {Object/Number} threshold Can be either an object with `x` and `y` properties or a number.
      * @return {Boolean}
@@ -171,11 +171,19 @@ Ext.define('Ext.util.Point', {
      * @return {Boolean}
      */
     roundedEquals: function(point) {
+        if (typeof point != 'object') {
+            point = { x: 0, y: 0};
+        }
+
         return (Math.round(this.x) === Math.round(point.x) &&
                 Math.round(this.y) === Math.round(point.y));
     },
 
     getDistanceTo: function(point) {
+        if (typeof point != 'object') {
+            point = { x: 0, y: 0};
+        }
+
         var deltaX = this.x - point.x,
             deltaY = this.y - point.y;
 
@@ -183,6 +191,10 @@ Ext.define('Ext.util.Point', {
     },
 
     getAngleTo: function(point) {
+        if (typeof point != 'object') {
+            point = { x: 0, y: 0};
+        }
+
         var deltaX = this.x - point.x,
             deltaY = this.y - point.y;
 

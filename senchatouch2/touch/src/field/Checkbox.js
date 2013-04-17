@@ -124,7 +124,17 @@ Ext.define('Ext.field.Checkbox', {
             useMask : true,
             cls     : Ext.baseCSSPrefix + 'input-checkbox'
         }
+
+        /**
+         * @cfg {Boolean} labelMaskTap
+         * @private
+         */
     },
+
+    platformConfig: [{
+        theme: ['Windows'],
+        labelAlign: 'left'
+    }],
 
     // @private
     initialize: function() {
@@ -136,6 +146,11 @@ Ext.define('Ext.field.Checkbox', {
             scope: me,
             order: 'before',
             masktap: 'onMaskTap'
+        });
+
+        me.label.on({
+            scope: me,
+            tap: 'onMaskTap'
         });
     },
 
@@ -187,7 +202,7 @@ Ext.define('Ext.field.Checkbox', {
      * @return {Boolean/String} value The value of {@link #value} or `true`, if {@link #checked}.
      */
     getSubmitValue: function() {
-        return (this.getChecked()) ? this._value || true : null;
+        return (this.getChecked()) ? Ext.isEmpty(this._value) ? true : this._value : null;
     },
 
     setChecked: function(newChecked) {
@@ -207,7 +222,7 @@ Ext.define('Ext.field.Checkbox', {
     // @private
     onMaskTap: function(component, e) {
         var me = this,
-            dom = component.input.dom;
+            dom = me.getComponent().input.dom;
 
         if (me.getDisabled()) {
             return false;

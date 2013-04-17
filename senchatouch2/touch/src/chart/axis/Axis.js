@@ -130,7 +130,10 @@ Ext.define('Ext.chart.axis.Axis', {
 
         /**
          * @cfg {Number} titleMargin
-         * The margin between axis title and axis.
+         * The margin around the axis title. Unlike CSS where the margin is added on all 4
+         * sides of an element, the `titleMargin` is the total space that is added horizontally
+         * for a vertical title and vertically for an horizontal title, with half the `titleMargin`
+         * being added on either side.
          */
         titleMargin: 4,
 
@@ -802,7 +805,7 @@ Ext.define('Ext.chart.axis.Axis', {
                 case 'bottom':
                     title.setAttributes({
                         x: anchor,
-                        y: thickness + titleMargin,
+                        y: thickness + titleMargin / 2,
                         textBaseline: 'top',
                         textAlign: 'center'
                     }, true, true);
@@ -824,11 +827,11 @@ Ext.define('Ext.chart.axis.Axis', {
                     break;
                 case 'right':
                     title.setAttributes({
-                        x: thickness - titleMargin / 2,
+                        x: thickness + titleMargin / 2,
                         y: anchor,
                         textBaseline: 'bottom',
                         textAlign: 'center',
-                        rotationCenterX: thickness,
+                        rotationCenterX: thickness + titleMargin / 2,
                         rotationCenterY: anchor,
                         rotationRads: Math.PI / 2
                     }, true, true);

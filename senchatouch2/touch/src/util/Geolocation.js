@@ -307,16 +307,18 @@ Ext.define('Ext.util.Geolocation', {
      *
      * Will be called on both success and failure.
      *
-     * The method will be passed one parameter, {@link Ext.util.Geolocation} (**this** reference),
-     * set to `null` on failure.
+     * The method will be passed one parameter, {@link Ext.util.Geolocation}
+     * (**this** reference), set to `null` on failure.
      *
      *     geo.updateLocation(function (geo) {
      *         alert('Latitude: ' + (geo !== null ? geo.latitude : 'failed'));
      *     });
      *
-     * @param {Object} scope (optional) The scope (**this** reference) in which the handler function is executed.
+     * @param {Object} [scope]
+     * The scope (**this** reference) in which the handler function is executed.
      *
      * **If omitted, defaults to the object which fired the event.**
+     *
      * <!--positonOptions undocumented param, see W3C spec-->
      */
     updateLocation: function(callback, scope, positionOptions) {

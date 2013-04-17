@@ -149,8 +149,8 @@ Ext.dom.Element.addMembers({
     /**
      * Removes the given CSS class(es) from this Element.
      * @param {String} names The CSS class(es) to remove from this element.
-     * @param {String} [prefix=''] (optional) Prefix to prepend to each class to be removed.
-     * @param {String} [suffix=''] (optional) Suffix to append to each class to be removed.
+     * @param {String} [prefix=''] Prefix to prepend to each class to be removed.
+     * @param {String} [suffix=''] Suffix to append to each class to be removed.
      */
     removeCls: function(names, prefix, suffix) {
         if (!names) {
@@ -193,18 +193,72 @@ Ext.dom.Element.addMembers({
     },
 
     /**
-     * Replaces a CSS class on the element with another.  If the old name does not exist, the new name will simply be added.
-     * @param {String} oldClassName The CSS class to replace.
-     * @param {String} newClassName The replacement CSS class.
+     * Replaces a CSS class on the element with another.
+     * If the old name does not exist, the new name will simply be added.
+     * @param {String} oldName The CSS class to replace.
+     * @param {String} newName The replacement CSS class.
+     * @param {String} [prefix=''] Prefix to prepend to each class to be replaced.
+     * @param {String} [suffix=''] Suffix to append to each class to be replaced.
      * @return {Ext.dom.Element} this
      */
     replaceCls: function(oldName, newName, prefix, suffix) {
-        return this.removeCls(oldName, prefix, suffix).addCls(newName, prefix, suffix);
+        if (!oldName && !newName) {
+            return this;
+        }
+
+        oldName = oldName || [];
+        newName = newName || [];
+
+        if (!this.isSynchronized) {
+            this.synchronize();
+        }
+
+        if (!suffix) {
+            suffix = '';
+        }
+
+        var dom = this.dom,
+            map = this.hasClassMap,
+            classList = this.classList,
+            SEPARATOR = this.SEPARATOR,
+            i, ln, name;
+
+        prefix = prefix ? prefix + SEPARATOR : '';
+        suffix = suffix ? SEPARATOR + suffix : '';
+
+        if (typeof oldName == 'string') {
+            oldName = oldName.split(this.spacesRe);
+        }
+        if (typeof newName == 'string') {
+            newName = newName.split(this.spacesRe);
+        }
+
+        for (i = 0, ln = oldName.length; i < ln; i++) {
+            name = prefix + oldName[i] + suffix;
+
+            if (map[name]) {
+                delete map[name];
+                Ext.Array.remove(classList, name);
+            }
+        }
+
+        for (i = 0, ln = newName.length; i < ln; i++) {
+            name = prefix + newName[i] + suffix;
+
+            if (!map[name]) {
+                map[name] = true;
+                classList.push(name);
+            }
+        }
+
+        dom.className = classList.join(' ');
+
+        return this;
     },
 
     /**
      * Checks if the specified CSS class exists on this element's DOM node.
-     * @param {String} className The CSS class to check for.
+     * @param {String} name The CSS class to check for.
      * @return {Boolean} `true` if the class exists, else `false`.
      */
     hasCls: function(name) {
@@ -213,6 +267,29 @@ Ext.dom.Element.addMembers({
         }
 
         return this.hasClassMap.hasOwnProperty(name);
+    },
+
+    /**
+     * Sets the specified CSS class on this element's DOM node.
+     * @param {String/Array} className The CSS class to set on this element.
+     */
+    setCls: function(className) {
+        var map = this.hasClassMap,
+            i, ln, name;
+
+        if (typeof className == 'string') {
+            className = className.split(this.spacesRe);
+        }
+
+        for (i = 0, ln = className.length; i < ln; i++) {
+            name = className[i];
+            if (!map[name]) {
+                map[name] = true;
+            }
+        }
+
+        this.classList = className.slice();
+        this.dom.className = className.join(' ');
     },
 
     /**
@@ -770,7 +847,15 @@ Ext.dom.Element.addMembers({
         } else {
             return me.addStyles.call(me, side, me.margins);
         }
-    }
+    },
+
+    translate: function() {
+        var transformStyleName = 'webkitTransform' in document.createElement('div').style ? 'webkitTransform' : 'transform';
+
+        return function(x, y, z) {
+            this.dom.style[transformStyleName] = 'translate3d(' + (x || 0) + 'px, ' + (y || 0) + 'px, ' + (z || 0) + 'px)';
+        }
+    }()
 });
 
 //<deprecated product=touch since=2.0>
@@ -790,11 +875,6 @@ Ext.dom.Element.addMembers({
      *         height: vpSize.height * 0.95
      *     });
      *     // To handle window resizing you would have to hook onto onWindowResize.
-     *
-     * `getViewSize` utilizes `clientHeight`/`clientWidth` which excludes sizing of scrollbars.
-     * To obtain the size including scrollbars, use {@link #getStyleSize}.
-     *
-     * Sizing of the document body is handled at the adapter level which handles special cases for IE and strict modes, etc.
      *
      * @deprecated 2.0.0
      * @return {Object} Object describing `width` and `height`:

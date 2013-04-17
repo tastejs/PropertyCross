@@ -100,7 +100,7 @@ Ext.define('Ext.fx.layout.card.Style', {
                 controller.resume();
             });
 
-            inElement.dom.style.setProperty('visibility', 'hidden', '!important');
+            inElement.dom.style.setProperty('visibility', 'hidden', 'important');
             newItem.show();
 
             Ext.Animator.run([outAnimation, inAnimation]);

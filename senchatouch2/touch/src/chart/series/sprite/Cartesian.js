@@ -137,9 +137,9 @@ Ext.define("Ext.chart.series.sprite.Cartesian", {
 
         /**
          * @private
-         * @cfg {Object} dataItems Store items that are passed to the renderer.
+         * @cfg {Object} store The store that is passed to the renderer.
          */
-        dataItems: null,
+        store: null,
 
         /**
          * @cfg {String} field The store field used by the series.

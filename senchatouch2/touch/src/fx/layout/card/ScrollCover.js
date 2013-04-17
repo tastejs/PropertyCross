@@ -23,14 +23,14 @@ Ext.define('Ext.fx.layout.card.ScrollCover', {
                 duration: this.getDuration()
             };
 
-            inItem.renderElement.dom.style.setProperty('visibility', 'hidden', '!important');
+            inItem.renderElement.dom.style.setProperty('visibility', 'hidden', 'important');
             inTranslate = inItem.setTranslatable(true).getTranslatable();
             outTranslate = outItem.setTranslatable(true).getTranslatable();
 
             outTranslate.translate({ x: 0, y: 0});
 //            outItem.setTranslate(null);
             inTranslate.translate({ x: xy.left, y: xy.top});
-            inTranslate.getWrapper().dom.style.setProperty('z-index', '100', '!important');
+            inTranslate.getWrapper().dom.style.setProperty('z-index', '100', 'important');
             inItem.show();
 
             inTranslate.on({

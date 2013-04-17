@@ -56,6 +56,28 @@ Ext.define('Ext.util.LineSegment', {
         return new Ext.util.Point(xi, yi);
     },
 
+    getLength: function() {
+        return Math.abs(this.point1.getDistanceTo(this.point2));
+    },
+
+    getAngleToX: function() {
+        var point1 = this.point1,
+            point2 = this.point2,
+            deltaY = point2.y - point1.y,
+            deltaX = point2.x - point1.x;
+
+        return Math.atan2(deltaY, deltaX);
+    },
+
+    getInBetweenPoint: function(distance) {
+        var point1 = this.point1,
+            angle = this.getAngleToX(),
+            x = point1.x + Math.cos(angle) * distance,
+            y = point1.y + Math.sin(angle) * distance;
+
+        return new Ext.util.Point(x, y);
+    },
+
     /**
      * Returns string representation of the line. Useful for debugging.
      * @return {String} For example `Point[12,8] Point[0,0]`

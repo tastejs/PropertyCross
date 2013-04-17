@@ -95,7 +95,7 @@ Ext.define('Ext.picker.Date', {
          * An array of strings that specifies the order of the slots.
          * @accessor
          */
-        slotOrder: ['month', 'day', 'year']
+        slotOrder: ['month', 'day', 'year'],
 
         /**
          * @cfg {Object/Date} value
@@ -114,7 +114,27 @@ Ext.define('Ext.picker.Date', {
          * @hide
          * @accessor
          */
+
+        /**
+         * @cfg {String/Mixed} doneButton
+         * Can be either:
+         *
+         * - A {String} text to be used on the Done button.
+         * - An {Object} as config for {@link Ext.Button}.
+         * - `false` or `null` to hide it.
+         * @accessor
+         */
+        doneButton: true
     },
+
+    platformConfig: [{
+        theme: ['Windows'],
+        doneButton: {
+            iconCls: 'check2',
+            ui: 'round',
+            text: ''
+        }
+    }],
 
     initialize: function() {
         this.callParent();
@@ -360,7 +380,7 @@ Ext.define('Ext.picker.Date', {
             return;
         }
 
-        this.callParent();
+        this.callParent(arguments);
 
         //get the new days of the month for this new date
         daysInMonth = this.getDaysInMonth(month + 1, year);
@@ -393,8 +413,7 @@ Ext.define('Ext.picker.Date', {
 
         slot.selectedIndex = index;
         slot.scrollToItem(item);
-
-//        slot._value = value;
+        slot.setValue(slot.getValue(true));
     },
 
     getDaySlot: function() {
@@ -445,5 +464,6 @@ Ext.define('Ext.picker.Date', {
         }
 
         this.hide();
+        this.inputBlocker.unblockInputs();
     }
 });

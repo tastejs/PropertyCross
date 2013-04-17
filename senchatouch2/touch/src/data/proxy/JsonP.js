@@ -246,7 +246,6 @@ Ext.define('Ext.data.proxy.JsonP', {
             url     = me.callParent(arguments),
             params  = Ext.apply({}, request.getParams()),
             filters = params.filters,
-            records,
             filter, i, value;
 
         delete params.filters;

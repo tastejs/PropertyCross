@@ -50,8 +50,7 @@ Ext.dom.Element.override({
 
     /**
      * Sets the X position of the element based on page coordinates.  Element must be part of the DOM tree to have page coordinates (`display:none` or elements not appended return `false`).
-     * @param {Number} The X position of the element
-     * @param {Boolean/Object} animate (optional) `true` for the default animation, or a standard Element animation config object.
+     * @param {Number} x The X position of the element
      * @return {Ext.dom.Element} this
      */
     setX: function(x) {
@@ -60,8 +59,7 @@ Ext.dom.Element.override({
 
     /**
      * Sets the Y position of the element based on page coordinates.  Element must be part of the DOM tree to have page coordinates (`display:none` or elements not appended return `false`).
-     * @param {Number} The Y position of the element.
-     * @param {Boolean/Object} animate (optional) `true` for the default animation, or a standard Element animation config object.
+     * @param {Number} y The Y position of the element.
      * @return {Ext.dom.Element} this
      */
     setY: function(y) {
@@ -71,8 +69,7 @@ Ext.dom.Element.override({
     /**
      * Sets the position of the element in page coordinates, regardless of how the element is positioned.
      * The element must be part of the DOM tree to have page coordinates (`display:none` or elements not appended return `false`).
-     * @param {Array} pos Contains X & Y [x, y] values for new position (coordinates are page-based).
-     * @param {Boolean/Object} animate (optional) `true` for the default animation, or a standard Element animation config object.
+     * @param {Number[]} pos Contains X & Y [x, y] values for new position (coordinates are page-based).
      * @return {Ext.dom.Element} this
      */
     setXY: function(pos) {

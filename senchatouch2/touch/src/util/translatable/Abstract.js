@@ -10,13 +10,13 @@ Ext.define('Ext.util.translatable.Abstract', {
     requires: ['Ext.fx.easing.Linear'],
 
     config: {
+        useWrapper: null,
+
         easing: null,
 
         easingX: null,
 
-        easingY: null,
-
-        fps: Ext.os.is.Android4 ? 50 : 60
+        easingY: null
     },
 
     /**
@@ -56,8 +56,6 @@ Ext.define('Ext.util.translatable.Abstract', {
     isTranslatable: true,
 
     constructor: function(config) {
-        this.doAnimationFrame = Ext.Function.bind(this.doAnimationFrame, this);
-
         this.initConfig(config);
     },
 
@@ -81,10 +79,6 @@ Ext.define('Ext.util.translatable.Abstract', {
 
     applyEasingY: function(easing) {
         return this.factoryEasing(easing);
-    },
-
-    updateFps: function(fps) {
-        this.animationInterval = 1000 / fps;
     },
 
     doTranslate: Ext.emptyFn,
@@ -129,7 +123,7 @@ Ext.define('Ext.util.translatable.Abstract', {
         this.lastX = null;
         this.lastY = null;
 
-        this.animationFrameId = requestAnimationFrame(this.doAnimationFrame);
+        Ext.AnimationQueue.start(this.doAnimationFrame, this);
 
         this.fireEvent('animationstart', this, this.x, this.y);
         return this;
@@ -181,8 +175,6 @@ Ext.define('Ext.util.translatable.Abstract', {
             now = Date.now(),
             x, y;
 
-        this.animationFrameId = requestAnimationFrame(this.doAnimationFrame);
-
         if (!me.isAnimating) {
             return;
         }
@@ -228,7 +220,6 @@ Ext.define('Ext.util.translatable.Abstract', {
         me.fireEvent('animationframe', me, x, y);
     },
 
-
     stopAnimation: function() {
         if (!this.isAnimating) {
             return;
@@ -239,7 +230,7 @@ Ext.define('Ext.util.translatable.Abstract', {
 
         this.isAnimating = false;
 
-        cancelAnimationFrame(this.animationFrameId);
+        Ext.AnimationQueue.stop(this.doAnimationFrame, this);
         this.fireEvent('animationend', this, this.x, this.y);
     },
 

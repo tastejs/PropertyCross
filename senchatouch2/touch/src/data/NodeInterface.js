@@ -536,8 +536,8 @@ Ext.define('Ext.data.NodeInterface', {
 
                 /**
                  * Creates a copy (clone) of this Node.
-                 * @param {String} id (optional) A new id, defaults to this Node's id.
-                 * @param {Boolean} deep (optional) If passed as `true`, all child Nodes are recursively copied into the new Node.
+                 * @param {String} [newId] A new id, defaults to this Node's id.
+                 * @param {Boolean} [deep] If passed as `true`, all child Nodes are recursively copied into the new Node.
                  * If omitted or `false`, the copy will have no child Nodes.
                  * @return {Ext.data.NodeInterface} A copy of this Node.
                  */
@@ -751,7 +751,7 @@ Ext.define('Ext.data.NodeInterface', {
 
                 /**
                  * Returns the index of a child node.
-                 * @param {Ext.data.NodeInterface} node
+                 * @param {Ext.data.NodeInterface} child
                  * @return {Number} The index of the node or -1 if it was not found.
                  */
                 indexOf : function(child) {

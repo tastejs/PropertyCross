@@ -180,7 +180,7 @@ Ext.define('Ext.fx.animation.Abstract', {
             }
         }
 
-        if (Ext.os.is.Android2) {
+        if (Ext.browser.is.AndroidStock2) {
             statesData['0.0001%'] = fromData;
         }
 

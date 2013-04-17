@@ -64,6 +64,10 @@ Ext.define('Ext.app.Action', {
         this.getUrl();
     },
 
+    applyBeforeFilters: function(filters) {
+        return filters || [];
+    },
+
     /**
      * Starts execution of this Action by calling each of the {@link #beforeFilters} in turn (if any are specified),
      * before calling the Controller {@link #action}. Same as calling {@link #resume}.

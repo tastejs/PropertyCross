@@ -77,6 +77,8 @@ Ext.define('Ext.dataview.component.DataItem', {
          */
         dataview: null,
 
+        width: '100%',
+
         items: [{
             xtype: 'component'
         }]

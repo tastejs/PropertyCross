@@ -572,6 +572,39 @@ var ExtObject = Ext.Object = {
         return objectClass;
     },
 
+    equals: function(origin, target) {
+        var originType = typeof origin,
+            targetType = typeof target,
+            key;
+
+        if (targetType === targetType) {
+            if (originType === 'object') {
+                for (key in origin) {
+                    if (!(key in target)) {
+                        return false;
+                    }
+
+                    if (!ExtObject.equals(origin[key], target[key])) {
+                        return false;
+                    }
+                }
+
+                for (key in target) {
+                    if (!(key in origin)) {
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+            else {
+                return origin === target;
+            }
+        }
+
+        return false;
+    },
+
     defineProperty: ('defineProperty' in Object) ? Object.defineProperty : function(object, name, descriptor) {
         if (descriptor.get) {
             object.__defineGetter__(name, descriptor.get);

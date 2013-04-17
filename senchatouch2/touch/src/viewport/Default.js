@@ -13,7 +13,8 @@ Ext.define('Ext.viewport.Default', {
 
     requires: [
         'Ext.LoadMask',
-        'Ext.layout.Card'
+        'Ext.layout.Card',
+        'Ext.util.InputBlocker'
     ],
 
     /**
@@ -162,10 +163,13 @@ Ext.define('Ext.viewport.Default', {
             this.stretchHeights = {};
         }
 
+        // set default devicePixelRatio if it is not explicitly defined
+        window.devicePixelRatio = window.devicePixelRatio || 1;
+
         this.callParent([config]);
 
         // Android is handled separately
-        if (!Ext.os.is.Android || Ext.browser.name == 'ChromeMobile') {
+        if (!Ext.os.is.Android || Ext.browser.is.ChromeMobile) {
             if (this.supportsOrientation()) {
                 this.addWindowListener('orientationchange', bind(this.onOrientationChange, this));
             }
@@ -234,6 +238,10 @@ Ext.define('Ext.viewport.Default', {
 
             if (osEnv.is.BlackBerry) {
                 classList.push(clsPrefix + 'bb');
+            }
+
+            if (Ext.browser.is.WebKit) {
+                classList.push(clsPrefix + 'webkit');
             }
 
             if (Ext.browser.is.Standalone) {
@@ -344,8 +352,8 @@ Ext.define('Ext.viewport.Default', {
     doBlurInput: function(e) {
         var target = e.target,
             focusedElement = this.focusedElement;
-
-        if (focusedElement && !this.isInputRegex.test(target.tagName)) {
+        //In IE9/10 browser window loses focus and becomes inactive if focused element is <body>. So we shouldn't call blur for <body>
+        if (focusedElement && focusedElement.nodeName.toUpperCase() != 'BODY' && !this.isInputRegex.test(target.tagName)) {
             delete this.focusedElement;
             focusedElement.blur();
         }
@@ -531,7 +539,7 @@ Ext.define('Ext.viewport.Default', {
         var portrait = this.PORTRAIT,
             landscape = this.LANDSCAPE;
 
-        if (this.supportsOrientation()) {
+        if (!Ext.os.is.Android && this.supportsOrientation()) {
             if (this.getWindowOrientation() % 180 === 0) {
                 return portrait;
             }

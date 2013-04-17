@@ -37,6 +37,7 @@ Ext.define('Ext.app.Router', {
     /**
      * Connects a url-based route to a controller/action pair plus additional params.
      * @param {String} url The url to recognize.
+     * @param {Object} [params] Additional parameters.
      */
     connect: function(url, params) {
         params = Ext.apply({url: url}, params || {}, this.getDefaults());

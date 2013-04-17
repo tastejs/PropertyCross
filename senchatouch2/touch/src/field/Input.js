@@ -132,7 +132,7 @@ Ext.define('Ext.field.Input', {
 
         /**
          * @cfg {Number} tabIndex The `tabIndex` for this field.
-         * 
+         *
          * __Note:__ This only applies to fields that are rendered, not those which are built via `applyTo`.
          * @accessor
          */
@@ -211,7 +211,7 @@ Ext.define('Ext.field.Input', {
          *     Ext.define('Ux.field.Pattern', {
          *         extend : 'Ext.field.Text',
          *         xtype  : 'patternfield',
-         *         
+         *
          *         config : {
          *             component : {
          *                 pattern : '[0-9]*'
@@ -241,7 +241,12 @@ Ext.define('Ext.field.Input', {
          * __This will be `undefined` until the Field has been visited.__ Compare {@link #originalValue}.
          * @accessor
          */
-        startValue: false
+        startValue: false,
+
+        /**
+         * True to hide sencha-styled clear button and set CSS native clear button (currently supports in IE10 only).
+         */
+        useNativeClearButton: false
     },
 
     /**
@@ -257,15 +262,14 @@ Ext.define('Ext.field.Input', {
                 tag: this.tag
             },
             {
+                reference: 'mask',
+                classList: [this.config.maskCls]
+            },
+            {
                 reference: 'clearIcon',
                 cls: 'x-clear-icon'
             }
         ];
-
-        items.push({
-            reference: 'mask',
-            classList: [this.config.maskCls]
-        });
 
         return items;
     },
@@ -292,11 +296,31 @@ Ext.define('Ext.field.Input', {
         });
 
         if (me.clearIcon) {
+            me.element.addCls((this.config.useNativeClearButton)?'native-clear-icon':'sencha-clear-icon');
             me.clearIcon.on({
                 tap: 'onClearIconTap',
+                touchstart: 'onClearIconPress',
+                touchend: 'onClearIconRelease',
                 scope: me
             });
         }
+
+        // Hack for IE10. Seems like keyup event is not fired for 'enter' keyboard button, so we use keypress event instead to handle enter.
+        if(Ext.browser.is.ie && Ext.browser.version.major >=10){
+            me.input.on({
+                scope: me,
+                keypress    : 'onKeyPress'
+            });
+        }
+    },
+
+    /**
+     * Manual Max Length processing is required for the stock "Browser" on Android
+     * @private
+     * @return {Boolean} 'true' if non-chrome browser is detected on Android
+     */
+    useManualMaxLength: function() {
+        return Boolean((Ext.os.is.Android && !Ext.browser.is.Chrome));
     },
 
     applyUseMask: function(useMask) {
@@ -441,7 +465,9 @@ Ext.define('Ext.field.Input', {
      * @private
      */
     updateMaxLength: function(newMaxLength) {
-        this.updateFieldAttribute('maxlength', newMaxLength);
+        if (!this.useManualMaxLength()) {
+            this.updateFieldAttribute('maxlength', newMaxLength);
+        }
     },
 
     /**
@@ -732,19 +758,36 @@ Ext.define('Ext.field.Input', {
         }
     },
 
+    onClearIconPress: function() {
+        this.clearIcon.addCls(Ext.baseCSSPrefix + 'pressing');
+    },
+
+    onClearIconRelease: function() {
+        this.clearIcon.removeCls(Ext.baseCSSPrefix + 'pressing');
+    },
+
     onClick: function(e) {
         this.fireEvent('click', e);
     },
 
     onChange: function(me, value, startValue) {
+        if (this.useManualMaxLength()) {
+            this.trimValueToMaxLength();
+        }
         this.fireEvent('change', me, value, startValue);
     },
 
     onPaste: function(e) {
+        if (this.useManualMaxLength()) {
+            this.trimValueToMaxLength();
+        }
         this.fireEvent('paste', e);
     },
 
     onKeyUp: function(e) {
+        if (this.useManualMaxLength()) {
+            this.trimValueToMaxLength();
+        }
         this.fireEvent('keyup', e);
     },
 
@@ -772,8 +815,24 @@ Ext.define('Ext.field.Input', {
             }
         }, 10);
     },
+    // Hack for IE10 mobile. Handle pressing 'enter' button and fire keyup event in this case.
+    onKeyPress: function(e) {
+        if(e.browserEvent.keyCode == 13){
+            this.fireEvent('keyup', e);
+        }
+    },
 
     onMouseDown: function(e) {
         this.fireEvent('mousedown', e);
+    },
+
+    trimValueToMaxLength: function() {
+        var maxLength = this.getMaxLength();
+        if (maxLength) {
+            var value = this.getValue();
+            if (value.length > this.getMaxLength()) {
+                this.setValue(value.slice(0, maxLength));
+            }
+        }
     }
 });

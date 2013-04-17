@@ -257,7 +257,7 @@ Ext.define("Ext.draw.sprite.AttributeDefinition", {
                     normalized[name] = [];
                     for (i = 0, ln = val.length; i < ln; i++) {
                         subVal = processors[name].call(this, val[i]);
-                        if (typeof val !== 'undefined') {
+                        if (typeof subVal !== 'undefined') {
                             normalized[name][i] = subVal;
                         }
                     }
@@ -284,7 +284,7 @@ Ext.define("Ext.draw.sprite.AttributeDefinition", {
     /**
      * Normalizes the changes given via their processors before they are applied as attributes.
      *
-     * @param changes The changes given.
+     * @param {Object} changes The changes given.
      * @return {Object} The normalized values.
      */
     normalize: function (changes, reserveUnrecognized) {

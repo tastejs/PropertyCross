@@ -1,5 +1,5 @@
 /*
-This file is part of Sencha Touch 2.1
+This file is part of Sencha Touch 2.2
 
 Copyright (c) 2011-2013 Sencha Inc
 
@@ -16,5 +16,5 @@ requirements will be met: http://www.gnu.org/copyleft/gpl.html.
 If you are unsure which license is appropriate for your use, please contact the sales department
 at http://www.sencha.com/contact.
 
-Build date: 2013-02-05 12:25:50 (3ba7c63bea96e5ea776e2bbd67cfb0aa01e43322)
+Build date: 2013-04-11 12:51:10 (c47a7edc5889a0e78d6c752ebc21d8c668e120ac)
 */

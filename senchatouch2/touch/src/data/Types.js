@@ -100,7 +100,8 @@ Ext.define('Ext.data.Types', {
         /**
          * @property {Object} INT
          * This data type means that the raw data is converted into an integer before it is placed into a Record.
-         * 
+         * A standard javascript parseInt(foo, 10) is enforced.
+         *
          * The synonym `INTEGER` is equivalent.
          */
         INT: {
@@ -119,7 +120,8 @@ Ext.define('Ext.data.Types', {
         /**
          * @property {Object} FLOAT
          * This data type means that the raw data is converted into a number before it is placed into a Record.
-         * 
+         * A standard javascript parseFloat(foo, 10) is enforced.
+         *
          * The synonym `NUMBER` is equivalent.
          */
         FLOAT: {

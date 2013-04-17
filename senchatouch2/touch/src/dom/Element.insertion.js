@@ -128,7 +128,7 @@ Ext.dom.Element.addMembers({
 
     /**
      * Replaces the passed element with this element.
-     * @param {String/HTMLElement/Ext.dom.Element} el The element to replace.
+     * @param {String/HTMLElement/Ext.dom.Element} element The element to replace.
      * The id of the node, a DOM Node or an existing Element.
      * @return {Ext.dom.Element} This element.
      */

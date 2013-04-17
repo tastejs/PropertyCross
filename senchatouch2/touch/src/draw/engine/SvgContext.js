@@ -333,6 +333,10 @@ Ext.define('Ext.draw.engine.SvgContext', {
             if (tspan.dom.firstChild) {
                 tspan.dom.removeChild(tspan.dom.firstChild);
             }
+            this.surface.setElementAttributes(tspan, {
+                "alignment-baseline": "middle",
+                "baseline-shift": "-50%"
+            });
             tspan.appendChild(document.createTextNode(Ext.String.htmlDecode(text)));
         }
     },

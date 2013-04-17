@@ -12,9 +12,9 @@
  *     @example preview
  *     var chart = new Ext.chart.CartesianChart({
  *         animate: true,
- *         innerPadding: { 
+ *         innerPadding: {
  *             left: 40,
- *             right: 40,
+ *             right: 40
  *         },
  *         store: {
  *             fields: ['name', 'data1', 'data2', 'data3', 'data4', 'data5'],
@@ -42,7 +42,7 @@
  *             },
  *             xField: 'name',
  *             yField: ['data1', 'data2', 'data3']
- *         
+ *
  *         }]
  *     });
  *     Ext.Viewport.setLayout('fit');

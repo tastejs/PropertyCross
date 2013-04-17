@@ -22,7 +22,6 @@
  *         },
  *         axes: [{
  *             type: 'numeric',
- *             grid: true,
  *             position: 'left',
  *             fields: ['data1', 'data2', 'data3', 'data4', 'data5'],
  *             title: 'Sample Values',
@@ -44,7 +43,7 @@
  *             },
  *             xField: 'name',
  *             yField: ['data1', 'data2', 'data3']
- *         
+ *
  *         }]
  *     });
  *     Ext.Viewport.setLayout('fit');

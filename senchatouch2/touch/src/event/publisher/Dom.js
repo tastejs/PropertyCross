@@ -14,7 +14,7 @@ Ext.define('Ext.event.publisher.Dom', {
 
     idOrClassSelectorRegex: /^([#|\.])([\w\-]+)$/,
 
-    handledEvents: ['click', 'focus', 'blur', 'paste', 'input',
+    handledEvents: ['click', 'focus', 'blur', 'paste', 'input', 'change',
                     'mousemove', 'mousedown', 'mouseup', 'mouseover', 'mouseout',
                     'keyup', 'keydown', 'keypress', 'submit',
                     'transitionend', 'animationstart', 'animationend'],
@@ -76,27 +76,73 @@ Ext.define('Ext.event.publisher.Dom', {
     },
 
     getVendorEventName: function(eventName) {
-        if (eventName === 'transitionend') {
-            eventName = Ext.browser.getVendorProperyName('transitionEnd');
-        }
-        else if (eventName === 'animationstart') {
-            eventName = Ext.browser.getVendorProperyName('animationStart');
-        }
-        else if (eventName === 'animationend') {
-            eventName = Ext.browser.getVendorProperyName('animationEnd');
+        if (Ext.browser.is.WebKit) {
+            if (eventName === 'transitionend') {
+                eventName = Ext.browser.getVendorProperyName('transitionEnd');
+            }
+            else if (eventName === 'animationstart') {
+                eventName = Ext.browser.getVendorProperyName('animationStart');
+            }
+            else if (eventName === 'animationend') {
+                eventName = Ext.browser.getVendorProperyName('animationEnd');
+            }
         }
 
         return eventName;
     },
 
-    attachListener: function(eventName) {
-        document.addEventListener(eventName, this.onEvent, !this.doesEventBubble(eventName));
+    bindListeners: function (doc, bind) {
+        var handlesEvents = this.getHandledEvents(),
+            handlesEventsLength = handlesEvents.length,
+            i;
 
+        for (i = 0; i < handlesEventsLength; i++) {
+            this.bindListener(doc, this.getVendorEventName(handlesEvents[i]), bind);
+        }
+    },
+
+    bindListener: function (doc, eventName, bind) {
+        if (bind) {
+            this.attachListener(eventName, doc);
+        } else {
+            this.removeListener(eventName, doc);
+        }
+        return this
+    },
+
+    attachListener: function(eventName, doc) {
+        if (!doc) {
+            doc = document;
+        }
+
+        var defaultView = doc.defaultView,
+            addEventListener;
+
+        if (defaultView && defaultView.addEventListener) {
+            addEventListener = defaultView.addEventListener;
+        }
+        else {
+            addEventListener = doc.addEventListener;
+        }
+        addEventListener(eventName, this.onEvent, !this.doesEventBubble(eventName));
         return this;
     },
 
-    removeListener: function(eventName) {
-        document.removeEventListener(eventName, this.onEvent, !this.doesEventBubble(eventName));
+    removeListener: function(eventName, doc) {
+        if (!doc) {
+            doc = document;
+        }
+
+        var defaultView = doc.defaultView,
+            removeEventListener;
+
+        if (defaultView && defaultView.removeEventListener) {
+            removeEventListener = defaultView.removeEventListener;
+        }
+        else {
+            removeEventListener = doc.addEventListener;
+        }
+        removeEventListener(eventName, this.onEvent, !this.doesEventBubble(eventName));
 
         return this;
     },
@@ -355,13 +401,22 @@ Ext.define('Ext.event.publisher.Dom', {
         return hasDispatched;
     },
 
-    matchesSelector: function(element, selector) {
-        if ('webkitMatchesSelector' in element) {
-            return element.webkitMatchesSelector(selector);
+    matchesSelector: function() {
+        var test = Element.prototype,
+            matchesSelector =
+                ('webkitMatchesSelector' in test) ? 'webkitMatchesSelector' :
+                (('msMatchesSelector' in test) ? 'msMatchesSelector' : ('mozMatchesSelector' in test ? 'mozMatchesSelector' : null));
+
+        if (matchesSelector) {
+            return function(element, selector) {
+                return element[matchesSelector](selector);
+            }
         }
 
-        return Ext.DomQuery.is(element, selector);
-    },
+        return function(element, selector) {
+            Ext.DomQuery.is(element, selector);
+        }
+    }(),
 
     onEvent: function(e) {
         var eventName = this.eventNameMap[e.type];

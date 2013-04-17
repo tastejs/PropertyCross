@@ -97,7 +97,7 @@
         this.hideButton(this.getListFavesButton());
 
         //push state so back button will work..
-        history.pushState();
+        history.pushState(null, "");
     },
 
     onMainPop: function(view, item) {

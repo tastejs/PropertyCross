@@ -28,7 +28,7 @@ Ext.define('Ext.MessageBox', {
          * @cfg
          * @inheritdoc
          */
-        ui: (Ext.os.is.BlackBerry && Ext.os.version.getMajor() === 10) ? 'plain' : 'dark',
+        ui: 'dark',
 
         /**
          * @cfg
@@ -134,6 +134,20 @@ Ext.define('Ext.MessageBox', {
         }
     },
 
+    platformConfig: [{
+        theme: ['Windows'],
+        ui: 'light',
+        showAnimation: {
+            type: 'fadeIn'
+        },
+        hideAnimation: {
+            type: 'fadeOut'
+        }
+    }, {
+        theme: ['Blackberry'],
+        ui: 'plain'
+    }],
+
     statics: {
         OK    : {text: 'OK',     itemId: 'ok',  ui: 'action'},
         YES   : {text: 'Yes',    itemId: 'yes', ui: 'action'},
@@ -196,6 +210,7 @@ Ext.define('Ext.MessageBox', {
         }
 
         this.callParent([config]);
+        this.inputBlocker = new Ext.util.InputBlocker();
     },
 
     /**
@@ -211,7 +226,8 @@ Ext.define('Ext.MessageBox', {
 
         Ext.applyIf(config, {
             docked: 'top',
-            minHeight: (Ext.os.is.BlackBerry && Ext.os.version.getMajor() === 10) ? '2.1em' : '1.3em',
+            minHeight: (Ext.filterPlatform('blackberry') || Ext.filterPlatform('ie10')) ? '2.6em' : '1.3em',
+            ui: Ext.filterPlatform('blackberry') ? 'light' : 'dark',
             cls   : this.getBaseCls() + '-title'
         });
 
@@ -483,6 +499,7 @@ Ext.define('Ext.MessageBox', {
      * @return {Ext.MessageBox} this
      */
     show: function(initialConfig) {
+        this.inputBlocker.blockInputs();
         //if it has not been added to a container, add it to the Viewport.
         if (!this.getParent() && Ext.Viewport) {
             Ext.Viewport.add(this);
@@ -548,11 +565,11 @@ Ext.define('Ext.MessageBox', {
      *
      * @param {String} title The title bar text.
      * @param {String} message The message box body text.
-     * @param {Function} fn A callback function which is called when the dialog is dismissed by clicking on the configured buttons.
+     * @param {Function} [fn] A callback function which is called when the dialog is dismissed by clicking on the configured buttons.
      * @param {String} fn.buttonId The `itemId` of the button pressed, one of: 'ok', 'yes', 'no', 'cancel'.
      * @param {String} fn.value Value of the input field if either `prompt` or `multiLine` option is `true`.
      * @param {Object} fn.opt The config object passed to show.
-     * @param {Object} scope The scope (`this` reference) in which the callback is executed.
+     * @param {Object} [scope] The scope (`this` reference) in which the callback is executed.
      * Defaults to: the browser window
      *
      * @return {Ext.MessageBox} this
@@ -677,7 +694,7 @@ Ext.define('Ext.MessageBox', {
         /**
          * Sets #icon.
          * @deprecated 2.0 Please use #setIconCls instead.
-         * @param {String} icon A CSS class name or empty string to clear the icon.
+         * @param {String} iconCls A CSS class name or empty string to clear the icon.
          * @return {Ext.MessageBox} this
          */
         setIcon: function(iconCls, doLayout){

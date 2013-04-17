@@ -31,7 +31,7 @@
  *         views: ['Main'],
  *
  *         isActive: function() {
- *             return Ext.os.is.Phone;
+ *             return Ext.os.is('Phone');
  *         }
  *     });
  *
@@ -52,7 +52,7 @@
  *         models: ['MyApp.model.Group'],
  *
  *         isActive: function() {
- *             return Ext.os.is.Phone;
+ *             return Ext.os.is('Phone');
  *         }
  *     });
  *
