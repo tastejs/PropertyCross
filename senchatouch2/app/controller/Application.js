@@ -130,44 +130,14 @@
         this.getMain().push(this.resultDetails);
     },
 
-    goToResultsList: function(values) {
-        var store =  Ext.getStore('results');
+    goToResultsList: function(store) {
         if (!this.resultList) {
             this.resultList = Ext.create('PropertyFinder.view.ResultList', {store: store});
         }
 
-        var extraParams = store.getProxy().getExtraParams();
-        store.currentPage = 1;
-        //Note: place_name takes precedence if defined and non-null..
-        extraParams.place_name = values.place_name;
-        extraParams.centre_point = values.centre_point && this.formatCoord(values.centre_point);
+        this.getMain().push(this.resultList);
 
-        this.prepareResultsList(this.resultList);
-    },
-
-    prepareResultsList: function(list) {
-        //add loading mask
-        Ext.Viewport.setMasked({
-           xtype: 'loadmask',
-           message: 'Loading...',
-           indicator: true
-        });
-
-        var store = list.getStore();
-        var that = this;
-
-        var onStoreLoad = function() {
-           Ext.Viewport.setMasked(false);
-           that.getMain().push(list);
-           store.removeListener('load', onStoreLoad);
-        };
-
-        //remove mask and push list onto main after store has finished loading
-        store.on('load', onStoreLoad);
-
-        store.load();
-
-        list.deselectAll();
+        this.resultList.deselectAll();
         this.resetHome();
     },
 
@@ -237,64 +207,76 @@
         this.getListTitleLabel().show(); //hidden if zero results - so need to show
     },
 
+    onFirstResult: function (result, values, store) {
+        var that = this,
+            response = result.response,
+            responseCode = response.application_response_code;
+
+        //one unambiguous location..
+        if(responseCode === "100" || /* one unambiguous location */
+                responseCode === "101" || /* best guess location */
+                responseCode === "110" /* large location, 1000 matches max */) {
+            //place_name is both display and search name for previous searches
+
+            if(response.listings.length === 0) {
+                that.getErrorMessage().setHtml("There were no properties found for the given location.");
+                that.getErrorMessage().show();
+            } else {
+                that.addToPreviousSearches(response.locations[0].place_name, values.centre_point, response.locations[0].long_title, response.total_results);
+                that.goToResultsList(store);
+            }
+        } else if(responseCode === "201" || /* unknown location */
+                 responseCode === "210" /* coordinate error */) {
+            that.getErrorMessage().setHtml("The location given was not recognised.");
+            that.getErrorMessage().show();
+        } else {
+            //have a go at displaying "did you mean" locations
+            if(response.locations) {
+                var didYouMeanList = that.getDidYouMean();
+                didYouMeanList.getStore().setData(response.locations);
+
+                that.getListTitleLabel().setHtml("Did you mean?");
+                that.getListTitleLabel().show();
+
+                that.getPreviousSearches().hide();
+                didYouMeanList.show();
+            } else {
+                that.getErrorMessage().setHtml("The location given was not recognised.");
+                that.getErrorMessage().show();
+            }
+        }
+    },
+
     makeRequest: function(values) {
         var that = this;
 
-        //need to make initial request to see if it's valid..
-        //TODO: figure out a better way of doing this so that we only need to make a single request!
-        Ext.data.JsonP.request({
-            url: 'http://api.nestoria.co.uk/api',
-            callbackKey: 'callback',
-            params: {
-                pretty : '1',
-                action : 'search_listings',
-                encoding : 'json',
-                listing_type : 'buy',
-                number_of_results: 1, //the minimum..
-                place_name: values.place_name,
-                centre_point: values.centre_point && this.formatCoord(values.centre_point)
-            },
-            success: function(result, request) {
-                var response = result.response;
-                var responseCode = response.application_response_code;
+        var store = Ext.getStore('results');
 
-                //one unambiguous location..
-                if(responseCode === "100" || /* one unambiguous location */
-                        responseCode === "101" || /* best guess location */
-                        responseCode === "110" /* large location, 1000 matches max */) {
-                    //place_name is both display and search name for previous searches
+        var proxy = store.getProxy();
+        var extraParams = proxy.getExtraParams();
+        store.currentPage = 1;
+        //Note: place_name takes precedence if defined and non-null..
+        extraParams.place_name = values.place_name;
+        extraParams.centre_point = values.centre_point && this.formatCoord(values.centre_point);
 
-                    if(response.listings.length === 0) {
-                        that.getErrorMessage().setHtml("There were no properties found for the given location.");
-                        that.getErrorMessage().show();
-                    } else {
-                        that.addToPreviousSearches(response.locations[0].place_name, values.centre_point, response.locations[0].long_title, response.total_results);
-                        that.goToResultsList(values);
-                    }
-                } else  if(responseCode === "201" || /* unknown location */
-                        responseCode === "210" /* coordinate error */) {
-                    that.getErrorMessage().setHtml("The location given was not recognised.");
-                    that.getErrorMessage().show();
-                } else {
-                    //have a go at displaying "did you mean" locations
-                    if(response.locations) {
-                        var didYouMeanList = that.getDidYouMean();
-                        didYouMeanList.getStore().setData(response.locations);
+        Ext.Viewport.setMasked({
+           xtype: 'loadmask',
+           message: 'Loading...',
+           indicator: true
+        });
 
-                        that.getListTitleLabel().setHtml("Did you mean?");
-                        that.getListTitleLabel().show();
-
-                        that.getPreviousSearches().hide();
-                        didYouMeanList.show();
-                    } else {
-                        that.getErrorMessage().setHtml("The location given was not recognised.");
-                        that.getErrorMessage().show();
-                    }
+        // need to handle initial request to see if it's valid, either show error or go to results view
+        store.load({
+            callback: function (records, operation, success) {
+                Ext.Viewport.setMasked(false);
+                if (success) {
+                    that.onFirstResult(operation.getResponse(), values, store);
                 }
-            },
-            failure: function() {
-                that.getErrorMessage().setHtml("An error occurred while searching. Please check your network connection and try again.");
-                that.getErrorMessage().show();
+                else
+                {
+                    that.getErrorMessage().setHtml("An error occurred while searching. Please check your network connection and try again.");
+                    that.getErrorMessage().show();
+                }
             }
         });
     },
