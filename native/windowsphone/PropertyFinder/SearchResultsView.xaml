@@ -66,7 +66,7 @@
             </ItemsControl.ItemTemplate>
           </ItemsControl>
 
-          <Button Visibility="{Binding LoadMoreVisible}"
+          <Button Visibility="{Binding LoadMoreVisible, Converter={StaticResource BoolToVisibilityConverter}}"
                   Grid.Row="2"
                   IsEnabled="{Binding IsLoading, Converter={StaticResource BooleanNotConverter}}"
                   Template="{StaticResource PropertyButtonTemplate}"
@@ -91,7 +91,7 @@
                 <Run Foreground="#AAA">, showing</Run>
                 <Run Text="{Binding Properties.Count}"></Run>
                 <Run Foreground="#AAA" > of </Run>
-                <Run Text="{Binding TotalPages}"></Run>
+                <Run Text="{Binding TotalResults}"></Run>
                 <Run Foreground="#AAA" > properties </Run>
                 </TextBlock>
               </StackPanel>
