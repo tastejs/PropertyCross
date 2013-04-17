@@ -25,11 +25,13 @@
     entity.longitude = [NSNumber numberWithDouble:self.longitude];
     entity.displayString = self.displayText;
     entity.isLocationSearch = [NSNumber numberWithBool:YES];
+    entity.matches = self.matches;
 }
 
 - (void)findPropertiesWithDataSource:(PropertyDataSource *)propertyDataSource
                           pageNumber:(NSNumber *)page
                               result:(PropertyDataSourceResultSuccess)successResult
+                               error:(PropertyDataSourceResultError)errorResult
 {
     PropertyDataSourceResultSuccess successBlock = ^(PropertyDataSourceResult *result){
         successResult(result);
@@ -37,7 +39,8 @@
     [propertyDataSource findPropertiesForLatitude:self.latitude
                                         longitude:self.longitude
                                        pageNumber:page
-                                          success:successBlock];
+                                          success:successBlock
+                                            error:errorResult];
 }
 
 @end

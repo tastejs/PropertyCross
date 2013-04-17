@@ -14,6 +14,7 @@
         store: 'Results',
 		defaultType: 'resultlistitem',
 		useComponents: true,
+<<<<<<< HEAD
         items: [
             {
                 docked: 'top',
@@ -24,21 +25,22 @@
             }
         ],
         itemHeight: '70px',
+=======
+>>>>>>> e2922fda6482404af820814fc6d61da70c04e60b
  
         listeners: {
             //Note: using the refresh event is not ideal as it can be cancelled by other listeners..
             refresh: {
                 fn: function(){
                     var store = this.getStore();
-                    var showingResultsTitle = this.down('.titlebar');
                     var totalCount = store.getTotalCount();
                     var data = store.getData();
                     if(totalCount && data) {
                         var fmt = PropertyFinder.util.Format.number;
-                        showingResultsTitle.setTitle("Showing " + fmt(data.length) + " of " + fmt(totalCount) + " matches");
-                        showingResultsTitle.show();
-                    } else {
-                        showingResultsTitle.hide();
+                        var xOfY = fmt(data.length) + " of " + fmt(totalCount);
+                        // Title is not read after first set, but parent doesn't exist initially.
+                        var titleLocation = this.parent ? this.parent.getNavigationBar() : this;
+                        titleLocation.setTitle(xOfY + " matches");
                     }
                 }
             }

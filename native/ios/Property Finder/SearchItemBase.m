@@ -15,6 +15,7 @@
 - (void) findPropertiesWithDataSource:(PropertyDataSource *)propertyDataSource
                            pageNumber:(NSNumber*)page
                                result:(PropertyDataSourceResultSuccess)successResult
+                                error:(PropertyDataSourceResultError)errorResult
 {
     // abstract method!
     @throw [NSException exceptionWithName:NSInternalInconsistencyException
@@ -38,6 +39,7 @@
         item.latitude = [entity.latitude doubleValue];
         item.longitude = [entity.longitude doubleValue];
         item.displayText = entity.displayString;
+        item.matches = entity.matches;
         return item;
     }
     else
@@ -45,6 +47,7 @@
         PlainTextSearchItem* item = [[PlainTextSearchItem alloc] init];
         item.displayText = entity.displayString;
         item.searchText = entity.searchString;
+        item.matches = entity.matches;
         return item;
     }
 }

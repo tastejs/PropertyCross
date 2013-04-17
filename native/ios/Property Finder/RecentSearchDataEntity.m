@@ -2,8 +2,8 @@
 //  RecentSearchDataEntity.m
 //  Property Finder
 //
-//  Created by Colin Eberhardt on 24/10/2012.
-//  Copyright (c) 2012 Colin Eberhardt. All rights reserved.
+//  Created by Colin Eberhardt on 12/04/2013.
+//  Copyright (c) 2013 Colin Eberhardt. All rights reserved.
 //
 
 #import "RecentSearchDataEntity.h"
@@ -11,11 +11,12 @@
 
 @implementation RecentSearchDataEntity
 
-@dynamic searchString;
-@dynamic timestamp;
 @dynamic displayString;
+@dynamic isLocationSearch;
 @dynamic latitude;
 @dynamic longitude;
-@dynamic isLocationSearch;
+@dynamic searchString;
+@dynamic timestamp;
+@dynamic matches;
 
 @end

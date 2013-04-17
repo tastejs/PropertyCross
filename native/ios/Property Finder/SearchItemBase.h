@@ -16,10 +16,14 @@
 // the human-readble description of this search.
 @property NSString* displayText;
 
+// teh number of matching properties
+@property NSNumber* matches;
+
 // executes the search that this item represents
 -(void) findPropertiesWithDataSource:(PropertyDataSource*) propertyDataSource
                           pageNumber:(NSNumber *)page
-                              result:(PropertyDataSourceResultSuccess) successResult;
+                              result:(PropertyDataSourceResultSuccess) successResult
+                               error:(PropertyDataSourceResultError)errorResult;
 
 // copies the state of this search to the given entity
 -(void) toRecentSearchDataEntity: (RecentSearchDataEntity*) entity;

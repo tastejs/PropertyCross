@@ -12,14 +12,17 @@
 {
     NSMutableData* _responseData;
     JSONDataSourceSuccess _successBlock;
+    JSONDataSourceError _errorBlock;
 }
 
 - (void)findPropertiesForLatitude:(double)latitude
                         longitude:(double)longitude
                        pageNumber:(NSNumber *)page
                           success:(JSONDataSourceSuccess)successResult
+                            error:(JSONDataSourceError) errorResult
 {
     _successBlock = successResult;
+    _errorBlock = errorResult;
     
     NSString* baseUrl = @"http://api.nestoria.co.uk/api?country=uk&pretty=1&action=search_listings&encoding=json&listing_type=buy&centre_point=";
     NSString* url = [NSString stringWithFormat:@"%@/%f,%f&page=%d", baseUrl, latitude, longitude, [page integerValue]];
@@ -31,8 +34,10 @@
 - (void)findPropertiesForSearchString:(NSString *)searchString
                            pageNumber:(NSNumber *)page
                               success:(JSONDataSourceSuccess)successResult
+                                error:(JSONDataSourceError) errorResult        
 {
     _successBlock = successResult;
+    _errorBlock = errorResult;    
     
     NSString* baseUrl = @"http://api.nestoria.co.uk/api?country=uk&pretty=1&action=search_listings&encoding=json&listing_type=buy&place_name=";
     NSString* url = [NSString stringWithFormat:@"%@/%@&page=%d", baseUrl, searchString, [page integerValue]];
@@ -54,7 +59,7 @@
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
-    
+    _errorBlock(@"An error occurred while searching. Please check your network connection and try again.");
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection

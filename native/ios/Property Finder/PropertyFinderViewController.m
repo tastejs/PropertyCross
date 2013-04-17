@@ -92,9 +92,17 @@
     [self.searchText addTarget:self
                         action:@selector(searchTextDidChange:)
               forControlEvents:UIControlEventEditingChanged];
+    
+    self.searchText.delegate = self;
 }
 
 #pragma mark - user interaction handlers
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [self.searchText resignFirstResponder];
+    [self executeSearch];
+    return YES;
+}
 
 - (void) searchTextDidChange: (id)sender
 {
@@ -173,6 +181,14 @@
 {
     self.userMessageLabel.text = nil;
     
+    PropertyDataSourceResultError error = ^(NSString* errorMessage) {
+        self.userMessageLabel.text = errorMessage;
+        
+        // hide the locations / recent searches table
+        self.tableView.dataSource = nil;
+        [self.tableView reloadData];
+    };
+    
     PropertyDataSourceResultSuccess success = ^(PropertyDataSourceResult *result){
         
         // stop the loading indicator
@@ -182,6 +198,8 @@
         // determine the type of returned result
         if ([result isKindOfClass:[PropertyListingResult class]])
         {
+            PropertyListingResult* propertyListingsResult = (PropertyListingResult*)result;
+            
             // if properties were returned navigate to the results view controller
             SearchResultsViewController* controller = [[SearchResultsViewController alloc] initWithResults:(PropertyListingResult*)result
                                                                                                 datasource:_dataSource
@@ -189,6 +207,7 @@
             [self.navigationController pushViewController:controller
                                                  animated:YES];
             
+            _searchItem.matches = propertyListingsResult.totalResults;
             [_dataStore addToRecentSearches:_searchItem];
             [self showRecentSearches];
             
@@ -215,7 +234,8 @@
     
     [_searchItem findPropertiesWithDataSource:_dataSource
                                    pageNumber:@1
-                                       result:success];
+                                       result:success
+                                        error:error];
 }
 
 

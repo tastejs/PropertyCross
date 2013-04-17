@@ -239,6 +239,19 @@ namespace PropertyFinder
       {
         cell.TextLabel.Text = string.Format ("{0:s}", recentSearch.Search.DisplayText);
         cell.Accessory = UITableViewCellAccessory.DisclosureIndicator;
+
+        UILabel leftHandLabel = (UILabel)cell.ViewWithTag (10);
+        if (leftHandLabel == null)
+        {
+          leftHandLabel = new UILabel();
+          leftHandLabel.Font = UIFont.SystemFontOfSize(12.0f);
+          leftHandLabel.Tag = 10;
+          leftHandLabel.Frame = new RectangleF(cell.Frame.Size.Width - 100, 0, 60, 30);
+          leftHandLabel.BackgroundColor = UIColor.Clear;
+          leftHandLabel.TextAlignment = UITextAlignment.Right;
+          cell.AddSubview(leftHandLabel);
+        }
+        leftHandLabel.Text = recentSearch.ResultsCount.ToString();
       }
     }
   }

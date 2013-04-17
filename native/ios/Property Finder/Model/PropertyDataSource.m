@@ -31,24 +31,32 @@
                         longitude:(double)longitude
                        pageNumber:(NSNumber *)page
                           success:(PropertyDataSourceResultSuccess)successResult
+                            error:(PropertyDataSourceResultError)errorResult
 {
     [_dataSource findPropertiesForLatitude:latitude
                                  longitude:longitude
                                 pageNumber:page
                                    success:^(NSString *result) {
-        [self handleResult:result success:successResult];
-    }];
+                                       [self handleResult:result success:successResult];
+                                   }
+                                     error:^(NSString *errorMessage) {
+                                       errorResult(errorMessage);
+                                   }];
 }
 
 - (void)findPropertiesForSearchString:(NSString *)searchString
                            pageNumber:(NSNumber *)page
                               success:(PropertyDataSourceResultSuccess)successResult
+                                error:(PropertyDataSourceResultError)errorResult
 {
     [_dataSource findPropertiesForSearchString:searchString
                                     pageNumber:page
                                        success:^(NSString *result) {
-        [self handleResult:result success:successResult];
-    }];
+                                           [self handleResult:result success:successResult];
+                                       }
+                                         error:^(NSString *errorMessage) {
+                                           errorResult(errorMessage);
+                                       }];
 }
 
 // handles the JSON string response, converting it into teh resuired Obj-C classes.
