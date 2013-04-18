@@ -58,11 +58,11 @@ enyo.kind({
 	},
 
 	processResponse: function(json) {
-		this.$.resultsHeader.setContent("Results " + (json.request.offset + 1) + " to " + (json.request.offset + json.response.listings.length) + " of " + json.response.total_results + " matches");
-
 		this.listings = this.listings.concat(json.response.listings);
 		this.$.resultsList.setCount(this.listings.length);
 		this.$.resultsList.refresh();
+
+		this.$.resultsHeader.setContent(this.listings.length + " of " + json.response.total_results + " matches");
 
 		this.$.moreDrawer.setOpen(json.request.page < json.response.total_pages);
 	},

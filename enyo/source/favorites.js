@@ -56,6 +56,7 @@ enyo.kind({
 
 	processFavorites: function() {
 		this.$.favoritesList.setCount(this.favorites.length);
+		this.$.favoritesList.refresh();
 
 		try {
 			Storage.set("favorites", this.favorites);
