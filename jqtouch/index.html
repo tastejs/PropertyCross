@@ -101,11 +101,11 @@
                     <li class="loadMore" data-bind="visible: listings().length < totalResults()">
                         <img class="loading" style="display: none;" data-bind="visible: searchInProgress()"
                             src="style/img/ajax-loader.gif" />
-                        <a href="#" data-bind="click: loadMore, visible: !searchInProgress()">Load More
+                        <a href="#" data-bind="click: loadMore, visible: !searchInProgress()">Load more ...
                             <span class="numResults">
-                                Results for <span data-bind="text: searchedLocation()"></span>,
-                                    showing <span data-bind="number: listings().length"></span> of
-                                        <span data-bind="number: totalResults"></span> properties
+                                Results for <b><span data-bind="text: searchedLocation()"></span></b>,
+                                    showing <b><span data-bind="number: listings().length"></span></b> of
+                                        <b><span data-bind="number: totalResults"></span></b> properties
                             </span>
                         </a>
                         <a href="#" data-bind="visible: searchInProgress()">Loading...</a>
