@@ -2,6 +2,10 @@
 	Contains workarounds for various shortcomings of sencha touch
 */
 
+#ext-titlebar-2 {
+	display:none;
+}
+
 /* Star icon is yellow for favourite properties */
 #faveButton.faveProperty .x-button-icon {
     background: yellow;

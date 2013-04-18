@@ -8,7 +8,7 @@
 			autoPaging: false,
 			loadMoreText: 'Load more results',
 			noMoreRecordsText: 'No more results',
-			loadTpl: '<div class="list-loading-text">Loading...</div>'
+			loadTpl: '<div class="list-loading-text">Loading ...</div>'
                     +'<div class="{cssPrefix}list-paging-msg">{message}</div>'
 		}],
 		
@@ -42,8 +42,9 @@
                         titleLocation.setTitle(xOfY + " matches");
                         var params = store.getProxy().getExtraParams();
                         var searchTerm = params.place_name || "current location";
-                        pagingPlugin.setLoadMoreText("<span id='listpaging-loadmore'>Load more...</span><br>" 
-                            + "<span id='listpaging-results'>Results for " + searchTerm + ", showing " + xOfY + " properties</span>");
+                        pagingPlugin.setLoadMoreText("<span id='listpaging-loadmore'>Load more ...</span><br>" 
+                            + "<span id='listpaging-results'>Results for <b>" + searchTerm + "</b>, showing <b>"
+			    + fmt(data.length) + "</b> of <b>" + fmt(totalCount) + "</b> properties</span>");
                     }
                 }
             }
