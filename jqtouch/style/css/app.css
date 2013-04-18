@@ -22,12 +22,9 @@
   font-size: 12px; }
 #jqt ul.listings .loadMore {
   text-align: center; }
-#jqt ul.listings .numResults {
-  text-align: center;
+#jqt ul.listings .loadMore .numResults {
   font-size: 12px;
-  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#eeeeee), to(#9c9ea0));
-  text-shadow: white 0 1px 0;
-  color: black; }
+  display: block;}
 #jqt ul.listings .detail {
   -webkit-box-flex: 1;
   white-space: normal; }

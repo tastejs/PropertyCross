@@ -33,7 +33,7 @@
                     Use the form below to search for houses to buy. You can search by place-name,
                     postcode, or click 'My location', to search in your current location!
                 </div>
-                <form>
+                <form data-bind="submit: stringSearch">
                     <ul class="rounded">
                         <li>
                             <img class="loading" style="display: none;" data-bind="visible: searchInProgress()"
@@ -52,7 +52,7 @@
                 </ul>
 
                 <div class="info" style="display:none" data-bind="visible: errorState().length > 0, text: errorState"></div>
-                
+
                 <h2 style="display:none" data-bind="visible: recentSearches().length > 0
                         && possibleLocations().length === 0">Recent searches</h2>
                 <ul style="display:none" class="rounded" data-bind="foreach: recentSearches,
@@ -64,7 +64,7 @@
                         </a>
                     </li>
                 </ul>
-                
+
                 <h2 style="display:none" data-bind="visible: possibleLocations().length > 0">Did you mean?</h2>
                 <ul style="display:none" class="rounded"
                         data-bind="foreach: possibleLocations, visible: possibleLocations().length > 0">
@@ -91,20 +91,24 @@
 
             <div id="listings">
                 <div class="toolbar">
-                    <h1>Results</h1>
+                    <h1><span data-bind="number: listings().length"></span> of
+                            <span data-bind="number: totalResults"></span> matches</h1>
                     <a class="back" href="#">Back</a>
                 </div>
                 <ul class="edgetoedge listings scroll">
-                    <li class="numResults">
-                        Showing <span data-bind="number: listings().length"></span> of 
-                            <span data-bind="number: totalResults"></span> matches
-                    </li>
                     <!-- ko template: { name: 'resultItemTemplate', foreach: listings } -->
                     <!-- /ko -->
                     <li class="loadMore" data-bind="visible: listings().length < totalResults()">
                         <img class="loading" style="display: none;" data-bind="visible: searchInProgress()"
                             src="style/img/ajax-loader.gif" />
-                        <a href="#" data-bind="click: loadMore">Load More</a>
+                        <a href="#" data-bind="click: loadMore, visible: !searchInProgress()">Load More
+                            <span class="numResults">
+                                Results for <span data-bind="text: searchedLocation()"></span>,
+                                    showing <span data-bind="number: listings().length"></span> of
+                                        <span data-bind="number: totalResults"></span> properties
+                            </span>
+                        </a>
+                        <a href="#" data-bind="visible: searchInProgress()">Loading...</a>
                     </li>
                 </ul>
             </div>
