@@ -38,7 +38,7 @@ enyo.kind({
 	showListing: function(inSender, inEvent) {
 		this.setIndex(this.LISTING_PAGE);
 		this.$.listing.initialize(inEvent.data);
-		this.$.listing.setFavorite(this.$.Favorites.isFavorite(inEvent.data.guid));
+		this.$.listing.setFavorite(this.$.favorites.isFavorite(inEvent.data.guid));
 	},
 
 	changeFav: function(inSender, inEvent) {
@@ -46,7 +46,7 @@ enyo.kind({
 	},
 
 	showFaves: function(inSender, inEvent) {
-		this.setIndex(this.FAVOITES_PAGE);
+		this.setIndex(this.FAVORITES_PAGE);
 		this.$.favorites.initialize();
 	},
 
