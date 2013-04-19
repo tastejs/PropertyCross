@@ -16,15 +16,6 @@
         store: 'Results',
 		defaultType: 'resultlistitem',
 		useComponents: true,
-        items: [
-            {
-                docked: 'top',
-                title: '',
-                ui: 'neutral',
-                xtype: 'titlebar',
-                style: "font-size: 10px"
-            }
-        ],
         itemHeight: '70px',
         listeners: {
             //Note: using the refresh event is not ideal as it can be cancelled by other listeners..

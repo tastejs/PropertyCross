@@ -67,6 +67,7 @@
         window.onpopstate = function() {
             that.getMain().pop();
         };
+        this.backStackDepth = 0;
     },
 
     resetHome: function() {
@@ -98,6 +99,7 @@
 
         //push state so back button will work..
         history.pushState(null, "");
+        this.updateBackStackDepth(+1);
     },
 
     onMainPop: function(view, item) {
@@ -105,6 +107,16 @@
         if (item.xtype === 'resultlist') {
             this.showButton(this.getListFavesButton());
         }
+        this.updateBackStackDepth(-1);
+    },
+    
+    updateBackStackDepth: function(increment) {
+        this.backStackDepth += increment;
+        document.removeEventListener("backbutton", this.onBack, false);
+        if (this.backStackDepth > 0) {
+          document.addEventListener("backbutton", this.onBack, false)
+        }
+        this.fireEvent('backStackDepth', this.backStackDepth);
     },
 
     onResultSelect: function(list, index, node, record) {
