@@ -160,9 +160,9 @@
       <Link>www\resources\loading\Default.png</Link>
     </Content>
     <Content Include="ApplicationIcon.png" />
-    <Resource Include="..\..\build\package\resources\loading\spinner.gif">
+    <Content Include="..\..\build\package\resources\loading\spinner.gif">
       <Link>www\resources\loading\spinner.gif</Link>
-    </Resource>
+    </Content>
     <Content Include="config.xml" />
     <Content Include="CordovaLib\WPCordovaClassLib.dll" />
     <Content Include="Images\appbar.back.rest.png" />
@@ -172,7 +172,7 @@
     <Content Include="Images\appbar.save.rest.png" />
     <Content Include="Images\appbar.stop.rest.png" />
     <Content Include="SplashScreenImage.jpg" />
-    <Content Include="www\cordova-2.6.0.js" />
+    <Content Include="www\cordova.js" />
     <Content Include="..\..\build\package\app.json">
       <Link>www\app.json</Link>
     </Content>
