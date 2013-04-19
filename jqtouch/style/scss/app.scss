@@ -1,5 +1,8 @@
 /* Custom App Styling */
 
+/* NOTE: This CSS file is generated via Sass, please edit the scss file and not the css file directly!
+    You can compile the style online using http://sass-lang.com/try.html */
+
 #jqt {
     #home {
         .intro {
@@ -30,15 +33,9 @@
         .title {
             font-size: 12px; 
         }
-        .loadMore {
-            text-align: center;
-        }
         .numResults {
-            text-align: center;
-            font-size: 12px;
-            background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#EEE), to(#9C9EA0));
-            text-shadow: white 0 1px 0;
-            color: black;
+            display: block;
+            font-size: 12px;            
         }
         .detail {
             -webkit-box-flex: 1;

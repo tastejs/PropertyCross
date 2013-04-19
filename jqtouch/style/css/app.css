@@ -1,4 +1,6 @@
 /* Custom App Styling */
+/* NOTE: This CSS file is generated via Sass, please edit the scss file and not the css file directly!
+    You can compile the style online using http://sass-lang.com/try.html */
 #jqt #home {
   /* make space for large title */ }
   #jqt #home .intro {
@@ -20,11 +22,9 @@
   margin-right: 10px; }
 #jqt ul.listings .title {
   font-size: 12px; }
-#jqt ul.listings .loadMore {
-  text-align: center; }
-#jqt ul.listings .loadMore .numResults {
-  font-size: 12px;
-  display: block;}
+#jqt ul.listings .numResults {
+  display: block;
+  font-size: 12px; }
 #jqt ul.listings .detail {
   -webkit-box-flex: 1;
   white-space: normal; }
