@@ -23,7 +23,7 @@ public class SearchResultsListItemCell implements Cell<ListItem>{
   
   private static final LoadMoreItemTemplate LOAD_MORE_ITEM_TEMPLATE = GWT.create(LoadMoreItemTemplate.class);
   public interface LoadMoreItemTemplate extends SafeHtmlTemplates {
-      @SafeHtmlTemplates.Template("<div class='propertyListItem'><h3>Load More ...</h3>" +
+      @SafeHtmlTemplates.Template("<div class='propertyListItem'><h3>Load more ...</h3>" +
   "<p>Results for <b>{0}</b>, showing <b>{1}</b> of <b>{2}</b> properties</div>"
       )
       SafeHtml content(String location, int displayedProperties, int totalProperties);

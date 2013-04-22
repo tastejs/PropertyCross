@@ -5,6 +5,7 @@ import java.util.List;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.Style.Display;
+import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
@@ -104,6 +105,10 @@ public class PropertyCrossView extends ViewBase implements PropertyCrossActivity
 		searchTextField.addKeyUpHandler(new KeyUpHandler() {
 			@Override
 			public void onKeyUp(KeyUpEvent event) {
+				int keyCode = event.getNativeKeyCode();
+				if (keyCode == KeyCodes.KEY_ENTER) {
+					eventHandler.searchButtonClicked();
+				}
 				eventHandler.searchTextChanged(searchTextField.getText());
 			}
 		});

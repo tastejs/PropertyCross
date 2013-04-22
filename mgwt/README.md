@@ -14,6 +14,10 @@ The mgwt PropertyCross implementation is structured using the popular GWT ['Acti
 * Then run -
 `mgwt> mvn clean install`
 
+## Packaging Instructions
+
+This project uses the [PhoneGap Build Maven Plugin](http://chrisprice.github.io/phonegap-build/phonegap-build-maven-plugin/). In order to package the project you need to active the build profile - `mgwt> mvn clean install -P phonegap-build`
+
 ## Developing with Eclipse
 
 * Ensure you have the [Eclipse plugin](https://developers.google.com/web-toolkit/download) installed
