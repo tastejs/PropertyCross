@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>PropertyCross</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- required libraries -->
+    <link href="styles/kendo.mobile.all.min.css" rel="stylesheet" />
+    <script src="js/jquery.min.js"></script>
+    <script src="js/kendo.mobile.min.js"></script>
+
+    <script type="text/javascript" src="viewModel/PropertyCrossSearchService.js"></script>
+    <script type="text/javascript" src="viewModel/FavouritesService.js"></script>
+    <script type="text/javascript" src="viewModel/SearchViewModel.js"></script>
+    <script type="text/javascript" src="viewModel/ResultsViewModel.js"></script>
+    <script type="text/javascript" src="viewModel/PropertyViewModel.js"></script>
+    <script type="text/javascript" src="viewModel/FavouritesViewModel.js"></script>
+    <script type="text/javascript" src="viewModel/Formatter.js"></script>
+
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+    <script id="recentSearchTemplate" type="text/x-kendo-template">
+        <a>
+            <span data-bind="text:long_title"></span>
+            <small data-bind="text:total_results" class="totalResults"></small>
+        </a>
+    </script>
+
+    <!-- Main "home" view -->
+    <div data-role="view" data-model="searchViewModel">
+        <div data-role="header">
+            <div data-role="navbar">
+                <span data-role="view-title">PropertyCross</span>
+                <a data-role="button" data-align="right" data-bind="click: goToFaves">Faves</a>
+            </div>
+        </div>
+
+        <p>Use the form below to search for houses to buy. You can search by place-name, postcode, or click 'My location', to search in your current location</p>
+        <form data-bind="events: {submit: stringSearch}" class="searchForm">
+            <input type="search" data-bind="value: searchTerm" />
+            <div>
+                <a data-role="button" data-bind="click: stringSearch">Go</a>
+                <a data-role="button" data-bind="click: locationSearch">Use My Location</a>
+                <img src="img/spinner.gif" data-bind="visible: loading"/>
+            </div>
+        </form>
+
+        <p data-bind="text: errorMessage" id="errorMessage"></p>
+
+        <!-- list of locations in case of ambiguous results -->
+        <h3 data-bind="visible: listedLocationsTitleVisible">Please select a location below:</h3>
+        <ul data-role="listview"
+            data-style="inset"
+            data-template="recentSearchTemplate"
+            data-bind="source: locations, events: { click:recentSearchClicked }"></ul>
+
+        <!-- recent searches -->
+        <h3 data-bind="visible: recentSearchTitleVisible">Recent Searches</h3>
+        <ul data-role="listview"
+            data-style="inset"
+            data-template="recentSearchTemplate"
+            data-bind="source: recentSearches, events: { click:recentSearchClicked }"></ul>
+    </div>
+
+    <!-- Individual result -->
+    <script id="propertyTemplate" type="text/x-kendo-template">
+        <a class="propertyListItem">
+            <img data-bind="attr: { src: thumb_url }" />
+            <h3>#= price#</h3>
+            <p>#= title#</p>
+        </a>
+    </script>
+
+    <!-- Results list view -->
+    <div data-role="view" data-model="resultsViewModel" id="resultsView">
+        <div data-role="header">
+            <div data-role="navbar">
+                <a data-role="backbutton" data-align="left">Back</a>
+                <span data-role="view-title"><span data-bind="text: properties.length"></span> of <span data-bind="text: totalResults"></span> matches</span>
+            </div>
+        </div>
+        <ul data-role="listview"
+            data-template="propertyTemplate"
+            data-bind="source: properties, events: { click: propertyClicked }">
+        </ul>
+
+        <ul class="km-listview km-list" data-bind="visible: loadMoreVisible, click:loadMore" id="loadMore">
+            <li>
+                <a class="km-listview">
+                    <h3 class="ui-li-heading" data-bind="text: loadMoreText"></h3>
+                </a>
+                <p>Results for <span data-bind="text: displayName"></span>, showing <span data-bind="text: properties.length"></span> of <span data-bind="text: totalResults"></span> properties</p>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Favourites list view -->
+    <div data-role="view" data-model="favouritesViewModel" id="favouritesView">
+        <div data-role="header">
+            <div data-role="navbar">
+                <a data-role="backbutton" data-align="left">Back</a>
+                <span data-role="view-title">Favourites</span>
+            </div>
+        </div>
+        <p data-bind="visible: noPropertiesMessageVisible">You have not added any properties to your favourites.</p>
+
+        <ul data-role="listview"
+            data-template="propertyTemplate"
+            data-bind="source: properties, events: { click: propertyClicked }">
+        </ul>
+    </div>
+
+    <!-- Property details view -->
+    <div data-role="view" data-model="propertyViewModel" id="propertyView">
+        <div data-role="header">
+            <div data-role="navbar">
+                <a data-role="backbutton" data-align="left">Back</a>
+                <span data-role="view-title">Information</span>
+                <a data-role="button" data-align="right" data-icon="favorites" data-bind="click: addRemoveFave, visible: notFave"></a>
+                <a data-role="button" data-align="right" data-icon="favorites" data-bind="click: addRemoveFave, visible: fave" class="isFave"></a>
+
+            </div>
+        </div>
+        <div class="propertyDetails">
+            <h2 data-bind="text: property.price"></h2>
+            <h3 data-bind="text: property.title"></h3>
+            <img data-bind="attr: {src: property.img_url}"/>
+            <p>Bedrooms: <span data-bind="text: property.bedroom_number"></span>, Bathrooms: <span data-bind="text: property.bathroom_number"></span></p>
+            <p data-bind="text: property.summary"></p>
+        </div>
+    </div>
+
+
+    <script type="text/javascript" src="app.js" ></script>
+
+</body>
+</html>
