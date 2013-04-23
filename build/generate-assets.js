@@ -17,7 +17,8 @@ async.series([
     ["mgwt"],
     ["senchatouch2"],
     ["native"],
-    ["rhomobile"]
+    ["rhomobile"],
+    ["kendoui"]
   ]),
 
   generateIcons.bind(null, "assets/icon-base-173x173.png", [
@@ -77,7 +78,17 @@ async.series([
     ["assets/frameworks/xamarin.png", "xamarin/android/PropertyCross/Resources/drawable-ldpi/ic_launcher.png", 36],
     ["assets/frameworks/xamarin.png", "xamarin/android/PropertyCross/Resources/drawable-mdpi/ic_launcher.png", 48],
     ["assets/frameworks/xamarin.png", "xamarin/android/PropertyCross/Resources/drawable-xhdpi/ic_launcher.png", 96],
-    ["assets/frameworks/sencha.png", "senchatouch2/resources/icons/ApplicationIcon.png", 144]
+    ["assets/frameworks/sencha.png", "senchatouch2/resources/icons/ApplicationIcon.png", 144],
+    ["assets/frameworks/kendoui.png", "kendoui/assets/icons/36x36.png", 36],
+    ["assets/frameworks/kendoui.png", "kendoui/assets/icons/48x48.png", 48],
+    ["assets/frameworks/kendoui.png", "kendoui/assets/icons/72x72.png", 72],
+    ["assets/frameworks/kendoui.png", "kendoui/assets/icons/96x96.png", 96],
+    ["assets/frameworks/kendoui.png", "kendoui/assets/icons/icon-57.png", 57],
+    ["assets/frameworks/kendoui.png", "kendoui/assets/icons/icon-72.png", 72],
+    ["assets/frameworks/kendoui.png", "kendoui/assets/icons/icon-57-2x.png", 114],
+    ["assets/frameworks/kendoui.png", "kendoui/assets/icons/icon-72-2x.png", 144],
+    ["assets/frameworks/kendoui.png", "kendoui/assets/icons/ApplicationIcon.png", 66],
+    ["assets/frameworks/kendoui.png", "kendoui/assets/icons/ApplicationTileIcon.png", 173]
   ]),
 
   generateSplashscreens.bind(null, "assets/splashscreen-bottom-640x640.png", [
@@ -108,7 +119,14 @@ async.series([
     ["rhomobile/app/loading.png",640, 960],
     ["titanium/Resources/iphone/Default.png", 320, 480],
     ["titanium/Resources/iphone/Default@2x.png", 640, 960],
-    ["senchatouch2/resources/loading/Default.png", 320, 480]
+    ["senchatouch2/resources/loading/Default.png", 320, 480],
+    ["kendoui/assets/splashscreens/200x320.png", 200, 320],
+    ["kendoui/assets/splashscreens/320x480.png", 320, 480],
+    ["kendoui/assets/splashscreens/480x800.png", 480, 800],
+    ["kendoui/assets/splashscreens/720x1280.png", 720, 1280],
+    ["kendoui/assets/splashscreens/screen-iphone-portrait.png", 320, 480],
+    ["kendoui/assets/splashscreens/screen-iphone-portrait-2x.png", 640, 960],
+    ["kendoui/assets/splashscreens/SplashScreenImage.jpg", 480, 800]
   ]),
 
   generateOther.bind(null, "assets/star.png", [
