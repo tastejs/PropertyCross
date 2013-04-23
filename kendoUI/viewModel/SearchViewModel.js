@@ -94,12 +94,19 @@ function SearchViewModel() {
 
     //callback function for when search has been completed
     function searchComplete(response) {
-        if (!response.locations || response.locations.length === 0) {
-            locationNotFound();
-        } else if (response.locations.length === 1) {
-            locationFound(response);
-        } else if (response.locations.length > 1) {
-            listLocations(response);
+        switch (response.application_response_code) {
+            case "100":
+            case "101":
+            case "110":
+                locationFound(response);
+                break;
+            default:
+                if (!response.locations || response.locations.length === 0) {
+                    locationNotFound();
+                } else if (response.locations.length > 1) {
+                    listLocations(response);
+                }
+                break;
         }
         that.set("loading", false);
     };
