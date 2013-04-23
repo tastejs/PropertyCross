@@ -213,5 +213,9 @@
     <Content Include="Default%402x.png" />
     <Content Include="Icon.png" />
     <Content Include="Icon%402x.png" />
+    <Content Include="nostar.png" />
+    <Content Include="nostar%402x.png" />
+    <Content Include="star.png" />
+    <Content Include="star%402x.png" />
   </ItemGroup>
 </Project>
