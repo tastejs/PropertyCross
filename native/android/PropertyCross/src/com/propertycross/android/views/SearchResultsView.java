@@ -99,6 +99,9 @@ public class SearchResultsView
 	@Override
 	public void setIsLoading(boolean isLoading) {
 		footer.setEnabled(!isLoading);
+		if (isLoading) {
+			resultDetails.setText(R.string.loading);
+		}
 	}
 
 	@Override
