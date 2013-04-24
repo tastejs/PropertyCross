@@ -57,7 +57,7 @@
         <header>
             <p class="title centered">Property Cross</p>
             <nav class="right">
-                <a href="#second" data-router="section" class="button">Faves</a>
+                <a href="#faves" data-router="section" class="button">Faves</a>
             </nav>
         </header>
 
@@ -70,7 +70,7 @@
                 <a href="#" class="button blue">Go</a>
                 <a href="#" class="button blue">My Location</a>
             </form>
-            <p class="centered">
+            <p>
                 Recent searches:
             </p>
             <ul>
@@ -79,6 +79,22 @@
                 <li>Tynemouth</li>
             </ul>
         </article>
+    </section>
+
+    <section id="faves" data-transition="slide">
+        <header data-back="home blue">
+            <p class="title centered">Favourites</p>
+        </header>
+
+        <article id="favourite-list" class="active indented list">
+            <ul>
+                <li>Muenchen, Deutschland</li>
+                <li>Lyon, France</li>
+                <li>Vancouver, Canada</li>
+            </ul>
+        </article>
+
+    </section>
 
        <!-- <article id="main-article" class="active list indented scroll">
             <ul>
@@ -116,7 +132,7 @@
                 </strong>
             </li>
         </article>-->
-    </section>
+
 
     <!-- Lungo - Dependencies -->
     <script src="components/quojs/quo.js"></script>
