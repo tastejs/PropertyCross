@@ -6,6 +6,7 @@
 /windowsPhone/*.suo
 /windowsPhone/PropertyCross/PropertyCross.csproj.user
 /android/PropertyCross/bin
+/android/PropertyCross/gen
 /android/PropertyCross/proguard-project.txt
 /android/PropertyCross/project.properties
 /android/PropertyCross/.*
