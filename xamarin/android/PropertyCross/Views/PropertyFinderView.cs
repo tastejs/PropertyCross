@@ -21,11 +21,12 @@ using IMenu = global::Com.Actionbarsherlock.View.IMenu;
 using IMenuItem = global::Com.Actionbarsherlock.View.IMenuItem;
 using MenuItem = global::Com.Actionbarsherlock.View.MenuItem;
 using MenuInflater = global::Com.Actionbarsherlock.View.MenuInflater;
+using Android.Views.InputMethods;
 
 namespace com.propertycross.xamarin.android.Views
 {
 	[Activity (MainLauncher = true, WindowSoftInputMode = SoftInput.StateHidden, ScreenOrientation = ScreenOrientation.Portrait)]
-	public class PropertyFinderView : SherlockActivity, PropertyFinderPresenter.View
+	public class PropertyFinderView : SherlockActivity, PropertyFinderPresenter.View, Android.Widget.TextView.IOnEditorActionListener
 	{
 		private PropertyFinderPresenter presenter;
 		private EditText searchText;
@@ -52,6 +53,7 @@ namespace com.propertycross.xamarin.android.Views
 			SetContentView (Resource.Layout.PropertyFinderView);
 			searchText = (EditText) FindViewById(Resource.Id.search);
 			searchText.TextChanged += SearchText_Changed;
+			searchText.SetOnEditorActionListener(this);
 
 			myLocationButton = (Button) FindViewById(Resource.Id.use_location);
 			myLocationButton.Click += LocationButton_Clicked; 
@@ -169,6 +171,16 @@ namespace com.propertycross.xamarin.android.Views
 				searchTerm = searchTerm.Trim();
 				SearchTextChanged(this, new SearchTextChangedEventArgs(searchTerm));
 			}
+		}
+
+		public bool OnEditorAction (TextView v, ImeAction actionId, KeyEvent e)
+		{
+			if (actionId == ImeAction.Search)
+			{
+				SearchButtonClicked(this, EventArgs.Empty);
+				return true;
+			}
+			return false;
 		}
 
 		private void LocationButton_Clicked(object sender, EventArgs e)
