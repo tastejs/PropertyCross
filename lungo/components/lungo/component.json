@@ -1,0 +1,33 @@
+{
+  "name": "lungo",
+  "description": "HTML5 Cross-Device Framework.",
+  "version": "2.1.0",
+  "homepage": "http://lungo.tapquo.com",
+  "author": {
+    "name": "Tapquo S.L."
+  },
+  "main": [
+    "./lungo.js",
+    "./lungo.css"
+  ],
+  "keywords": [
+    "mobile"
+  ],
+  "dependencies": {
+    "quojs": "latest"
+  },
+  "license": [
+    {
+      "type": "GPLv3"
+    },
+    {
+      "type": "Commercial"
+    }
+  ],
+  "_id": "lungo@2.1.0",
+  "readme": "ERROR: No README.md file found!",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/TapQuo/package-lungo.git"
+  }
+}
