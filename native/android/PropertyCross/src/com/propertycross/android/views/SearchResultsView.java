@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.Spannable;
+import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ListView;
@@ -81,9 +85,12 @@ public class SearchResultsView
 	@Override
 	public void setSearchResults(int totalResult, int pageNumber,
 			int totalPages, List<Property> properties, String searchLocation) {
-		resultDetails.setText(String.format(
-				getResources().getString(R.string.result_details),
-				searchLocation, properties.size(), totalResult));
+		
+		// Format the text:
+		// Results for x, showing y of z properties.
+		String text = String.format(getResources().getString(R.string.result_details),
+				searchLocation, properties.size(), totalResult);
+		resultDetails.setText(Html.fromHtml(text));
 		
 		((SearchResultsAdapter) getListAdapter()).addRange(properties);
 		getSupportActionBar().setTitle(String.format(
@@ -99,6 +106,9 @@ public class SearchResultsView
 	@Override
 	public void setIsLoading(boolean isLoading) {
 		footer.setEnabled(!isLoading);
+		if (isLoading) {
+			resultDetails.setText(R.string.loading);
+		}
 	}
 
 	@Override
