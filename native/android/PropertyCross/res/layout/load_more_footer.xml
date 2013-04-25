@@ -14,5 +14,6 @@
         android:textSize="14sp"
         android:text="@string/no_result_details"
         android:textColor="@color/row_detail_color"
-        android:gravity="center_vertical" />
+        android:gravity="center_vertical"
+        android:bufferType="spannable" />
 </LinearLayout>

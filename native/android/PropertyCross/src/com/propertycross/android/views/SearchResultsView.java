@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ListView;
@@ -81,9 +84,31 @@ public class SearchResultsView
 	@Override
 	public void setSearchResults(int totalResult, int pageNumber,
 			int totalPages, List<Property> properties, String searchLocation) {
-		resultDetails.setText(String.format(
-				getResources().getString(R.string.result_details),
-				searchLocation, properties.size(), totalResult));
+		
+		// Format the text:
+		// Results for x, showing y of z properties.
+		String text = String.format(getResources().getString(R.string.result_details),
+				searchLocation, properties.size(), totalResult);
+		resultDetails.setText(text);
+		
+		// Style the text:
+		// Results for #x#, showing #y# of #z# properties.
+		Spannable spannable = (Spannable) resultDetails.getText();
+		
+		// Get the starting indices (and length, if necessary) of the three components.
+		int searchIndex = text.indexOf(searchLocation);
+		int showingIndex = text.indexOf(Integer.toString(properties.size()));
+		int showingLength = Integer.toString(properties.size()).length();
+		int totalIndex = text.indexOf(Integer.toString(totalResult), showingIndex + showingLength);
+		int totalLength = Integer.toString(totalResult).length();
+		
+		// Apply the styling.
+		spannable.setSpan(new StyleSpan(Typeface.BOLD), searchIndex, searchIndex + searchLocation.length(),
+				Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+		spannable.setSpan(new StyleSpan(Typeface.BOLD), showingIndex, showingIndex + showingLength,
+				Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+		spannable.setSpan(new StyleSpan(Typeface.BOLD), totalIndex, totalIndex + totalLength,
+				Spannable.SPAN_INCLUSIVE_INCLUSIVE);
 		
 		((SearchResultsAdapter) getListAdapter()).addRange(properties);
 		getSupportActionBar().setTitle(String.format(
