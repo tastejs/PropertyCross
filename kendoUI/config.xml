@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <widget xmlns="http://www.w3.org/ns/widgets"
 	    xmlns:gap="http://phonegap.com/ns/1.0"
-	    id="com.propertycross.jquerymobile"
+	    id="com.propertycross.kendoUI"
 	    version="1.0.0">
 
     <name>PropertyCross</name>
@@ -22,7 +22,7 @@
     <preference name="orientation"                value="portrait" />
     <preference name="webviewbounce"              value="false" />
     <preference name="prerendered-icon"           value="true" />
-    <preference name="auto-hide-splash-screen"    value="false" />
+    <preference name="auto-hide-splash-screen"    value="true" />
 
     <icon src="assets/icons/icon-72-2x.png" />
     <icon src="assets/icons/36x36.png"              gap:platform="android"    gap:density="ldpi" />
