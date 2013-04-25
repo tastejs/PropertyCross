@@ -15,6 +15,8 @@ using Com.Actionbarsherlock.App;
 using Com.Actionbarsherlock.View;
 
 using IMenuItem = global::Com.Actionbarsherlock.View.IMenuItem;
+using Android.Text;
+using Android.Graphics;
 
 namespace com.propertycross.xamarin.android.Views
 {
@@ -58,10 +60,11 @@ namespace com.propertycross.xamarin.android.Views
 		public void SetSearchResults(int totalResult, int pageNumber, int totalPages,
         	List<Property> properties, string searchLocation)
         {
-			resultDetails.Text = Java.Lang.String.Format(Resources.GetString(Resource.String.result_details),
-			                                             searchLocation,
-			                                             properties.Count,
-			                                             totalResult);
+			// Format the text:
+			// Results for x, showing y of z properties.
+			String text = Java.Lang.String.Format(Resources.GetString(Resource.String.result_details),
+			                                      searchLocation, properties.Count, totalResult);
+			resultDetails.TextFormatted = Html.FromHtml (text);
 
 			((SearchResultsAdapter) ListAdapter).AddRange(properties);
 			SupportActionBar.Title = Java.Lang.String.Format(Resources.GetString(Resource.String.results_shown),
@@ -79,6 +82,10 @@ namespace com.propertycross.xamarin.android.Views
 			set
 			{
 				footer.Enabled = !value;
+				if(value)
+				{
+					resultDetails.Text = Resources.GetString(Resource.String.loading);
+				}
 			}
 		}
 
