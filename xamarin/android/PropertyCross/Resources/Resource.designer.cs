@@ -852,14 +852,14 @@ namespace com.propertycross.xamarin.android
 			// aapt resource value: 0x7f040037
 			public const int recent_search_text = 2130968631;
 			
-			// aapt resource value: 0x7f040035
-			public const int recentsearches_header = 2130968629;
-			
-			// aapt resource value: 0x7f040036
-			public const int recentsearches_list = 2130968630;
-			
 			// aapt resource value: 0x7f040027
 			public const int result_details = 2130968615;
+			
+			// aapt resource value: 0x7f040035
+			public const int results_header = 2130968629;
+			
+			// aapt resource value: 0x7f040036
+			public const int results_list = 2130968630;
 			
 			// aapt resource value: 0x7f040031
 			public const int search = 2130968625;
@@ -1056,6 +1056,9 @@ namespace com.propertycross.xamarin.android
 			
 			// aapt resource value: 0x7f090009
 			public const int abs__shareactionprovider_share_with_application = 2131296265;
+			
+			// aapt resource value: 0x7f09001c
+			public const int ambiguous_location = 2131296284;
 			
 			// aapt resource value: 0x7f09000a
 			public const int app_name = 2131296266;
