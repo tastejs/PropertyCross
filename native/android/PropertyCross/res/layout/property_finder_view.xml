@@ -43,7 +43,7 @@
         android:textSize="12sp" />
 
     <TextView
-        android:id="@+id/recentsearches_header"
+        android:id="@+id/results_header"
         style="?android:listSeparatorTextViewStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -51,7 +51,7 @@
         android:textSize="14sp" />
 
     <ListView
-        android:id="@+id/recentsearches_list"
+        android:id="@+id/results_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp" />
