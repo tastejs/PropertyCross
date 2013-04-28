@@ -66,6 +66,7 @@
     <Compile Include="Views\FavouritesView.cs" />
     <Compile Include="Utils\BitmapUtils.cs" />
     <Compile Include="Utils\AsyncDrawable.cs" />
+    <Compile Include="AmbiguousLocationsAdapter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

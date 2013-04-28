@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
-using Android.Locations;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
@@ -33,9 +32,10 @@ namespace com.propertycross.xamarin.android.Views
 		private Button myLocationButton;
 		private Button startSearchButton;
 		private TextView messageText;
-		private ListView recentSearchList;
-		private RecentSearchAdapter adapter;
+		private TextView resultsHeader;
+		private ListView resultsList;
 		private GeoLocationService geoLocationService;
+		private bool showingRecentSearches = true;
 
 		protected override void OnCreate (Bundle bundle)
 		{
@@ -46,7 +46,7 @@ namespace com.propertycross.xamarin.android.Views
 
 			var uiMarshal = new MarshalInvokeService(app);
 			var source = new PropertyDataSource(new JsonWebPropertySearch(uiMarshal));
-			geoLocationService = new GeoLocationService((LocationManager)GetSystemService(Context.LocationService), uiMarshal);
+			geoLocationService = new GeoLocationService((Android.Locations.LocationManager)GetSystemService(Context.LocationService), uiMarshal);
 			var stateService = new StatePersistenceService(app);
 			PropertyFinderPersistentState state = stateService.LoadState();
 
@@ -63,10 +63,10 @@ namespace com.propertycross.xamarin.android.Views
 
 			messageText = (TextView) FindViewById(Resource.Id.mainview_message);
 
-			recentSearchList = (ListView) FindViewById(Resource.Id.recentsearches_list);
-			recentSearchList.ItemClick += RecentSearchItem_Clicked;
-			adapter = new RecentSearchAdapter(this, new List<RecentSearch>());
-			recentSearchList.Adapter = adapter;
+			resultsHeader = (TextView) FindViewById(Resource.Id.results_header);
+			resultsList = (ListView) FindViewById(Resource.Id.results_list);
+			resultsList.ItemClick += ResultsListItem_Clicked;
+			resultsList.Adapter = new RecentSearchAdapter(this, new List<RecentSearch>());;
 
 			presenter = 
 				new PropertyFinderPresenter(state,
@@ -123,17 +123,34 @@ namespace com.propertycross.xamarin.android.Views
 			}
 		}
 
-		public void DisplaySuggestedLocations (List<PropertyFinder.Model.Location> locations)
+		public void DisplaySuggestedLocations (List<Location> locations)
 		{
+			if(locations != null)
+			{
+				showLocations();
+				resultsList.Adapter = new AmbiguousLocationsAdapter(this, locations);;
+			}
 		}
 
 		public void DisplayRecentSearches(List<RecentSearch> recentSearches)
 		{
 			if(recentSearches != null)
 			{
-				adapter = new RecentSearchAdapter(this, recentSearches);
-				recentSearchList.Adapter = adapter;
+				showRecentSearches();
+				resultsList.Adapter = new RecentSearchAdapter(this, recentSearches);
 			}
+		}
+
+		private void showRecentSearches()
+		{
+			showingRecentSearches = true;
+			resultsHeader.Text = Resources.GetString(Resource.String.recent_searches);
+		}
+		
+		private void showLocations()
+		{
+			showingRecentSearches = false;
+			resultsHeader.Text = Resources.GetString(Resource.String.ambiguous_location);
 		}
 
 		public bool IsLoading
@@ -193,10 +210,20 @@ namespace com.propertycross.xamarin.android.Views
 			SearchButtonClicked(this, EventArgs.Empty);
 		}
 
-		private void RecentSearchItem_Clicked(object sender, AdapterView.ItemClickEventArgs e)
+		private void ResultsListItem_Clicked(object sender, AdapterView.ItemClickEventArgs e)
 		{
-			RecentSearch item = adapter.GetItem(e.Position);
-			RecentSearchSelected(this, new RecentSearchSelectedEventArgs(item));
+			if(showingRecentSearches)
+			{
+				RecentSearchAdapter adapter = (RecentSearchAdapter) resultsList.Adapter;
+				RecentSearch item = adapter.GetItem(e.Position);
+				RecentSearchSelected(this, new RecentSearchSelectedEventArgs(item));
+			}
+			else
+			{
+				AmbiguousLocationsAdapter adapter = (AmbiguousLocationsAdapter) resultsList.Adapter;
+				Location item = adapter.GetItem(e.Position);
+				LocationSelected(this, new LocationSelectedEventArgs(item));
+			}
 		}
 	}
 }
