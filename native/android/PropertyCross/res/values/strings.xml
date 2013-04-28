@@ -18,4 +18,5 @@
 	<string name="property_title">Property Details</string>
 	<string name="searching">Searching&#8230;</string>
 	<string name="loading">Loading&#8230;</string>
+	<string name="ambiguous_location">Please select a location below</string>
 </resources>

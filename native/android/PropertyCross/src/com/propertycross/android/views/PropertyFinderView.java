@@ -23,6 +23,7 @@ import com.actionbarsherlock.view.MenuItem;
 import com.propertycross.android.R;
 import com.propertycross.android.events.Callback;
 import com.propertycross.android.events.LocationSelectedEvent;
+import com.propertycross.android.events.LocationSelectedEventArgs;
 import com.propertycross.android.events.RecentSearchSelectedEvent;
 import com.propertycross.android.events.RecentSearchSelectedEventArgs;
 import com.propertycross.android.events.SearchTextChangedEvent;
@@ -50,8 +51,8 @@ public class PropertyFinderView extends SherlockActivity implements PropertyFind
     private Button myLocationButton;
     private Button startSearchButton;
     private TextView messageText;
-    private ListView recentSearchList;
-    private RecentSearchAdapter adapter;
+    private TextView resultsHeader;
+    private ListView resultsList;
     private Callback<UIEvent> searchButtonClickedCallback;
     private Callback<SearchTextChangedEvent> searchTextChangedCallback;
     private Callback<UIEvent> myLocationClickedCallback;
@@ -59,6 +60,7 @@ public class PropertyFinderView extends SherlockActivity implements PropertyFind
     private Callback<LocationSelectedEvent> locationSelectedCallback;
     private Callback<RecentSearchSelectedEvent> recentSearchSelectedCallback;
     private GeoLocationService geoLocationService;
+    private boolean showingRecentSearches = true;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -136,22 +138,33 @@ public class PropertyFinderView extends SherlockActivity implements PropertyFind
         });
 
         messageText = (TextView) findViewById(R.id.mainview_message);
-
-        recentSearchList = (ListView) findViewById(R.id.recentsearches_list);
-        adapter = new RecentSearchAdapter(this, new ArrayList<RecentSearch>());
-        recentSearchList.setAdapter(adapter);
-        recentSearchList.setOnItemClickListener(new OnItemClickListener() {
+        resultsHeader = (TextView) findViewById(R.id.results_header);
+        resultsList = (ListView) findViewById(R.id.results_list);
+        resultsList.setAdapter(new RecentSearchAdapter(this, new ArrayList<RecentSearch>()));
+        resultsList.setOnItemClickListener(new OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                RecentSearch item = adapter.getItem(position);
+                if (showingRecentSearches) {
+                    RecentSearchAdapter adapter = (RecentSearchAdapter) resultsList.getAdapter();
+                    RecentSearch item = adapter.getItem(position);
 
-                if (recentSearchSelectedCallback != null) {
-                    recentSearchSelectedCallback.complete(
-                            new RecentSearchSelectedEvent(this, new RecentSearchSelectedEventArgs(
+                    if (recentSearchSelectedCallback != null) {
+                        recentSearchSelectedCallback.complete(
+                                new RecentSearchSelectedEvent(this, new RecentSearchSelectedEventArgs(
+                                        item)));
+                        }
+                    } else {
+                        AmbiguousLocationsAdapter adapter = (AmbiguousLocationsAdapter) resultsList.getAdapter();
+                        Location item = adapter.getItem(position);
+
+                        if (locationSelectedCallback != null) {
+                            locationSelectedCallback.complete(
+                                new LocationSelectedEvent(this, new LocationSelectedEventArgs(
                                     item)));
-                }
+                            }
+                        }
             }
         });
 
@@ -206,14 +219,28 @@ public class PropertyFinderView extends SherlockActivity implements PropertyFind
 
     @Override
     public void displaySuggestedLocations(List<Location> locations) {
+        if (locations != null) {
+            showLocations();
+            resultsList.setAdapter(new AmbiguousLocationsAdapter(this, locations));
+        }
     }
 
     @Override
     public void displayRecentSearches(List<RecentSearch> recentSearches) {
         if (recentSearches != null) {
-            adapter = new RecentSearchAdapter(this, recentSearches);
-            recentSearchList.setAdapter(adapter);
+            showRecentSearches();
+            resultsList.setAdapter(new RecentSearchAdapter(this, recentSearches));
         }
+    }
+
+    private void showRecentSearches() {
+        showingRecentSearches = true;
+        resultsHeader.setText(getResources().getString(R.string.recent_searches));
+    }
+
+    private void showLocations() {
+        showingRecentSearches = false;
+        resultsHeader.setText(getResources().getString(R.string.ambiguous_location));
     }
 
     @Override
