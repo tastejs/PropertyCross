@@ -100,7 +100,16 @@ public class SearchResultsView
 
 	@Override
 	public void setLoadMoreVisible(boolean isVisible) {
-		footer.setVisibility(isVisible ? View.VISIBLE : View.INVISIBLE);
+		/*
+		 * List View footers cannot be hidden easily because they're wrapped
+		 * in an enclosing View. Instead, remove the footer and add it back
+		 * if necessary.
+		 */
+		getListView().removeFooterView(footer);
+		if (isVisible)
+		{
+			getListView().addFooterView(footer);
+		} 
 	}
 
 	@Override
