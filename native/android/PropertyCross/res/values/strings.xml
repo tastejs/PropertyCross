@@ -11,7 +11,7 @@
 	<string name="favourites_remove">Remove from Favourites</string>
 	<string name="property_summary">%1$s %2$d bed %3$s</string>
 	<string name="property_details">%1$s %2$s</string>
-	<string name="result_details">Results for &lt;b>%1$s&lt;/b>, showing &lt;b>%2$d&lt;/b> of &lt;b>%3$d&lt;/b> properties.</string>
+	<string name="result_details"><![CDATA[Results for <b>%1$s</b>, showing <b>%2$d</b> of <b>%3$d</b> properties.]]></string>
 	<string name="results_shown">%1$d of %2$d matches</string>
 	<string name="no_result_details">No results.</string>
 	<string name="property_img_description">A picture of the property.</string>
