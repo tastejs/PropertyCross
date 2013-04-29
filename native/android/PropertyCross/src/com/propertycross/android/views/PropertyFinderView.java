@@ -9,11 +9,14 @@ import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -61,6 +64,9 @@ public class PropertyFinderView extends SherlockActivity implements PropertyFind
     private Callback<RecentSearchSelectedEvent> recentSearchSelectedCallback;
     private GeoLocationService geoLocationService;
     private boolean showingRecentSearches = true;
+    private MenuItem refreshItem;
+    private ImageView loadingView;
+    private Animation loadingAnimation;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -168,6 +174,9 @@ public class PropertyFinderView extends SherlockActivity implements PropertyFind
             }
         });
 
+        loadingAnimation = AnimationUtils.loadAnimation(this, R.anim.loading_rotate);
+        loadingAnimation.setRepeatMode(Animation.INFINITE);
+
         presenter = new PropertyFinderPresenter(
                 state,
                 source,
@@ -190,8 +199,15 @@ public class PropertyFinderView extends SherlockActivity implements PropertyFind
     }
 
     @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        refreshItem = menu.findItem(R.id.refresh);
+        loadingView = (ImageView) refreshItem.getActionView();
+        return true;
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getSupportMenuInflater().inflate(R.menu.favourites_view, menu);
+        getSupportMenuInflater().inflate(R.menu.menu_propertyfinderview, menu);
         return true;
     }
 
@@ -246,7 +262,11 @@ public class PropertyFinderView extends SherlockActivity implements PropertyFind
     @Override
     public void setIsLoading(boolean isLoading) {
         if (isLoading) {
-            messageText.setText(R.string.searching);
+            loadingView.startAnimation(loadingAnimation);
+            refreshItem.setVisible(true);
+        } else {
+            loadingView.clearAnimation();
+            refreshItem.setVisible(false);
         }
         searchText.setEnabled(!isLoading);
         myLocationButton.setEnabled(!isLoading);
