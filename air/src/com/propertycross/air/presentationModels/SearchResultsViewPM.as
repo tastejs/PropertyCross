@@ -22,6 +22,10 @@ package com.propertycross.air.presentationModels
         //------------------------------------
 
         private static const PROPERTIES_CHANGED:String = "propertiesChanged";
+        private static const LOADING_CHANGED:String = "loadingChanged";
+
+        private static const LOAD_MORE:String = "Load more...";
+        private static const LOADING:String = "Loading...";
 
 
         //------------------------------------
@@ -65,6 +69,47 @@ package com.propertycross.air.presentationModels
             return _lastResult.page * _lastResult.pageSize + " of " + _lastResult.totalResults;
         }
 
+        //----------------------------------
+        //  loadPrompt
+        //----------------------------------
+
+        [Bindable("loadingChanged")]
+        public function get loadPrompt():String
+        {
+            return loading ? LOADING : LOAD_MORE;
+        }
+
+        //----------------------------------
+        //  loadPromptDetails
+        //----------------------------------
+
+        [Bindable("loadingChanged")]
+        public function get loadPromptDetails():String
+        {
+            return loading ? "" : "Results for " + _currentLocation + ", showing " + title + " properties";
+        }
+
+        //----------------------------------
+        //  loading
+        //----------------------------------
+
+        private var _loading:Boolean;
+        protected function get loading():Boolean
+        {
+            return _loading;
+        }
+        protected function set loading(value:Boolean):void
+        {
+            if (value != _loading)
+            {
+                _loading = value;
+                dispatchEvent(new Event(LOADING_CHANGED));
+            }
+        }
+
+
+
+
 
         //------------------------------------
         //
@@ -90,6 +135,7 @@ package com.propertycross.air.presentationModels
                 return;
             }
             _lastResult = result;
+            loading = false;
             dispatchEvent(new Event(PROPERTIES_CHANGED));
         }
 
@@ -104,6 +150,7 @@ package com.propertycross.air.presentationModels
 
         public function loadMore():void
         {
+            loading = true;
             dispatchEvent(new SearchEvent(SearchEvent.SEARCH, _currentLocation, _lastResult.page + 1));
         }
     }
