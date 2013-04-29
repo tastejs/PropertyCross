@@ -1,0 +1,1 @@
+<a href="/results/goToProperty/<%=property.id%>" >    <img src="<%= property.thumb_url %>" />    <h3><%= property.price %></h3>    <%= property.title %></a>
