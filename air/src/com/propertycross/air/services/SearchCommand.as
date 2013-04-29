@@ -18,7 +18,7 @@ package com.propertycross.air.services
         //------------------------------------
 
         private static const GENERAL_ERROR:String =
-            "An error occurred while searching. Please check your network connection and try again";
+            "An error occurred while searching. Please check your network connection and try again.";
         private static const NOT_RECOGNISED:String =
             "The location given was not recognised";
 
@@ -53,7 +53,7 @@ package com.propertycross.air.services
             return new SearchResult(properties, locations, totalResults, page);
         }
 
-        public function error(fault:Fault):void
+        public function error(info:Object):void
         {
             throw new Error(GENERAL_ERROR);
         }
