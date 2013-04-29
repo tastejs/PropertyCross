@@ -171,6 +171,10 @@ package com.propertycross.air.presentationModels
             {
                 return;
             }
+            if (location)
+            {
+                locationName = location.name;
+            }
             searching = true;
             this.error = null;
             state = DEFAULT_STATE;
