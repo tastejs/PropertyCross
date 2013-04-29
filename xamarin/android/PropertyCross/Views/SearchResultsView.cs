@@ -74,7 +74,15 @@ namespace com.propertycross.xamarin.android.Views
         
         public void SetLoadMoreVisible(bool visible)
         {
-			footer.Visibility = visible ? ViewStates.Visible : ViewStates.Invisible;
+			/* List View footers cannot be hidden easily because they're wrapped
+			 * in an enclosing View. Instead, remove the footer and add it back
+			 * if necessary.
+			 */
+			ListView.RemoveFooterView(footer);
+			if (visible)
+			{
+				ListView.AddFooterView(footer);
+			}
         }
 
 		public bool IsLoading
