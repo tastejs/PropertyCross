@@ -15,6 +15,8 @@ using PropertyFinder.Model;
 using Com.Actionbarsherlock.App;
 using Com.Actionbarsherlock.View;
 
+using IMenuItem = global::Com.Actionbarsherlock.View.IMenuItem;
+
 namespace com.propertycross.xamarin.android.Views
 {
 	[Activity (ScreenOrientation = ScreenOrientation.Portrait)]			
@@ -26,12 +28,33 @@ namespace com.propertycross.xamarin.android.Views
 		{
 			base.OnCreate(bundle);
 
+			SupportActionBar.Title = Resources.GetString(Resource.String.favourites_view);
+			SupportActionBar.SetDisplayHomeAsUpEnabled(true);
+
 			ListAdapter = new SearchResultsAdapter(this, new List<Property>() {});
 			
-			var app = (PropertyFinderApplication)Application;
+			var app = PropertyFinderApplication.GetApplication(this);
 			presenter = (FavouritesPresenter) app.Presenter;
-			presenter.SetView(this);
 			app.CurrentActivity = this;
+		}
+
+		protected override void OnResume()
+		{
+			base.OnResume();
+			if (presenter != null)
+			{
+				presenter.SetView(this);
+			}
+		}
+
+		public override bool OnOptionsItemSelected(IMenuItem item)
+		{
+			if(item.ItemId == Android.Resource.Id.Home)
+			{
+				Finish();
+				return true;
+			}
+			return base.OnOptionsItemSelected(item);
 		}
 
 		protected override void OnListItemClick(ListView l, View v, int position, long id)

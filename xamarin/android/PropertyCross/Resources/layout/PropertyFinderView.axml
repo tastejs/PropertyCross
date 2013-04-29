@@ -1,59 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/propview"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:layout_margin="16dp">
-    <ProgressBar
-        android:id="@+id/progress"
-        android:layout_centerInParent="true"
-        android:indeterminate="true"
-        android:layout_width="64dp"
-        android:layout_height="64dp" />
-    <LinearLayout
-        android:id="@+id/propview"
-        android:orientation="vertical"
+    android:orientation="vertical"
+    android:layout_margin="16dp"
+    android:layout_gravity="top">
+    <TextView
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/search_description"
-            android:layout_marginBottom="4dp" />
-        <EditText
-            android:id="@+id/search"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
-            android:inputType="text" />
-        <Button
-            android:id="@+id/do_search"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/do_search_text"
-            android:layout_marginBottom="4dp" />
-        <Button
-            android:id="@+id/use_location"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/use_location_text"
-            android:layout_marginBottom="4dp" />
-        <TextView
-            android:id="@+id/mainview_message"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:layout_marginBottom="4dp" />
-        <TextView
-            android:id="@+id/recentsearches_header"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="?android:listSeparatorTextViewStyle"
-            android:textSize="14sp"
-            android:text="@string/recent_searches" />
-        <ListView
-            android:id="@+id/recentsearches_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp" />
-    </LinearLayout>
-</RelativeLayout>
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:text="@string/search_description" />
+    <EditText
+        android:id="@+id/search"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:inputType="text"
+        android:imeOptions="actionSearch" />
+    <Button
+        android:id="@+id/do_search"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:text="@string/do_search_text" />
+    <Button
+        android:id="@+id/use_location"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:text="@string/use_location_text" />
+    <TextView
+        android:id="@+id/mainview_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:textSize="12sp" />
+    <TextView
+        android:id="@+id/recentsearches_header"
+        style="?android:listSeparatorTextViewStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/recent_searches"
+        android:textSize="14sp" />
+    <ListView
+        android:id="@+id/recentsearches_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp" />
+</LinearLayout>

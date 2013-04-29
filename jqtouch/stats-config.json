@@ -1,0 +1,11 @@
+{
+  "common":[
+    "dataSource/*.coffee",
+    "model/*.coffee",
+    "util/*.coffee",
+    "viewModel/*.coffee",
+    "main.coffee",
+    "style/scss/app.scss",
+    "index.html"
+  ]
+}

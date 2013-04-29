@@ -29,6 +29,8 @@ namespace PropertyFinder.ViewModel
 
     private bool _isLoading = false;
 
+    private bool _loadMoreVisible = true;
+
     private PropertyFinderPersistentState _state;
 
     public SearchResultsViewModel(INavigationService navigationService, PropertyFinderPersistentState state,
@@ -42,6 +44,7 @@ namespace PropertyFinder.ViewModel
       _properties = new ObservableCollection<PropertyViewModel>(propertyViewModels);
       _totalResult = results.TotalResult;
       _totalPages = results.TotalPages;
+      UpdateLoadMoreVisible();
     }
 
     public string SearchText
@@ -64,6 +67,20 @@ namespace PropertyFinder.ViewModel
       get { return _totalResult; }
     }
 
+    public bool LoadMoreVisible
+    {
+      get { return _loadMoreVisible; }
+      set
+      {
+        SetField<bool>(ref _loadMoreVisible, value, "LoadMoreVisible");
+      }
+    }
+
+    private void UpdateLoadMoreVisible()
+    {
+      LoadMoreVisible = Properties.Count < TotalResults;
+    }
+
     public bool IsLoading
     {
       get { return _isLoading; }
@@ -79,14 +96,6 @@ namespace PropertyFinder.ViewModel
       set
       {
         SetField<int>(ref _pageNumber, value, "PageNumber");
-      }
-    }
-
-    public Visibility LoadMoreVisible
-    {
-      get
-      {
-        return TotalPages > 1 ? Visibility.Visible : Visibility.Collapsed;
       }
     }
 
@@ -124,6 +133,7 @@ namespace PropertyFinder.ViewModel
           {
             Properties.Add(new PropertyViewModel(this, _state, property));
           }
+          UpdateLoadMoreVisible();
           IsLoading = false;
         }
       }, error =>

@@ -1,0 +1,7 @@
+{
+  "common": [
+    "*.rb",
+    "*.erb",
+    "propertycross.js"
+  ]
+}

@@ -1,0 +1,62 @@
+/*Property list item*/
+.propertyListItem img {
+    float: left;
+    margin-right: 10px;
+}
+.propertyListItem h3, .propertyListItem p {
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+.propertyListItem p {
+    font-size: .9rem
+}
+
+.km-button.isFave .km-icon{
+    color: yellow;
+    background: none;
+}
+
+/*Error message*/
+#errorMessage {
+    color: red;
+}
+
+/*Total results count for recent searches*/
+.totalResults {
+    background: #CCC;
+    float: right;
+    margin-right: 30px;
+    padding: 0 5px;
+    border-radius: 5px;
+}
+
+/*Property details*/
+.propertyDetails img {
+    width: 100%;
+}
+
+/*Search form*/
+.searchForm input {
+    width: 94%;
+    height: 40px;
+    margin: 8px 3%;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.searchForm div a:first-child {
+    margin-left: 3%;
+}
+.searchForm img {
+    float: right;
+}
+
+/*Load more*/
+#loadMore {
+    border-top: 1px solid rgba(0,0,0,0.1);
+}
+#loadMore h3, #loadMore p {
+    margin: 0;
+}
+#loadMore p {
+    font-size: .9rem;
+}

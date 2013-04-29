@@ -9,6 +9,7 @@
         proxy: {
             type: 'jsonp',
             url: 'http://api.nestoria.co.uk/api',
+            timeout: 5000, // 5s
             reader: {
                 type: 'json',
                 rootProperty: 'response.listings',

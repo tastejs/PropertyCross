@@ -1,12 +1,15 @@
 {
-  "shared": "common/*.cs",
-  "iOS": {
+  "common": "common/*.cs",
+  "ios": {
     "include":"iphone/PropertyFinder/*.cs",
     "exclude":"iphone/PropertyFinder/*.designer.cs"
   },
-  "Android": null,
-  "WindowsPhone":{
-    "include":["windowsphone/*.cs", "windowsphone/*.xaml"],
+  "android": {
+    "include":"android/PropertyCross/*.cs",
+    "exclude":"android/PropertyCross/*.designer.cs"
+  },
+  "windowsphone":{
+    "include":["windowsphone/*.cs"],
     "exclude":"*.xaml.cs"
   }
 }

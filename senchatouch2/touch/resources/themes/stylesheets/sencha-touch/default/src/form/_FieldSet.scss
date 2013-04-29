@@ -1,0 +1,101 @@
+/**
+ * @class Ext.form.FieldSet
+ */
+
+.x-form-fieldset {
+    margin: .5em .5em 1.5em;
+
+    .x-form-label {
+        border-top: 1px solid lighten($form-light, 20%);
+    }
+
+    .x-form-fieldset-inner {
+        border: 1px solid $form-light;
+        background: #fff;
+        padding: 0;
+        @if $include-border-radius {
+            @include border-radius($form-fieldset-radius);
+        }
+    }
+
+    //Ext.field.Field
+    .x-field {
+        border-bottom: 1px solid $form-light;
+        background: transparent;
+
+        &:first-child {
+            @if $include-border-radius {
+              @include border-top-radius($form-fieldset-radius);
+            }
+        }
+
+        &:last-child {
+            border-bottom: 0;
+
+            @if $include-border-radius {
+              @include border-bottom-radius($form-fieldset-radius);
+            }
+        }
+    }
+}
+
+.x-form-fieldset-title {
+    @include label();
+    margin: 1em ( $form-spacing + .1em ) .3em;
+    color: $form-dark;
+}
+
+.x-form-fieldset-instructions {
+    @include label();
+    color: lighten($form-dark, 30%);
+    margin: 1em ( $form-spacing + .1em ) .3em;
+    font-size: .8em;
+}
+
+@if $include-border-radius {
+    .x-label-align-left {
+        &:first-child {
+            .x-form-label {
+                @include border-top-left-radius($form-fieldset-radius);
+            }
+        }
+
+        &:last-child {
+            .x-form-label {
+                @include border-bottom-left-radius($form-fieldset-radius);
+            }
+        }
+    }
+
+    .x-label-align-right {
+        &:first-child {
+            .x-form-label {
+              @include border-top-right-radius($form-fieldset-radius);
+            }
+        }
+
+        &:last-child {
+            border-bottom: 0;
+
+            .x-form-label {
+                @include border-bottom-right-radius($form-fieldset-radius);
+            }
+        }
+    }
+
+    .x-label-align-top {
+        &:first-child {
+            .x-form-label {
+                @include border-top-radius($form-fieldset-radius);
+            }
+        }
+    }
+
+    .x-label-align-bottom {
+        &:last-child {
+            .x-form-label {
+                @include border-bottom-radius($form-fieldset-radius);
+            }
+        }
+    }
+}

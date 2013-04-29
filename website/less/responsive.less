@@ -1,0 +1,118 @@
+header {
+
+/* Landscape phone to portrait tablet */
+  @media (max-width: 767px) {
+    margin: 0 !important;
+    text-align: center;
+  }
+
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 768px) and (max-width: 979px) {
+  margin: 20px 0 !important;
+  }
+
+  h1 {
+  /* Landscape phone to portrait tablet */
+    @media (max-width: 767px) {
+      font-size: 50px;
+    }
+  }
+
+
+
+  &.jumbotron {
+
+    h1 {
+    /* Landscape phone to portrait tablet */
+      @media (max-width: 767px) {
+        margin-top: -10px;
+      }
+    }
+
+    p.lead {
+      /* Landscape phone to portrait tablet */
+      @media (max-width: 767px) {
+        font-size: @baseFontSize;
+        line-height: 1;
+        margin-bottom: @baseFontSize;
+      }
+    }
+
+    img {
+      /* Large desktop */
+      @media (min-width: 1200px) {
+        right: 100px;
+      }
+    }
+
+    img {
+      /* Portrait tablet to landscape and desktop */
+      @media (min-width: 768px) and (max-width: 979px) {
+        top: 20px;
+        right: 0;
+        height: 150px;
+        width: 150px;
+      }
+    }
+
+    img {
+      /* Landscape phone to portrait tablet */
+      @media (max-width: 767px) {
+        position: static;
+        height: 80px;
+        width: 80px;
+      }
+    }
+
+  }
+
+  &.strip {
+    h3 small {
+      /* Landscape phone to portrait tablet */
+      @media (max-width: 767px) {
+        display: none;
+      }
+    }
+
+    img {
+    /* Landscape phone to portrait tablet */
+      @media (max-width: 767px) {
+        height: 45px;
+        width: 45px;
+      }
+    }
+  }
+
+}
+
+.screenshots {
+  /* Landscape phone to portrait tablet */
+  @media (max-width: 767px) {
+    text-align: center;
+  }
+
+  h4 {
+    /* Landscape phone to portrait tablet */
+    @media (max-width: 767px) {
+      text-align: left;
+    }
+}
+}
+
+.btns {
+  /* Landscape phone to portrait tablet */
+  @media (max-width: 767px) {
+    text-align: center;
+  }
+}
+
+.pie >div {
+  /* Landscape phone to portrait tablet */
+  @media (max-width: 767px) {
+    border: none;
+  }
+  /* Portrait tablet to landscape and desktop */
+  @media (min-width: 768px) and (max-width: 979px) {
+    border: none;
+  }
+}

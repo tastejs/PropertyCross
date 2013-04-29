@@ -1,0 +1,107 @@
+body {
+  background-image: url('../images/bg-tile.png');
+  padding-bottom: @baseLineHeight;
+}
+
+a {
+  font-weight: bold;
+}
+
+a.btn {
+  font-weight: normal;
+}
+
+
+hr {
+  border: 0;
+  height: 1px;
+  background-image: url('../images/hr.png');
+}
+
+header {
+  &.jumbotron {
+    margin: 80px 0 20px;
+    position: relative;
+  }
+
+  &.jumbotron img {
+    height: 305px;
+    width: 305px;
+    position: absolute;
+    top: -70px;
+    right: 0;
+    margin: 10px;
+    margin-bottom: 0;
+  }
+
+  h1 {
+    font-size: 80px;
+    line-height: 1;
+  }
+
+  &.jumbotron .lead {
+  }
+
+  h1>i, h3>i {
+    font-style: normal;
+    color: @orange;
+  }
+
+  a {
+    color: @textColor;
+
+    &:hover {
+      color: @textColor;
+      text-decoration: none;
+    }
+  }
+
+  hr {
+    margin: 0;
+  }
+}
+
+.btn {
+  margin: 0 5px 5px 0;
+
+  &.disabled {
+    color: @grayLight;
+  }
+}
+
+.btns {
+  margin: 20px 0;
+}
+
+.overview .table {
+  color: @grayLight;
+  img {
+    width: 40px;
+    height: 40px;
+    max-width: none;
+  }
+  td:first-child {
+    width: 40px;
+  }
+  tr:first-child>td {
+    border-top: 0;
+  }
+  td {
+    vertical-align: middle;
+    text-align: center;
+  }
+  td:nth-child(2) {
+    text-align: left;
+  }
+}
+
+footer {
+  line-height: 64px;
+
+  img {
+    width: 48px;
+    height: 48px;
+    margin: 0 8px;
+    border-radius: 3px;
+  }
+}

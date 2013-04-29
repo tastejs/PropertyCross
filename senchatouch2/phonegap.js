@@ -1,0 +1,1 @@
+// Dummy file for development - index.html will refer to phonegap.js but this is injected by phonegap at build time.

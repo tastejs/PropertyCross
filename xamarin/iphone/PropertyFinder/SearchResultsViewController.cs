@@ -74,7 +74,7 @@ namespace PropertyFinder
     public void SetSearchResults (int totalResult, int pageNumber, int totalPages,
                                                        List<Property> properties, string searchLocation)
     {
-      _tableSource.SetProperties(properties, totalResult);
+      _tableSource.SetProperties(properties, totalResult, searchLocation);
       searchResultsTable.ReloadData();
 
       Title = string.Format("{0:d} of {1:d} matches", properties.Count, totalResult);
@@ -90,7 +90,10 @@ namespace PropertyFinder
     {
       set
       {
-       
+        if (value == true && _tableSource.LoadingLabel != null)
+        {
+          _tableSource.LoadingLabel.Text = "Loading ...";
+        }
       }
     }
 
@@ -106,6 +109,8 @@ namespace PropertyFinder
       private List<Property> _properties = new List<Property>();
       private static readonly string _cellIdentifier = "TableCell";
       private int _totalResults;
+      private UILabel _loadingLabel;
+      private string _searchText;
 
       public TableSource ()
       {
@@ -119,10 +124,19 @@ namespace PropertyFinder
         }
       }
 
-      public void SetProperties (List<Property> properties, int totalResults)
+      public UILabel LoadingLabel
+      {
+        get
+        {
+          return _loadingLabel;
+        }
+      }
+
+      public void SetProperties (List<Property> properties, int totalResults, string searchText)
       {
         _properties = properties;
         _totalResults = totalResults;
+        _searchText = searchText;
       }
 
       public override int RowsInSection (UITableView tableview, int section)
@@ -149,15 +163,41 @@ namespace PropertyFinder
           DispatchQueue.DefaultGlobalQueue.DispatchAsync(() => {
             UIImage image = UIImage.LoadFromData (NSData.FromUrl (new NSUrl (property.ThumbnailUrl)));
             DispatchQueue.MainQueue.DispatchAsync(() => {
+              if (cell.ImageView!=null) {
               cell.ImageView.Image = image;
               cell.SetNeedsLayout();
+              }
             });
           });
         }
         else
         {
+          _loadingLabel = cell.TextLabel;
+
           cell.TextLabel.Text = "Load more ...";
-          cell.DetailTextLabel.Text = string.Format("Showing {0:d} of {1:d} matches", _properties.Count, _totalResults);
+
+          UIFont boldFont = UIFont.BoldSystemFontOfSize(13.0f);
+          UIFont regularFont = UIFont.SystemFontOfSize(13.0f);
+          NSMutableDictionary regularFontAttributes =  new NSMutableDictionary() {{ UIStringAttributeKey.Font , regularFont }};
+          NSMutableDictionary boldFontAttributes = new NSMutableDictionary() {{ UIStringAttributeKey.Font , boldFont}};
+          
+          string propertiesCountText = string.Format("{0:d}", _properties.Count);
+          string totalResultsText = string.Format("{0:d}", _totalResults);
+          
+          // Create the attributed string
+          string text = string.Format("Results for {0:s}, showing {1:d} of {2:d} properties",
+                            _searchText, propertiesCountText, totalResultsText);
+          NSMutableAttributedString attributedText = new NSMutableAttributedString(text, regularFontAttributes);
+          
+          // make certain components bold
+          attributedText.SetAttributes(boldFontAttributes,
+                                       new NSRange(12, _searchText.Length));
+          attributedText.SetAttributes(boldFontAttributes,
+                                       new NSRange(12 + _searchText.Length + 10, propertiesCountText.Length));
+          attributedText.SetAttributes(boldFontAttributes,
+                                       new NSRange(12 + _searchText.Length + 10 + propertiesCountText.Length + 4, totalResultsText.Length));
+         
+          cell.DetailTextLabel.AttributedText = attributedText;
           cell.ImageView.Image = null;
         }
         return cell;
@@ -170,10 +210,11 @@ namespace PropertyFinder
 
       public override void RowSelected (UITableView tableView, NSIndexPath indexPath)
       {
+        tableView.DeselectRow(indexPath, false);
+
         int row = indexPath.Row;
         if (row < _properties.Count)
         {
-          tableView.DeselectRow(indexPath, false);
           var property = _properties [row];
           PropertySelected (this, new PropertyEventArgs (property));
         }

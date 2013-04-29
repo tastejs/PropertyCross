@@ -1,0 +1,93 @@
+<div class="span5 pie">
+  <div>
+    <h4>
+      Code Sharing Metrics
+    </h4>
+    <div class="chart">
+      <svg style="left: -0.5px; " height="300" width="300">
+        <desc><span>Your browser does not support SVG</span></desc>
+        <defs>
+          <radialGradient id="shinyshiny">
+            <stop offset="80%" stop-color="#fff" stop-opacity="0"/>
+            <stop offset="92%" stop-color="#fff" stop-opacity="0.24"/>
+            <stop offset="93%" stop-color="#fff" stop-opacity="0.08"/>
+            <stop offset="94%" stop-color="#000" stop-opacity="0.08"/>
+            <stop offset="95%" stop-color="#000" stop-opacity="0.08"/>
+            <stop offset="96%" stop-color="#000" stop-opacity="0.12"/>
+            <stop offset="100%" stop-color="#000" stop-opacity="0.12"/>
+          </radialGradient>
+          <pattern id="background" width="54" height="40" patternUnits="userSpaceOnUse">
+            <image xlink:href="{{ site.baseurl }}/images/bg-tile.png" width="54" height="40"/>
+          </pattern>
+        </defs>
+        <g opacity="1.0">
+          {% if page.pie.android %}
+          <path fill="#96c11f" stroke="none" d="{{ page.pie.android.segment }}"/>
+          {% endif %}
+          {% if page.pie.ios %}
+          <path fill="#d75432" stroke="none" d="{{ page.pie.ios.segment }}"/>
+          {% endif %}
+          {% if page.pie.windowsphone %}
+          <path fill="#1d9097" stroke="none" d="{{ page.pie.windowsphone.segment }}"/>
+          {% endif %}
+          {% if page.pie.common %}
+          <path fill="#fac606" stroke="none" d="{{ page.pie.common.segment }}"/>
+          {% endif %}
+          {% if page.pie.android %}
+          <path fill="none" stroke="#ffffff" stroke-width="2.5" d="{{ page.pie.android.line }}"/>
+          {% endif %}
+          {% if page.pie.ios %}
+          <path fill="none" stroke="#ffffff" stroke-width="2.5" d="{{ page.pie.ios.line }}"/>
+          {% endif %}
+          {% if page.pie.windowsphone %}
+          <path fill="none" stroke="#ffffff" stroke-width="2.5" d="{{ page.pie.windowsphone.line }}"/>
+          {% endif %}
+          {% if page.pie.common %}
+          <path fill="none" stroke="#ffffff" stroke-width="2.5" d="{{ page.pie.common.line }}"/>
+          {% endif %}
+        </g>
+        <circle fill="url(#shinyshiny)" cx="150" cy="150" r="150"/>
+        <circle fill="url(#background)" cx="150" cy="150" r="150"/>
+      </svg>
+    </div>
+    <table class="table">
+      <tr>
+        <td>
+          {% if page.platforms contains 'android' %}
+          <img src="../images/android_legend.png" alt="{{ site.platforms.android }} specific code" title="{{ site.platforms.android }} specific code"/>
+          {% else %}
+          <img src="../images/android_legend_disabled.png" alt="{{ site.platforms.android }} not supported" title="{{ site.platforms.android }} not supported"/>
+          {% endif %}
+        </td>
+        <td>
+          {% if page.platforms contains 'ios' %}
+          <img src="../images/ios_legend.png" alt="{{ site.platforms.ios }} specific code" title="{{ site.platforms.ios }} specific code"/>
+          {% else %}
+          <img src="../images/ios_legend_disabled.png" alt="{{ site.platforms.ios }} not supported" title="{{ site.platforms.ios }} not supported"/>
+          {% endif %}
+        </td>
+      </tr>
+      <tr>
+        <td>
+          {% if page.platforms contains 'windowsphone' %}
+          <img src="../images/windowsphone_legend.png" alt="{{ site.platforms.windowsphone }} specific code" title="{{ site.platforms.windowsphone }} specific code"/>
+          {% else %}
+          <img src="../images/windowsphone_legend_disabled.png" alt="{{ site.platforms.windowsphone }} not supported" title="{{ site.platforms.windowsphone }} not supported"/>
+          {% endif %}
+        </td>
+        <td>
+          <a href="http://en.wikipedia.org/wiki/Common_(entertainer)">
+            {% if page.pie.common %}
+            <img src="../images/common_legend.png" alt="Common code" title="Common code"/>
+            {% else %}
+            <img src="../images/common_legend_disabled.png" alt="No common code" title="No common code"/>
+            {% endif %}
+          </a>
+        </td>
+      </tr>
+    </table>
+    {% if page.pie.notes %}
+    <p>{{ page.pie.notes }}</p>
+    {% endif %}
+  </div>
+</div>

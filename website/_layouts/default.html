@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+  <title>PropertyCross{% if page.title %} | {{ page.title }}{% endif %}</title>
+  <meta name="description" content="Helping you select a cross-platform mobile framework - Apps using jQuery Mobile, Sencha Touch, Titanium and more">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--[if lt IE 9]>
+  <script src="{{ site.baseurl }}/scripts/html5shiv.js"></script>
+  <![endif]-->
+
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Bree+Serif|Open+Sans:400,700" type="text/css">
+  {% if site.debug %}
+  <link rel="stylesheet/less" href="{{ site.baseurl }}/less/main.less" type="text/css">
+  <script type="text/javascript">var less = { env:'development' };</script>
+  <script src="{{ site.baseurl }}/less/less.js" type="text/javascript"></script>
+  {% else %}
+  <link rel="stylesheet" href="{{ site.baseurl }}/less/main.css" type="text/css">
+  <script type="text/javascript">
+  
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-37206767-1']);
+    _gaq.push(['_trackPageview']);
+  
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  
+  </script>
+  {% endif %}
+</head>
+<body>
+<div class="container">
+  {{ content }}
+
+  <div class="row">
+    <div class="span12">
+      <hr/>
+    </div>
+  </div>
+
+  <footer>
+    <div class="row">
+      <div class="span12">
+        Brought to you by <a href="https://github.com/ColinEberhardt/">
+        <img src="http://www.gravatar.com/avatar/458f2e0d08d4114f8b323798cfea141d"/>Colin
+        Eberhardt</a> and <a href="https://github.com/chrisprice/">
+        <img src="http://www.gravatar.com/avatar/b6fe36176ec7c9475374a5cd3b7bef1a"/>Chris
+        Price</a>,
+        with thanks to Nestoria for their <a href="http://www.nestoria.co.uk/help/api">property search API</a>.
+      </div>
+    </div>
+  </footer>
+</div>
+<script type="text/javascript">// <![CDATA[
+!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+// ]]></script>
+<script type="text/javascript">// <![CDATA[
+(function() {     var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;     po.src = 'https://apis.google.com/js/plusone.js';     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);   })();
+// ]]></script>
+</body>
+</html>

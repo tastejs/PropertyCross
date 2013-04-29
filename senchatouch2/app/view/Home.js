@@ -15,7 +15,7 @@
             },
             {
                 xtype: 'formpanel',
-                scrollable: false,
+                scrollable: null,
                 margin: 10,
                 items: [
                     {
@@ -24,7 +24,8 @@
                             {
                                 xtype: 'textfield',
                                 label: 'Location',
-                                name: 'place_name'
+                                name: 'place_name',
+                                id: 'placeNameText'
                             }
                         ],
                         margin: 10
@@ -67,7 +68,7 @@
                 padding: '0 10 10',
                 xtype: 'dataview',
                 id: 'previousSearches',
-                scrollable: false,
+                scrollable: null,
                 store: 'searches',
                 defaultType: 'searcheslistitem',
                 useComponents: true
@@ -78,7 +79,7 @@
                 hidden: 'true',
                 ui: 'round',
                 id: 'didYouMean',
-                scrollable: false,
+                scrollable: null,
                 store: {
                     fields: ['place_name', 'long_title']
                 },

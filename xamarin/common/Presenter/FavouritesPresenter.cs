@@ -32,6 +32,7 @@ namespace PropertyFinder.Presenter
     public void SetView(View view)
     {
       view.SetFavourites(_state.Favourites);
+      view.PropertySelected -= View_PropertySelected;
       view.PropertySelected += View_PropertySelected;
     }
 

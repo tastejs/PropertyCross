@@ -17,10 +17,23 @@ namespace PropertyFinder
     {
       InitializeComponent();
     }
-    
+
+    private PropertyFinderViewModel ViewModel
+    {
+      get { return ((PropertyFinderViewModel)DataContext); }
+    }
+
     private void ApplicationBarIconButton_Click(object sender, EventArgs e)
     {
-      ((PropertyFinderViewModel)DataContext).FavouritesSelectedCommand.Execute(null);
+      ViewModel.FavouritesSelectedCommand.Execute(null);
+    }
+
+    private void TextBox_KeyDown(object sender, KeyEventArgs e)
+    {
+      if (e.Key == Key.Enter)
+      {
+        ViewModel.SearchCommand.Execute(null);
+      }
     }
 
   }

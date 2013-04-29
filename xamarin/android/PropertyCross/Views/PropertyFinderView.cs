@@ -21,11 +21,12 @@ using IMenu = global::Com.Actionbarsherlock.View.IMenu;
 using IMenuItem = global::Com.Actionbarsherlock.View.IMenuItem;
 using MenuItem = global::Com.Actionbarsherlock.View.MenuItem;
 using MenuInflater = global::Com.Actionbarsherlock.View.MenuInflater;
+using Android.Views.InputMethods;
 
 namespace com.propertycross.xamarin.android.Views
 {
 	[Activity (MainLauncher = true, WindowSoftInputMode = SoftInput.StateHidden, ScreenOrientation = ScreenOrientation.Portrait)]
-	public class PropertyFinderView : SherlockActivity, PropertyFinderPresenter.View
+	public class PropertyFinderView : SherlockActivity, PropertyFinderPresenter.View, Android.Widget.TextView.IOnEditorActionListener
 	{
 		private PropertyFinderPresenter presenter;
 		private EditText searchText;
@@ -34,15 +35,14 @@ namespace com.propertycross.xamarin.android.Views
 		private TextView messageText;
 		private ListView recentSearchList;
 		private RecentSearchAdapter adapter;
-		private View mainView;
-		private ProgressBar progress;
 		private GeoLocationService geoLocationService;
 
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
 
-			var app = (PropertyFinderApplication)Application;
+			var app = PropertyFinderApplication.GetApplication(this);
+			app.CurrentActivity = this;
 
 			var uiMarshal = new MarshalInvokeService(app);
 			var source = new PropertyDataSource(new JsonWebPropertySearch(uiMarshal));
@@ -53,6 +53,7 @@ namespace com.propertycross.xamarin.android.Views
 			SetContentView (Resource.Layout.PropertyFinderView);
 			searchText = (EditText) FindViewById(Resource.Id.search);
 			searchText.TextChanged += SearchText_Changed;
+			searchText.SetOnEditorActionListener(this);
 
 			myLocationButton = (Button) FindViewById(Resource.Id.use_location);
 			myLocationButton.Click += LocationButton_Clicked; 
@@ -67,10 +68,6 @@ namespace com.propertycross.xamarin.android.Views
 			adapter = new RecentSearchAdapter(this, new List<RecentSearch>());
 			recentSearchList.Adapter = adapter;
 
-			progress = (ProgressBar) FindViewById(Resource.Id.progress);
-			progress.Visibility = ViewStates.Invisible;
-			mainView = FindViewById(Resource.Id.propview);
-
 			presenter = 
 				new PropertyFinderPresenter(state,
 				                            source,
@@ -79,7 +76,6 @@ namespace com.propertycross.xamarin.android.Views
 			presenter.SetView(this);
 
 			app.Presenter = presenter;
-			app.CurrentActivity = this;
 		}
 
 		protected override void OnPause()
@@ -120,7 +116,11 @@ namespace com.propertycross.xamarin.android.Views
 
 		public void SetMessage(string msg)
 		{
-			messageText.Text = msg;
+			// Ignore null messages from the presenter.
+			if (msg != null)
+			{
+				messageText.Text = msg;
+			}
 		}
 
 		public void DisplaySuggestedLocations (List<PropertyFinder.Model.Location> locations)
@@ -143,8 +143,16 @@ namespace com.propertycross.xamarin.android.Views
 				searchText.Enabled = !value;
 				myLocationButton.Enabled = !value;
 				startSearchButton.Enabled = !value;
-				progress.Visibility = value ? ViewStates.Visible : ViewStates.Invisible;
-				mainView.Visibility = !value ? ViewStates.Visible : ViewStates.Invisible;
+
+				if (value)
+				{
+					messageText.Text = Resources.GetString(Resource.String.searching);
+				}
+				else
+				{
+					// Explicitly clear the message in the view.
+					messageText.Text = null;
+				}
 			}
 		}
 
@@ -157,7 +165,22 @@ namespace com.propertycross.xamarin.android.Views
 
 		private void SearchText_Changed(object sender, EventArgs e)
 		{
-			SearchTextChanged(this, new SearchTextChangedEventArgs(searchText.Text));
+			String searchTerm = searchText.Text;
+			if (searchTerm != null)
+			{
+				searchTerm = searchTerm.Trim();
+				SearchTextChanged(this, new SearchTextChangedEventArgs(searchTerm));
+			}
+		}
+
+		public bool OnEditorAction (TextView v, ImeAction actionId, KeyEvent e)
+		{
+			if (actionId == ImeAction.Search)
+			{
+				SearchButtonClicked(this, EventArgs.Empty);
+				return true;
+			}
+			return false;
 		}
 
 		private void LocationButton_Clicked(object sender, EventArgs e)

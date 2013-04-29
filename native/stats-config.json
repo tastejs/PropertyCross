@@ -1,15 +1,14 @@
 {
-  "shared":null,
-  "iOS":[
-    "iphone/*.h",
-    "iphone/*.m",
-    "iphone/*.mm",
-    "iphone/*.cpp",
-    "iphone/*.c"
+  "common":null,
+  "ios":[
+    "ios/*.h",
+    "ios/*.m"
   ],
-  "Android":null,
-  "WindowsPhone":{
-    "include":["windowsphone/*.cs", "windowsphone/*.xaml"],
+  "android":[
+		"android/PropertyCross/src*.java"
+	],
+  "windowsphone":{
+    "include":["windowsphone/*.cs"],
     "exclude":"*.xaml.cs"
   }
 }

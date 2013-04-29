@@ -1,0 +1,40 @@
+#Searching_label, .misspelt_place_name, #property_object, #property_guid
+{
+  display:none
+}
+
+#long_title, .number_of_li
+{
+  font-weight:bold
+}
+
+.thumbnail-container
+{
+  padding: 0 10px 0 0;
+  text-align: center;
+  float: left;
+}
+
+.thumbnail-container img
+{
+  width: 60px;
+  height: 60px;
+}
+
+div.propertyView img 
+{
+  padding: 2px;
+  margin: 5px;
+  width: 95%;
+  background-color: #aaa;
+}
+
+div.propertyView h1
+{
+  margin: 10px 0;
+}
+
+div.propertyView h3
+{
+  margin: 5px 0;
+}

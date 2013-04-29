@@ -11,7 +11,8 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="8dp"
-        android:textSize="20sp" />
+        android:textSize="22sp"
+        android:textStyle="bold" />
     <TextView
         android:id="@+id/property_location"
         android:layout_width="wrap_content"

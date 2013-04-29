@@ -1,0 +1,103 @@
+---
+layout: default
+---
+<header class="strip">
+  <a href="..">
+    <h3>
+      Property<i>Cross</i><small> | Helping you <b>select</b> a cross-platform mobile framework</small>
+    </h3>
+  </a>
+  <hr/>
+  <h1>
+    {{ page.title }} <img src="{{ site.baseurl }}/framework-icons/{{ page.framework }}-complete.png"/>
+  </h1>
+</header>
+
+<div class="row">
+  <div class="span7">
+    <h4>
+      Overview
+    </h4>
+
+    {{ content }}
+
+    <p class="btns">
+      <a href="{{ site.githuburl }}/issues?labels={{ page.framework }}&state=open" class="btn btn-large btn-primary github-issue-count-button" type="button">
+          View known issues
+      </a>
+    </p>
+  </div>
+  {% include pie.html %}
+</div>
+
+<div class="row">
+  <div class="span12">
+    <hr/>
+  </div>
+</div>
+
+{% for platform_hash in page.platforms %}
+  {% for platform in platform_hash %}
+    {% include screenshots.html %}
+  {% endfor %}
+{% endfor %}
+
+{% if page.contributors %}
+<footer>
+  <div class="row">
+    <div class="span12">
+      Framework example contributed by
+      {% for contributor in page.contributors %}
+        <a href="https://github.com/{{ contributor.username }}/">
+          {% comment %} keep on the same line to avoid extra whitespace {% endcomment %}
+          {% if contributor.hash %}<img src="http://www.gravatar.com/avatar/{{ contributor.hash }}"/>{% endif %}{{ contributor.name }}
+        </a>
+        {% unless forloop.last %}and{% endunless %}
+      {% endfor %}
+    </div>
+  </div>
+</footer>
+
+<div class="row">
+  <div class="span12">
+    <hr/>
+  </div>
+</div>
+
+{% endif %}
+
+<div class="others">
+  <div class="row">
+    <div class="span12">
+      <h4>Other Frameworks</h4>
+    </div>
+  </div>
+  <div class="row">
+    {% for post in site.posts reversed %}
+    <div class="span3">
+      <a href="{{ site.baseurl }}{{ post.url }}">
+        <img src="{{ site.baseurl }}/framework-icons/{{ post.framework }}-complete.png"/>{{ post.title }}
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+<script type="text/javascript">
+    !function() {
+        var buttons = document.getElementsByClassName('github-issue-count-button');
+        for (var i = 0, button = buttons[i]; i < buttons.length; button = buttons[++i]) {
+            var url = button.href
+                    .replace(/https:\/\/github\.com/, 'https://api.github.com/repos')
+                    .replace(/per_page=[0-9]+/g, '');
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', url, true);
+            xhr.onload = function(e) {
+                var count = JSON.parse(e.target.responseText).length;
+                this.classList.add('issue-count-' + count);
+                var label = count < 30 ? count : '30+';
+                this.innerHTML += '<span>' + label + '</span>';
+            }.bind(button);
+            xhr.send();
+        }
+    }();
+</script>

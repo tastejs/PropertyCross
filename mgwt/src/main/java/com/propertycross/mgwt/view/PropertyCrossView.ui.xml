@@ -1,0 +1,41 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui"
+	xmlns:mgwt-widgets="urn:import:com.googlecode.mgwt.ui.client.widget"
+	xmlns:mgwt="urn:import:com.googlecode.mgwt.ui.client.widget">
+
+	<ui:style>
+		.extraPadding {
+			padding: 1em 0;
+		}
+		
+		.contentContainer {
+			margin: 0.3em;
+		}
+	</ui:style>
+
+	<g:HTMLPanel styleName="panel">
+		<div class='{style.contentContainer}'>
+			<p class='{style.extraPadding}'>Use the form below to search for houses to buy. You can
+				search by place-name, postcode,
+				or click 'My location', to search in your current location</p>
+
+			<g:FlowPanel>
+				<mgwt:MSearchBox ui:field="searchTextField"></mgwt:MSearchBox>
+				<mgwt:Button ui:field="goButton">Go</mgwt:Button>
+				<mgwt:Button ui:field="myLocationButton">My location</mgwt:Button>
+			</g:FlowPanel>
+
+			<p ui:field="isLoadingIndicator" class='{style.extraPadding}'>Searching ...</p>
+
+			<p ui:field="userMessage" class='{style.extraPadding}'></p>
+
+			<h4 ui:field="suggestedLocationsHeading" class='{style.extraPadding}'>Please select a
+				location below:</h4>
+			<mgwt-widgets:CellList ui:field="suggestedLocationsList"></mgwt-widgets:CellList>
+
+			<h4 ui:field="recentSearchesHeader" class='{style.extraPadding}'>Recent searches:</h4>
+			<mgwt-widgets:CellList ui:field="recentSearchesList"></mgwt-widgets:CellList>
+		</div>
+	</g:HTMLPanel>
+</ui:UiBinder> 

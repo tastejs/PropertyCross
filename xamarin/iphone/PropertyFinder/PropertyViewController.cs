@@ -16,12 +16,19 @@ namespace PropertyFinder
 
     private UIBarButtonItem _favouriteButton;
 
+    private UIImage _starImage;
+
+    private UIImage _noStarImage;
+
     public PropertyViewController (PropertyPresenter presenter) : base ("PropertyViewController", null)
     {
       Title = "Property Details";
       _presenter = presenter;
 
-      _favouriteButton = new UIBarButtonItem("+",
+      _starImage = new UIImage("star.png");
+      _noStarImage = new UIImage("nostar.png");
+
+      _favouriteButton = new UIBarButtonItem(_starImage,
             UIBarButtonItemStyle.Bordered, FavouriteButtonEventHandler);
     }
 		
@@ -63,7 +70,7 @@ namespace PropertyFinder
     public bool IsFavourited {
       set
       {
-        _favouriteButton.Title = value ? "-" : "+";
+        _favouriteButton.Image = value ? _starImage : _noStarImage;
       }
     }
 

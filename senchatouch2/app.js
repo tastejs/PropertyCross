@@ -1,6 +1,6 @@
-﻿//<debug>
+//<debug>
 Ext.Loader.setPath({
-    'Ext': 'sdk/src'
+    'Ext': 'touch/src'
 });
 //</debug>
 
