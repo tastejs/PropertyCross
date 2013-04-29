@@ -1,0 +1,1 @@
+<%=numResults%> of <%=totalResults%> matches

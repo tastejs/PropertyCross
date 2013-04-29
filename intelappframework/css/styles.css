@@ -1,0 +1,76 @@
+/*Header button defaults*/
+#header a.button {
+    float: left;
+}
+
+/*Fave button*/
+#header a#addRemoveFave {
+    float: right;
+    margin-right: 6px;
+}
+#header a#addRemoveFave.fave {
+    color: yellow;
+}
+
+/*Home page*/
+#recentSearchLabel, #locListLabel, #errorMessage  {
+    margin-top: 10px;
+    display: none; /* initially hidden */
+}
+#recentSearches li span.totalResults {
+    float: right;
+    margin-right: 35px;
+    margin-top: 14px;
+    font-size: 12px;
+    background: #CCC;
+    line-height: 12px;
+    padding: 4px;
+    color: black;
+    border-radius: 4px;
+}
+#recentSearches li span.recentSearchLocation {
+    width: calc(100% - 90px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+}
+
+#loadingSpinner {
+    float: right;
+    display: none;
+}
+#errorMessage {
+    color: red;
+}
+
+/*Results list*/
+#results a {
+    padding: 10px;
+    border-bottom: 1px solid black;
+    display: block;
+    color: white;
+    text-decoration: none;
+}
+#results a img {
+    float: left;
+    margin-right: 5px
+}
+#results a:after{
+    content: "";
+    display: block;
+    clear: both;
+}
+
+/*Property details*/
+#property img{
+    width: 100%;
+}
+#property h3, #property div {
+    margin: 5px;
+}
+
+/* data-footer attr doesn't fully remove the footer, so do it with CSS */
+#content {
+    bottom: 0;
+}

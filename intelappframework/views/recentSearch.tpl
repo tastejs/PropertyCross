@@ -1,0 +1,1 @@
+<li data-recent-search-id="<%= search.id %>">    <a href="/search/recent/<%= search.id %>/<%= search.display_name %>">        <span class="recentSearchLocation"><%= search.display_name %></span>        <span class="totalResults"><%= search.total_results %></span>    </a></li>
