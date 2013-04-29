@@ -5,7 +5,7 @@
     xmlns:parsley="http://www.spicefactory.org/parsley"
     xmlns:assets="com.propertycross.air.assets.*"
 
-    title="{model.title} results"
+    title="{model.title} matches"
 >
     <s:layout>
         <s:VerticalLayout />
