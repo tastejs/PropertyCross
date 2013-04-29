@@ -687,13 +687,10 @@ namespace com.propertycross.xamarin.android
 			public const int ic_launcher = 2130837591;
 			
 			// aapt resource value: 0x7f020058
-			public const int monoandroidsplash = 2130837592;
+			public const int nostar = 2130837592;
 			
 			// aapt resource value: 0x7f020059
-			public const int nostar = 2130837593;
-			
-			// aapt resource value: 0x7f02005a
-			public const int star = 2130837594;
+			public const int star = 2130837593;
 			
 			static Drawable()
 			{
@@ -981,25 +978,22 @@ namespace com.propertycross.xamarin.android
 			public const int load_more_footer = 2130903060;
 			
 			// aapt resource value: 0x7f030015
-			public const int monoandroidsplash = 2130903061;
+			public const int property_search_row = 2130903061;
 			
 			// aapt resource value: 0x7f030016
-			public const int property_search_row = 2130903062;
+			public const int property_view = 2130903062;
 			
 			// aapt resource value: 0x7f030017
-			public const int property_view = 2130903063;
+			public const int PropertyFinderView = 2130903063;
 			
 			// aapt resource value: 0x7f030018
-			public const int PropertyFinderView = 2130903064;
+			public const int recent_search_row = 2130903064;
 			
 			// aapt resource value: 0x7f030019
-			public const int recent_search_row = 2130903065;
+			public const int sherlock_spinner_dropdown_item = 2130903065;
 			
 			// aapt resource value: 0x7f03001a
-			public const int sherlock_spinner_dropdown_item = 2130903066;
-			
-			// aapt resource value: 0x7f03001b
-			public const int sherlock_spinner_item = 2130903067;
+			public const int sherlock_spinner_item = 2130903066;
 			
 			static Layout()
 			{
@@ -1133,14 +1127,14 @@ namespace com.propertycross.xamarin.android
 		public partial class Style
 		{
 			
-			// aapt resource value: 0x7f0a005a
-			public const int ActionBar = 2131361882;
-			
-			// aapt resource value: 0x7f0a005c
-			public const int ActionBar_MenuTextStyle = 2131361884;
+			// aapt resource value: 0x7f0a0059
+			public const int ActionBar = 2131361881;
 			
 			// aapt resource value: 0x7f0a005b
-			public const int ActionBar_TitleText = 2131361883;
+			public const int ActionBar_MenuTextStyle = 2131361883;
+			
+			// aapt resource value: 0x7f0a005a
+			public const int ActionBar_TitleText = 2131361882;
 			
 			// aapt resource value: 0x7f0a0033
 			public const int DialogWindowTitle_Sherlock = 2131361843;
@@ -1149,10 +1143,7 @@ namespace com.propertycross.xamarin.android
 			public const int DialogWindowTitle_Sherlock_Light = 2131361844;
 			
 			// aapt resource value: 0x7f0a0058
-			public const int Mono_Android_Theme_Splash = 2131361880;
-			
-			// aapt resource value: 0x7f0a0059
-			public const int PropertyCrossTheme = 2131361881;
+			public const int PropertyCrossTheme = 2131361880;
 			
 			// aapt resource value: 0x7f0a0047
 			public const int Sherlock___TextAppearance_Small = 2131361863;
