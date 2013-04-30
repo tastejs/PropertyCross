@@ -156,6 +156,11 @@ function SearchViewModel() {
         }
     };
 
+    this.listedLocationClicked = function(event) {
+        this.set("searchTerm", event.dataItem.place_name);
+        search(event.dataItem.place_name, event.dataItem.coords);
+    };
+
     this.recentSearchClicked = function(event) {
         search(event.dataItem.place_name, event.dataItem.coords);
     };
