@@ -85,7 +85,9 @@ define ["lib/jqtouch",
                             network connection and try again."
         stringSearch: -> @search 1, @location()
         recentSearch: (search) -> @search 1, search.search_loc
-        searchWithName: (name) -> @search 1, name
+        searchWithName: (name) ->
+            @location(name)
+            @search 1, name
         geoSearch: ->
             self = this
             navigator.geolocation.getCurrentPosition(
