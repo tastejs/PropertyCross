@@ -193,9 +193,12 @@ $.mvc.controller.create("search", {
     },
 
     /* Searches on a recently searched location */
-    recent: function(placeName, displayName){
-        this.displayName = displayName;
-        this.performSearch(placeName);
+    recent: function(placeName){
+        var that = this;
+        recentSearch.get(placeName, function(search) {
+            that.displayName = search.display_name;
+            that.performSearch(placeName);
+        });
     },
 
     loc: function(placeName) {
