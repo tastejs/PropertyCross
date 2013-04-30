@@ -1,6 +1,15 @@
 $.mvc.controller.create("favourites", {
 
     show: function() {
+        this.refreshFavesList(function() {
+            $("#resultListHeader h1").html("Favourites");
+            $("#loadMore").hide();
+            //transition to results view
+            $.ui.loadContent("results",false,false,"slide");
+        });
+    },
+
+    refreshFavesList: function(callback) {
         var $resultList = $("#resultList");
         $resultList.empty();
 
@@ -23,15 +32,11 @@ $.mvc.controller.create("favourites", {
                         bathroom_number: prop.bathroom_number
                     });
                     property.save(function() {
-                        $resultList.append($.template("resultsTpl",{property:prop}));
+                        $resultList.append($.template("resultsTpl",{property:prop, fave:true}));
                     });
                 });
             }
-
-            $("#resultListHeader h1").html("Favourites");
-            $("#loadMore").hide();
-            //transition to results view
-            $.ui.loadContent("results",false,false,"slide");
+            callback();
         });
 
     },
