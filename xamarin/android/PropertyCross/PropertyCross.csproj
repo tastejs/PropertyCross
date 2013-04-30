@@ -77,7 +77,6 @@
     <AndroidResource Include="Resources\values\Strings.xml" />
     <AndroidResource Include="Resources\layout\PropertyFinderView.axml" />
     <AndroidResource Include="Resources\layout\recent_search_row.axml" />
-    <AndroidResource Include="Resources\menu\favourites_view.xml" />
     <AndroidResource Include="Resources\values\themes.xml" />
     <AndroidResource Include="Resources\layout\property_search_row.axml" />
     <AndroidResource Include="Resources\layout\load_more_footer.axml" />
@@ -98,6 +97,12 @@
     <AndroidResource Include="Resources\drawable-xhdpi\star.png" />
     <AndroidResource Include="Resources\values\colors.xml" />
     <AndroidResource Include="Resources\layout-v11\load_more_footer.axml" />
+    <AndroidResource Include="Resources\anim\loading_rotate.axml" />
+    <AndroidResource Include="Resources\drawable-hdpi\refresh.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\refresh.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\refresh.png" />
+    <AndroidResource Include="Resources\menu\menu_propertyfinderview.xml" />
+    <AndroidResource Include="Resources\layout\loading_action_item.axml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\Common\Model\IJsonPropertySearch.cs">
@@ -195,6 +200,7 @@
     <Folder Include="Resources\drawable\" />
     <Folder Include="Resources\drawable-ldpi\" />
     <Folder Include="Resources\layout-v11\" />
+    <Folder Include="Resources\anim\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ActionBarSherlock\ActionBarSherlock.csproj">
