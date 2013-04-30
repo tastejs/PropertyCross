@@ -201,6 +201,7 @@ $.mvc.controller.create("search", {
     loc: function(placeName) {
         this.displayName = '';
         this.performSearch(placeName);
+        $('#stringSearch').val(placeName);
     },
 
     /*Loads more results, for the current search*/
