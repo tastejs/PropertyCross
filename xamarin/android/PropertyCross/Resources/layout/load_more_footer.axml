@@ -2,24 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
-    <TextView
-        android:id="@+id/tap_loadmore"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        android:textSize="14sp"
-        android:text="@string/tap_load_more"
-        android:gravity="center" />
+    android:layout_height="wrap_content"
+    android:background="@android:drawable/list_selector_background">
     <TextView
         android:id="@+id/result_details"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="?android:attr/listPreferredItemHeight"
         android:layout_marginBottom="4dp"
         android:layout_marginLeft="4dp"
         android:layout_marginRight="4dp"
         android:textSize="14sp"
         android:text="@string/no_result_details"
         android:textColor="@color/row_detail_color"
-        android:gravity="center" />
+        android:gravity="center_vertical" />
 </LinearLayout>

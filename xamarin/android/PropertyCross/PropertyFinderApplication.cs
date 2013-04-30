@@ -1,6 +1,7 @@
 using System;
 using Android.App;
 using Android.Runtime;
+using Android.Content;
 
 namespace com.propertycross.xamarin.android
 {
@@ -27,6 +28,11 @@ namespace com.propertycross.xamarin.android
 		{
 			get;
 			set;
+		}
+
+		public static PropertyFinderApplication GetApplication(Context context)
+		{
+			return (PropertyFinderApplication)context.ApplicationContext;
 		}
 	}
 }

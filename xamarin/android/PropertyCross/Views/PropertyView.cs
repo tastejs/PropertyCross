@@ -51,7 +51,7 @@ namespace com.propertycross.xamarin.android.Views
 
 			placeholder = BitmapFactory.DecodeResource(Resources, Resource.Drawable.ic_launcher);
 
-			var app = (PropertyFinderApplication)Application;
+			var app = PropertyFinderApplication.GetApplication(this);
 			presenter = (PropertyPresenter) app.Presenter;
 			presenter.SetView(this);
 			app.CurrentActivity = this;

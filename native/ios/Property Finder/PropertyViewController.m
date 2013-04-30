@@ -19,6 +19,8 @@
 {
     Property* _property;
     PersistentDataStore* _dataStore;
+    UIImage* _starImage;
+    UIImage* _noStarImage;
 }
 
 #pragma mark - initialisation
@@ -40,6 +42,9 @@
     {
         self.title = @"Property Details";
         
+        _starImage = [UIImage imageNamed:@"star.png"];
+        _noStarImage = [UIImage imageNamed:@"nostar.png"];
+        
         AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
         _dataStore = appDelegate.persistentDataStore;
     }
@@ -58,8 +63,8 @@
     self.summaryLabel.text = _property.summary;
     [self.summaryLabel sizeToFit];
     
-    NSString* buttonText = [_dataStore isPropertyFavourited:_property] ? @"-" : @"+";
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:buttonText
+    UIImage* buttonImage = [_dataStore isPropertyFavourited:_property] ? _starImage : _noStarImage;
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:buttonImage
                                                                               style:UIBarButtonItemStyleBordered
                                                                              target:self
                                                                              action:@selector(favouriteButtonTouched)];
@@ -69,8 +74,8 @@
 - (void) favouriteButtonTouched
 {
     [_dataStore toggleFavourite:_property];
-    NSString* buttonText = [_dataStore isPropertyFavourited:_property] ? @"-" : @"+";
-    self.navigationItem.rightBarButtonItem.title = buttonText;
+    UIImage* buttonImage = [_dataStore isPropertyFavourited:_property] ? _starImage : _noStarImage;
+    self.navigationItem.rightBarButtonItem.image = buttonImage;
 }
 
 @end

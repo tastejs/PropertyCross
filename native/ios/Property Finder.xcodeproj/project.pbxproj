@@ -10,6 +10,10 @@
 		7220D61A1718630500F21A64 /* RecentSearchDataEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 7220D6191718630500F21A64 /* RecentSearchDataEntity.m */; };
 		726CEB88163EE01C00860DD0 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 726CEB87163EE01C00860DD0 /* Icon.png */; };
 		726CEB8A163EE02000860DD0 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 726CEB89163EE02000860DD0 /* Icon@2x.png */; };
+		728463301727327700AD5EE9 /* nostar.png in Resources */ = {isa = PBXBuildFile; fileRef = 7284632E1727327700AD5EE9 /* nostar.png */; };
+		728463311727327700AD5EE9 /* star.png in Resources */ = {isa = PBXBuildFile; fileRef = 7284632F1727327700AD5EE9 /* star.png */; };
+		728463351727354F00AD5EE9 /* nostar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 728463331727354F00AD5EE9 /* nostar@2x.png */; };
+		728463361727354F00AD5EE9 /* star@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 728463341727354F00AD5EE9 /* star@2x.png */; };
 		72AB49E11636FA8C006B5EF1 /* PropertyFinderDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 72AB49DF1636FA8C006B5EF1 /* PropertyFinderDataModel.xcdatamodeld */; };
 		72AB49EA1636FBEE006B5EF1 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72AB49E91636FBEE006B5EF1 /* CoreData.framework */; };
 		72AB49ED1637CA3A006B5EF1 /* SearchItemBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 72AB49EC1637CA3A006B5EF1 /* SearchItemBase.m */; };
@@ -59,6 +63,10 @@
 		7220D6191718630500F21A64 /* RecentSearchDataEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentSearchDataEntity.m; sourceTree = "<group>"; };
 		726CEB87163EE01C00860DD0 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		726CEB89163EE02000860DD0 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		7284632E1727327700AD5EE9 /* nostar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = nostar.png; path = "Property Finder/nostar.png"; sourceTree = SOURCE_ROOT; };
+		7284632F1727327700AD5EE9 /* star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = star.png; path = "Property Finder/star.png"; sourceTree = SOURCE_ROOT; };
+		728463331727354F00AD5EE9 /* nostar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "nostar@2x.png"; path = "Property Finder/nostar@2x.png"; sourceTree = SOURCE_ROOT; };
+		728463341727354F00AD5EE9 /* star@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "star@2x.png"; path = "Property Finder/star@2x.png"; sourceTree = SOURCE_ROOT; };
 		72AB49E01636FA8C006B5EF1 /* PropertyFinderDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PropertyFinderDataModel.xcdatamodel; sourceTree = "<group>"; };
 		72AB49E91636FBEE006B5EF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		72AB49EB1637CA3A006B5EF1 /* SearchItemBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchItemBase.h; sourceTree = "<group>"; };
@@ -188,6 +196,10 @@
 		72AB4A1B163BBFED006B5EF1 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				728463331727354F00AD5EE9 /* nostar@2x.png */,
+				728463341727354F00AD5EE9 /* star@2x.png */,
+				7284632E1727327700AD5EE9 /* nostar.png */,
+				7284632F1727327700AD5EE9 /* star.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -374,6 +386,10 @@
 				72AB4A1216389555006B5EF1 /* FavouritesViewController.xib in Resources */,
 				726CEB88163EE01C00860DD0 /* Icon.png in Resources */,
 				726CEB8A163EE02000860DD0 /* Icon@2x.png in Resources */,
+				728463301727327700AD5EE9 /* nostar.png in Resources */,
+				728463311727327700AD5EE9 /* star.png in Resources */,
+				728463351727354F00AD5EE9 /* nostar@2x.png in Resources */,
+				728463361727354F00AD5EE9 /* star@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

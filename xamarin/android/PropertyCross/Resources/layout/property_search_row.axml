@@ -7,8 +7,6 @@
         android:id="@+id/property_thumb"
         android:layout_width="?android:attr/listPreferredItemHeight"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentBottom="true"
         android:layout_marginRight="4dp"
         android:contentDescription="@string/property_img_description" />
     <LinearLayout

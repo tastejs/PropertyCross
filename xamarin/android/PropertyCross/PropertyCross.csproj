@@ -66,6 +66,7 @@
     <Compile Include="Views\FavouritesView.cs" />
     <Compile Include="Utils\BitmapUtils.cs" />
     <Compile Include="Utils\AsyncDrawable.cs" />
+    <Compile Include="AmbiguousLocationsAdapter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -96,6 +97,7 @@
     <AndroidResource Include="Resources\drawable-xhdpi\nostar.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\star.png" />
     <AndroidResource Include="Resources\values\colors.xml" />
+    <AndroidResource Include="Resources\layout-v11\load_more_footer.axml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\Common\Model\IJsonPropertySearch.cs">
@@ -192,6 +194,7 @@
     <Folder Include="Resources\drawable-v14\" />
     <Folder Include="Resources\drawable\" />
     <Folder Include="Resources\drawable-ldpi\" />
+    <Folder Include="Resources\layout-v11\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ActionBarSherlock\ActionBarSherlock.csproj">
