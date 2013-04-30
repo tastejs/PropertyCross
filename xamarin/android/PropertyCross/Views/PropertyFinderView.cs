@@ -21,6 +21,7 @@ using IMenuItem = global::Com.Actionbarsherlock.View.IMenuItem;
 using MenuItem = global::Com.Actionbarsherlock.View.MenuItem;
 using MenuInflater = global::Com.Actionbarsherlock.View.MenuInflater;
 using Android.Views.InputMethods;
+using Android.Views.Animations;
 
 namespace com.propertycross.xamarin.android.Views
 {
@@ -36,6 +37,9 @@ namespace com.propertycross.xamarin.android.Views
 		private ListView resultsList;
 		private GeoLocationService geoLocationService;
 		private bool showingRecentSearches = true;
+		private IMenuItem refreshItem;
+		private ImageView loadingView;
+		private Animation loadingAnimation;
 
 		protected override void OnCreate (Bundle bundle)
 		{
@@ -66,7 +70,10 @@ namespace com.propertycross.xamarin.android.Views
 			resultsHeader = (TextView) FindViewById(Resource.Id.results_header);
 			resultsList = (ListView) FindViewById(Resource.Id.results_list);
 			resultsList.ItemClick += ResultsListItem_Clicked;
-			resultsList.Adapter = new RecentSearchAdapter(this, new List<RecentSearch>());;
+			resultsList.Adapter = new RecentSearchAdapter(this, new List<RecentSearch>());
+
+			loadingAnimation = AnimationUtils.LoadAnimation(this, Resource.Animation.loading_rotate);
+			loadingAnimation.RepeatMode = RepeatMode.Restart;
 
 			presenter = 
 				new PropertyFinderPresenter(state,
@@ -90,9 +97,16 @@ namespace com.propertycross.xamarin.android.Views
 			geoLocationService.Dispose();
 		}
 
+		public override bool OnPrepareOptionsMenu(IMenu menu)
+		{
+			refreshItem = menu.FindItem(Resource.Id.refresh);
+			loadingView = (ImageView) refreshItem.ActionView;
+			return true;
+		}
+
 		public override bool OnCreateOptionsMenu(IMenu menu)
 		{
-			SupportMenuInflater.Inflate(Resource.Menu.favourites_view, menu);
+			SupportMenuInflater.Inflate(Resource.Menu.menu_propertyfinderview, menu);
 			return true;
 		}
 
@@ -163,12 +177,13 @@ namespace com.propertycross.xamarin.android.Views
 
 				if (value)
 				{
-					messageText.Text = Resources.GetString(Resource.String.searching);
+					loadingView.StartAnimation(loadingAnimation);
+					refreshItem.SetVisible(true);
 				}
 				else
 				{
-					// Explicitly clear the message in the view.
-					messageText.Text = null;
+					loadingView.ClearAnimation();
+					refreshItem.SetVisible(false);
 				}
 			}
 		}
