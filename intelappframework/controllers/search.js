@@ -79,7 +79,7 @@ $.mvc.controller.create("search", {
                 bathroom_number: prop.bathroom_number
             });
             property.save(function() {
-                that.$resultList.append($.template("resultsTpl",{property:property}));
+                that.$resultList.append($.template("resultsTpl",{property:property, fave:false}));
             });
         });
         var numResults = that.$resultList.find("a").length;
