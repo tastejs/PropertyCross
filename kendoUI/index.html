@@ -56,7 +56,7 @@
         <ul data-role="listview"
             data-style="inset"
             data-template="recentSearchTemplate"
-            data-bind="source: locations, events: { click:recentSearchClicked }"></ul>
+            data-bind="source: locations, events: { click:listedLocationClicked }"></ul>
 
         <!-- recent searches -->
         <h3 data-bind="visible: recentSearchTitleVisible">Recent Searches</h3>
@@ -121,7 +121,7 @@
                 <a data-role="backbutton" data-align="left">Back</a>
                 <span data-role="view-title">Information</span>
                 <a data-role="button" data-align="right" data-icon="favorites" data-bind="click: addRemoveFave, visible: notFave"></a>
-                <a data-role="button" data-align="right" data-icon="favorites" data-bind="click: addRemoveFave, visible: fave" class="isFave"></a>
+                <a data-role="button" data-align="right" data-icon="favorites" data-bind="click: addRemoveFave, visible: isFave" class="isFave"></a>
 
             </div>
         </div>
