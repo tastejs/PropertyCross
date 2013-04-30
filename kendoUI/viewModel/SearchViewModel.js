@@ -59,8 +59,9 @@ function SearchViewModel() {
             }
         } else {
             //else move existing to the front of the array
-            var existingSearch = that.recentSearches.splice(existing, 1);
-            that.recentSearches.unshift(existingSearch[0]);
+            var existingSearch = that.recentSearches.splice(existing, 1)[0];
+            existingSearch.total_results = total_results; //total may have changed since last searched
+            that.recentSearches.unshift(existingSearch);
         }
         saveState();
     };
