@@ -18,7 +18,8 @@ async.series([
     ["senchatouch2"],
     ["native"],
     ["rhomobile"],
-    ["kendoui"]
+    ["kendoui"],
+    ["intelappframework"]
   ]),
 
   generateIcons.bind(null, "assets/icon-base-173x173.png", [
