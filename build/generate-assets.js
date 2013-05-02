@@ -88,7 +88,17 @@ async.series([
     ["assets/frameworks/kendoui.png", "kendoui/assets/icons/icon-57-2x.png", 114],
     ["assets/frameworks/kendoui.png", "kendoui/assets/icons/icon-72-2x.png", 144],
     ["assets/frameworks/kendoui.png", "kendoui/assets/icons/ApplicationIcon.png", 66],
-    ["assets/frameworks/kendoui.png", "kendoui/assets/icons/ApplicationTileIcon.png", 173]
+    ["assets/frameworks/kendoui.png", "kendoui/assets/icons/ApplicationTileIcon.png", 173],
+    ["assets/frameworks/intelappframework.png", "intelappframework/assets/icons/36x36.png", 36],
+    ["assets/frameworks/intelappframework.png", "intelappframework/assets/icons/48x48.png", 48],
+    ["assets/frameworks/intelappframework.png", "intelappframework/assets/icons/72x72.png", 72],
+    ["assets/frameworks/intelappframework.png", "intelappframework/assets/icons/96x96.png", 96],
+    ["assets/frameworks/intelappframework.png", "intelappframework/assets/icons/icon-57.png", 57],
+    ["assets/frameworks/intelappframework.png", "intelappframework/assets/icons/icon-72.png", 72],
+    ["assets/frameworks/intelappframework.png", "intelappframework/assets/icons/icon-57-2x.png", 114],
+    ["assets/frameworks/intelappframework.png", "intelappframework/assets/icons/icon-72-2x.png", 144],
+    ["assets/frameworks/intelappframework.png", "intelappframework/assets/icons/ApplicationIcon.png", 66],
+    ["assets/frameworks/intelappframework.png", "intelappframework/assets/icons/ApplicationTileIcon.png", 173]
   ]),
 
   generateSplashscreens.bind(null, "assets/splashscreen-bottom-640x640.png", [
@@ -126,7 +136,14 @@ async.series([
     ["kendoui/assets/splashscreens/720x1280.png", 720, 1280],
     ["kendoui/assets/splashscreens/screen-iphone-portrait.png", 320, 480],
     ["kendoui/assets/splashscreens/screen-iphone-portrait-2x.png", 640, 960],
-    ["kendoui/assets/splashscreens/SplashScreenImage.jpg", 480, 800]
+    ["kendoui/assets/splashscreens/SplashScreenImage.jpg", 480, 800],
+    ["intelappframework/assets/splashscreens/200x320.png", 200, 320],
+    ["intelappframework/assets/splashscreens/320x480.png", 320, 480],
+    ["intelappframework/assets/splashscreens/480x800.png", 480, 800],
+    ["intelappframework/assets/splashscreens/720x1280.png", 720, 1280],
+    ["intelappframework/assets/splashscreens/screen-iphone-portrait.png", 320, 480],
+    ["intelappframework/assets/splashscreens/screen-iphone-portrait-2x.png", 640, 960],
+    ["intelappframework/assets/splashscreens/SplashScreenImage.jpg", 480, 800]
   ]),
 
   generateOther.bind(null, "assets/star.png", [
