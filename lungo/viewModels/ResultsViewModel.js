@@ -8,6 +8,9 @@ define(
 
     function(ko, DataSource, Search, PropertyViewModel) {
 
+        var LOAD_MORE_TEXT = 'Load more ...';
+        var LOAD_MORE_LOADING_TEXT = 'Loading ...';
+
         var ResultsViewModel = function(application) {
             this.datasource = new DataSource();
 
@@ -15,6 +18,8 @@ define(
             this.resultCount = ko.observable();
             this.currentPageNumber = ko.observable();
             this.searchTerm = ko.observable();
+
+            this.loadMoreText = ko.observable(LOAD_MORE_TEXT);
 
             this.pageCount = ko.computed(function() {
                 return this.properties().length;
@@ -37,12 +42,17 @@ define(
             };
 
             this.retrieveMoreResults = function() {
+                this.loadMoreText(LOAD_MORE_LOADING_TEXT);
+
                 var search = new Search({
                     term: this.searchTerm(),
                     pageNumber: this.currentPageNumber() + 1
                 });
 
-                this.datasource.performSearch(search, Lungo.Core.bind(this, this.update));
+                this.datasource.performSearch(search, Lungo.Core.bind(this, function(response, search) {
+                    this.update(response, search);
+                    this.loadMoreText(LOAD_MORE_TEXT);
+                }));
             };
 
         };

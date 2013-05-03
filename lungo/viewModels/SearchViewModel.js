@@ -13,17 +13,20 @@ define(
             this.searchTerm = ko.observable();
             this.recentSearches = ko.observableArray();
             this.datasource = new DataSource();
+            this.isSearching = ko.observable(false);
 
-            this.performSearch = function() {
+            this.performSearch = function(element) {
 
                 var search = new Search({
                     term: this.searchTerm(),
                     pageNumber: 1
                 });
 
+                this.isSearching(true);
+
                 // Perform the search
                 this.datasource.performSearch(search, Lungo.Core.bind(this, function(response) {
-                    console.log('Done, response is', response);
+                    this.isSearching(false);
 
                     switch(response.code) {
                         case DataSourceResponseCode.PROPERTIES_FOUND:

@@ -63,9 +63,10 @@
         </header>
 
         <article id="search-form" class="active indented list">
-            <p class="centered">
+            <p>
                 Use the form below to search for houses to buy. You can search by place-name, postcode, or click 'My location', to search in your current location!
             </p>
+            <div data-bind="visible: isSearching" data-loading="" class="loader"></div>
             <form data-bind="submit: performSearch">
                 <input type="text" data-bind="value: searchTerm" placeholder="Enter Location" />
                 <button type="submit" data-router="section" class="blue">Go</button>
@@ -107,7 +108,7 @@
             <ul>
                 <li data-bind="click: retrieveMoreResults">
                     <a href="#">
-                        <strong>Load more ...</strong>
+                        <strong data-bind="text: loadMoreText"></strong>
                         <small>Results for <strong data-bind="text: searchTerm"></strong>, showing <strong data-bind="text: pageCount"></strong> of <strong data-bind="text: resultCount"></strong> properties</small>
                     </a>
                 </li>
