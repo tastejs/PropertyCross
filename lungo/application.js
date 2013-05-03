@@ -1,17 +1,12 @@
 require.config({
     paths: {
         ko: 'components/knockout/knockout-2.2.1',
-        datasource: 'models/NestoriaDataSource',
-        lungo: 'components/lungo/lungo'
+        datasource: 'models/NestoriaDataSource'
     },
 
     shim: {
         ko: {
             exports: 'ko'
-        },
-
-        lungo: {
-            exports: 'Lungo'
         }
     },
 
@@ -25,6 +20,7 @@ define(
     ],
 
     function(ko, ApplicationViewModel) {
-        ko.applyBindings(new ApplicationViewModel());
+        this.applicationViewModel = new ApplicationViewModel();
+        this.applicationViewModel.initialize();
     }
 );

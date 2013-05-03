@@ -1,27 +1,27 @@
 define(
     [
         'ko',
-        'datasource',
-        'models/Search'
+        'viewModels/SearchViewModel',
+        'viewModels/ResultsViewModel'
     ],
 
-    function(ko, DataSource, Search) {
+    function(ko, SearchViewModel, ResultsViewModel) {
 
     var ApplicationViewModel = function() {
 
-        this.searchTerm = ko.observable();
-        this.recentSearches = ko.observableArray();
-        this.datasource = new DataSource();
+        this.searchViewModel = new SearchViewModel(this);
+        this.resultsViewModel = new ResultsViewModel(this);
 
-        this.performSearch = function() {
-            var search = new Search(this.searchTerm());
-
-            // Perform the search
-            this.datasource.performSearch(search, Lungo.Core.bind(this, function(response) {
-                this.recentSearches.push(search);
-            }));
+        this.initialize = function() {
+            ko.applyBindings(this.searchViewModel, Quo('#main').get(0));
+            ko.applyBindings(this.resultsViewModel, Quo('#results').get(0));
         };
 
+        this.displaySearchResults = function(response, search) {
+            this.resultsViewModel.empty();
+            this.resultsViewModel.update(response, search);
+            Lungo.Router.section('results');
+        };
     };
 
     return ApplicationViewModel;

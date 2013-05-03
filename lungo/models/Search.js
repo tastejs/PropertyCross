@@ -1,7 +1,8 @@
 define([], function() {
 
-    var Search = function(name) {
-        this.name = name;
+    var Search = function(params) {
+        this.term = params.term;
+        this.pageNumber = params.pageNumber;
     };
 
     return Search;

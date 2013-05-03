@@ -50,9 +50,10 @@
     <link rel="stylesheet" href="components/lungo/lungo.icon.brand.css">
     <link rel="stylesheet" href="components/lungo/lungo.css">
     <link rel="stylesheet" href="components/lungo/theme.lungo.css">
+    <link rel="stylesheet" href="css/main.css">
 </head>
 
-<body class="app">
+<body class="app" data-position="fixed">
     <section id="main" data-transition="">
         <header>
             <p class="title centered">Property Cross</p>
@@ -67,7 +68,7 @@
             </p>
             <form data-bind="submit: performSearch">
                 <input type="text" data-bind="value: searchTerm" placeholder="Enter Location" />
-                <button type="submit" href="#results" data-router="section" class="blue">Go</button>
+                <button type="submit" data-router="section" class="blue">Go</button>
                 <button href="#" class="blue">My Location</button>
             </form>
             <p>
@@ -96,18 +97,35 @@
 
     <section id="results" data-transition="slide">
         <header data-back="home blue">
-            <p class="title centered">4 out of 20 matches</p>
+            <p class="title centered"><span data-bind="text: pageCount"></span> out of <span data-bind="text: resultCount"></span> matches</p>
         </header>
 
-        <article id="result-list" class="active indented list">
+        <article id="result-list" class="active indented list scroll">
+            <ul data-bind="foreach: properties">
+                <li data-bind="template: { name: 'property-template', data: $data }"></li>
+            </ul>
             <ul>
-                <li>1 Cardigan Terrace</li>
-                <li>55 Addycombe Terrace</li>
-                <li>18 Heaton Road</li>
-                <li>12 Chillingham Road</li>
+                <li data-bind="click: retrieveMoreResults">
+                    <a href="#">
+                        <strong>Load more ...</strong>
+                        <small>Results for <strong data-bind="text: searchTerm"></strong>, showing <strong data-bind="text: pageCount"></strong> of <strong data-bind="text: resultCount"></strong> properties</small>
+                    </a>
+                </li>
             </ul>
         </article>
     </section>
+
+    <script type="text/html" id="property-template">
+        <div class="property">
+            <div class="property-thumbnail ib">
+                <img data-bind="attr: { src: thumbnailUrl } " />
+            </div>
+            <div class="property-information ib">
+                <strong data-bind="text: formattedPrice"></strong>
+                <small data-bind="text: title"></small>
+            </div>
+        </div>
+    </script>
 
 
     <!-- Lungo - Dependencies -->

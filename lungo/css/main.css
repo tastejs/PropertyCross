@@ -1,0 +1,9 @@
+.ib {
+    display: inline-block;
+}
+
+.property-thumbnail {
+    width: 60px;
+    height: 60px;
+    margin-right: 15px;
+}
