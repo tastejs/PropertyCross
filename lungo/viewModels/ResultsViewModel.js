@@ -25,6 +25,10 @@ define(
                 return this.properties().length;
             }, this);
 
+            this.hasMoreResults = ko.computed(function() {
+                return this.pageCount() < this.resultCount();
+            }, this);
+
             this.empty = function() {
                 this.properties.removeAll();
             };

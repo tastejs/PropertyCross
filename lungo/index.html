@@ -120,7 +120,7 @@
             <ul data-bind="foreach: properties">
                 <li data-bind="template: { name: 'property-template', data: $data }"></li>
             </ul>
-            <ul>
+            <ul data-bind="visible: hasMoreResults">
                 <li data-bind="click: retrieveMoreResults">
                     <a href="#">
                         <strong data-bind="text: loadMoreText"></strong>
