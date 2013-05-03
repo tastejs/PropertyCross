@@ -12,3 +12,8 @@
     position: absolute;
     width: 100%
 }
+
+.error-message {
+    font-size: 1.1em;
+    color: #a31313;
+}

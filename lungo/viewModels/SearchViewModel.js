@@ -28,6 +28,7 @@ define(
                 // Perform the search
                 this.datasource.performSearch(search, Lungo.Core.bind(this, function(response) {
                     this.isSearching(false);
+                    this.errorMessage('');
 
                     switch(response.code) {
                         case DataSourceResponseCode.PROPERTIES_FOUND:
