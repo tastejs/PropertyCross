@@ -5,7 +5,9 @@ define(
 
     function(ko) {
 
-        var PropertyViewModel = function() {
+        var PropertyViewModel = function(application) {
+
+            this.model = null;
 
             this.guid = ko.observable();
             this.price = ko.observable();
@@ -21,7 +23,20 @@ define(
                 return '£' + this.price();
             }, this);
 
+            this.stats = ko.computed(function() {
+                return this.bedrooms() + ' bed, ' + this.bathrooms() + ' bathrooms';
+            }, this);
+
+            this.location = ko.computed(function() {
+                var split = this.title().split(',');
+                return split[0] + ', ' + split[1];
+            }, this, {
+                deferEvaluation: true
+            });
+
             this.initialize = function(property) {
+                this.model = property;
+
                 this.guid(property.guid);
                 this.price(property.price);
                 this.bedrooms(property.bedrooms);
@@ -33,6 +48,13 @@ define(
                 this.summary(property.summary);
             };
 
+            this.isFavourited = function() {
+                return application.getFavouriteByGuid(this.model.guid) !== null;
+            };
+
+            this.toggleFavourited = function() {
+                application.toggleFavourited(this.model);
+            };
         };
 
         return PropertyViewModel;

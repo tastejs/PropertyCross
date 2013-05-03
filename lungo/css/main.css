@@ -17,3 +17,7 @@
     font-size: 1.1em;
     color: #a31313;
 }
+
+#property-details img {
+    width: 94%;
+}

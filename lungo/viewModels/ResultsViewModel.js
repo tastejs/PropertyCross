@@ -39,7 +39,7 @@ define(
                 this.searchTerm(search.term);
 
                 response.data.forEach(Lungo.Core.bind(this, function(property) {
-                    var viewModel = new PropertyViewModel();
+                    var viewModel = new PropertyViewModel(application);
                     viewModel.initialize(property);
                     this.properties.push(viewModel);
                 }));
@@ -57,6 +57,11 @@ define(
                     this.update(response, search);
                     this.loadMoreText(LOAD_MORE_TEXT);
                 }));
+            };
+
+            this.viewProperty = function(property) {
+                ko.applyBindings(property, Quo('#property-view').get(0));
+                Lungo.Router.section('property-view');
             };
 
         };
