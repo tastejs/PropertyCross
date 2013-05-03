@@ -84,16 +84,22 @@ define(
                 }
             };
 
-            this.performSearch = function(search, callback) {
-                Quo.json(
-                    this.rootUrl,
-                    Lungo.Core.mix(this.defaultParams, {
+            this.performSearch = function(search, callback, errorCallback) {
+                Quo.ajax({
+                    url: this.rootUrl,
+                    timeout: 5000,
+                    dataType: 'json',
+                    data: Lungo.Core.mix(this.defaultParams, {
                         'place_name': search.term,
                         'page': search.pageNumber
                     }),
-                    function(response) {
+                    success: function(response) {
                         callback.call(this, parseResponse(response), search);
-                    });
+                    },
+                    error: function() {
+                        errorCallback.call(this, 'An error occurred while searching. Please check your network connection and try again.');
+                    }
+                });
             };
         };
 

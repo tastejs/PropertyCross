@@ -14,6 +14,7 @@ define(
             this.recentSearches = ko.observableArray();
             this.datasource = new DataSource();
             this.isSearching = ko.observable(false);
+            this.errorMessage = ko.observable();
 
             this.performSearch = function(element) {
 
@@ -30,15 +31,23 @@ define(
 
                     switch(response.code) {
                         case DataSourceResponseCode.PROPERTIES_FOUND:
-                            application.displaySearchResults(response, search);
+                            if(!response.data.length) {
+                                this.errorMessage('There were no properties found for the given location.');
+                            } else {
+                                application.displaySearchResults(response, search);
+                            }
                             break;
                         case DataSourceResponseCode.AMBIGIOUS_LOCATION:
 
                             break;
                         case DataSourceResponseCode.UNKNOWN_LOCATION:
-
+                            this.errorMessage('The location given was not recognised.');
                             break;
                     }
+                }),
+                Lungo.Core.bind(this, function(message) {
+                    this.isSearching(false);
+                    this.errorMessage(message);
                 }));
             };
         };
