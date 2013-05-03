@@ -10,14 +10,22 @@ define(
 
         var SearchViewModel = function(application) {
 
-            this.searchTerm = ko.observable();
-            this.recentSearches = ko.observableArray();
             this.datasource = new DataSource();
-            this.isSearching = ko.observable(false);
+
             this.errorMessage = ko.observable();
 
-            this.performSearch = function(element) {
+            this.searchTerm = ko.observable();
+            this.isSearching = ko.observable(false);
 
+            this.recentSearches = ko.observableArray();
+
+            this.suggestions = ko.observableArray();
+            this.hasSuggestions = ko.computed(function() {
+                return this.suggestions().length > 0;
+            }, this);
+
+
+            this.performSearch = Lungo.Core.bind(this, function() {
                 var search = new Search({
                     term: this.searchTerm(),
                     pageNumber: 1
@@ -27,6 +35,7 @@ define(
 
                 // Perform the search
                 this.datasource.performSearch(search, Lungo.Core.bind(this, function(response) {
+                    this.suggestions.removeAll();
                     this.isSearching(false);
                     this.errorMessage('');
 
@@ -39,7 +48,9 @@ define(
                             }
                             break;
                         case DataSourceResponseCode.AMBIGIOUS_LOCATION:
-
+                            response.data.forEach(function(location) {
+                                this.suggestions.push(location);
+                            }, this);
                             break;
                         case DataSourceResponseCode.UNKNOWN_LOCATION:
                             this.errorMessage('The location given was not recognised.');
@@ -50,7 +61,12 @@ define(
                     this.isSearching(false);
                     this.errorMessage(message);
                 }));
-            };
+            });
+
+            this.performSearchFromSuggested = Lungo.Core.bind(this, function(location) {
+                this.searchTerm(location.placeName);
+                this.performSearch();
+            });
         };
 
         return SearchViewModel;
