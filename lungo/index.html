@@ -89,7 +89,7 @@
                 <p>Please select a location below:</p>
 
                 <ul data-bind="foreach:suggestions">
-                    <li data-bind="text: longTitle, click: $parent.performSearchFromSuggested"></li>
+                    <li data-bind="click: $parent.performSearchFromSuggested"><strong data-bind="text: longTitle"></strong></li>
                 </ul>
             </div>
 
@@ -122,10 +122,8 @@
             </ul>
             <ul data-bind="visible: hasMoreResults">
                 <li data-bind="click: retrieveMoreResults">
-                    <a href="#">
-                        <strong data-bind="text: loadMoreText"></strong>
-                        <small>Results for <strong data-bind="text: searchTerm"></strong>, showing <strong data-bind="text: pageCount"></strong> of <strong data-bind="text: resultCount"></strong> properties</small>
-                    </a>
+                    <strong data-bind="text: loadMoreText"></strong>
+                    <small>Results for <strong data-bind="text: searchTerm"></strong>, showing <strong data-bind="text: pageCount"></strong> of <strong data-bind="text: resultCount"></strong> properties</small>
                 </li>
             </ul>
         </article>
