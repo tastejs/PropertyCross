@@ -34,6 +34,7 @@
     <icon src="assets/icons/icon-57-2x.png"         gap:platform="ios"        width="114" height="114" />
     <icon src="assets/icons/icon-72-2x.png"         gap:platform="ios"        width="144" height="144" />
 
+    <gap:splash src="assets/splashscreens/SplashScreenImage.jpg"        gap:platform="winphone"/>
     <gap:splash src="assets/splashscreens/200x320.png"                      gap:platform="android" gap:density="ldpi" />
     <gap:splash src="assets/splashscreens/320x480.png"                      gap:platform="android" gap:density="mdpi" />
     <gap:splash src="assets/splashscreens/480x800.png"                      gap:platform="android" gap:density="hdpi" />
