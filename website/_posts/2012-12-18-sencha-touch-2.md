@@ -5,6 +5,7 @@ phonegap: true
 platforms:
 - android
 - ios
+- windowsphone
 pie:
   common: { segment: 'M150,150l0.00,-145.00A145,145,0,1,1,149.95,5.00z' }
 contributors:
