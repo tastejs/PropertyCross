@@ -1,6 +1,7 @@
 ---
 layout: framework
 framework: senchatouch2
+phonegap: true
 platforms:
 - android
 - ios

@@ -2,6 +2,7 @@
 layout: framework
 title: jQuery Mobile
 framework: jquerymobile
+phonegap: true
 platforms:
 - android
 - ios

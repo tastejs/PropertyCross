@@ -12,12 +12,15 @@ layout: default
     Helping you <b>select</b> a cross-platform mobile framework
   </p>
 
-  <a href="{{ site.githuburl }}/archive/master.zip" class="btn btn-large btn-primary" type="button">Download the project</a>
+  <a href="{{ site.githuburl }}/archive/master.zip" class="btn btn-large btn-primary" type="button">Download the project (v1.0)</a>
   <a href="{{ site.githuburl }}/" class="btn btn-large btn-primary" type="button">View project on GitHub</a>
 </header>
 
 <div class="row">
   <div class="span6">
+    {% capture versionInformation %}{% include current-version-information.md %}{% endcapture %}
+    {{ versionInformation | markdownify }}
+    <br/>
     <h4>
       Introduction
     </h4>
@@ -26,6 +29,7 @@ layout: default
     <br/>
     <a class="twitter-share-button" href="https://twitter.com/share">Tweet</a>
     <div class="g-plusone" data-size="medium"></div>
+    
   </div>
   <div class="span6 overview">
     <h4>
@@ -37,7 +41,7 @@ layout: default
       {% for post in site.posts reversed %}
       <tr>
         <td><img src="{{ site.baseurl }}/framework-icons/{{ post.framework }}-complete.png" alt="{{ post.title }}" title="{{ post.title }}"/></td>
-        <td><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></td>
+        <td><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a> {% if post.phonegap %}<a href="#phonegap">*</a>{% endif %}</td>
         <td>
           {% if post.platforms contains 'android' %}
           <img src="{{ site.baseurl }}/images/android-badge.png" alt="{{ site.platforms.android }}" title="{{ site.platforms.android }}"/>
@@ -63,6 +67,7 @@ layout: default
       {% endfor %}
       </tbody>
     </table>
+    <small id="phonegap"><strong>*</strong> - PropertyCross implementation uses PhoneGap / Cordova for packaging.</small>
   </div>
 </div>
 

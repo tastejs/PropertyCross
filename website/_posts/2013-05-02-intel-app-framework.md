@@ -1,6 +1,8 @@
 ---
 layout: framework
+title: Intel App Framework
 framework: intelappframework
+phonegap: true
 platforms:
 - android
 - ios
