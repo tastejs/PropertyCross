@@ -60,10 +60,8 @@ define(
             };
 
             this.viewProperty = function(property) {
-                ko.applyBindings(property, Quo('#property-view').get(0));
-                Lungo.Router.section('property-view');
+                application.viewProperty(property);
             };
-
         };
 
         return ResultsViewModel;

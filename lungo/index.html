@@ -55,10 +55,9 @@
 
 <body class="app" data-position="fixed">
     <section id="main" data-transition="">
-        <header>
-            <p class="title centered">Property Cross</p>
+        <header data-title="Property Cross">
             <nav class="right">
-                <a href="#faves" data-router="section" class="button">Faves</a>
+                <a href="#favourites" data-router="section" class="button">Faves</a>
             </nav>
         </header>
 
@@ -96,16 +95,12 @@
         </article>
     </section>
 
-    <section id="faves" data-transition="slide">
-        <header data-back="home blue">
-            <p class="title centered">Favourites</p>
-        </header>
+    <section id="favourites" data-transition="slide">
+        <header data-back="home blue" data-title="Favourites"></header>
 
-        <article id="favourite-list" class="active indented list">
-            <ul>
-                <li>Muenchen, Deutschland</li>
-                <li>Lyon, France</li>
-                <li>Vancouver, Canada</li>
+        <article id="favourite-list" class="active indented list scroll">
+            <ul data-bind="foreach: favourites">
+                <li data-bind="template: { name: 'property-template', data: $data }, click: $parent.viewProperty"></li>
             </ul>
         </article>
 
@@ -118,7 +113,7 @@
 
         <article id="result-list" class="active indented list scroll">
             <ul data-bind="foreach: properties">
-                <li data-bind="template: { name: 'property-template', data: $data }"></li>
+                <li data-bind="template: { name: 'property-template', data: $data }, click: $parent.viewProperty"></li>
             </ul>
             <ul data-bind="visible: hasMoreResults">
                 <li data-bind="click: retrieveMoreResults">
@@ -126,6 +121,25 @@
                     <small>Results for <strong data-bind="text: searchTerm"></strong>, showing <strong data-bind="text: pageCount"></strong> of <strong data-bind="text: resultCount"></strong> properties</small>
                 </li>
             </ul>
+        </article>
+    </section>
+
+    <section id="property-view" data-transition="slide">
+        <header data-back="home blue" data-title="Property Details">
+            <nav class="right" data-bind="visible: isFavourited() === false, click: toggleFavourited">
+                <a class="button" data-icon="star"></a>
+            </nav>
+            <nav class="right" data-bind="visible: isFavourited() === true, click: toggleFavourited">
+                <a class="button" data-icon="star-full"></a>
+            </nav>
+        </header>
+
+        <article id="property-details" class="active indented list scroll">
+            <h1 data-bind="text: formattedPrice"></h1>
+            <h2 data-bind="text: location"></h2>
+            <img data-bind="attr: { src: imgUrl }" />
+            <h3 data-bind="text: stats"></h3>
+            <p data-bind="text: summary"></p>
         </article>
     </section>
 

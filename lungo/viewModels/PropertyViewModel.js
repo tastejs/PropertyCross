@@ -49,11 +49,11 @@ define(
             };
 
             this.isFavourited = function() {
-                return application.getFavouriteByGuid(this.model.guid) !== null;
+                return application.favouritesViewModel.getFavouriteByGuid(this.model.guid) !== null;
             };
 
             this.toggleFavourited = function() {
-                application.toggleFavourited(this.model);
+                application.favouritesViewModel.toggleFavourited(this);
             };
         };
 
