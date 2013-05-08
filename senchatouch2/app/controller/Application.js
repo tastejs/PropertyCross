@@ -347,7 +347,7 @@
                 emptyText: 'You have not added any properties to your favourites'
             });
         }
-        this.prepareResultsList(this.favesList);
+        this.getMain().push(this.favesList);
     },
 
     showButton: function(button) {
