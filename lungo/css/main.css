@@ -8,6 +8,15 @@
     margin-right: 15px;
 }
 
+.property-information {
+    width: 75%;
+    height: 60px;
+}
+
+.property-information small {
+    white-space: normal !important;
+}
+
 .loader {
     position: absolute;
     width: 100%

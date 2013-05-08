@@ -3,10 +3,11 @@ define(
         'models/DataSourceResponse',
         'models/DataSourceResponseCode',
         'models/Property',
-        'models/Location'
+        'models/Location',
+        'models/Search'
     ],
 
-    function(DataSourceResponse, DataSourceResponseCode, Property, Location) {
+    function(DataSourceResponse, DataSourceResponseCode, Property, Location, Search) {
 
         var NestoriaDataSource = function() {
 
@@ -84,22 +85,37 @@ define(
                 }
             };
 
-            this.performSearch = function(search, callback, errorCallback) {
+            var perform = Lungo.Core.bind(this, function(search, callback, errorCallback, options) {
                 Quo.ajax({
                     url: this.rootUrl,
                     timeout: 5000,
                     dataType: 'json',
-                    data: Lungo.Core.mix(this.defaultParams, {
-                        'place_name': search.term,
-                        'page': search.pageNumber
-                    }),
+                    data: Lungo.Core.mix(this.defaultParams, options),
                     success: function(response) {
-                        callback.call(this, parseResponse(response), search);
+                        callback.call(this, parseResponse(response), search)
                     },
                     error: function() {
                         errorCallback.call(this, 'An error occurred while searching. Please check your network connection and try again.');
                     }
-                });
+                })
+            });
+
+            this.performSearch = function(search, callback, errorCallback) {
+                var opts;
+
+                if(search.type === Search.Type.location) {
+                    opts = {
+                        'centre_point': search.position.latitude() + ',' + search.position.longitude(),
+                        'page': search.pageNumber
+                    }
+                } else if(search.type === Search.Type.term) {
+                    opts = {
+                        'place_name': search.term,
+                        'page': search.pageNumber
+                    }
+                }
+
+                perform(search, callback, errorCallback, opts);
             };
         };
 

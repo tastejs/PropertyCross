@@ -36,7 +36,7 @@ define(
             this.update = function(response, search) {
                 this.currentPageNumber(response.pageNumber);
                 this.resultCount(response.total);
-                this.searchTerm(search.term);
+                this.searchTerm(search.getTerm());
 
                 response.data.forEach(Lungo.Core.bind(this, function(property) {
                     var viewModel = new PropertyViewModel(application);
@@ -53,7 +53,7 @@ define(
                     pageNumber: this.currentPageNumber() + 1
                 });
 
-                this.datasource.performSearch(search, Lungo.Core.bind(this, function(response, search) {
+                this.datasource.performSearch(search, Lungo.Core.bind(this, function(response) {
                     this.update(response, search);
                     this.loadMoreText(LOAD_MORE_TEXT);
                 }));

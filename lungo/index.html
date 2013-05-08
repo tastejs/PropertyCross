@@ -68,10 +68,10 @@
 
             <div data-bind="visible: isSearching" data-loading="" class="loader"></div>
 
-            <form data-bind="submit: performSearch">
+            <form data-bind="submit: performSearchFromTerm">
                 <input type="text" data-bind="value: searchTerm" placeholder="Enter Location" />
                 <button type="submit" data-router="section" class="blue">Go</button>
-                <button href="#" class="blue">My Location</button>
+                <button href="#" type="button" data-bind="click: searchMyLocation" class="blue">My Location</button>
             </form>
 
             <p class="error-message" data-bind="text: errorMessage"></p>
@@ -79,8 +79,8 @@
             <div data-bind="visible: hasSuggestions() === false">
                 <p>Recent searches:</p>
 
-                <ul data-bind="foreach:recentSearches">
-                    <li data-bind="text: name"></li>
+                <ul data-bind="foreach:recentSearches.slice(0).reverse()">
+                    <li data-bind="text: getTerm(), click: $parent.performSearch"></li>
                 </ul>
             </div>
 
@@ -96,9 +96,10 @@
     </section>
 
     <section id="favourites" data-transition="slide">
-        <header data-back="home blue" data-title="Favourites"></header>
+        <header data-back="left blue" data-title="Favourites"></header>
 
         <article id="favourite-list" class="active indented list scroll">
+            <p data-bind="visible: favourites().length === 0">You have not added any properties to your favourites.</p>
             <ul data-bind="foreach: favourites">
                 <li data-bind="template: { name: 'property-template', data: $data }, click: $parent.viewProperty"></li>
             </ul>
@@ -107,7 +108,7 @@
     </section>
 
     <section id="results" data-transition="slide">
-        <header data-back="home blue">
+        <header data-back="left blue">
             <p class="title centered"><span data-bind="text: pageCount"></span> out of <span data-bind="text: resultCount"></span> matches</p>
         </header>
 
@@ -125,7 +126,7 @@
     </section>
 
     <section id="property-view" data-transition="slide">
-        <header data-back="home blue" data-title="Property Details">
+        <header data-back="left blue" data-title="Property Details">
             <nav class="right" data-bind="visible: isFavourited() === false, click: toggleFavourited">
                 <a class="button" data-icon="star"></a>
             </nav>
