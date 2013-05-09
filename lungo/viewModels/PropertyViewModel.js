@@ -20,7 +20,8 @@ define(
             this.summary = ko.observable();
 
             this.formattedPrice = ko.computed(function() {
-                return '£' + this.price();
+                // Credit: http://stackoverflow.com/questions/2901102/how-to-print-a-number-with-commas-as-thousands-separators-in-javascript
+                return this.price() && '£' + this.price().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             }, this);
 
             this.stats = ko.computed(function() {
