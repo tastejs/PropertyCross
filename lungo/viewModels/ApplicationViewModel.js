@@ -5,11 +5,12 @@ define(
         'viewModels/ResultsViewModel',
         'viewModels/FavouritesViewModel',
         'viewModels/PropertyDetailsViewModel',
+        'viewModels/PropertyViewModel',
         'models/Search'
     ],
 
     function(ko, SearchViewModel, ResultsViewModel, FavouritesViewModel, PropertyDetailsViewModel,
-        Search) {
+             PropertyViewModel, Search) {
 
     var ApplicationViewModel = function() {
 
@@ -28,13 +29,14 @@ define(
         }, this);
 
         this.setState = function(state) {
-            /*state.favourites.forEach(function(favourite) {
+            state.favourites.forEach(function(favourite) {
                 var viewModel = new PropertyViewModel(this);
                 viewModel.initialize(favourite);
 
+                console.log(favourite);
                 this.favouritesViewModel.favourites.push(viewModel);
             }, this);
-*/
+
             state.recentSearches.forEach(function(search) {
                 this.searchViewModel.recentSearches.push(new Search(search));
             }, this);
