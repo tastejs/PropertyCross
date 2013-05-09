@@ -39,6 +39,12 @@ define(
                 } else {
                     this.recentSearchResponses.push(searchResponse);
                 }
+
+                // Limit the recent searches to 6
+                var surplus = this.recentSearchResponses().length - 6;
+                if(surplus > 0) {
+                    this.recentSearchResponses.splice(0, surplus);
+                }
             };
 
             var searchSuccessCallback = Lungo.Core.bind(this, function(response) {
