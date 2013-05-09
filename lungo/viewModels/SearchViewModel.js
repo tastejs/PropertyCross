@@ -80,6 +80,7 @@ define(
             this.performSearch = Lungo.Core.bind(this, function(search) {
                 this.searchTerm(search.getTerm());
                 this.isSearching(true);
+                Lungo.dom('#searchTerm').trigger('blur');
                 this.datasource.performSearch(search, searchSuccessCallback, searchErrorCallback);
             });
 
@@ -111,7 +112,6 @@ define(
             });
 
             this.searchMyLocation = Lungo.Core.bind(this, function() {
-
                 if(this.locationEnabled()) {
                     navigator.geolocation.getCurrentPosition(
                         Lungo.Core.bind(this, function(pos) {
