@@ -34,6 +34,10 @@ define(
                 deferEvaluation: true
             });
 
+            this.isFavourited = ko.computed(function() {
+                return application.favouritesViewModel.getFavouriteByGuid(this.guid()) !== null;
+            }, this);
+
             this.initialize = function(property) {
                 this.model = property;
 
@@ -46,14 +50,6 @@ define(
                 this.thumbnailUrl(property.thumbnailUrl);
                 this.imgUrl(property.imgUrl);
                 this.summary(property.summary);
-            };
-
-            this.isFavourited = function() {
-                return application.favouritesViewModel.getFavouriteByGuid(this.model.guid) !== null;
-            };
-
-            this.toggleFavourited = function() {
-                application.favouritesViewModel.toggleFavourited(this);
             };
         };
 

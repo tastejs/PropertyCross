@@ -29,7 +29,6 @@ define(
 
             this.addToRecent = function(currentSearch) {
                 var existingSearch = ko.utils.arrayFirst(this.recentSearches(), function(seenSearch) {
-                    console.log('does', currentSearch.getTerm(), 'equal', seenSearch.getTerm(), currentSearch.getTerm() === seenSearch.getTerm())
                     return currentSearch.getTerm() === seenSearch.getTerm();
                 });
 

@@ -11,12 +11,12 @@ define(
 
             this.getFavouriteByGuid = function(guid) {
                 return ko.utils.arrayFirst(this.favourites(), function (propertyViewModel) {
-                    return propertyViewModel.model.guid === guid;
+                    return propertyViewModel.guid() === guid;
                 });
             };
 
             this.toggleFavourited = function(propertyViewModel) {
-                var existingFavourite = this.getFavouriteByGuid(propertyViewModel.model.guid);
+                var existingFavourite = this.getFavouriteByGuid(propertyViewModel.guid());
 
                 if(existingFavourite) {
                     this.favourites.remove(existingFavourite);

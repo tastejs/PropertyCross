@@ -21,6 +21,15 @@ define(
 
     function(ko, ApplicationViewModel) {
         this.applicationViewModel = new ApplicationViewModel();
-        this.applicationViewModel.initialize();
+
+        this.applicationViewModel.applicationState.subscribe(function(state) {
+            Lungo.Data.Storage.persistent("applicationState", state);
+        });
+
+        var state = Lungo.Data.Storage.persistent("applicationState");
+
+        this.applicationViewModel.initialize({
+            state: state
+        });
     }
 );
