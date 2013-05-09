@@ -18,7 +18,7 @@ define(
             this.searchTerm = ko.observable();
             this.isSearching = ko.observable(false);
 
-            this.recentSearches = ko.observableArray();
+            this.recentSearchResponses = ko.observableArray();
 
             this.suggestions = ko.observableArray();
             this.hasSuggestions = ko.computed(function() {
@@ -28,16 +28,16 @@ define(
             this.locationEnabled = ko.observable(true);
 
             this.addToRecent = function(currentSearch) {
-                var existingSearch = ko.utils.arrayFirst(this.recentSearches(), function(seenSearch) {
+                var existingSearch = ko.utils.arrayFirst(this.recentSearchResponses(), function(seenSearch) {
                     return currentSearch.getTerm() === seenSearch.getTerm();
                 });
 
                 if(existingSearch) {
                     // Search already done, move to the front of the array
-                    this.recentSearches.remove(existingSearch);
-                    this.recentSearches.push(existingSearch);
+                    this.recentSearchResponses.remove(existingSearch);
+                    this.recentSearchResponses.push(existingSearch);
                 } else {
-                    this.recentSearches.push(currentSearch);
+                    this.recentSearchResponses.push(currentSearch);
                 }
             };
 
@@ -51,7 +51,7 @@ define(
                         if(!response.data.length) {
                             this.errorMessage('There were no properties found for the given location.');
                         } else {
-                            this.addToRecent(response.search);
+                            this.addToRecent(response);
                             application.displaySearchResults(response);
                         }
                         break;
@@ -97,6 +97,8 @@ define(
 
                 this.performSearch(search);
             });
+
+            this.performSearchFromRecent = function() {};
 
             this.searchMyLocation = Lungo.Core.bind(this, function() {
 

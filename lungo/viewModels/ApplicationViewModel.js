@@ -6,11 +6,11 @@ define(
         'viewModels/FavouritesViewModel',
         'viewModels/PropertyDetailsViewModel',
         'viewModels/PropertyViewModel',
-        'models/Search'
+        'models/DataSourceResponse'
     ],
 
     function(ko, SearchViewModel, ResultsViewModel, FavouritesViewModel, PropertyDetailsViewModel,
-             PropertyViewModel, Search) {
+             PropertyViewModel, DataSourceResponse) {
 
     var ApplicationViewModel = function() {
 
@@ -21,7 +21,7 @@ define(
 
         this.applicationState = ko.computed(function() {
             var state = {
-                recentSearches: this.searchViewModel.recentSearches(),
+                recentSearches: this.searchViewModel.recentSearchResponses(),
                 favourites: this.favouritesViewModel.favourites()
             };
 
@@ -37,7 +37,7 @@ define(
             }, this);
 
             state.recentSearches.forEach(function(search) {
-                this.searchViewModel.recentSearches.push(new Search(search));
+                this.searchViewModel.recentSearchResponses.push(new DataSourceResponse(search));
             }, this);
         };
 

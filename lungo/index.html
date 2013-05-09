@@ -79,8 +79,11 @@
             <div data-bind="visible: hasSuggestions() === false">
                 <p>Recent searches:</p>
 
-                <ul data-bind="foreach:recentSearches.slice(0).reverse()">
-                    <li data-bind="text: getTerm(), click: $parent.performSearch"></li>
+                <ul data-bind="foreach:recentSearchResponses.slice(0).reverse()">
+                    <li data-bind="click: $parent.performSearchFromRecent">
+                        <span data-bind="text: search.getTerm()"></span>
+                        <div class="right tag blue" data-bind="text: total"></div>
+                    </li>
                 </ul>
             </div>
 
