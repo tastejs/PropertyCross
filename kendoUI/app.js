@@ -1,7 +1,7 @@
 /*globals kendo, document, TwitterSearchViewModel, SearchResultsViewModel, TweetViewModel  */
 
 // create the mobile app
-var app = new kendo.mobile.Application(document.body);
+var app = new kendo.mobile.Application(document.body, { transition: "slide" });
 
 var formatter = new Formatter();
 var favouritesService = new FavouritesService();
