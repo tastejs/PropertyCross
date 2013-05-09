@@ -4,10 +4,12 @@ define(
         'viewModels/SearchViewModel',
         'viewModels/ResultsViewModel',
         'viewModels/FavouritesViewModel',
-        'viewModels/PropertyDetailsViewModel'
+        'viewModels/PropertyDetailsViewModel',
+        'models/Search'
     ],
 
-    function(ko, SearchViewModel, ResultsViewModel, FavouritesViewModel, PropertyDetailsViewModel) {
+    function(ko, SearchViewModel, ResultsViewModel, FavouritesViewModel, PropertyDetailsViewModel,
+        Search) {
 
     var ApplicationViewModel = function() {
 
@@ -31,11 +33,11 @@ define(
                 viewModel.initialize(favourite);
 
                 this.favouritesViewModel.favourites.push(viewModel);
-            }, this);*/
-
-            /*state.recentSearches.forEach(function(search) {
+            }, this);
+*/
+            state.recentSearches.forEach(function(search) {
                 this.searchViewModel.recentSearches.push(new Search(search));
-            }, this);*/
+            }, this);
         };
 
         this.initialize = function(params) {
