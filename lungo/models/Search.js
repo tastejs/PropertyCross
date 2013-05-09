@@ -7,7 +7,7 @@ define(
 
     var Search = function(params) {
         this.term = params.term;
-        this.position = new Position(params.position);
+        this.position = params.position && new Position(params.position);
         this.pageNumber = params.pageNumber;
         this.type = params.type;
 

@@ -27,17 +27,17 @@ define(
 
             this.locationEnabled = ko.observable(true);
 
-            this.addToRecent = function(currentSearch) {
-                var existingSearch = ko.utils.arrayFirst(this.recentSearchResponses(), function(seenSearch) {
-                    return currentSearch.getTerm() === seenSearch.getTerm();
+            this.addToRecent = function(searchResponse) {
+                var existingSearchResponse = ko.utils.arrayFirst(this.recentSearchResponses(), function(currResponse) {
+                    return searchResponse.search.getTerm() === currResponse.search.getTerm();
                 });
 
-                if(existingSearch) {
+                if(existingSearchResponse) {
                     // Search already done, move to the front of the array
-                    this.recentSearchResponses.remove(existingSearch);
-                    this.recentSearchResponses.push(existingSearch);
+                    this.recentSearchResponses.remove(existingSearchResponse);
+                    this.recentSearchResponses.push(searchResponse);
                 } else {
-                    this.recentSearchResponses.push(currentSearch);
+                    this.recentSearchResponses.push(searchResponse);
                 }
             };
 
@@ -98,7 +98,11 @@ define(
                 this.performSearch(search);
             });
 
-            this.performSearchFromRecent = function() {};
+            this.performSearchFromRecent = Lungo.Core.bind(this, function(recentSearchResponse) {
+                // The results may have changed since the search was performed, so extract the
+                // search and do it again
+                this.performSearch(recentSearchResponse.search);
+            });
 
             this.searchMyLocation = Lungo.Core.bind(this, function() {
 
