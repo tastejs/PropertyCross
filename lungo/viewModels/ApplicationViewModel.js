@@ -33,7 +33,6 @@ define(
                 var viewModel = new PropertyViewModel(this);
                 viewModel.initialize(favourite);
 
-                console.log(favourite);
                 this.favouritesViewModel.favourites.push(viewModel);
             }, this);
 
