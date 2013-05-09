@@ -5,6 +5,7 @@ define([], function() {
         this.data = params.data;
         this.total = params.total;
         this.pageNumber = params.pageNumber;
+        this.search = params.search;
     };
 
     return DataSourceResponse;

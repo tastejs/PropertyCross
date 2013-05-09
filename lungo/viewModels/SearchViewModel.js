@@ -41,7 +41,7 @@ define(
                 }
             };
 
-            var searchSuccessCallback = Lungo.Core.bind(this, function(response, search) {
+            var searchSuccessCallback = Lungo.Core.bind(this, function(response) {
                 this.suggestions.removeAll();
                 this.isSearching(false);
                 this.errorMessage('');
@@ -51,8 +51,8 @@ define(
                         if(!response.data.length) {
                             this.errorMessage('There were no properties found for the given location.');
                         } else {
-                            this.addToRecent(search);
-                            application.displaySearchResults(response, search);
+                            this.addToRecent(response.search);
+                            application.displaySearchResults(response);
                         }
                         break;
                     case DataSourceResponseCode.AMBIGIOUS_LOCATION:
@@ -104,7 +104,7 @@ define(
                     navigator.geolocation.getCurrentPosition(
                         Lungo.Core.bind(this, function(pos) {
                             var search = new Search({
-                                position: new Position(pos),
+                                position: pos,
                                 pageNumber: 1,
                                 type: Search.Type.location
                             });

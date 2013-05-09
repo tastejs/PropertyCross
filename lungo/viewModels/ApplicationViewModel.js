@@ -52,9 +52,9 @@ define(
             }
         };
 
-        this.displaySearchResults = function(response, search) {
+        this.displaySearchResults = function(response) {
             this.resultsViewModel.empty();
-            this.resultsViewModel.update(response, search);
+            this.resultsViewModel.update(response);
             Lungo.Router.section('results');
         };
 

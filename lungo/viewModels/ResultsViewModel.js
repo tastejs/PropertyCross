@@ -17,7 +17,10 @@ define(
             this.properties = ko.observableArray();
             this.resultCount = ko.observable();
             this.currentPageNumber = ko.observable();
-            this.searchTerm = ko.observable();
+            this.search = ko.observable();
+            this.searchTerm = ko.computed(function() {
+                return this.search() && this.search().getTerm();
+            }, this);
 
             this.loadMoreText = ko.observable(LOAD_MORE_TEXT);
 
@@ -33,10 +36,10 @@ define(
                 this.properties.removeAll();
             };
 
-            this.update = function(response, search) {
+            this.update = function(response) {
                 this.currentPageNumber(response.pageNumber);
                 this.resultCount(response.total);
-                this.searchTerm(search.getTerm());
+                this.search(response.search);
 
                 response.data.forEach(Lungo.Core.bind(this, function(property) {
                     var viewModel = new PropertyViewModel(application);
@@ -48,13 +51,10 @@ define(
             this.retrieveMoreResults = function() {
                 this.loadMoreText(LOAD_MORE_LOADING_TEXT);
 
-                var search = new Search({
-                    term: this.searchTerm(),
-                    pageNumber: this.currentPageNumber() + 1
-                });
+                var search = this.search().getNextPageSearch();
 
                 this.datasource.performSearch(search, Lungo.Core.bind(this, function(response) {
-                    this.update(response, search);
+                    this.update(response);
                     this.loadMoreText(LOAD_MORE_TEXT);
                 }));
             };

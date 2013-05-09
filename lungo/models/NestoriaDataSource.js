@@ -24,7 +24,7 @@ define(
                 callback: '?'
             };
 
-            var parseResponse = function(xhr) {
+            var parseResponse = function(xhr, search) {
                 var response = xhr.response,
                     responseCode = response.application_response_code;
 
@@ -51,7 +51,8 @@ define(
                         code: DataSourceResponseCode.PROPERTIES_FOUND,
                         data: listings,
                         total: response.total_results,
-                        pageNumber: parseInt(response.page)
+                        pageNumber: parseInt(response.page),
+                        search: search
                     });
                 } else if(responseCode === '200' || // Ambigious Location
                     responseCode === '202') {       // Misspelled location
@@ -71,7 +72,8 @@ define(
                         code: DataSourceResponseCode.AMBIGIOUS_LOCATION,
                         data: suggestedLocations,
                         total: 0,
-                        pageNumber: 0
+                        pageNumber: 0,
+                        search: search
                     });
                 } else {
                     // 201 - unknown location
@@ -80,7 +82,8 @@ define(
                         code: DataSourceResponseCode.UNKNOWN_LOCATION,
                         data: [],
                         total: 0,
-                        pageNumber: 0
+                        pageNumber: 0,
+                        search: search
                     });
                 }
             };
@@ -92,7 +95,7 @@ define(
                     dataType: 'json',
                     data: Lungo.Core.mix(this.defaultParams, options),
                     success: function(response) {
-                        callback.call(this, parseResponse(response), search)
+                        callback.call(this, parseResponse(response, search))
                     },
                     error: function() {
                         errorCallback.call(this, 'An error occurred while searching. Please check your network connection and try again.');
