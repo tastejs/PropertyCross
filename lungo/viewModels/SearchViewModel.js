@@ -34,7 +34,6 @@ define(
 
                 if(existingSearch) {
                     // Search already done, move to the front of the array
-                    var currentSearchIndex = this.recentSearches.indexOf(existingSearch);
                     this.recentSearches.remove(existingSearch);
                     this.recentSearches.push(existingSearch);
                 } else {

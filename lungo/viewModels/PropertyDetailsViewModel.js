@@ -7,7 +7,6 @@ define(
 
         var PropertyDetailsViewModel = function(application) {
 
-            this.viewModels = ko.observableArray();
             this.currentViewModel = ko.observable();
 
             this.isFavourited = ko.computed(function() {
@@ -15,10 +14,6 @@ define(
             }, this);
 
             this.setCurrentViewModel = function(viewModel) {
-                if(this.viewModels.indexOf(viewModel) < 0) {
-                    this.viewModels.push(viewModel);
-                }
-
                 this.currentViewModel(viewModel);
             };
 
