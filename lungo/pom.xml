@@ -22,11 +22,10 @@
                 <version>2.3</version>
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
-                    <warSourceDirectory>${basedir}</warSourceDirectory>
+                    <warSourceDirectory>${basedir}/src</warSourceDirectory>
                 </configuration>
             </plugin>
         </plugins>
-        <outputDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF/classes</outputDirectory>
     </build>
 
     <profiles>
@@ -52,7 +51,12 @@
                                     <configFile>config.xml</configFile>
                                     <keys>com.scottlogic.mobile.certificates:ios-team</keys>
                                     <platforms>
+                                        <!--<platform>ios</platform>-->
                                         <platform>android</platform>
+                                        <platform>winphone</platform>
+                                        <platform>webos</platform>
+                                        <platform>symbian</platform>
+                                        <platform>blackberry</platform>
                                     </platforms>
                                 </configuration>
                             </execution>

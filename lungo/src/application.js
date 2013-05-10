@@ -23,13 +23,21 @@ define(
         this.applicationViewModel = new ApplicationViewModel();
 
         this.applicationViewModel.applicationState.subscribe(function(state) {
-            Lungo.Data.Storage.persistent("applicationState", state);
+            Lungo.Data.Storage.persistent('applicationState', state);
         });
 
-        var state = Lungo.Data.Storage.persistent("applicationState");
+        var state = Lungo.Data.Storage.persistent('applicationState');
 
         this.applicationViewModel.initialize({
             state: state
         });
+
+        document.addEventListener('deviceready', function() {
+            document.addEventListener('backbutton', function() {
+                Lungo.Router.back();
+            }, false);
+        }, false);
+
+
     }
 );
