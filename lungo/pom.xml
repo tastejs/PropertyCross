@@ -12,6 +12,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <phonegap-build.server>phonegap-build</phonegap-build.server>
+        <phonegap-build.ios.server>ios-developer-certificate</phonegap-build.ios.server>
     </properties>
 
     <build>
@@ -51,7 +52,7 @@
                                     <configFile>config.xml</configFile>
                                     <keys>com.scottlogic.mobile.certificates:ios-team</keys>
                                     <platforms>
-                                        <!--<platform>ios</platform>-->
+                                        <platform>ios</platform>
                                         <platform>android</platform>
                                         <platform>winphone</platform>
                                         <platform>webos</platform>
