@@ -1,0 +1,76 @@
+﻿.win8phone-layout {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.win8phone-layout .load-panel.dx-loadpanel-content {
+    background: transparent;
+    border: none;
+}
+
+.win8phone-layout .layout-content {
+    position: absolute;
+    top: 35px;
+    bottom: 0;
+    width: 100%;
+    overflow: hidden;
+}
+
+.win8phone-layout .layout-content > div[data-options] {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.win8phone-layout .view-content {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.win8phone-layout .layout-frame {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+/* navigation */
+.win8phone-layout .navigation-list.dx-list .dx-list-item .dx-navigation-item {
+	line-height: 24px;
+	height: 24px;
+}
+
+.win8phone-layout .navigation-list.dx-list .dx-list-item .dx-icon {
+	float: left;
+	margin-right: 15px;
+	-moz-background-size: 100%;
+	-o-background-size: 100%;
+	-webkit-background-size: 100%;
+	background-size: 100%;
+	width: 24px;
+	height: 24px;
+}
+
+.win8phone-layout .dx-toolbar.layout-toolbar-bottom {
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 0;
+
+    -webkit-transition: all .2s;
+    -moz-transition: all .2s;
+    -o-transition: all .2s;
+    transition: all .2s;
+}
+
+.win8phone-layout .dx-toolbar.layout-toolbar-bottom.semi-hidden {
+    margin-bottom: -20px;
+
+    -webkit-transition: all .2s;
+    -moz-transition: all .2s;
+    -o-transition: all .2s;
+    transition: all .2s;
+}

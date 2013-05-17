@@ -1,0 +1,125 @@
+﻿<div class="nav-patrial-view" data-options="dxView : { name: 'nav-list' } " >
+    <div data-bind="dxList: { }" style="height: 100%" data-options="dxCommandContainer : { locations: [{'name':'navigation'}] } " >
+        <div data-bind="click: clickAction, visible: visible, css: { 'dx-state-disabled': disabled }" data-options="dxTemplate : { name: 'item' } " >
+            <div>
+                <!-- ko if: icon -->
+                <span  data-bind="attr:{ 'class': 'dx-icon dx-icon-' + icon }"></span>
+                <!-- /ko -->
+                <!-- ko if: iconSrc -->
+                <img class="dx-icon" data-bind="attr: { src: iconSrc}" />
+                <!-- /ko -->
+                <div class="dx-navigation-item" data-bind="text: title"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="slideout-layout dx-black-background" data-options="dxLayout : { name: 'slideout', platform: 'ios', controller: 'slideout' } " >
+
+    <div class="navigation-list" data-options="dxViewPlaceholder : { viewName: 'nav-list' } " >
+    </div>
+
+    <div class="layout-frame dx-content-background">
+        <div class="layout-header dx-toolbar" data-options="dxContentPlaceholder : { name: 'header', transition: 'slide' } " >
+            <div data-bind="dxToolbar: {
+                    items: [
+                        { align: 'left', template: 'nav-button' },
+                        { text: title, align: 'center' }
+                    ]
+                }"
+               
+                class="layout-toolbar" data-options="dxCommandContainer : { locations: [
+                    {'name':'menu','showText':false,'align':'left'},
+                    {'name':'back','showIcon':false,'align':'left'},
+                    {'name':'cancel','showIcon':false,'align':'left'},
+                    {'name':'create','showText':false,'align':'right'},
+                    {'name':'edit','showIcon':false,'align':'right'},
+                    {'name':'save','showIcon':false,'align':'right'}] } " >
+                <div style="display: none" class="nav-button-item" data-options="dxTemplate : { name: 'nav-button' } " >
+                    <div class="nav-button" data-bind="dxButton: { icon: 'menu' }"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="layout-content dx-ios-stripes" data-options="dxContentPlaceholder : { name: 'content', transition: 'slide' } " >
+            <div class="load-panel" data-bind="dxLoadPanel: { visible: true, shading: false, targetContainer: false }"></div>
+        </div>
+        <div class="menu-actionsheet" data-bind="dxActionSheet: {}" data-options="dxCommandContainer: { locations: [{ name: 'menu' }] }"></div>
+    </div>
+
+    <div class="view-footer" data-options="dxContent : { targetPlaceholder: 'view-footer' } " >
+        <div data-bind="dxToolbar: { visible: false }" class="view-toolbar-bottom" data-options="dxCommandContainer : { locations: [{'name':'delete','showIcon':false,'defaultCommandOptions':{'type':'danger'}}] } " >
+        </div>
+    </div>
+</div>
+
+<div class="slideout-layout dx-black-background" data-options="dxLayout : { name: 'slideout', platform: 'android', controller: 'slideout' } " >
+
+    <div class="navigation-list" data-options="dxViewPlaceholder : { viewName: 'nav-list' } " >
+    </div>
+
+    <div class="layout-frame dx-content-background">
+        <div class="layout-header dx-toolbar" data-options="dxContentPlaceholder : { name: 'header', transition: 'slide' } " >
+            <div data-bind="dxToolbar: {
+                    items: [
+                        { align: 'left', template: 'nav-button' },
+                        { text: title, align: 'center' }
+                    ]
+                }"
+               
+                class="layout-toolbar" data-options="dxCommandContainer : { locations: [
+                    {'name':'create','showText':false,'align':'right'},
+                    {'name':'edit','showText':false,'align':'right'}, 
+                    {'name':'save','showText': false, 'align':'right'},
+                    {'name':'menu','showText':false,'align':'right'}, 
+                    { 'name':'delete', 'menu': true, 'align': 'right' }] } " >
+                <div style="display: none" class="nav-button-item" data-options="dxTemplate : { name: 'nav-button' } " >
+                    <div class="nav-button" data-bind="dxButton: { icon: 'menu' }"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="layout-content" data-options="dxContentPlaceholder : { name: 'content', transition: 'slide' } " >
+            <div class="load-panel" data-bind="dxLoadPanel: { visible: true, shading: false, targetContainer: false }"></div>
+        </div>
+    </div>
+
+</div>
+
+<div class="slideout-layout dx-black-background" data-options="dxLayout : { name: 'slideout', platform: 'win8', phone: true, controller: 'slideout' } " >
+
+    <div class="navigation-list" data-options="dxViewPlaceholder : { viewName: 'nav-list' } " >
+    </div>
+
+    <div class="layout-frame dx-content-background">
+        <div class="layout-header dx-toolbar" data-options="dxContentPlaceholder : { name: 'header', transition: 'slide' } " >
+            <div data-bind="dxToolbar: {
+                    items: [
+                        { align: 'left', template: 'nav-button' },
+                        { text: title, align: 'left' }
+                    ]
+                }"
+               
+                class="layout-toolbar" data-options="dxCommandContainer : { locations: [ ] } " >
+                <div style="display: none" class="nav-button-item" data-options="dxTemplate : { name: 'nav-button' } " >
+                    <div class="nav-button" data-bind="dxButton: { icon: 'menu' }"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="layout-content" data-options="dxContentPlaceholder : { name: 'content', transition: 'slide' } " >  
+            <div class="load-panel" data-bind="dxLoadPanel: { visible: true, shading: false, targetContainer: false }"></div>
+        </div>
+
+        <div data-bind="dxToolbar: { items: [], visible: false }" class="layout-toolbar-bottom win8 semi-hidden"
+            data-options="dxCommandContainer : { locations: [
+                { 'name':'save', 'align':'center' },
+                { 'name':'cancel', 'align':'center' },
+                { 'name':'create', 'align':'center' },
+                { 'name':'edit', 'align':'center' },
+                { 'name':'delete', 'align':'center' }
+            ] } " >
+        </div>
+    </div>
+
+</div>

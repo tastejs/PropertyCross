@@ -1,0 +1,164 @@
+﻿html, 
+body, 
+#view-port
+{
+	height: 100%;
+}
+
+body
+{
+	margin: 0;
+	padding: 0;
+}
+
+.dx-theme-ios .dx-textbox-input,
+.dx-theme-ios .dx-list
+{
+	background-color: #f7f7f7;
+}
+
+
+h2
+{
+	font-size: 14px;
+	padding-left: 0px !important;
+}
+
+h3
+{
+	font-size: 12px;
+	font-weight: bold !important;
+	padding-left: 0px !important;
+}
+
+
+
+
+.dx-theme-ios .dx-textbox
+{
+	margin-bottom: 5px;
+}
+
+.dx-theme-ios .dx-button
+{
+	margin-right: 5px;
+}
+
+.dx-theme-android .dx-textbox
+{
+	margin-bottom: 15px;
+}
+
+.dx-theme-android .dx-button
+{
+	margin-right: 10px;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.dx-theme-ios .elements-block
+{
+	padding: 10px 10px 0px 10px;
+}
+
+.dx-theme-android .elements-block
+{
+	padding: 15px 15px 0px 15px;
+}
+
+.property-info
+{
+	font-size: 14px;
+	white-space: normal;
+}
+
+.property-item img
+{
+	float: left;
+	margin-right: 10px;
+}
+
+.property-price
+{
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.last-search-count
+{
+	background-color: #777;
+	color: #fff;
+	border-radius: 10px;
+	padding: 4px;
+	font-size: 11px;
+}
+
+#favoritesList .dx-empty-message
+{
+	 font-size: 12px;
+}
+
+.home-list-item
+{
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.suggestion-list
+{
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+    height: auto;
+}
+
+.dx-theme-ios-typography .suggestion-list {
+    top: 195px;
+}
+
+.dx-theme-android-typography .suggestion-list {
+    top: 240px;
+}
+
+.dx-theme-win8phone-typography .suggestion-list {
+    top: 218px;
+    bottom: 60px;
+    left: 0px;
+    right: 0px;
+}
+
+/* winphone8 */
+@media screen and (orientation: portrait) {
+    @-ms-viewport {
+        width: 320px;
+        user-zoom: fixed;
+        max-zoom: 1;
+        min-zoom: 1;
+    }
+}
+
+.win8phone-layout .dx-toolbar {
+	background-color: rgba(255,255,255,0.20);
+}
+
+.win8phone-layout .layout-content > div[data-options] {
+	left: 10px !important;
+	right: 10px !important;
+}
+
+.win8phone-layout .home-list-item {
+	background: red;
+	margin: 10px 5px;
+}
+
+.win8phone-layout .last-search-count {
+	background: none;
+	font-size: 14px;
+	float: right;
+}
+
+.win8phone-layout .elements-block {
+	margin-bottom: 15px;
+}

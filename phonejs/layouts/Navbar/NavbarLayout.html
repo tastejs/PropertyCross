@@ -1,0 +1,95 @@
+﻿<div class="navbar-layout" data-options="dxLayout : { name: 'navbar', platform: 'ios', controller: 'navbar' } " >
+
+    <div class="layout-header" data-options="dxContentPlaceholder : { name: 'header', transition: 'slide' } " >
+        <div
+            data-bind="dxToolbar: { items: [ { text: title, align: 'center' } ] }"
+            data-options="dxCommandContainer : { locations: [
+                {'name':'back','showIcon':false,'align':'left'},
+                {'name':'cancel','showIcon':false,'align':'left'},
+                {'name':'create','showText':false,'align':'right'},
+                {'name':'edit','showIcon':false,'align':'right'},
+                {'name':'save','showIcon':false,'align':'right'}] } " >
+        </div>
+    </div>
+
+    <div class="layout-content dx-ios-stripes" data-options="dxContentPlaceholder : { name: 'content', transition: 'slide' }">
+        <div class="load-panel" data-bind="dxLoadPanel: { visible: true, shading: false, targetContainer: false }"></div>
+    </div>
+
+    <div class="layout-footer" data-options="dxContentPlaceholder : { name: 'footer' } " >
+        <div id="navBar" data-bind="dxNavBar: { }" data-options="dxCommandContainer : { locations: [{'name':'navigation'}] } " >
+        </div>
+    </div>
+
+    <div class="view-footer" data-options="dxContent : { targetPlaceholder: 'view-footer' } " >
+        <div data-bind="dxToolbar: { visible: false }" class="view-toolbar-bottom"
+            data-options="dxCommandContainer : { locations: [{'name':'delete','showIcon':false,'align':'center','defaultCommandOptions':{'type':'danger'}}] } " >
+        </div>
+    </div>
+
+</div>
+
+
+<div class="navbar-layout" data-options="dxLayout : { name: 'navbar', platform: 'android', controller: 'navbar' } " >
+
+    <div class="layout-header" data-options="dxContentPlaceholder : { name: 'header' } " >
+        <div id="navBar" data-bind="dxNavBar: { }" data-options="dxCommandContainer : { locations: [{'name':'navigation'}] } " >
+        </div>
+    </div>
+
+    <div class="layout-content" data-options="dxContentPlaceholder : { name: 'content', transition: 'slide' }">
+        <div class="load-panel" data-bind="dxLoadPanel: { visible: true, shading: false, targetContainer: false }"></div>
+    </div>
+
+    <div class="layout-footer" data-options="dxContentPlaceholder : { name: 'footer' } " >
+        <div
+            data-bind="dxToolbar: { visible: false }"
+            data-options="dxCommandContainer : { locations: [
+                {'name':'create','showText':false},
+                {'name':'edit','showText':false,'align':'left'},
+                {'name':'menu', 'align':'right'}, 
+                {'name':'delete','menu': true, 'align':'right'},
+                {'name':'save','showIcon':false,'align':'left'},
+                {'name':'cancel','showIcon':false,'align':'right'}] } " >
+        </div>
+    </div>
+
+</div>
+
+
+<div class="navbar-layout-tablet" data-options="dxLayout : { name: 'navbar', platform: 'win8', phone: false } " >
+    <div class="layout-header" data-options="dxContentPlaceholder : { name: 'header' } " >
+        <h1 data-bind="text: title"></h1>
+        <div id="navBar" data-bind="dxNavBar: { }" data-options="dxCommandContainer : { locations: [{'name':'navigation','showIcon':false}] } " ></div>
+    </div>
+    <div class="layout-content-wrapper">
+        <div class="layout-content" data-options="dxContentPlaceholder : { name: 'content', transition: 'none' }">
+            <div class="load-panel" data-bind="dxLoadPanel: { visible: true, shading: false, targetContainer: false }"></div>
+        </div>
+    </div>
+</div>
+
+<div class="navbar-layout-phone" data-options="dxLayout : { name: 'navbar', platform: 'win8', phone: true, controller: 'navbar' } " >
+
+    <div class="layout-header" data-options="dxContentPlaceholder : { name: 'header' } " >
+        <div id="navBar" data-bind="dxNavBar: { }" data-options="dxCommandContainer : { locations: [ {'name':'navigation', showIcon: false }] } " >
+        </div>
+    </div>
+
+    <div class="layout-content" data-options="dxContentPlaceholder : { name: 'content', transition: 'slide' } " >
+        <div class="load-panel" data-bind="dxLoadPanel: { visible: true, shading: false, targetContainer: false }"></div>
+    </div>
+
+    <div class="layout-footer" data-options="dxContentPlaceholder : { name: 'footer' } " >
+        <div data-bind="dxToolbar: { items: [], visible: false }" class="layout-toolbar-bottom win8 semi-hidden"
+            data-options="dxCommandContainer : { locations: [
+                { 'name':'save', 'align':'center' },
+                { 'name':'cancel', 'align':'center' },
+                { 'name':'create', 'align':'center' },
+                { 'name':'edit', 'align':'center' },
+                { 'name':'delete', 'align':'center' }
+            ] } " >
+        </div>
+    </div>
+
+</div>

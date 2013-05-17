@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<widget
+    xmlns="http://www.w3.org/ns/widgets"
+    xmlns:gap="http://phonegap.com/ns/1.0"
+    id="com.devexpress.propertycross"
+    versionCode="1"
+    version="0.0.1">
+   
+    <name>PropertyCross</name>
+
+    <description>
+        PropertyCross app implementation from DevExpress
+    </description>
+
+    <author href="http://www.devexpress.com">
+        Developer Express Inc.
+    </author>
+
+    <preference name="phonegap-version" value="2.3.0" />
+    <preference name="orientation" value="portrait" />
+    <preference name="target-device" value="handset" />
+    <preference name="auto-hide-splash-screen" value="false" />
+    <preference name="permissions" value="none"/>
+
+    <feature name="http://api.phonegap.com/1.0/geolocation" />
+
+    <access origin="http://nestoria.co.uk" subdomains="true" />
+    <access origin="http://nestimg.com" subdomains="true" />
+
+    <!-- Android icons -->
+    <icon src="Resources/PackageIcons.Android.ic_launcher_36_36.png"  gap:platform="android" gap:density="ldpi" />
+    <icon src="Resources/PackageIcons.Android.ic_launcher_48_48.png"  gap:platform="android" gap:density="mdpi" />
+    <icon src="Resources/PackageIcons.Android.ic_launcher_72_72.png"  gap:platform="android" gap:density="hdpi" />
+    <icon src="Resources/PackageIcons.Android.ic_launcher_96_96.png"  gap:platform="android" gap:density="xhdpi" />
+
+    <!-- iPhone icons -->
+    <icon src="Resources/PackageIcons.iOS.icon.png"  gap:platform="ios" width="57" height="57" />
+    <icon src="Resources/PackageIcons.iOS.icon@2x.png" gap:platform="ios" width="114" height="114" />
+
+    <!-- Android splashes -->
+    <gap:splash src="Resources/PackageIcons.Android.splash_200_320.png"  gap:platform="android" gap:density="ldpi" />
+    <gap:splash src="Resources/PackageIcons.Android.splash_320_480.png"  gap:platform="android" gap:density="mdpi" />
+    <gap:splash src="Resources/PackageIcons.Android.splash_480_800.png"  gap:platform="android" gap:density="hdpi" />
+    <gap:splash src="Resources/PackageIcons.Android.splash_720_1280.png" gap:platform="android" gap:density="xhdpi" />
+
+    <!-- iPhone splashes -->
+    <gap:splash src="Resources/PackageIcons.iOS.Default~iphone.png" gap:platform="ios" width="320" height="480" />
+    <gap:splash src="Resources/PackageIcons.iOS.Default@2x~iphone.png" gap:platform="ios" width="640" height="960" />
+    <gap:splash src="Resources/PackageIcons.iOS.Default-568h@2x.png" gap:platform="ios" width="640" height="1136" />
+
+</widget>
