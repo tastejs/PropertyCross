@@ -19,7 +19,9 @@ async.series([
     ["native"],
     ["rhomobile"],
     ["kendoui"],
-    ["intelappframework"]
+    ["intelappframework"],
+    ["lungo"],
+    ["phonejs"]
   ]),
 
   generateIcons.bind(null, "assets/icon-base-173x173.png", [
