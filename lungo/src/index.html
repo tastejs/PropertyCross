@@ -1,0 +1,146 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>PropertyCross</title>
+    <meta name="description" content="An implementation of the PropertyCross application written in Lungo">
+    <meta name="author" content="Steven Hall (stevenhall@scottlogic.co.uk)">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="cleartype" content="on">
+
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="components/lungo/lungo.css">
+    <link rel="stylesheet" href="components/lungo/lungo.icon.css">
+    <link rel="stylesheet" href="components/lungo/lungo.icon.brand.css">
+    <link rel="stylesheet" href="components/lungo/lungo.css">
+    <link rel="stylesheet" href="components/lungo/theme.lungo.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body class="app" data-position="fixed">
+    <section id="main" data-transition="">
+        <header data-title="Property Cross">
+            <nav class="right">
+                <a href="#favourites" data-router="section" class="button">Faves</a>
+            </nav>
+        </header>
+
+        <article id="search-form" class="active indented list">
+            <p>
+                Use the form below to search for houses to buy. You can search by place-name, postcode, or click 'My location', to search in your current location!
+            </p>
+
+            <div data-bind="visible: isSearching" data-loading="" class="loader"></div>
+
+            <form data-bind="submit: performSearchFromTerm">
+                <input type="text" id="searchTerm" data-bind="value: searchTerm" placeholder="Enter Location" />
+                <button type="submit" data-router="section" class="blue">Go</button>
+                <button href="#" type="button" data-bind="click: searchMyLocation" class="blue">My Location</button>
+            </form>
+
+            <p class="error-message" data-bind="text: errorMessage"></p>
+
+            <div data-bind="visible: hasSuggestions() === false">
+                <p>Recent searches:</p>
+
+                <ul data-bind="foreach:recentSearchResponses.slice(0).reverse()">
+                    <li data-bind="click: $parent.performSearchFromRecent">
+                        <span data-bind="text: search.getDisplayTerm()"></span>
+                        <div class="right tag blue" data-bind="text: total"></div>
+                    </li>
+                </ul>
+            </div>
+
+            <div data-bind="visible: hasSuggestions() === true">
+                <p>Please select a location below:</p>
+
+                <ul data-bind="foreach:suggestions">
+                    <li data-bind="click: $parent.performSearchFromSuggested"><strong data-bind="text: longTitle"></strong></li>
+                </ul>
+            </div>
+
+        </article>
+    </section>
+
+    <section id="favourites" data-transition="slide">
+        <header data-back="left blue" data-title="Favourites"></header>
+
+        <article id="favourite-list" class="active indented list scroll">
+            <p data-bind="visible: favourites().length === 0">You have not added any properties to your favourites.</p>
+            <ul data-bind="foreach: favourites">
+                <li data-bind="template: { name: 'property-template', data: $data }, click: $parent.viewProperty"></li>
+            </ul>
+        </article>
+
+    </section>
+
+    <section id="results" data-transition="slide">
+        <header data-back="left blue">
+            <p class="title centered"><span data-bind="text: pageCount"></span> out of <span data-bind="text: resultCount"></span> matches</p>
+        </header>
+
+        <article id="result-list" class="active indented list scroll">
+            <ul data-bind="foreach: properties">
+                <li data-bind="template: { name: 'property-template', data: $data }, click: $parent.viewProperty"></li>
+            </ul>
+            <ul data-bind="visible: hasMoreResults">
+                <li data-bind="click: retrieveMoreResults">
+                    <strong data-bind="text: loadMoreText"></strong>
+                    <small>Results for <strong data-bind="text: searchTerm"></strong>, showing <strong data-bind="text: pageCount"></strong> of <strong data-bind="text: resultCount"></strong> properties</small>
+                </li>
+            </ul>
+        </article>
+    </section>
+
+    <section id="property-view" data-transition="slide">
+        <header data-back="left blue" data-title="Property Details">
+            <nav class="right" data-bind="visible: isFavourited() === false, click: toggleFavourited">
+                <a class="button" data-icon="star"></a>
+            </nav>
+            <nav class="right" data-bind="visible: isFavourited() === true, click: toggleFavourited">
+                <a class="button" data-icon="star-full"></a>
+            </nav>
+        </header>
+
+        <article id="property-details" class="active indented list scroll" data-bind="with: currentViewModel">
+            <h1 data-bind="text: formattedPrice"></h1>
+            <h2 data-bind="text: location"></h2>
+            <img data-bind="attr: { src: imgUrl }" />
+            <h3 data-bind="text: stats"></h3>
+            <p data-bind="text: summary"></p>
+        </article>
+    </section>
+
+    <script type="text/html" id="property-template">
+        <div class="property">
+            <div class="property-thumbnail ib">
+                <img data-bind="attr: { src: thumbnailUrl } " />
+            </div>
+            <div class="property-information ib">
+                <strong data-bind="text: formattedPrice"></strong>
+                <small data-bind="text: title"></small>
+            </div>
+        </div>
+    </script>
+
+
+    <!-- Lungo - Dependencies -->
+    <script src="components/quojs/quo.js"></script>
+    <script src="components/lungo/lungo.js"></script>
+    <!-- Lungo - Sandbox App -->
+    <script>
+        Lungo.init({
+            name: 'PropertyCross',
+            version: '1.0'
+        });
+    </script>
+
+    <!-- PhoneGap -->
+    <script src="phonegap.js"></script>
+    <script data-main="application" src="components/requirejs/require.js"></script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+.ib {
+    display: inline-block;
+}
+
+.property-thumbnail {
+    width: 60px;
+    height: 60px;
+    margin-right: 15px;
+}
+
+.property-information {
+    width: 65%;
+    height: 60px;
+}
+
+.property-information small {
+    white-space: normal !important;
+}
+
+.loader {
+    position: absolute;
+    width: 100%
+}
+
+.error-message {
+    font-size: 1.1em;
+    color: #a31313;
+}
+
+#property-details img {
+    width: 94%;
+}

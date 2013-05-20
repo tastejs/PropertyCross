@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.propertycross.lungo</groupId>
+    <artifactId>lungo-demo</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
+    <name>Property Cross Lungo Demo</name>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <phonegap-build.server>phonegap-build</phonegap-build.server>
+        <phonegap-build.ios.server>ios-developer-certificate</phonegap-build.ios.server>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.3</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <warSourceDirectory>${basedir}/src</warSourceDirectory>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>phonegap-build</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.github.chrisprice</groupId>
+                        <artifactId>phonegap-build-maven-plugin</artifactId>
+                        <version>0.0.4</version>
+                        <executions>
+                            <execution>
+                                <id>phonegap-build</id>
+                                <goals>
+                                    <goal>clean</goal>
+                                    <goal>build</goal>
+                                </goals>
+                                <configuration>
+                                    <configFile>config.xml</configFile>
+                                    <keys>com.scottlogic.mobile.certificates:ios-team</keys>
+                                    <platforms>
+                                        <platform>ios</platform>
+                                        <platform>android</platform>
+                                        <platform>winphone</platform>
+                                        <platform>webos</platform>
+                                        <platform>symbian</platform>
+                                        <platform>blackberry</platform>
+                                    </platforms>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+            <dependencies>
+                <dependency>
+                    <groupId>com.scottlogic.mobile.certificates</groupId>
+                    <artifactId>ios-team</artifactId>
+                    <version>1.0.1</version>
+                    <type>zip</type>
+                    <scope>provided</scope>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
+
+</project>
