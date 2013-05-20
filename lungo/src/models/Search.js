@@ -7,6 +7,7 @@ define(
 
     var Search = function(params) {
         this.term = params.term;
+        this.displayTerm = params.displayTerm;
         this.position = params.position && new Position(params.position);
         this.pageNumber = params.pageNumber;
         this.type = params.type;
@@ -16,6 +17,14 @@ define(
                 return this.term;
             } else if(this.type === Search.Type.location) {
                 return this.position.latitude() + ',' + this.position.longitude();
+            }
+        };
+
+        this.getDisplayTerm = function() {
+            if(this.displayTerm) {
+                return this.displayTerm;
+            } else {
+                return this.getTerm();
             }
         };
 

@@ -49,7 +49,7 @@
 
                 <ul data-bind="foreach:recentSearchResponses.slice(0).reverse()">
                     <li data-bind="click: $parent.performSearchFromRecent">
-                        <span data-bind="text: search.getTerm()"></span>
+                        <span data-bind="text: search.getDisplayTerm()"></span>
                         <div class="right tag blue" data-bind="text: total"></div>
                     </li>
                 </ul>

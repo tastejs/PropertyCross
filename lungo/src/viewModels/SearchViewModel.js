@@ -16,6 +16,8 @@ define(
             this.errorMessage = ko.observable();
 
             this.searchTerm = ko.observable();
+            this.currentSearch = ko.observable();
+
             this.isSearching = ko.observable(false);
 
             this.recentSearchResponses = ko.observableArray();
@@ -78,7 +80,9 @@ define(
             });
 
             this.performSearch = Lungo.Core.bind(this, function(search) {
-                this.searchTerm(search.getTerm());
+                this.currentSearch(search);
+                this.searchTerm(search.getDisplayTerm());
+
                 this.isSearching(true);
                 Lungo.dom('#searchTerm').trigger('blur');
                 this.datasource.performSearch(search, searchSuccessCallback, searchErrorCallback);
@@ -86,18 +90,17 @@ define(
 
             // From UI:
             this.performSearchFromTerm = Lungo.Core.bind(this, function() {
-                var search = new Search({
+                this.performSearch(new Search({
                     term: this.searchTerm(),
                     pageNumber: 1,
                     type: Search.Type.term
-                });
-
-                this.performSearch(search);
+                }));
             });
 
             this.performSearchFromSuggested = Lungo.Core.bind(this, function(location) {
                 var search = new Search({
                     term: location.placeName,
+                    displayTerm: location.longTitle,
                     pageNumber: 1,
                     type: Search.Type.term
                 });
