@@ -17,4 +17,8 @@ downloads:
 ---
 [Intel App Framework](http://app-framework-software.intel.com/) is a framework for building cross-platform mobile application using HTML5 technologies. The framework started life as jqMobi, a mobile optimised version of jQuery, which was created by the team behind [appMobi](http://www.appmobi.com/). Intel acquired the jqMobi tools and staff in February 2013.
 
+Intel App Framework is free and open sourced under an MIT licence. Intel also offer [XDK](http://html5dev-software.intel.com/), which is a a full suite of tools built around the App Framework. XDK adds an IDE, build tools and an emulator.
+
+Along with its lightweight JavaScript library, Intel App Framework provides a basic [MVC framework](http://app-framework-software.intel.com/docmvc.php) and many UI components. Rather than mimicking the native look and feel, the framework has opted for providing its own styles which looks the same across all platforms. Styles can be customised using the framework “[Style Builder](http://app-framework-software.intel.com/style.php)”. The Intel App Framework version of PropertyCross uses [PhoneGap Build](https://build.phonegap.com/) in order to create the native packages.
+
 To view the code and detailed build steps, [see the github source]({{ site.githuburl }}/tree/master/intelappframework).

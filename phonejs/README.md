@@ -4,7 +4,7 @@
 
 PhoneJS uses the [Knockout](http://knockoutjs.com/) MVVM framework for structuring the application, with the PhoneJS CSS providing a native-styled UI for the various phone platforms. PhoneJS applications use [PhoneGap](http://phonegap.com/) for packaging.
 
-DevExpress also offers a more integrated solution based on PhoneJS, called [DXTREME](http://www.devexpress.com/Products/HTML-JS/), which adds Visual Studio tooling.
+DevExpress also offers a more integrated solution based on PhoneJS, called [DXTREME Mobile](http://www.devexpress.com/Products/HTML-JS/), which adds Visual Studio tooling.
 
 
 To view the code and detailed build steps, see the [github source](https://github.com/ColinEberhardt/PropertyCross/tree/master/phonejs).
