@@ -48,7 +48,11 @@ Run the build with:
 ## Contact & Links
 Application developer: Steven Hall
 [Lungo.js](http://lungo.tapquo.com/)
+
 [Quo.js](http://quojs.tapquo.com/)
+
 [Knockout.js](http://knockoutjs.com/)
+
 [Require.js](http://requirejs.org/)
+
 [PhoneGap Build](https://build.phonegap.com/apps)
