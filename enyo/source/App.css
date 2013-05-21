@@ -11,13 +11,13 @@
 .header-button-right {
 	position: absolute;
 	right:10px;
-	top: 7px;;
+	top: 7px;
 }
 
 .header-button-left {
 	position: absolute;
 	left:10px;
-	top: 7px;;
+	top: 7px;
 }
 
 .error-drawer > * {
@@ -37,10 +37,13 @@
 
 .item {
 	position: relative;
-	border-bottom: 1px solid #0E0E0E;
+	/*border-bottom: 1px solid #0E0E0E*/;
 	padding: 12px 16px;
-	background-color: #333333;
-	color:white;
+	background-color: #f3f2f2;
+	/*background-image: url('../assets/app_results.plmo/bar_bg_selected.png');*/
+	color: black;
+	margin-top: 2px;
+	margin-bottom: 4px;
 }
 
 .item > img {
@@ -51,7 +54,8 @@
 }
 
 .item.onyx-selected {
-	background-color: MidnightBlue;
+	background-color: #d8d8d6;
+
 }
 
 .recent {
@@ -130,4 +134,8 @@
 	width: 160px;
 	height: 120px;
 	background-image: url(../assets/home-b-160x120.png);
+}
+
+.onyx-groupbox > * {
+	border: none !important;
 }

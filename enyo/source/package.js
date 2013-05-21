@@ -4,6 +4,7 @@ enyo.depends(
 	//"Theme.less",	// uncomment this line, and follow the steps described in Theme.less
 	"utils.js",
 	"storage.js",
+	"kinds",
 	"App.css",
 	"App.js",
 	"search.js",

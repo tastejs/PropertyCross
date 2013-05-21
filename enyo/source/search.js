@@ -10,7 +10,7 @@ enyo.kind({
 	components: [
 		{kind: "onyx.Toolbar", components: [
 			{content: "PropertyCross", classes: "header-center"},
-			{kind: "onyx.Button", content: "Faves", classes:"header-button-right", ontap: "showFaves"}
+			{kind: "PC.Button", content: "Faves", classes:"header-button-right", ontap: "showFaves"}
 		]},
 		{classes: "panel-row", content: "Use the form below to search for houses to buy. You can search by place-name, postcode, or click 'My location', to search in your current location!"},
 		{kind: "onyx.InputDecorator", classes: "input-wide panel-row", components: [
@@ -19,9 +19,9 @@ enyo.kind({
 			]},
 			{kind: "onyx.Icon", classes: "input-right", src: "assets/cancel.png", ontap: "clearSearchInput" }
 		]},
-		{classes: "panel-row", components: [
-			{kind: "onyx.Button", content: "Go", onclick: "search"},
-			{kind: "onyx.Button", content: "My location", onclick: "geolocate"}
+		{classes: "panel-row", layoutKind: enyo.FittableColumnsLayout, noStretch: true, classes: "enyo-center", components: [
+			{kind: "PC.Button", content: "Go", ontap: "search"},
+			{kind: "PC.Button", content: "My location", ontap: "geolocate"}
 		]},
 		{name: "searchError", kind: "onyx.Drawer", open: false, classes: "panel-row error-drawer", components: [
 			{name: "searchErrorContent", content: "There was a problem with your search."}
@@ -144,6 +144,7 @@ enyo.kind({
 	},
 
 	search: function() {
+		this.log("DO A SEARCH");
 		var searchVal = this.$.searchInput.getValue();
 		if (searchVal.length) {
 			enyo.log(">>>> Searching...");
