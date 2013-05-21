@@ -13,7 +13,7 @@ contributors:
   username: joelwilliamsmith
   hash: 6e5b209f9dced24655066d1128a13964
 downloads:
-  android: https://s3-eu-west-1.amazonaws.com/propertycross/PropertyCross-IntelAppFramework-ce8e28b80dae09684b2022bfece8a13c101c6d24l.apk
+  android: https://s3-eu-west-1.amazonaws.com/propertycross/PropertyCross-IntelAppFramework-ce8e28b80dae09684b2022bfece8a13c101c6d24.apk
 ---
 [Intel App Framework](http://app-framework-software.intel.com/) is a framework for building cross-platform mobile application using HTML5 technologies. The framework started life as jqMobi, a mobile optimised version of jQuery, which was created by the team behind [appMobi](http://www.appmobi.com/). Intel acquired the jqMobi tools and staff in February 2013.
 
