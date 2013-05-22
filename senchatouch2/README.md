@@ -26,21 +26,19 @@ For the Windows Phone 8 build, PhoneGap build does not currently support WP8, ho
 ##Application Structure
 
  + `\.sencha` - Sencha project and workspace files.
- + `\app\controller` - Contains the application business logic
- + `\app\model` - Contains persisted model objects 
- + `\app\store` - Sencha data stores for persisting the model objects
- + `\app\util` - Simple utility functions
- + `\app\view` - The various Sencha views used by the app
+ + `\app\controller` - Contains the application business logic.
+ + `\app\model` - Configures persisted model objects.
+ + `\app\store` - Sencha data stores representing either collections of data loaded from the server, or persisted model objects.
+ + `\app\util` - Simple utility functions.
+ + `\app\view` - The various Sencha views used by the app.
  + `\assets` - icons and splashscreens used by PhoneGap, these are generated via the [PropertyCross build system](https://github.com/ColinEberhardt/PropertyCross/tree/master/build).
- + `\cordova-wp8` - A Windows Phone Cordova / PhoneGap project. This is used because PhoneGap Build does not wupport WP8.
- + `\resources` - The Sencha styles.
+ + `\cordova-wp8` - A Windows Phone Cordova / PhoneGap project. This is used because PhoneGap Build does not support WP8.
+ + `\resources` - The Sencha standard styles and customisation (SASS/CSS).
  + `\touch` - The Sencha Touch framework JS files.
  + `app.js` - The application bootstrap.
- + `app.json` - TODO: document
- + `build.xml` - TODO: document
- + `config.xml` - The XML file that is used by PhoneGap Build in order to package the app
+ + `app.json` - Application metadata/config.
+ + `build.xml` - Sencha build process configuration.
+ + `config.xml` - The XML file that is used by PhoneGap Build in order to package the app.
  + `index.html` - The host HTML page for this app.
- + `packager.json` - TODO: document 
  + `phonegap.js` - The PhoneGap JavaScript APIs.
  + `stats-config.json` - Used by the PropertyCross build in order to compute code sharing metrics.
- + `version.properties` - TODO: document 
