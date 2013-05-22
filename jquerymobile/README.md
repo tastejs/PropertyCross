@@ -34,7 +34,7 @@ The jQuery Mobile application is packaged using [PhoneGap Build](https://build.p
  + `index-windowsphone.html` - The Windows Phone version
  + `stats-config.json` - Used by the PropertyCross build in order to compute code sharing metrics.
 
-##References
+##Further Reading
 
  + [Integrating Knockout and jQuery Mobile](http://www.scottlogic.co.uk/blog/colin/2012/10/integrating-knockout-and-jquerymobile/) - a blog post that describes the experiences of integrating these two frameworks.
  + [Property Finder - a Cross-Platform HTML5 Mobile App](http://www.codeproject.com/Articles/445361/Property-Finder-a-cross-platform-HTML5-mobile-app) - an article which describes an early version of this application.
