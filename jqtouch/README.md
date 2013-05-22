@@ -22,17 +22,17 @@ The jQTouch application is packaged using [PhoneGap Build](https://build.phonega
 
 ##Application Structure
 
- + `\assets` - icons and splashscreens used by PhoneGap, these are generated via the [PropertyCross build system](https://github.com/ColinEberhardt/PropertyCross/tree/master/build).
- + `\dataSource` - TODO: document.
- + `\lib` - the various JavaScript frameworks used by this implementation
- + `\model` - TODO: document.
+ + `\assets` - Icons and splashscreens used by PhoneGap, these are generated via the [PropertyCross build system](https://github.com/ColinEberhardt/PropertyCross/tree/master/build).
+ + `\dataSource` - CoffeeScript for application data sources. 
+ + `\lib` - The various JavaScript frameworks used by this implementation
+ + `\model` - CoffeeScript defining base models of the application.
  + `\style` - The application specific styles, generated using SaSS.
  + `\themes` - The standard jQTouch CSS.
- + `\util` - TODO: document
+ + `\util` - CoffeeScript defining utility classes or functions. 
  + `\viewModel` - The view models that implement the PropertyCross logic.
- + `coffee-script.js` - TODO: document
+ + `coffee-script.js` - The CoffeeScript JS compiler v1.4.0 - http://coffeescript.org. 
  + `config.xml` - The XML file that is used by PhoneGap Build in order to package the app
- + `cs.js` - TODO: document
- + `index.html` - Defines the various view for the application.
- + `main.coffee` - TODO: document 
+ + `cs.js` - The CoffeeScript RequireJS plugin - http://github.com/jrburke/require-cs. 
+ + `index.html` - Defines the various views for the application and imports required CSS and scripts.
+ + `main.coffee` - The main entry point of the application.
  + `stats-config.json` - Used by the PropertyCross build in order to compute code sharing metrics.
