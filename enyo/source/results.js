@@ -10,7 +10,7 @@ enyo.kind({
 	components: [
 		{kind: "onyx.Toolbar", components: [
 			{name: "resultsHeader", content: "X of X matches", classes: "header-center"},
-			{kind: "PC.Button", content: "Back", classes:"header-button-left back-button", ontap: "goBack"}
+			{kind: "PC.Button", classes:"header-button-left back-button", ontap: "goBack"}
 		]},
 		{name: "resultsError", kind: "onyx.Drawer", open: false, classes: "panel-row error-drawer", components: [
 			{name: "resultsErrorContent", content: "There was a problem loading the listings."}
