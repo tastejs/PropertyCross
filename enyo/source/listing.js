@@ -12,7 +12,7 @@ enyo.kind({
 	components: [
 		{kind: "onyx.Toolbar", components: [
 			{name: "resultsHeader", content: "Property Details", classes: "header-center"},
-			{kind: "PC.Button", content: "Back", classes:"header-button-left back-button", ontap: "goBack"},
+			{kind: "PC.Button", classes:"header-button-left back-button", ontap: "goBack"},
 			{name: "fav", kind: "onyx.ToggleIconButton", src: "assets/fav.png", classes:"header-button-right", ontap: "changeFavorite"}
 		]},
 		{name: "resultsBox", fit: true, layoutKind:"FittableRowsLayout", components: [
