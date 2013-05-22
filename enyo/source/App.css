@@ -130,7 +130,6 @@
 }
 
 .listing-image {
-	display:block;
 	width: 160px;
 	height: 120px;
 	background-image: url(../assets/home-b-160x120.png);
