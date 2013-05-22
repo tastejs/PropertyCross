@@ -1,4 +1,4 @@
-#Xamarin ProperyCross
+#Xamarin PropertyCross
 
 
 Visit the [Xamarin page](http://propertycross.com/xamarin/) on the PropertyCross website for screenshots and code sharing metrics.
