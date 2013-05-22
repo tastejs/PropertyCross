@@ -1,4 +1,4 @@
-#Intel App Framework Property Cross Implementation
+#Intel App Framework 
 
 Visit the [Intel App Framework page](http://propertycross.com/intel-app-framework/) on the PropertyCross website for screenshots and code sharing metrics.
 
@@ -18,13 +18,13 @@ The IAP application is packaged using [PhoneGap Build](https://build.phonegap.co
 
 ##Application Structure
 
- + `assets` - icons and splashscreens used by PhoneGap, these are generated via the [PropertyCross build system](https://github.com/ColinEberhardt/PropertyCross/tree/master/build).
- + `controllers` - IAF controllers, these form part of the MVC implementation
- + `css` - the application CSS, this is the out-of-the-box IAF style.
- + `img` - application images
- + `js` - the IAF framework code
- + `models` - the persisted entities
- + `views` - the HTML templates that are used as the application views
+ + `\assets` - icons and splashscreens used by PhoneGap, these are generated via the [PropertyCross build system](https://github.com/ColinEberhardt/PropertyCross/tree/master/build).
+ + `\controllers` - IAF controllers, these form part of the MVC implementation
+ + `\css` - the application CSS, this is the out-of-the-box IAF style.
+ + `\img` - application images
+ + `\js` - the IAF framework code
+ + `\models` - the persisted entities
+ + `\views` - the HTML templates that are used as the application views
  + `app.js` - the application 'bootstrap'
  + `config.xml` - The XML file that is used by PhoneGap Build in order to package the app
  + `index.html` - Defines the various view for the application.
