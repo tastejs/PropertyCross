@@ -3,7 +3,7 @@ Enyo PropertyCross
 
 This is the [PropertyCross](http://propertycross.com/) application written with the [Enyo JavaScript framework](http://enyojs.com).  The purpose of PropertyCross is to allow developers to compare different frameworks and how they are utilized.
 
-Enyo is a free and open source (Apache 2.0 license) cross-platform and cross-browser framework that enables developers to easily create applications and deploy them to many modern desktop browsers and mobile devices.  See if your favorite platform is listed [here](http://enyojs.com/docs/platforms/).
+Enyo is a free and open source (Apache 2.0 license) cross-platform and cross-browser framework that enables developers to easily create applications and deploy them to many popular desktop browsers and mobile devices.  See if your favorite platform is listed [here](http://enyojs.com/docs/platforms/).
 
 Building Enyo PropertyCross
 =========
