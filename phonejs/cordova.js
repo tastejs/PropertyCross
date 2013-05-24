@@ -1,1 +1,1 @@
-// This fill will be added by the native app packager (PhoneGap build, etc)
+// This file is replaced by the native app packager
