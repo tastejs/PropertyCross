@@ -57,6 +57,7 @@ PropertyFinder.views.Home = function(params) {
     }
 
     function handleGoClick() {
+        $("input").blur(); // force software keyboard hiding
         doNestoriaSearch();
     }
 
