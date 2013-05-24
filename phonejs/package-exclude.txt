@@ -2,12 +2,4 @@ package-exclude.txt
 create-package.cmd
 .htaccess
 web.config
-bin/*
-obj/*
-*.sln
-*.dxjsproj
 cordova.js
-css/dx.desktop.*
-css/dx.win8.*
-js/dx.chartjs.*
-js/dx.all.*
