@@ -32,6 +32,6 @@ Enyo PropertyCross Source Structure
 
 Building Enyo PropertyCross
 =========
-This application is based on the [Bootplate project](https://github.com/enyojs/bootplate) to enabled easy packaging and deployment.  See the project [wiki](https://github.com/enyojs/enyo/wiki/Bootplate) for complete instructions.
+This application is based on the [Bootplate project](https://github.com/enyojs/bootplate) to enable easy packaging and deployment.  See the project [wiki](https://github.com/enyojs/enyo/wiki/Bootplate) for complete instructions.
 
 You can run the un-minifed version directly in your browser for easy testing.  Just open index.html located in the enyo/source directory of this repository.
