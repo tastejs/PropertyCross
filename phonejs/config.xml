@@ -27,25 +27,21 @@
     <access origin="http://nestoria.co.uk" subdomains="true" />
     <access origin="http://nestimg.com" subdomains="true" />
 
-    <!-- Android icons -->
-    <icon src="Resources/PackageIcons.Android.ic_launcher_36_36.png"  gap:platform="android" gap:density="ldpi" />
-    <icon src="Resources/PackageIcons.Android.ic_launcher_48_48.png"  gap:platform="android" gap:density="mdpi" />
-    <icon src="Resources/PackageIcons.Android.ic_launcher_72_72.png"  gap:platform="android" gap:density="hdpi" />
-    <icon src="Resources/PackageIcons.Android.ic_launcher_96_96.png"  gap:platform="android" gap:density="xhdpi" />
+    <icon src="assets/icons/icon-72-2x.png" />
+    <icon src="assets/icons/36x36.png"              gap:platform="android"    gap:density="ldpi" />
+    <icon src="assets/icons/48x48.png"              gap:platform="android"    gap:density="mdpi" />
+    <icon src="assets/icons/72x72.png"              gap:platform="android"    gap:density="hdpi" />
+    <icon src="assets/icons/96x96.png"              gap:platform="android"    gap:density="xhdpi" />
+    <icon src="assets/icons/icon-57.png"            gap:platform="ios"        width="57" height="57" />
+    <icon src="assets/icons/icon-72.png"            gap:platform="ios"        width="72" height="72" />
+    <icon src="assets/icons/icon-57-2x.png"         gap:platform="ios"        width="114" height="114" />
+    <icon src="assets/icons/icon-72-2x.png"         gap:platform="ios"        width="144" height="144" />
 
-    <!-- iPhone icons -->
-    <icon src="Resources/PackageIcons.iOS.icon.png"  gap:platform="ios" width="57" height="57" />
-    <icon src="Resources/PackageIcons.iOS.icon@2x.png" gap:platform="ios" width="114" height="114" />
-
-    <!-- Android splashes -->
-    <gap:splash src="Resources/PackageIcons.Android.splash_200_320.png"  gap:platform="android" gap:density="ldpi" />
-    <gap:splash src="Resources/PackageIcons.Android.splash_320_480.png"  gap:platform="android" gap:density="mdpi" />
-    <gap:splash src="Resources/PackageIcons.Android.splash_480_800.png"  gap:platform="android" gap:density="hdpi" />
-    <gap:splash src="Resources/PackageIcons.Android.splash_720_1280.png" gap:platform="android" gap:density="xhdpi" />
-
-    <!-- iPhone splashes -->
-    <gap:splash src="Resources/PackageIcons.iOS.Default~iphone.png" gap:platform="ios" width="320" height="480" />
-    <gap:splash src="Resources/PackageIcons.iOS.Default@2x~iphone.png" gap:platform="ios" width="640" height="960" />
-    <gap:splash src="Resources/PackageIcons.iOS.Default-568h@2x.png" gap:platform="ios" width="640" height="1136" />
+    <gap:splash src="assets/splashscreens/200x320.png"                      gap:platform="android" gap:density="ldpi" />
+    <gap:splash src="assets/splashscreens/320x480.png"                      gap:platform="android" gap:density="mdpi" />
+    <gap:splash src="assets/splashscreens/480x800.png"                      gap:platform="android" gap:density="hdpi" />
+    <gap:splash src="assets/splashscreens/720x1280.png"                     gap:platform="android" gap:density="xhdpi" />
+    <gap:splash src="assets/splashscreens/screen-iphone-portrait.png"       gap:platform="ios"     width="320" height="480" />
+    <gap:splash src="assets/splashscreens/screen-iphone-portrait-2x.png"    gap:platform="ios"     width="640" height="960" />
 
 </widget>
