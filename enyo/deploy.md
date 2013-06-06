@@ -21,7 +21,7 @@ Instead, the CSS url paths are fixed up to reference the new path from the build
 
 To compress your application, you must run the Node.js script named `deploy.js` that comes with Enyo, as `enyo/tools/deploy.js`.
 
-    $ node enyo/tools/deploy.js -h
+    $ node enyo/tools/deploy.js
 
 This script will run the minification tool located in `enyo/tools/minifier/minify.js`, and make a build of enyo, then a build of your app.
 
