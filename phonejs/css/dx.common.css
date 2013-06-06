@@ -1,7 +1,7 @@
 /* 
 * DevExpress PhoneJS
-* Version: 13.1.2
-* Build date: May 15, 2013
+* Version: 13.1.4
+* Build date: Jun 5, 2013
 *
 * Copyright (c) 2012 - 2013 Developer Express Inc. ALL RIGHTS RESERVED
 * EULA: http://phonejs.devexpress.com/EULA
@@ -162,10 +162,11 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 .dx-button
 {
   display: inline-block;
-  margin: 1px;
+  margin: 1px 0;
   cursor: pointer;
   text-align: center;
   vertical-align: middle;
+  max-width: 100%;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -176,6 +177,12 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   -ms-user-drag: none;
   -o-user-drag: none;
   user-drag: none;
+}
+.dx-button .dx-button-content
+{
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-height: 100%;
 }
 .dx-button.dx-state-disabled
 {
@@ -534,7 +541,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   cursor: pointer;
   position: relative;
   overflow: hidden;
-  text-overflow: hidden;
+  text-overflow: ellipsis;
   white-space: nowrap;
 }
 .dx-tabs .dx-tab a
@@ -575,11 +582,11 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   -o-user-select: none;
   user-select: none;
 }
-.dx-maps
+.dx-map
 {
   position: relative;
 }
-.dx-maps .dx-maps-container, .dx-maps .dx-maps-shield
+.dx-map .dx-map-container, .dx-map .dx-map-shield
 {
   position: absolute;
   top: 0;
@@ -587,7 +594,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   width: 100%;
   height: 100%;
 }
-.dx-maps .dx-maps-shield
+.dx-map .dx-map-shield
 {
   opacity: .01;
   background: rgba(0,0,0,.01);
@@ -731,6 +738,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 .dx-list .dx-list-item
 {
   cursor: pointer;
+  -webkit-backface-visibility: hidden;
 }
 .dx-list.dx-state-disabled, .dx-list.dx-state-disabled .dx-list-item, .dx-list.dx-state-disabled.dx-list-item
 {
@@ -981,7 +989,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 {
   bottom: 85px;
 }
-.dx-overlay-content.dx-action-sheet-popup
+.dx-action-sheet-popup .dx-overlay-content
 {
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -996,14 +1004,14 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   padding-top: 0;
   padding-bottom: 0;
 }
-.dx-overlay-content.dx-action-sheet-popup .dx-button
+.dx-action-sheet-popup .dx-overlay-content .dx-button
 {
   padding-left: 0;
   padding-right: 0;
   margin-left: 0;
   margin-right: 0;
 }
-.dx-overlay-content.dx-action-sheet-popup .dx-action-sheet-item, .dx-overlay-content.dx-action-sheet-popup .dx-action-sheet-cancel
+.dx-action-sheet-popup .dx-overlay-content .dx-action-sheet-item, .dx-action-sheet-popup .dx-overlay-content .dx-action-sheet-cancel
 {
   width: 100%;
 }
@@ -1122,8 +1130,10 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 .dx-dashboard-title
 {
-  font-size: 20px;
+  font-size: 30px;
   overflow: hidden;
+  padding-top: 3px;
+  padding-bottom: 3px;
 }
 .dx-dashboard-title .dx-dashboard-title-image
 {
@@ -1131,12 +1141,15 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 .dx-dashboard-title .dx-dashboard-title-text
 {
-  display: block;
-  float: left;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  padding: 4px;
+  display: inline-block;
+  float: left;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 .dx-dashboard-viewer .dx-viewer-item-table
 {
@@ -1157,6 +1170,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   user-select: none;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
+  overflow: hidden;
 }
 .dx-dashboard-viewer .dx-dashboard-splitter-pane-empty
 {
@@ -1169,20 +1183,49 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   user-select: none;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
+  overflow: visible;
 }
 .dx-dashboard-icon
 {
   background-repeat: no-repeat;
   background-position: center center;
-  width: 24px;
-  height: 24px;
 }
-.dx-dashboard-button-icon
+.dx-dashboard-button
+{
+  display: inline-block;
+  padding: 0;
+  border: 1px solid transparent;
+}
+.dx-dashboard-small-icon
 {
   background-repeat: no-repeat;
   background-position: center center;
   width: 24px;
   height: 24px;
+}
+.dx-dashboard-big-icon
+{
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: 32px;
+  height: 32px;
+}
+.dx-dashboard-small-button-icon
+{
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  padding: 0;
+  border: 1px solid transparent;
+}
+.dx-dashboard-big-button-icon
+{
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: 32px;
+  height: 32px;
   display: inline-block;
   padding: 0;
   border: 1px solid transparent;
@@ -1205,11 +1248,11 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 .dx-dashboard-item-header .dx-dashboard-item-header-text
 {
-  display: block;
-  float: left;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  display: block;
+  float: left;
   font-weight: normal;
   padding-left: 10px;
   padding-top: 7px;
@@ -1301,7 +1344,7 @@ div.dx-dashboard-item
   border: 1px solid transparent;
   opacity: .4;
 }
-.dx-dashboard-export
+.dx-dashboard-item-export
 {
   background-repeat: no-repeat;
   background-position: center center;
@@ -1311,22 +1354,34 @@ div.dx-dashboard-item
   padding: 0;
   border: 1px solid transparent;
 }
-.dx-dashboard-clear-master-filter.dxdbEnabled:hover, .dx-dashboard-content-selection:hover, .dx-dashboard-export:hover, .dx-dashboard-item-header-drill-up.dxdbEnabled:hover
+.dx-dashboard-export
+{
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: 32px;
+  height: 32px;
+  display: inline-block;
+  padding: 0;
+  border: 1px solid transparent;
+}
+.dx-dashboard-clear-master-filter.dxdbEnabled:hover, .dx-dashboard-content-selection:hover, .dx-dashboard-item-export:hover, .dx-dashboard-export:hover, .dx-dashboard-item-header-drill-up.dxdbEnabled:hover
 {
   cursor: pointer;
 }
-.dx-dashboard-clear-master-filter.dxdbEnabled, .dx-dashboard-item-header-drill-up.dxdbEnabled
+.dx-dashboard-clear-master-filter.dxdbEnabled, .dx-dashboard-item-header-drill-up.dxdbEnabled, .dx-dashboard-item-export.dxdbEnabled
 {
   opacity: 1;
 }
 .dx-dashboard-menu-background
 {
   display: none;
-  padding: 1px;
   position: absolute;
 }
 .dx-dashboard-menu-background li
 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   border: 1px solid transparent;
   border-collapse: separate;
   cursor: pointer;
@@ -1372,10 +1427,6 @@ div.dx-dashboard-splitter-layout-place
   width: 100%;
   height: 100%;
   vertical-align: top;
-}
-div.dx-dashboard-splitter-layout-place, div.dx-dashboard-splitter-separator
-{
-  overflow: hidden;
 }
 div.dx-dashboard-layout-shield
 {

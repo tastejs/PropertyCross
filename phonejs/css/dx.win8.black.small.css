@@ -1,7 +1,7 @@
 /* 
 * DevExpress PhoneJS
-* Version: 13.1.2
-* Build date: May 15, 2013
+* Version: 13.1.4
+* Build date: Jun 5, 2013
 *
 * Copyright (c) 2012 - 2013 Developer Express Inc. ALL RIGHTS RESERVED
 * EULA: http://phonejs.devexpress.com/EULA
@@ -54,6 +54,10 @@
 {
   background-color: #000;
 }
+@media screen and (orientation: portrait)
+{
+  @-ms-viewport{width:320px;user-zoom:fixed;max-zoom:1;min-zoom:1;}
+  }
 .dx-theme-win8 .dx-black-background
 {
   background: #000;
@@ -682,7 +686,9 @@
 }
 .dx-theme-win8 .dx-slider .dx-slider-wrapper .dx-slider-bar .dx-slider-handle
 {
-  display: none;
+  height: 12px;
+  width: 12px;
+  background: #fff;
 }
 .dx-theme-win8 .dx-indent-wrapper
 {
@@ -723,20 +729,22 @@
 {
   text-align: left;
 }
+.dx-theme-win8 .dx-editbox
+{
+  margin: 0;
+}
 .dx-theme-win8 .dx-editbox .dx-editbox-input
 {
   min-height: 28px;
   min-width: 64px;
   margin: 4px 0;
-  border-width: 1px;
-  border-style: solid;
-  border-color: #888;
+  border: 2px solid #888;
   font-size: 11pt;
   font-weight: 400;
   line-height: 1.3636;
   background-color: rgba(255,255,255,.87);
   color: #000;
-  padding: .5em;
+  padding: .3em;
 }
 .dx-theme-win8 .dx-editbox .dx-editbox-input:-moz-placeholder
 {
@@ -892,7 +900,7 @@
   position: relative;
   padding: .6em 10px;
   overflow: hidden;
-  text-overflow: hidden;
+  text-overflow: ellipsis;
   white-space: nowrap;
   font-size: 14pt;
   font-weight: 200;
@@ -1041,12 +1049,12 @@
   color: #fff;
   padding: 3px 8px;
 }
-.dx-theme-win8 .dx-lookup-popup.dx-overlay-content
+.dx-theme-win8 .dx-lookup-popup .dx-overlay-content
 {
   height: 80% !important;
   margin: 10% 0;
 }
-.dx-theme-win8 .dx-lookup-popup.dx-overlay-content.dx-popup-fullscreen
+.dx-theme-win8 .dx-lookup-popup .dx-overlay-content.dx-popup-fullscreen
 {
   height: 100% !important;
   margin: 0;
@@ -1055,6 +1063,14 @@
 .dx-theme-win8 .dx-lookup-popup .dx-list-item.dx-lookup-selected
 {
   background-color: #bb1000;
+}
+.dx-theme-win8 .dx-lookup-popup .dx-popup-content.dx-lookup-cancel
+{
+  bottom: 105px;
+}
+.dx-theme-win8 .dx-lookup-popup .dx-popup-content.dx-lookup-cancel .dx-button.dx-lookup-cancel
+{
+  margin: 10px 0;
 }
 .dx-theme-win8 .dx-loadindicator.dx-loadindicator-large .dx-loadindicator-wrapper .dx-loadindicator-icon .dx-loadindicator-win8-segment .dx-loadindicator-win8-inner-segment
 {
@@ -1353,61 +1369,60 @@
   border: 2px solid #888;
   padding: .5em 1em;
 }
-.dx-theme-win8 .dx-popup .dx-autocomplete-popup.dx-overlay-content
+.dx-theme-win8 .dx-popup.dx-autocomplete-popup .dx-overlay-content
 {
   position: absolute;
 }
-.dx-theme-win8 .dx-popup .dx-autocomplete-popup.dx-overlay-content .dx-popup-content
+.dx-theme-win8 .dx-popup.dx-autocomplete-popup .dx-overlay-content .dx-popup-content
 {
   border: 2px solid #888;
-  border-top: 0;
   padding: 0;
 }
-.dx-theme-win8 .dx-popup .dx-autocomplete-popup.dx-overlay-content .dx-popup-content .dx-list
+.dx-theme-win8 .dx-popup.dx-autocomplete-popup .dx-overlay-content .dx-popup-content .dx-list
 {
   background-color: #fff;
 }
-.dx-theme-win8 .dx-popup .dx-autocomplete-popup.dx-overlay-content .dx-popup-content .dx-list .dx-list-item
+.dx-theme-win8 .dx-popup.dx-autocomplete-popup .dx-overlay-content .dx-popup-content .dx-list .dx-list-item
 {
   background-color: #fff;
   color: #000;
   padding: .5em 1em;
 }
-.dx-theme-win8 .dx-popup .dx-autocomplete-popup.dx-overlay-content .dx-popup-content .dx-list .dx-list-item.dx-state-active
+.dx-theme-win8 .dx-popup.dx-autocomplete-popup .dx-overlay-content .dx-popup-content .dx-list .dx-list-item.dx-state-active
 {
   background-color: #bb1000;
   color: #fff;
 }
-.dx-theme-win8 .dx-popup .dx-autocomplete-popup.dx-overlay-content .dx-popup-content .dx-list .dx-list-item.dx-state-active.dx-state-active
+.dx-theme-win8 .dx-popup.dx-autocomplete-popup .dx-overlay-content .dx-popup-content .dx-list .dx-list-item.dx-state-active.dx-state-active
 {
   background-color: #bb1000;
 }
-.dx-theme-win8 .dx-popup .dx-autocomplete-popup.dx-overlay-content .dx-popup-content .dx-list .dx-list-item.dx-state-disabled
+.dx-theme-win8 .dx-popup.dx-autocomplete-popup .dx-overlay-content .dx-popup-content .dx-list .dx-list-item.dx-state-disabled
 {
   color: #b2b2b2;
 }
-.dx-theme-win8 .dx-popup .dx-autocomplete-popup.dx-overlay-content .dx-popup-content .dx-list .dx-list-item.dx-autocomplete-selected
+.dx-theme-win8 .dx-popup.dx-autocomplete-popup .dx-overlay-content .dx-popup-content .dx-list .dx-list-item.dx-autocomplete-selected
 {
   background-color: #0281d2;
   color: #fff;
 }
-.dx-theme-win8 .dx-popup .dx-dropdownmenu-popup.dx-overlay-content .dx-popup-content
+.dx-theme-win8 .dx-popup.dx-dropdownmenu-popup .dx-overlay-content .dx-popup-content
 {
   padding: 0;
   border: 0;
   background-color: #fff;
 }
-.dx-theme-win8 .dx-popup .dx-dropdownmenu-popup.dx-overlay-content .dx-popup-content .dx-list-item
+.dx-theme-win8 .dx-popup.dx-dropdownmenu-popup .dx-overlay-content .dx-popup-content .dx-list-item
 {
   background-color: #fff;
   color: #000;
 }
-.dx-theme-win8 .dx-popup .dx-dropdownmenu-popup.dx-overlay-content .dx-popup-content .dx-list-item.dx-state-active
+.dx-theme-win8 .dx-popup.dx-dropdownmenu-popup .dx-overlay-content .dx-popup-content .dx-list-item.dx-state-active
 {
   background-color: #0281d2;
   color: #fff;
 }
-.dx-theme-win8 .dx-popup .dx-dropdownmenu-popup.dx-overlay-content .dx-popup-content .dx-list-item.dx-state-disabled
+.dx-theme-win8 .dx-popup.dx-dropdownmenu-popup .dx-overlay-content .dx-popup-content .dx-list-item.dx-state-disabled
 {
   color: #b2b2b2;
 }

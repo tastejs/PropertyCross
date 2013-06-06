@@ -10,7 +10,15 @@
 
         init: function(options) {
             this.callBase(options);
-            this._navigationManager.navigating.add($.proxy(this._onNavigating, this));
+            this._navigatingHandler = $.proxy(this._onNavigating, this);
+        },
+
+        activate: function() {
+            this._navigationManager.navigating.add(this._navigatingHandler);
+        },
+
+        deactivate: function() {
+            this._navigationManager.navigating.remove(this._navigatingHandler);
         },
 
         _onNavigating: function(args) {

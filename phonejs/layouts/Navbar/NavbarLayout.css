@@ -91,7 +91,7 @@
 
 /* android */
 
-.dx-theme-android .navbar-layout .layout-header {
+.dx-theme-android .navbar-layout .layout-header #navBar {
     top: 0;
     height: 78px;
     border-bottom: 1px solid #09c;
