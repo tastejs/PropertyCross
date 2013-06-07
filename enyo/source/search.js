@@ -52,6 +52,8 @@ enyo.kind({
 	
 	suggestedLocations: [],
 
+	isGeolocation: false,
+
 	create: function () {
 		this.inherited(arguments);
 
@@ -81,8 +83,12 @@ enyo.kind({
 
 	recentListItemTap: function(inSender, inEvent) {
 		var i = inEvent.index;
-		this.$.searchInput.setValue(this.recentLocations[i].search);
-		this.search();
+		if (this.recentLocations[i].isGeolocation) {
+			this.geoProcess({coords: {latitude: this.recentLocations[i].latitude, longitude: this.recentLocations[i].longitude}});
+		} else {
+			this.$.searchInput.setValue(this.recentLocations[i].search);
+			this.search();
+		}
 	},
 
 	setupSuggestedListItem: function (inSender, inEvent) {
@@ -116,6 +122,7 @@ enyo.kind({
 	  var longitude = position.coords.longitude;
 		enyo.log(">>>> Geolocating...");
 		this.$.searchingPopup.show();
+		this.isGeolocation = true;
 		var jsonp = new enyo.JsonpRequest({url:"http://api.nestoria.co.uk/api", callbackName:"callback"});
 		jsonp.response(this, "processResult");
 		jsonp.error(this, "processError");
@@ -149,6 +156,7 @@ enyo.kind({
 		if (searchVal.length) {
 			enyo.log(">>>> Searching...");
 			this.$.searchingPopup.show();
+			this.isGeolocation = false;
 			var jsonp = new enyo.JsonpRequest({url:"http://api.nestoria.co.uk/api", callbackName:"callback"});
 			jsonp.response(this, "processResult");
 			jsonp.error(this, "processError");
@@ -176,7 +184,7 @@ enyo.kind({
 		if (responseCode === "100" || responseCode === "101" || responseCode === "102") {
 			enyo.log(">>>> Search results: " + this.searchResults.total_results);
 			if (this.searchResults.total_results !== 0) {
-				this.addToSearchHistory({search: this.searchResults.locations[0].title, matches: this.searchResults.total_results});
+				this.addToSearchHistory({search: this.searchResults.locations[0].title, longitude: this.searchResults.locations[0].center_long, latitude: this.searchResults.locations[0].center_lat, matches: this.searchResults.total_results, isGeolocation: this.isGeolocation});
 			} else {
 				this.showSearchError("There were no properties found for the given location.");
 			}
