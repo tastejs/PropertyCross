@@ -20,11 +20,12 @@
         <!-- boiler plate code that appears to be required... -->
         <script type="text/javascript">
         $.ui.animateHeaders=false;
+        $.ui.loadDefaultHash=false;
             if (!((window.DocumentTouch && document instanceof DocumentTouch) || 'ontouchstart' in window)) {
                 var script = document.createElement("script");
-                script.src = "js/af.desktopBrowsers.js";
+                script.src = "plugins/af.desktopBrowsers.js";
                 var tag = $("head").append(script);
-                $.os.desktop = true;
+
             }
         </script>
     </head>
