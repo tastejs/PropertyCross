@@ -1,11 +1,16 @@
 $.mvc.controller.create("results", {
-    views: {"propertyTpl": "views/property.tpl"},
+    views: {
+        "propertyTpl": "views/property.tpl"
+    },
     favesPage: false,
 
     goToProperty: function(id, favesPage) {
         this.favesPage = favesPage === "true";
         properties.get(id, function(property) {
-            $("#property").html($.template("propertyTpl",{property:property}));
+            //$("#property").html($.template("propertyTpl",{property:property}));
+            $.ui.updatePanel("#property", $.template("propertyTpl", {
+                property: property
+            }));
             var $addRemoveFaveButton = $("#addRemoveFave");
             $addRemoveFaveButton.attr("href", "/favourites/addRemove/" + id);
             favourites.isFave(id, function(isFave) {
@@ -25,7 +30,7 @@ $.mvc.controller.create("results", {
             } else {
                 $("#bathroomNumber").show();
             }
-            $.ui.loadContent("property",false,false,"slide");
+            $.ui.loadContent("property", false, false, "slide");
         });
     },
 

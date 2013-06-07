@@ -1,6 +1,7 @@
 /*Header button defaults*/
 #header a.button {
     float: left;
+    margin:4px;
 }
 
 /*Fave button*/
