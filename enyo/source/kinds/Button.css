@@ -1,0 +1,60 @@
+.pc-button {
+	background-color: rgba(255, 255, 255, 0);
+	background-image: url('../../assets/button.png');
+	background-repeat: no-repeat;
+	border: none;
+	color: #fff;
+	/* these buttons are fixed height/width for simplicity and until I get just a border image as opposed to a full button .png*/
+	height: 50px;
+	width: 150px;
+	vertical-align: middle;
+	padding-top: .8em;
+}
+
+.pc-button.active, .pc-button.pressed {
+	background-image: url('../../assets/button_on.png');
+	background-position: bottom center;
+	border-top: none;
+	box-shadow: none;
+}
+
+.pc-button:active:hover:not([disabled]) {
+	background-image: url('../../assets/button_on.png');
+	background-position: bottom center;
+	border-top: none;
+	box-shadow: none;
+}
+
+.pc-button.back-button {
+	background-image: url('../../assets/button_back.png') !important;
+	top: 15px;
+	left: 20px;
+	height: 26px;
+	width: 25px;
+}
+
+.pc-button.back-button.active, .pc-button.back-button.pressed {
+	background-image: url('../../assets/button_back_on.png') !important;
+	background-position: bottom center;
+	border-top: none;
+	box-shadow: none;
+}
+
+.pc-button.back-button:active:hover:not([disabled]) {
+	background-image: url('../../assets/button_back_on.png') !important;
+	background-position: bottom center;
+	border-top: none;
+	box-shadow: none;
+}
+
+.onyx-toolbar .pc-button {
+	background-color: rgba(255, 255, 255, 0);
+	background-image: url('../../assets/button_on.png');
+	box-shadow: none;
+	margin: 0px;
+	padding: 0px 0px .2em 0px;
+}
+
+.onyx-toolbar {
+	background-color: #ff9833;
+}

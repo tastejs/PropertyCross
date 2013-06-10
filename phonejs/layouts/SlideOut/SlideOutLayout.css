@@ -200,6 +200,10 @@
     height: 60px;
 }
 
+.dx-theme-win8phone .slideout-layout .dx-toolbar {
+    height: 45px;
+}
+
 .dx-theme-win8 .slideout-layout .layout-header .dx-toolbar {
     opacity: 1;
     height: 45px;

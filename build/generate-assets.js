@@ -6,24 +6,6 @@ var fs = require('fs');
 var CONCURRENCY_LIMIT = 5;
 
 async.series([
-  generateFrameworkLogos.bind(null, "assets/framework-icons/templates/tech_badge_bg.png",
-                                                  "assets/framework-icons/templates/tech_badge_mask.png",
-                                                  "assets/framework-icons/templates/tech_badge_fg.png", [
-    ["xamarin"],
-    ["air"],
-    ["titanium"],
-    ["jqtouch"],
-    ["jquerymobile"],
-    ["mgwt"],
-    ["senchatouch2"],
-    ["native"],
-    ["rhomobile"],
-    ["kendoui"],
-    ["intelappframework"],
-    ["lungo"],
-    ["phonejs"]
-  ]),
-
   generateIcons.bind(null, "assets/icon-base-173x173.png", [
     // ["FRAMEWORK-OVERLAY", "TARGET", WIDTH],
     ["assets/frameworks/air.png", "air/src/com/propertycross/air/assets/icon16x16.png", 16],
@@ -110,18 +92,37 @@ async.series([
     ["assets/frameworks/intelappframework.png", "intelappframework/assets/icons/icon-57-2x.png", 114],
     ["assets/frameworks/intelappframework.png", "intelappframework/assets/icons/icon-72-2x.png", 144],
     ["assets/frameworks/intelappframework.png", "intelappframework/assets/icons/ApplicationIcon.png", 66],
-    ["assets/frameworks/intelappframework.png", "intelappframework/assets/icons/ApplicationTileIcon.png", 173]
-    ["assets/frameworks/kendoui.png", "kendoui/assets/icons/ApplicationTileIcon.png", 173],
-    ["assets/frameworks/lungo.png", "lungo/assets/icons/36x36.png", 36],
-    ["assets/frameworks/lungo.png", "lungo/assets/icons/48x48.png", 48],
-    ["assets/frameworks/lungo.png", "lungo/assets/icons/72x72.png", 72],
-    ["assets/frameworks/lungo.png", "lungo/assets/icons/96x96.png", 96],
-    ["assets/frameworks/lungo.png", "lungo/assets/icons/icon-57.png", 57],
-    ["assets/frameworks/lungo.png", "lungo/assets/icons/icon-72.png", 72],
-    ["assets/frameworks/lungo.png", "lungo/assets/icons/icon-57-2x.png", 114],
-    ["assets/frameworks/lungo.png", "lungo/assets/icons/icon-72-2x.png", 144],
-    ["assets/frameworks/lungo.png", "lungo/assets/icons/ApplicationIcon.png", 66],
-    ["assets/frameworks/lungo.png", "lungo/assets/icons/ApplicationTileIcon.png", 173]
+    ["assets/frameworks/intelappframework.png", "intelappframework/assets/icons/ApplicationTileIcon.png", 173],
+    ["assets/frameworks/lungo.png", "lungo/src/assets/icons/36x36.png", 36],
+    ["assets/frameworks/lungo.png", "lungo/src/assets/icons/48x48.png", 48],
+    ["assets/frameworks/lungo.png", "lungo/src/assets/icons/72x72.png", 72],
+    ["assets/frameworks/lungo.png", "lungo/src/assets/icons/96x96.png", 96],
+    ["assets/frameworks/lungo.png", "lungo/src/assets/icons/icon-57.png", 57],
+    ["assets/frameworks/lungo.png", "lungo/src/assets/icons/icon-72.png", 72],
+    ["assets/frameworks/lungo.png", "lungo/src/assets/icons/icon-57-2x.png", 114],
+    ["assets/frameworks/lungo.png", "lungo/src/assets/icons/icon-72-2x.png", 144],
+    ["assets/frameworks/lungo.png", "lungo/src/assets/icons/ApplicationIcon.png", 66],
+    ["assets/frameworks/lungo.png", "lungo/src/assets/icons/ApplicationTileIcon.png", 173],
+    ["assets/frameworks/phonejs.png", "phonejs/assets/icons/36x36.png", 36],
+    ["assets/frameworks/phonejs.png", "phonejs/assets/icons/48x48.png", 48],
+    ["assets/frameworks/phonejs.png", "phonejs/assets/icons/72x72.png", 72],
+    ["assets/frameworks/phonejs.png", "phonejs/assets/icons/96x96.png", 96],
+    ["assets/frameworks/phonejs.png", "phonejs/assets/icons/icon-57.png", 57],
+    ["assets/frameworks/phonejs.png", "phonejs/assets/icons/icon-72.png", 72],
+    ["assets/frameworks/phonejs.png", "phonejs/assets/icons/icon-57-2x.png", 114],
+    ["assets/frameworks/phonejs.png", "phonejs/assets/icons/icon-72-2x.png", 144],
+    ["assets/frameworks/phonejs.png", "phonejs/assets/icons/ApplicationIcon.png", 66],
+    ["assets/frameworks/phonejs.png", "phonejs/assets/icons/ApplicationTileIcon.png", 173],
+    ["assets/frameworks/enyo.png", "enyo/assets/icons/36x36.png", 36],
+    ["assets/frameworks/enyo.png", "enyo/assets/icons/48x48.png", 48],
+    ["assets/frameworks/enyo.png", "enyo/assets/icons/72x72.png", 72],
+    ["assets/frameworks/enyo.png", "enyo/assets/icons/96x96.png", 96],
+    ["assets/frameworks/enyo.png", "enyo/assets/icons/icon-57.png", 57],
+    ["assets/frameworks/enyo.png", "enyo/assets/icons/icon-72.png", 72],
+    ["assets/frameworks/enyo.png", "enyo/assets/icons/icon-57-2x.png", 114],
+    ["assets/frameworks/enyo.png", "enyo/assets/icons/icon-72-2x.png", 144],
+    ["assets/frameworks/enyo.png", "enyo/assets/icons/ApplicationIcon.png", 66],
+    ["assets/frameworks/enyo.png", "enyo/assets/icons/ApplicationTileIcon.png", 173],
   ]),
 
   generateSplashscreens.bind(null, "assets/splashscreen-bottom-640x640.png", [
@@ -218,59 +219,6 @@ async.series([
     console.error(err);
   }
 });
-
-function generateFrameworkLogos(background, mask, foreground, icons, callback) {
-  async.forEachLimit(icons, CONCURRENCY_LIMIT, function(config, callback) {
-    var maskedImage = "website/framework-icons/" + config[0] + "-masked-temp.png",
-          withBackground = "website/framework-icons/" + config[0] + "-with-background-temp.png",
-          complete = "website/framework-icons/" + config[0] + "-complete.png";
-
-    async.series([
-      function(callback) {
-        // mask the logo
-        renderAndExec(
-            "convert    \"{{{icon}}}\"  \"{{{mask}}}\" -alpha Off  -compose CopyOpacity -composite png32:\"{{{result}}}\"",
-            {
-              icon: "assets/framework-icons/" + config[0] + ".png",
-              mask: mask,
-              result:  maskedImage
-            },
-            callback);
-      },
-      function(callback) {
-        // compose with background
-        renderAndExec(
-            "convert   \"{{{background}}}\" \"{{{overlay}}}\" -composite png32:\"{{{result}}}\"",
-            {
-              background: background,
-              overlay: maskedImage,
-              result: withBackground
-            },
-            callback);
-      },
-      function(callback) {
-        // compose with foreground
-        renderAndExec(
-            "convert   \"{{{background}}}\" \"{{{overlay}}}\" -composite -define png:exclude-chunks=date png32:\"{{{result}}}\"",
-            {
-              background: withBackground,
-              overlay: foreground,
-              result: complete
-            },
-            callback);
-      },
-      function(callback) {
-        // delete temp files
-        fs.unlink(maskedImage, callback)
-      },
-      function(callback) {
-        // delete temp files
-        fs.unlink(withBackground, callback)
-      }
-    ], callback);
-
-  }, callback);
-}
 
 function generateIcons(background, icons, callback) {
   async.forEachLimit(icons, CONCURRENCY_LIMIT, function(config, callback) {

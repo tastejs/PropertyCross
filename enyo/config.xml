@@ -1,31 +1,28 @@
-<?xml version="1.0"?>
-<widget
-    xmlns="http://www.w3.org/ns/widgets"
-    xmlns:gap="http://phonegap.com/ns/1.0"
-    id="com.devexpress.propertycross"
-    versionCode="1"
-    version="0.0.1">
-   
+<?xml version="1.0" encoding="utf-8"?>
+<widget xmlns="http://www.w3.org/ns/widgets"
+	    xmlns:gap="http://phonegap.com/ns/1.0"
+	    id="com.propertycross.enyo"
+	    version="1.0.0">
+
     <name>PropertyCross</name>
 
     <description>
-        PropertyCross app implementation from DevExpress
+        Part of the PropertyCross project, the Enyo implementation.
     </description>
 
-    <author href="http://www.devexpress.com">
-        Developer Express Inc.
+    <author href="http://enyojs.com">
+        Art Dahm
     </author>
 
-    <preference name="phonegap-version" value="2.3.0" />
-    <preference name="orientation" value="portrait" />
-    <preference name="target-device" value="handset" />
-    <preference name="auto-hide-splash-screen" value="false" />
-    <preference name="permissions" value="none"/>
-
     <feature name="http://api.phonegap.com/1.0/geolocation" />
+    <feature name="http://api.phonegap.com/1.0/network" />
 
-    <access origin="http://nestoria.co.uk" subdomains="true" />
-    <access origin="http://nestimg.com" subdomains="true" />
+    <preference name="phonegap-version"           value="2.1.0" />
+    <preference name="target-device"              value="handset" />
+    <preference name="orientation"                value="portrait" />
+    <preference name="webviewbounce"              value="false" />
+    <preference name="prerendered-icon"           value="true" />
+    <preference name="auto-hide-splash-screen"    value="true" />
 
     <icon src="assets/icons/icon-72-2x.png" />
     <icon src="assets/icons/36x36.png"              gap:platform="android"    gap:density="ldpi" />
@@ -36,6 +33,7 @@
     <icon src="assets/icons/icon-72.png"            gap:platform="ios"        width="72" height="72" />
     <icon src="assets/icons/icon-57-2x.png"         gap:platform="ios"        width="114" height="114" />
     <icon src="assets/icons/icon-72-2x.png"         gap:platform="ios"        width="144" height="144" />
+		<icon src="assets/icons/64x64.png"              gap:platform="webos" />
 
     <gap:splash src="assets/splashscreens/200x320.png"                      gap:platform="android" gap:density="ldpi" />
     <gap:splash src="assets/splashscreens/320x480.png"                      gap:platform="android" gap:density="mdpi" />
