@@ -10,7 +10,7 @@
     margin-right: 6px;
 }
 #header a#addRemoveFave.fave {
-    color: yellow;
+    color: green;
 }
 
 /*Home page*/
@@ -26,7 +26,7 @@
     background: #CCC;
     line-height: 12px;
     padding: 4px;
-    color: black;
+    color: inherit;
     border-radius: 4px;
 }
 #recentSearches li span.recentSearchLocation {
@@ -50,8 +50,9 @@
     padding: 10px;
     border-bottom: 1px solid black;
     display: block;
-    color: white;
+    color: inherit;
     text-decoration: none;
+
 }
 #results a img {
     float: left;
@@ -71,7 +72,13 @@
     margin: 5px;
 }
 
-/* data-footer attr doesn't fully remove the footer, so do it with CSS */
-#content {
-    bottom: 0;
+/* Custom win 8 colors */
+#afui.win8 #recentSearches li {
+    background:#00aba9;
+    margin-bottom: 10px;
+}
+
+#afui.win8 #results a {
+    background:#3f3f3f;
+    margin-bottom:10px;
 }

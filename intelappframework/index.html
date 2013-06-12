@@ -20,6 +20,8 @@
         <!-- boiler plate code that appears to be required... -->
         <script type="text/javascript">
         $.ui.animateHeaders=false;
+        $.ui.backButtonText="Back";
+      //  $.os.blackberry=true;
         $.ui.loadDefaultHash=false;
             if (!((window.DocumentTouch && document instanceof DocumentTouch) || 'ontouchstart' in window)) {
                 var script = document.createElement("script");
@@ -38,7 +40,7 @@
                     <h1>PropertyCross</h1>
                     <a id="listFaves" href="/favourites/show" class="button" >Faves</a>
                 </header>
-                <div id="main" class="panel" selected="true"  data-footer="none" data-header="homeHeader">
+                <div id="main" class="panel" selected="true"   data-header="homeHeader">
                     <p>Use the form below to search for houses to buy. You can search by place-name, postcode, or click 'My location', to search in your current location!</p>
                     <form action="javascript: $.mvc.route('/search/string');" >
                         <input type="text" class="jq-ui-forms" id="stringSearch">
@@ -57,10 +59,10 @@
 
                 <!-- Result view -->
                 <header id="resultListHeader">
-                    <a href="javascript: $.ui.goBack()" class="button">Back</a>
+                    <a id="backButton" href="javascript: $.ui.goBack()" class="button">Back</a>
                     <h1></h1>
                 </header>
-                <div id="results" class="panel" data-footer="none" data-header="resultListHeader">
+                <div id="results" class="panel" title="Back"  data-header="resultListHeader">
                     <div id="resultList" ></div>
                     <div id="loadMore">
                         <a href="/search/loadMore">
@@ -72,13 +74,20 @@
 
                 <!-- Property details view -->
                 <header id="propertyDetailsHeader">
-                    <a href="/results/backToResults" class="button">Back</a> <!-- The in built framework back button didn't seem to play nicely so manually adding it -->
+                    <a id="backButton" href="/results/backToResults" class="button">Back</a> <!-- The in built framework back button didn't seem to play nicely so manually adding it -->
                     <h1>Information</h1>
                     <a id="addRemoveFave" class="button icon star"></a>
                 </header>
-                <div id="property" class="panel" data-footer="none" data-header="propertyDetailsHeader"> </div>
+                <div id="property" class="panel" title="Back"  data-header="propertyDetailsHeader"> </div>
+               
 
+                
             </div>
+            <div id="navbar">
+                    <a href="#main" class="icon home">Home</a>
+                    <a href="#results" class="icon magnifier">Results</a>
+                    <a href="/favourites/show" class="icon star">Faves</a>
+                </div>
         </div>
     </body>
 </html>

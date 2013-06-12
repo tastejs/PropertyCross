@@ -2,20 +2,22 @@
  * af.8tiles - Provides a WP8 theme and handles showing the menu
  * Copyright 2012 - Intel
  */
-;(function($) {
+;
+(function($) {
 	"use strict";
 
 	if (!$) {
-		throw "This plugin requires jqUi";
+		throw "This plugin requires App Framework UI";
 	}
 
 	function wire8Tiles() {
-		$.ui.isWin8=true;
-		if(!$.os.ie) return;
+		$.ui.isWin8 = true;
+		if (!$.os.ie) return;
 		$.ui.ready(function() {
 			if ($.ui.slideSideMenu) $.ui.slideSideMenu = false;
 			//we need to make sure the menu button shows up in the bottom navbar
-			$.query("#afui #navbar footer").append("<a id='metroMenu' onclick='$.ui.toggleSideMenu()'>•••</a>");
+			if ($("nav").length > 0)
+				$.query("#afui #navbar footer").append("<a id='metroMenu' onclick='$.ui.toggleSideMenu()'>•••</a>");
 			var tmpAnchors = $.query("#afui #navbar").find("a");
 			if (tmpAnchors.length > 0) {
 				tmpAnchors.data("ignore-pressed", "true").data("resetHistory", "true");
@@ -25,7 +27,8 @@
 			var oldUpdate = $.ui.updateNavbarElements;
 			$.ui.updateNavbarElements = function() {
 				oldUpdate.apply($.ui, arguments);
-				if ($.query("#afui #navbar #metroMenu").length == 1) return;
+				if $(("nav").length === 0) return;
+				if ($.query("#afui #navbar #metroMenu").length === 1) return;
 				$.query("#afui #navbar footer").append("<a id='metroMenu' onclick='$.ui.toggleSideMenu()'>•••</a>");
 			};
 
