@@ -4,7 +4,7 @@
 
 /* Star icon is yellow for favourite properties */
 #faveButton.faveProperty .x-button-icon {
-    background: yellow;
+    color: yellow;
 }
 
 /* Forces the field set title on the home page to wrap onto a second line. See http://davehiren.blogspot.co.uk/2012/05/sencha-touch-field-set-title-wrap-to.html */
