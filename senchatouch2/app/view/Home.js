@@ -2,7 +2,7 @@
     extend: 'Ext.Container',
     xtype: 'home',
     requires: ['Ext.form.Panel', 'Ext.form.FieldSet', 'Ext.field.Text',
-            'PropertyFinder.view.SearchesListItem', 'PropertyFinder.view.DidYouMeanListItem'],
+            'PropertyFinder.view.SearchesListItem', 'PropertyFinder.view.SuggestedLocationsListItem'],
     config: {
 		id: 'home',
         title: 'Property Finder',
@@ -78,13 +78,13 @@
                 padding: '0 10 10',
                 hidden: 'true',
                 ui: 'round',
-                id: 'didYouMean',
+                id: 'suggestedLocations',
                 scrollable: null,
                 store: {
                     fields: ['place_name', 'long_title']
                 },
                 itemTpl: '{long_title}',
-                defaultType: 'didyoumeanlistitem',
+                defaultType: 'suggestedlocationslistitem',
                 useComponents: true
             }
         ]
