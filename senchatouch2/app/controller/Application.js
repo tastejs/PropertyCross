@@ -18,7 +18,7 @@
             listFavesButton: '#listFavesButton',
             errorMessage: '#errorMessage',
             previousSearches: '#previousSearches',
-            didYouMean: '#didYouMean',
+            suggestedLocations: '#suggestedLocations',
             listTitleLabel: '#listTitleLabel'
         },
 
@@ -54,8 +54,8 @@
             previousSearches: {
                 itemtap: 'onPreviousSearches'
             },
-            didYouMean: {
-                itemtap: 'onDidYouMean'
+            suggestedLocations: {
+                itemtap: 'onSuggestedLocations'
             }
         }
     },
@@ -71,7 +71,7 @@
     },
 
     resetHome: function() {
-        this.getDidYouMean().hide();
+        this.getSuggestedLocations().hide();
         this.getErrorMessage().hide();
         this.getPreviousSearches().show();
         var titleListLabel = this.getListTitleLabel()
@@ -176,7 +176,7 @@
         return lat + "," + lon;
     },
 
-    onDidYouMean: function(list, index, node, record) {
+    onSuggestedLocations: function(list, index, node, record) {
         this.makeRequest(record.getData());
 
         this.resetHome();
@@ -244,14 +244,14 @@
         } else {
             //have a go at displaying "did you mean" locations
             if(response.locations) {
-                var didYouMeanList = that.getDidYouMean();
-                didYouMeanList.getStore().setData(response.locations);
+                var suggestedLocationsList = that.getSuggestedLocations();
+                suggestedLocationsList.getStore().setData(response.locations);
 
-                that.getListTitleLabel().setHtml("Did you mean?");
+                that.getListTitleLabel().setHtml("Please select a location below:");
                 that.getListTitleLabel().show();
 
                 that.getPreviousSearches().hide();
-                didYouMeanList.show();
+                suggestedLocationsList.show();
             } else {
                 that.getErrorMessage().setHtml("The location given was not recognised.");
                 that.getErrorMessage().show();

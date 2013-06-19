@@ -1,6 +1,6 @@
-Ext.define('PropertyFinder.view.DidYouMeanListItem', {
+Ext.define('PropertyFinder.view.SuggestedLocationsListItem', {
     extend: 'Ext.dataview.component.DataItem',
-    xtype: 'didyoumeanlistitem',
+    xtype: 'suggestedlocationslistitem',
     
     
     config: {
