@@ -21,7 +21,7 @@
         <script type="text/javascript">
         $.ui.animateHeaders=false;
         $.ui.backButtonText="Back";
-      //  $.os.blackberry=true;
+      
         $.ui.loadDefaultHash=false;
             if (!((window.DocumentTouch && document instanceof DocumentTouch) || 'ontouchstart' in window)) {
                 var script = document.createElement("script");
@@ -76,7 +76,7 @@
                 <header id="propertyDetailsHeader">
                     <a id="backButton" href="/results/backToResults" class="button">Back</a> <!-- The in built framework back button didn't seem to play nicely so manually adding it -->
                     <h1>Information</h1>
-                    <a id="addRemoveFave" class="button icon star"></a>
+                    <a id="addRemoveFave" class="button icon star" style="padding-left:13px"></a>
                 </header>
                 <div id="property" class="panel" title="Back"  data-header="propertyDetailsHeader"> </div>
                
