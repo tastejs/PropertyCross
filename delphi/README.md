@@ -39,8 +39,7 @@ You will also need to make sure that (if you want to deploy to the device) you h
 See the following guides
 
  - [Set up your development environment for Mac](http://docwiki.embarcadero.com/RADStudio/XE4/en/IOS_Tutorial:_Set_Up_Your_Development)
- - [Set up your development environment on Windows]http://docwiki.embarcadero.com/RADStudio/XE4/en/IOS_Tutorial:_Set_Up_Your_Development
-_Environment_on_Windows_PC)
+ - [Set up your development environment on Windows](http://docwiki.embarcadero.com/RADStudio/XE4/en/IOS_Tutorial:_Set_Up_Your_Development_Environment_on_Windows_PC)
 
   
 More on the set-up available here (including code signing help):
