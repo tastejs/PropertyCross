@@ -123,6 +123,8 @@ async.series([
     ["assets/frameworks/enyo.png", "enyo/assets/icons/icon-72-2x.png", 144],
     ["assets/frameworks/enyo.png", "enyo/assets/icons/ApplicationIcon.png", 66],
     ["assets/frameworks/enyo.png", "enyo/assets/icons/ApplicationTileIcon.png", 173],
+    ["assets/frameworks/delphi.png", "delphi/assets/icons/icon-57.png", 57],
+    ["assets/frameworks/delphi.png", "delphi/assets/icons/icon-57-2x.png", 114],
   ]),
 
   generateSplashscreens.bind(null, "assets/splashscreen-bottom-640x640.png", [
@@ -175,7 +177,10 @@ async.series([
     ["lungo/assets/splashscreens/720x1280.png", 720, 1280],
     ["lungo/assets/splashscreens/screen-iphone-portrait.png", 320, 480],
     ["lungo/assets/splashscreens/screen-iphone-portrait-2x.png", 640, 960],
-    ["lungo/assets/splashscreens/SplashScreenImage.jpg", 480, 800]
+    ["lungo/assets/splashscreens/SplashScreenImage.jpg", 480, 800],
+    ["delphi/assets/splashscreens/320x480.png", 320, 480],
+    ["delphi/assets/splashscreens/640x960.png", 640, 960],
+    ["delphi/assets/splashscreens/720x1280.png", 640, 1136],
   ]),
 
   generateOther.bind(null, "assets/star.png", [
