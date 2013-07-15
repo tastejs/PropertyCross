@@ -1,0 +1,10 @@
+<div class="page-title">{pageTitle}</div>
+{?showBack}
+<div class="button back icon-arrow-left"></div>
+{/showBack}
+{?showFavoriteButton}
+<div class="button right icon-heart toggle-favorite {?isFavorited}favorited icon-red {:else}icon-black{/isFavorited}"></div>
+{/showFavoriteButton}
+{?showFavorites}
+<a class="button right icon-heart icon-black" href="/favorites"></a>
+{/showFavorites}

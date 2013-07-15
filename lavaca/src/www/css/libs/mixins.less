@@ -1,0 +1,336 @@
+.clearfix {
+  zoom: 1; 
+  display: inline-block; 
+  display: block;
+  &:after {
+    display: block; 
+    visibility: hidden; 
+    height: 0; 
+    clear: both; 
+    content: "";
+  }
+}
+.box {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-box;
+  display: -o-box;
+}
+.box-vertical {
+  .box;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -ms-box-orient: vertical;
+  -o-box-orient: vertical;
+}
+.box-horizontal {
+  .box;
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  -ms-box-orient: horizontal;
+  -o-box-orient: horizontal;
+}
+.box-flex (@val: 1) {
+  -webkit-box-flex: @val;
+  -moz-box-flex: @val;
+  -ms-box-flex: @val;
+  -o-box-flex: @val;
+}
+.box-pack (@place: center) {
+  -webkit-box-pack: @arguments;
+  -moz-box-pack: @arguments;
+  -ms-box-pack: @arguments;
+  -o-box-pack: @arguments;
+}
+.box-align (@place: center) {
+  -webkit-box-align: @arguments;
+  -moz-box-align: @arguments;
+  -ms-box-align: @arguments;
+  -o-box-align: @arguments;
+}
+
+.border-radius(@val) {
+  .border-radius-sides(@val, @val, @val, @val);
+}
+
+
+.border-radius-sides(@topright: 0, @bottomright: 0, @bottomleft: 0, @topleft: 0) {
+  -webkit-border-top-right-radius: @topright;
+  -webkit-border-bottom-right-radius: @bottomright;
+  -webkit-border-bottom-left-radius: @bottomleft;
+  -webkit-border-top-left-radius: @topleft;
+  -moz-border-radius-topright: @topright;
+  -moz-border-radius-bottomright: @bottomright;
+  -moz-border-radius-bottomleft: @bottomleft;
+  -moz-border-radius-topleft: @topleft;
+  border-top-right-radius: @topright;
+  border-bottom-right-radius: @bottomright;
+  border-bottom-left-radius: @bottomleft;
+  border-top-left-radius: @topleft;
+  -moz-background-clip: padding; 
+  -webkit-background-clip: padding-box; 
+  background-clip: padding-box;
+}
+
+
+
+/*.box-shadow (@x: 0, @y: 0, @blur: 5px, @color: rgba(0,0,0,.7)) {*/
+.box-shadow (@value) {
+  box-shadow: @arguments;
+  -moz-box-shadow: @arguments;
+  -webkit-box-shadow: @arguments;
+  -ms-box-shadow: @arguments;
+  -o-box-shadow: @arguments;
+}
+.vertical-shadow (@leftOpacity: 0, @rightOpacity: 0.2) {
+  background: -webkit-gradient(linear, 0% 0%, 100% 0%, from(rgba(0,0,0,@leftOpacity)), to(rgba(0,0,0,@rightOpacity)));
+  background: -moz-gradient(linear, 0% 0%, 100% 0%, from(rgba(0,0,0,@leftOpacity)), to(rgba(0,0,0,@rightOpacity)));
+  background: -ms-gradient(linear, 0% 0%, 100% 0%, from(rgba(0,0,0,@leftOpacity)), to(rgba(0,0,0,@rightOpacity)));
+  background: -o-gradient(linear, 0% 0%, 100% 0%, from(rgba(0,0,0,@leftOpacity)), to(rgba(0,0,0,@rightOpacity)));
+  background: gradient(linear, 0% 0%, 100% 0%, from(rgba(0,0,0,@leftOpacity)), to(rgba(0,0,0,@rightOpacity)));
+}
+
+.horizontal-gradient (@topColor, @bottomColor) {
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(@topColor), to(@bottomColor));
+  background: -moz-gradient(linear, 0% 0%, 0% 100%, from(@topColor), to(@bottomColor));
+  background: -ms-gradient(linear, 0% 0%, 0% 100%, from(@topColor), to(@bottomColor));
+  background: -o-gradient(linear, 0% 0%, 0% 100%, from(@topColor), to(@bottomColor));
+  background: gradient(linear, 0% 0%, 0% 100%, from(@topColor), to(@bottomColor));
+}
+
+.vertical-gradient (@topColor, @bottomColor) {
+  background: -webkit-gradient(linear, 0% 0%, 100% 0%, from(@topColor), to(@bottomColor));
+  background: -moz-gradient(linear, 0% 0%, 100% 0%, from(@topColor), to(@bottomColor));
+  background: -ms-gradient(linear, 0% 0%, 100% 0%, from(@topColor), to(@bottomColor));
+  background: -o-gradient(linear, 0% 0%, 100% 0%, from(@topColor), to(@bottomColor));
+  background: gradient(linear, 0% 0%, 100% 0%, from(@topColor), to(@bottomColor));
+}
+
+.gradient(@from, @to, @fromColor, @toColor) {
+  background: -webkit-gradient(linear, @from, @to, from(@fromColor), to(@toColor));
+  background: -moz-gradient(linear, @from, @to, from(@fromColor), to(@toColor));
+  background: -ms-gradient(linear, @from, @to, from(@fromColor), to(@toColor));
+  background: -o-gradient(linear, @from, @to, from(@fromColor), to(@toColor));
+  background: gradient(linear, @from, @to, from(@fromColor), to(@toColor));
+}
+
+
+
+.backface-visibility (@value: animation-1) {
+  backface-visibility: @arguments;
+  -webkit-backface-visibility: @arguments;
+  -moz-backface-visibility: @arguments;
+  -ms-backface-visibility: @arguments;
+  -o-backface-visibility: @arguments;
+}
+.transition (@args) {
+  transition: @arguments;
+  -moz-transition: @arguments;
+  -webkit-transition: @arguments;
+  -ms-transition: @arguments;
+  -o-transition: @arguments;
+}
+.transition-transform (@value) {
+  transition: transform @arguments;
+  -moz-transition: -moz-transform @arguments;
+  -webkit-transition: -webkit-transform @arguments;
+  -ms-transition: -ms-transform @arguments;
+  -o-transition: -o-transform @arguments;
+}
+.transform (@value) {
+  transform: @arguments;
+  -moz-transform: @arguments;
+  -webkit-transform: @arguments;
+  -ms-transform: @arguments;
+  -o-transform: @arguments;
+}
+.transform-origin (@value) {
+  transform-origin: @arguments;
+  -moz-transform-origin: @arguments;
+  -webkit-transform-origin: @arguments;
+  -ms-transform-origin: @arguments;
+  -o-transform-origin: @arguments;
+}
+.transform-style (@value: 500px) {
+  transform-style: @arguments;
+  -moz-transform-style: @arguments;
+  -webkit-transform-style: @arguments;
+  -ms-transform-style: @arguments;
+  -o-transform-style: @arguments;
+}
+.perspective (@value: 500px) {
+  perspective: @arguments;
+  -moz-perspective: @arguments;
+  -webkit-perspective: @arguments;
+  -ms-perspective: @arguments;
+  -o-perspective: @arguments;
+}
+.perspective-origin (@value) {
+  perspective-origin: @arguments;
+  -moz-perspective-origin: @arguments;
+  -webkit-perspective-origin: @arguments;
+  -ms-perspective-origin: @arguments;
+  -o-perspective-origin: @arguments;
+}
+.animation-name (@value: animation-1) {
+  animation-name: @arguments;
+  -moz-animation-name: @arguments;
+  -webkit-animation-name: @arguments;
+  -ms-animation-name: @arguments;
+  -o-animation-name: @arguments;
+}
+.animation-duration (@value: 250ms) {
+  animation-duration: @arguments;
+  -moz-animation-duration: @arguments;
+  -webkit-animation-duration: @arguments;
+  -ms-animation-duration: @arguments;
+  -o-animation-duration: @arguments;
+}
+.animation-iteration-count (@value: 1) {
+  animation-iteration-count: @arguments;
+  -moz-animation-iteration-count: @arguments;
+  -webkit-animation-iteration-count: @arguments;
+  -ms-animation-iteration-count: @arguments;
+  -o-animation-iteration-count: @arguments;
+}
+.animation-fill-mode (@value: forwards) {
+  animation-fill-mode: @arguments;
+  -moz-animation-fill-mode: @arguments;
+  -webkit-animation-fill-mode: @arguments;
+  -ms-animation-fill-mode: @arguments;
+  -o-animation-fill-mode: @arguments;
+}
+.animation-timing-function (@value: linear) {
+  animation-timing-function: @arguments;
+  -moz-animation-timing-function: @arguments;
+  -webkit-animation-timing-function: @arguments;
+  -ms-animation-timing-function: @arguments;
+  -o-animation-timing-function: @arguments;
+}
+.animation-delay (@value: 0) {
+  animation-delay: @arguments;
+  -moz-animation-delay: @arguments;
+  -webkit-animation-delay: @arguments;
+  -ms-animation-delay: @arguments;
+  -o-animation-delay: @arguments;
+}
+.transition-delay (@value: 0) {
+  transition-delay: @arguments;
+  -moz-transition-delay: @arguments;
+  -webkit-transition-delay: @arguments;
+  -o-transition-delay: @arguments;
+}
+@-webkit-keyframes rotate-discrete {
+    0% {
+      -webkit-transform: rotate(-15deg); 
+    }
+    7.7% {
+       -webkit-transform: rotate(-45deg);     
+    }
+    15.4% {
+       -webkit-transform: rotate(-75deg);     
+    }
+    23.1% {
+       -webkit-transform: rotate(-105deg);     
+    }
+    30.8% {
+       -webkit-transform: rotate(-135deg);     
+    }
+    38.5% {
+       -webkit-transform: rotate(-165deg);     
+    }
+    46.2% {
+       -webkit-transform: rotate(-195deg);     
+    }
+    53.9% {
+       -webkit-transform: rotate(-225deg);     
+    }
+    61.6% {
+       -webkit-transform: rotate(-255deg);     
+    }
+    69.3% {
+       -webkit-transform: rotate(-285deg);     
+    }
+    77% {
+       -webkit-transform: rotate(-315deg);     
+    }
+    84.7% {
+       -webkit-transform: rotate(-345deg);     
+    }
+    100% {
+       -webkit-transform: rotate(-375deg);     
+    }
+}
+@-webkit-keyframes rotate-discrete-reverse {
+    0% {
+      -webkit-transform: rotate(15deg); 
+    }
+    7.7% {
+       -webkit-transform: rotate(45deg);     
+    }
+    15.4% {
+       -webkit-transform: rotate(75deg);     
+    }
+    23.1% {
+       -webkit-transform: rotate(105deg);     
+    }
+    30.8% {
+       -webkit-transform: rotate(135deg);     
+    }
+    38.5% {
+       -webkit-transform: rotate(165deg);     
+    }
+    46.2% {
+       -webkit-transform: rotate(195deg);     
+    }
+    53.9% {
+       -webkit-transform: rotate(225deg);     
+    }
+    61.6% {
+       -webkit-transform: rotate(255deg);     
+    }
+    69.3% {
+       -webkit-transform: rotate(285deg);     
+    }
+    77% {
+       -webkit-transform: rotate(315deg);     
+    }
+    84.7% {
+       -webkit-transform: rotate(345deg);     
+    }
+    100% {
+       -webkit-transform: rotate(375deg);     
+    }
+}
+.loading-animations {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 2rem;
+  height: 2rem;
+  -webkit-mask-image: url("../../assets/img/loader_gradient-2x.png");
+  -webkit-mask-size: 2rem 2rem;
+  .animation-name(rotate-discrete-reverse);
+  .animation-iteration-count(infinite);
+  .animation-duration(1s);
+  .animation-timing-function(step-start);
+  .item-01 {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: url("../../assets/img/loader_ticks-2x.png");
+    background-size: 2rem 2rem;
+    display: block;
+    .animation-name(rotate-discrete);
+    .animation-iteration-count(infinite);
+    .animation-duration(1s);
+    .animation-timing-function(step-start);
+  }
+  .item-02,
+  .item-03,
+  .item-04 {
+    display: none;
+  }
+}

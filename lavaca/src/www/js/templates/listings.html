@@ -1,0 +1,13 @@
+<div class="overflow-scroll">
+  <ul>
+    {>"templates/listings-list-item"/}
+  </ul>
+  <div class="load-more {?hasMoreResults}has-more{/hasMoreResults}">
+    {?hasMoreResults}
+      <div class="loading-text">Load more...</div>
+      <div class="results">Results for {longTitle}, showing {#items}{@eq key="0" value="{$idx}"}{$len}{/eq}{/items} of {total_results} properties</div>
+    {:else}
+      <div class="results">No More Results</div>
+    {/hasMoreResults}
+  </div>
+</div>

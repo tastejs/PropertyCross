@@ -1,0 +1,67 @@
+.recent-searches,
+.list-locations  {
+  font-family: 'Helvetica Neue', 'Helvetica';
+  text-align: center;
+  h2 {
+    font-size: 2rem;
+    margin: 0 0 5px 0;
+  }
+  ul {
+    font-size: 1.4em;
+    li {
+      line-height: 1.7em;
+      cursor: pointer;
+      span {
+        cursor: pointer;
+      }
+    }
+  }
+}
+.searchText {
+  border-bottom: 1px solid rgb(204, 212, 219);
+  outline: none;
+  font-family: 'Helvetica Neue', 'Helvetica';
+  font-size: 1.8em;
+  font-weight: 200;
+  width: 100%;
+  margin-bottom: 5px;
+  border-radius: 0;
+  padding: 5px;
+}
+.icon-compass, .icon-search {
+  font-size: 1.8rem;
+  padding: 5px;
+  border: 1px solid rgb(204, 212, 219);
+  border-radius: .5rem;
+  margin-right: 10px;
+  color: rgb(73, 73, 73);
+  .text {
+    font-size: 1.8rem;
+    margin: 0 10px 0 5px;
+  }
+}
+.icon-search {
+  background-color: #ffffff;
+}
+form {
+  width: 90%;
+  margin: 0px auto 20px;
+  position: relative;
+}
+body.loading .loading-indicator {
+  .loading-animations;
+}
+.total-results {
+  padding: .25rem .5rem;
+  display: inline-block;
+  vertical-align: middle;
+  background: rgb(73, 73, 73);
+  color: #FFFFFF;
+  border-radius: 1rem;
+  font-size: 12px;
+}
+@media only screen and (max-width: 320px) {
+  .searchText {
+    font-size: 1.3em;
+  }
+}

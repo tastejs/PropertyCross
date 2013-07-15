@@ -1,0 +1,31 @@
+{
+  "globals": {
+    "define": false,
+    "describe": false,
+    "expect": false,
+    "beforeEach": false,
+    "afterEach": false,
+    "spyOn": false,
+    "it": false,
+    "xit": false,
+    "runs": false,
+    "waitsFor": false,
+    "jasmine": false
+  },
+
+  "browser":   true,
+  "devel":     true,
+
+  "sub":       true,
+  "expr":      true,
+  "undef":     true,
+  "unused":    true,
+  "smarttabs": true,
+  "laxbreak":  true,
+  "curly":     true,
+  "eqeqeq":    true,
+  "nonew":     true,
+  "latedef":   true,
+  "sub":       true,
+  "loopfunc":  true
+}
