@@ -1,0 +1,79 @@
+.view.listings {
+  ul {
+    margin: 0;
+  }
+  li {
+    padding-bottom: 0.5em;
+    margin: 0;
+    padding: .5rem;
+    border-bottom: 1px solid rgb(204, 212, 219);
+    .row {
+      width: 25%;
+    }
+    .row-bottom {
+      width: 75%;
+      padding: 1em 0 0 1em;
+    }
+    .image {
+      width: 100%;
+      padding-bottom: 75%;
+      display: inline-block;
+      background-size: 100%;
+      background-repeat: no-repeat;
+    }
+    .title {
+      font-family: 'Helvetica Neue', 'Helvetica';
+      font-weight: 200;
+      font-size: 1.1em;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap: ;
+      word-wrap: break-word;
+      width: 100%;
+    }
+    .price {
+      font-size: 2.6em;
+      font-family: 'DIN', 'Helvetica Neue', 'Helvetica';
+      font-weight: 700;
+      color: rgb(73, 73, 73);
+      margin-top: 0.25em;
+    }
+    &:last-child {
+      border: none;
+    }
+  }
+  .load-more {
+    text-align: center;
+    padding: 0.5em
+    background: #eeeeee;
+    font-family: 'DIN', 'Helvetical Neue', 'Helvetica';
+    font-size: 2rem;
+    min-height: 50px;
+    .loading-text {
+      color: rgb(0, 166, 222);
+    }
+    .results {
+      font-size: 0.7em;
+      padding-top: 0.5em;
+      font-weight: 700;
+      margin: 0.5em 0.5em;
+    }
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  .view.listings {
+    li {
+      .title {
+        font-size: 0.9em;
+      }
+      .price {
+        font-size: 1.8em;
+        margin-bottom: 0.25em;
+      }
+    }
+    .load-more {
+      font-size: 1.4em;
+    }
+  }
+}

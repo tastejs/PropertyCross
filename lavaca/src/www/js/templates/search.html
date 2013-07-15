@@ -1,0 +1,45 @@
+<p>
+  {@msg key="instructions"/}
+</p>
+<form action="" class="search">
+  <input name="searchText" class="searchText" placeholder="Search" type="text">
+  <div class="loading-indicator">
+    <div class="item-01"></div>
+    <div class="item-02"></div>
+    <div class="item-03"></div>
+    <div class="item-04"></div>
+  </div>
+  <div class="buttons">
+    <button type="submit" class="button icon-search"><span class="text">Go<span></button>
+    <span class="location button icon-compass"><span class="text">My Location</span></span>
+  </div>
+</form>
+<div class="search-lists">
+{?error}
+  <p>{error}</p>
+{:else}
+  {?showLocations}
+    <div class="list-locations">
+      <h2>Please select a location below:</h2>
+      <ul>
+        {#search}
+          {#locations}
+          <li data-search-key="{place_name}"><span class="title">{long_title}</span></li>
+          {/locations}
+        {/search}
+      </ul>
+    </div>
+  {:else}
+    {?recentSearches}
+    <div class="recent-searches">
+      <h2>Recent searches:</h2>
+      <ul>
+        {#recentSearches}
+        <li data-search-key="{place_name}"><span class="title">{long_title}</span> <span class="total-results">{total_results}</span></li>
+        {/recentSearches}
+      </ul>
+    </div>
+    {/recentSearches}
+  {/showLocations}
+{/error}
+</div>
