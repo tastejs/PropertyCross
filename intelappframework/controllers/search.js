@@ -1,9 +1,10 @@
 $.mvc.controller.create("search", {
-    views: {"resultsTpl": "views/result.tpl",
-            "recentSearchTpl": "views/recentSearch.tpl",
-            "headerTpl": "views/resultListHeader.tpl",
-            "locationTpl": "views/locationList.tpl",
-            "loadMoreTpl": "views/loadMore.tpl"
+    views: {
+        "resultsTpl": "views/result.tpl",
+        "recentSearchTpl": "views/recentSearch.tpl",
+        "headerTpl": "views/resultListHeader.tpl",
+        "locationTpl": "views/locationList.tpl",
+        "loadMoreTpl": "views/loadMore.tpl"
     },
     $resultList: $("#resultList"),
     $errorMessage: $("#errorMessage"),
@@ -11,12 +12,14 @@ $.mvc.controller.create("search", {
     $recentSearches: $("#recentSearches"),
     $loadMore: $("#loadMore"),
     $loadingSpinner: $("#loadingSpinner"),
-    placeName: '', displayName: '', pageNum: 1,
+    placeName: '',
+    displayName: '',
+    pageNum: 1,
 
     /* Sets the display name locally - this is either the long_title of the location object, or formatted coordinates in the case of geo search */
     setDisplayName: function(location, placeNameOrCoords) {
         function to2DP(value) {
-            return (Math.round(value * 100))/100;
+            return (Math.round(value * 100)) / 100;
         }
         if (this.displayName === '') {
             if (placeNameOrCoords.latitude && placeNameOrCoords.longitude) {
@@ -49,7 +52,9 @@ $.mvc.controller.create("search", {
                 searchTimeMS: new Date().getTime()
             });
             recentSearch.save(function() {
-                that.$recentSearches.prepend($.template("recentSearchTpl", {search: recentSearch}));
+                that.$recentSearches.prepend($.template("recentSearchTpl", {
+                    search: recentSearch
+                }));
                 that.$recentSearches.find($(":nth-child(5)")).remove();
                 recentSearch.prune();
             });
@@ -66,7 +71,7 @@ $.mvc.controller.create("search", {
     /* Adds properties to the model, updates the results view and transitions to results view */
     updatePropertiesList: function(response) {
         var that = this;
-        response.listings.forEach(function(prop){
+        response.listings.forEach(function(prop) {
             var property = new Property();
             property.id = prop.guid;
             property.set({
@@ -79,26 +84,33 @@ $.mvc.controller.create("search", {
                 bathroom_number: prop.bathroom_number
             });
             property.save(function() {
-                that.$resultList.append($.template("resultsTpl",{property:property, fave:false}));
+                that.$resultList.append($.template("resultsTpl", {
+                    property: property,
+                    fave: false
+                }));
             });
         });
         var numResults = that.$resultList.find("a").length;
         var totalResults = response.total_results;
 
         $("#resultListHeader h1").html(
-                            $.template("headerTpl", {
-                                numResults: $.mvc.controller.formatter.number(numResults),
-                                totalResults: $.mvc.controller.formatter.number(totalResults)}));
-        $.ui.updateHeaderElements($("#resultListHeader")); //unfortunately needed for load more to update num results value in the header
+            $.template("headerTpl", {
+            numResults: $.mvc.controller.formatter.number(numResults),
+            totalResults: $.mvc.controller.formatter.number(totalResults)
+        }));
+
+        //This is not needed anymore since headers are moved around in the dom and not cloned
+        //$.ui.updateHeaderElements($("#resultListHeader")); //unfortunately needed for load more to update num results value in the header
 
         if (numResults === totalResults) {
             this.$loadMore.hide();
         } else {
             this.$loadMore.find("a span").html(
-                            $.template("loadMoreTpl", {
-                                numResults: $.mvc.controller.formatter.number(numResults),
-                                totalResults: $.mvc.controller.formatter.number(totalResults),
-                                searchTerm: this.displayName}));
+                $.template("loadMoreTpl", {
+                numResults: $.mvc.controller.formatter.number(numResults),
+                totalResults: $.mvc.controller.formatter.number(totalResults),
+                searchTerm: this.displayName
+            }));
             this.$loadMore.show();
         }
 
@@ -106,7 +118,7 @@ $.mvc.controller.create("search", {
 
     /* Outputs the results of a search to the DOM and switches the view to the results view */
     locationFound: function(response, locOrCoords) {
-        if(response.listings.length === 0) {
+        if (response.listings.length === 0) {
             this.setErrorMessage("There were no properties found for the given location.");
         }
         var loc = response.locations[0];
@@ -114,7 +126,9 @@ $.mvc.controller.create("search", {
         this.setDisplayName(loc, locOrCoords);
         this.updatePropertiesList(response);
         //transition to results view
-        $.ui.loadContent("results",false,false,"slide");
+        $.ui.loadContent("results", false, false, "slide");
+
+
 
         this.addToRecentSearches(response);
     },
@@ -125,7 +139,9 @@ $.mvc.controller.create("search", {
         var that = this;
         this.$locList.empty();
         $.each(response.locations, function(index, loc) {
-            that.$locList.append($.template("locationTpl", {loc: loc}));
+            that.$locList.append($.template("locationTpl", {
+                loc: loc
+            }));
         });
         this.$locList.show();
     },
@@ -164,7 +180,7 @@ $.mvc.controller.create("search", {
     },
 
     /* Performs a string search, using the value entered in the input box */
-    string:function() {
+    string: function() {
         var location = $('#stringSearch').val();
         if (location === "") {
             this.setErrorMessage("Please enter a location to search for");
@@ -177,10 +193,12 @@ $.mvc.controller.create("search", {
     /* Performs a geo location search */
     geo: function() {
         var that = this;
+
         function success(loc) {
             that.displayName = '';
             that.performSearch(loc.coords);
         };
+
         function error(msg) {
             that.setErrorMessage("The use of location is currently disabled.");
         };
@@ -193,7 +211,7 @@ $.mvc.controller.create("search", {
     },
 
     /* Searches on a recently searched location */
-    recent: function(placeName){
+    recent: function(placeName) {
         var that = this;
         recentSearch.get(placeName, function(search) {
             that.displayName = search.display_name;
@@ -231,7 +249,9 @@ $.mvc.controller.create("search", {
                 return b.searchTimeMS - a.searchTimeMS;
             });
             $.each(searches, function(index, search) {
-                that.$recentSearches.append($.template("recentSearchTpl", {search: search}));
+                that.$recentSearches.append($.template("recentSearchTpl", {
+                    search: search
+                }));
             });
         });
     }

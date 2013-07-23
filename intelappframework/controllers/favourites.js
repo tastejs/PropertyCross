@@ -5,7 +5,7 @@ $.mvc.controller.create("favourites", {
             $("#resultListHeader h1").html("Favourites");
             $("#loadMore").hide();
             //transition to results view
-            $.ui.loadContent("results",false,false,"slide");
+            $.ui.loadContent("results", false, false, "slide");
         });
     },
 
@@ -32,7 +32,10 @@ $.mvc.controller.create("favourites", {
                         bathroom_number: prop.bathroom_number
                     });
                     property.save(function() {
-                        $resultList.append($.template("resultsTpl",{property:prop, fave:true}));
+                        $resultList.append($.template("resultsTpl", {
+                            property: prop,
+                            fave: true
+                        }));
                     });
                 });
             }
@@ -51,7 +54,9 @@ $.mvc.controller.create("favourites", {
 
                     var fave = new Favourites();
                     fave.id = id;
-                    fave.set({property:property});
+                    fave.set({
+                        property: property
+                    });
                     fave.save(function() {
                         $("#addRemoveFave").addClass("fave");
                     });

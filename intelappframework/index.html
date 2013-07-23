@@ -8,27 +8,31 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <link rel="stylesheet" type="text/css" href="css/icons.css" />
-        <link rel="stylesheet" type="text/css" href="css/jq.ui.css" />
+        <link rel="stylesheet" type="text/css" href="css/af.ui.css" />
         <link rel="stylesheet" type="text/css" href="css/styles.css" />
 
-        <script type="text/javascript" charset="utf-8" src="js/jq.ui.min.js"></script>
+        <script type="text/javascript" charset="utf-8" src="js/appframework.ui.min.js"></script>
+        <script type="text/javascript" charset="utf-8" src="js/jq.template.js"></script>
         <script type="text/javascript" charset="utf-8" src="js/jq.mvc.min.js"></script>
         <script type="text/javascript" charset="utf-8" src="app.js"></script>
 
 
         <!-- boiler plate code that appears to be required... -->
         <script type="text/javascript">
+        $.ui.animateHeaders=false;
+        $.ui.backButtonText="Back";
+      
+        $.ui.loadDefaultHash=false;
             if (!((window.DocumentTouch && document instanceof DocumentTouch) || 'ontouchstart' in window)) {
                 var script = document.createElement("script");
-                script.src = "js/jq.desktopBrowsers.js";
+                script.src = "plugins/af.desktopBrowsers.js";
                 var tag = $("head").append(script);
-                $.os.android = true;
-                $.os.desktop = true;
+
             }
         </script>
     </head>
     <body>
-        <div id="jQUi">
+        <div id="afui">
             <div id="content">
 
                 <!-- Home view -->
@@ -36,7 +40,7 @@
                     <h1>PropertyCross</h1>
                     <a id="listFaves" href="/favourites/show" class="button" >Faves</a>
                 </header>
-                <div id="main" class="panel" selected="true"  data-footer="none" data-header="homeHeader">
+                <div id="main" class="panel" selected="true"   data-header="homeHeader">
                     <p>Use the form below to search for houses to buy. You can search by place-name, postcode, or click 'My location', to search in your current location!</p>
                     <form action="javascript: $.mvc.route('/search/string');" >
                         <input type="text" class="jq-ui-forms" id="stringSearch">
@@ -47,18 +51,18 @@
                     <p id="errorMessage"></p>
 
                     <h3 id="locListLabel">Please select a location below:</h3>
-                    <ul id="locList"></ul>
+                    <ul class="list" id="locList"></ul>
 
                     <h3 id="recentSearchLabel">Recent Searches</h3>
-                    <ul id="recentSearches"></ul>
+                    <ul class="list" id="recentSearches"></ul>
                 </div>
 
                 <!-- Result view -->
                 <header id="resultListHeader">
-                    <a href="javascript: $.ui.goBack()" class="button">Back</a>
+                    <a id="backButton" href="javascript: $.ui.goBack()" class="button">Back</a>
                     <h1></h1>
                 </header>
-                <div id="results" class="panel" data-footer="none" data-header="resultListHeader">
+                <div id="results" class="panel" title="Back"  data-header="resultListHeader">
                     <div id="resultList" ></div>
                     <div id="loadMore">
                         <a href="/search/loadMore">
@@ -70,13 +74,20 @@
 
                 <!-- Property details view -->
                 <header id="propertyDetailsHeader">
-                    <a href="/results/backToResults" class="button">Back</a> <!-- The in built framework back button didn't seem to play nicely so manually adding it -->
+                    <a id="backButton" href="/results/backToResults" class="button">Back</a> <!-- The in built framework back button didn't seem to play nicely so manually adding it -->
                     <h1>Information</h1>
-                    <a id="addRemoveFave" class="button icon star"></a>
+                    <a id="addRemoveFave" class="button icon star" style="padding-left:13px"></a>
                 </header>
-                <div id="property" class="panel" data-footer="none" data-header="propertyDetailsHeader"> </div>
+                <div id="property" class="panel" title="Back"  data-header="propertyDetailsHeader"> </div>
+               
 
+                
             </div>
+            <div id="navbar">
+                    <a href="#main" class="icon home">Home</a>
+                    <a href="#results" class="icon magnifier">Results</a>
+                    <a href="/favourites/show" class="icon star">Faves</a>
+                </div>
         </div>
     </body>
 </html>
