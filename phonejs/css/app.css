@@ -34,34 +34,40 @@ h3
 
 
 
-.dx-theme-ios .dx-textbox
+.dx-theme-ios .dx-textbox,
+.dx-theme-ios7 .dx-textbox
 {
     margin-bottom: 5px;
 }
 
-.dx-theme-ios .dx-button
+.dx-theme-ios .dx-button,
+.dx-theme-ios7 .dx-button
 {
     margin-right: 5px;
 }
 
-.dx-theme-android .dx-textbox
+.dx-theme-android .dx-textbox,
+.dx-theme-tizen .dx-textbox
 {
     margin-bottom: 15px;
 }
 
-.dx-theme-android .dx-button
+.dx-theme-android .dx-button,
+.dx-theme-tizen .dx-button
 {
     margin-right: 10px;
     padding-left: 15px;
     padding-right: 15px;
 }
 
-.dx-theme-ios .elements-block
+.dx-theme-ios .elements-block,
+.dx-theme-ios7 .elements-block
 {
     padding: 10px 10px 0px 10px;
 }
 
-.dx-theme-android .elements-block
+.dx-theme-android .elements-block,
+.dx-theme-tizen .elements-block
 {
     padding: 15px 15px 0px 15px;
 }
