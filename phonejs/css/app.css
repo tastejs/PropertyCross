@@ -2,33 +2,33 @@
 body, 
 #view-port
 {
-	height: 100%;
+    height: 100%;
 }
 
 body
 {
-	margin: 0;
-	padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
 .dx-theme-ios .dx-textbox-input,
 .dx-theme-ios .dx-list
 {
-	background-color: #f7f7f7;
+    background-color: #f7f7f7;
 }
 
 
 h2
 {
-	font-size: 14px;
-	padding-left: 0px !important;
+    font-size: 14px;
+    padding-left: 0px !important;
 }
 
 h3
 {
-	font-size: 12px;
-	font-weight: bold !important;
-	padding-left: 0px !important;
+    font-size: 12px;
+    font-weight: bold !important;
+    padding-left: 0px !important;
 }
 
 
@@ -36,73 +36,73 @@ h3
 
 .dx-theme-ios .dx-textbox
 {
-	margin-bottom: 5px;
+    margin-bottom: 5px;
 }
 
 .dx-theme-ios .dx-button
 {
-	margin-right: 5px;
+    margin-right: 5px;
 }
 
 .dx-theme-android .dx-textbox
 {
-	margin-bottom: 15px;
+    margin-bottom: 15px;
 }
 
 .dx-theme-android .dx-button
 {
-	margin-right: 10px;
-	padding-left: 15px;
-	padding-right: 15px;
+    margin-right: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 .dx-theme-ios .elements-block
 {
-	padding: 10px 10px 0px 10px;
+    padding: 10px 10px 0px 10px;
 }
 
 .dx-theme-android .elements-block
 {
-	padding: 15px 15px 0px 15px;
+    padding: 15px 15px 0px 15px;
 }
 
 .property-info
 {
-	font-size: 14px;
-	white-space: normal;
+    font-size: 14px;
+    white-space: normal;
 }
 
 .property-item img
 {
-	float: left;
-	margin-right: 10px;
+    float: left;
+    margin-right: 10px;
 }
 
 .property-price
 {
-	font-size: 16px;
-	font-weight: bold;
+    font-size: 16px;
+    font-weight: bold;
 }
 
 .last-search-count
 {
-	background-color: #777;
-	color: #fff;
-	border-radius: 10px;
-	padding: 4px;
-	font-size: 11px;
+    background-color: #777;
+    color: #fff;
+    border-radius: 10px;
+    padding: 4px;
+    font-size: 11px;
 }
 
 #favoritesList .dx-empty-message
 {
-	 font-size: 12px;
+     font-size: 12px;
 }
 
 .home-list-item
 {
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .suggestion-list
@@ -140,25 +140,25 @@ h3
 }
 
 .win8phone-layout .dx-toolbar {
-	background-color: rgba(255,255,255,0.20);
+    background-color: rgba(255,255,255,0.20);
 }
 
 .win8phone-layout .layout-content > div[data-options] {
-	left: 10px !important;
-	right: 10px !important;
+    left: 10px !important;
+    right: 10px !important;
 }
 
 .win8phone-layout .home-list-item {
-	background: red;
-	margin: 10px 5px;
+    background: red;
+    margin: 10px 5px;
 }
 
 .win8phone-layout .last-search-count {
-	background: none;
-	font-size: 14px;
-	float: right;
+    background: none;
+    font-size: 14px;
+    float: right;
 }
 
 .win8phone-layout .elements-block {
-	margin-bottom: 15px;
+    margin-bottom: 15px;
 }
