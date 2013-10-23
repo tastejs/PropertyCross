@@ -39,6 +39,13 @@
                 $navBar.hide();
             }
 
+            var $toolbarBottom = viewInfo.renderResult.$markup.find(".layout-toolbar-bottom"),
+                toolbarBottom = $toolbarBottom.data("dxToolbar");
+
+            if(toolbarBottom && toolbarBottom.option("items").length) {
+                viewInfo.renderResult.$markup.find(".layout-content").addClass("has-toolbar-bottom");
+            }
+
             this.callBase.apply(this, arguments);
         },
 
