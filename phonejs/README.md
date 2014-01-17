@@ -8,11 +8,11 @@ Visit the [PhoneJS page](http://propertycross.com/phonejs/) on the PropertyCross
 
 PhoneJS uses the [Knockout](http://knockoutjs.com/) MVVM framework for structuring the application, with the PhoneJS CSS providing a native-styled UI for the various phone platforms. PhoneJS applications use [PhoneGap](http://phonegap.com/) for packaging.
 
-DevExpress also offers a more integrated solution based on PhoneJS, called [DXTREME Mobile](http://www.devexpress.com/Products/HTML-JS/), which adds Visual Studio tooling.
+DevExpress also offers a more integrated solution based on PhoneJS, called [DevExtreme](http://www.devexpress.com/Products/HTML-JS/), which adds Visual Studio tooling.
 
 ## Building
 
-The documentation for PhoneJS can be [found online](http://phonejs.devexpress.com/Documentation). PhoneJS applications can be run directly from a browser, although you have to override the browser UserAgent in order to mimic a mobile browser.
+The documentation for PhoneJS can be [found online](http://phonejs.devexpress.com/Documentation). PhoneJS applications can be run directly from a browser, although you have to override the browser UserAgent or use a simulator such as [Ripple](http://emulate.phonegap.com/) in order to mimic a mobile browser.
 
 The PhoneJS application is packaged using [PhoneGap Build](https://build.phonegap.com/), with the configuration specified in the `config.xml` file.
 

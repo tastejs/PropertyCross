@@ -19,8 +19,8 @@
     <div class="navigation-list" data-options="dxViewPlaceholder : { viewName: 'nav-list' } " >
     </div>
 
-    <div class="layout-frame dx-content-background">
-        <div class="layout-header dx-toolbar" data-options="dxContentPlaceholder : { name: 'header', transition: 'slide' } " >
+    <div class="layout-frame dx-content-background" data-options="dxTransition: { name: 'main', type: 'slide' }">
+        <div class="layout-header dx-toolbar" data-options="dxContentPlaceholder : { name: 'header' } " >
             <div data-bind="dxToolbar: {
                     items: [
                         { align: 'left', template: 'nav-button' },
@@ -41,7 +41,7 @@
             </div>
         </div>
 
-        <div class="layout-content dx-ios-stripes" data-options="dxContentPlaceholder : { name: 'content', transition: 'slide' } " >
+        <div class="layout-content dx-ios-stripes" data-options="dxContentPlaceholder : { name: 'content' } " >
             <div class="load-panel" data-bind="dxLoadPanel: { visible: true, shading: false, targetContainer: false }"></div>
         </div>
         <div class="menu-actionsheet" data-bind="dxActionSheet: {}" data-options="dxCommandContainer: { locations: [{ name: 'menu' }] }"></div>
@@ -58,8 +58,8 @@
     <div class="navigation-list" data-options="dxViewPlaceholder : { viewName: 'nav-list' } " >
     </div>
 
-    <div class="layout-frame dx-content-background">
-        <div class="layout-header dx-toolbar" data-options="dxContentPlaceholder : { name: 'header', transition: 'slide' } " >
+    <div class="layout-frame dx-content-background" data-options="dxTransition: { name: 'main', type: 'slide' }">
+        <div class="layout-header dx-toolbar" data-options="dxContentPlaceholder : { name: 'header' } " >
             <div data-bind="dxToolbar: {
                     items: [
                         { align: 'left', template: 'nav-button' },
@@ -69,7 +69,7 @@
                
                 class="layout-toolbar" data-options="dxCommandContainer : { locations: [
                     {'name':'create','showText':false,'align':'right'},
-                    {'name':'edit','showText':false,'align':'right'}, 
+                    {'name':'edit','showText':false,'align':'right'},
                     {'name':'save','showText': false, 'align':'right'},
                     {'name':'menu','showText':false,'align':'right'}, 
                     { 'name':'delete', 'menu': true, 'align': 'right' }] } " >
@@ -79,11 +79,43 @@
             </div>
         </div>
 
-        <div class="layout-content" data-options="dxContentPlaceholder : { name: 'content', transition: 'slide' } " >
+        <div class="layout-content" data-options="dxContentPlaceholder : { name: 'content' } " >
             <div class="load-panel" data-bind="dxLoadPanel: { visible: true, shading: false, targetContainer: false }"></div>
         </div>
     </div>
 
+</div>
+
+<div class="slideout-layout dx-black-background" data-options="dxLayout : { name: 'slideout', platform: 'tizen', controller: 'slideout' } " >
+
+    <div class="navigation-list" data-options="dxViewPlaceholder : { viewName: 'nav-list' } " >
+    </div>
+
+    <div class="layout-frame dx-content-background" data-options="dxTransition: { name: 'main', type: 'slide' }">
+        <div class="layout-header dx-toolbar" data-options="dxContentPlaceholder : { name: 'header' } " >
+            <div data-bind="dxToolbar: {
+                items: [
+                    { align: 'left', template: 'nav-button' },
+                    { text: title, align: 'center' }
+                ]
+            }"
+               
+                class="layout-toolbar" data-options="dxCommandContainer : { locations: [
+                    {'name':'create','showText':false,'align':'right'},
+                    {'name':'edit','showText':false,'align':'right'},
+                    {'name':'save','showText': false, 'align':'right'},
+                    {'name':'menu','showText':false,'align':'right'}, 
+                    { 'name':'delete', 'menu': true, 'align': 'right' }] } " >
+                <div style="display: none" class="nav-button-item" data-options="dxTemplate : { name: 'nav-button' } " >
+                    <div class="nav-button" data-bind="dxButton: { icon: 'menu' }"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="layout-content" data-options="dxContentPlaceholder : { name: 'content' } " >
+            <div class="load-panel" data-bind="dxLoadPanel: { visible: true, shading: false, targetContainer: false }"></div>
+        </div>
+    </div>
 </div>
 
 <div class="slideout-layout dx-black-background" data-options="dxLayout : { name: 'slideout', platform: 'win8', phone: true, controller: 'slideout' } " >
@@ -91,8 +123,8 @@
     <div class="navigation-list" data-options="dxViewPlaceholder : { viewName: 'nav-list' } " >
     </div>
 
-    <div class="layout-frame dx-content-background">
-        <div class="layout-header dx-toolbar" data-options="dxContentPlaceholder : { name: 'header', transition: 'slide' } " >
+    <div class="layout-frame dx-content-background" data-options="dxTransition: { name: 'main', type: 'slide' }">
+        <div class="layout-header dx-toolbar" data-options="dxContentPlaceholder : { name: 'header' } " >
             <div data-bind="dxToolbar: {
                     items: [
                         { align: 'left', template: 'nav-button' },
@@ -107,7 +139,7 @@
             </div>
         </div>
 
-        <div class="layout-content" data-options="dxContentPlaceholder : { name: 'content', transition: 'slide' } " >  
+        <div class="layout-content" data-options="dxContentPlaceholder : { name: 'content' } " >  
             <div class="load-panel" data-bind="dxLoadPanel: { visible: true, shading: false, targetContainer: false }"></div>
         </div>
 

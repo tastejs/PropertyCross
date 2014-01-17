@@ -56,14 +56,33 @@
         timeout: 5000
     });
 
+    // http://phonejs.devexpress.com/Blog/ios7-mobile-app-style-released
+    function chooseIosTheme() {
+        var devices = DevExpress.devices,
+            iosVersion = devices.iosVersion();
+
+        if(devices.current().platform === "ios" && iosVersion && iosVersion[0] === 7)  {
+            $(".dx-viewport")
+                .removeClass("dx-theme-ios")
+                .addClass("dx-theme-ios7");
+        }
+    }
+
     $(function() {
         document.addEventListener("deviceready", function() {
             if (PropertyFinder.isWinPhone)
                 document.addEventListener("backbutton", onBackKeyDown, false);
             navigator.splashscreen.hide();
         }, false);
-        
+
+        // Use one of the following lines to force a specific platform when viewing in a desktop browser
+        // DevExpress.devices.current("iPhone");
+        // DevExpress.devices.current("androidPhone");
+        // DevExpress.devices.current("win8Phone");
+        // DevExpress.devices.current("tizen");
+
         app = PropertyFinder.app = new DevExpress.framework.html.HtmlApplication(APP_SETTINGS);
+        chooseIosTheme();
         app.router.register(":view/:id", { view: "Home", id: undefined });
         app.navigate();    
     });
