@@ -4,7 +4,7 @@ Visit the [Emy page](http://propertycross.com/emy/) on the PropertyCross website
 
 ##Overview
 
-[Emy](http://www.emy-library.org/) is a lightweight library for building cross-platform mobile application using HTML5 and CSS3 technologies. It is shown here with its own theme, but has [themes](http://www.emy-library.org/plugins.html) available for iOS, Android and Windows Phone (although at the time of writing, the downloads for these did not appear to work).
+[Emy](http://www.emy-library.org/) is a lightweight library for building cross-platform mobile application using HTML5 and CSS3 technologies. It is shown here with its own theme, but has [themes](http://www.emy-library.org/plugins.html) available for iOS, Android and Windows Phone.
 
 Emy is free and open sourced under an MIT licence.
 
