@@ -1,0 +1,58 @@
+
+/**
+ * GREEN:
+ * 
+ * COLOR GUIDE:
+ * 	Light: #b6db49
+ *  Dark: #99cc00;
+ *
+ */
+
+.ui-bar-b,.ui-body-b .ui-dialog-contain .ui-title {
+	border-bottom: 2px solid #B6DB49;
+}
+
+.ui-btn-down-b .ui-btn-inner,.ui-btn-down-b .ui-btn-text .ui-link-inherit,.ui-listview .ui-btn-hover-b,.ui-input-search.ui-body-b {
+	background-color: #B6DB49;
+}
+
+.ui-body-b form .ui-btn-down-b,.ui-body-b form .ui-mini.ui-checkbox-on,.ui-body-b form .ui-mini.ui-radio-on {
+	background-color: #99cc00;
+}
+
+.ui-body-b div.ui-input-text.ui-focus:after{background-color: #99cc00;}
+.ui-body-b div.ui-input-text.ui-focus:before{background-color: #99cc00;}
+.ui-body-b div.ui-input-text.ui-focus {border-bottom: 1px solid #99cc00;}
+
+textarea.ui-body-b.ui-input-text:focus {
+	border: 1px solid #99cc00;
+}
+
+.ui-body-b .ui-link,.ui-body-b .ui-li a,.nativeDroidCards ul[data-nativedroid-plugin="twitter"] a {
+	color: #99cc00;
+}
+
+.ui-body-b .table-stroke tr:nth-child(even) .ui-link {
+	color: #b6db49;
+}
+
+
+.ui-slider-track .ui-btn.ui-slider-handle {
+	border: 10px solid rgba(182,219,73,0.3);	
+}
+
+.ui-slider-track .ui-btn.ui-slider-handle.ui-focus {
+	border: 10px solid rgba(182,219,73,0.5);	
+	box-shadow: 0px 0px 2px 0px #99cc00;
+}
+
+.ui-slider-bg.ui-btn-active {
+	background-color: #b6db49;
+}
+
+progress::-webkit-progress-value {
+	background-color: #99cc00;
+}
+progress::-moz-progress-bar {
+	background-color: #99cc00;
+}

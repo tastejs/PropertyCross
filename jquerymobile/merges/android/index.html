@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PropertyCross</title>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no" />
+
+  <!-- hide the navigation bar when bookmarked on an iPhone -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+
+  <script type="text/javascript" src="lib/jquery-1.8.2.min.js"></script>
+  <script type="text/javascript" src="lib/jquery.mobile-1.3.2.min.js"></script>
+  <script type="text/javascript" src="lib/jquery.jsonp-2.1.4.min.js"></script>
+  <script type="text/javascript" src="lib/knockout-2.2.0rc.debug.js"></script>
+  <!-- Automatically included by PhoneGap Build -->
+  <script type="text/javascript" src="cordova.js"></script>
+  <script type="text/javascript" src="lib/require.js" data-main="app"></script>
+
+  <!-- native droid theme -->
+  <link rel="stylesheet" type="text/css" href="lib/nativedroid/jquerymobile.css" />
+  <link rel="stylesheet" type="text/css" href="lib/nativedroid/jquerymobile.nativedroid.css" />
+  <link rel="stylesheet" type="text/css" href="lib/nativedroid/jquerymobile.nativedroid.dark.css" />
+  <link rel="stylesheet" type="text/css" href="lib/nativedroid/jquerymobile.nativedroid.color.green.css" />
+  <link rel="stylesheet" type="text/css" href="lib/nativedroid/font-awesome.min.css" />
+  <!-- application specific styling -->
+  <link rel="stylesheet" type="text/css" href="style/style.css" />
+  <link rel="stylesheet" type="text/css" href="style/style-android.css" />
+</head>
+<body>
+  <script id="locationTemplate" type="text/x-jquery-tmpl">
+    <li>
+      <a data-bind="click: $parent.selectLocation">
+        <span data-bind="text: displayString"/>
+      </a>
+    </li>
+  </script>
+
+  <script id="locationWithCountTemplate" type="text/x-jquery-tmpl">
+    <li>
+      <a data-bind="click: $parent.selectLocation">
+        <p data-bind="text: displayString"></p>
+        <p class="ui-li-aside" data-bind="text: totalResults"></p>
+      </a>
+    </li>
+  </script>
+
+  <script id="propertyThumbnailView" type="text/x-jquery-tmpl">
+    <li class="property">
+      <a data-bind="click: select">
+        <div class="thumbnail-container">
+          <img data-bind="attr: { src: thumbnailUrl }"/>
+        </div>
+        <h3>£<span data-bind="text: price"/></h3>
+        <p data-bind="text: title"></p>
+      </a>
+    </li>
+  </script>
+
+  <!-- Renders the property finder front page-->
+  <div data-role="page" data-theme="b" id="propertySearchView">
+    <div data-role="header" data-position="fixed" data-tap-toggle="false" data-theme="b">
+      <h1>PropertyCross</h1>
+    </div>
+    <div data-role="content" data-theme="b">
+      <div class="inset">
+        <p>Use the form below to search for houses to buy. You can search by place-name, postcode, or click 'My location', to search in your current location</p>
+        <form data-bind="submit: executeSearch">
+          <div data-role="fieldcontain">
+            <label for="searchBox">Search...</label>
+            <input type="text" id="searchBox" data-clear-btn="true"
+                  data-bind="value: searchDisplayString, enable: isSearchEnabled, valueUpdate:'afterkeydown'"/>
+          </div>
+          <img class="loadingIndicator"
+               data-bind="visible: isSearchEnabled() == false" style="display:none"
+               src="style/spinner.gif"/>
+          <button type="submit" data-inline="true"
+                  data-bind="enable: isSearchEnabled, click: executeSearch">Go</button>
+          <button data-bind="enable: isSearchEnabled, click: searchMyLocation"
+                  data-inline="true">My location</button>
+        </form>
+
+        <!-- a message that indicates search failure etc ... -->
+        <p data-bind="text:userMessage"/>
+
+        <!-- a list of locations that the user can pick from -->
+        <div data-bind="visible: locations().length > 0" style="display:none">
+          <h4>Please select a location below:</h4>
+          <ul data-role="listview" class="locations" data-inset="false" data-icon="false" data-divider-theme="b"
+              data-bind='template: { name: "locationTemplate", foreach: locations, afterRender: $root.refreshListview }'/>
+        </div>
+
+        <!-- the last 4 recent searches -->
+        <div data-bind="visible: recentSearches().length > 0 && locations().length === 0" style="display:none">
+          <ul data-role="listview" data-inset="false" class="locations" data-divider-theme="b">
+            <li data-role="list-divider" role="heading">Recent searches</li>
+            <!-- ko template: { name: "locationWithCountTemplate", foreach: recentSearches, afterRender: $root.refreshListview } -->
+            <!-- /ko -->
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div data-role="footer" data-theme="b" data-position="fixed" data-tap-toggle="false" data-update-page-padding="false">
+      <div data-role="navbar">
+        <ul>
+          <li><a data-bind="click: viewFavourites" data-icon="star">Favourites</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- a page which renders a list of search results -->
+  <div data-role="page" data-theme="b" id="searchResultsView">
+    <div data-role="header" data-position="fixed" data-tap-toggle="false" data-theme="b">
+      <h1 data-bind="text: properties().length + ' of ' + totalResults() + ' matches'"></h1>
+    </div>
+    <div data-role="content" data-theme="b">
+      <ul data-role="listview"/>
+      <!-- ko template: { name: "propertyThumbnailView", foreach: properties, afterRender: $root.refreshListview } -->
+      <!-- /ko -->
+      <li data-bind="visible: properties().length !== totalResults()">
+        <a data-bind="click: loadMore">
+          <h3 data-bind="visible: !isLoading()">Load more ...</h3>
+          <h3 data-bind="visible: isLoading()">Loading ...</h3>
+          <p class="results-summary">
+            Results for <span data-bind="with: searchLocation"><span data-bind="text: displayString"></span></span>, showing
+            <span data-bind="text: properties().length"></span> of
+            <span data-bind="text: totalResults"></span> properties
+          </p>
+        </a>
+      </li>
+    </ul>
+    </div>
+  </div>
+
+  <!-- a page which renders the users favourites -->
+  <div data-role="page" data-theme="b" id="favouritesView">
+    <div data-role="header" data-position="fixed" data-tap-toggle="false" data-theme="b">
+      <h1>Favourites</h1>
+    </div>
+    <div data-role="content" data-theme="b">
+      <ul data-role="listview"
+          data-bind='template: { name: "propertyThumbnailView", foreach: properties, afterRender: $root.refreshListview }>
+      </ul>
+    </div>
+  </div>
+
+  <!-- a page which renders a property -->
+  <div data-role="page" data-theme="b" id="propertyView">
+    <div data-role="header" data-position="fixed" data-tap-toggle="false" data-theme="b">
+      <h1>Property Details</h1>
+    </div>
+    <div data-role="content" data-theme="b" class="propertyView">
+      <div class="inset">
+        <h1>£<span data-bind="text: price"/></h1>
+        <h3 data-bind="text: title"></h3>
+        <img data-bind="attr: { src: thumbnailUrl }" />
+        <p data-bind="text: stats"></p>
+        <p data-bind="text: summary"></p>
+      </div>
+    </div>
+    <div data-role="footer" data-position="fixed" data-tap-toggle="false" data-theme="b">
+      <div data-role="navbar" data-iconpos="notext">
+        <ul>
+          <li>
+            <a data-bind="click: addToFavourites, css: { favourited: isFavourite() }" data-icon="star"></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="http://debug.build.phonegap.com/target/target-script-min.js#acbdbfa2-7a06-11e3-8593-22000a98b3d6"></script>
+</body>
+</html>

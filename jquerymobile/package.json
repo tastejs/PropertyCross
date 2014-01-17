@@ -1,0 +1,10 @@
+{
+  "name": "property-cross-jquerymobile",
+  "version": "1.3.0",
+  "abbr": "jqm",
+  "implName": "jQuery Mobile",
+  "appId": 729188,
+  "devDependencies": {
+    "grunt": "0.4.2"
+  }
+}

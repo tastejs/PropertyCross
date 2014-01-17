@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Redirection</title>
+    <script type="text/javascript" src="cordova.js"></script>
+    <style>
+      body, iframe { padding: 0; border: 0; margin: 0; }
+    </style>
+  </head>
+  <body>
+    <script type="text/javascript">
+        var index;
+        if (cordova.platformId === "android") {
+          index = "index-android.html";
+        } else if (cordova.platformId === "ios") {
+          index = "index-ios.html";
+        } else {
+          index = "index-winphone.html";
+        }
+        window.location.replace(window.location.href.replace("index.html", index));
+    </script>
+  </body>
+</html>

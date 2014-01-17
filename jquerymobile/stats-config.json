@@ -1,14 +1,14 @@
 {
   "common": [
-    "model/*.js",
-    "viewModel/*.js",
-    "style/*.css",
-    "app.js",
-    "index.html"
+    "www/**"
   ],
   "windowsphone":[
-    "style-windowsphone/*.css",
-    "app-windowsphone.js",
-    "index-windowsphone.html"
+    "merges/winphone/**"
+  ],
+  "android":[
+    "merges/android/**"
+  ],
+  "ios":[
+    "merges/ios/**"
   ]
 }

@@ -1,0 +1,1545 @@
+@import url("http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700");
+
+a {
+	text-decoration: none;
+}
+
+.ui-page {
+	font-family: "Roboto", sans-serif;
+	font-weight: 300;
+}
+
+.ui-content {
+	padding: 0px;
+}
+
+.ui-content .ui-listview-inset, .ui-panel-inner .ui-listview-inset,.ui-content .ui-listview, .ui-panel-inner .ui-listview {
+	margin: 0;
+}
+
+.ui-header {
+	z-index: 9999;
+	padding: 7px 15px 7px 25px;
+	padding: 0px 0px 0px 0px;
+	min-height: 50px;
+}
+
+.ui-header.noborder {
+	border-bottom: 2px solid transparent !important;
+}
+
+.ui-header-fixed {
+	top: 0px;
+}
+
+.ui-header-fixed .ui-btn-left, .ui-header-fixed .ui-btn-right {
+	top: 3px;
+}
+
+.ui-header .ui-btn-left, .ui-header .ui-btn-right, .ui-footer .ui-btn-left, .ui-footer .ui-btn-right,.ui-header-fixed.ui-fixed-hidden .ui-btn-right {
+	position: fixed;
+}
+
+.ui-header.ui-fixed-hidden {
+	padding: 7px 15px 7px 25px;
+}
+
+.ui-header .ui-title, .ui-footer .ui-title {
+	text-align: left;
+	margin: 4px 7px 3px 7px;
+	margin: 10px 25px 7px 34px;
+	font-size: 25px;
+	font-weight: 300;
+}
+
+.ui-header .ui-btn-inner, .ui-footer .ui-btn-inner, .ui-mini .ui-btn-inner {
+	text-decoration: none;
+	padding: 9px 3px 3px 0px;
+}
+
+.ui-header .ui-btn-inner, .ui-footer .ui-btn-inner{
+	font-size: 22px;
+}
+
+.ui-header .ui-btn-right .ui-btn-inner {
+	min-width: 32px;
+}
+
+.ui-footer .ui-navbar {
+	box-shadow:  0px 0px 10px rgba(0,0,0,0.5);
+}
+
+.ui-navbar ul li:last-child {
+	border-right: 0px;
+}
+
+.ui-footer {
+	z-index: 9999;
+	padding: 7px 15px 7px 25px;
+	padding: 0px 0px 0px 0px;
+	min-height: 50px;
+}
+
+.ui-footer .ui-btn-text {
+	top: 7px;
+	font-size: 20px;
+}
+
+.ui-footer.noborder {
+	border-bottom: 2px solid transparent !important;
+}
+
+.ui-footer-fixed {
+	bottom: 0px;
+}
+
+.ui-footer-fixed .ui-btn-left, .ui-footer-fixed .ui-btn-right {
+	top: 3px;
+}
+
+.ui-footer .ui-btn-left, .ui-footer .ui-btn-right, .ui-footer .ui-btn-left, .ui-footer .ui-btn-right,.ui-footer-fixed.ui-fixed-hidden .ui-btn-right {
+	position: fixed;
+}
+
+.ui-footer.ui-fixed-hidden {
+	padding: 7px 15px 7px 25px;
+}
+
+.ui-footer .ui-title, .ui-footer .ui-title {
+	text-align: left;
+	margin: 4px 7px 3px 7px;
+	margin: 10px 25px 7px 34px;
+	font-size: 25px;
+	font-weight: 300;
+}
+
+.ui-footer .ui-btn-inner, .ui-mini .ui-btn-inner {
+	text-decoration: none;
+	padding: 9px 3px 3px 0px;
+}
+
+.ui-footer .ui-btn-inner, .ui-footer .ui-btn-inner{
+	font-size: 22px;
+}
+
+.ui-footer .ui-btn-right .ui-btn-inner {
+	min-width: 32px;
+}
+
+
+.ui-li-divider {
+	padding: 7px 15px 7px 15px; 
+}
+
+.ui-link-inherit {
+	font-size: 20px;
+	line-height: 25px;
+}
+
+.ui-listview .ui-li-icon {
+	width: 32px !important;
+	height: 32px !important;
+	max-width: 32px !important;
+	max-height: 32px !important;
+	margin-top: -6px !important;
+}
+
+img.ui-li-icon {
+	width: 32px;
+	height: 32px;
+	background-position: center center;
+	background-repeat: no-repeat;
+}
+
+.ui-li-has-icon .ui-btn-inner a.ui-link-inherit, .ui-li-static.ui-li-has-icon {
+	padding-left: 45px;
+}
+
+.ui-btn {
+	-webkit-transition: background 0.2s, color 0.2s;
+	-moz-transition: background 0.2s, color 0.2s;
+	-o-transition: background 0.2s, color 0.2s;
+	-ms-transition: background 0.2s, color 0.2s;
+	transition: background 0.2s, color 0.2s;
+}
+
+.ui-li-heading {
+	font-weight: 300;
+	font-size: 18px;	
+	white-space:normal;
+}
+
+.ui-li-desc {
+	font-weight: 300;
+	font-size: 16px;
+	white-space:normal;
+}
+
+.ui-listview-filter {
+	margin: auto;
+}
+
+.ui-listview-filter .ui-input-search {
+	margin: auto;
+}
+
+.ui-li-thumb {
+	left: 15px;
+	top: 25px;
+	max-width: 70px;
+	max-height: 115px;
+}
+
+.ui-li-has-thumb {
+	min-height: 115px;
+}
+
+.ui-li-has-thumb .ui-link-inherit,.ui-li-has-thumb .ui-btn-inner.ui-li {
+	border-bottom: 0px !important; 
+}
+
+.ui-loader-textonly {
+	color: #FFFFFF;
+	position: fixed;
+	top: 100%;
+	left: 0px;
+	width: 100%;
+	background-color: #020202;	
+}
+.ui-loader h1 {
+	font-family: "Roboto", sans-serif;
+	font-weight: 300;
+	text-transform: uppercase;
+}
+
+.ui-loader-textonly.ui-loader-verbose {
+	margin-left: 0px;
+}
+
+.ui-li-desc img {
+	max-width: 100%;
+	display: block;
+	padding-top: 7px;
+	padding-bottom: 7px;
+}
+
+.ui-collapsible-content {
+	padding: 0px;
+}
+
+.ui-collapsible-heading-toggle .ui-btn-text {
+	font-weight: 300;
+	font-size: 22px;
+}
+
+.ui-grid-b.fixed,.ui-grid-a.fixed {
+	display: none;
+}
+
+.ui-content h1,.ui-content h2,.ui-content h3,.ui-content h4,.ui-content h5,.ui-content h6,.ui-content p {
+	font-weight: 300;
+	margin: 7px 0px 7px 0px;
+}
+
+.ui-collapsible h1.ui-collapsible-heading, .ui-collapsible h2.ui-collapsible-heading, .ui-collapsible h3.ui-collapsible-heading, .ui-collapsible h4.ui-collapsible-heading, .ui-collapsible h5.ui-collapsible-heading, .ui-collapsible h6.ui-collapsible-heading {
+	padding-left: 0px;
+	margin: auto;
+}
+
+.ui-content th {
+	font-weight: 300;
+}
+
+.ui-popup-container.ui-popup-active {
+	z-index: 99999;	
+}
+
+.ui-dialog-contain .ui-content,.ui-popup .ui-content {
+	padding: 15px 15px 0px 15px;
+}
+
+.ui-dialog-contain .ui-title,.ui-popup .ui-title {
+	font-size: 22px;
+}
+
+.ui-popup .ui-content p {
+	padding: 15px;
+}
+
+.ui-popup h1.ui-title {
+	padding: 0px;
+}
+
+.ui-popup-screen.in {
+	opacity: 1;
+}
+.ui-popup-screen {
+	background-color: rgba(0,0,0,0.8);
+}
+
+.ui-panel-inner {
+	padding: 0px;
+}
+
+.ui-input-search {
+	padding: 3px 15px 3px 45px;
+}
+
+.ui-body-b .ui-input-search input {
+	display: inline-block;
+	width: 90%;
+	padding-left: 7px;
+}
+
+.ui-selectmenu .ui-header a,.ui-dialog-contain .ui-header a {
+	display: none;
+}
+
+div.inset {
+	padding: 0px 15px 0px 15px;
+}
+
+.ui-listview-filter {
+	position: relative;
+}
+
+
+.ui-slider-handle {
+	border-radius: 50%;
+	-webkit-transition: border 0.5s, background 0.5s;
+	-moz-transition: border 0.5s, background 0.5s;
+	-o-transition: border 0.5s, background 0.5s;
+	-ms-transition: border 0.5s, background 0.5s;
+	transition: border 0.5s, background 0.5s;
+}
+
+
+.ui-slider-handle.ui-btn {
+	background-color: transparent !important;
+}
+
+.ui-slider-track .ui-btn.ui-slider-handle {
+	width: 16px;
+	height: 16px;
+	border-radius: 50%;
+	margin: -19px 0 0 -25px;
+}
+
+
+.ui-slider-track .ui-btn.ui-slider-handle.ui-focus {
+	width: 16px;
+	height: 16px;
+	border-radius: 50%;
+	margin: -19px 0 0 -25px;
+	background-color: transparent;
+}
+
+.ui-slider-track {
+	height: 2px;
+	margin: 7px 0px 0px 45px;
+	border-top: 0px !important;
+	border-bottom: 0px !important;
+	box-shadow: none !important;
+}
+
+.ui-rangeslider .ui-rangeslider-sliders .ui-slider-track {
+	border-width: 0px !important;
+}
+
+.ui-rangeslider label:first-child {
+	display: block;
+}
+
+.ui-slider-inneroffset .ui-slider-handle {
+	border-radius: 0px;
+	padding: 0px;
+	margin: 0px;
+	border: 0px !important;
+}
+
+.ui-slider-label {
+	border-top: 0px !important;
+}
+
+.ui-checkbox input,.ui-radio input {
+	display: block;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	opacity: 0.01;
+}
+
+.ui-li .ui-btn-text a.ui-link-inherit {
+	text-overflow: clip;
+	white-space: normal;	
+}
+
+
+@-webkit-keyframes messagepop {
+	0% {
+		-webkit-transform: scale(1,1);
+	}
+	50% {
+		-webkit-transform: scale(1.4,1.4);
+	}
+	100% {
+		-webkit-transform: scale(1,1);
+	}
+}
+@-moz-keyframes messagepop {
+	0% {
+		-moz-transform: scale(1,1);
+	}
+	50% {
+		-moz-transform: scale(1.4,1.4);
+	}
+	100% {
+		-moz-transform: scale(1,1);
+	}
+}
+@-o-keyframes messagepop {
+	0% {
+		-o-transform: scale(1,1);
+	}
+	50% {
+		-o-transform: scale(1.4,1.4);
+	}
+	100% {
+		-o-transform: scale(1,1);
+	}
+}
+@-ms-keyframes messagepop {
+	0% {
+		-ms-transform: scale(1,1);
+	}
+	50% {
+		-ms-transform: scale(1.4,1.4);
+	}
+	100% {
+		-ms-transform: scale(1,1);
+	}
+}
+@keyframes messagepop {
+	0% {
+		transform: scale(1,1);
+	}
+	50% {
+		transform: scale(1.4,1.4);
+	}
+	100% {
+		transform: scale(1,1);
+	}
+}
+.message {
+	clear: both;
+	padding: 7px 7px 7px 75px;
+	min-height: 45px;
+	margin: 7px 0px 7px 0px;
+	text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+	position: relative;
+}
+
+.message i {
+	display: block;
+	position: absolute;
+	left: 7px;
+	top: 7px;
+	height: 100%;
+	font-size: 45px;
+	line-height: 45px;
+	width: 65px;
+	text-align: center;
+	-webkit-animation: messagepop 1s 2;
+	-moz-animation: messagepop 1s 2;
+	-o-animation: messagepop 1s 2;
+	-ms-animation: messagepop 1s 2;
+	animation: messagepop 1s 2;
+	animation-delay: 1s;
+	-webkit-animation-delay: 1s;
+	-moz-animation-delay: 1s;
+	-o-animation-delay: 1s;
+	-ms-animation-delay: 1s;
+}
+
+
+pre {
+	word-wrap:break-word;
+}
+
+.simpleList {
+	padding: 0px;
+	margin: 0px;
+}
+
+.simpleList li {
+	list-style-type: none;
+	margin: auto;
+	padding: 7px 0px 7px 0px;
+	border-bottom: 1px solid rgba(0,0,0,0.2);
+}
+
+
+.ui-body-b form .ui-btn-down-b, .ui-body-b form .ui-mini.ui-checkbox-on, .ui-body-b form .ui-mini.ui-radio-o {
+	-webkit-transition: box-shadow 0.5s, text-shadow 0.5s, border 0.5s;
+	-moz-transition: box-shadow 0.5s, text-shadow 0.5s, border 0.5s;
+	-ms-transition: box-shadow 0.5s, text-shadow 0.5s, border 0.5s;
+	-o-transition: box-shadow 0.5s, text-shadow 0.5s, border 0.5s;
+	transition: box-shadow 0.5s, text-shadow 0.5s, border 0.5s;
+	box-shadow: none;
+}
+
+.ui-header .ui-btn-left, .ui-footer .ui-btn-left, .ui-footer .ui-btn-right, .ui-header-fixed.ui-fixed-hidden .ui-btn-right {
+	position: absolute;
+	width: 23px;
+}
+
+.ui-header .ui-btn-right {
+	position: absolute;
+	width: 23px;
+}
+
+.ui-footer .ui-btn-icon-top .ui-icon { top: 10px; }
+
+@media (min-width: 28em) {
+	.ui-rangeslider label:first-child {
+		display: block;
+		float: left;
+		width: 20%;
+	}
+}
+
+
+@media all and (min-width: 768px){
+	.showastabs.ui-listview {
+	
+	}
+	
+	.showastabs.ui-listview .ui-li.ui-btn {
+	    width: auto;
+	    height: auto;
+		display: inline-block;
+		margin: auto;
+	}
+
+	.showastabs.center {
+		text-align: center;
+	}
+	
+	.showastabs.nobg.ui-listview {
+		background: transparent !important;
+		border-bottom: 0px solid #FFFFFF !important;
+	}
+
+	.showastabs.ui-listview .ui-btn-inner.ui-li {
+		border-bottom: 0px;
+	}
+
+	.ui-grid-b.fixed,.ui-grid-a.fixed {
+		display: block;
+		position: fixed;
+		left: 0px;
+		top: 110px;
+		bottom: 0px;
+		width: 100%;
+		overflow: hidden;
+	}
+
+	.ui-grid-b .ui-block-a,.ui-grid-b .ui-block-b,.ui-grid-b .ui-block-c,.ui-grid-a .ui-block-a,.ui-grid-a .ui-block-b {
+		position: relative;
+	}
+	
+	.ui-grid-b.fixed .scroll-v,.ui-grid-a.fixed .scroll-v {
+		overflow: hidden;
+		overflow-y: auto;
+		-webkit-overflow-scrolling: touch;
+
+	}
+
+	.nativeDroidCards > li {
+		display: inline-block;
+		float: left;
+		margin: 1%;
+		width: 43%;
+	}
+	
+	.nativeDroidCards > li:nth-child(2n+1) {
+		clear: both;
+	}
+
+
+}
+
+
+
+
+/*
+ * FontAwesome adjustments for jQM
+ */
+
+.ui-icon-glass:before{content:"\f000";}.ui-icon-music:before{content:"\f001";}.ui-icon-envelope-alt:before{content:"\f0e0";}.ui-icon-heart:before{content:"\f004";}.ui-icon-star:before{content:"\f005";}.ui-icon-star-empty:before{content:"\f006";}.ui-icon-user:before{content:"\f007";}.ui-icon-film:before{content:"\f008";}.ui-icon-th:before{content:"\f00a";}.ui-icon-th-list:before{content:"\f00b";}.ui-icon-zoom-in:before{content:"\f00e";}.ui-icon-zoom-out:before{content:"\f010";}.ui-icon-signal:before{content:"\f012";}.ui-icon-trash:before{content:"\f014";}.ui-icon-home:before{content:"\f015";}.ui-icon-time:before{content:"\f017";}.ui-icon-road:before{content:"\f018";}.ui-icon-download-alt:before{content:"\f019";}.ui-icon-download:before{content:"\f01a";}.ui-icon-upload:before{content:"\f01b";}.ui-icon-inbox:before{content:"\f01c";}.ui-icon-play-circle:before{content:"\f01d";}.ui-icon-refresh:before{content:"\f021";}.ui-icon-list-alt:before{content:"\f022";}.ui-icon-lock:before{content:"\f023";}.ui-icon-flag:before{content:"\f024";}.ui-icon-headphones:before{content:"\f025";}.ui-icon-volume-off:before{content:"\f026";}.ui-icon-volume-down:before{content:"\f027";}.ui-icon-volume-up:before{content:"\f028";}.ui-icon-qrcode:before{content:"\f029";}.ui-icon-barcode:before{content:"\f02a";}.ui-icon-tag:before{content:"\f02b";}.ui-icon-tags:before{content:"\f02c";}.ui-icon-book:before{content:"\f02d";}.ui-icon-bookmark:before{content:"\f02e";}.ui-icon-print:before{content:"\f02f";}.ui-icon-camera:before{content:"\f030";}.ui-icon-font:before{content:"\f031";}.ui-icon-bold:before{content:"\f032";}.ui-icon-italic:before{content:"\f033";}.ui-icon-text-height:before{content:"\f034";}.ui-icon-text-width:before{content:"\f035";}.ui-icon-align-left:before{content:"\f036";}.ui-icon-align-center:before{content:"\f037";}.ui-icon-align-right:before{content:"\f038";}.ui-icon-align-justify:before{content:"\f039";}.ui-icon-list:before{content:"\f03a";}.ui-icon-indent-left:before{content:"\f03b";}.ui-icon-indent-right:before{content:"\f03c";}.ui-icon-facetime-video:before{content:"\f03d";}.ui-icon-picture:before{content:"\f03e";}.ui-icon-pencil:before{content:"\f040";}.ui-icon-map-marker:before{content:"\f041";}.ui-icon-adjust:before{content:"\f042";}.ui-icon-tint:before{content:"\f043";}.ui-icon-edit:before{content:"\f044";}.ui-icon-share:before{content:"\f045";}.ui-icon-move:before{content:"\f047";}.ui-icon-step-backward:before{content:"\f048";}.ui-icon-fast-backward:before{content:"\f049";}.ui-icon-play:before{content:"\f04b";}.ui-icon-pause:before{content:"\f04c";}.ui-icon-stop:before{content:"\f04d";}.ui-icon-forward:before{content:"\f04e";}.ui-icon-fast-forward:before{content:"\f050";}.ui-icon-step-forward:before{content:"\f051";}.ui-icon-eject:before{content:"\f052";}.ui-icon-chevron-left:before{content:"\f053";}.ui-icon-chevron-right:before{content:"\f054";}.ui-icon-plus-sign:before{content:"\f055";}.ui-icon-minus-sign:before{content:"\f056";}.ui-icon-remove-sign:before{content:"\f057";}.ui-icon-ok-sign:before{content:"\f058";}.ui-icon-question-sign:before{content:"\f059";}.ui-icon-screenshot:before{content:"\f05b";}.ui-icon-remove-circle:before{content:"\f05c";}.ui-icon-ban-circle:before{content:"\f05e";}.ui-icon-arrow-left:before{content:"\f060";}.ui-icon-arrow-right:before{content:"\f061";}.ui-icon-arrow-up:before{content:"\f062";}.ui-icon-arrow-down:before{content:"\f063";}.ui-icon-resize-full:before{content:"\f065";}.ui-icon-resize-small:before{content:"\f066";}.ui-icon-plus:before{content:"\f067";}.ui-icon-minus:before{content:"\f068";}.ui-icon-asterisk:before{content:"\f069";}.ui-icon-exclamation-sign:before{content:"\f06a";}.ui-icon-gift:before{content:"\f06b";}.ui-icon-leaf:before{content:"\f06c";}.ui-icon-fire:before{content:"\f06d";}.ui-icon-eye-open:before{content:"\f06e";}.ui-icon-eye-close:before{content:"\f070";}.ui-icon-plane:before{content:"\f072";}.ui-icon-calendar:before{content:"\f073";}.ui-icon-random:before{content:"\f074";}.ui-icon-comment:before{content:"\f075";}.ui-icon-magnet:before{content:"\f076";}.ui-icon-chevron-up:before{content:"\f077";}.ui-icon-chevron-down:before{content:"\f078";}.ui-icon-retweet:before{content:"\f079";}.ui-icon-shopping-cart:before{content:"\f07a";}.ui-icon-folder-close:before{content:"\f07b";}.ui-icon-folder-open:before{content:"\f07c";}.ui-icon-resize-vertical:before{content:"\f07d";}.ui-icon-resize-horizontal:before{content:"\f07e";}.ui-icon-bar-chart:before{content:"\f080";}.ui-icon-twitter-sign:before{content:"\f081";}.ui-icon-facebook-sign:before{content:"\f082";}.ui-icon-camera-retro:before{content:"\f083";}.ui-icon-key:before{content:"\f084";}.ui-icon-cogs:before{content:"\f085";}.ui-icon-comments:before{content:"\f086";}.ui-icon-star-half:before{content:"\f089";}.ui-icon-heart-empty:before{content:"\f08a";}.ui-icon-signout:before{content:"\f08b";}.ui-icon-linkedin-sign:before{content:"\f08c";}.ui-icon-pushpin:before{content:"\f08d";}.ui-icon-external-link:before{content:"\f08e";}.ui-icon-signin:before{content:"\f090";}.ui-icon-trophy:before{content:"\f091";}.ui-icon-github-sign:before{content:"\f092";}.ui-icon-upload-alt:before{content:"\f093";}.ui-icon-lemon:before{content:"\f094";}.ui-icon-phone:before{content:"\f095";}.ui-icon-bookmark-empty:before{content:"\f097";}.ui-icon-phone-sign:before{content:"\f098";}.ui-icon-twitter:before{content:"\f099";}.ui-icon-facebook:before{content:"\f09a";}.ui-icon-github:before{content:"\f09b";}.ui-icon-unlock:before{content:"\f09c";}.ui-icon-credit-card:before{content:"\f09d";}.ui-icon-rss:before{content:"\f09e";}.ui-icon-hdd:before{content:"\f0a0";}.ui-icon-bullhorn:before{content:"\f0a1";}.ui-icon-bell:before{content:"\f0a2";}.ui-icon-certificate:before{content:"\f0a3";}.ui-icon-hand-right:before{content:"\f0a4";}.ui-icon-hand-left:before{content:"\f0a5";}.ui-icon-hand-up:before{content:"\f0a6";}.ui-icon-hand-down:before{content:"\f0a7";}.ui-icon-circle-arrow-left:before{content:"\f0a8";}.ui-icon-circle-arrow-right:before{content:"\f0a9";}.ui-icon-circle-arrow-up:before{content:"\f0aa";}.ui-icon-circle-arrow-down:before{content:"\f0ab";}.ui-icon-globe:before{content:"\f0ac";}.ui-icon-wrench:before{content:"\f0ad";}.ui-icon-tasks:before{content:"\f0ae";}.ui-icon-filter:before{content:"\f0b0";}.ui-icon-briefcase:before{content:"\f0b1";}.ui-icon-fullscreen:before{content:"\f0b2";}.ui-icon-group:before{content:"\f0c0";}.ui-icon-link:before{content:"\f0c1";}.ui-icon-cloud:before{content:"\f0c2";}.ui-icon-beaker:before{content:"\f0c3";}.ui-icon-cut:before{content:"\f0c4";}.ui-icon-copy:before{content:"\f0c5";}.ui-icon-save:before{content:"\f0c7";}.ui-icon-sign-blank:before{content:"\f0c8";}.ui-icon-reorder:before{content:"\f0c9";}.ui-icon-list-ul:before{content:"\f0ca";}.ui-icon-list-ol:before{content:"\f0cb";}.ui-icon-strikethrough:before{content:"\f0cc";}.ui-icon-underline:before{content:"\f0cd";}.ui-icon-table:before{content:"\f0ce";}.ui-icon-magic:before{content:"\f0d0";}.ui-icon-truck:before{content:"\f0d1";}.ui-icon-pinterest:before{content:"\f0d2";}.ui-icon-pinterest-sign:before{content:"\f0d3";}.ui-icon-google-plus-sign:before{content:"\f0d4";}.ui-icon-google-plus:before{content:"\f0d5";}.ui-icon-money:before{content:"\f0d6";}.ui-icon-caret-down:before{content:"\f0d7";}.ui-icon-caret-up:before{content:"\f0d8";}.ui-icon-caret-left:before{content:"\f0d9";}.ui-icon-caret-right:before{content:"\f0da";}.ui-icon-columns:before{content:"\f0db";}.ui-icon-sort:before{content:"\f0dc";}.ui-icon-sort-down:before{content:"\f0dd";}.ui-icon-sort-up:before{content:"\f0de";}.ui-icon-envelope:before{content:"\f003";}.ui-icon-linkedin:before{content:"\f0e1";}.ui-icon-legal:before{content:"\f0e3";}.ui-icon-dashboard:before{content:"\f0e4";}.ui-icon-comment-alt:before{content:"\f0e5";}.ui-icon-comments-alt:before{content:"\f0e6";}.ui-icon-bolt:before{content:"\f0e7";}.ui-icon-sitemap:before{content:"\f0e8";}.ui-icon-umbrella:before{content:"\f0e9";}.ui-icon-paste:before{content:"\f0ea";}.ui-icon-lightbulb:before{content:"\f0eb";}.ui-icon-exchange:before{content:"\f0ec";}.ui-icon-cloud-download:before{content:"\f0ed";}.ui-icon-cloud-upload:before{content:"\f0ee";}.ui-icon-user-md:before{content:"\f0f0";}.ui-icon-stethoscope:before{content:"\f0f1";}.ui-icon-suitcase:before{content:"\f0f2";}.ui-icon-bell-alt:before{content:"\f0f3";}.ui-icon-coffee:before{content:"\f0f4";}.ui-icon-food:before{content:"\f0f5";}.ui-icon-building:before{content:"\f0f7";}.ui-icon-hospital:before{content:"\f0f8";}.ui-icon-ambulance:before{content:"\f0f9";}.ui-icon-medkit:before{content:"\f0fa";}.ui-icon-fighter-jet:before{content:"\f0fb";}.ui-icon-beer:before{content:"\f0fc";}.ui-icon-h-sign:before{content:"\f0fd";}.ui-icon-plus-sign-alt:before{content:"\f0fe";}.ui-icon-double-angle-left:before{content:"\f100";}.ui-icon-double-angle-right:before{content:"\f101";}.ui-icon-double-angle-up:before{content:"\f102";}.ui-icon-double-angle-down:before{content:"\f103";}.ui-icon-desktop:before{content:"\f108";}.ui-icon-laptop:before{content:"\f109";}.ui-icon-tablet:before{content:"\f10a";}.ui-icon-mobile-phone:before{content:"\f10b";}.ui-icon-quote-left:before{content:"\f10d";}.ui-icon-quote-right:before{content:"\f10e";}.ui-icon-spinner:before{content:"\f110";}.ui-icon-circle:before{content:"\f111";}.ui-icon-github-alt:before{content:"\f113";}.ui-icon-folder-close-alt:before{content:"\f114";}.ui-icon-folder-open-alt:before{content:"\f115";}.ui-icon-expand-alt:before{content:"\f116";}.ui-icon-collapse-alt:before{content:"\f117";}.ui-icon-smile:before{content:"\f118";}.ui-icon-frown:before{content:"\f119";}.ui-icon-meh:before{content:"\f11a";}.ui-icon-gamepad:before{content:"\f11b";}.ui-icon-keyboard:before{content:"\f11c";}.ui-icon-flag-alt:before{content:"\f11d";}.ui-icon-flag-checkered:before{content:"\f11e";}.ui-icon-terminal:before{content:"\f120";}.ui-icon-code:before{content:"\f121";}.ui-icon-star-half-full:before,.ui-icon-star-half-empty:before{content:"\f123";}.ui-icon-location-arrow:before{content:"\f124";}.ui-icon-crop:before{content:"\f125";}.ui-icon-code-fork:before{content:"\f126";}.ui-icon-unlink:before{content:"\f127";}.ui-icon-question:before{content:"\f128";}.ui-icon-exclamation:before{content:"\f12a";}.ui-icon-superscript:before{content:"\f12b";}.ui-icon-subscript:before{content:"\f12c";}.ui-icon-eraser:before{content:"\f12d";}.ui-icon-puzzle-piece:before{content:"\f12e";}.ui-icon-microphone:before{content:"\f130";}.ui-icon-microphone-off:before{content:"\f131";}.ui-icon-shield:before{content:"\f132";}.ui-icon-calendar-empty:before{content:"\f133";}.ui-icon-fire-extinguisher:before{content:"\f134";}.ui-icon-rocket:before{content:"\f135";}.ui-icon-maxcdn:before{content:"\f136";}.ui-icon-chevron-sign-left:before{content:"\f137";}.ui-icon-chevron-sign-right:before{content:"\f138";}.ui-icon-chevron-sign-up:before{content:"\f139";}.ui-icon-chevron-sign-down:before{content:"\f13a";}.ui-icon-html5:before{content:"\f13b";}.ui-icon-css3:before{content:"\f13c";}.ui-icon-anchor:before{content:"\f13d";}.ui-icon-unlock-alt:before{content:"\f13e";}.ui-icon-bullseye:before{content:"\f140";}.ui-icon-ellipsis-horizontal:before{content:"\f141";}.ui-icon-ellipsis-vertical:before{content:"\f142";}.ui-icon-rss-sign:before{content:"\f143";}.ui-icon-play-sign:before{content:"\f144";}.ui-icon-ticket:before{content:"\f145";}.ui-icon-minus-sign-alt:before{content:"\f146";}.ui-icon-check-minus:before{content:"\f147";}.ui-icon-level-up:before{content:"\f148";}.ui-icon-level-down:before{content:"\f149";}.ui-icon-check-sign:before{content:"\f14a";}.ui-icon-edit-sign:before{content:"\f14b";}.ui-icon-external-link-sign:before{content:"\f14c";}.ui-icon-share-sign:before{content:"\f14d";}.ui-icon-compass:before{content:"\f14e";}.ui-icon-collapse:before{content:"\f150";}.ui-icon-collapse-top:before{content:"\f151";}.ui-icon-expand:before{content:"\f152";}.ui-icon-euro:before,.ui-icon-eur:before{content:"\f153";}.ui-icon-gbp:before{content:"\f154";}.ui-icon-dollar:before,.ui-icon-usd:before{content:"\f155";}.ui-icon-rupee:before,.ui-icon-inr:before{content:"\f156";}.ui-icon-yen:before,.ui-icon-jpy:before{content:"\f157";}.ui-icon-renminbi:before,.ui-icon-cny:before{content:"\f158";}.ui-icon-won:before,.ui-icon-krw:before{content:"\f159";}.ui-icon-bitcoin:before,.ui-icon-btc:before{content:"\f15a";}.ui-icon-file:before{content:"\f016";}.ui-icon-file-text:before{content:"\f15c";}.ui-icon-sort-by-alphabet:before{content:"\f15d";}.ui-icon-sort-by-alphabet-alt:before{content:"\f15e";}.ui-icon-sort-by-attributes:before{content:"\f160";}.ui-icon-sort-by-attributes-alt:before{content:"\f161";}.ui-icon-sort-by-order:before{content:"\f162";}.ui-icon-sort-by-order-alt:before{content:"\f163";}.ui-icon-youtube-sign:before{content:"\f166";}.ui-icon-youtube:before{content:"\f167";}.ui-icon-xing:before{content:"\f168";}.ui-icon-xing-sign:before{content:"\f169";}.ui-icon-youtube-play:before{content:"\f16a";}.ui-icon-dropbox:before{content:"\f16b";}.ui-icon-stackexchange:before{content:"\f16c";}.ui-icon-instagram:before{content:"\f16d";}.ui-icon-flickr:before{content:"\f16e";}.ui-icon-adn:before{content:"\f170";}.ui-icon-bitbucket:before{content:"\f171";}.ui-icon-bitbucket-sign:before{content:"\f172";}.ui-icon-tumblr:before{content:"\f173";}.ui-icon-tumblr-sign:before{content:"\f174";}.ui-icon-long-arrow-down:before{content:"\f175";}.ui-icon-long-arrow-up:before{content:"\f176";}.ui-icon-long-arrow-left:before{content:"\f177";}.ui-icon-long-arrow-right:before{content:"\f178";}.ui-icon-apple:before{content:"\f179";}.ui-icon-windows:before{content:"\f17a";}.ui-icon-android:before{content:"\f17b";}.ui-icon-linux:before{content:"\f17c";}.ui-icon-dribble:before{content:"\f17d";}.ui-icon-skype:before{content:"\f17e";}.ui-icon-foursquare:before{content:"\f180";}.ui-icon-trello:before{content:"\f181";}.ui-icon-female:before{content:"\f182";}.ui-icon-male:before{content:"\f183";}.ui-icon-gittip:before{content:"\f184";}.ui-icon-sun:before{content:"\f185";}.ui-icon-moon:before{content:"\f186";}.ui-icon-archive:before{content:"\f187";}.ui-icon-bug:before{content:"\f188";}.ui-icon-vk:before{content:"\f189";}.ui-icon-weibo:before{content:"\f18a";}.ui-icon-renren:before{content:"\f18b";}.ui-icon-checkbox-on:before{content:"\f046";}.ui-icon-loading:before{content:"\f110";width:auto;height:auto;}.ui-icon-search:before,.ui-icon-search:before,.ui-input-search:before,.ui-input-search,.ui-icon-search:before{content:"\f002";}.ui-icon-th-large:before,.ui-icon-grid:before{content:"\f009";}.ui-icon-ok:before,.ui-icon-check:before{content:"\f00c";}.ui-icon-remove:before,.ui-icon-delete:before{content:"\f00d";}.ui-icon-power-off:before,.ui-icon-off:before,.ui-icon-off:before{content:"\f011";}.ui-icon-cog:before,.ui-icon-gear:before{content:"\f013";}.ui-icon-file-alt:before,.ui-icon-file-text-alt:before{content:"\f0f6";}.ui-icon-rotate-right:before,.ui-icon-repeat:before,.ui-icon-repeat:before{content:"\f01e";}.ui-icon-backward:before,.ui-icon-back:before{content:"\f04a";}.ui-icon-info-sign:before,.ui-icon-info:before{content:"\f05a";}.ui-icon-ok-circle:before,.ui-icon-radio-on:before{content:"\f05d";}.ui-icon-mail-forward:before,.ui-icon-share-alt:before,.ui-icon-share-alt:before{content:"\f064";}.ui-icon-warning-sign:before,.ui-icon-alert:before{content:"\f071";}.ui-icon-thumbs-up-alt:before,.ui-icon-thumbs-up:before{content:"\f087";}.ui-icon-thumbs-down-alt:before,.ui-icon-thumbs-down:before{content:"\f088";}.ui-icon-unchecked:before,.ui-icon-check-empty:before,.ui-icon-check-empty:before,.ui-icon-checkbox-off:before{content:"\f096";}.ui-icon-paperclip:before,.ui-icon-paper-clip:before,.ui-icon-paper-clip:before{content:"\f0c6";}.ui-icon-rotate-left:before,.ui-icon-undo:before,.ui-icon-undo:before{content:"\f0e2";}.ui-icon-angle-left:before,.ui-icon-arrow-l:before{content:"\f104";}.ui-icon-angle-right:before,.ui-icon-arrow-r:before{content:"\f105";}.ui-icon-angle-up:before,.ui-icon-arrow-u:before{content:"\f106";}.ui-icon-angle-down:before,.ui-icon-arrow-d:before{content:"\f107";}.ui-icon-circle-blank:before,.ui-icon-radio-off:before{content:"\f10c";}.ui-icon-mail-reply:before,.ui-icon-reply:before,.ui-icon-reply:before{content:"\f112";}.ui-icon-reply-all:before,.ui-icon-mail-reply-all:before{content:"\f122";}
+
+.ui-loader .ui-icon {  margin-left: -25px;	margin-top: -25px;	width: 50px;	height: 50px;	border-radius: 50%;	border: 1px solid;	-webkit-animation: loadingRotation 1s infinite linear;-moz-animation: loadingRotation 1s infinite linear;-ms-animation: loadingRotation 1s infinite linear; }
+.ui-slider-inneroffset .ui-slider-handle .ui-btn-inner { opacity: 0.8; border-radius: 3px; font-family:FontAwesome;font-weight:normal;font-style:normal;text-decoration:inherit;-webkit-font-smoothing:antialiased;}
+.ui-slider-inneroffset .ui-slider-handle .ui-btn-inner:before{content:"\f02a"; opacity: 0.2; font-size: 26px; text-align: center;}
+
+/*
+ * Various GUI Elements 
+ * 
+ */
+
+@-webkit-keyframes slideImagesIn {
+	0% {
+		opacity: 0;
+		-webkit-transform: scale(.6,.6);
+	}
+	50% {
+		-webkit-transform: scale(1.6,1.6);
+	}	
+	100% {
+		opacity: 1;
+		-webkit-transform: scale(1.0,1.0);
+	}
+}
+
+
+@-moz-keyframes slideImagesIn {
+	0% {
+		opacity: 0;
+		-moz-transform: scale(.6,.6);
+	}
+	50% {
+		-moz-transform: scale(1.6,1.6);
+	}	
+	100% {
+		opacity: 1;
+		-moz-transform: scale(1.0,1.0);
+	}
+}
+
+@-webkit-keyframes slideFromLeft {
+	0% {
+		left: -100%;
+		-webkit-transform: scale(0.3,0.3) rotateY(-45deg);
+	}
+	100% {
+		left: 0px;
+		-webkit-transform: scale(1,1) rotateY(0deg);
+	}
+}
+
+
+@-webkit-keyframes slideFromRight {
+	0% {
+		left: 100%;
+		-webkit-transform: scale(0.3,0.3) rotateY(45deg);
+	}
+	100% {
+		left: 0px;
+		-webkit-transform: scale(1,1) rotateY(0deg);
+	}
+}
+
+
+@-moz-keyframes slideFromLeft {
+	0% {
+		left: -100%;
+		-moz-transform: scale(0.3,0.3) rotateY(-45deg);
+	}
+	100% {
+		left: 0px;
+		-moz-transform: scale(1,1) rotateY(0deg);
+	}
+}
+
+
+@-moz-keyframes slideFromRight {
+	0% {
+		left: 100%;
+		-moz-transform: scale(0.3,0.3) rotateY(45deg);
+	}
+	100% {
+		left: 0px;
+		-moz-transform: scale(1,1) rotateY(0deg);
+	}
+}
+
+
+@keyframes slideFromLeft {
+	0% {
+		left: -100%;
+		-webkit-transform: scale(0.3,0.3) rotateY(-45deg);
+		-moz-transform: scale(0.3,0.3) rotateY(-45deg);
+		-o-transform: scale(0.3,0.3) rotateY(-45deg);
+		-ms-transform: scale(0.3,0.3) rotateY(-45deg);
+		transform: scale(0.3,0.3) rotateY(-45deg);
+	}
+	100% {
+		left: 0px;
+		-webkit-transform: scale(1,1) rotateY(0deg);
+		-moz-transform: scale(1,1) rotateY(0deg);
+		-o-transform: scale(1,1) rotateY(0deg);
+		-ms-transform: scale(1,1) rotateY(0deg);
+		transform: scale(1,1) rotateY(0deg);
+	}
+}
+
+
+@keyframes slideFromRight {
+	0% {
+		left: 100%;
+		-webkit-transform: scale(0.3,0.3) rotateY(45deg);
+		-moz-transform: scale(0.3,0.3) rotateY(45deg);
+		-o-transform: scale(0.3,0.3) rotateY(45deg);
+		-ms-transform: scale(0.3,0.3) rotateY(45deg);
+		transform: scale(0.3,0.3) rotateY(45deg);
+	}
+	100% {
+		left: 0px;
+		-webkit-transform: scale(1,1) rotateY(0deg);
+		-moz-transform: scale(1,1) rotateY(0deg);
+		-o-transform: scale(1,1) rotateY(0deg);
+		-ms-transform: scale(1,1) rotateY(0deg);
+		transform: scale(1,1) rotateY(0deg);
+	}
+}
+
+.delayedFadeIn {
+	overflow: hidden;
+	position: relative;
+	perspective: 500;
+	-webkit-perspective: 500;
+}
+
+.delayedFadeIn li {
+	opacity: 1;
+	overflow: hidden;
+	top: 0px;
+	left: 0px;
+	position: relative;
+	-webkit-animation: slideFromLeft 1s 1;
+	-moz-animation: slideFromLeft 1s 1;
+	animation: slideFromLeft 1s 1;
+}
+
+
+progress {
+	height: 2px;
+	width: 100%;
+	margin: 3px 0px 3px 0px;
+	display: block;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	border: none;
+	border-radius: 50%;
+}
+
+progress::-webkit-progress-bar {
+	padding: 0px;
+}
+
+progress::-webkit-progress-value {
+	border-radius: 5px;
+	-webkit-transition: all 0s;
+	-moz-transition: all 0s;
+	-o-transition: all 0s;
+	-ms-transition: all 0s;
+	transition: all 0s;
+}
+
+progress::-moz-progress-bar  {
+	padding: 0px;
+	border-radius: 5px;
+	-webkit-transition: all 0s;
+	-moz-transition: all 0s;
+	-o-transition: all 0s;
+	-ms-transition: all 0s;
+	transition: all 0s;
+}
+
+progress  {
+	border-radius: 5px;
+	-webkit-transition: all 0s;
+	-moz-transition: all 0s;
+	-o-transition: all 0s;
+	-ms-transition: all 0s;
+	transition: all 0s;
+}
+
+.nativeDroidProgress {
+	position: fixed;
+	top: 49px;
+	left: 0px;
+	z-index: 99999;
+}
+
+.nativeDroidProgress[data-animation-time="0"]::-webkit-progress-value {	-webkit-transition: all 0s !important;	}
+
+.nativeDroidProgress[data-animation-time="0"]::-moz-progress-value {	-moz-transition: all 0s !important;	}
+
+.nativeDroidCards {
+	list-style: none;
+	padding: 12px 0px 0px 0px;
+	margin: 0px 0px 0px 0px;
+	perspective: 500;
+	-webkit-perspective: 500;
+}
+
+.nativeDroidCards > li {
+	padding: 10px;
+	margin: 12px;
+	display: block;
+	opacity: 1;
+	top: 0px;
+	left: -100%;
+	position: relative;
+	-webkit-animation: slideFromLeft 1.5s 1;
+	-webkit-animation-fill-mode: forwards;
+	-moz-animation: slideFromLeft 1.5s 1;
+	-moz-animation-fill-mode: forwards;
+	animation: slideFromLeft 1.5s 1;
+	animation-fill-mode: forwards;
+}
+
+.nativeDroidCards > li:nth-child(even) {
+	-webkit-animation: slideFromRight 1.5s 1;
+	-webkit-animation-fill-mode: forwards;
+	-moz-animation: slideFromRight 1.5s 1;
+	-moz-animation-fill-mode: forwards;
+	animation: slideFromRight 1.5s 1;
+	animation-fill-mode: forwards;
+}
+
+.nativeDroidCards > li:nth-child(1) { -webkit-animation-delay: 0.5s; -moz-animation-delay: 0.5s;  -o-animation-delay: 0.5s; -ms-animation-delay: 0.5s; animation-delay: 0.5s;}
+.nativeDroidCards > li:nth-child(2) { -webkit-animation-delay: 1s;  -moz-animation-delay: 1s;  }
+.nativeDroidCards > li:nth-child(3) { -webkit-animation-delay: 1.5s;  -moz-animation-delay: 1.5s;  }
+.nativeDroidCards > li:nth-child(4) { -webkit-animation-delay: 2.0s;  -moz-animation-delay: 2.0s;  }
+.nativeDroidCards > li:nth-child(5) { -webkit-animation-delay: 2.5s;  -moz-animation-delay: 2.5s;  }
+.nativeDroidCards > li:nth-child(6) { -webkit-animation-delay: 3s;  -moz-animation-delay: 3s;  }
+.nativeDroidCards > li:nth-child(7) { -webkit-animation-delay: 3.5s;  -moz-animation-delay: 3.5s;  }
+.nativeDroidCards > li:nth-child(8) { -webkit-animation-delay: 4s;  -moz-animation-delay: 4s;  }
+.nativeDroidCards > li:nth-child(9) { -webkit-animation-delay: 4.5s;  -moz-animation-delay: 4.5s;  }
+.nativeDroidCards > li:nth-child(10) { -webkit-animation-delay: 5s;  -moz-animation-delay: 5s;  }
+.nativeDroidCards > li:nth-child(11) { -webkit-animation-delay: 5.5s;  -moz-animation-delay: 5.5s;  }
+.nativeDroidCards > li:nth-child(12) { -webkit-animation-delay: 6s;  -moz-animation-delay: 6s;  }
+.nativeDroidCards > li:nth-child(13) { -webkit-animation-delay: 6.5s;  -moz-animation-delay: 6.5s;  }
+.nativeDroidCards > li:nth-child(14) { -webkit-animation-delay: 7s;  -moz-animation-delay: 7.0s;  }
+.nativeDroidCards > li:nth-child(15) { -webkit-animation-delay: 7.5s;  -moz-animation-delay: 7.5s;  }
+
+.nativeDroidCards > li h1 {
+	font-size: 24px;
+	padding: 0px;
+	margin: auto;
+}
+.nativeDroidCards > li h2 {
+	font-size: 14px;
+	padding: 0px;
+	margin: auto;
+}
+
+.nativeDroidCards > li[data-cards-type="sports"] h1 span {
+	display: block;
+	float: right;
+}
+.nativeDroidCards table {
+	margin: 7px 0px 7px 0px;
+	border-spacing:0;
+	border-collapse:collapse;
+	width: 100%;
+}
+
+.nativeDroidCards table td {
+	vertical-align: top;
+	margin: 0px;
+	padding: 3px;
+}
+
+.nativeDroidCards table tr > td:first-child {
+	text-align: right;
+}
+
+.nativeDroidCards a {
+	display: block;
+	padding: 7px 0px 7px 0px;
+	font-size: 18px;
+}
+
+.nativeDroidCards > li[data-cards-type="weather"] ul {
+	list-style: none;
+	padding: 0px;
+	margin: 0px;
+	width: 100%;
+}
+
+.nativeDroidCards > li[data-cards-type="weather"] ul li {
+	padding: 0px;
+	margin: 0px;
+	text-align: center;
+}
+
+.nativeDroidCards > li[data-cards-type="weather"] .detail li {
+	display: inline-block;
+}
+.nativeDroidCards > li[data-cards-type="weather"] .detail li:first-child {
+	width: 25%;
+}
+.nativeDroidCards > li[data-cards-type="weather"] .detail li:first-child span {
+	display: block;
+	width: auto;
+}
+.nativeDroidCards > li[data-cards-type="weather"] .detail li:first-child .sunny {
+	font-size: 60px;
+}
+.nativeDroidCards > li[data-cards-type="weather"] .detail li:nth-child(2) {
+	width: 70%;
+	font-size: 115px;
+	text-align: right;
+}
+
+.nativeDroidCards > li[data-cards-type="weather"] .week li strong,.nativeDroidCards > li[data-cards-type="weather"] .week li span,.nativeDroidCards > li[data-cards-type="weather"] .week i {
+	display: block;
+	width: auto;
+}
+
+.nativeDroidCards > li[data-cards-type="weather"] .week li {
+	width: 22%;
+	display: inline-block;
+}
+.nativeDroidCards > li[data-cards-type="weather"] .week li:last-child {
+	border-right: 0px solid rgba(0,0,0,0.05);
+}
+
+.nativeDroidCards > li[data-cards-type="weather"] .sunny {
+	color: #FFF000;
+}
+
+.nativeDroidCards ul[data-nativedroid-plugin="twitter"] li,.nativeDroidCards ul[data-nativedroid-plugin="twitter"] {
+	padding: 0px;
+	margin: 7px 0px 0px 0px;
+}
+
+.nativeDroidCards ul[data-nativedroid-plugin="twitter"] li img {
+	float: left;
+	margin: 7px;
+}
+
+.nativeDroidCards ul[data-nativedroid-plugin="twitter"] a,.nativeDroidCards ul[data-nativedroid-plugin="twitter"] p,.nativeDroidCards ul[data-nativedroid-plugin="twitter"] h2 {
+	font-size: 14px;
+	padding: 0px;
+	margin: 0px;
+	border-top: 0px;
+}
+
+.nativeDroidCards > li .map {
+	margin: 0;
+    padding: 0;
+	width: 100%;
+    height: 150px;
+}
+
+.nativeDroidGallery {
+	list-style: none;
+	margin: auto auto;
+	padding: 0px 0px 0px 0px;
+	width: 100%;
+	overflow: hidden;
+}
+
+.nativeDroidGallery li {
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center center;
+	display: block;
+	float: left;
+	width: 75px;
+	height: 75px;
+	overflow: hidden;
+	margin: 4px 4px 0px 0px;
+	padding: 0px 0px 0px 0px;
+/*	top: 0px;
+	left: -100%;*/
+	position: relative;
+	-webkit-animation: slideImagesIn 1.5s 1;
+	-webkit-animation-fill-mode: forwards;
+	-moz-animation: slideImagesIn 1.5s 1;
+	-moz-animation-fill-mode: forwards;
+	animation: slideImagesIn 1.5s 1;
+	animation-fill-mode: forwards;
+	
+	-webkit-transition: background-image 0.75s linear;
+	-moz-transition: background-image 0.75s linear;
+	-ms-transition: background-image 0.75s linear;
+	-o-transition: background-image 0.75s linear;
+	transition: background-image 0.75s linear;
+	
+}
+
+.nativeDroidGallery li span {
+	display: none;
+}
+
+
+@-webkit-keyframes galleryActivate {	0% { -webkit-transform: scale(1.0,1.0);	} 50% {	-webkit-transform: scale(0.8,0.8); } 100% {	-webkit-transform: scale(1,1); } }
+@-moz-keyframes galleryActivate {	0% { -moz-transform: scale(1,1);	} 50% {	-moz-transform: scale(0.8,0.8); } 100% {	-moz-transform: scale(1,1); } }
+@-ms-keyframes galleryActivate {	0% { -ms-transform: scale(1,1);	} 50% {	-ms-transform: scale(0.8,0.8); } 100% {	-ms-transform: scale(1,1); } }
+@-o-keyframes galleryActivate {	0% { -o-transform: scale(1,1);	} 50% {	-o-transform: scale(0.8,0.8); } 100% {	-o-transform: scale(1,1); } }
+@keyframes galleryActivate {	0% { transform: scale(1,1);	} 50% {	transform: scale(0.8,0.8); } 100% {	transform: scale(1,1); } }
+
+
+.nativeDroidGallery .overlay {
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	z-index: 99998;
+	background: rgba(0,0,0,0.9);
+	display: none;
+}
+
+.nativeDroidGallery li.active  {
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	z-index: 99999;
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center center;
+
+	-webkit-animation: galleryActivate 0.5s 1;
+	-moz-animation: galleryActivate 0.5s 1;
+	-o-animation: galleryActivate 0.5s 1;
+	-ms-animation: galleryActivate 0.5s 1;
+	animation: galleryActivate 0.5s 1;
+	animation-fill-mode: forwards;
+
+	-webkit-transition: left 0.4s;
+	-moz-transition: left 0.4s;
+	-ms-transition: left 0.4s;
+	-o-transition: left 0.4s;
+	transition: left 0.4s;
+}
+
+.nativeDroidGallery li.slideLeft {
+	left: -100% !important;
+}
+.nativeDroidGallery li.slideRight {
+	left: 100% !important;
+}
+
+.nativeDroidGallery li .closeTrigger {
+	display: none;
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	background-color: rgba(0,0,0,0.5);
+	border-radius: 7px;
+	padding: 7px;
+	opacity: 0.8;
+}
+
+.nativeDroidGallery li.active .closeTrigger {
+	display: block;
+}
+
+.nativeDroidGallery li.active span {
+	display: block;
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	width: 100%;
+	background-color: rgba(0,0,0,0.5);
+	padding: 7px;
+}
+
+.nativeDroidGallery li.active.zoom  {
+	overflow: auto;
+ 	-webkit-overflow-scrolling:touch;
+	-webkit-transform: translate3d(0,0,0);
+}
+
+.nativeDroidGallerySetList {
+
+	-webkit-transition: left 0.4s;
+	-moz-transition: left 0.4s;
+	-ms-transition: left 0.4s;
+	-o-transition: left 0.4s;
+	transition: left 0.4s;
+}
+
+
+.nativeDroidGallerySetList.slideLeft {
+	position: fixed;
+	left: -100%;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;	
+}
+
+.nativeDroidGallery li.active.zoom .fullscreenImage {
+	position: absolute;
+}
+
+.nativeDroidGallery li.active.zoom span  {
+	display: none;
+}
+
+.nativeDroidSplashscreen {
+	display: block;
+	background-color: #000000;
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	z-index: 99999;
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	background-position: center center;
+	overflow: hidden;
+}
+
+@-webkit-keyframes fadeOut { 0% { opacity: 1; } 100% { opacity: 0; } }
+@-moz-keyframes fadeOut { 0% { opacity: 1; } 100% { opacity: 0; } }
+@-o-keyframes fadeOut { 0% { opacity: 1; } 100% { opacity: 0; } }
+@-ms-keyframes fadeOut { 0% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes fadeOut { 0% { opacity: 1; } 100% { opacity: 0; } }
+
+.nativeDroidSplashscreen.fadeOut {
+	-webkit-animation: fadeOut 0.5s 1;
+	-moz-animation: fadeOut 0.5s 1;
+	-o-animation: fadeOut 0.5s 1;
+	-ms-animation: fadeOut 0.5s 1;
+	animation: fadeOut 0.5s 1;
+	-webkit-animation-fill-mode: forwards;
+	-moz-animation-fill-mode: forwards;
+	-o-animation-fill-mode: forwards;
+	-ms-animation-fill-mode: forwards;
+	animation-fill-mode: forwards;
+}
+
+@-webkit-keyframes moveLeft { 0% { left: 0px; } 100% { left: -100%; } }
+@-moz-keyframes moveLeft { 0% { left: 0px; } 100% { left: -100%; } }
+@-o-keyframes moveLeft { 0% { left: 0px; } 100% { left: -100%; } }
+@-ms-keyframes moveLeft { 0% { left: 0px; } 100% { left: -100%; } }
+@keyframes moveLeft { 0% { left: 0px; } 100% { left: -100%; } }
+
+.nativeDroidSplashscreen.moveLeft {
+	-webkit-animation: moveLeft 0.5s 1;
+	-moz-animation: moveLeft 0.5s 1;
+	-o-animation: moveLeft 0.5s 1;
+	-ms-animation: moveLeft 0.5s 1;
+	animation: moveLeft 0.5s 1;
+	-webkit-animation-fill-mode: forwards;
+	-moz-animation-fill-mode: forwards;
+	-o-animation-fill-mode: forwards;
+	-ms-animation-fill-mode: forwards;
+	animation-fill-mode: forwards;
+}
+
+@-webkit-keyframes moveRight { 0% { left: 0px; } 100% { left: 100%; } }
+@-moz-keyframes moveRight { 0% { left: 0px; } 100% { left: 100%; } }
+@-o-keyframes moveRight { 0% { left: 0px; } 100% { left: 100%; } }
+@-ms-keyframes moveRight { 0% { left: 0px; } 100% { left: 100%; } }
+@keyframes moveRight { 0% { left: 0px; } 100% { left: 100%; } }
+ 
+.nativeDroidSplashscreen.moveRight { 
+	-webkit-animation: moveRight 0.5s 1;
+	-moz-animation: moveRight 0.5s 1;
+	-o-animation: moveRight 0.5s 1;
+	-ms-animation: moveRight 0.5s 1;
+	animation: moveRight 0.5s 1;
+	-webkit-animation-fill-mode: forwards;
+	-moz-animation-fill-mode: forwards;
+	-o-animation-fill-mode: forwards;
+	-ms-animation-fill-mode: forwards;
+	animation-fill-mode: forwards;
+}
+
+
+.splashScreenExample {
+	text-align: center;
+}
+
+.splashScreenExample h1,.splashScreenExample h2,.splashScreenExample h3 {
+	
+	-webkit-transform: scale(0.01,0.01);
+	-moz-transform: scale(0.01,0.01);
+	-ms-transform: scale(0.01,0.01);
+	-o-transform: scale(0.01,0.01);
+	transform: scale(0.01,0.01);
+	
+	position: relative;
+	left: 0px;
+	
+	-webkit-animation: galleryActivate 0.5s 1;
+	-moz-animation: galleryActivate 0.5s 1;
+	-o-animation: galleryActivate 0.5s 1;
+	-ms-animation: galleryActivate 0.5s 1;
+	animation: galleryActivate 0.5s 1;
+	-webkit-animation-fill-mode: forwards;
+	-moz-animation-fill-mode: forwards;
+	-o-animation-fill-mode: forwards;
+	-ms-animation-fill-mode: forwards;
+	animation-fill-mode: forwards;
+	
+	-webkit-animation-delay: 0.25s;
+	-moz-animation-delay: 0.25s;
+	-ms-animation-delay: 0.25s;
+	-o-animation-delay: 0.25s;
+	animation-delay: 0.25s;
+}
+
+.splashScreenExample h2 {
+	-webkit-animation-delay: 0.5s;
+	-moz-animation-delay: 0.5s;
+	-ms-animation-delay: 0.5s;
+	-o-animation-delay: 0.5s;
+	animation-delay: 0.5s;
+}
+.splashScreenExample h3 {
+	-webkit-animation-delay: 0.75s;
+	-moz-animation-delay: 0.75s;
+	-ms-animation-delay: 0.75s;
+	-o-animation-delay: 0.75s;
+	animation-delay: 0.75s;
+}
+
+
+@-webkit-keyframes moveUp { 0% { top: 100%; } 100% { top:  50%; } }
+@-moz-keyframes moveUp { 0% { top: 100%; } 100% { top:  50%; } }
+@-o-keyframes moveUp { 0% { top: 100%; } 100% { top:  50%; } }
+@-ms-keyframes moveUp { 0% { top: 100%; } 100% { top:  50%; } }
+@keyframes moveUp { 0% { top: 100%; } 100% { top: 50%; } }
+ 
+
+.splashScreenExample .splashScreenDroid {
+	position: fixed;
+	top: 100%;
+	left: 0px;
+	width: 100%;
+	height: 250px;
+	background-image: url("http://nativedroid.godesign.ch/res/img/droid.png");
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: clip;
+		
+	-webkit-animation: moveUp 0.5s 1;
+	-moz-animation: moveUp 0.5s 1;
+	-o-animation: moveUp 0.5s 1;
+	-ms-animation: moveUp 0.5s 1;
+	animation: moveUp 0.5s 1;
+	-webkit-animation-fill-mode: forwards;
+	-moz-animation-fill-mode: forwards;
+	-o-animation-fill-mode: forwards;
+	-ms-animation-fill-mode: forwards;
+	animation-fill-mode: forwards;
+	
+	-webkit-animation-delay: 1s;
+	-moz-animation-delay: 1s;
+	-ms-animation-delay: 1s;
+	-o-animation-delay: 1s;
+	animation-delay: 1s;
+}
+
+.nativeDroidLockscreen {
+	display: none;
+	background-color: #000000;
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	z-index: 99998;
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+.nativeDroidLockscreen .unlock {
+	font-size: 25px;
+	padding: 7px;
+	border-radius: 7px;
+	background-color: rgba(0,255,0,0.5);
+}
+
+
+
+.nativeDroidHomescreen,.nativeDroidHomescreen div[data-nativedroid-role="screenslide"] {
+	display: block;
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	z-index: 99997;
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	background-position: center center;
+	overflow: hidden;
+}
+
+.nativeDroidHomescreen div[data-nativedroid-role="screenslide"] {
+	left: 0px;
+	top: 0px;
+	
+	height: 90%;
+	
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	
+	-webkit-transition: all 0.5s;
+	-moz-transition: all 0.5s;
+	-ms-transition: all 0.5s;
+	-o-transition: all 0.5s;
+	transition: all 0.5s;
+}
+
+.nativeDroidHomescreen div[data-nativedroid-role="screenslide"].left {
+	left: -100%;
+	-webkit-transform: scale(0.8,0.8);
+	-moz-transform: scale(0.8,0.8);
+	-ms-transform: scale(0.8,0.8);
+	-o-transform: scale(0.8,0.8);
+	transform: scale(0.8,0.8);
+}
+
+.nativeDroidHomescreen div[data-nativedroid-role="screenslide"].leftNoTransition {
+	left: -100%;
+	-webkit-transition: none !important;
+	-moz-transition: none !important;
+	-ms-transition: none !important;
+	-o-transition: none !important;
+	transition: none !important;
+}
+
+.nativeDroidHomescreen div[data-nativedroid-role="screenslide"].right {
+	left: 100%;
+	-webkit-transform: scale(0.8,0.8);
+	-moz-transform: scale(0.8,0.8);
+	-ms-transform: scale(0.8,0.8);
+	-o-transform: scale(0.8,0.8);
+	transform: scale(0.8,0.8);
+}
+
+.nativeDroidHomescreen div[data-nativedroid-role="screenslide"].rightNoTransition {
+	left: 100%;
+	-webkit-transition: none !important;
+	-moz-transition: none !important;
+	-ms-transition: none !important;
+	-o-transition: none !important;
+	transition: none !important;
+}
+
+.nativeDroidScreenSlideIndicators {
+	position: fixed;
+	bottom: 5%;
+	left: 0px;
+	width: 100%;
+	text-align: center;
+}
+
+.nativeDroidScreenSlideIndicators .blobs {
+	
+	display: inline-block;
+	
+	width: 8px;
+	height: 8px;
+
+	border-top-left-radius: 4px;
+	border-bottom-right-radius: 4px;
+	border-top-right-radius: 4px;
+	border-bottom-left-radius: 4px;
+	
+	background-color: rgba(255,255,255,0.5);
+	box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.1);
+	
+	margin-right: 10px;
+	
+	-webkit-transition: all 0.25s linear;
+	-moz-transition: all 0.25s linear;
+	-ms-transition: all 0.25s linear;
+	-o-transition: all 0.25s linear;
+	transition: all 0.25s linear;
+}
+
+.nativeDroidScreenSlideIndicators .blobs.active {
+	background-color: rgba(255,255,255,0.8);
+	box-shadow: 0px 0px 10px 2px rgba(0,0,0,0.6);
+
+
+	border-top-left-radius: 4px;
+	border-bottom-right-radius: 4px;
+	border-top-right-radius: 0px;
+	border-bottom-left-radius: 0px;
+	
+	-webkit-transform: scale(1.5,1.5) rotate(180deg);
+	-moz-transform: scale(1.5,1.5) rotate(180deg);
+	-o-transform: scale(1.5,1.5) rotate(180deg);
+	-ms-transform: scale(1.5,1.5) rotate(180deg);
+	transform: scale(1.5,1.5) rotate(180deg);
+}
+
+.nativeDroidHomescreenWidget {
+	text-align: center;
+	padding: 0px 0px 0px 0px;
+	margin: 0px 0px 0px 0px;
+	top: 0px;
+	left: 0px;
+	display: inline-block; 
+	position: absolute;
+/*	overflow: hidden;*/
+}
+
+.nativeDroidHomescreenWidget[data-nativedroid-widget-width="1"] { width: 25%; }
+.nativeDroidHomescreenWidget[data-nativedroid-widget-width="2"] { width: 50%; }
+.nativeDroidHomescreenWidget[data-nativedroid-widget-width="3"] { width: 75%; }
+.nativeDroidHomescreenWidget[data-nativedroid-widget-width="4"] { width: 100%; }
+
+.nativeDroidHomescreenWidget[data-nativedroid-widget-height="1"] { height: 20%; }
+.nativeDroidHomescreenWidget[data-nativedroid-widget-height="2"] { height: 40%; }
+.nativeDroidHomescreenWidget[data-nativedroid-widget-height="3"] { height: 60%; }
+.nativeDroidHomescreenWidget[data-nativedroid-widget-height="4"] { height: 80%; }
+.nativeDroidHomescreenWidget[data-nativedroid-widget-height="5"] { height: 100%; }
+
+.nativeDroidHomescreenWidget[data-nativedroid-widget-offset-left="1"] { left: 25%; }
+.nativeDroidHomescreenWidget[data-nativedroid-widget-offset-left="2"] { left: 50%; }
+.nativeDroidHomescreenWidget[data-nativedroid-widget-offset-left="3"] { left: 75%; }
+.nativeDroidHomescreenWidget[data-nativedroid-widget-offset-left="4"] { left: 100%; }
+
+.nativeDroidHomescreenWidget[data-nativedroid-widget-offset-top="1"] { top: 20%; }
+.nativeDroidHomescreenWidget[data-nativedroid-widget-offset-top="2"] { top: 40%; }
+.nativeDroidHomescreenWidget[data-nativedroid-widget-offset-top="3"] { top: 60%; }
+.nativeDroidHomescreenWidget[data-nativedroid-widget-offset-top="4"] { top: 80%; }
+.nativeDroidHomescreenWidget[data-nativedroid-widget-offset-top="5"] { top: 100%; }
+	
+.nativeDroidWidgetClock {
+	text-shadow: 1px 1px 2px rgba(0,0,0,0.8); 
+	margin: auto auto auto auto;
+}
+
+.nativeDroidWidgetClock .ClockTime {
+	margin: 7px;
+}
+
+.nativeDroidWidgetClock .ClockTime .time {
+	font-size: 60px;
+	font-weight: 300;
+	line-height: 65px; 
+	padding: 7px 7px 0px 7px;
+
+	/*-webkit-animation: galleryActivate 0.5s 1;
+	-moz-animation: galleryActivate 0.5s 1;
+	-o-animation: galleryActivate 0.5s 1;
+	-ms-animation: galleryActivate 0.5s 1;
+	animation: galleryActivate 0.5s 1;
+	animation-fill-mode: forwards;*/
+}
+
+.nativeDroidWidgetClock .ClockTime .date {
+	font-size: 14px;
+}
+
+@media (max-height: 324px) {
+	.nativeDroidWidgetClock .ClockTime .time {
+		font-size: 40px;
+		font-weight: 300;
+		line-height: 40px; 
+		padding: 0px 0px 0px 0px;
+	}
+}
+
+.nativeDroidWidgetReader {
+	height: 100%;
+
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
+	
+	text-align: left;
+	text-shadow: 1px 1px 2px rgba(0,0,0,0.8); 
+}
+
+.nativeDroidWidgetReader ul li.widgetTitleBar {
+	background-color: rgba(0,0,0,0.9);
+	box-shadow: 0px 5px 10px rgba(0,0,0,0.3);
+	border-top-left-radius: 7px;
+	border-top-right-radius: 7px;
+}
+
+.nativeDroidWidgetReader ul li.widgetTitleBar h3 {
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;
+	border-radius: 0px;
+	font-size: 25px;
+
+}
+
+.nativeDroidWidgetReader ul {
+	list-style: none;
+	padding: 0px 0px 0px 0px;
+	margin: 0px 7px 0px 7px;
+	position: relative;
+}
+
+.nativeDroidWidgetReader ul li {
+	border-top: 1px solid rgba(255,255,255,0.1);
+	padding: 7px 14px 7px 14px;
+	background-color: rgba(0,0,0,0.6);
+}
+
+.nativeDroidWidgetReader ul li:nth-child(2) {
+	border-top: 0px;
+}
+
+.nativeDroidWidgetReader ul li strong {
+	display: block;
+	font-weight: 300;
+	font-size: 16px;
+	color: rgba(255,255,255,0.8);
+}
+
+.nativeDroidWidgetReader ul li p {
+	font-size: 12px;
+	color: rgba(255,255,255,0.5);
+}
+
+.nativeDroidWidgetReader ul li .feedActionBox {
+	display: block;
+	float: right;
+	font-size: 25px;
+/*	padding: 15px;
+	border-radius: 50%;
+	background-color: rgba(255,255,0,0.8);*/
+	margin: 0px 0px 0px 7px;
+}
+
+.nativeDroidWidgetReader ul li .feedActionBox a {
+	color: rgba(255,255,255,0.8);
+	font-weight: 300;
+}
+
+.nativeDroidIconWidget {
+	text-align: center;
+	margin: 12px auto;	
+	text-shadow: 1px 1px 5px rgba(0,0,0,0.6);
+
+}
+
+.nativeDroidIconWidget i {
+	font-size: 45px;
+	display: block;
+}
+
+.nativeDroidIconWidget span {
+	font-size: 12px;
+	text-shadow: 2px 2px 2px rgba(0,0,0,0.8);
+}
+
+
+
+.noTransition {
+	-webkit-transition: none !important;
+	-moz-transition: none !important;
+	-ms-transition: none !important;
+	-o-transition: none !important;
+	transition: none !important;
+}

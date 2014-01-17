@@ -1,0 +1,11 @@
+.ui-page
+{
+  background: transparent;
+}
+
+.loadingIndicator
+{
+  float:right;
+  width:50px;
+  margin-top:5px;
+}
