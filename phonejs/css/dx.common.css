@@ -1,7 +1,7 @@
-/* 
+/*! 
 * DevExpress PhoneJS
-* Version: 13.1.4
-* Build date: Jun 5, 2013
+* Version: 13.1.8
+* Build date: Oct 22, 2013
 *
 * Copyright (c) 2012 - 2013 Developer Express Inc. ALL RIGHTS RESERVED
 * EULA: http://phonejs.devexpress.com/EULA
@@ -29,10 +29,16 @@ body
 {
   background: #fff;
 }
-.dx-viewport
+.dx-viewport, .dx-hidden-bag
 {
   width: 100%;
   height: 100%;
+}
+.dx-hidden-bag
+{
+  top: -9999px;
+  left: -9999px;
+  position: fixed;
 }
 blockquote, q
 {
@@ -146,17 +152,17 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 {
   float: left;
   width: 40%;
+  overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  overflow: hidden;
 }
 .dx-fieldset .dx-field-value
 {
   float: right;
   width: 60%;
+  overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  overflow: hidden;
   margin: 0;
 }
 .dx-button
@@ -180,8 +186,9 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 .dx-button .dx-button-content
 {
-  text-overflow: ellipsis;
   overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   max-height: 100%;
 }
 .dx-button.dx-state-disabled
@@ -278,6 +285,11 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   padding-top: 30px;
   top: -80px;
   overflow: hidden;
+  -webkit-transform: translate3d(0,0,0);
+  -moz-transform: translate3d(0,0,0);
+  -ms-transform: translate3d(0,0,0);
+  -o-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -288,6 +300,11 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   -ms-user-drag: none;
   -o-user-drag: none;
   user-drag: none;
+}
+.dx-scrollview-pull-down .dx-scrollview-pull-down-container
+{
+  display: inline-block;
+  text-align: right;
 }
 .dx-scrollview-pull-down.dx-scrollview-pull-down-loading .dx-scrollview-pull-down-image
 {
@@ -382,6 +399,14 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 {
   clear: both;
 }
+.dx-scrollview-scrollbottom
+{
+  -webkit-transform: translate3d(0,0,0);
+  -moz-transform: translate3d(0,0,0);
+  -ms-transform: translate3d(0,0,0);
+  -o-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);
+}
 .dx-scrollview-scrollbottom .dx-scrollview-scrollbottom-indicator
 {
   height: 23px;
@@ -402,6 +427,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 .dx-scrollview-scrollbottom .dx-scrollview-scrollbottom-indicator
 {
   display: inline-block;
+  margin-left: 0;
 }
 .dx-scrollview-scrollbottom.dx-scrollview-scrollbottom-end .dx-scrollview-scrollbottom-indicator
 {
@@ -424,10 +450,10 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 .dx-scrollview-scrollbottom
 {
-  text-align: center;
   width: 100%;
   padding: 10px 0;
   overflow: hidden;
+  text-align: center;
 }
 .dx-checkbox
 {
@@ -452,6 +478,9 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 .dx-checkbox .dx-checkbox-icon
 {
   display: inline-block;
+  width: 100%;
+  height: 100%;
+  background-size: cover !important;
 }
 .dx-slider
 {
@@ -588,6 +617,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 .dx-map .dx-map-container, .dx-map .dx-map-shield
 {
+  color: #000;
   position: absolute;
   top: 0;
   left: 0;
@@ -637,6 +667,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   width: 100%;
   border: 0;
   outline: 0;
+  -webkit-user-modify: read-write-plaintext-only;
   -webkit-appearance: none;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -707,6 +738,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 .dx-toolbar .dx-toolbar-label
 {
+  white-space: nowrap;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -801,12 +833,12 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 .dx-overlay.dx-overlay-modal
 {
+  position: fixed;
   width: 100%;
   height: 100%;
 }
 .dx-overlay.dx-overlay-shader
 {
-  position: fixed;
   background-color: rgba(128,128,128,.5);
 }
 .dx-overlay .dx-overlay-content
@@ -896,9 +928,23 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 {
   padding: 10px 10px 5px 10px;
 }
-.dx-dialog-root .dx-overlay-content .dx-button:only-child
+.dx-dialog-root .dx-overlay-content .dx-dialog-buttons
 {
   width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+}
+.dx-dialog-root .dx-overlay-content .dx-dialog-buttons .dx-button:nth-child(even)
+{
+  float: right;
+}
+.dx-dialog-root .dx-overlay-content .dx-dialog-buttons .dx-button:nth-child(odd)
+{
+  float: left;
+}
+.dx-dialog-root .dx-overlay-content .dx-dialog-buttons .dx-button:only-child
+{
+  float: right;
 }
 .dx-gallery
 {
@@ -922,7 +968,9 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   -ms-user-select: none;
   -o-user-select: none;
   user-select: none;
-  background-size: 100%;
+  -webkit-background-size: 100% 100%;
+  -moz-background-size: 100% 100%;
+  background-size: 100% 100%;
 }
 .dx-gallery.dx-state-disabled .dx-gallery-nav-button-prev, .dx-gallery.dx-state-disabled .dx-gallery-nav-button-next
 {
@@ -969,9 +1017,9 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   width: 100%;
   height: 100%;
   position: relative;
+  overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  overflow: hidden;
 }
 .dx-lookup-popup .dx-list-item
 {
@@ -1049,6 +1097,8 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   opacity: .9;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
   border-radius: 5px;
   -webkit-user-drag: none;
   -moz-user-drag: none;
@@ -1063,8 +1113,12 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 .dx-loadpanel-content .dx-loadpanel-message
 {
-  margin: 10px;
+  margin: 25px;
   text-align: center;
+}
+.dx-loadpanel-content .dx-loadpanel-message.dx-loadpanel-has-indicator
+{
+  margin: 10px;
 }
 .dx-overlay.dx-loadpanel, .dx-overlay.dx-loadpanel .dx-overlay-shader, .dx-overlay.dx-loadpanel .dx-overlay-content
 {
@@ -1284,6 +1338,8 @@ div.dx-dashboard-item
 .dx-dashboard-item-shield
 {
   position: absolute;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAEUlEQVQIW2P8//8/AwgwwhgAROgF/ckwojkAAAAASUVORK5CYII=);
+  z-index: 100;
 }
 .dx-dashboard-item-toolbar
 {
@@ -1321,7 +1377,7 @@ div.dx-dashboard-item
   display: inline-block;
   padding: 0;
   border: 1px solid transparent;
-  opacity: .4;
+  opacity: .25;
 }
 .dx-dashboard-content-selection
 {
@@ -1342,7 +1398,7 @@ div.dx-dashboard-item
   display: inline-block;
   padding: 0;
   border: 1px solid transparent;
-  opacity: .4;
+  opacity: .25;
 }
 .dx-dashboard-item-export
 {

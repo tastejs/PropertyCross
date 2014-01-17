@@ -22,7 +22,8 @@
     overflow: hidden;
 }
 
-.navbar-layout .layout-content > div {
+.navbar-layout .layout-content > div,
+.navbar-layout .transition-frame {
     position: absolute;
     height: 100%;
     width: 100%;
@@ -89,6 +90,62 @@
     line-height: 38px;
 }
 
+/* ios7 */
+
+.dx-theme-ios7 .navbar-layout .layout-header {
+    top: 0;
+    height: 44px;
+}
+
+.dx-theme-ios7 .navbar-layout .layout-content {
+    top: 44px;
+    bottom: 0;
+}
+
+.dx-theme-ios7 .navbar-layout .layout-content.has-navbar {
+    bottom: 59px;
+}
+
+.dx-theme-ios7 .navbar-layout .layout-footer {
+    height: 59px;
+    bottom: 0;
+}
+
+.dx-theme-ios7 .navbar-layout .view-footer {
+    position: static;
+}
+
+.dx-theme-ios7 .navbar-layout .view-toolbar-bottom.dx-toolbar {
+    background: transparent;
+    border: none;
+    margin-bottom: 10px;
+}
+
+.dx-theme-ios7 .navbar-layout .view-toolbar-bottom.dx-toolbar .dx-toolbar-center {
+    width: 100%;
+}
+
+.dx-theme-ios7 .navbar-layout .view-footer .dx-toolbar {
+    height: 57px;
+}
+
+.dx-theme-ios7 .navbar-layout .view-footer .dx-button {
+    width: 97%;
+    overflow: visible;
+}
+
+.dx-theme-ios7 .navbar-layout .view-footer .dx-button .dx-button-content {
+    height: 44px;
+    border-radius: 6px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.dx-theme-ios7 .navbar-layout .view-footer .dx-button .dx-button-content .dx-button-text {
+    font-size: 20px;
+    line-height: 38px;
+}
+
 /* android */
 
 .dx-theme-android .navbar-layout .layout-header #navBar {
@@ -107,7 +164,7 @@
 }
 
 .dx-theme-android .navbar-layout .layout-content.has-navbar {
-    top: 78px;
+    top: 79px;
 }
 
 .dx-theme-android .navbar-layout .layout-footer {
@@ -121,7 +178,6 @@
 }
 
 .dx-theme-android .navbar-layout .dx-tabs.dx-navbar {
-    height: 100%;
     padding: 0;
 }
 
@@ -204,10 +260,51 @@
     top: 45px;
 }
 
+.dx-theme-win8 .navbar-layout-phone .layout-content.has-toolbar-bottom {
+    overflow: hidden;
+    width: 100%;
+    bottom: 40px;
+    position: absolute;
+}
+
 .dx-theme-win8 .navbar-layout-phone .dx-toolbar {
     height: 60px;
 }
 
 .dx-theme-win8 .navbar-layout-phone .layout-header .dx-toolbar {
     opacity: 1;
+}
+
+/* tizen */
+
+.dx-theme-tizen .navbar-layout .layout-header #navBar {
+    top: 0;
+    height: 71px;
+}
+
+.dx-theme-tizen .navbar-layout .layout-content {
+    top: 0;
+    bottom: 0;
+}
+
+.dx-theme-tizen .navbar-layout .layout-content.has-toolbar {
+    bottom: 40px;
+}
+
+.dx-theme-tizen .navbar-layout .layout-content.has-navbar {
+    top: 71px;
+}
+
+.dx-theme-tizen .navbar-layout .layout-footer {
+    bottom: 0;
+    height: 40px;
+    display: none;
+}
+
+.dx-theme-tizen .navbar-layout .layout-footer.has-toolbar {
+    display: block;
+}
+
+.dx-theme-tizen .navbar-layout .dx-tabs.dx-navbar {
+    padding: 0;
 }
