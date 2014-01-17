@@ -1,0 +1,8 @@
+{
+  "name": "property-cross",
+  "version": "1.3.0",
+  "devDependencies": {
+    "grunt": "0.4.2",
+    "grunt-hub": "0.5.0"
+  }
+}

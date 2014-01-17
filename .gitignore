@@ -3,4 +3,8 @@
 *.xcbkptlist
 node_modules
 /rhomobile/bin
-/phonejs/package.zip
+app.zip
+*/build
+*.apk
+*.ipa
+*.xap
