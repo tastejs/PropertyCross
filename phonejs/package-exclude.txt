@@ -1,6 +1,0 @@
-package-exclude.txt
-create-package.cmd
-.htaccess
-web.config
-cordova.js
-README.md
