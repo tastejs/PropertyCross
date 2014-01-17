@@ -1,3 +1,2 @@
-
-/build
-/deploy
+/src/build
+/src/deploy

@@ -1,21 +1,9 @@
-[submodule "senchatouch2/build/package"]
-	path = senchatouch2/build/package
-	url = https://github.com/chrisprice/PropertyCross-ST2
-[submodule "jquerymobile/build/package"]
-	path = jquerymobile/build/package
-	url = https://github.com/chrisprice/PropertyCross-jQM.git
-[submodule "jquerymobile/build/package-windowsphone"]
-	path = jquerymobile/build/package-windowsphone
-	url = https://github.com/chrisprice/PropertyCross-jQM-WindowsPhone.git
-[submodule "website/twitter-bootstrap"]
-	path = website/twitter-bootstrap
-	url = https://github.com/twitter/bootstrap.git
-[submodule "enyo/enyo"]
-	path = enyo/enyo
+[submodule "enyo/src/enyo"]
+	path = enyo/src/enyo
 	url = https://github.com/enyojs/enyo.git
-[submodule "enyo/lib/layout"]
-	path = enyo/lib/layout
-	url = https://github.com/enyojs/layout.git
-[submodule "enyo/lib/onyx"]
-	path = enyo/lib/onyx
+[submodule "enyo/src/lib/onyx"]
+	path = enyo/src/lib/onyx
 	url = https://github.com/enyojs/onyx.git
+[submodule "enyo/src/lib/layout"]
+	path = enyo/src/lib/layout
+	url = https://github.com/enyojs/layout.git

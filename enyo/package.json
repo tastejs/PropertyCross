@@ -1,0 +1,11 @@
+{
+  "name": "property-cross-enyo",
+  "version": "1.3.0",
+  "abbr": "enyo",
+  "implName": "Enyo",
+  "appId": 737694,
+  "devDependencies": {
+    "grunt": "0.4.2",
+    "grunt-execute": "~0.1.5"
+  }
+}
