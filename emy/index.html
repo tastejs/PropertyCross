@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+	<meta charset="utf-8">
+	<title>Property Finder</title>
+	<meta name="description" content="PropertyCross demo app using Emy, an Efficiant Mobile web librarY to create mobile web applications using HTML5 & CSS">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon">
+	<link rel="apple-touch-icon-precomposed" href="assets/images/apple-touch-icon-precomposed.png">
+	<meta name="msapplication-tap-highlight" content="no">
+
+<!-- EMY files -->
+	<link rel="stylesheet" type="text/css" href="emy/emy.css">
+	<link rel="stylesheet" title="emy" type="text/css" href="emy/themes/emy/main.css">
+	<script src="emy/emy.js"></script>
+
+<!-- This app files -->
+	<link rel="stylesheet" type="text/css" href="assets/css/my_app.css">
+	<script src="assets/scripts/my_app.js"></script>
+
+</head>
+
+<body>
+
+	<header id="toolbar" class="toolbar">
+		<div>
+			<a id="backButton" class="button" href="#">Back</a>
+			<a id="tlb_favorites_list" class="button" onclick="myApp.getFavorites()">Favorites</a>
+		</div>
+		<h1 id="viewTitle">Property Finder</h1>
+		<div>
+			<a id="tlb_favorites_add" class="button" onclick="myApp.addFavorite()">Add</a>
+			<a id="tlb_favorites_remove" class="button" onclick="myApp.removeFavorite()">Remove</a>
+		</div>
+	</header>
+
+
+	<section id="home" data-title="Property Finder" class="panel" selected="true" data-onshow="myApp.viewHandler()">
+		<form onsubmit="myApp.searchByKeywords(emy.$('#search_term').value)">
+			<fieldset>
+				<div class="row">
+					<p>
+						Use the form below to search for houses to buy. You can search by place-name,
+						postcode, or click 'My location', to search in your current location!
+					</p>
+				</div>
+			</fieldset>
+			<fieldset>
+				<div class="row">
+					<label for="search_term">Location</label>
+					<input type="search" name="search_term" id="search_term" value="Chelsea">
+				</div>
+				<div class="row">
+					<label for="search_countries">Country</label>
+					<select name="search_countries" id="search_countries" size="1" onChange="myApp.changeCountry(emy.$('#search_countries').value)">
+						<option value="au">Australia</option>
+						<option value="br">Brazil</option>
+						<option value="de">Germany</option>
+						<option value="es">Spain</option>
+						<option value="fr">France</option>
+						<option value="in">India</option>
+						<option value="it">Italia</option>
+						<option value="uk" selected="selected">United Kingdom</option>
+					</select>
+				</div>
+				<div class="row padding">
+					<button type="submit" class="mainButton">Search</button>
+					<button type="button" class="mainButton" onclick="myApp.getMyLocation(myApp.searchByLocation)">My Location</button>
+				</div>
+			</fieldset>
+
+		</form>
+
+		<div id="recents" class="hide">
+			<h2>Recent Searches</h2>
+			<fieldset>
+				<ul id="recentsList"></ul>
+			</fieldset>
+		</div>
+	</section>
+
+
+</body>
+</html>
