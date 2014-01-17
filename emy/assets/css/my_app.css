@@ -1,0 +1,138 @@
+.hide { display: none }
+
+/**** toolbar ****/
+#tlb_search, #tlb_favorites_add, #tlb_favorites_remove {
+	width:	2.8em;
+	text-indent:	-999em;
+	background:	url(../images/icon-magnify.png) no-repeat center;
+	background-size:	 auto 60%;
+}
+#tlb_favorites_add {
+	background-image:	url(../images/icon-favorites-add.png)
+}
+#tlb_favorites_remove {
+	background-image:	url(../images/icon-favorites-remove.png)
+}
+#tlb_favorites_add, #tlb_favorites_remove {
+	display:	none;
+}
+
+/**** homescreen ****/
+#home a.mainButton {
+	width:		auto;
+}
+#home div.row.padding {
+	padding:	.3em .5em;
+}
+
+
+#recents {
+	margin-top:	1em;
+}
+#recentsList, #recentsList li, #recentsList li a {
+	display:	block;
+	margin:	0;
+}
+#recentsList li {
+	padding:		0;
+	margin:		0;
+	border-bottom:	.1em solid #ddd;
+}
+#recentsList li a {
+	width:	100%;
+	padding:		.8em;
+	cursor:	pointer;
+}
+
+
+/**** items listing ****/
+section#favorites > ul > li,
+section#search_results > ul > li {
+	display:		table;
+	padding:		0;
+}
+
+section#favorites > ul > li > a,
+section#search_results > ul > li > a {
+	display:		table-row;
+	margin:		0;
+	padding:		0 1.8em 0 0;
+}
+section#favorites > ul > li > a > img,
+section#favorites > ul > li > a > div,
+section#search_results > ul > li > a > img,
+section#search_results > ul > li > a > div {
+	display:		table-cell;
+}
+section#favorites > ul > li > a > img,
+section#search_results > ul > li > a > img {
+	width:	4em;
+	height:	4em;
+}
+section#favorites > ul > li > a > div,
+section#search_results > ul > li > a > div {
+	width:	100%;
+	padding:		.2em 1.8em .2em .3em;
+	vertical-align:	top;
+	line-height:	1.1em;
+}
+section#favorites > ul > li > a > div span,
+section#search_results > ul > li > a > div span {
+	display:		block;
+	font-size:		.9em;
+}
+section#favorites > ul > li > a > div span.title,
+section#search_results > ul > li > a > div span.title {
+	font-size:		.8em;
+	font-style:	italic;
+}
+section#favorites > ul > li > a > div span.price,
+section#search_results > ul > li > a > div span.price {
+	font-size:		1.1em;
+	font-weight:	bold;
+}
+
+/*** sheet *****/
+section#sheet h2 {
+	font-size:					2em;
+	font-weight:			bold;
+	margin-top:			0.4em;
+	margin-bottom:	0;
+}
+section#sheet .row.title {
+	font-weight:	bold;
+}
+
+/*** two columns for viewport > 500px & < 750px width ***/
+@media only screen and (min-width: 31em) and (max-width: 47em) {
+	section#favorites > ul > li > a,
+	section#search_results > ul > li > a {
+		font-size:	1.15em;
+	}
+}
+/*** two columns for viewport > 500px width ***/
+@media only screen and (min-width: 31em) and (orientation: landscape) {
+	section#sheet .row {
+		float:		left;
+		width:	50%;
+	}
+	section#sheet .row.title {
+		float:		right;
+	}
+}
+
+/*** two columns for viewport > 750px width ***/
+@media only screen and (min-width: 47em) {
+	section#favorites > ul,
+	section#search_results > ul {
+		float:			left;
+		width:		100%;
+	}
+	section#favorites > ul > li,
+	section#search_results > ul > li {
+		width:		50%;
+		height:		4.8em;
+		border-top:		0;
+		border-right:	1px solid #ccc;
+	}
+}
