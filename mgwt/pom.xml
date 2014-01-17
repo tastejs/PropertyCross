@@ -72,49 +72,6 @@
         <outputDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF/classes</outputDirectory>
     </build>
 
-    <profiles>
-        <profile>
-            <id>phonegap-build</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>com.github.chrisprice</groupId>
-                        <artifactId>phonegap-build-maven-plugin</artifactId>
-                        <version>0.0.4</version>
-                        <executions>
-                            <execution>
-                                <id>phonegap-build</id>
-                                <goals>
-                                    <goal>clean</goal>
-                                    <goal>build</goal>
-                                </goals>
-                                <configuration>
-                                    <keys>com.scottlogic.mobile.certificates:ios-team</keys>
-                                    <platforms>
-                                        <platform>android</platform>
-                                        <platform>ios</platform>
-                                    </platforms>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-            <dependencies>
-                <dependency>
-                    <groupId>com.scottlogic.mobile.certificates</groupId>
-                    <artifactId>ios-team</artifactId>
-                    <version>1.0.1</version>
-                    <type>zip</type>
-                    <scope>provided</scope>
-                </dependency>
-            </dependencies>
-        </profile>
-    </profiles>
-
     <dependencies>
         <dependency>
             <groupId>com.googlecode.mgwt</groupId>
