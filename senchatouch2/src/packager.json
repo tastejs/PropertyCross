@@ -1,0 +1,174 @@
+{
+	/**
+	 * @cfg  applicationName
+	 * @required
+	 * This is the name of your application, which is displayed on the device when the app is installed. On IOS, this should match
+	 * the name of your application in the Apple Provisioning Portal.
+	 */
+	"applicationName":"PropertyFinder",
+
+	/**
+	 * @cfg  applicationId
+	 * This is the name namespace for your application. On IOS, this should match the name of your application in the Apple Provisioning Portal.
+	 */
+	"applicationId":"PropertyFinder",
+
+	/**
+	 * @cfg  bundleSeedId
+	 * A ten character string which stands before aplication ID in Apple Provisioning Portal
+	 */
+	"bundleSeedId":"KPXFEPZ6EF",
+
+	/**
+	 * @cfg  versionString
+	 * @required
+	 * This is the version of your application.
+	 */
+	"versionString":"1.0",
+
+	/**
+	 * @cfg  versionCode
+	 * @required
+	 * This is the integer version code of your application, or you can refer to it as a build number. Used only for Android builds.
+	 */
+	"versionCode":"1",
+
+	/**
+	 * @cfg  icon
+	 * For iOS, please refer to their documentation about icon sizes:
+	 * https://developer.apple.com/library/ios/#documentation/userexperience/conceptual/mobilehig/IconsImages/IconsImages.html
+	 *
+	 * For Android, please refer to the Google Launcher icons guide:
+	 * http://developer.android.com/guide/practices/ui_guidelines/icon_design_launcher.html
+	 * iOS uses 57, 72, 114 and 144; Android uses 36, 48 and 72; if you package for Android you can ignore iOS icons and vice verca
+	 */
+	"icon": {
+		"36":"resources/icons/Icon_Android36.png",
+		"48":"resources/icons/Icon_Android48.png",
+		"57":"resources/icons/Icon.png",
+		"72":"resources/icons/Icon~ipad.png",
+		"114":"resources/icons/Icon@2x.png",
+		"144":"resources/icons/Icon~ipad@2x.png"
+	},
+
+	/**
+	 * @cfg  inputPath
+	 * @required
+	 * This is location of your Sencha Touch 2 application, relative to this configuration file.
+	 */
+	"inputPath":"./",
+
+	/**
+	 * @cfg  outputPath
+	 * @required
+	 * This is where the built application file with be saved. Make sure that output path is not in your input path, you may get into endless recursive copying
+	 */
+	"outputPath":"../build/",
+
+	/**
+	 * @cfg  configuration
+	 * @required
+	 * This is configuration for your application. `Debug` should always be used unless you are submitting your app to an online
+	 * store - in which case `Release` should be specified.
+	 */
+	"configuration":"Debug",
+
+	/**
+	 * @cfg  platform
+	 * @required
+	 * This is the platform where you will be running your application. Available options are:
+	 *  - iOSSimulator
+	 *  - iOS
+	 *  - Android
+	 *  - AndroidEmulator
+	 */
+	"platform":"iOSSimulator",
+
+	/**
+	 * @cfg  deviceType
+	 * @required
+	 * This is device type that your application will be running on.
+	 *
+	 * If you are developing for Android, this is not necessary.
+	 *
+	 * Available options are:
+	 *  - iPhone
+	 *  - iPad
+	 *  - Universal
+	 */
+	"deviceType":"Universal",
+
+	/**
+	 * @cfg  certificatePath
+	 * This is the location of your certificate.
+	 * This is required when you are developing for Android or you are developing on Windows.
+	 */
+	"certificatePath":"/path/to/certificate.file",
+
+	/**
+	 * @cfg  certificateAlias
+	 * This is the name of your certificate.
+	 *
+	 * IF you do not specify this on OSX, we will try and automatically find the certificate for you using the applicationId.
+	 *
+	 * This can be just a simple matcher. For example, if your certificate name is "iPhone Developer: Robert Dougan (ABCDEFGHIJ)", you
+	 * can just put "iPhone Developer".
+	 *
+	 * When using a certificatePath on Windows, you do not need to specify this.
+	 */
+	"certificateAlias":"",
+	/**
+	 * @cfg  certificatePassword
+	 * The password which was specified during certificate export
+	 */
+	"certificatePassword":"",
+	/**
+	 * @cfg  provisionProfile
+	 * The path to the provision profile (APP_NAME.mobileprovision) which you can create and then download from Apple's provisioning portal
+	 */
+	"provisionProfile":"",
+	/**
+	 * @cfg  notificationConfiguration
+	 * Notification configuration for push notifications, can be "debug", "release" or empty if you don't use push notifications in your project.
+	 */
+	"notificationConfiguration":"",
+	/**
+	 * @cfg  sdkPath
+	 * This is the path to the Android SDK, if you are developing an Android application.
+	 */
+	"sdkPath":"/path/to/android-sdk",
+
+	/**
+	 * @cfg  androidAPILevel
+	 * This is android API level, the version of Android SDK to use, you can read more about it here: http://developer.android.com/guide/appendix/api-levels.html.
+	 * Be sure to install corresponding platform API in android SDK manager (android_sdk/tools/android)
+	 */
+	"androidAPILevel":"8",
+
+        /**
+	 * @cfg {Array[String]} permissions
+	 * Array of permissions that is used by an application (Android only) 
+	 * Full list of permissions for Android application can be found here: http://developer.android.com/reference/android/Manifest.permission.html#ACCESS_CHECKIN_PROPERTIES
+	 */
+	"permissions":[
+            "INTERNET",
+            "ACCESS_NETWORK_STATE",
+            "CAMERA",
+            "VIBRATE",
+            "ACCESS_FINE_LOCATION",
+            "ACCESS_COARSE_LOCATION",
+            "CALL_PHONE"
+        ],
+
+	/**
+	 * @cfg {Array[String]} orientations
+	 * @required
+	 * This is orientations that this application can run.
+	 */
+	"orientations": [
+		"portrait",
+		"landscapeLeft",
+		"landscapeRight",
+		"portraitUpsideDown"
+	]
+}

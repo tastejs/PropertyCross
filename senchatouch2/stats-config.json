@@ -1,8 +1,8 @@
 {
   "common":[
-    "app/*.js",
-    "resources/css/additional.css",
-    "app.js",
-    "index.html"
+    "src/app/*.js",
+    "src/resources/css/additional.css",
+    "src/app.js",
+    "src/index.html"
   ]
 }
