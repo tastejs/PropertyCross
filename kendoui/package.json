@@ -1,0 +1,10 @@
+{
+  "name": "property-cross-kendoui",
+  "version": "1.3.0",
+  "abbr": "kui",
+  "implName": "Kendo UI",
+  "appId": 735811,
+  "devDependencies": {
+    "grunt": "0.4.2"
+  }
+}
