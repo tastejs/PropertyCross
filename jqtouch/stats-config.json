@@ -1,11 +1,11 @@
 {
   "common":[
-    "dataSource/*.coffee",
-    "model/*.coffee",
-    "util/*.coffee",
-    "viewModel/*.coffee",
-    "main.coffee",
-    "style/scss/app.scss",
-    "index.html"
+    "www/dataSource/*.coffee",
+    "www/model/*.coffee",
+    "www/util/*.coffee",
+    "www/viewModel/*.coffee",
+    "www/main.coffee",
+    "www/style/scss/app.scss",
+    "www/index.html"
   ]
 }
