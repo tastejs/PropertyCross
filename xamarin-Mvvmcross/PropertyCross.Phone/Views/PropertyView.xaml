@@ -1,0 +1,85 @@
+﻿<views:MvxPhonePage
+    x:Class="PropertyCross.WindowsPhone.Views.PropertyView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:views="clr-namespace:Cirrious.MvvmCross.WindowsPhone.Views;assembly=Cirrious.MvvmCross.WindowsPhone"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:bindableApplicationBar="clr-namespace:BindableApplicationBar;assembly=BindableApplicationBar"
+    xmlns:nativeConverters="clr-namespace:PropertyCross.WindowsPhone.NativeConverters"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True">
+    <views:MvxPhonePage.Resources>
+        <nativeConverters:BooleanToFavouriteString x:Key="booleanToFavouriteString"/>
+    </views:MvxPhonePage.Resources>
+    <toolkit:TransitionService.NavigationInTransition>
+        <toolkit:NavigationInTransition>
+            <toolkit:NavigationInTransition.Backward>
+                <toolkit:TurnstileTransition Mode="BackwardIn"/>
+            </toolkit:NavigationInTransition.Backward>
+            <toolkit:NavigationInTransition.Forward>
+                <toolkit:TurnstileTransition Mode="ForwardIn"/>
+            </toolkit:NavigationInTransition.Forward>
+        </toolkit:NavigationInTransition>
+    </toolkit:TransitionService.NavigationInTransition>
+    <toolkit:TransitionService.NavigationOutTransition>
+        <toolkit:NavigationOutTransition>
+            <toolkit:NavigationOutTransition.Backward>
+                <toolkit:TurnstileTransition Mode="BackwardOut"/>
+            </toolkit:NavigationOutTransition.Backward>
+            <toolkit:NavigationOutTransition.Forward>
+                <toolkit:TurnstileTransition Mode="ForwardOut"/>
+            </toolkit:NavigationOutTransition.Forward>
+        </toolkit:NavigationOutTransition>
+    </toolkit:TransitionService.NavigationOutTransition>
+
+    <Grid x:Name="LayoutRoot"
+        Background="Black">
+        <Image Source="../Images/background.jpg"
+          VerticalAlignment="Bottom"
+          Opacity="0.5"/>
+        <StackPanel Orientation="Vertical"
+                Margin="10">
+            <TextBlock x:Name="propertyTitle"
+                 Text="{Binding Location}"
+                 TextWrapping="Wrap"
+                 FontSize="{StaticResource PhoneFontSizeExtraLarge}"/>
+            <Border Margin="0,15,0,5"
+              BorderThickness="2"
+              BorderBrush="#AAA">
+                <Image x:Name="propertyImage" Source="{Binding ImageUri}"/>
+            </Border>            
+            <TextBlock x:Name="propertyPrice"
+                 Text="{Binding PriceText}"
+                 Margin="0,10,0,10"
+                 TextWrapping="Wrap"
+                 FontSize="{StaticResource PhoneFontSizeExtraLarge}"/>
+            <TextBlock x:Name="propertyDetails"
+                 Text="{Binding PropertyOverview}"
+                 Margin="0,10,0,10"
+                 Foreground="#AAA"
+                 TextWrapping="Wrap"
+                 FontSize="{StaticResource PhoneFontSizeLarge}"/>
+
+            <TextBlock x:Name="propertyDescription"
+                 Text="{Binding PropertyInformation}"
+                 Margin="0,10,0,10"
+                 Foreground="#AAA"
+                 TextWrapping="Wrap"
+                 FontSize="{StaticResource PhoneFontSizeMedium}"/>
+        </StackPanel>
+    </Grid>
+
+    <bindableApplicationBar:Bindable.ApplicationBar>
+        <bindableApplicationBar:BindableApplicationBar>
+            <bindableApplicationBar:BindableApplicationBarButton IconUri="{Binding IsFavourited, Converter={StaticResource BooleanToFavouriteImageUri},FallbackValue=/Images/favourite.png}" Text="{Binding IsFavourited, Converter={StaticResource booleanToFavouriteString},FallbackValue=add favourite}" Command="{Binding ToggleIsFavouriteCommand}"/>
+        </bindableApplicationBar:BindableApplicationBar>
+    </bindableApplicationBar:Bindable.ApplicationBar>
+</views:MvxPhonePage>

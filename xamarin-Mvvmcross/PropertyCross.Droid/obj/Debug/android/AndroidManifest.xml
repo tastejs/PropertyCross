@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:installLocation="auto" package="com.propertycross.xamarin.mvvmcross.android" android:versionCode="1" android:versionName="1.0">
+  <uses-sdk android:minSdkVersion="7" android:targetSdkVersion="18" />
+  <application android:theme="@style/Theme.Propertycrosstheme" android:label="@string/app_name" android:icon="@drawable/ic_launcher" android:name="mono.android.app.Application" android:debuggable="true">
+    <activity android:icon="@drawable/ic_launcher" android:label="@string/app_name" android:noHistory="true" android:screenOrientation="portrait" android:theme="@style/Theme.Splash" android:name="propertycross.droid.SplashScreen">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
+    </activity>
+    <activity android:screenOrientation="portrait" android:name="propertycross.droid.views.FavouritesView" />
+    <activity android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden|adjustUnspecified" android:name="propertycross.droid.views.PropertyFinderView" />
+    <activity android:screenOrientation="portrait" android:name="propertycross.droid.views.PropertyView" />
+    <activity android:screenOrientation="portrait" android:name="propertycross.droid.views.SearchResultsView" />
+    <provider android:name="mono.MonoRuntimeProvider" android:exported="false" android:initOrder="2147483647" android:authorities="com.propertycross.xamarin.mvvmcross.android.mono.MonoRuntimeProvider.__mono_init__" />
+    <receiver android:name="mono.android.Seppuku">
+      <intent-filter>
+        <action android:name="mono.android.intent.action.SEPPUKU" />
+        <category android:name="mono.android.intent.category.SEPPUKU.com.propertycross.xamarin.mvvmcross.android" />
+      </intent-filter>
+    </receiver>
+  </application>
+  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+  <uses-permission android:name="android.permission.INTERNET" />
+  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+</manifest>

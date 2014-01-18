@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>MetroEventToCommand</id>
+    <version>2.1</version>
+    <title>Metro Event To Command</title>
+    <authors>Olivier Matis</authors>
+    <owners>Olivier Matis</owners>
+    <licenseUrl>https://metroeventtocommand.codeplex.com/license</licenseUrl>
+    <projectUrl>http://metroeventtocommand.codeplex.com/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Replacement for Event To Command behavior for WinRT XAML applications (Windows 8 or Windows Phone 8)</description>
+    <summary>Metro Event To Command</summary>
+    <releaseNotes>Added HandleEvent property that allow to set the event has handled</releaseNotes>
+    <copyright>Equinoxe Consulting.NET</copyright>
+    <language />
+    <tags>Metro MVVM Event Command Binding</tags>
+  </metadata>
+</package>

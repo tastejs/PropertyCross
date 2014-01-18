@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"  xmlns:yourapp="http://schemas.android.com/apk/res-auto" >
+<item android:id="@+id/favourites_add_item" android:title="@string/favourites_add"
+ 		android:icon="@drawable/nostar" yourapp:showAsAction="always" />
+<item android:id="@+id/favourites_remove_item" android:title="@string/favourites_remove"
+		android:icon="@drawable/star" yourapp:showAsAction="always" />
+</menu>
