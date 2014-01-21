@@ -1,4 +1,4 @@
-#Intel App Framework 
+#Intel App Framework
 
 Visit the [Intel App Framework page](http://propertycross.com/intel-app-framework/) on the PropertyCross website for screenshots and code sharing metrics.
 
@@ -14,7 +14,7 @@ Along with its lightweight JavaScript library, Intel App Framework provides a ba
 
 Applications developed with Intel App Framework (IAF) can be run directly within a web browser. Because the application uses XHR in order to load templates, if you run the application from your local file system you will encounter problems due to the [same origin policy](http://en.wikipedia.org/wiki/Same_origin_policy). You can solve this either by serving the app from a web server, or by using one of the [Chrome switches](http://peter.sh/experiments/chromium-command-line-switches/) that disables this policy.
 
-The IAP application is packaged using [PhoneGap Build](https://build.phonegap.com/), with the configuration specified in the `config.xml` file.
+The IAP application is packaged using [PhoneGap Build](https://build.phonegap.com/) - see [`/phonegap/README.md`](https://github.com/tastejs/PropertyCross/tree/master/phonegap) for details.
 
 ##Application Structure
 

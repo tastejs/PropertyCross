@@ -11,17 +11,17 @@
         <link rel="stylesheet" type="text/css" href="css/af.ui.css" />
         <link rel="stylesheet" type="text/css" href="css/styles.css" />
 
+        <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
         <script type="text/javascript" charset="utf-8" src="js/appframework.ui.min.js"></script>
         <script type="text/javascript" charset="utf-8" src="js/jq.template.js"></script>
         <script type="text/javascript" charset="utf-8" src="js/jq.mvc.min.js"></script>
         <script type="text/javascript" charset="utf-8" src="app.js"></script>
 
-
         <!-- boiler plate code that appears to be required... -->
         <script type="text/javascript">
         $.ui.animateHeaders=false;
         $.ui.backButtonText="Back";
-      
+
         $.ui.loadDefaultHash=false;
             if (!((window.DocumentTouch && document instanceof DocumentTouch) || 'ontouchstart' in window)) {
                 var script = document.createElement("script");
@@ -76,12 +76,15 @@
                 <header id="propertyDetailsHeader">
                     <a id="backButton" href="/results/backToResults" class="button">Back</a> <!-- The in built framework back button didn't seem to play nicely so manually adding it -->
                     <h1>Information</h1>
-                    <a id="addRemoveFave" class="button icon star" style="padding-left:13px"></a>
+                    <a class="addRemoveFave button icon star" style="padding-left:13px"></a>
                 </header>
-                <div id="property" class="panel" title="Back"  data-header="propertyDetailsHeader"> </div>
-               
+                <div id="property" class="panel" title="Back"  data-header="propertyDetailsHeader">
+                    <a class="addRemoveFave button icon star" style="padding-left:13px"></a>
+                    <div id="propertyContent"> </div>
+                </div>
 
-                
+
+
             </div>
             <div id="navbar">
                     <a href="#main" class="icon home">Home</a>

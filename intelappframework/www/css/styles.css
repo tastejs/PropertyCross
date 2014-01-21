@@ -82,3 +82,12 @@
     background:#3f3f3f;
     margin-bottom:10px;
 }
+
+#property .addRemoveFave {
+  display: none;
+}
+
+#afui.android #property .addRemoveFave {
+  display: block;
+  float: right;
+}

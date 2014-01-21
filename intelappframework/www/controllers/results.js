@@ -8,10 +8,10 @@ $.mvc.controller.create("results", {
         this.favesPage = favesPage === "true";
         properties.get(id, function(property) {
             //$("#property").html($.template("propertyTpl",{property:property}));
-            $.ui.updatePanel("#property", $.template("propertyTpl", {
+            $.ui.updatePanel("#propertyContent", $.template("propertyTpl", {
                 property: property
             }));
-            var $addRemoveFaveButton = $("#addRemoveFave");
+            var $addRemoveFaveButton = $(".addRemoveFave");
             $addRemoveFaveButton.attr("href", "/favourites/addRemove/" + id);
             favourites.isFave(id, function(isFave) {
                 if (isFave) {
