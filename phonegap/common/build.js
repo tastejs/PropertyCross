@@ -57,7 +57,7 @@ module.exports = {
     config.copy.configXml.options.process = function(content) {
       var impl = grunt.config.get("pkg.implName");
       grunt.log.oklns("Setting implementation name to "+impl);
-      return content.replace(/\[IMPL\]/g, impl);
+      return content.replace(/\[IMPL\]/g, impl).replace(/\[ID\]/g, grunt.config.get("pkg.abbr"));
     }
 
     if (mutateConfig) {

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <widget xmlns="http://www.w3.org/ns/widgets"
 	    xmlns:gap="http://phonegap.com/ns/1.0"
-	    id="com.propertycross.intelappframework"
+	    id="com.propertycross.[ID]"
 	    version="1.0.0">
 
-    <name>PropertyCross</name>
+    <name>PropertyCross - [IMPL]</name>
 
     <description>
         Part of the PropertyCross project, the [IMPL] implementation.

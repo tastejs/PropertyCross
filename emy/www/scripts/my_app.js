@@ -12,6 +12,9 @@ window.myApp = {
 		if(document.body)
 		{
 			myApp.getFavorites(false);
+      if (navigator.splashscreen) {
+        navigator.splashscreen.hide();
+      }
 		}
 		else
 			setTimeout(myApp.init, 10);

@@ -13,3 +13,7 @@ You'll need:
 Once you have those installed, you'll need to do `npm install` in the `phonegap/common` and `phonegap/common-with-winphone` directories. You can then just run `grunt` to do the build.
 
 If you're not a member of the TasteJS team and do not have the password to use our PhoneGap Build accounts, you can create your own account, and use grunt to generate the zip file for uploading. Typically the command for this would be `grunt clean copy compress` or `grunt clean exec copy compress` depending on whether the implementation uses a supplementary tool to generate the web resources.
+
+## Workarounds
+
+Unfortunately, PhoneGap Build does not support the PhoneGap `merges` structure. We have implemented a crude workaround that switches the `index.html` that is used in the app, but were you producing a production app, we would recommend using the local build if you need to customise the different platforms.
