@@ -1,8 +1,14 @@
 {
-  "name": "property-cross-lungo",
+  "name": "lungo",
   "version": "1.3.0",
   "abbr": "lungo",
   "implName": "Lungo",
+  "contributors": [{
+    "name": "Steven Hall",
+    "username": "emmerich",
+    "hash": "30187520d3181c674d7b7ecbcbbf48b1"
+  }],
+  "platforms": ["android", "ios"],
   "appId": 735779,
   "devDependencies": {
     "grunt": "0.4.2"

@@ -1,11 +1,17 @@
 Native PropertyCross
 ====================
 
-These are the native implementations of the Property Finder application, included as reference. 
+These are the native implementations of the Property Finder application, included as reference.
+
+## Introduction
+
+The native implementations of the PropertyCross application are included as a benchmark for comparison. These implementations illustrate the tools and technologies that are used for native development on each mobile platform. The native implementations also provide a target for the user experience that should be aimed for with the cross-platform frameworks, with the assumption being that the use of native implementation technologies will provide the best user experience.
+
+The iOS application is built using Xcode, the Windows Phone application is built using Visual Studio together with the Windows Phone 7 SDKs, and the Android version is built using Eclipse.
 
 ## Building the iOS and Windows Phone applications
 
-The iOS version is built using XCode4.5, the Windows Phone version using Visual Studio and the Windows Phone 7.1 SDKs. 
+The iOS version is built using XCode4.5, the Windows Phone version using Visual Studio and the Windows Phone 7.1 SDKs.
 
 ## Building the Android Application
 

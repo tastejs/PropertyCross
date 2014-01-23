@@ -1,8 +1,17 @@
 {
-  "name": "property-cross-mgwt",
+  "name": "mgwt",
   "version": "1.3.0",
   "abbr": "mgwt",
   "implName": "mgwt",
+  "contributors": [{
+    "name": "Colin Eberhardt",
+    "username": "colineberhardt",
+    "hash": "458f2e0d08d4114f8b323798cfea141d"
+  },{
+    "name": "Steve Blair",
+    "username": "SteveBlair"
+  }],
+  "platforms": ["android", "ios"],
   "appId": 736266,
   "devDependencies": {
     "grunt": "~0.4.2",

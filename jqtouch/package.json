@@ -1,8 +1,13 @@
 {
-  "name": "property-cross-jqtouch",
+  "name": "jqtouch",
   "version": "1.3.0",
   "abbr": "jqt",
   "implName": "jQTouch",
+  "contributors": [{
+    "name": "Mark Rhodes",
+    "username": "markrhodes"
+  }],
+  "platforms": ["android", "ios"],
   "appId": 727777,
   "devDependencies": {
     "grunt": "0.4.2"

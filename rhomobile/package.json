@@ -1,0 +1,10 @@
+{
+  "name": "rhomobile",
+  "version": "1.3.0",
+  "implName": "RhoMobile",
+  "contributors": [{
+    "name": "Vinothini",
+    "username": "VinothiniBalakrishnan"
+  }],
+  "platforms": ["android", "ios", "windowsphone"]
+}

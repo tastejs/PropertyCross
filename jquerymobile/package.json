@@ -1,8 +1,18 @@
 {
-  "name": "property-cross-jquerymobile",
+  "name": "jquerymobile",
   "version": "1.3.0",
   "abbr": "jqm",
   "implName": "jQuery Mobile",
+  "contributors": [{
+    "name": "Colin Eberhardt",
+    "username": "colineberhardt",
+    "hash": "458f2e0d08d4114f8b323798cfea141d"
+  },{
+    "name": "Chris Price",
+    "username": "chrisprice",
+    "hash": "b6fe36176ec7c9475374a5cd3b7bef1a"
+  }],
+  "platforms": ["android", "ios", "windowsphone"],
   "appId": 729188,
   "devDependencies": {
     "grunt": "0.4.2"

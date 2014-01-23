@@ -3,6 +3,12 @@
   "version": "1.3.0",
   "abbr": "iaf",
   "implName": "Intel App Framework",
+  "contributors": [{
+    "name": "Joel Smith",
+    "username": "joelwilliamsmith",
+    "hash": "6e5b209f9dced24655066d1128a13964"
+  }],
+  "platforms": ["android", "ios", "windowsphone"],
   "appId": 727266,
   "devDependencies": {
     "grunt": "0.4.2"

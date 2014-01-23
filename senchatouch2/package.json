@@ -1,8 +1,21 @@
 {
-  "name": "property-cross-senchatouch2",
+  "name": "senchatouch2",
   "version": "1.3.0",
   "abbr": "st2",
   "implName": "Sencha Touch 2",
+  "contributors": [{
+    "name": "Mark Rhodes",
+    "username": "markrhodes"
+  },{
+    "name": "Joel Smith",
+    "username": "joelwilliamsmith",
+    "hash": "6e5b209f9dced24655066d1128a13964"
+  },{
+    "name": "Nicholas Wolverson",
+    "username": "nwolverson",
+    "hash": "c2fa082fa1ffbab1293262c599d459fb"
+  }],
+  "platforms": ["android", "ios", "windowsphone"],
   "appId": 737353,
   "devDependencies": {
     "grunt": "0.4.2",

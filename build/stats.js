@@ -3,12 +3,14 @@ var find = require('./find');
 var path = require('path');
 var async = require('async');
 var yaml = require('yamljs');
+var Q = require('q');
 
 find('.', "*/stats-config.json", function (statsConfigFiles) {
   var stats = statsConfigFiles.map(function(statsConfigFile) {
-    var statsRoot = path.dirname(statsConfigFile);
-    var statsConfig = JSON.parse(fs.readFileSync(statsConfigFile).toString());
-    var stats = {};
+    var statsRoot = path.dirname(statsConfigFile),
+        statsConfig = JSON.parse(fs.readFileSync(statsConfigFile).toString()),
+        stats = {},
+        deferred = Q.defer();
     async.forEach(Object.keys(statsConfig), function(key, callback) {
       countChars(statsRoot, statsConfig[key], function(error, count) {
         if (!error && count > 0) {
@@ -17,15 +19,29 @@ find('.', "*/stats-config.json", function (statsConfigFiles) {
         callback(error);
       });
     }, function() {
-      console.log("---");
-      console.log(statsRoot);
-      console.log("---");
-      console.log(yaml.stringify({
-        pie: createPie(stats)
-      }));
+      deferred.resolve({ pie: createPie(stats), statsRoot: statsRoot });
     });
+    return deferred.promise;
   });
+  Q.all(stats).done(process.argv.indexOf("json") > -1 ? printJSON : printYAML);
 });
+
+function printYAML(stats) {
+  stats.map(function(moduleStats) {
+    console.log("---");
+    console.log(moduleStats.statsRoot);
+    console.log("---");
+    console.log(yaml.stringify({
+      pie: moduleStats.pie
+    }));
+  });
+}
+
+function printJSON(stats) {
+  console.log(JSON.stringify({
+    stats: stats
+  }));
+}
 
 function countChars(root, filter, callback) {
   if (!filter) {

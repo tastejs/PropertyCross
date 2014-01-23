@@ -1,0 +1,11 @@
+{
+  "name": "air",
+  "version": "1.3.0",
+  "implName": "AIR",
+  "contributors": [{
+    "name": "Graham Odds",
+    "username": "godds",
+    "hash": "3f5e6c753071c6a41f7f1dbb89daeb3b"
+  }],
+  "platforms": ["android", "ios"]
+}
