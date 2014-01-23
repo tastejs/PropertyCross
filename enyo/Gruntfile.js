@@ -20,7 +20,8 @@ module.exports = function(grunt) {
     config.clean.push("src/build/**");
     config.clean.push("src/deploy/**");
     config.compress.main.files.push(
-      { expand: true, src: ["**/*"], cwd: "src/deploy/src", dest: "www" }
+      { expand: true, src: ["**/*"], cwd: "src/deploy/src", dest: "www" },
+      { expand: true, src: ["assets/**/*"], dest: "www" }
     );
   });
 
