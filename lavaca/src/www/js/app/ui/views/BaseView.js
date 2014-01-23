@@ -109,7 +109,7 @@ define(function(require) {
               this.shell.addClass('current');
               this.trigger('entercomplete');
             }
-            
+
           } else {
             this.shell.addClass('current');
             if (exitingViews.length > 0) {

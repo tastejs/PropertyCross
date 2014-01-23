@@ -1,1 +1,0 @@
-(function(){dust.register("example",body_0);function body_0(chk,ctx){return chk.write("<h1>").helper("msg",ctx,{},{"key":"headline"}).write("</h1><p>").helper("msg",ctx,{},{"key":"choose_language"}).write(" <a href=\"/lang?locale=en_US\">English</a>, <a href=\"/lang?locale=es_MX\">Español</a></p>");}return body_0;})();

@@ -3,6 +3,15 @@
   "version": "2.0.0",
   "description": "A Lavaca app",
   "main": "Gruntfile.js",
+  "contributors": [{
+    "name": "George Henderson",
+    "username": "georgehenderson",
+    "hash": "a7c81a624fd68bde3e032853c8af7dbe"
+  },{
+    "name": "Mutual Mobile",
+    "url": "http://www.mutualmobile.com"
+  }],
+  "platforms": ["android", "ios"],
   "scripts": {},
   "dependencies": {
     "mout": "0.3.x",
@@ -15,8 +24,8 @@
     "preprocess": "1.0.x",
     "connect": "2.4.4",
     "deferreds": "1.x",
-    "dustjs-linkedin": "1.1.1",
-    "grunt-dustjs": "0.2.x",
+    "dustjs-linkedin": "2.3.1",
+    "grunt-dustjs": "1.2.x",
     "grunt-contrib-clean": "0.4.x",
     "grunt-contrib-copy": "0.4.x",
     "grunt-contrib-concat": "0.1.x",

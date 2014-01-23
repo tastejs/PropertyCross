@@ -70,7 +70,7 @@ module.exports = function( grunt ) {
         options: {
           locals: {
             css: '<link rel="stylesheet" type="text/css" href="<%= paths.out.css %>" />\n',
-            js: '<script src="<%= paths.out.js %>"></script>\n'
+            js: '<script data-main="js/boot.js" src="js/libs/require.js"></script>\n'
           }
         },
         files: [{
@@ -84,12 +84,9 @@ module.exports = function( grunt ) {
             css: '<%= preprocess.www.options.locals.css %>',
             js: (function() {
               return [
-                '<%= paths.out.cordova %>',
-                '<%= paths.out.js %>'
+                '<script src="<%= paths.out.cordova %>"></script>',
+                '<%= preprocess.www.options.locals.js %>'
               ]
-                .map(function(file) {
-                  return '<script src="' + file + '"></script>';
-                })
                 .join('\n') + '\n';
             })()
           }
@@ -140,12 +137,9 @@ module.exports = function( grunt ) {
 
     dustjs: {
       all: {
-        files: [
-          {
-            src: '<%= paths.src.www %>/templates/**/*.html',
-            dest: '<%= paths.src.www %>/js/app/ui/templates.js'
-          }
-        ]
+        files: {
+          'src/www/js/templates.js': ['src/www/js/templates/**/*.html']
+        }
       }
     },
 
@@ -213,8 +207,20 @@ module.exports = function( grunt ) {
           {
             expand: true,
             cwd: '<%= paths.src.root %>',
-            src: '**/*',
+            src: ['**/*', '!www/js/libs/mout', '!www/js/libs/jquery-mobile'],
             dest: '<%= paths.tmp.root %>/'
+          },
+          {
+            expand: true,
+            cwd: 'node_modules/jquery-mobile/js',
+            src: '**/*',
+            dest: '<%= paths.tmp.root %>/www/js/libs/jquery-mobile/'
+          },
+          {
+            expand: true,
+            cwd: 'node_modules/mout',
+            src: '**/*',
+            dest: '<%= paths.tmp.root %>/www/js/libs/mout/'
           }
         ]
       },
@@ -245,9 +251,9 @@ module.exports = function( grunt ) {
               expand: true,
               cwd: '<%= paths.tmp.www %>',
               src: [
-                '<%= paths.out.index %>',
+                'index.html',
                 '<%= paths.out.css %>',
-                '<%= paths.out.js %>',
+                'js/**/*',
                 'configs/**/*',
                 'assets/**/*',
                 'messages/**/*'
@@ -296,14 +302,15 @@ module.exports = function( grunt ) {
     'amd-dist': {
       all: {
         options: {
-          standalone: false
+          standalone: true
         },
         files: [
           {
             src: [
-              '<%= paths.tmp.www %>/js/libs/require.js',
-              '<%= paths.tmp.www %>/js/app/boot.js',
-              '<%= paths.tmp.www %>/js/templates.js'
+//              '<%= paths.tmp.www %>/js/templates.js',
+  //            '<%= paths.tmp.www %>/js/app/**/*.js',
+    //          '<%= paths.tmp.www %>/js/lib/**/*.js',
+              '<%= paths.tmp.www %>/js/boot.js'
             ],
             dest: '<%= paths.tmp.www %>/<%= paths.out.js %>'
           }
@@ -312,8 +319,8 @@ module.exports = function( grunt ) {
     },
 
     requirejs: {
-      baseUrl: '<%= paths.src.www %>/js',
-      mainConfigFile: '<%= paths.src.www %>/js/app/boot.js',
+      baseUrl: '<%= paths.tmp.www %>/js',
+      mainConfigFile: '<%= paths.tmp.www %>/js/boot.js',
       optimize: 'none',
       keepBuildDir: true,
       locale: "en-us",
@@ -344,7 +351,7 @@ module.exports = function( grunt ) {
 
   grunt.registerTask('build', 'Builds app with specified config', function(env) {
     env = env || 'local';
-    grunt.task.run('clean:tmp', 'clean:build', 'copy:tmp', 'less', 'concat', 'amd-dist', 'uglify', 'copy:build', 'preprocess::'+env, 'clean:tmp');
+    grunt.task.run('clean:tmp', 'clean:build', 'copy:tmp', 'less', 'concat', 'copy:build', 'preprocess::'+env, 'clean:tmp');
   });
 
   grunt.registerTask('default', ['amd-test', 'jasmine', 'server']);

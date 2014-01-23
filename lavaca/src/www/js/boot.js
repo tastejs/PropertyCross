@@ -1,5 +1,5 @@
 require.config({
-  baseUrl: 'js',
+//  baseUrl: 'js',
   paths: {
     'es5-shim': 'libs/es5-shim',
     '$': 'libs/jquery-2.0.0',
