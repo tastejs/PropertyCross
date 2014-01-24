@@ -1,2 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<BorlandProject/>
+<BorlandProject>
+  <BT_BuildType>Debug</BT_BuildType>
+  <MobileDevice>emulator-5556</MobileDevice>
+</BorlandProject>

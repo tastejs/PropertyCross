@@ -86,7 +86,7 @@ type
     LinkPropertyToFieldText3: TLinkPropertyToField;
     LinkPropertyToFieldText4: TLinkPropertyToField;
     lbFavourates: TListBox;
-    LinkListControlToFavs: TLinkListControlToField;
+    LinkListControlToFavsch: TLinkListControlToField;
     lvSearchResults: TListView;
     LinkFillControlToSearchResults: TLinkFillControlToField;
     ListItemClickTimer: TTimer;
