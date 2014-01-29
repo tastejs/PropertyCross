@@ -1,12 +1,12 @@
 $.mvc.controller.create("results", {
     views: {
-        "propertyTpl": "views/property.tpl"
+        "propertyTpl": "views/property.html"
     },
     favesPage: false,
 
     goToProperty: function(id, favesPage) {
         this.favesPage = favesPage === "true";
-        properties.get(id, function(property) {
+        properties.fetch(id, function(property) {
             //$("#property").html($.template("propertyTpl",{property:property}));
             $.ui.updatePanel("#propertyContent", $.template("propertyTpl", {
                 property: property

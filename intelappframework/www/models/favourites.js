@@ -3,7 +3,7 @@ Favourites = new $.mvc.model.extend("favourites", {
 
     //executes the supplied callback function passing whether the supplied id is favourite
     isFave: function(id, callback) {
-        this.get(id, function(fave) {
+        this.fetch(id, function(fave) {
             callback(fave.property !== '');
         });
     }

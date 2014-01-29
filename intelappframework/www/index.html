@@ -7,14 +7,19 @@
         <meta http-equiv="Content-type" content="text/html; charset=utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <meta name="apple-mobile-web-app-capable" content="yes" />
-        <link rel="stylesheet" type="text/css" href="css/icons.css" />
         <link rel="stylesheet" type="text/css" href="css/af.ui.css" />
         <link rel="stylesheet" type="text/css" href="css/styles.css" />
 
         <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+        <!-- @font-face icons don't work in WP -->
+        <script type="text/javascript">
+        if (cordova.platformId !== 'windowsphone') {
+          document.write('<link rel="stylesheet" type="text/css" href="css/icons.css" />');
+        }
+        </script>
         <script type="text/javascript" charset="utf-8" src="js/appframework.ui.min.js"></script>
-        <script type="text/javascript" charset="utf-8" src="js/jq.template.js"></script>
         <script type="text/javascript" charset="utf-8" src="js/jq.mvc.min.js"></script>
+        <script type="text/javascript" charset="utf-8" src="js/jq.template.js"></script>
         <script type="text/javascript" charset="utf-8" src="app.js"></script>
 
         <!-- boiler plate code that appears to be required... -->

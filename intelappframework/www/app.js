@@ -1,4 +1,10 @@
 function initialize() {
+
+  if (cordova.platformId === "windowsphone") {
+    console.log("Windows Phone 8");
+    $(".addRemoveFave").text("Fave");
+  }
+
   var app = new $.mvc.app();
 
   app.loadControllers(["searchService", "search", "results", "favourites", "formatter"]);

@@ -21,7 +21,6 @@
 #recentSearches li span.totalResults {
     float: right;
     margin-right: 35px;
-    margin-top: 14px;
     font-size: 12px;
     background: #CCC;
     line-height: 12px;
@@ -91,3 +90,11 @@
   display: block;
   float: right;
 }
+
+@-ms-viewport{width:320px;user-zoom:fixed;max-zoom:1;min-zoom:1;}
+
+#afui.win8 #navbar a {
+  line-height: 67px;
+  top: inherit;
+}
+
