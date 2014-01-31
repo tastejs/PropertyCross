@@ -18,7 +18,7 @@ uses
   System.Rtti, System.Bindings.Outputs, Fmx.Bind.Editors, FMX.Objects,
   Data.Bind.Components, Data.Bind.DBScope, FMX.ListBox, FMX.Layouts,
   FMX.StdCtrls, FMX.Edit, dataNestoria, unitNestoriaObjects,
-  FMX.ListView.Types, FMX.ListView,
+  FMX.ListView.Types, FMX.ListView, FMX.Graphics,
   unitNestoriaSearchTypes, FMX.Sensors, System.Sensors;
 
 type
@@ -117,6 +117,9 @@ type
       NewLocation: TLocationCoord2D);
     procedure LocationSensor1StateChanged(Sender: TObject);
     procedure TimerSearchTimeoutTimer(Sender: TObject);
+    procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
+      Shift: TShiftState);
+    procedure LocationSensor1DataChanged(Sender: TObject);
   private
     { Private declarations }
     FNextPageAniIndicator: TAniIndicator;
@@ -138,7 +141,7 @@ implementation
 
 {$R *.fmx}
 
-uses unitNestoriaImagesServices, unitNestoriaThreadServices;
+uses unitNestoriaImagesServices, unitNestoriaThreadServices, BackButtonManager;
 
 procedure TfrmMain.actAddFavourateExecute(Sender: TObject);
 begin
@@ -159,7 +162,7 @@ begin
   AnimatorLoading.Visible := True;
   AnimatorLoading.Enabled := True;
   AnimatorLoading.Repaint;
-{$IFDEF IOS}
+{$IFDEF IOS or ANDROID}
   // Work around.  Force CheckSynchronize when animation is running.
   TimerCheckSynchronize.Enabled := True;
 {$ENDIF}
@@ -168,7 +171,7 @@ begin
   LProc :=
     procedure(AResult: TNestoriaSearchResult)
     begin
-{$IFDEF IOS}
+{$IFDEF IOS or ANDROID}
       TimerCheckSynchronize.Enabled := False;
 {$ENDIF}
       if AResult <> nil then
@@ -213,6 +216,23 @@ begin
   TNestoriaImageServices.RegisterLoadEvent(OnLoadImage);
   LinkFillControlToSearchResults.AutoFill := False;
   LinkFillControlToSearchResults.BindList.ClearList;
+
+  if TOSVersion.Platform = pfAndroid then
+    TBackActionManager.HideBackActionControls(Self, True);
+end;
+
+procedure TfrmMain.FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
+  Shift: TShiftState);
+var
+  BackAction : TChangeTabAction;
+begin
+  if (TOSVersion.Platform = pfAndroid) and (Key = vkHardwareBack) then begin
+    BackAction := TBackActionManager.FindBackAction(tcMain,True);
+    if Assigned(BackAction) then begin
+      BackAction.ExecuteTarget(Self);
+      Key := 0;
+    end;
+  end;
 end;
 
 procedure TfrmMain.OnLoadImage(const AURL: string);
@@ -347,9 +367,10 @@ begin
           lvSearchResults.BeginUpdate;
           try
             LTopItem := -1;
-            if dtmdlNestoria.LastSearchConfig.CurrentPage = 1 then
-              lvSearchResults.Items.Clear
-            else
+            if dtmdlNestoria.LastSearchConfig.CurrentPage = 1 then begin
+              lvSearchResults.ItemIndex := -1;
+              lvSearchResults.Items.Clear;
+            end else
               if (lvSearchResults.Items.Count > 0) and
                 (lvSearchResults.Items[lvSearchResults.Items.Count-1].Tag = LastItemTag) then
               begin
@@ -375,7 +396,7 @@ begin
           if LTopItem <> -1 then
           begin
             FTopItem := LTopItem;
-{$IFDEF IOS} // Scroll up a little to show more rows
+{$IFDEF IOS or ANDROID} // Scroll up a little to show more rows
             TimerNextPage.Enabled := True;
 {$ENDIF}
           end;
@@ -501,7 +522,7 @@ begin
   FNextPageAniIndicator.Align := TAlignLayout.alBottom;
   FNextPageAniIndicator.HitTest := False;
   FNextPageAniIndicator.Enabled := True;
-{$IFDEF IOS}
+{$IFDEF IOS or ANDROID}
   // Work around.  Force CheckSynchronize when animation is running.
   TimerCheckSynchronize.Enabled := True;
 {$ENDIF}
@@ -510,7 +531,7 @@ begin
   LProc :=
     procedure(AResult: TNestoriaSearchResult)
     begin
-{$IFDEF IOS}
+{$IFDEF IOS or ANDROID}
       TimerCheckSynchronize.Enabled := False;
 {$ENDIF}
       if AResult <> nil then
@@ -522,6 +543,11 @@ begin
 
   // Asynch load
   dtmdlNestoria.LoadNextPage(LProc)
+end;
+
+procedure TfrmMain.LocationSensor1DataChanged(Sender: TObject);
+begin
+//
 end;
 
 procedure TfrmMain.LocationSensor1LocationChanged(Sender: TObject;

@@ -11,7 +11,7 @@ unit unitNestoriaObjects;
 
 interface
 
-uses FMX.Types, FMX.Objects;
+uses FMX.Types, FMX.Objects, FMX.Graphics;
 
 
 {$SCOPEDENUMS ON}

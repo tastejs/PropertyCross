@@ -15,7 +15,8 @@ uses
   Data.JSON.Doc in 'Data.JSON.Doc.pas',
   Data.JSON.Intf in 'Data.JSON.Intf.pas',
   Data.JSON.Objs in 'Data.JSON.Objs.pas',
-  Data.JSON.Tokenizer in 'Data.JSON.Tokenizer.pas';
+  Data.JSON.Tokenizer in 'Data.JSON.Tokenizer.pas',
+  BackButtonManager in 'BackButtonManager.pas';
 
 {$R *.res}
 
