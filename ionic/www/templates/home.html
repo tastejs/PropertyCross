@@ -4,11 +4,11 @@
     <div class="list list-inset">
         <label class="item item-input">
             <i class="icon ion-search placeholder-icon"></i>
-            <input type="text" placeholder="Search">
+            <input type="text" placeholder="Search" ng-model="searchText" autocomplete="off" autocorrect="off">
         </label>
     </div>
     <div class="padding">
-        <button class="button button-positive">Go</button>
+        <button class="button button-positive" ng-click="search()">Go</button>
         <button class="button button-positive">My Location</button>
     </div>
 

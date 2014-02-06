@@ -1,23 +1,28 @@
-angular.module('propertycross.services', [])
+angular.module('propertycross.services', ['ionic', 'ngResource'])
 
-.factory('PetService', function() {
-  // Might use a resource here that returns a JSON array
-
-  // Some fake testing data
-  var pets = [
-    { id: 0, title: 'Cats', description: 'Furry little creatures. Obsessed with plotting assassination, but never following through on it.' },
-    { id: 1, title: 'Dogs', description: 'Lovable. Loyal almost to a fault. Smarter than they let on.' },
-    { id: 2, title: 'Turtles', description: 'Everyone likes turtles.' },
-    { id: 3, title: 'Sharks', description: 'An advanced pet. Needs millions of gallons of salt water. Will happily eat you.' }
-  ];
-
-  return {
-    all: function() {
-      return pets;
-    },
-    get: function(petId) {
-      // Simple index lookup
-      return pets[petId];
-    }
-  }
+.factory('Nestoria', function($resource, $q) {
+    var service = $resource("http://api.nestoria.co.uk/api",
+                            { country: "uk",
+                              pretty: "1",
+                              action: "search_listings",
+                              encoding: "json",
+                              listing_type: "buy",
+                              callback: "JSON_CALLBACK",
+                              page: 1 },
+                            { search: { method: "JSONP" } });
+    return {
+        search: function(location) {
+            var q = $q.defer();
+            service.search({
+                place_name: location
+            },
+            function(response) {
+                q.resolve(response);
+            },
+            function(error) {
+                q.reject(error);
+            });
+            return q.promise;
+        }
+    };
 });
