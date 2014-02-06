@@ -1,8 +1,5 @@
-angular.module('starter.services', [])
+angular.module('propertycross.services', [])
 
-/**
- * A simple example service that returns some data.
- */
 .factory('PetService', function() {
   // Might use a resource here that returns a JSON array
 

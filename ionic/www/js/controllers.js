@@ -1,15 +1,17 @@
-angular.module('starter.controllers', [])
+angular.module('propertycross.controllers', [])
 
+.controller('HomeCtrl', function($scope) {
 
-// A simple controller that fetches a list of data from a service
-.controller('PetIndexCtrl', function($scope, PetService) {
-  // "Pets" is a service returning mock data (services.js)
-  $scope.pets = PetService.all();
 })
 
+.controller('ResultsCtrl', function($scope, $stateParams) {
+    $scope.properties = [];
+})
 
-// A simple controller that shows a tapped item's data
-.controller('PetDetailCtrl', function($scope, $stateParams, PetService) {
-  // "Pets" is a service returning mock data (services.js)
-  $scope.pet = PetService.get($stateParams.petId);
+.controller('PropertyCtrl', function($scope, $stateParams) {
+
+})
+
+.controller('FavouritesCtrl', function($scope) {
+
 });
