@@ -10,8 +10,20 @@ angular.module('propertycross.controllers', ['ionic'])
         });
     }, 200);
 
+    var doSearchMyLocation = ionic.debounce(function() {
+        var loading = $ionicLoading.show({ content: 'Searching...' });
+        Properties.searchByCurrentLocation().then(function(response) {
+            loading.hide();
+            $state.go('results', { searchTerm: 'TODO' });
+        });
+    }, 200);
+
     $scope.search = function(searchText) {
         doSearch(searchText);
+    };
+
+    $scope.searchMyLocation = function() {
+        doSearchMyLocation();
     };
 
 })

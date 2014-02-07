@@ -27,10 +27,10 @@ angular.module('propertycross.services', ['ngResource'])
             return q.promise;
         },
 
-        searchByCoordinates: function(coordinates, page) {
+        searchByCoordinates: function(latitude, longitude, page) {
             var q = $q.defer();
             service.search({
-                centre_point: coordinates,
+                centre_point: latitude.toFixed(2) + ',' + longitude.toFixed(2),
                 page: page
             },
             function(response) {
@@ -45,7 +45,26 @@ angular.module('propertycross.services', ['ngResource'])
     };
 })
 
-.factory('Properties', function($q, Nestoria) {
+.factory('Geolocation', function($q) {
+
+    return {
+
+        getCurrentPosition: function() {
+            var q = $q.defer();
+            navigator.geolocation.getCurrentPosition(
+                function(result) {
+                    q.resolve(result);
+                },
+                function(error) {
+                    q.reject(error);
+                });
+            return q.promise;
+        }
+
+    };
+})
+
+.factory('Properties', function($q, Nestoria, Geolocation) {
 
     var lastSearch = '',
         page = 1,
@@ -114,9 +133,36 @@ angular.module('propertycross.services', ['ngResource'])
         },
 
         searchByCurrentLocation: function() {
-            // TODO
+            lastSearch = '';
+            page = 1;
+            lastResponse = null;
+            properties = [];
+
+            var q = $q.defer();
+            Geolocation.getCurrentPosition().then(
+                function(result) {
+                    // TODO update lastSearch, etc
+                    Nestoria.searchByCoordinates(result.coords.latitude,
+                                                 result.coords.longitude,
+                                                 page).then(
+                        function(response) {
+                            lastResponse = response;
+                            properties = toProperties(response.listings);
+                            q.resolve(properties);
+                        },
+                        function(error) {
+                            q.reject(error);
+                        }
+                    );
+                },
+                function(error) {
+                    q.reject(error);
+                }
+            );
+            return q.promise;
         },
 
+        // TODO handle more properties when using coordinates
         moreProperties: function() {
             var q = $q.defer();
             Nestoria.search(lastSearch, ++page).then(
