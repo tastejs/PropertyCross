@@ -1,4 +1,4 @@
-angular.module('propertycross.services', ['ionic', 'ngResource'])
+angular.module('propertycross.services', ['ngResource'])
 
 .factory('Nestoria', function($resource, $q) {
     var service = $resource("http://api.nestoria.co.uk/api",
@@ -7,19 +7,51 @@ angular.module('propertycross.services', ['ionic', 'ngResource'])
                               action: "search_listings",
                               encoding: "json",
                               listing_type: "buy",
-                              callback: "JSON_CALLBACK",
-                              page: 1 },
-                            { search: { method: "JSONP" } });
+                              callback: "JSON_CALLBACK" },
+                            { search: { method: "JSONP" } }),
+        lastSearchTerm,
+        page = 1,
+        lastResponse;
+
     return {
-        search: function(location) {
+
+        // YUCK, can this be done as a property instead?
+        lastResponse: function() {
+            return lastResponse;
+        },
+
+        search: function(term) {
+            lastSearchTerm = term;
+            page = 1;
+
             var q = $q.defer();
             service.search({
-                place_name: location
+                place_name: term,
+                page: page
             },
             function(response) {
-                q.resolve(response);
+                lastResponse = response.response;
+                q.resolve(response.response);
             },
             function(error) {
+                lastResponse = null;
+                q.reject(error);
+            });
+            return q.promise;
+        },
+
+        more: function() {
+            var q = $q.defer();
+            service.search({
+                place_name: lastSearchTerm,
+                page: ++page
+            },
+            function(response) {
+                lastResponse = response.response;
+                q.resolve(response.response);
+            },
+            function(error) {
+                lastResponse = null;
                 q.reject(error);
             });
             return q.promise;

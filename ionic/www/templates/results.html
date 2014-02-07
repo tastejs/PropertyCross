@@ -1,10 +1,9 @@
-<!-- TODO dynamic title -->
-<view title="'Results'">
+<view title="title">
   <content has-header="true">
     <list>
       <item ng-repeat="property in properties" type="item-text-wrap" href="#/property/{{property.id}}">
         <!-- TODO picture, etc -->
-        <h3>{{property.name}}</h3>
+        <h3>{{property.title}}</h3>
         </item>
       </item>
     </list>

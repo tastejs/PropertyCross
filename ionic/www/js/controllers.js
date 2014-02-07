@@ -5,11 +5,11 @@ angular.module('propertycross.controllers', ['ionic'])
     var doSearch = ionic.debounce(function(location) {
         console.log('location: ' + location);
         var loading = $ionicLoading.show({ content: 'Searching...' });
-        Nestoria.search(location).then(function() {
+        Nestoria.search(location).then(function(response) {
             loading.hide();
             $state.go('results', { searchTerm: location });
         });
-    }, 300);
+    }, 200);
 
     $scope.search = function(searchText) {
         doSearch(searchText);
@@ -17,8 +17,10 @@ angular.module('propertycross.controllers', ['ionic'])
 
 })
 
-.controller('ResultsCtrl', function($scope, $stateParams) {
-    $scope.properties = [];
+.controller('ResultsCtrl', function($scope, $stateParams, Nestoria) {
+    var searchResult = Nestoria.lastResponse();
+    $scope.properties = searchResult.listings;
+    $scope.title = searchResult.listings.length + ' of ' + searchResult.total_results + ' matches';
 })
 
 .controller('PropertyCtrl', function($scope, $stateParams) {
