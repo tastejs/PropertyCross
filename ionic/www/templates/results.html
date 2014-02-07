@@ -2,7 +2,7 @@
   <content has-header="true">
     <div class="list">
       <a ng-repeat="property in properties" class="item item-avatar" href="#/property/{{property.guid}}">
-        <img src="{{property.thumb_url}}" />
+        <img ng-src="{{property.thumb_url}}" />
         <!-- TODO formatting of price -->
         <h2>{{property.price_formatted}}</h2>
         <p>{{property.title}}</p>

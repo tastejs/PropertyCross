@@ -19,7 +19,7 @@ angular.module('propertycross', ['ionic',
         })
 
         .state('property', {
-            url: '/property/:propertyId',
+            url: '/property/:id',
             templateUrl: 'templates/property.html',
             controller: 'PropertyCtrl'
         })

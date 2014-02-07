@@ -1,6 +1,9 @@
-<!-- TODO -->
-<view title="'Property'">
+<view title="'Property Details'" right-buttons="rightButtons">
   <content has-header="true" padding="true">
-
+    <h2>{{property.price_formatted}}</h2>
+    <h3>{{property.title}}</h3>
+    <img ng-src="{{property.img_url}}" />
+    <p>{{rooms}}</p>
+    <p>{{property.summary}}</p>
   </content>
 </view>
