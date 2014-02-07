@@ -1,17 +1,18 @@
 angular.module('propertycross.controllers', ['ionic'])
 
-.controller('HomeCtrl', function($scope, Nestoria) {
+.controller('HomeCtrl', function($scope, $state, $ionicLoading, Nestoria) {
 
     var doSearch = ionic.debounce(function(location) {
-        Nestoria.search(location).then(function(response) {
-            console.log("woot");
+        console.log('location: ' + location);
+        var loading = $ionicLoading.show({ content: 'Searching...' });
+        Nestoria.search(location).then(function() {
+            loading.hide();
+            $state.go('results', { searchTerm: location });
         });
     }, 300);
 
-    $scope.searchText = "";
-
-    $scope.search = function() {
-        doSearch("edinburgh");
+    $scope.search = function(searchText) {
+        doSearch(searchText);
     };
 
 })
