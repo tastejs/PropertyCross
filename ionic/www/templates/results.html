@@ -1,11 +1,12 @@
 <view title="title">
   <content has-header="true">
-    <list>
-      <item ng-repeat="property in properties" type="item-text-wrap" href="#/property/{{property.id}}">
-        <!-- TODO picture, etc -->
-        <h3>{{property.title}}</h3>
-        </item>
-      </item>
-    </list>
+    <div class="list">
+      <a ng-repeat="property in properties" class="item item-avatar" href="#/property/{{property.guid}}">
+        <img src="{{property.thumb_url}}" />
+        <!-- TODO formatting of price -->
+        <h2>{{property.price_formatted}}</h2>
+        <p>{{property.title}}</p>
+      </a>
+    </div>
   </content>
 </view>
