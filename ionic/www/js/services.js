@@ -52,6 +52,30 @@ angular.module('propertycross.services', ['ngResource'])
         lastResponse,
         properties = [];
 
+    function toProperties(listings) {
+
+        function simplifyTitle(title) {
+            var parts = title.split(', ');
+            parts.length = 2;
+            return parts.join(', ');
+        }
+        function formatPrice(price) {
+            return '£' + price.split(' ')[0];
+        }
+
+        return listings.map(function(listing) {
+            return {
+                guid: listing.guid,
+                title: simplifyTitle(listing.title),
+                price: formatPrice(listing.price_formatted),
+                thumbnailURL: listing.thumb_url,
+                imageURL: listing.img_url,
+                summary: listing.summary,
+                rooms: listing.bedroom_number + ' bed, ' + listing.bathroom_number + ' bathroom'
+            };
+        });
+    }
+
     return {
         current: function() {
             return properties;
@@ -79,7 +103,7 @@ angular.module('propertycross.services', ['ngResource'])
             Nestoria.search(placeName, page).then(
                 function(response) {
                     lastResponse = response;
-                    properties = response.listings;
+                    properties = toProperties(response.listings);
                     q.resolve(properties);
                 },
                 function(error) {
@@ -98,7 +122,7 @@ angular.module('propertycross.services', ['ngResource'])
             Nestoria.search(lastSearch, ++page).then(
                 function(response) {
                     lastResponse = response;
-                    properties.append(response.listings);
+                    properties.append(toProperties(response.listings));
                     q.resolve(properties);
                 },
                 function(error) {
