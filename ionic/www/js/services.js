@@ -187,4 +187,73 @@ angular.module('propertycross.services', ['ngResource'])
             return null;
         }
     };
-});
+})
+
+.factory('Favourites', function($q, Properties) {
+    var properties = [];
+
+    function save() {
+        try {
+            localStorage['favourites'] = JSON.stringify(properties);
+        }
+        catch(error) {
+            console.error("Failed to save favourites", error);
+        }
+    }
+
+    return {
+
+        properties: function() {
+            return properties;
+        },
+
+        load: function() {
+            var q = $q.defer();
+            try {
+                if (!properties || !properties.length) {
+                    properties = JSON.parse(localStorage['favourites']) || [];
+                }
+                q.resolve(properties);
+            }
+            catch(error) {
+                console.error("Failed to load favourites", error);
+                q.reject(error);
+            }
+            return q.promise;
+        },
+
+        add: function(property) {
+            if (!property) {
+                return;
+            }
+            properties.push(property);
+            save();
+            return properties;
+        },
+
+        remove: function(property) {
+            var index = properties.indexOf(property);
+            if (index == -1) {
+                return index;
+            }
+            properties.splice(index, 1);
+            save();
+            return properties;
+        },
+
+        get: function(id) {
+            for (var i = 0, len = properties.length; i < len; i++) {
+                if (properties[i].guid == id) {
+                    return properties[i];
+                }
+            }
+            return null;
+        },
+
+        isFavourite: function(property) {
+            return properties.indexOf(property) != -1;
+        }
+    };
+})
+
+;

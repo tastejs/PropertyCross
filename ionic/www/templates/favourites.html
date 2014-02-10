@@ -1,6 +1,11 @@
-<!-- TODO -->
 <view title="'Favourites'">
-  <content has-header="true" padding="true">
-
+  <content has-header="true">
+    <div class="list">
+      <a ng-repeat="property in properties" class="item item-avatar" href="#/property/{{property.guid}}">
+        <img ng-src="{{property.thumbnailURL}}" />
+        <h2>{{property.price}}</h2>
+        <p>{{property.title}}</p>
+      </a>
+    </div>
   </content>
 </view>
