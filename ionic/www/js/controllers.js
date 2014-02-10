@@ -35,9 +35,27 @@ angular.module('propertycross.controllers', ['ionic'])
     Favourites.load();
 })
 
-.controller('ResultsCtrl', function($scope, $stateParams, Properties) {
+.controller('ResultsCtrl', function($scope, $ionicLoading, Properties) {
+
+    function updateTitle() {
+        $scope.title = Properties.count() + ' of ' + Properties.total() + ' matches';
+    }
+
+    var doLoadMore = ionic.debounce(function() {
+        var loading = $ionicLoading.show({ content: 'Loading more...' });
+        Properties.more().then(function(properties) {
+            loading.hide();
+            $scope.properties = properties;
+            updateTitle();
+        });
+    }, 200);
+
     $scope.properties = Properties.current();
-    $scope.title = Properties.count() + ' of ' + Properties.total() + ' matches';
+    $scope.loadMore = function() {
+        doLoadMore();
+    };
+
+    updateTitle();
 })
 
 .controller('PropertyCtrl', function($scope, $stateParams, Properties, Favourites) {

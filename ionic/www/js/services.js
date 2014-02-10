@@ -163,12 +163,12 @@ angular.module('propertycross.services', ['ngResource'])
         },
 
         // TODO handle more properties when using coordinates
-        moreProperties: function() {
+        more: function() {
             var q = $q.defer();
             Nestoria.search(lastSearch, ++page).then(
                 function(response) {
                     lastResponse = response;
-                    properties.append(toProperties(response.listings));
+                    properties = properties.concat(toProperties(response.listings));
                     q.resolve(properties);
                 },
                 function(error) {

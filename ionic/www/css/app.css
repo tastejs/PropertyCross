@@ -1,6 +1,3 @@
-.ionic-logo {
-  display: block;
-  margin: 15px auto;
-  width: 96px;
-  height: 96px;
+.load-more {
+    cursor: pointer;
 }
