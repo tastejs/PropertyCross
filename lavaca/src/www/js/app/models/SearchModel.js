@@ -46,7 +46,7 @@ define(function(require) {
         this.apply(response, true);
         this.trigger('fetchSuccess', {response: response});
       } else {
-        if (response === 'unknown location') {
+        if (response.application_response_text === 'unknown location') {
           errorMessage = Translation.get('not_matched');
         } else if(responseCode === '210') {
           errorMessage = Translation.get('location_not_found');

@@ -3,21 +3,38 @@
 /libs/atnotate/atnotate.pyc
 .idea
 
-/src/android/.classpath
-/src/android/.project
-/src/android/bin/*
-/src/android/gen/*
+/src/www/components
 
-/src/ios/App.xcodeproj/project.xcworkspace/xcuserdata/*
-/src/ios/App.xcodeproj/xcuserdata/*
-/src/ios/CordovaLib/CordovaLib.xcodeproj/xcuserdata/*
+/cordova/platforms/android/.classpath
+/cordova/platforms/android/.project
+/cordova/platforms/android/local.properties
+/cordova/platforms/android/bin/*
+/cordova/platforms/android/gen/*
+/cordova/platforms/android/assets/www
+
+/cordova/platforms/ios/PropertyCross.xcodeproj/project.xcworkspace/xcuserdata
+/cordova/platforms/ios/PropertyCross.xcodeproj/xcuserdata
+/cordova/platforms/ios/CordovaLib/CordovaLib.xcodeproj/xcuserdata
+/cordova/platforms/ios/CordovaLib/build
+/cordova/platforms/ios/www
+/cordova/platforms/ios/build
+
+/cordova/www
 
 /node_modules
 /docs
+/doc
 /pkg
-/package
 /tmp
 /build
 /log
 
+test/runner.html
+
 .tern-port
+test/runner.html
+
+#### items from generated gitignore file in cordova ios project
+*.mode1v3
+*.perspectivev3
+*.pbxuser

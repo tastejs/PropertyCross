@@ -35,10 +35,22 @@ Note: this may require sudo
 $ npm install -g grunt-cli
 ```
 
-4. __Install dev dependencies for our tasks to work__
+3. __Install bower globally__
+Note: this may require sudo
+```bash
+$ npm install -g bower
+```
+
+4. __Install node dependencies for our tasks to work__
 ```bash
 $ npm install
 ```
+
+5. __Install bower dependencies__
+```bash
+$ bower install
+```
+
 
 ### Run Development Server
 
@@ -51,10 +63,10 @@ Your application should now be running on `localhost:8080`.
 ### Build for Deployment
 
 ```bash
-$ grunt build
+$ grunt build:production
 ```
 
-This task creates a build directory with the iOS, Android, and Web code ready for deployment.
+This task creates a build directory with the Web code ready for deployment. The iOs and Android code projects are in `cordova/platforms`.
 
 ### Package Builds for Native Deployment
 
@@ -74,11 +86,11 @@ or
 $ grunt pkg:android
 ```
 
-libimobiledevice is required to install and uninstall packages to/from iOS devices. Mac OS X users may use https://github.com/benvium/libimobiledevice-macosx.
+libimobiledevice is required to install and uninstall packages to/from iOS devices. Mac OS X users may use [https://github.com/benvium/libimobiledevice-macosx](https://github.com/benvium/libimobiledevice-macosx).
 adb is required to install and uninstall packages to/from Android devices.
 
 For more help with building see [Building Your Project](https://github.com/mutualmobile/lavaca/wiki/2.1.-Building-Your-Project).
 
 ## Application Structure
 
-See [Project Structure](https://github.com/mutualmobile/lavaca/wiki/1.1.-Project-Structure) from the Lavaca wiki.
+See [Project Structure](http://getlavaca.com/#/guide/Project-Structure#@10) from the Lavaca wiki.
