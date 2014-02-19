@@ -12,7 +12,7 @@ unit dataNestoria;
 interface
 
 uses
-  System.SysUtils, System.Classes, System.IOUtils,
+  System.SysUtils, System.Classes,
   Data.DB, Datasnap.DBClient, Generics.Collections, Fmx.Bind.GenData,
   Data.Bind.GenData, Data.Bind.Components, Data.Bind.ObjectScope,
   FMX.Objects, FMX.Types, FMX.ListBox, unitNestoriaObjects,
@@ -99,7 +99,7 @@ implementation
 {$R *.dfm}
 
 uses unitNestoriaDBServices, unitNestoriaHTTPServices, unitNestoriaJSONServices,
-  unitNestoriaThreadServices, FMX.Forms;
+  unitNestoriaThreadServices, FMX.Forms, System.IOUtils;
 
 constructor TdtmdlNestoria.Create(AOwner: TComponent);
 begin
@@ -117,8 +117,8 @@ end;
 
 procedure TdtmdlNestoria.DataModuleCreate(Sender: TObject);
 begin
-  cdsSearches.FileName := System.IOUtils.TPath.Combine(System.IOUtils.TPath.GetDocumentsPath, 'Searchs.xml');
-  cdsFavourates.FileName := System.IOUtils.TPath.Combine(System.IOUtils.TPath.GetDocumentsPath, 'Favs.xml');
+  cdsSearches.FileName := TPath.GetDocumentsPath + PathDelim + 'Searchs.xml';
+  cdsFavourates.FileName := TPath.GetDocumentsPath  + PathDelim + 'Favs.xml';
 
   // Setup Search Results
   if FileExists(cdsSearches.FileName) then begin

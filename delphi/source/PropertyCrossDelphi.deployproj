@@ -47,16 +47,16 @@
             <LocalCommand/>
             <RemoteCommand/>
         </DeployFile>
-        <DeployFile Include="C:\dev\software\android-ndk-r9\prebuilt\android-arm\gdbserver\gdbserver" Condition="'$(Config)'=='Release'">
-            <RemoteDir>PropertyCrossDelphi\library\lib\armeabi\</RemoteDir>
-            <RemoteName>gdbserver</RemoteName>
+        <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_96x96.png" Condition="'$(Config)'=='Release'">
+            <RemoteDir>PropertyCrossDelphi\res\drawable-xhdpi\</RemoteDir>
+            <RemoteName>ic_launcher.png</RemoteName>
             <Operation>1</Operation>
             <LocalCommand/>
             <RemoteCommand/>
         </DeployFile>
-        <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_96x96.png" Condition="'$(Config)'=='Release'">
-            <RemoteDir>PropertyCrossDelphi\res\drawable-xhdpi\</RemoteDir>
-            <RemoteName>ic_launcher.png</RemoteName>
+        <DeployFile Include="C:\Users\Public\Documents\RAD Studio\12.0\PlatformSDKs\android-ndk-r8e\prebuilt\android-arm\gdbserver\gdbserver" Condition="'$(Config)'=='Release'">
+            <RemoteDir>PropertyCrossDelphi\library\lib\armeabi\</RemoteDir>
+            <RemoteName>gdbserver</RemoteName>
             <Operation>1</Operation>
             <LocalCommand/>
             <RemoteCommand/>
@@ -70,10 +70,10 @@
         </DeployFile>
     </ItemGroup>
     <ItemGroup Condition="'$(Platform)'=='iOSDevice'">
-        <DeployFile Include="C:\projects\PropertyCross\delphi\assets\splashscreens\320x480.png" Condition="'$(Config)'=='Release'">
+        <DeployFile Include="$(BDS)\bin\Artwork\iOS\iPhone\FM_ApplicationIcon_57x57.png" Condition="'$(Config)'=='Release'">
             <RemoteDir>PropertyCrossDelphi.app\</RemoteDir>
-            <RemoteName>Default.png</RemoteName>
-            <Operation>1</Operation>
+            <RemoteName>FM_ApplicationIcon_57x57.png</RemoteName>
+            <Operation>0</Operation>
             <LocalCommand/>
             <RemoteCommand/>
         </DeployFile>
@@ -85,17 +85,17 @@
             <RemoteCommand/>
             <Required>True</Required>
         </DeployFile>
-        <DeployFile Include="$(BDS)\bin\Artwork\iOS\iPad\FM_LaunchImageLandscape_2048x1496.png" Condition="'$(Config)'=='Release'">
+        <DeployFile Include="$(BDS)\bin\Artwork\iOS\iPhone\FM_LaunchImage_320x480.png" Condition="'$(Config)'=='Release'">
             <RemoteDir>PropertyCrossDelphi.app\</RemoteDir>
-            <RemoteName>Default-Landscape@2x.png</RemoteName>
+            <RemoteName>Default.png</RemoteName>
             <Operation>1</Operation>
             <LocalCommand/>
             <RemoteCommand/>
         </DeployFile>
-        <DeployFile Include="C:\projects\PropertyCross\delphi\assets\icons\icon-57.png" Condition="'$(Config)'=='Release'">
+        <DeployFile Include="$(BDS)\bin\Artwork\iOS\iPad\FM_LaunchImageLandscape_2048x1496.png" Condition="'$(Config)'=='Release'">
             <RemoteDir>PropertyCrossDelphi.app\</RemoteDir>
-            <RemoteName>icon-57.png</RemoteName>
-            <Operation>0</Operation>
+            <RemoteName>Default-Landscape@2x.png</RemoteName>
+            <Operation>1</Operation>
             <LocalCommand/>
             <RemoteCommand/>
         </DeployFile>
@@ -148,16 +148,23 @@
             <LocalCommand/>
             <RemoteCommand/>
         </DeployFile>
-        <DeployFile Include="iOSDevice\Release\ResourceRules.plist" Condition="'$(Config)'=='Release'">
+        <DeployFile Include="$(BDS)\bin\Artwork\iOS\iPhone\FM_ApplicationIcon_114x114.png" Condition="'$(Config)'=='Release'">
             <RemoteDir>PropertyCrossDelphi.app\</RemoteDir>
-            <RemoteName>ResourceRules.plist</RemoteName>
+            <RemoteName>FM_ApplicationIcon_114x114.png</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+        </DeployFile>
+        <DeployFile Include="$(BDS)\bin\Artwork\iOS\iPhone\FM_LaunchImage_640x1136.png" Condition="'$(Config)'=='Release'">
+            <RemoteDir>PropertyCrossDelphi.app\</RemoteDir>
+            <RemoteName>Default-568h@2x.png</RemoteName>
             <Operation>1</Operation>
             <LocalCommand/>
             <RemoteCommand/>
         </DeployFile>
-        <DeployFile Include="C:\projects\PropertyCross\delphi\assets\splashscreens\720x1280.png" Condition="'$(Config)'=='Release'">
+        <DeployFile Include="iOSDevice\Release\ResourceRules.plist" Condition="'$(Config)'=='Release'">
             <RemoteDir>PropertyCrossDelphi.app\</RemoteDir>
-            <RemoteName>Default-568h@2x.png</RemoteName>
+            <RemoteName>ResourceRules.plist</RemoteName>
             <Operation>1</Operation>
             <LocalCommand/>
             <RemoteCommand/>
@@ -226,14 +233,7 @@
             <LocalCommand/>
             <RemoteCommand/>
         </DeployFile>
-        <DeployFile Include="C:\projects\PropertyCross\delphi\assets\icons\icon-57-2x.png" Condition="'$(Config)'=='Release'">
-            <RemoteDir>PropertyCrossDelphi.app\</RemoteDir>
-            <RemoteName>icon-57-2x.png</RemoteName>
-            <Operation>0</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-        </DeployFile>
-        <DeployFile Include="C:\projects\PropertyCross\delphi\assets\splashscreens\640x960.png" Condition="'$(Config)'=='Release'">
+        <DeployFile Include="$(BDS)\bin\Artwork\iOS\iPhone\FM_LaunchImage_640x960.png" Condition="'$(Config)'=='Release'">
             <RemoteDir>PropertyCrossDelphi.app\</RemoteDir>
             <RemoteName>Default@2x.png</RemoteName>
             <Operation>1</Operation>
@@ -341,6 +341,15 @@
             <RemoteCommand/>
         </DeployFile>
     </ItemGroup>
+    <ItemGroup Condition="'$(Platform)'=='Win64'">
+        <DeployFile Include="$(BDS)\bin64\midas.dll">
+            <RemoteDir>PropertyCrossDelphi\</RemoteDir>
+            <RemoteName>midas.dll</RemoteName>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+        </DeployFile>
+    </ItemGroup>
     <ItemGroup Condition="'$(Platform)'=='OSX32'">
         <DeployFile Include="$(BDS)\redist\osx32\libmidas.dylib">
             <RemoteDir>PropertyCrossDelphi.app\Contents\MacOS\</RemoteDir>
@@ -353,15 +362,6 @@
             <RemoteDir>PropertyCrossDelphi.app\Contents\MacOS\</RemoteDir>
             <RemoteName>libcgunwind.1.0.dylib</RemoteName>
             <Operation>1</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-        </DeployFile>
-    </ItemGroup>
-    <ItemGroup Condition="'$(Platform)'=='Win64'">
-        <DeployFile Include="$(BDS)\bin64\midas.dll">
-            <RemoteDir>PropertyCrossDelphi\</RemoteDir>
-            <RemoteName>midas.dll</RemoteName>
-            <Operation>0</Operation>
             <LocalCommand/>
             <RemoteCommand/>
         </DeployFile>

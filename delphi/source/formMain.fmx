@@ -2,35 +2,36 @@ object frmMain: TfrmMain
   Left = 0
   Top = 0
   Caption = 'HeaderFooter'
-  ClientHeight = 567
-  ClientWidth = 384
+  ClientHeight = 460
+  ClientWidth = 320
   FormFactor.Width = 1440
   FormFactor.Height = 900
   FormFactor.Orientations = [soPortrait, soInvertedPortrait]
   FormFactor.Devices = [dkDesktop, dkiPhone, dkiPad]
   OnCreate = FormCreate
+  OnKeyUp = FormKeyUp
   DesignerMobile = True
-  DesignerWidth = 384
-  DesignerHeight = 592
-  DesignerDeviceName = 'Google Nexus 4'
-  DesignerOrientation = 2
-  DesignerOSVersion = ''
+  DesignerWidth = 320
+  DesignerHeight = 480
+  DesignerDeviceName = 'iPhone'
+  DesignerOrientation = 0
+  DesignerOSVersion = '6'
   object tcMain: TTabControl
     Align = alClient
     FullSize = True
-    Height = 567.000000000000000000
+    Height = 460.000000000000000000
     TabHeight = 49.000000000000000000
-    TabIndex = 3
+    TabIndex = 2
     TabOrder = 0
     TabPosition = tpNone
-    Width = 384.000000000000000000
+    Width = 320.000000000000000000
     OnChange = tcMainChange
     object tabHome: TTabItem
       WordWrap = False
       Height = 8.000000000000000000
       IsSelected = False
-      Position.X = 173.000000000000000000
-      Position.Y = 548.000000000000000000
+      Position.X = 141.000000000000000000
+      Position.Y = 441.000000000000000000
       TabOrder = 0
       Text = 'tabHome'
       Width = 8.000000000000000000
@@ -38,27 +39,27 @@ object frmMain: TfrmMain
         Anchors = []
         Height = 44.000000000000000000
         TabOrder = 0
-        Width = 384.000000000000000000
+        Width = 320.000000000000000000
         object ToolBarLabel: TLabel
-          Align = alCenter
-          AutoSize = True
-          Height = 29.000000000000000000
+          Align = alClient
+          Height = 44.000000000000000000
           StyleLookup = 'toollabel'
           Text = 'PropertyCross'
           TextAlign = taCenter
-          Width = 147.000000000000000000
+          Width = 320.000000000000000000
           WordWrap = False
-        end
-        object btnFavourates: TButton
-          Action = ctaFavourates
-          Anchors = [akTop, akRight]
-          Height = 31.000000000000000000
-          Position.X = 328.000000000000000000
-          Position.Y = 7.000000000000000000
-          StyleLookup = 'toolbutton'
-          TabOrder = 1
-          Text = 'Favs'
-          Width = 50.000000000000000000
+          object btnFavourates: TButton
+            Action = ctaFavourates
+            Align = alRight
+            Height = 30.000000000000000000
+            Margins.Right = 5.000000000000000000
+            Position.X = 265.000000000000000000
+            Position.Y = 7.000000000000000000
+            StyleLookup = 'toolbutton'
+            TabOrder = 0
+            Text = 'Favs'
+            Width = 50.000000000000000000
+          end
         end
       end
       object lblDescription: TLabel
@@ -77,7 +78,7 @@ object frmMain: TfrmMain
           'y place-name, postcode, or click '#39'My location'#39', to search in you' +
           'r current location!'
         VertTextAlign = taLeading
-        Width = 364.000000000000000000
+        Width = 300.000000000000000000
         Trimming = ttCharacter
       end
       object edtLocation: TEdit
@@ -86,7 +87,7 @@ object frmMain: TfrmMain
         TabOrder = 2
         Position.X = 10.000000000000000000
         Position.Y = 123.000000000000000000
-        Width = 364.000000000000000000
+        Width = 300.000000000000000000
         Height = 31.000000000000000000
         Margins.Left = 10.000000000000000000
         Margins.Top = 2.000000000000000000
@@ -105,7 +106,7 @@ object frmMain: TfrmMain
         Align = alTop
         Height = 57.000000000000000000
         Position.Y = 160.000000000000000000
-        Width = 384.000000000000000000
+        Width = 320.000000000000000000
         object btnGo: TButton
           Height = 38.000000000000000000
           Position.X = 12.000000000000000000
@@ -129,18 +130,18 @@ object frmMain: TfrmMain
       object tcSearchResults: TTabControl
         Align = alClient
         FullSize = True
-        Height = 350.000000000000000000
+        Height = 243.000000000000000000
         TabHeight = 49.000000000000000000
         TabIndex = 2
         TabOrder = 4
         TabPosition = tpNone
-        Width = 384.000000000000000000
+        Width = 320.000000000000000000
         object tabSearchLocations: TTabItem
           WordWrap = False
           Height = 8.000000000000000000
           IsSelected = False
-          Position.X = 178.000000000000000000
-          Position.Y = 331.000000000000000000
+          Position.X = 146.000000000000000000
+          Position.Y = 224.000000000000000000
           TabOrder = 0
           Text = 'tabSearchLocations'
           Trimming = ttCharacter
@@ -155,15 +156,15 @@ object frmMain: TfrmMain
             StyleLookup = 'embossedlabel'
             Text = 'Recent Search:'
             VertTextAlign = taTrailing
-            Width = 372.000000000000000000
+            Width = 308.000000000000000000
             Trimming = ttCharacter
           end
           object lbSearchedLocations: TListBox
             Align = alClient
-            Height = 319.000000000000000000
+            Height = 212.000000000000000000
             StyleLookup = 'transparentlistboxstyle'
             TabOrder = 1
-            Width = 384.000000000000000000
+            Width = 320.000000000000000000
             DefaultItemStyles.ItemStyle = 'listboxitemnodetail'
             DefaultItemStyles.GroupHeaderStyle = ''
             DefaultItemStyles.GroupFooterStyle = ''
@@ -202,8 +203,8 @@ object frmMain: TfrmMain
           WordWrap = False
           Height = 8.000000000000000000
           IsSelected = False
-          Position.X = 188.000000000000000000
-          Position.Y = 331.000000000000000000
+          Position.X = 156.000000000000000000
+          Position.Y = 224.000000000000000000
           TabOrder = 1
           Text = 'tabSearchMessage'
           Trimming = ttCharacter
@@ -213,13 +214,13 @@ object frmMain: TfrmMain
             Font.Family = 'Arial'
             Font.Size = 13.000000000000000000
             StyledSettings = []
-            Height = 330.000000000000000000
+            Height = 223.000000000000000000
             Margins.Left = 10.000000000000000000
             Margins.Top = 20.000000000000000000
             Margins.Right = 10.000000000000000000
             Text = 'Search message:'
             VertTextAlign = taLeading
-            Width = 364.000000000000000000
+            Width = 300.000000000000000000
             Trimming = ttCharacter
           end
         end
@@ -227,18 +228,18 @@ object frmMain: TfrmMain
           WordWrap = False
           Height = 8.000000000000000000
           IsSelected = True
-          Position.X = 198.000000000000000000
-          Position.Y = 331.000000000000000000
+          Position.X = 166.000000000000000000
+          Position.Y = 224.000000000000000000
           TabOrder = 2
           Text = 'tabSearchChooseFromMultipleLocation'
           Trimming = ttCharacter
           Width = 8.000000000000000000
           object lbMultipleResultLocations: TListBox
             Align = alClient
-            Height = 319.000000000000000000
+            Height = 212.000000000000000000
             StyleLookup = 'transparentlistboxstyle'
             TabOrder = 0
-            Width = 384.000000000000000000
+            Width = 320.000000000000000000
             DefaultItemStyles.ItemStyle = 'listboxitemnodetail'
             DefaultItemStyles.GroupHeaderStyle = ''
             DefaultItemStyles.GroupFooterStyle = ''
@@ -268,7 +269,7 @@ object frmMain: TfrmMain
             StyleLookup = 'embossedlabel'
             Text = 'Select a location below:'
             VertTextAlign = taTrailing
-            Width = 372.000000000000000000
+            Width = 308.000000000000000000
             Trimming = ttCharacter
           end
         end
@@ -278,8 +279,8 @@ object frmMain: TfrmMain
       WordWrap = False
       Height = 8.000000000000000000
       IsSelected = False
-      Position.X = 183.000000000000000000
-      Position.Y = 548.000000000000000000
+      Position.X = 151.000000000000000000
+      Position.Y = 441.000000000000000000
       TabOrder = 1
       Text = 'tabFavourates'
       Width = 8.000000000000000000
@@ -287,33 +288,30 @@ object frmMain: TfrmMain
         Anchors = []
         Height = 44.000000000000000000
         TabOrder = 0
-        Width = 384.000000000000000000
+        Width = 320.000000000000000000
         object ToolBarLabel1: TLabel
-          Align = alCenter
-          Anchors = [akTop, akBottom]
-          AutoSize = True
-          Height = 29.000000000000000000
+          Align = alClient
+          Height = 44.000000000000000000
           StyleLookup = 'toollabel'
           Text = 'Favourates'
           TextAlign = taCenter
-          Width = 117.000000000000000000
+          Width = 320.000000000000000000
           WordWrap = False
-        end
-        object btnBack: TButton
-          Action = ctaHome
-          Height = 31.000000000000000000
-          Position.X = 6.000000000000000000
-          Position.Y = 7.000000000000000000
-          StyleLookup = 'backtoolbutton'
-          TabOrder = 1
-          Width = 65.000000000000000000
+          object btnBack: TButton
+            Action = ctaHome
+            Align = alLeft
+            Height = 44.000000000000000000
+            StyleLookup = 'backtoolbutton'
+            TabOrder = 0
+            Width = 81.000000000000000000
+          end
         end
       end
       object lbFavourates: TListBox
         Align = alClient
-        Height = 523.000000000000000000
+        Height = 416.000000000000000000
         TabOrder = 1
-        Width = 384.000000000000000000
+        Width = 320.000000000000000000
         DefaultItemStyles.ItemStyle = 'listboxitembottomdetail'
         DefaultItemStyles.GroupHeaderStyle = ''
         DefaultItemStyles.GroupFooterStyle = ''
@@ -323,9 +321,9 @@ object frmMain: TfrmMain
     object tabSearchResult: TTabItem
       WordWrap = False
       Height = 8.000000000000000000
-      IsSelected = False
-      Position.X = 193.000000000000000000
-      Position.Y = 548.000000000000000000
+      IsSelected = True
+      Position.X = 161.000000000000000000
+      Position.Y = 441.000000000000000000
       TabOrder = 2
       Text = 'tabSearchResult'
       Trimming = ttCharacter
@@ -337,9 +335,9 @@ object frmMain: TfrmMain
         FooterAppearanceClassName = 'TListHeaderObjects'
         OnUpdateObjects = lvSearchResultsUpdateObjects
         Align = alClient
-        Height = 523.000000000000000000
+        Height = 416.000000000000000000
         TabOrder = 1
-        Width = 384.000000000000000000
+        Width = 320.000000000000000000
         ItemAppearance.ItemHeight = 60
         ItemAppearanceObjects.ItemObjects.Text.Height = 30.000000000000000000
         ItemAppearanceObjects.ItemObjects.Text.PlaceOffset.X = 44.000000000000000000
@@ -364,78 +362,79 @@ object frmMain: TfrmMain
         Anchors = []
         Height = 44.000000000000000000
         TabOrder = 0
-        Width = 384.000000000000000000
+        Width = 320.000000000000000000
         object lblResultTitle: TLabel
-          Anchors = [akLeft, akTop, akRight]
+          Align = alClient
           Height = 44.000000000000000000
-          Position.X = 80.000000000000000000
           StyleLookup = 'toollabel'
           Text = 'Property X of Y'
-          Width = 305.000000000000000000
+          TextAlign = taCenter
+          Width = 320.000000000000000000
           WordWrap = False
           Trimming = ttCharacter
-        end
-        object btnHome: TButton
-          Action = ctaHome
-          Height = 31.000000000000000000
-          Position.X = 6.000000000000000000
-          Position.Y = 7.000000000000000000
-          StyleLookup = 'backtoolbutton'
-          TabOrder = 1
-          Trimming = ttCharacter
-          Width = 65.000000000000000000
+          object btnHome: TButton
+            Action = ctaHome
+            Align = alLeft
+            Height = 30.000000000000000000
+            Position.Y = 7.000000000000000000
+            StyleLookup = 'backtoolbutton'
+            TabOrder = 0
+            Trimming = ttCharacter
+            Width = 81.000000000000000000
+          end
         end
       end
     end
     object tabPropertyDetails: TTabItem
       WordWrap = False
       Height = 8.000000000000000000
-      IsSelected = True
-      Position.X = 203.000000000000000000
-      Position.Y = 548.000000000000000000
+      IsSelected = False
+      Position.X = 171.000000000000000000
+      Position.Y = 441.000000000000000000
       TabOrder = 3
       Text = 'tabPropertyDetails'
       Trimming = ttCharacter
       Width = 8.000000000000000000
       object ToolBar2: TToolBar
         Anchors = []
-        Height = 48.000000000000000000
+        Height = 44.000000000000000000
         TabOrder = 0
-        Width = 384.000000000000000000
+        Width = 320.000000000000000000
         object Label3: TLabel
-          Anchors = [akLeft, akTop, akRight]
-          Height = 29.000000000000000000
-          Position.X = 80.000000000000000000
-          Position.Y = 7.000000000000000000
+          Align = alClient
+          Height = 44.000000000000000000
+          Margins.Left = -8.000000000000000000
+          Margins.Right = 40.000000000000000000
           StyleLookup = 'toollabel'
           Text = 'Property Details'
-          Width = 241.000000000000000000
-          WordWrap = False
-        end
-        object btnPropDetailsBack: TButton
-          Action = ctaSearchResults
-          Height = 48.000000000000000000
-          Position.X = 6.000000000000000000
-          Position.Y = 7.000000000000000000
-          StyleLookup = 'backtoolbutton'
-          TabOrder = 1
-          Trimming = ttCharacter
-          Width = 65.000000000000000000
+          TextAlign = taCenter
+          Width = 166.000000000000000000
         end
         object btnAddRemoveFavourate: TButton
           Action = ctaSearchResults
-          Anchors = [akTop, akRight]
+          Align = alRight
           Font.Size = 18.000000000000000000
           Font.Style = [fsBold]
           StyledSettings = [ssFamily, ssStyle, ssFontColor]
-          Height = 48.000000000000000000
-          Position.X = 342.000000000000000000
+          Height = 30.000000000000000000
+          Margins.Right = 5.000000000000000000
+          Position.X = 282.000000000000000000
           Position.Y = 7.000000000000000000
           StyleLookup = 'toolbutton'
-          TabOrder = 2
+          TabOrder = 1
           Text = '+'
           Trimming = ttCharacter
           Width = 33.000000000000000000
+        end
+        object btnPropDetailsBack: TButton
+          Action = ctaSearchResults
+          Align = alLeft
+          Height = 30.000000000000000000
+          Position.Y = 7.000000000000000000
+          StyleLookup = 'backtoolbutton'
+          TabOrder = 2
+          Trimming = ttCharacter
+          Width = 89.000000000000000000
         end
       end
       object lblPropDetailTitle: TLabel
@@ -444,7 +443,7 @@ object frmMain: TfrmMain
         Margins.Left = 10.000000000000000000
         Margins.Right = 10.000000000000000000
         Position.X = 10.000000000000000000
-        Position.Y = 105.000000000000000000
+        Position.Y = 101.000000000000000000
         Text = 
           'ipsum mi vehicula purus, eu congue sapien orci eu est. Morbi bla' +
           'ndit volutpat ante, non ultrices eros semper at. Fusce leo leo, ' +
@@ -466,7 +465,7 @@ object frmMain: TfrmMain
           'uris felis consequat nisl, sit amet laoreet est quam et tortor. ' +
           'Proin mattis interdum tempus. Etiam ac vehicula neque. Donec tem' +
           'por, velit sit'
-        Width = 364.000000000000000000
+        Width = 300.000000000000000000
         Trimming = ttCharacter
       end
       object lblPropDetailPrice: TLabel
@@ -479,9 +478,9 @@ object frmMain: TfrmMain
         Margins.Right = 10.000000000000000000
         Margins.Bottom = 6.000000000000000000
         Position.X = 10.000000000000000000
-        Position.Y = 54.000000000000000000
+        Position.Y = 50.000000000000000000
         Text = 'Software Engineer'
-        Width = 364.000000000000000000
+        Width = 300.000000000000000000
         Trimming = ttCharacter
       end
       object lblRoomsDetail: TLabel
@@ -492,14 +491,14 @@ object frmMain: TfrmMain
         Margins.Right = 10.000000000000000000
         Margins.Bottom = 6.000000000000000000
         Position.X = 10.000000000000000000
-        Position.Y = 316.000000000000000000
+        Position.Y = 312.000000000000000000
         Text = '-33'
-        Width = 364.000000000000000000
+        Width = 300.000000000000000000
         Trimming = ttCharacter
       end
       object lblPropDetailText: TLabel
         Align = alClient
-        Height = 224.000000000000000000
+        Height = 121.000000000000000000
         Margins.Left = 10.000000000000000000
         Margins.Right = 10.000000000000000000
         Text = 
@@ -524,7 +523,7 @@ object frmMain: TfrmMain
           'Proin mattis interdum tempus. Etiam ac vehicula neque. Donec tem' +
           'por, velit sit'
         VertTextAlign = taLeading
-        Width = 364.000000000000000000
+        Width = 300.000000000000000000
         Trimming = ttCharacter
       end
       object Image1: TImage
@@ -634,7 +633,7 @@ object frmMain: TfrmMain
         Margins.Top = 6.000000000000000000
         Margins.Right = 40.000000000000000000
         Margins.Bottom = 6.000000000000000000
-        Position.X = 72.000000000000000000
+        Position.X = 40.000000000000000000
         Position.Y = 129.000000000000000000
         Width = 240.000000000000000000
         WrapMode = iwStretch
@@ -663,6 +662,7 @@ object frmMain: TfrmMain
     Top = 52
   end
   object LocationSensor1: TLocationSensor
+    OnDataChanged = LocationSensor1DataChanged
     OnStateChanged = LocationSensor1StateChanged
     OnLocationChanged = LocationSensor1LocationChanged
     Left = 144
