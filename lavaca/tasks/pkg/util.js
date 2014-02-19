@@ -176,6 +176,7 @@ util.getAppNameIos = function(dir) {
   data.split('\n').every(function(line) {
     if (line.search(/PRODUCT_NAME =/) !== -1) {
       cand = line.match(/PRODUCT_NAME = (.*?);/)[1];
+      cand = cand.replace(/"/g, '');
       return true; //continue
     }
     if (cand && line.search(/name =/) !== -1) {

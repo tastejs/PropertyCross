@@ -1,0 +1,19 @@
+{
+  "name": "lavaca-starter",
+  "version": "2.3.2",
+  "homepage": "http://getlavaca.com",
+  "authors": [
+    "Mutual Mobile <george.henderson@mutualmobile.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "lavaca": "latest"
+  }
+}

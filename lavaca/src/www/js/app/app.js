@@ -7,10 +7,9 @@ define(function(require) {
   var localStore = require('./cache/localStore');
   var stateModel = require('app/models/StateModel');
   var headerView = require('app/ui/views/controls/HeaderView');
-  require('lavaca/ui/LoadingIndicator');
+  var Detection = require('lavaca/env/Detection');
   require('lavaca/ui/DustTemplate');
-  require('jquery-mobile/events/touch');
-  require('jquery-mobile/events/orientationchange');
+  require('hammer');
 
 
   // Uncomment this section to use hash-based browser history instead of HTML5 history.
@@ -18,9 +17,9 @@ define(function(require) {
   History.overrideStandardsMode();
 
   /**
-   * @class app
-   * @super Lavaca.mvc.Application
    * Global application-specific object
+   * @class app
+   * @extends Lavaca.mvc.Application
    */
   var app = new Application(function() {
     // Initialize the routes
@@ -34,6 +33,7 @@ define(function(require) {
     stateModel.set('lang', localStore.get('lang') || 'en_US');
     //initialize translations
     Translation.init(stateModel.get('lang'));
+    Detection.addCustomDetection(navigator.userAgent.search(/os 7_/i) > 0, 'iOS7', 'html');
     //render header view
     headerView.render();
   });

@@ -21,7 +21,7 @@ define(function(require) {
             place_name: this.get('placeName'),
             page: parseInt(this.get('page'), 10) + 1
           });
-      Collection.prototype.fetch.call(this, 'api', {dataType: 'jsonp', data: params});
+      Collection.prototype.fetch.call(this, 'api', {dataType: 'jsonp', data: params, timeout: 5000});
     },
     onFetchSuccess: function(response) {
       response = this.parse(response.response);
@@ -38,7 +38,7 @@ define(function(require) {
         this.add(response.items);
         this.trigger('fetchSuccess', {response: response});
       } else {
-        if (response === 'unknown location') {
+        if (response.application_response_text === 'unknown location') {
           errorMessage = Translation.get('not_matched');
         } else if(responseCode === '210') {
           errorMessage = Translation.get('location_not_found');
