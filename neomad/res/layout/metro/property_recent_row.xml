@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<HorizontalLayout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  marginTop="4"
+                  marginBottom="4"
+                  height="30"
+                  backgroundColor="#009999"
+                  stretchHorizontalMode="MATCH_PARENT"
+                  stretchVerticalMode="MATCH_CONTENT"
+                  contentAlignment="VCENTER|LEFT"
+                  xsi:noNamespaceSchemaLocation="http://www.neomades.com/XSD/3.5.0/layout.xsd">
+    <!-- Query -->
+    <TextLabel id="@+id/ITEM_RECENT_LABEL"
+               layoutAlignment="LEFT|VCENTER"
+               contentAlignment="LEFT|VCENTER"
+               paddingTop="8"
+               marginLeft="12"
+               height="30"
+               stretchHorizontalMode="MATCH_PARENT"
+               stretchVerticalMode="MATCH_CONTENT"/>
+    <!-- Count -->
+    <TextLabel id="@+id/ITEM_RECENT_COUNT"
+               contentAlignment="RIGHT|VCENTER"
+               layoutAlignment="RIGHT|VCENTER"
+               paddingTop="8"
+               height="30"
+               marginRight="12"
+               stretchHorizontalMode="MATCH_PARENT"
+               stretchVerticalMode="MATCH_CONTENT"/>
+</HorizontalLayout>
