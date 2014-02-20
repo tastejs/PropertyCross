@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<VerticalLayout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                padding="4"
+                backgroundColor="#ffffff"
+                contentAlignment="HCENTER|VCENTER"
+                stretchHorizontalMode="MATCH_PARENT" stretchVerticalMode="MATCH_PARENT"
+                xsi:noNamespaceSchemaLocation="http://www.neomades.com/XSD/3.5.0/layout.xsd">
+
+    <ListView id="@+id/PROPERTY_LIST"
+              separatorColor="#777777"
+              separatorVisible="true"
+              stretchHorizontalMode="MATCH_PARENT"
+              stretchVerticalMode="MATCH_PARENT"/>
+</VerticalLayout>

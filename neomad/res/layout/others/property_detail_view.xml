@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<VerticalLayout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                contentAlignment="LEFT|TOP"
+                stretchHorizontalMode="MATCH_PARENT"
+                stretchVerticalMode="MATCH_PARENT"
+                paddingTop="8"
+                paddingLeft="16"
+                paddingRight="16"
+                paddingBottom="8"
+                xsi:noNamespaceSchemaLocation="http://www.neomades.com/XSD/3.5.0/layout.xsd">
+    <!-- Price -->
+    <TextLabel id="@+id/ITEM_DETAIL_PRICE"
+               stretchHorizontalMode="MATCH_PARENT"
+               stretchVerticalMode="MATCH_CONTENT"
+               marginBottom="8"
+               textColor="#000000"/>
+    <!-- Price -->
+    <TextLabel id="@+id/ITEM_DETAIL_LOCATION"
+               stretchHorizontalMode="MATCH_PARENT"
+               stretchVerticalMode="MATCH_CONTENT"
+               textColor="#000000"/>
+    <!-- Image -->
+    <ImageLabel id="@+id/ITEM_DETAIL_IMAGE"
+                margin="4"
+                stretchHorizontalMode="MATCH_PARENT"
+                stretchVerticalMode="MATCH_CONTENT"/>
+    <VerticalLayout layoutAlignment="BOTTOM|HCENTER"
+			contentAlignment="LEFT" stretchHorizontalMode="MATCH_PARENT"
+			stretchVerticalMode="MATCH_PARENT">
+        <!-- Title -->
+        <TextLabel id="@+id/ITEM_DETAIL_TITLE"
+                   stretchHorizontalMode="MATCH_PARENT"
+                   stretchVerticalMode="MATCH_CONTENT"
+                   marginBottom="8"
+                   textColor="#000000"/>
+        <!-- Description -->
+        <TextLabel id="@+id/ITEM_DETAIL_DESC"
+                   stretchHorizontalMode="MATCH_PARENT"
+                   stretchVerticalMode="MATCH_CONTENT"
+                   textColor="#000000"/>
+    </VerticalLayout>
+
+</VerticalLayout>

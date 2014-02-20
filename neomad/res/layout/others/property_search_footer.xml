@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<HorizontalLayout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  marginBottom="4"
+                  marginLeft="4"
+                  marginRight="4"
+                  contentAlignment="LEFT|VCENTER"
+                  stretchHorizontalMode="MATCH_PARENT"
+                  stretchVerticalMode="MATCH_CONTENT"
+                  xsi:noNamespaceSchemaLocation="http://www.neomades.com/XSD/3.5.0/layout.xsd">
+    <TextLabel id="@+id/ITEM_FOOTER_LOADING"
+               stretchHorizontalMode="MATCH_PARENT"
+               stretchVerticalMode="MATCH_CONTENT"
+               height="50"
+               contentAlignment="LEFT|VCENTER"
+               textColor="#777777"/>
+    <TextLabel id="@+id/ITEM_FOOTER_MESSAGE"
+               stretchHorizontalMode="MATCH_PARENT"
+               stretchVerticalMode="MATCH_CONTENT"
+               contentAlignment="LEFT|VCENTER"
+               height="50"
+               textColor="#777777"/>
+</HorizontalLayout>

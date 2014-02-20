@@ -1,0 +1,15 @@
+ID;en;
+SEARCH_DESCRIPTION;Use the form below to search for houses to buy. You can search by place-name, postcode, or click 'My location', to search in your current location!;
+DO_SEARCH_TEXT;Go;
+USE_LOCATION_TEXT;My Location;
+RECENT_SEARCHES;Recent Searches;
+FAVOURITES;Favourites;
+FAVS;Favs;
+RESULTS;Results;
+PROPERTY_DETAILS;Property Details;
+AMBIGUOUS_LOCATION;Please select a location below;
+NETWORK_ERROR;An error occurred while searching. Please check your network connection and try again.;
+NO_RESULT;There were no properties found for the given location.;
+NO_LOCATION;Unable to detect current location. Please ensure location is turned on in your phone settings and try again.;
+LOCATION_NOT_FOUND;The location given was not recognised;
+LOADING;Loading...;
