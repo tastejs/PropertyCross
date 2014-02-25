@@ -108,6 +108,16 @@ module.exports = function(grunt) {
               );
             });
           })
+          .then(function checkIdentity() {
+            if (!options.identity) {
+              grunt.log.error('WARNING: you haven\'t provided a signing identity (using --ios.identity cmd line parameter)');
+            } else {
+              return util.cmd('security -q find-certificate -c "' + options.identity + '"').then(null, function() {
+                grunt.log.error('WARNING: the identity specified doesn\'t seem to exist - you may need to check its name in your keychain');
+                return true;
+              });
+            }
+          })
           .then(function run() {
             var home = process.env.HOME || process.env.HOMEPATH || process.env.USERPROFILE;
             var provisionFile = grunt.file.expand(path.resolve(home, 'Library/MobileDevice/Provisioning Profiles/*.mobileprovision'))[0];
