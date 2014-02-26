@@ -209,16 +209,11 @@ angular.module('propertycross.services', ['ngResource'])
 
         load: function() {
             var q = $q.defer();
-            try {
-                if (!properties || !properties.length) {
-                    properties = JSON.parse(localStorage['favourites']) || [];
-                }
-                q.resolve(properties);
+            if (!properties || !properties.length) {
+                var json = localStorage['favourites'];
+                properties = json ? JSON.parse(json) : [];
             }
-            catch(error) {
-                console.error("Failed to load favourites", error);
-                q.reject(error);
-            }
+            q.resolve(properties);
             return q.promise;
         },
 
