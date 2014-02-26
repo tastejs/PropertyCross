@@ -70,7 +70,7 @@ angular.module('propertycross.services', ['ngResource'])
 .factory('Properties', function($q, Nestoria, Geolocation) {
 
     var lastSearch = '',
-        page = 1,
+        lastSearchPage = 1,
         lastResponse,
         properties = [];
 
@@ -98,6 +98,73 @@ angular.module('propertycross.services', ['ngResource'])
         });
     }
 
+    function search(page, placeName) {
+        var q = $q.defer();
+        Nestoria.search(placeName, page).then(
+            function(response) {
+                var responseProperties = toProperties(response.listings);
+                if (placeName != lastSearch) {
+                    properties = responseProperties;
+                }
+                else {
+                    properties = properties.concat(responseProperties);
+                }
+                lastSearch = placeName;
+                lastSearchPage = page;
+                lastResponse = response;
+                q.resolve(properties);
+            },
+            function(error) {
+                q.reject(error);
+            }
+        );
+        return q.promise;
+    }
+
+    function searchByCurrentLocation(page, coordinates) {
+        var q = $q.defer();
+        var doSearchByCoordinates = function(coords) {
+            Nestoria.searchByCoordinates(coords.latitude,
+                                         coords.longitude,
+                                         page).then(
+                function(response) {
+                    var responseProperties = toProperties(response.listings);
+                    if (coords != lastSearch) {
+                        properties = responseProperties;
+                    }
+                    else {
+                        properties = properties.concat(responseProperties);
+                    }
+                    lastSearch = coords;
+                    lastSearchPage = page;
+                    lastResponse = response;
+                    q.resolve(properties);
+                },
+                function(error) {
+                    q.reject(error);
+                }
+            );
+        };
+
+        if (!coordinates) {
+            Geolocation.getCurrentPosition().then(
+                function(result) {
+                    var coords = { latitude: result.coords.latitude,
+                                   longitude: result.coords.longitude };
+                    doSearchByCoordinates(coords);
+                },
+                function(error) {
+                    q.reject(error);
+                }
+            );
+        }
+        else {
+            doSearchByCoordinates(coordinates);
+        }
+
+        return q.promise;
+    }
+
     return {
         current: function() {
             return properties;
@@ -116,69 +183,24 @@ angular.module('propertycross.services', ['ngResource'])
         },
 
         search: function(placeName) {
-            lastSearch = placeName;
-            page = 1;
             lastResponse = null;
             properties = [];
-
-            var q = $q.defer();
-            Nestoria.search(placeName, page).then(
-                function(response) {
-                    lastResponse = response;
-                    properties = toProperties(response.listings);
-                    q.resolve(properties);
-                },
-                function(error) {
-                    q.reject(error);
-                }
-            );
-            return q.promise;
+            return search(1, placeName);
         },
 
         searchByCurrentLocation: function() {
-            lastSearch = '';
-            page = 1;
             lastResponse = null;
             properties = [];
-
-            var q = $q.defer();
-            Geolocation.getCurrentPosition().then(
-                function(result) {
-                    // TODO update lastSearch, etc
-                    Nestoria.searchByCoordinates(result.coords.latitude,
-                                                 result.coords.longitude,
-                                                 page).then(
-                        function(response) {
-                            lastResponse = response;
-                            properties = toProperties(response.listings);
-                            q.resolve(properties);
-                        },
-                        function(error) {
-                            q.reject(error);
-                        }
-                    );
-                },
-                function(error) {
-                    q.reject(error);
-                }
-            );
-            return q.promise;
+            return searchByCurrentLocation(1);
         },
 
-        // TODO handle more properties when using coordinates
         more: function() {
-            var q = $q.defer();
-            Nestoria.search(lastSearch, ++page).then(
-                function(response) {
-                    lastResponse = response;
-                    properties = properties.concat(toProperties(response.listings));
-                    q.resolve(properties);
-                },
-                function(error) {
-                    q.reject(error);
-                }
-            );
-            return q.promise;
+            if (typeof lastSearch === 'string') {
+                return search(lastSearch, lastSearchPage + 1);
+            }
+            else {
+                return searchByCurrentLocation(lastSearchPage + 1, lastSearch);
+            }
         },
 
         get: function(id) {
