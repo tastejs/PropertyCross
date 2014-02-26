@@ -14,20 +14,43 @@ angular.module('propertycross.controllers', ['ionic'])
                                   $state.go('favourites');
                               } } ];
 
+    var loading;
+
+    var searchErrorHandler = function(error) {
+        loading.hide();
+        if (error instanceof Array) {
+            $scope.locations = error;
+            $scope.showLocations = true;
+            $scope.showRecentSearches = false;
+        }
+        else {
+            $scope.errorMessage = error;
+            $scope.showError = true;
+        }
+    };
+
     var doSearch = ionic.debounce(function(location) {
-        var loading = $ionicLoading.show({ content: 'Searching...' });
-        Properties.search(location).then(function(response) {
-            loading.hide();
-            $state.go('results');
-        });
+        $scope.errorMessage = '';
+        $scope.showError = false;
+        loading = $ionicLoading.show({ content: 'Searching...' });
+        Properties.search(location).then(
+            function(response) {
+                loading.hide();
+                $state.go('results');
+            },
+            searchErrorHandler);
     }, 200);
 
     var doSearchMyLocation = ionic.debounce(function() {
-        var loading = $ionicLoading.show({ content: 'Searching...' });
-        Properties.searchByCurrentLocation().then(function(response) {
-            loading.hide();
-            $state.go('results');
-        });
+        $scope.errorMessage = '';
+        $scope.showError = false;
+        loading = $ionicLoading.show({ content: 'Searching...' });
+        Properties.searchByCurrentLocation().then(
+            function(response) {
+                loading.hide();
+                $state.go('results');
+            },
+            searchErrorHandler);
     }, 200);
 
     $scope.search = function(searchText) {
@@ -39,10 +62,17 @@ angular.module('propertycross.controllers', ['ionic'])
     };
 
     $scope.recentSearches = [];
+    $scope.showRecentSearches = false;
     RecentSearches.get().then(function(searches) {
         $scope.recentSearches = searches;
         $scope.showRecentSearches = searches.length;
     });
+
+    $scope.locations = [];
+    $scope.showLocations = false;
+
+    $scope.errorMessage = '';
+    $scope.showError = false;
 
     Favourites.load();
 })

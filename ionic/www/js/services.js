@@ -8,7 +8,9 @@ angular.module('propertycross.services', ['ngResource'])
                               encoding: 'json',
                               listing_type: 'buy',
                               callback: 'JSON_CALLBACK' },
-                            { search: { method: 'JSONP' } });
+                            { search: { method: 'JSONP' } }),
+        validCodes = [ '100', '101', '110' ],
+        ambiguousCodes = [ '200', '202' ];
 
     return {
 
@@ -19,8 +21,19 @@ angular.module('propertycross.services', ['ngResource'])
                 page: page
             },
             function(response) {
-                RecentSearches.add(placeName);
-                q.resolve(response.response);
+                response = response.response;
+                if (validCodes.indexOf(response.application_response_code) != -1) {
+                    RecentSearches.add(placeName);
+                    q.resolve(response);
+                }
+                else if (ambiguousCodes.indexOf(response.application_response_code) != -1) {
+                    q.reject(response.locations.map(function(item) {
+                        return { key: item.place_name, value: item.long_title };
+                    }));
+                }
+                else {
+                    q.reject('An error occurred while searching. Please check your network connection and try again.');
+                }
             },
             function(error) {
                 q.reject(error);
@@ -103,6 +116,10 @@ angular.module('propertycross.services', ['ngResource'])
         Nestoria.search(placeName, page).then(
             function(response) {
                 var responseProperties = toProperties(response.listings);
+                if (!responseProperties.length) {
+                    q.reject('There were no properties found for ' + placeName);
+                    return;
+                }
                 if (placeName != lastSearch) {
                     properties = responseProperties;
                 }
@@ -129,6 +146,10 @@ angular.module('propertycross.services', ['ngResource'])
                                          page).then(
                 function(response) {
                     var responseProperties = toProperties(response.listings);
+                    if (!responseProperties.length) {
+                        q.reject('There were no properties found for ' + placeName);
+                        return;
+                    }
                     if (coords != lastSearch) {
                         properties = responseProperties;
                     }
