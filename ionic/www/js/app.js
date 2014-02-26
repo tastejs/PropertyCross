@@ -13,7 +13,7 @@ angular.module('propertycross', ['ionic',
         })
 
         .state('results', {
-            url: '/results/:searchTerm',
+            url: '/results',
             templateUrl: 'templates/results.html',
             controller: 'ResultsCtrl'
         })

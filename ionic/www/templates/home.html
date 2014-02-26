@@ -12,6 +12,9 @@
         <button class="button button-positive" ng-click="searchMyLocation()">My Location</button>
     </div>
 
-    <!-- TODO recent searches and error messages -->
+    <!-- TODO error messages -->
+    <div class="list card" ng-show="showRecentSearches">
+        <a ng-repeat="recentSearch in recentSearches" class="item" ng-click="search(recentSearch)">{{ recentSearch }}</a>
+    </div>
   </content>
 </view>

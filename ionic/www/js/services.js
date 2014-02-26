@@ -1,14 +1,14 @@
 angular.module('propertycross.services', ['ngResource'])
 
-.factory('Nestoria', function($resource, $q) {
-    var service = $resource("http://api.nestoria.co.uk/api",
-                            { country: "uk",
-                              pretty: "1",
-                              action: "search_listings",
-                              encoding: "json",
-                              listing_type: "buy",
-                              callback: "JSON_CALLBACK" },
-                            { search: { method: "JSONP" } });
+.factory('Nestoria', function($resource, $q, RecentSearches) {
+    var service = $resource('http://api.nestoria.co.uk/api',
+                            { country: 'uk',
+                              pretty: '1',
+                              action: 'search_listings',
+                              encoding: 'json',
+                              listing_type: 'buy',
+                              callback: 'JSON_CALLBACK' },
+                            { search: { method: 'JSONP' } });
 
     return {
 
@@ -19,6 +19,7 @@ angular.module('propertycross.services', ['ngResource'])
                 page: page
             },
             function(response) {
+                RecentSearches.add(placeName);
                 q.resolve(response.response);
             },
             function(error) {
@@ -29,11 +30,13 @@ angular.module('propertycross.services', ['ngResource'])
 
         searchByCoordinates: function(latitude, longitude, page) {
             var q = $q.defer();
+            var searchTerm = latitude.toFixed(2) + ',' + longitude.toFixed(2);
             service.search({
-                centre_point: latitude.toFixed(2) + ',' + longitude.toFixed(2),
+                centre_point: searchTerm,
                 page: page
             },
             function(response) {
+                RecentSearches.add(searchTerm);
                 q.resolve(response.response);
             },
             function(error) {
@@ -189,7 +192,7 @@ angular.module('propertycross.services', ['ngResource'])
     };
 })
 
-.factory('Favourites', function($q, Properties) {
+.factory('Favourites', function($q) {
     var properties = [];
 
     function save() {
@@ -197,7 +200,7 @@ angular.module('propertycross.services', ['ngResource'])
             localStorage['favourites'] = JSON.stringify(properties);
         }
         catch(error) {
-            console.error("Failed to save favourites", error);
+            console.error('Failed to save favourites', error);
         }
     }
 
@@ -248,6 +251,47 @@ angular.module('propertycross.services', ['ngResource'])
         isFavourite: function(property) {
             return properties.indexOf(property) != -1;
         }
+    };
+})
+
+.factory('RecentSearches', function($q, $rootScope) {
+    var searches = [];
+
+    function save() {
+        try {
+            localStorage['searches'] = JSON.stringify(searches);
+        }
+        catch(error) {
+            console.error('Failed to save recent searches', error);
+        }
+    }
+
+    return {
+
+        get: function() {
+            var q = $q.defer();
+            var json = localStorage['searches'];
+            searches = json ? JSON.parse(json) : [];
+            q.resolve(searches);
+            return q.promise;
+        },
+
+        add: function(search) {
+            if (!search) {
+                return;
+            }
+            var index = searches.indexOf(search);
+            if (index != -1) {
+                searches.splice(index, 1);
+            }
+            searches.unshift(search);
+            if (searches.length > 5) {
+                searches.length = 5;
+            }
+            save();
+            return searches;
+        }
+
     };
 })
 

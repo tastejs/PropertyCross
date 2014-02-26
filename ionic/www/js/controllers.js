@@ -1,6 +1,12 @@
 angular.module('propertycross.controllers', ['ionic'])
 
-.controller('HomeCtrl', function($scope, $state, $ionicLoading, Properties, Favourites) {
+.controller('HomeCtrl', function($scope,
+                                 $rootScope,
+                                 $state,
+                                 $ionicLoading,
+                                 Properties,
+                                 Favourites,
+                                 RecentSearches) {
 
     $scope.rightButtons = [ { type: 'button-clear',
                               content: 'Faves',
@@ -12,7 +18,7 @@ angular.module('propertycross.controllers', ['ionic'])
         var loading = $ionicLoading.show({ content: 'Searching...' });
         Properties.search(location).then(function(response) {
             loading.hide();
-            $state.go('results', { searchTerm: location });
+            $state.go('results');
         });
     }, 200);
 
@@ -20,7 +26,7 @@ angular.module('propertycross.controllers', ['ionic'])
         var loading = $ionicLoading.show({ content: 'Searching...' });
         Properties.searchByCurrentLocation().then(function(response) {
             loading.hide();
-            $state.go('results', { searchTerm: 'TODO' });
+            $state.go('results');
         });
     }, 200);
 
@@ -31,6 +37,12 @@ angular.module('propertycross.controllers', ['ionic'])
     $scope.searchMyLocation = function() {
         doSearchMyLocation();
     };
+
+    $scope.recentSearches = [];
+    RecentSearches.get().then(function(searches) {
+        $scope.recentSearches = searches;
+        $scope.showRecentSearches = searches.length;
+    });
 
     Favourites.load();
 })
