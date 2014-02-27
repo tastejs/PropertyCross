@@ -217,7 +217,7 @@ angular.module('propertycross.services', ['ngResource'])
 
         more: function() {
             if (typeof lastSearch === 'string') {
-                return search(lastSearch, lastSearchPage + 1);
+                return search(lastSearchPage + 1, lastSearch);
             }
             else {
                 return searchByCurrentLocation(lastSearchPage + 1, lastSearch);
