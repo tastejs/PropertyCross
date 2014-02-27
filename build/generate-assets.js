@@ -135,6 +135,9 @@ async.series([
     ["assets/frameworks/emy.png", "emy/www/assets/icons/icon-72-2x.png", 144],
     ["assets/frameworks/emy.png", "emy/www/assets/icons/ApplicationIcon.png", 66],
     ["assets/frameworks/emy.png", "emy/www/assets/icons/ApplicationTileIcon.png", 173],
+    ["assets/frameworks/neomad.png", "neomad/res/Icons/ic_launcher.png", 72],
+    ["assets/frameworks/neomad.png", "neomad/res/Icons/others/app.png", 72],
+    ["assets/frameworks/neomad.png", "neomad/res/Icons/metro/app.png", 173]
   ]),
 
   generateSplashscreens.bind(null, "assets/splashscreen-bottom-640x640.png", [

@@ -8,3 +8,5 @@ app.zip
 *.apk
 *.ipa
 *.xap
+/neomad/bin
+/neomad/out
