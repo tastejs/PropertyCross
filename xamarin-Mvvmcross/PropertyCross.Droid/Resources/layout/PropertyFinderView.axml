@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/propview"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:layout_margin="16dp"
+    android:layout_gravity="top">
+  <TextView
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="4dp"
+      android:text="@string/search_description" />
+  <EditText
+      android:id="@+id/search"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="4dp"
+      android:inputType="text"
+      android:imeOptions="actionSearch" 
+      local:MvxBind="Text SearchText; Enabled Negated(IsBusy)"/>
+  <Button
+      android:id="@+id/do_search"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="4dp"
+      android:text="@string/do_search_text"
+      local:MvxBind="Click SearchCommand; Enabled Negated(IsBusy)"/>
+  <Button
+      android:id="@+id/use_location"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="4dp"
+      android:text="@string/use_location_text" 
+      local:MvxBind="Click UseLocationCommand; Enabled Negated(IsBusy)"/>
+  <TextView
+      android:id="@+id/mainview_message"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="4dp"
+      android:textSize="12sp" 
+       local:MvxBind="Text Message"/>
+ 
+  <TextView
+      android:id="@+id/results_header"
+      style="?android:listSeparatorTextViewStyle"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="@string/recent_searches"
+      local:MvxBind="Visibility ShowSelectLocation,Converter=InvertedVisibility"
+      android:textSize="14sp" />
+    <Mvx.MvxListView
+        android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="4dp" 
+         local:MvxBind="ItemsSource RecentSearches; ItemClick RecentSearchSelectedCommand; Visibility ShowSelectLocation,Converter=InvertedVisibility"
+    local:MvxItemTemplate="@layout/item_recent_search"/>
+ 
+    <TextView
+        android:id="@+id/ambiguous_location"
+        style="?android:listSeparatorTextViewStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/ambiguous_location"
+        local:MvxBind="Visibility ShowSelectLocation,Converter=Visibility"
+        android:textSize="14sp" />
+    <Mvx.MvxListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+         local:MvxBind="ItemsSource SuggestedLocations; ItemClick LocationSelectedCommand; Visibility ShowSelectLocation,Converter=Visibility"
+    local:MvxItemTemplate="@layout/item_suggested_location"
+        />
+</LinearLayout>

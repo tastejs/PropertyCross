@@ -1,0 +1,176 @@
+<views:MvxPhonePage
+    x:Class="PropertyCross.WindowsPhone.Views.PropertyFinderView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:views="clr-namespace:Cirrious.MvvmCross.WindowsPhone.Views;assembly=Cirrious.MvvmCross.WindowsPhone"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:bindableApplicationBar="clr-namespace:BindableApplicationBar;assembly=BindableApplicationBar"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True">
+    <toolkit:TransitionService.NavigationInTransition>
+        <toolkit:NavigationInTransition>
+            <toolkit:NavigationInTransition.Backward>
+                <toolkit:TurnstileTransition Mode="BackwardIn"/>
+            </toolkit:NavigationInTransition.Backward>
+            <toolkit:NavigationInTransition.Forward>
+                <toolkit:TurnstileTransition Mode="ForwardIn"/>
+            </toolkit:NavigationInTransition.Forward>
+        </toolkit:NavigationInTransition>
+    </toolkit:TransitionService.NavigationInTransition>
+    <toolkit:TransitionService.NavigationOutTransition>
+        <toolkit:NavigationOutTransition>
+            <toolkit:NavigationOutTransition.Backward>
+                <toolkit:TurnstileTransition Mode="BackwardOut"/>
+            </toolkit:NavigationOutTransition.Backward>
+            <toolkit:NavigationOutTransition.Forward>
+                <toolkit:TurnstileTransition Mode="ForwardOut"/>
+            </toolkit:NavigationOutTransition.Forward>
+        </toolkit:NavigationOutTransition>
+    </toolkit:TransitionService.NavigationOutTransition>
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="Black">
+<Grid.Resources>
+            <Style TargetType="Button"  x:Key="ButtonStyle">
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+               
+                <Setter Property="Margin" Value="3"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{StaticResource PhoneAccentBrush}">
+                                <ContentControl x:Name="ContentContainer"
+                              Margin="20,10,0,10"
+                              Padding="0,0,10,0"
+                              Width="430"
+                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                              Content="{TemplateBinding Content}"
+                              HorizontalAlignment="Left"
+                              HorizontalContentAlignment="Stretch"
+                              Background="LightBlue"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </Grid.Resources>
+        <Image Source="../Images/background.jpg"
+          VerticalAlignment="Bottom"
+          Opacity="0.5"/>
+
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="PropertyCross"
+                 FontSize="{StaticResource PhoneFontSizeExtraLarge}"/>
+
+            <TextBlock Text="Use the form below to search for houses to buy. You can search by place-name, postcode, or click 'My Location', to search in your current location!"
+                 Grid.Row="1"
+                 TextWrapping="Wrap"
+                 Margin="0,30,0,0"/>
+
+            <!-- search form -->
+            <StackPanel Orientation="Horizontal"
+                  Grid.Row="2"
+                  Margin="0,10,0,0">
+                <TextBox 
+                 Width="200"
+                 KeyDown="SearchText_KeyDown"
+                 Text="{Binding SearchText, Mode=TwoWay}"
+                 IsEnabled="{Binding IsBusy, Converter={StaticResource NativeNegatedConverter}}"/>
+                <Button
+                Content="Go"
+                IsEnabled="{Binding IsBusy, Converter={StaticResource NativeNegatedConverter}}"
+                    Command="{Binding SearchCommand}"/>
+                <Button 
+                Content="My location"
+                IsEnabled="{Binding IsBusy, Converter={StaticResource NativeNegatedConverter}}"
+                    Command="{Binding UseLocationCommand}"/>
+            </StackPanel>
+
+            <!-- progress indicator -->
+            <Grid Height="8" Grid.Row="3">
+                <ProgressBar
+                     IsIndeterminate="True"
+                     Visibility="{Binding IsBusy, Converter={StaticResource VisibilityConverter}}"/>
+            </Grid>
+
+            <!-- error message -->
+            <TextBlock
+                 TextWrapping="Wrap"
+                 Grid.Row="4"
+                 Margin="0,20,0,20"
+                Text="{Binding Message, Mode=OneWay}"/>
+
+            <!-- ambiguous locations list -->
+            <StackPanel x:Name="SelectLocation"
+                  Orientation="Vertical"
+                  Grid.Row="5"
+                  Margin="0,5,0,20"
+                  Visibility="{Binding ShowSelectLocation, Converter={StaticResource VisibilityConverter}}">
+                <TextBlock Text="Please select a location below:"
+                   FontSize="{StaticResource PhoneFontSizeMedium}"/>
+                <ListBox x:Name="locationsList" ItemsSource="{Binding SuggestedLocations}"  toolkit:TiltEffect.IsTiltEnabled="True">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button Style="{StaticResource ButtonStyle}"
+                      Command="{Binding ElementName=SelectLocation, Path=DataContext.LocationSelectedCommand}" CommandParameter="{Binding }">
+                                <Grid>
+                                    <TextBlock Text="{Binding DisplayName}"
+                             FontSize="{StaticResource PhoneFontSizeMedium}"/>
+                                </Grid>
+                            </Button>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ListBox>
+            </StackPanel>
+
+            <!-- recent searches -->
+            <StackPanel x:Name="recentSearchesContainer"
+                  Orientation="Vertical"
+                  Grid.Row="5"
+                  Margin="0,5,0,20"
+                    Visibility="{Binding ShowSelectLocation, Converter={StaticResource InvertedVisibilityConverter}}">
+                <TextBlock Text="Recent searches:"
+                   FontSize="{StaticResource PhoneFontSizeMedium}"/>
+                <ListBox x:Name="recentSearchList" ItemsSource="{Binding RecentSearches}"  toolkit:TiltEffect.IsTiltEnabled="True">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button Style="{StaticResource ButtonStyle}"
+                      Command="{Binding ElementName=recentSearchesContainer,Path=DataContext.RecentSearchSelectedCommand}" CommandParameter="{Binding }">
+                                <Grid>
+                                    <TextBlock Text="{Binding Search.DisplayText}"
+                             FontSize="{StaticResource PhoneFontSizeMedium}"/>
+                                    <TextBlock Text="{Binding ResultsCount}"
+                             HorizontalAlignment="Right"
+                             FontSize="{StaticResource PhoneFontSizeMedium}"/>
+                                </Grid>
+                            </Button>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ListBox>
+            </StackPanel>
+        </Grid>
+    </Grid>
+    <bindableApplicationBar:Bindable.ApplicationBar>
+        <bindableApplicationBar:BindableApplicationBar>
+            <bindableApplicationBar:BindableApplicationBarButton IconUri="/Images/favourite.png" Text="View Favourites" Command="{Binding ShowFavouritesCommand}"/>
+        </bindableApplicationBar:BindableApplicationBar>
+    </bindableApplicationBar:Bindable.ApplicationBar>
+</views:MvxPhonePage>
