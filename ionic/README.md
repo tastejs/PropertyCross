@@ -12,14 +12,13 @@ Applications developed with Ionic can be run directly within a web browser contr
 
 ## Application Structure
 
-+ `\css` - application-specific styling
-+ `\img` - application-specific images
-+ `\js` - application-specific JavaScript files
-+ `\js\app.js` - the application bootstrap, setting up state/routing for the app
-+ `\js\controllers.js` - the view models that implement the PropertyCross view logic
-+ `\js\services.js` - the services that implement the PropertyCross data fetching logic
-+ `\lib` - the Ionic framework and its dependencies
-+ `\res` - icons, etc used by PhoneGap
-+ `\templates` - the various views of the application
-+ `config.xml` - the XML file that is used by PhoneGap Build in order to package the app
-+ `index.html` - defines the root view for the application
++ `\www\assets` - icons, etc used by PhoneGap
++ `\www\css` - application-specific styling
++ `\www\img` - application-specific images
++ `\www\js` - application-specific JavaScript files
++ `\www\js\app.js` - the application bootstrap, setting up state/routing for the app
++ `\www\js\controllers.js` - the view models that implement the PropertyCross view logic
++ `\www\js\services.js` - the services that implement the PropertyCross data fetching logic
++ `\www\lib` - the Ionic framework and its dependencies
++ `\www\templates` - the various views of the application
++ `\www\index.html` - defines the root view for the application
