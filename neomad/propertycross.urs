@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <urs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-     xsi:noNamespaceSchemaLocation="/XSD/3.5.0/urs.xsd">
+     xsi:noNamespaceSchemaLocation="http://www.neomades.com/XSD/0.0.0/urs.xsd">
     <parameters>
         <mainclassname>PropertyCross</mainclassname>
         <applicationname>PropertyCross - NeoMAD</applicationname>
