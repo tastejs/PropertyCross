@@ -3,7 +3,7 @@
      xsi:noNamespaceSchemaLocation="/XSD/3.5.0/urs.xsd">
     <parameters>
         <mainclassname>PropertyCross</mainclassname>
-        <applicationname>PropertyCross</applicationname>
+        <applicationname>PropertyCross - NeoMAD</applicationname>
         <packagename>com.propertycross.neomad</packagename>
         <icon path="res/Icons/others/app.png">
         	<windowsphone tilebackgroundpath="res/Icons/metro/app.png" />
