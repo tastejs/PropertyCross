@@ -9,7 +9,7 @@
                    visible="false"
                    stretchHorizontalMode="MATCH_PARENT"
                    stretchVerticalMode="MATCH_CONTENT"
-                   textColor="#000000"/>
+                   />
     <ListView id="@+id/PROPERTY_LIST"
               separatorColor="#777777"
               separatorVisible="true"
