@@ -47,7 +47,7 @@ public abstract class PropertyDetailAdapter extends ScreenAdapter {
 		return state.isFavorite(property);
 	}
 
-	public void receive(Event e) {
+	public void onEventReceived(Event e) {
 
 	}
 }

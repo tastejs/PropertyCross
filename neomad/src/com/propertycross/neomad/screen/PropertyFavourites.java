@@ -4,6 +4,7 @@ import java.util.Vector;
 
 import com.neomades.app.ScreenParams;
 import com.neomades.ui.ListView;
+import com.neomades.ui.TextLabel;
 import com.neomades.ui.View;
 import com.neomades.ui.listeners.ItemClickedListener;
 import com.propertycross.neomad.Res;
@@ -36,12 +37,20 @@ public class PropertyFavourites extends ScreenAdapter implements ItemClickedList
 		super.init();
 		list = (ListView) findView(Res.id.PROPERTY_LIST);
 		list.setItemClickedListener(this);
+		Vector items = (Vector) getScreenParams().getObject(FAVOURITES);
 		adapter = new PropertyListAdapter(this);
+		adapter.setModel(items, null, items.size());
 		list.setListAdapter(adapter);
 		list.setItemTypeAdapter(adapter);
-		Vector items = (Vector) getScreenParams().getObject(FAVOURITES);
-		adapter.setModel(items, null, items.size());
 		update();
+		
+		boolean hasNoFavourites = items.size() == 0;
+		if (hasNoFavourites) {
+			TextLabel message = (TextLabel)findView(Res.id.LABEL_NO_ITEM);
+			message.setText(Res.string.NO_FAVOURITES);
+			message.setVisible(true);
+		}
+		
 	}
 
 	protected void onCreate() {
@@ -62,7 +71,7 @@ public class PropertyFavourites extends ScreenAdapter implements ItemClickedList
 		list.notifyDataChanged();
 	}
 
-	public void receive(Event e) {
+	public void onEventReceived(Event e) {
 		if (e.getType() == Event.Type.UPDATE_LIST) {
 			loadListFromPersistence();
 		}

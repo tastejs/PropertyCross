@@ -80,11 +80,24 @@ public abstract class ScreenAdapter extends Screen implements EventListener {
 	}
 
 	public void send(Event e) {
+		
 		getBus().receive(e);
+		willSendEvent();
+	}
+	
+	protected void willSendEvent() {
+	}
+	
+	protected void didReceivedEvent() {
 	}
 
-	public void receive(Event e) {
+	public final void receive(Event e) {
+		didReceivedEvent();
+		onEventReceived(e);
+	}
 
+	protected void onEventReceived(Event e) {
+		
 	}
 
 	protected abstract void update();
@@ -97,4 +110,6 @@ public abstract class ScreenAdapter extends Screen implements EventListener {
 		// by default no
 		return false;
 	}
+	
+	
 }

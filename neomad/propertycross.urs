@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <urs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-     xsi:noNamespaceSchemaLocation="http://www.neomades.com/XSD/0.0.0/urs.xsd">
+     xsi:noNamespaceSchemaLocation="/XSD/3.6.0/urs.xsd">
     <parameters>
         <mainclassname>PropertyCross</mainclassname>
-        <applicationname>PropertyCross - NeoMAD</applicationname>
+        <applicationname>PropertyCross</applicationname>
         <packagename>com.propertycross.neomad</packagename>
         <icon path="res/Icons/others/app.png">
         	<windowsphone tilebackgroundpath="res/Icons/metro/app.png" />
@@ -17,6 +17,7 @@
     
     <binaryname filename="$PRODUCTNAME_$TARGET_$VERSION_$LANGUAGE"
                 multilanguageseparator="_" suboutputpath="${TARGET_NAME}"/>
+                
                 
                 
     <permissions>

@@ -42,6 +42,8 @@ public class Constants implements TargetInfo {
 
 	public static final int FINDER_LIST_MARGIN = 4;
 
+
+
 	public static boolean THEME_LIGHT_WITH_DARK_ACTION_BAR = false;
 
 	public static boolean PROPERTY_DETAILS_SUBTITLE = true;
@@ -49,8 +51,6 @@ public class Constants implements TargetInfo {
 	public static boolean SPLASH_ENABLED = false;
 
 	public static boolean SCREEN_WITH_BG_IMAGE = false;
-
-	public static boolean RECENT_SEARCH_COUNT = true;
 
 	public static boolean RECENT_SEARCH_COUNT_WITH_PARENTHESIS = false;
 
@@ -87,7 +87,6 @@ public class Constants implements TargetInfo {
 			RECENT_SEARCH_COUNT_WITH_PARENTHESIS = true;
 			THEME_LIGHT_WITH_DARK_ACTION_BAR = true;
 		} else if (IOS) {
-			RECENT_SEARCH_COUNT = false;
 			RENAME_BACK_BUTTON = true;
 			FAVOURITES_SHORT_TEXT = true;
 			PROPERTY_FINDER_TITLE = "Property Finder";
