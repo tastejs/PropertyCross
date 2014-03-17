@@ -9,6 +9,7 @@ import com.neomades.json.JSONObject;
 import com.neomades.ui.Button;
 import com.neomades.ui.TextLabel;
 import com.neomades.ui.View;
+import com.neomades.ui.WaitView;
 import com.neomades.ui.listeners.ClickListener;
 import com.neomades.ui.menu.Menu;
 import com.neomades.ui.menu.MenuItem;
@@ -32,65 +33,69 @@ import com.propertycross.neomad.utils.Log;
 /**
  * @author Neomades
  */
-public class PropertyFinder extends PropertyFinderAdapter {
+public class PropertyFinder extends PropertyFinderAdapter implements ClickListener {
 
 	public static final String FAVOURITES = "favourites";
 	private Button doSearch;
 	private Button doLocation;
+	private View loadingView;
 
 	protected void onCreate() {
 		setContent(Res.layout.PROPERTY_FINDER_SCREEN);
 		updateTitle(Constants.PROPERTY_FINDER_TITLE);
 		setShortTitle(Constants.PROPERTY_FINDER_SHORT_TITLE);
 		init();
-		
+		loadingView = (WaitView) findView(Res.id.WAIT_VIEW);
 		doSearch = (Button) findView(Res.id.DO_SEARCH);
 		doLocation = (Button) findView(Res.id.DO_LOCATION);
+		doSearch.setClickListener(this);
+		doLocation.setClickListener(this);
+	}
 
-		doSearch.setClickListener(new ClickListener() {
-			public void onClick(View view) {
-				if (getQuery().getText() != null) {
-					doSearch.setEnabled(false);
-					setMessage("");
-					send(new SearchEvent(getName(), getQuery().getText().trim(), 1));
-				}
-			}
-		});
-		doLocation.setClickListener(new ClickListener() {
-			public void onClick(View view) {
-				setMessage("");
-				doLocation.setEnabled(false);
-				find();
-			}
-		});
+	public void onClick(View view) {
+		setActivityIndicatorVisible(true);
+		switch (view.getId()) {
+		case Res.id.DO_SEARCH:
+			doSearch();
+			break;
+		case Res.id.DO_LOCATION:
+			doLocation();
+			break;
+		default:
+			// none
+			break;
+		}
+
 	}
 
 	protected void onMenuCreate(Menu menu) {
+		addFavouritesMenuItem(menu);
+	}
+
+	private void addFavouritesMenuItem(Menu menu) {
 		MenuItem item = null;
 		if (Constants.FAVOURITES_WITH_ICON) {
 			item = new MenuItem(Res.string.FAVOURITES, Res.image.FAVS);
-			
+
 		} else if (Constants.FAVOURITES_SHORT_TEXT) {
-			item = new MenuItem(
-					Res.string.FAVS);
-			
+			item = new MenuItem(Res.string.FAVS);
+
 		} else {
-			item = new MenuItem(
-					Res.string.FAVOURITES);	
+			item = new MenuItem(Res.string.FAVOURITES);
 		}
 		item.setAsRightAction();
 		menu.addItem(item);
 	}
 
 	protected void onMenuAction(MenuItem item) {
-		send(new CallbackEvent(getName(), PersistenceService.SERVICE_NAME,
-				Event.Type.LOAD) {
+		// only one menu item
+		loadFavourites();
+	}
+
+	private void loadFavourites() {
+		send(new CallbackEvent(getName(), PersistenceService.SERVICE_NAME, Event.Type.LOAD) {
 			public void onComplete(Object result) {
-				setState((PersistenceState) result);
-				ScreenParams values = new ScreenParams();
-				values.putObject(FAVOURITES, getState().getFavourites());
-				values.putObject(EXTRA_PREVIOUS_SCREEN, getShortTitle());
-				controller.pushScreen(PropertyFavourites.class, values);
+				doShowFavourites(result);
 			}
 		});
 	}
@@ -106,7 +111,7 @@ public class PropertyFinder extends PropertyFinderAdapter {
 					getQuery().setText(getSearch().getLabel());
 				}
 			} else {
-				setSearch(new FullTextSearch(getQuery().getText()));
+				setSearch(new FullTextSearch(getSearch().getLabel(), getSearch().getQuery()));
 			}
 			setProperties(PropertyList.valueOf(json));
 
@@ -120,7 +125,7 @@ public class PropertyFinder extends PropertyFinderAdapter {
 			} else {
 				setMessage(ResManager.getString(Res.string.NO_RESULT));
 			}
-			updateSearches();
+//			updateSearches();
 		} catch (JSONException ex) {
 			Log.d(ex.getMessage());
 		}
@@ -129,48 +134,98 @@ public class PropertyFinder extends PropertyFinderAdapter {
 
 	public void handleFindByPlace(Object data) {
 		try {
-			LocationList l = LocationList.valueOf(new JSONObject(data
-					.toString()));
+			LocationList l = LocationList.valueOf(new JSONObject(data.toString()));
 			Vector items = new Vector();
 			for (int i = 0; i < l.getData().size(); i++) {
-				items.addElement(new RecentSearch(new GeoLocationSearch(
-						(Location) l.getData().elementAt(i)), 0));
+				items.addElement(new RecentSearch(new GeoLocationSearch((Location) l.getData().elementAt(i)), 0));
 			}
 			getAdapter().setItems(items);
-			((TextLabel) findView(Res.id.RESULTS_HEADER))
-					.setText(Res.string.AMBIGUOUS_LOCATION);
+			((TextLabel) findView(Res.id.RESULTS_HEADER)).setText(Res.string.AMBIGUOUS_LOCATION);
 			update();
 		} catch (JSONException ex) {
 			Log.d(ex.getMessage());
 		}
 		enableAction();
 	}
+	
+	protected void willSendEvent() {
+		setActivityIndicatorVisible(true);
+	}
+	
+	protected void didReceivedEvent() {
+		setActivityIndicatorVisible(false);
+	}
 
-	public void receive(Event e) {
-		super.receive(e);
+	public void onEventReceived(Event e) {
+		super.onEventReceived(e);
+		
 		if (e.getType() == Event.Type.FIND_ERROR) {
-			setMessage(ResManager.getString(Res.string.LOCATION_NOT_FOUND));
-			enableAction();
+			onLocationNotFound();
+		} else if (e.getType() == Event.Type.FIND_BY_NAME_RES) {
+			onLocationFoundByName(e);
+		} else if (e.getType() == Event.Type.FIND_BY_PLACE_RES) {
+			onLocationFoundByPlace(e);
+		} else if (e.getType() == Event.Type.FIND_BY_LOCATION_RES) {
+			onLocationFoundByName(e);
+		} else if (e.getType() == Event.Type.NETWORK_ERROR) {
+			onNetworkError();
 		}
-		else if (e.getType() == Event.Type.FIND_BY_NAME_RES) {
-			handleFindByName(e.getValue(), false);
-			update();
+	}
+
+	private void onLocationFoundByName(Event e) {
+		handleFindByName(e.getValue(), false);
+		update();
+	}
+
+	private void onLocationNotFound() {
+		setMessage(ResManager.getString(Res.string.LOCATION_NOT_FOUND));
+		enableAction();
+	}
+
+	private void onLocationFoundByPlace(Event e) {
+		handleFindByPlace(e.getValue());
+	}
+
+	private void onNetworkError() {
+		setMessage(ResManager.getString(Res.string.NETWORK_ERROR));
+		enableAction();
+	}
+
+	private void doSearch() {
+		if (getQuery().getText() != null) {
+			doSearch.setEnabled(false);
+			setMessage("");
+			
+			send(new SearchEvent(getName(), getQuery().getText().trim(), 1));
 		}
-		else if (e.getType() == Event.Type.FIND_BY_PLACE_RES) {
-			handleFindByPlace(e.getValue());
-		}
-		else if (e.getType() == Event.Type.FIND_BY_LOCATION_RES) {
-			handleFindByName(e.getValue(), true);
-			update();
-		}
-		else if (e.getType() == Event.Type.NETWORK_ERROR) {
-			setMessage(ResManager.getString(Res.string.NETWORK_ERROR));
-			enableAction();
-		}
+	}
+
+	private void doLocation() {
+		setMessage("");
+		doLocation.setEnabled(false);
+		find();
+	}
+
+	private void doShowFavourites(Object result) {
+		setState((PersistenceState) result);
+		ScreenParams values = new ScreenParams();
+		values.putObject(FAVOURITES, getState().getFavourites());
+		values.putObject(EXTRA_PREVIOUS_SCREEN, getShortTitle());
+		controller.pushScreen(PropertyFavourites.class, values);
 	}
 
 	private void enableAction() {
 		doSearch.setEnabled(true);
 		doLocation.setEnabled(true);
+	}
+
+	protected void setActivityIndicatorVisible(boolean on) {
+		if (loadingView != null) {
+			loadingView.setVisible(on);
+		}
+		TextLabel label = ((TextLabel) findView(Res.id.ERROR_MESSAGE));
+		if (label != null) {
+			label.setVisible(!on);
+		}
 	}
 }

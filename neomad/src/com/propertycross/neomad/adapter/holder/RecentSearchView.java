@@ -18,13 +18,7 @@ public class RecentSearchView implements ViewHolder {
 	public void update(Object model) {
 		label.setText(((RecentSearch) model).getSearch().getLabel());
 		int nb = ((RecentSearch) model).getCount();
-		if (Constants.RECENT_SEARCH_COUNT) {
-			count.setText(decorateCount(nb));
-		} else {
-			// force count = 0 to hide label
-			nb = 0;
-		}
-		
+		count.setText(decorateCount(nb));
 		count.setVisible(nb > 0);
 		
 		

@@ -37,8 +37,8 @@ public class PropertyResult extends PropertyResultAdapter {
 		}
 	}
 
-	public void receive(Event e) {
-		super.receive(e);
+	public void onEventReceived(Event e) {
+		super.onEventReceived(e);
 		loading = false;
 	}
 	
