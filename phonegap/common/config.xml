@@ -42,6 +42,8 @@
     <icon src="assets/icons/icon-57-2x.png"         gap:platform="ios"        width="114" height="114" />
     <icon src="assets/icons/icon-72-2x.png"         gap:platform="ios"        width="144" height="144" />
 
+    <gap:plugin name="org.apache.cordova.geolocation" />
+    <gap:plugin name="org.apache.cordova.network-information" />
     <gap:plugin name="org.apache.cordova.splashscreen" />
 
     <gap:splash src="assets/splashscreens/200x320.png"                      gap:platform="android" gap:density="ldpi" />
