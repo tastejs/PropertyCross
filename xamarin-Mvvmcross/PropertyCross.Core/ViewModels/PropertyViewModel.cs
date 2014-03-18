@@ -31,9 +31,8 @@ namespace PropertyCross.Core.ViewModels
         public void Init(Property property)
         {
             Property = property;
-            PriceText = property.Price.ToString("C0");
-            DetailsText = string.Format("{0} {1} bed {2}", property.ShortTitle, property.Bedrooms,
-                property.PropertyType);
+            PriceText = string.Format ("£{0:0,0}", property.Price);
+            DetailsText = property.Title;
             ImageUri = new Uri(property.ImageUrl);
             PropertyOverview = string.Format("{0} {1}", property.BedBathroomText, property.PropertyType);
             PropertyInformation = property.Summary;

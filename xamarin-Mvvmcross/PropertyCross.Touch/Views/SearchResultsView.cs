@@ -23,7 +23,8 @@ namespace PropertyCross.Touch.Views
             if (RespondsToSelector(new Selector("edgesForExtendedLayout")))
                 EdgesForExtendedLayout = UIRectEdge.None;
 
-            var source = new MvxStandardTableViewSource(TableView, UITableViewCellStyle.Subtitle, new NSString("sub"), "TitleText PriceText;ImageUrl ImageUri;DetailText DetailsText", UITableViewCellAccessory.DisclosureIndicator);
+            var source = new MvxStandardTableViewSource(TableView, UITableViewCellStyle.Subtitle, new NSString("sub"),
+                "TitleText PriceText;ImageUrl ImageUri;DetailText DetailsText", UITableViewCellAccessory.DisclosureIndicator);
             TableView.Source = source;
 
             var set = this.CreateBindingSet<SearchResultsView, SearchResultsViewModel>();
