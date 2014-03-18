@@ -1,0 +1,16 @@
+{
+  "common": "PropertyCross.Core/**/*.cs",
+  "ios": {
+    "include":"PropertyCross.Touch/**/*.cs",
+    "exclude":"PropertyCross.Touch/**/*.designer.cs"
+  },
+  "android": {
+    "include":"PropertyCross.Droid/**/*.cs",
+    "exclude":"PropertyCross.Droid/**/*.Designer.cs"
+  },
+  "windowsphone": {
+    "include":"PropertyCross.Phone/**/*.cs",
+    "exclude":"PropertyCross.Phone/**/*.designer.cs",
+    "exclude":"PropertyCross.Phone/**/*.xaml.cs"
+  }
+}
