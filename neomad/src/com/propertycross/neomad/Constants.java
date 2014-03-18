@@ -68,7 +68,7 @@ public class Constants implements TargetInfo {
 	
 	public static String LAYOUT_LIST_PATH = "others";
 	
-	
+	public static int waitColor = -1;
 
 	/**
 	 * Conditioning by platform
@@ -87,6 +87,7 @@ public class Constants implements TargetInfo {
 			RECENT_SEARCH_COUNT_WITH_PARENTHESIS = true;
 			THEME_LIGHT_WITH_DARK_ACTION_BAR = true;
 		} else if (IOS) {
+			waitColor = 0x333333;
 			RENAME_BACK_BUTTON = true;
 			FAVOURITES_SHORT_TEXT = true;
 			PROPERTY_FINDER_TITLE = "Property Finder";

@@ -49,6 +49,7 @@ public class PropertyFavourites extends ScreenAdapter implements ItemClickedList
 			TextLabel message = (TextLabel)findView(Res.id.LABEL_NO_ITEM);
 			message.setText(Res.string.NO_FAVOURITES);
 			message.setVisible(true);
+			list.setVisible(false);
 		}
 		
 	}

@@ -4,6 +4,7 @@ import java.util.Vector;
 
 import com.neomades.app.ResManager;
 import com.neomades.app.ScreenParams;
+import com.neomades.graphics.Color;
 import com.neomades.json.JSONException;
 import com.neomades.json.JSONObject;
 import com.neomades.ui.Button;
@@ -38,7 +39,7 @@ public class PropertyFinder extends PropertyFinderAdapter implements ClickListen
 	public static final String FAVOURITES = "favourites";
 	private Button doSearch;
 	private Button doLocation;
-	private View loadingView;
+	private WaitView loadingView;
 
 	protected void onCreate() {
 		setContent(Res.layout.PROPERTY_FINDER_SCREEN);
@@ -46,6 +47,9 @@ public class PropertyFinder extends PropertyFinderAdapter implements ClickListen
 		setShortTitle(Constants.PROPERTY_FINDER_SHORT_TITLE);
 		init();
 		loadingView = (WaitView) findView(Res.id.WAIT_VIEW);
+		if (Constants.waitColor != -1) {
+			loadingView.setColor(Color.rgb(Constants.waitColor));
+		}
 		doSearch = (Button) findView(Res.id.DO_SEARCH);
 		doLocation = (Button) findView(Res.id.DO_LOCATION);
 		doSearch.setClickListener(this);
@@ -111,7 +115,14 @@ public class PropertyFinder extends PropertyFinderAdapter implements ClickListen
 					getQuery().setText(getSearch().getLabel());
 				}
 			} else {
-				setSearch(new FullTextSearch(getSearch().getLabel(), getSearch().getQuery()));
+				Search search = getSearch();
+				FullTextSearch fullSearch;
+				if (search != null) {
+					fullSearch = new FullTextSearch(search.getLabel(), search.getQuery());
+				} else {
+					fullSearch = new FullTextSearch(getQuery().getText());
+				}
+				setSearch(fullSearch);
 			}
 			setProperties(PropertyList.valueOf(json));
 
@@ -227,5 +238,15 @@ public class PropertyFinder extends PropertyFinderAdapter implements ClickListen
 		if (label != null) {
 			label.setVisible(!on);
 		}
+	}
+	
+	protected void onPause() {
+		super.onPause();
+		setActivityIndicatorVisible(false);
+	}
+	
+	protected void onResume() {
+		super.onResume();
+		setActivityIndicatorVisible(false);
 	}
 }
