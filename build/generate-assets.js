@@ -125,6 +125,15 @@ async.series([
     ["assets/frameworks/enyo.png", "enyo/assets/icons/ApplicationTileIcon.png", 173],
     ["assets/frameworks/delphi.png", "delphi/assets/icons/icon-57.png", 57],
     ["assets/frameworks/delphi.png", "delphi/assets/icons/icon-57-2x.png", 114],
+    ["assets/frameworks/xamarin-mvvmcross.png", "xamarin-Mvvmcross/PropertyCross.Phone/ApplicationIcon.png", 66],
+    ["assets/frameworks/xamarin-mvvmcross.png", "xamarin-Mvvmcross/PropertyCross.Phone/ApplicationTileIcon.png", 173],
+    ["assets/frameworks/xamarin-mvvmcross.png", "xamarin-Mvvmcross/PropertyCross.Droid/Resources/drawable-hdpi/ic_launcher.png", 72],
+    ["assets/frameworks/xamarin-mvvmcross.png", "xamarin-Mvvmcross/PropertyCross.Droid/Resources/drawable-ldpi/ic_launcher.png", 36],
+    ["assets/frameworks/xamarin-mvvmcross.png", "xamarin-Mvvmcross/PropertyCross.Droid/Resources/drawable-mdpi/ic_launcher.png", 48],
+    ["assets/frameworks/xamarin-mvvmcross.png", "xamarin-Mvvmcross/PropertyCross.Droid/Resources/drawable-xhdpi/ic_launcher.png", 96],
+    ["assets/frameworks/xamarin-mvvmcross.png", "xamarin-Mvvmcross/PropertyCross.Touch/Icon.png", 57],
+    ["assets/frameworks/xamarin-mvvmcross.png", "xamarin-Mvvmcross/PropertyCross.Touch/Icon@2x.png", 114]
+
   ]),
 
   generateSplashscreens.bind(null, "assets/splashscreen-bottom-640x640.png", [
