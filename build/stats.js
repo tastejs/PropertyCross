@@ -20,6 +20,8 @@ find('.', "*/stats-config.json", function (statsConfigFiles) {
       console.log("---");
       console.log(statsRoot);
       console.log("---");
+      console.log(stats);
+      console.log("---");
       console.log(yaml.stringify({
         pie: createPie(stats)
       }));
