@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PropertyCross.Core", "PropertyCross.Core.csproj", "{68DFCF11-8431-47CB-8A93-2E09591F81FE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PropertyCross.Core", "PropertyCross.Core\PropertyCross.Core.csproj", "{68DFCF11-8431-47CB-8A93-2E09591F81FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PropertyCross.Droid", "..\PropertyCross.Droid\PropertyCross.Droid.csproj", "{CAA1EE3B-A228-4A7C-A8AA-37307BF024D6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PropertyCross.Droid", "PropertyCross.Droid\PropertyCross.Droid.csproj", "{CAA1EE3B-A228-4A7C-A8AA-37307BF024D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PropertyCross.WindowsPhone", "..\PropertyCross.Phone\PropertyCross.WindowsPhone.csproj", "{C21B8463-E87E-4776-AEA9-8FDE7831BF66}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PropertyCross.WindowsPhone", "PropertyCross.Phone\PropertyCross.WindowsPhone.csproj", "{C21B8463-E87E-4776-AEA9-8FDE7831BF66}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PropertyCross.Touch", "..\PropertyCross.Touch\PropertyCross.Touch.csproj", "{26117FDF-81C4-44F9-8A40-E0204E412DE5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PropertyCross.Touch", "PropertyCross.Touch\PropertyCross.Touch.csproj", "{26117FDF-81C4-44F9-8A40-E0204E412DE5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
