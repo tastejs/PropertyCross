@@ -176,7 +176,7 @@ async.series([
     ["rhomobile/app/loading.png",640, 960],
     ["titanium/Resources/iphone/Default.png", 320, 480],
     ["titanium/Resources/iphone/Default@2x.png", 640, 960],
-    ["senchatouch2/resources/loading/Default.png", 320, 480],
+    ["senchatouch2/src/resources/loading/Default.png", 320, 480],
     ["kendoui/www/assets/splashscreens/200x320.png", 200, 320],
     ["kendoui/www/assets/splashscreens/320x480.png", 320, 480],
     ["kendoui/www/assets/splashscreens/480x800.png", 480, 800],
@@ -190,7 +190,7 @@ async.series([
     ["intelappframework/www/assets/splashscreens/720x1280.png", 720, 1280],
     ["intelappframework/www/assets/splashscreens/screen-iphone-portrait.png", 320, 480],
     ["intelappframework/www/assets/splashscreens/screen-iphone-portrait-2x.png", 640, 960],
-    ["intelappframework/www/assets/splashscreens/SplashScreenImage.jpg", 480, 800]
+    ["intelappframework/www/assets/splashscreens/SplashScreenImage.jpg", 480, 800],
     ["lungo/www/assets/splashscreens/200x320.png", 200, 320],
     ["lungo/www/assets/splashscreens/320x480.png", 320, 480],
     ["lungo/www/assets/splashscreens/480x800.png", 480, 800],
@@ -230,7 +230,7 @@ async.series([
     ["xamarin/android/PropertyCross/Resources/drawable-hdpi/star.png", 48],
     ["xamarin/android/PropertyCross/Resources/drawable-mdpi/star.png", 32],
     ["native/android/PropertyCross/res/drawable-hdpi/star.png", 48],
-    ["native/android/PropertyCross/res/drawable-mdpi/star.png", 32]
+    ["native/android/PropertyCross/res/drawable-mdpi/star.png", 32],
     ["native/android/PropertyCross/res/drawable-xhdpi/star.png", 64],
   ]),
 
