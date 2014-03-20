@@ -12,9 +12,9 @@ public class Event {
 		public static final char UPDATE_LIST = 0x05;
 		public static final char FIND_BY_NAME = 0x06;
 		public static final char FIND_BY_NAME_RES = 0x07;
-		public static final char FIND_BY_LOCATION_RES = 0x08;
-		public static final char FIND_BY_PLACE = 0x09;
-		public static final char FIND_BY_PLACE_RES = 0x0a;
+		public static final char FIND_BY_LOCATION = 0x08;
+		public static final char FIND_BY_LOCATION_RES = 0x09;
+		public static final char FOUND_AMBIGIOUS_RES = 0x0a;
 		public static final char FIND_ERROR = 0x0b;
 		public static final char LOAD_PROPERTIES = 0x0c;
 		public static final char GET_LOCATION = 0x0d;

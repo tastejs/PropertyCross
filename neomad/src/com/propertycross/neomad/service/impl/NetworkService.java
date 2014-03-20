@@ -42,7 +42,7 @@ public class NetworkService extends PropertyService {
 
 	private void findByLocationPlace(Double latitude, Double longitude,
 			Integer page, final String target) {
-		runRequest(target, Event.Type.FIND_BY_PLACE_RES,
+		runRequest(target, Event.Type.FIND_BY_LOCATION_RES,
 				findByLocationQuery(latitude, longitude, page));
 	}
 
@@ -65,10 +65,9 @@ public class NetworkService extends PropertyService {
 					.getJSONObject("response");
 			String code = response.getString("application_response_code");
 			if (isUnambiguous(code) || isBestGuess(code) || isLarge(code)) {
-				return event == Event.Type.FIND_BY_PLACE_RES ? Event.Type.FIND_BY_LOCATION_RES
-						: Event.Type.FIND_BY_NAME_RES;
+				return event;
 			} else if (isAmbiguous(code) || isMisspelled(code)) {
-				return Event.Type.FIND_BY_PLACE_RES;
+				return Event.Type.FOUND_AMBIGIOUS_RES;
 			}
 		} catch (Exception ex) {
 			// do nothing
@@ -138,7 +137,7 @@ public class NetworkService extends PropertyService {
 			if (e.getType() == Event.Type.FIND_BY_NAME) {
 				findByLocationName(m.getLocation(), m.getPage(), target);
 			}
-			if (e.getType() == Event.Type.FIND_BY_PLACE) {
+			if (e.getType() == Event.Type.FIND_BY_LOCATION) {
 				findByLocationPlace(m.getLatitude(), m.getLongitude(),
 						m.getPage(), target);
 			}
