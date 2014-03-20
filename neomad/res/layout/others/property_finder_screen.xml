@@ -35,8 +35,7 @@
 	<HorizontalLayout stretchHorizontalMode="MATCH_PARENT"
 		stretchVerticalMode="MATCH_CONTENT" backgroundColor="#777777" height="1" />
 
-	<ListView id="@+id/RECENT_LIST" separatorVisible="true"
-		separatorColor="#CCCCCC" listIndicatorVisible="true" marginBottom="4"
+	<ListView id="@+id/RECENT_LIST"  marginBottom="4"
 		stretchHorizontalMode="MATCH_PARENT" stretchVerticalMode="MATCH_PARENT" />
 
 </VerticalLayout>

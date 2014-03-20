@@ -37,7 +37,7 @@
 	<VerticalLayout stretchHorizontalMode="MATCH_PARENT"
 		stretchVerticalMode="MATCH_CONTENT">
 		<WaitView id="@+id/WAIT_VIEW" visible="false"
-			layoutAlignment="HCENTER" width="30"
+			layoutAlignment="HCENTER" width="30" 
 			height="30" />
 		<TextLabel id="@+id/ERROR_MESSAGE" stretchHorizontalMode="MATCH_PARENT"
 			stretchVerticalMode="MATCH_CONTENT" textColor="#000000" />

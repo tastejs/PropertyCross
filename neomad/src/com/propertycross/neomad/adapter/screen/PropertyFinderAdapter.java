@@ -116,6 +116,10 @@ public abstract class PropertyFinderAdapter extends ScreenAdapter implements Ite
 		list.setItemClickedListener(this);
 		adapter = new RecentSearchListAdapter();
 		list.setListAdapter(adapter);
+		loadRecentSearches();
+	}
+
+	protected void loadRecentSearches() {
 		send(new CallbackEvent(getName(), PersistenceService.SERVICE_NAME, Event.Type.LOAD) {
 			public void onComplete(Object result) {
 				state = (PersistenceState) result;

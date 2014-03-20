@@ -30,6 +30,7 @@ import com.propertycross.neomad.model.search.RecentSearch;
 import com.propertycross.neomad.model.search.Search;
 import com.propertycross.neomad.service.impl.PersistenceService;
 import com.propertycross.neomad.utils.Log;
+import com.propertycross.neomad.utils.StringUtils;
 
 /**
  * @author Neomades
@@ -49,6 +50,7 @@ public class PropertyFinder extends PropertyFinderAdapter implements ClickListen
 		loadingView = (WaitView) findView(Res.id.WAIT_VIEW);
 		if (Constants.waitColor != -1) {
 			loadingView.setColor(Color.rgb(Constants.waitColor));
+			loadingView.setStyle(WaitView.STYLE_GRAY);
 		}
 		doSearch = (Button) findView(Res.id.DO_SEARCH);
 		doLocation = (Button) findView(Res.id.DO_LOCATION);
@@ -117,9 +119,12 @@ public class PropertyFinder extends PropertyFinderAdapter implements ClickListen
 			} else {
 				Search search = getSearch();
 				FullTextSearch fullSearch;
-				if (search != null) {
+				boolean searchFromRecents = search != null && StringUtils.equalsIgnoreCase(search.getQuery(), getQuery().getText());
+				if (searchFromRecents) {
+					// Search from recents
 					fullSearch = new FullTextSearch(search.getLabel(), search.getQuery());
 				} else {
+					// Search from textfield
 					fullSearch = new FullTextSearch(getQuery().getText());
 				}
 				setSearch(fullSearch);
@@ -127,7 +132,9 @@ public class PropertyFinder extends PropertyFinderAdapter implements ClickListen
 			setProperties(PropertyList.valueOf(json));
 
 			if (getProperties().getCount() > 0) {
+				// Save recent searches
 				getState().persist(new RecentSearch(getSearch(), getProperties().getCount()));
+				
 				ScreenParams values = new ScreenParams();
 				values.putObject(PropertyList.class.getName(), getProperties());
 				values.putObject(Search.class.getName(), getSearch());
@@ -136,7 +143,9 @@ public class PropertyFinder extends PropertyFinderAdapter implements ClickListen
 			} else {
 				setMessage(ResManager.getString(Res.string.NO_RESULT));
 			}
-//			updateSearches();
+			
+			updateSearches();
+			
 		} catch (JSONException ex) {
 			Log.d(ex.getMessage());
 		}
