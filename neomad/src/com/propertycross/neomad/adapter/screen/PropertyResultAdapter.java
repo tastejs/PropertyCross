@@ -73,7 +73,7 @@ public abstract class PropertyResultAdapter extends ScreenAdapter implements
 		updateTitle();
 	}
 
-	public void receive(Event e) {
+	public void onEventReceived(Event e) {
 		if (e.getType() == Event.Type.FIND_BY_NAME_RES) {
 			handle(e.getValue());
 			update();

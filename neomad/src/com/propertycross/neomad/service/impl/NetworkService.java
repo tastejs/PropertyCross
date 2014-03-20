@@ -34,7 +34,7 @@ public class NetworkService extends PropertyService {
 		super(busService);
 	}
 
-	private void findByLoactionName(String location, Integer page,
+	private void findByLocationName(String location, Integer page,
 			final String target) {
 		runRequest(target, Event.Type.FIND_BY_NAME_RES,
 				findByLocationQuery(location, page));
@@ -136,7 +136,7 @@ public class NetworkService extends PropertyService {
 		String target = m.getSender().toString();
 		if (Network.isConnected()) {
 			if (e.getType() == Event.Type.FIND_BY_NAME) {
-				findByLoactionName(m.getLocation(), m.getPage(), target);
+				findByLocationName(m.getLocation(), m.getPage(), target);
 			}
 			if (e.getType() == Event.Type.FIND_BY_PLACE) {
 				findByLocationPlace(m.getLatitude(), m.getLongitude(),

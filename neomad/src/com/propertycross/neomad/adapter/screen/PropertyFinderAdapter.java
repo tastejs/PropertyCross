@@ -116,6 +116,10 @@ public abstract class PropertyFinderAdapter extends ScreenAdapter implements Ite
 		list.setItemClickedListener(this);
 		adapter = new RecentSearchListAdapter();
 		list.setListAdapter(adapter);
+		loadRecentSearches();
+	}
+
+	protected void loadRecentSearches() {
 		send(new CallbackEvent(getName(), PersistenceService.SERVICE_NAME, Event.Type.LOAD) {
 			public void onComplete(Object result) {
 				state = (PersistenceState) result;
@@ -134,7 +138,7 @@ public abstract class PropertyFinderAdapter extends ScreenAdapter implements Ite
 		update();
 	}
 
-	public void receive(Event e) {
+	public void onEventReceived(Event e) {
 		if (e instanceof CallbackEvent && e.getType() == Event.Type.LOAD_PROPERTIES) {
 			((CallbackEvent) e).onComplete(properties);
 		}
@@ -145,6 +149,8 @@ public abstract class PropertyFinderAdapter extends ScreenAdapter implements Ite
 		query.setText(recentSearch.getSearch().getLabel());
 		setMessage("");
 		search = recentSearch.getSearch();
+		
+		// query
 		send(new SearchEvent(getName(), search.getQuery(), 1));
 	}
 
@@ -167,4 +173,6 @@ public abstract class PropertyFinderAdapter extends ScreenAdapter implements Ite
 	protected void setMessage(String msg) {
 		((TextLabel) findView(Res.id.ERROR_MESSAGE)).setText(msg);
 	}
+	
+	
 }

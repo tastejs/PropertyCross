@@ -3,6 +3,7 @@
                   stretchHorizontalMode="MATCH_PARENT"
                   marginTop="3"
                   marginBottom="3"
+                  height="50"
                   stretchVerticalMode="MATCH_CONTENT"
                   xsi:noNamespaceSchemaLocation="http://www.neomades.com/XSD/3.5.0/layout.xsd">
     <!-- Query -->

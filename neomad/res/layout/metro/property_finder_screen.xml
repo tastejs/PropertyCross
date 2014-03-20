@@ -3,11 +3,12 @@
 	stretchHorizontalMode="MATCH_PARENT" stretchVerticalMode="MATCH_PARENT"
 	xsi:noNamespaceSchemaLocation="http://www.neomades.com/XSD/3.5.0/layout.xsd">
 
-	<Include refLayout="@layout/PROPERTY_SPLASH"/>
+	<Include refLayout="@layout/PROPERTY_SPLASH" />
 
 	<VerticalLayout id="@+id/ID_PROPERTY_FINDER"
 		contentAlignment="HCENTER|TOP" padding="10" stretchHorizontalMode="MATCH_PARENT"
 		stretchVerticalMode="MATCH_PARENT">
+		
 		<TextLabel id="@+id/ID_SEARCH_DESCRIPTION" marginBottom="4"
 			contentAlignment="VCENTER|LEFT" stretchHorizontalMode="MATCH_PARENT"
 			stretchVerticalMode="MATCH_CONTENT" text="@string/SEARCH_DESCRIPTION" />
@@ -22,8 +23,16 @@
 				stretchVerticalMode="MATCH_CONTENT" text="@string/USE_LOCATION_TEXT"
 				width="120" />
 		</HorizontalLayout>
-		<TextLabel id="@+id/ERROR_MESSAGE" marginBottom="4"
-			stretchHorizontalMode="MATCH_PARENT" stretchVerticalMode="MATCH_CONTENT" />
+		
+	<VerticalLayout stretchHorizontalMode="MATCH_PARENT"
+		stretchVerticalMode="MATCH_CONTENT">
+		<WaitView id="@+id/WAIT_VIEW" visible="false"
+			layoutAlignment="HCENTER" stretchHorizontalMode="MATCH_CONTENT"
+			height="30" />
+		<TextLabel id="@+id/ERROR_MESSAGE" stretchHorizontalMode="MATCH_PARENT"
+			stretchVerticalMode="MATCH_CONTENT" textColor="#000000" />
+	</VerticalLayout>
+		
 		<TextLabel id="@+id/RESULTS_HEADER" stretchHorizontalMode="MATCH_PARENT"
 			stretchVerticalMode="MATCH_CONTENT" text="@string/RECENT_SEARCHES" />
 		<ListView id="@+id/RECENT_LIST" marginBottom="4" marginLeft="8"

@@ -5,6 +5,7 @@ import java.util.Vector;
 import com.propertycross.neomad.event.Event;
 import com.propertycross.neomad.model.search.RecentSearch;
 import com.propertycross.neomad.service.impl.PersistenceService;
+import com.propertycross.neomad.utils.StringUtils;
 
 /**
  * @author Neomades
@@ -50,18 +51,15 @@ public class PersistenceState {
 		RecentSearch rs = findByLabel(s.getSearch().getLabel());
 		if (rs != null) {
 			searches.removeElement(rs);
-			rs.setCount(rs.getCount());
-			if (rs.getCount() > 0) {
-				searches.insertElementAt(rs, 0);
-			}
-		} else {
-			if (s.getCount() > 0) {
-				searches.insertElementAt(s, 0);
-			}
+		} 
+		if (s.getCount() > 0) {
+			searches.insertElementAt(s, 0);
 		}
+		
 		if (searches.size() > SEARCH_COUNT_LIMIT) {
 			searches.removeElementAt(SEARCH_COUNT_LIMIT);
 		}
+		flush();
 	}
 
 	public void persist(Property p) {
@@ -77,12 +75,13 @@ public class PersistenceState {
 		if (!f) {
 			favorites.addElement(p);
 		}
+		flush();
 	}
 
 	private RecentSearch findByLabel(String label) {
 		for (int i = 0; i < searches.size(); i++) {
 			RecentSearch rs = (RecentSearch) searches.elementAt(i);
-			if (label.equals(rs.getSearch().getLabel())) {
+			if (StringUtils.equalsIgnoreCase(label, rs.getSearch().getLabel())) {
 				return rs;
 			}
 		}
@@ -90,6 +89,6 @@ public class PersistenceState {
 	}
 
 	public void flush() {
-		manager.receive(new Event(null, null, null, Event.Type.SAVE));
+		manager.send(new Event(this, this, PersistenceService.SERVICE_NAME, Event.Type.SAVE));
 	}
 }

@@ -7,6 +7,11 @@
 
 	<VerticalLayout padding="4" contentAlignment="HCENTER|VCENTER"
 		stretchHorizontalMode="MATCH_PARENT" stretchVerticalMode="MATCH_PARENT">
+		<TextLabel id="@+id/LABEL_NO_ITEM"
+                   visible="false"
+                   stretchHorizontalMode="MATCH_PARENT"
+                   stretchVerticalMode="MATCH_CONTENT"
+                   textColor="#000000"/>
 		<ListView id="@+id/PROPERTY_LIST" listIndicatorVisible="true"
 			selectionColorEnabled="false" stretchHorizontalMode="MATCH_PARENT"
 			marginLeft="8" marginRight="8" stretchVerticalMode="MATCH_PARENT" />
