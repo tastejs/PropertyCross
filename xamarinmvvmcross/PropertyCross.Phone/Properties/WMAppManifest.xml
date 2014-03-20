@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2012/deployment" AppPlatformVersion="8.0">
   <DefaultLanguage xmlns="" code="en-US" />
-  <App xmlns="" ProductID="{c21b8463-e87e-4776-aea9-8fde7831bf66}" Title="Property Cross 2" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="PropertyCross.Phone author" Description="Sample description" Publisher="PropertyCross.Phone" PublisherID="{58ba54c3-ce42-47ae-80f1-3e403c6271ed}">
+  <App xmlns="" ProductID="{c21b8463-e87e-4776-aea9-8fde7831bf66}" Title="PropertyCross - MvvmCross" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="PropertyCross.Phone author" Description="Helping you select a cross-platform mobile framework" Publisher="PropertyCross.Phone" PublisherID="{58ba54c3-ce42-47ae-80f1-3e403c6271ed}">
     <IconPath IsRelative="true" IsResource="false">ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING" />

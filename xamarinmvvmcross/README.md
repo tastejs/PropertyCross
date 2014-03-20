@@ -1,7 +1,7 @@
-#Xamarin-MvvmCross PropertyCross
+#Xamarin MvvmCross PropertyCross
 
 
-Visit the [Xamarin-MvvmCross page](http://propertycross.com/xamarin-mvvmcross/) on the PropertyCross website for screenshots and code sharing metrics.
+Visit the [Xamarin MvvmCross page](http://propertycross.com/xamarinmvvmcross/) on the PropertyCross website for screenshots and code sharing metrics.
 
 ##Introduction
 

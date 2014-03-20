@@ -15,9 +15,9 @@
 	<key>MinimumOSVersion</key>
 	<string>7.0</string>
 	<key>CFBundleDisplayName</key>
-	<string>PropertyCross2</string>
+	<string>PropertyCross - MvvmCross</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.waterstons.propertycross2</string>
+	<string>com.propertycross.mvvmcross</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>NSMainNibFile</key>
