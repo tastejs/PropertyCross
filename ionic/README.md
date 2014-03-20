@@ -1,5 +1,7 @@
 # Ionic PropertyCross
 
+Visit the [Ionic page](http://propertycross.com/ionic/) on the PropertyCross website for screenshots and code sharing metrics.
+
 ## Overview
 
 This is an implementation of the PropertyCross application using [Ionic](http://ionicframework.com) (v0.9.24).  Ionic is an HTML5 framework built with [Sass](http://sass-lang.com) and optimized for [AngularJS](http://angularjs.org) that uses [Cordova / PhoneGap](http://phonegap.com) to package the HTML / JavaScript within a native wrapper for app-store deployment.  Ionic includes a mobile-specific components and controllers, and Cordova provides a set of APIs for accessing native phone functionalities which are not available via HTML specifications.
