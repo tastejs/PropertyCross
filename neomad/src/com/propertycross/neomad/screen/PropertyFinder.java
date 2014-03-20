@@ -106,28 +106,14 @@ public class PropertyFinder extends PropertyFinderAdapter implements ClickListen
 		});
 	}
 
-	public void handleLocationResults(Object data, boolean parseLocation) {
+	public void handleLocationResults(Object data) {
 		try {
 			JSONObject json = new JSONObject(data.toString());
-			if (parseLocation) {
-				Vector location = LocationList.valueOf(json).getData();
-				if (!location.isEmpty()) {
-					Location l = (Location) location.elementAt(0);
-					setSearch(new GeoLocationSearch(l));
-					getQuery().setText(getSearch().getLabel());
-				}
-			} else {
-				Search search = getSearch();
-				FullTextSearch fullSearch;
-				boolean searchFromRecents = search != null && StringUtils.equalsIgnoreCase(search.getQuery(), getQuery().getText());
-				if (searchFromRecents) {
-					// Search from recents
-					fullSearch = new FullTextSearch(search.getLabel(), search.getQuery());
-				} else {
-					// Search from textfield
-					fullSearch = new FullTextSearch(getQuery().getText());
-				}
-				setSearch(fullSearch);
+			Vector location = LocationList.valueOf(json).getData();
+			if (!location.isEmpty()) {
+				Location l = (Location) location.elementAt(0);
+				setSearch(new GeoLocationSearch(l));
+				getQuery().setText(getSearch().getLabel());
 			}
 			setProperties(PropertyList.valueOf(json));
 
@@ -193,7 +179,7 @@ public class PropertyFinder extends PropertyFinderAdapter implements ClickListen
 	}
 
 	private void onLocationResult(Event e) {
-		handleLocationResults(e.getValue(), true);
+		handleLocationResults(e.getValue());
 		update();
 	}
 
