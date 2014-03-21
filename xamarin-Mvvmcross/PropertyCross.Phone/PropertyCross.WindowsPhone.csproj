@@ -201,53 +201,53 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="BindableApplicationBar">
-      <HintPath>..\PropertyCross.Core\packages\BindableApplicationBar.1.1.0.0\lib\wp8\BindableApplicationBar.dll</HintPath>
+      <HintPath>..\packages\BindableApplicationBar.1.1.0.0\lib\wp8\BindableApplicationBar.dll</HintPath>
     </Reference>
     <Reference Include="Cirrious.CrossCore">
-      <HintPath>..\PropertyCross.Core\packages\MvvmCross.HotTuna.CrossCore.3.1.1-beta2\lib\wp8\Cirrious.CrossCore.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.HotTuna.CrossCore.3.1.1-beta2\lib\wp8\Cirrious.CrossCore.dll</HintPath>
     </Reference>
     <Reference Include="Cirrious.CrossCore.WindowsPhone">
-      <HintPath>..\PropertyCross.Core\packages\MvvmCross.HotTuna.CrossCore.3.1.1-beta2\lib\wp8\Cirrious.CrossCore.WindowsPhone.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.HotTuna.CrossCore.3.1.1-beta2\lib\wp8\Cirrious.CrossCore.WindowsPhone.dll</HintPath>
     </Reference>
     <Reference Include="Cirrious.MvvmCross">
-      <HintPath>..\PropertyCross.Core\packages\MvvmCross.HotTuna.MvvmCrossLibraries.3.1.1-beta2\lib\wp8\Cirrious.MvvmCross.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.HotTuna.MvvmCrossLibraries.3.1.1-beta2\lib\wp8\Cirrious.MvvmCross.dll</HintPath>
     </Reference>
     <Reference Include="Cirrious.MvvmCross.Localization">
-      <HintPath>..\PropertyCross.Core\packages\MvvmCross.HotTuna.CrossCore.3.1.1-beta2\lib\wp8\Cirrious.MvvmCross.Localization.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.HotTuna.CrossCore.3.1.1-beta2\lib\wp8\Cirrious.MvvmCross.Localization.dll</HintPath>
     </Reference>
     <Reference Include="Cirrious.MvvmCross.Plugins.File">
-      <HintPath>..\PropertyCross.Core\packages\MvvmCross.HotTuna.Plugin.File.3.1.1-beta2\lib\wp8\Cirrious.MvvmCross.Plugins.File.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.HotTuna.Plugin.File.3.1.1-beta2\lib\wp8\Cirrious.MvvmCross.Plugins.File.dll</HintPath>
     </Reference>
     <Reference Include="Cirrious.MvvmCross.Plugins.File.WindowsPhone">
-      <HintPath>..\PropertyCross.Core\packages\MvvmCross.HotTuna.Plugin.File.3.1.1-beta2\lib\wp8\Cirrious.MvvmCross.Plugins.File.WindowsPhone.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.HotTuna.Plugin.File.3.1.1-beta2\lib\wp8\Cirrious.MvvmCross.Plugins.File.WindowsPhone.dll</HintPath>
     </Reference>
     <Reference Include="Cirrious.MvvmCross.Plugins.Network, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\PropertyCross.Core\packages\MvvmCross.HotTuna.Plugin.Network.3.1.1-beta2\lib\wp8\Cirrious.MvvmCross.Plugins.Network.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.HotTuna.Plugin.Network.3.1.1-beta2\lib\wp8\Cirrious.MvvmCross.Plugins.Network.dll</HintPath>
     </Reference>
     <Reference Include="Cirrious.MvvmCross.Plugins.Network.WindowsPhone">
-      <HintPath>..\PropertyCross.Core\packages\MvvmCross.HotTuna.Plugin.Network.3.1.1-beta2\lib\wp8\Cirrious.MvvmCross.Plugins.Network.WindowsPhone.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.HotTuna.Plugin.Network.3.1.1-beta2\lib\wp8\Cirrious.MvvmCross.Plugins.Network.WindowsPhone.dll</HintPath>
     </Reference>
     <Reference Include="Cirrious.MvvmCross.Plugins.Visibility">
-      <HintPath>..\PropertyCross.Core\packages\MvvmCross.HotTuna.Plugin.Visibility.3.1.1-beta2\lib\wp8\Cirrious.MvvmCross.Plugins.Visibility.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.HotTuna.Plugin.Visibility.3.1.1-beta2\lib\wp8\Cirrious.MvvmCross.Plugins.Visibility.dll</HintPath>
     </Reference>
     <Reference Include="Cirrious.MvvmCross.Plugins.Visibility.WindowsPhone">
-      <HintPath>..\PropertyCross.Core\packages\MvvmCross.HotTuna.Plugin.Visibility.3.1.1-beta2\lib\wp8\Cirrious.MvvmCross.Plugins.Visibility.WindowsPhone.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.HotTuna.Plugin.Visibility.3.1.1-beta2\lib\wp8\Cirrious.MvvmCross.Plugins.Visibility.WindowsPhone.dll</HintPath>
     </Reference>
     <Reference Include="Cirrious.MvvmCross.WindowsPhone">
-      <HintPath>..\PropertyCross.Core\packages\MvvmCross.HotTuna.MvvmCrossLibraries.3.1.1-beta2\lib\wp8\Cirrious.MvvmCross.WindowsPhone.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.HotTuna.MvvmCrossLibraries.3.1.1-beta2\lib\wp8\Cirrious.MvvmCross.WindowsPhone.dll</HintPath>
     </Reference>
     <Reference Include="MetroEventToCommand">
-      <HintPath>..\PropertyCross.Core\packages\MetroEventToCommand.2.1\lib\wp8\MetroEventToCommand.dll</HintPath>
+      <HintPath>..\packages\MetroEventToCommand.2.1\lib\wp8\MetroEventToCommand.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Phone.Controls.Toolkit">
-      <HintPath>..\PropertyCross.Core\packages\WPtoolkit.4.2013.08.16\lib\wp8\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
+      <HintPath>..\packages\WPtoolkit.4.2013.08.16\lib\wp8\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation">
-      <HintPath>..\PropertyCross.Core\packages\MvvmLightLibs.4.2.30.0\lib\wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <HintPath>..\packages\MvvmLightLibs.4.2.30.0\lib\wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows.Interactivity, Version=3.9.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\PropertyCross.Core\packages\MvvmLightLibs.4.2.30.0\lib\wp8\System.Windows.Interactivity.dll</HintPath>
+      <HintPath>..\packages\MvvmLightLibs.4.2.30.0\lib\wp8\System.Windows.Interactivity.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

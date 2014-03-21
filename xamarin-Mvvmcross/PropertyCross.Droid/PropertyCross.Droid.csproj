@@ -16,9 +16,8 @@
     <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
-    <AndroidUseLatestPlatformSdk>true</AndroidUseLatestPlatformSdk>
-    <TargetFrameworkVersion>
-    </TargetFrameworkVersion>
+    <AndroidUseLatestPlatformSdk>False</AndroidUseLatestPlatformSdk>
+    <TargetFrameworkVersion>v4.2</TargetFrameworkVersion>
     <AndroidSupportedAbis>armeabi,armeabi-v7a,x86</AndroidSupportedAbis>
     <AndroidStoreUncompressedFileExtensions />
     <MandroidI18n />
@@ -48,80 +47,76 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Cirrious.CrossCore">
-      <HintPath>..\PropertyCross.Core\packages\MvvmCross.HotTuna.CrossCore.3.1.1-beta2\lib\MonoAndroid\Cirrious.CrossCore.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.HotTuna.CrossCore.3.1.1-beta2\lib\MonoAndroid\Cirrious.CrossCore.dll</HintPath>
     </Reference>
     <Reference Include="Cirrious.CrossCore.Droid">
-      <HintPath>..\PropertyCross.Core\packages\MvvmCross.HotTuna.CrossCore.3.1.1-beta2\lib\MonoAndroid\Cirrious.CrossCore.Droid.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.HotTuna.CrossCore.3.1.1-beta2\lib\MonoAndroid\Cirrious.CrossCore.Droid.dll</HintPath>
     </Reference>
     <Reference Include="Cirrious.MvvmCross">
-      <HintPath>..\PropertyCross.Core\packages\MvvmCross.HotTuna.MvvmCrossLibraries.3.1.1-beta2\lib\MonoAndroid\Cirrious.MvvmCross.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.HotTuna.MvvmCrossLibraries.3.1.1-beta2\lib\MonoAndroid\Cirrious.MvvmCross.dll</HintPath>
     </Reference>
     <Reference Include="Cirrious.MvvmCross.Binding">
-      <HintPath>..\PropertyCross.Core\packages\MvvmCross.HotTuna.CrossCore.3.1.1-beta2\lib\MonoAndroid\Cirrious.MvvmCross.Binding.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.HotTuna.CrossCore.3.1.1-beta2\lib\MonoAndroid\Cirrious.MvvmCross.Binding.dll</HintPath>
     </Reference>
     <Reference Include="Cirrious.MvvmCross.Binding.Droid">
-      <HintPath>..\PropertyCross.Core\packages\MvvmCross.HotTuna.CrossCore.3.1.1-beta2\lib\MonoAndroid\Cirrious.MvvmCross.Binding.Droid.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.HotTuna.CrossCore.3.1.1-beta2\lib\MonoAndroid\Cirrious.MvvmCross.Binding.Droid.dll</HintPath>
     </Reference>
     <Reference Include="Cirrious.MvvmCross.Droid">
-      <HintPath>..\PropertyCross.Core\packages\MvvmCross.HotTuna.MvvmCrossLibraries.3.1.1-beta2\lib\MonoAndroid\Cirrious.MvvmCross.Droid.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.HotTuna.MvvmCrossLibraries.3.1.1-beta2\lib\MonoAndroid\Cirrious.MvvmCross.Droid.dll</HintPath>
     </Reference>
     <Reference Include="Cirrious.MvvmCross.Localization">
-      <HintPath>..\PropertyCross.Core\packages\MvvmCross.HotTuna.CrossCore.3.1.1-beta2\lib\MonoAndroid\Cirrious.MvvmCross.Localization.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.HotTuna.CrossCore.3.1.1-beta2\lib\MonoAndroid\Cirrious.MvvmCross.Localization.dll</HintPath>
     </Reference>
     <Reference Include="Cirrious.MvvmCross.Plugins.DownloadCache">
-      <HintPath>..\PropertyCross.Core\packages\MvvmCross.HotTuna.Plugin.DownloadCache.3.1.1-beta2\lib\MonoAndroid\Cirrious.MvvmCross.Plugins.DownloadCache.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.HotTuna.Plugin.DownloadCache.3.1.1-beta2\lib\MonoAndroid\Cirrious.MvvmCross.Plugins.DownloadCache.dll</HintPath>
     </Reference>
     <Reference Include="Cirrious.MvvmCross.Plugins.DownloadCache.Droid">
-      <HintPath>..\PropertyCross.Core\packages\MvvmCross.HotTuna.Plugin.DownloadCache.3.1.1-beta2\lib\MonoAndroid\Cirrious.MvvmCross.Plugins.DownloadCache.Droid.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.HotTuna.Plugin.DownloadCache.3.1.1-beta2\lib\MonoAndroid\Cirrious.MvvmCross.Plugins.DownloadCache.Droid.dll</HintPath>
     </Reference>
     <Reference Include="Cirrious.MvvmCross.Plugins.File">
-      <HintPath>..\PropertyCross.Core\packages\MvvmCross.HotTuna.Plugin.File.3.1.1-beta2\lib\MonoAndroid\Cirrious.MvvmCross.Plugins.File.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.HotTuna.Plugin.File.3.1.1-beta2\lib\MonoAndroid\Cirrious.MvvmCross.Plugins.File.dll</HintPath>
     </Reference>
     <Reference Include="Cirrious.MvvmCross.Plugins.File.Droid">
-      <HintPath>..\PropertyCross.Core\packages\MvvmCross.HotTuna.Plugin.File.3.1.1-beta2\lib\MonoAndroid\Cirrious.MvvmCross.Plugins.File.Droid.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.HotTuna.Plugin.File.3.1.1-beta2\lib\MonoAndroid\Cirrious.MvvmCross.Plugins.File.Droid.dll</HintPath>
     </Reference>
     <Reference Include="Cirrious.MvvmCross.Plugins.Json">
-      <HintPath>..\PropertyCross.Core\packages\MvvmCross.HotTuna.Plugin.Json.3.1.1-beta2\lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Json.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.HotTuna.Plugin.Json.3.1.1-beta2\lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Json.dll</HintPath>
     </Reference>
     <Reference Include="Cirrious.MvvmCross.Plugins.Network">
-      <HintPath>..\PropertyCross.Core\packages\MvvmCross.HotTuna.Plugin.Network.3.1.1-beta2\lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Network.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.HotTuna.Plugin.Network.3.1.1-beta2\lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Network.dll</HintPath>
     </Reference>
     <Reference Include="Cirrious.MvvmCross.Plugins.Network.Droid">
-      <HintPath>..\PropertyCross.Core\packages\MvvmCross.HotTuna.Plugin.Network.3.1.1-beta2\lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Network.Droid.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.HotTuna.Plugin.Network.3.1.1-beta2\lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Network.Droid.dll</HintPath>
     </Reference>
     <Reference Include="Cirrious.MvvmCross.Plugins.Visibility">
-      <HintPath>..\PropertyCross.Core\packages\MvvmCross.HotTuna.Plugin.Visibility.3.1.1-beta2\lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Visibility.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.HotTuna.Plugin.Visibility.3.1.1-beta2\lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Visibility.dll</HintPath>
     </Reference>
     <Reference Include="Cirrious.MvvmCross.Plugins.Visibility.Droid">
-      <HintPath>..\PropertyCross.Core\packages\MvvmCross.HotTuna.Plugin.Visibility.3.1.1-beta2\lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Visibility.Droid.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.HotTuna.Plugin.Visibility.3.1.1-beta2\lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Visibility.Droid.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Android" />
     <Reference Include="mscorlib" />
-    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\PropertyCross.Core\packages\Newtonsoft.Json.6.0.1-beta1\lib\portable-net40+sl5+wp80+win8+monotouch+monoandroid\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Net, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\PropertyCross.Core\packages\MvvmCross.PortableSupport.3.1.1-beta2\lib\MonoAndroid\System.Net.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Windows, Version=2.0.5.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\PropertyCross.Core\packages\MvvmCross.PortableSupport.3.1.1-beta2\lib\MonoAndroid\System.Windows.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
-    <Reference Include="System.Xml.Serialization, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\PropertyCross.Core\packages\MvvmCross.PortableSupport.3.1.1-beta2\lib\MonoAndroid\System.Xml.Serialization.dll</HintPath>
-    </Reference>
     <Reference Include="Xamarin.Android.Support.v4">
-      <HintPath>..\PropertyCross.Core\Components\xamandroidsupportv7appcompat-7.18.0\lib\android\Xamarin.Android.Support.v4.dll</HintPath>
+      <HintPath>..\Components\xamandroidsupportv7appcompat-7.18.0\lib\android\Xamarin.Android.Support.v4.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Android.Support.v7.AppCompat">
-      <HintPath>..\PropertyCross.Core\Components\xamandroidsupportv7appcompat-7.18.0\lib\android\Xamarin.Android.Support.v7.AppCompat.dll</HintPath>
+      <HintPath>..\Components\xamandroidsupportv7appcompat-7.18.0\lib\android\Xamarin.Android.Support.v7.AppCompat.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.1-beta1\lib\portable-net40+sl5+wp80+win8+monotouch+monoandroid\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net">
+      <HintPath>..\packages\MvvmCross.PortableSupport.3.1.1-beta2\lib\MonoAndroid\System.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows">
+      <HintPath>..\packages\MvvmCross.PortableSupport.3.1.1-beta2\lib\MonoAndroid\System.Windows.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Serialization">
+      <HintPath>..\packages\MvvmCross.PortableSupport.3.1.1-beta2\lib\MonoAndroid\System.Xml.Serialization.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -315,14 +310,14 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PropertyCross.Core\PropertyCross.Core.csproj">
-      <Project>{68dfcf11-8431-47cb-8a93-2e09591f81fe}</Project>
+      <Project>{68DFCF11-8431-47CB-8A93-2E09591F81FE}</Project>
       <Name>PropertyCross.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="xamandroidsupportv7appcompat">
-      <Visible>False</Visible>
       <Version>7.18.0</Version>
+      <Visible>False</Visible>
     </XamarinComponentReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

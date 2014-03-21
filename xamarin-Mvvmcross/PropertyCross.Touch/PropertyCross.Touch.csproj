@@ -123,56 +123,56 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Cirrious.CrossCore">
-      <HintPath>..\PropertyCross.Core\packages\MvvmCross.HotTuna.CrossCore.3.1.1-beta2\lib\MonoTouch\Cirrious.CrossCore.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.HotTuna.CrossCore.3.1.1-beta2\lib\MonoTouch\Cirrious.CrossCore.dll</HintPath>
     </Reference>
     <Reference Include="Cirrious.CrossCore.Touch">
-      <HintPath>..\PropertyCross.Core\packages\MvvmCross.HotTuna.CrossCore.3.1.1-beta2\lib\MonoTouch\Cirrious.CrossCore.Touch.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.HotTuna.CrossCore.3.1.1-beta2\lib\MonoTouch\Cirrious.CrossCore.Touch.dll</HintPath>
     </Reference>
     <Reference Include="Cirrious.MvvmCross">
-      <HintPath>..\PropertyCross.Core\packages\MvvmCross.HotTuna.MvvmCrossLibraries.3.1.1-beta2\lib\MonoTouch\Cirrious.MvvmCross.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.HotTuna.MvvmCrossLibraries.3.1.1-beta2\lib\MonoTouch\Cirrious.MvvmCross.dll</HintPath>
     </Reference>
     <Reference Include="Cirrious.MvvmCross.Binding">
-      <HintPath>..\PropertyCross.Core\packages\MvvmCross.HotTuna.CrossCore.3.1.1-beta2\lib\MonoTouch\Cirrious.MvvmCross.Binding.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.HotTuna.CrossCore.3.1.1-beta2\lib\MonoTouch\Cirrious.MvvmCross.Binding.dll</HintPath>
     </Reference>
     <Reference Include="Cirrious.MvvmCross.Binding.Touch">
-      <HintPath>..\PropertyCross.Core\packages\MvvmCross.HotTuna.CrossCore.3.1.1-beta2\lib\MonoTouch\Cirrious.MvvmCross.Binding.Touch.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.HotTuna.CrossCore.3.1.1-beta2\lib\MonoTouch\Cirrious.MvvmCross.Binding.Touch.dll</HintPath>
     </Reference>
     <Reference Include="Cirrious.MvvmCross.Localization">
-      <HintPath>..\PropertyCross.Core\packages\MvvmCross.HotTuna.CrossCore.3.1.1-beta2\lib\MonoTouch\Cirrious.MvvmCross.Localization.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.HotTuna.CrossCore.3.1.1-beta2\lib\MonoTouch\Cirrious.MvvmCross.Localization.dll</HintPath>
     </Reference>
     <Reference Include="Cirrious.MvvmCross.Plugins.DownloadCache">
-      <HintPath>..\PropertyCross.Core\packages\MvvmCross.HotTuna.Plugin.DownloadCache.3.1.1-beta2\lib\MonoTouch\Cirrious.MvvmCross.Plugins.DownloadCache.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.HotTuna.Plugin.DownloadCache.3.1.1-beta2\lib\MonoTouch\Cirrious.MvvmCross.Plugins.DownloadCache.dll</HintPath>
     </Reference>
     <Reference Include="Cirrious.MvvmCross.Plugins.DownloadCache.Touch">
-      <HintPath>..\PropertyCross.Core\packages\MvvmCross.HotTuna.Plugin.DownloadCache.3.1.1-beta2\lib\MonoTouch\Cirrious.MvvmCross.Plugins.DownloadCache.Touch.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.HotTuna.Plugin.DownloadCache.3.1.1-beta2\lib\MonoTouch\Cirrious.MvvmCross.Plugins.DownloadCache.Touch.dll</HintPath>
     </Reference>
     <Reference Include="Cirrious.MvvmCross.Plugins.File">
-      <HintPath>..\PropertyCross.Core\packages\MvvmCross.HotTuna.Plugin.File.3.1.1-beta2\lib\MonoTouch\Cirrious.MvvmCross.Plugins.File.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.HotTuna.Plugin.File.3.1.1-beta2\lib\MonoTouch\Cirrious.MvvmCross.Plugins.File.dll</HintPath>
     </Reference>
     <Reference Include="Cirrious.MvvmCross.Plugins.File.Touch">
-      <HintPath>..\PropertyCross.Core\packages\MvvmCross.HotTuna.Plugin.File.3.1.1-beta2\lib\MonoTouch\Cirrious.MvvmCross.Plugins.File.Touch.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.HotTuna.Plugin.File.3.1.1-beta2\lib\MonoTouch\Cirrious.MvvmCross.Plugins.File.Touch.dll</HintPath>
     </Reference>
     <Reference Include="Cirrious.MvvmCross.Plugins.Json">
-      <HintPath>..\PropertyCross.Core\packages\MvvmCross.HotTuna.Plugin.Json.3.1.1-beta2\lib\MonoTouch\Cirrious.MvvmCross.Plugins.Json.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.HotTuna.Plugin.Json.3.1.1-beta2\lib\MonoTouch\Cirrious.MvvmCross.Plugins.Json.dll</HintPath>
     </Reference>
     <Reference Include="Cirrious.MvvmCross.Plugins.Network">
-      <HintPath>..\PropertyCross.Core\packages\MvvmCross.HotTuna.Plugin.Network.3.1.1-beta2\lib\MonoTouch\Cirrious.MvvmCross.Plugins.Network.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.HotTuna.Plugin.Network.3.1.1-beta2\lib\MonoTouch\Cirrious.MvvmCross.Plugins.Network.dll</HintPath>
     </Reference>
     <Reference Include="Cirrious.MvvmCross.Plugins.Network.Touch">
-      <HintPath>..\PropertyCross.Core\packages\MvvmCross.HotTuna.Plugin.Network.3.1.1-beta2\lib\MonoTouch\Cirrious.MvvmCross.Plugins.Network.Touch.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.HotTuna.Plugin.Network.3.1.1-beta2\lib\MonoTouch\Cirrious.MvvmCross.Plugins.Network.Touch.dll</HintPath>
     </Reference>
     <Reference Include="Cirrious.MvvmCross.Plugins.Visibility">
-      <HintPath>..\PropertyCross.Core\packages\MvvmCross.HotTuna.Plugin.Visibility.3.1.1-beta2\lib\MonoTouch\Cirrious.MvvmCross.Plugins.Visibility.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.HotTuna.Plugin.Visibility.3.1.1-beta2\lib\MonoTouch\Cirrious.MvvmCross.Plugins.Visibility.dll</HintPath>
     </Reference>
     <Reference Include="Cirrious.MvvmCross.Plugins.Visibility.Touch">
-      <HintPath>..\PropertyCross.Core\packages\MvvmCross.HotTuna.Plugin.Visibility.3.1.1-beta2\lib\MonoTouch\Cirrious.MvvmCross.Plugins.Visibility.Touch.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.HotTuna.Plugin.Visibility.3.1.1-beta2\lib\MonoTouch\Cirrious.MvvmCross.Plugins.Visibility.Touch.dll</HintPath>
     </Reference>
     <Reference Include="Cirrious.MvvmCross.Touch">
-      <HintPath>..\PropertyCross.Core\packages\MvvmCross.HotTuna.MvvmCrossLibraries.3.1.1-beta2\lib\MonoTouch\Cirrious.MvvmCross.Touch.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.HotTuna.MvvmCrossLibraries.3.1.1-beta2\lib\MonoTouch\Cirrious.MvvmCross.Touch.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\PropertyCross.Core\packages\Newtonsoft.Json.6.0.1-beta1\lib\portable-net40+sl5+wp80+win8+monotouch+monoandroid\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.1-beta1\lib\portable-net40+sl5+wp80+win8+monotouch+monoandroid\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Windows" />
