@@ -1,0 +1,14 @@
+{
+  "name": "xamarinmvvmcross",
+  "version": "1.0.0",
+  "implName": "Xamarin MvvmCross",
+  "contributors": [{
+    "name": "Colin Eberhardt",
+    "username": "colineberhardt",
+    "hash": "458f2e0d08d4114f8b323798cfea141d"
+  }, {
+    "name": "Ross Dargan",
+    "username": "rossdargan"
+  }],
+  "platforms": ["android", "ios", "windowsphone"]
+}

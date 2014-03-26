@@ -2,7 +2,7 @@
 <HorizontalLayout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     marginBottom="4"
     marginTop="4"
-    backgroundColor="#80c0c0c0"
+    backgroundColor="#80808080"
     stretchHorizontalMode="MATCH_PARENT"
     stretchVerticalMode="MATCH_CONTENT"
     xsi:noNamespaceSchemaLocation="http://www.neomades.com/XSD/3.5.0/layout.xsd" >
@@ -36,7 +36,7 @@
             contentAlignment="TOP|LEFT"
             stretchHorizontalMode="MATCH_PARENT"
             stretchVerticalMode="MATCH_CONTENT"
-            textColor="#A0A0A0" />
+            textColor="#B0B0B0" />
     </VerticalLayout>
 
 </HorizontalLayout>

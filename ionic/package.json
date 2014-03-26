@@ -1,0 +1,16 @@
+{
+  "name": "ionic",
+  "abbr": "ionic",
+  "version": "1.0.0",
+  "implName": "Ionic",
+  "contributors": [{
+    "name": "Graham Odds",
+    "username": "godds",
+    "hash": "3f5e6c753071c6a41f7f1dbb89daeb3b"
+  }],
+  "platforms": ["android", "ios"],
+  "appId": 807793,
+  "devDependencies": {
+    "grunt": "0.4.2"
+  }
+}

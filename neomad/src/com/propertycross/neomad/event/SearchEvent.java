@@ -19,7 +19,7 @@ public class SearchEvent extends Event {
 	}
 
 	public SearchEvent(String sender, double latitude, double longitude, int page) {
-		super(null, sender, NetworkService.SERVICE_NAME, Type.FIND_BY_PLACE);
+		super(null, sender, NetworkService.SERVICE_NAME, Type.FIND_BY_LOCATION);
 		this.page = new Integer(page);
 		this.latitude = new Double(latitude);
 		this.longitude = new Double(longitude);

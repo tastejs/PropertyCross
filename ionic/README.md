@@ -1,5 +1,7 @@
 # Ionic PropertyCross
 
+Visit the [Ionic page](http://propertycross.com/ionic/) on the PropertyCross website for screenshots and code sharing metrics.
+
 ## Overview
 
 This is an implementation of the PropertyCross application using [Ionic](http://ionicframework.com) (v0.9.24).  Ionic is an HTML5 framework built with [Sass](http://sass-lang.com) and optimized for [AngularJS](http://angularjs.org) that uses [Cordova / PhoneGap](http://phonegap.com) to package the HTML / JavaScript within a native wrapper for app-store deployment.  Ionic includes a mobile-specific components and controllers, and Cordova provides a set of APIs for accessing native phone functionalities which are not available via HTML specifications.
@@ -12,14 +14,13 @@ Applications developed with Ionic can be run directly within a web browser contr
 
 ## Application Structure
 
-+ `\css` - application-specific styling
-+ `\img` - application-specific images
-+ `\js` - application-specific JavaScript files
-+ `\js\app.js` - the application bootstrap, setting up state/routing for the app
-+ `\js\controllers.js` - the view models that implement the PropertyCross view logic
-+ `\js\services.js` - the services that implement the PropertyCross data fetching logic
-+ `\lib` - the Ionic framework and its dependencies
-+ `\res` - icons, etc used by PhoneGap
-+ `\templates` - the various views of the application
-+ `config.xml` - the XML file that is used by PhoneGap Build in order to package the app
-+ `index.html` - defines the root view for the application
++ `\www\assets` - icons, etc used by PhoneGap
++ `\www\css` - application-specific styling
++ `\www\img` - application-specific images
++ `\www\js` - application-specific JavaScript files
++ `\www\js\app.js` - the application bootstrap, setting up state/routing for the app
++ `\www\js\controllers.js` - the view models that implement the PropertyCross view logic
++ `\www\js\services.js` - the services that implement the PropertyCross data fetching logic
++ `\www\lib` - the Ionic framework and its dependencies
++ `\www\templates` - the various views of the application
++ `\www\index.html` - defines the root view for the application

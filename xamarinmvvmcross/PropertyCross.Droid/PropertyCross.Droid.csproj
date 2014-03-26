@@ -1,0 +1,332 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{CAA1EE3B-A228-4A7C-A8AA-37307BF024D6}</ProjectGuid>
+    <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PropertyCross.Droid</RootNamespace>
+    <AssemblyName>PropertyCross.Droid</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <AndroidApplication>true</AndroidApplication>
+    <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
+    <AndroidUseLatestPlatformSdk>False</AndroidUseLatestPlatformSdk>
+    <TargetFrameworkVersion>v4.2</TargetFrameworkVersion>
+    <AndroidSupportedAbis>armeabi,armeabi-v7a,x86</AndroidSupportedAbis>
+    <AndroidStoreUncompressedFileExtensions />
+    <MandroidI18n />
+    <JavaMaximumHeapSize />
+    <JavaOptions />
+    <ReleaseVersion>1.0</ReleaseVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AndroidUseSharedRuntime>True</AndroidUseSharedRuntime>
+    <AndroidLinkMode>None</AndroidLinkMode>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AndroidUseSharedRuntime>False</AndroidUseSharedRuntime>
+    <AndroidLinkMode>SdkOnly</AndroidLinkMode>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Cirrious.CrossCore">
+      <HintPath>..\packages\MvvmCross.HotTuna.CrossCore.3.1.1-beta2\lib\MonoAndroid\Cirrious.CrossCore.dll</HintPath>
+    </Reference>
+    <Reference Include="Cirrious.CrossCore.Droid">
+      <HintPath>..\packages\MvvmCross.HotTuna.CrossCore.3.1.1-beta2\lib\MonoAndroid\Cirrious.CrossCore.Droid.dll</HintPath>
+    </Reference>
+    <Reference Include="Cirrious.MvvmCross">
+      <HintPath>..\packages\MvvmCross.HotTuna.MvvmCrossLibraries.3.1.1-beta2\lib\MonoAndroid\Cirrious.MvvmCross.dll</HintPath>
+    </Reference>
+    <Reference Include="Cirrious.MvvmCross.Binding">
+      <HintPath>..\packages\MvvmCross.HotTuna.CrossCore.3.1.1-beta2\lib\MonoAndroid\Cirrious.MvvmCross.Binding.dll</HintPath>
+    </Reference>
+    <Reference Include="Cirrious.MvvmCross.Binding.Droid">
+      <HintPath>..\packages\MvvmCross.HotTuna.CrossCore.3.1.1-beta2\lib\MonoAndroid\Cirrious.MvvmCross.Binding.Droid.dll</HintPath>
+    </Reference>
+    <Reference Include="Cirrious.MvvmCross.Droid">
+      <HintPath>..\packages\MvvmCross.HotTuna.MvvmCrossLibraries.3.1.1-beta2\lib\MonoAndroid\Cirrious.MvvmCross.Droid.dll</HintPath>
+    </Reference>
+    <Reference Include="Cirrious.MvvmCross.Localization">
+      <HintPath>..\packages\MvvmCross.HotTuna.CrossCore.3.1.1-beta2\lib\MonoAndroid\Cirrious.MvvmCross.Localization.dll</HintPath>
+    </Reference>
+    <Reference Include="Cirrious.MvvmCross.Plugins.DownloadCache">
+      <HintPath>..\packages\MvvmCross.HotTuna.Plugin.DownloadCache.3.1.1-beta2\lib\MonoAndroid\Cirrious.MvvmCross.Plugins.DownloadCache.dll</HintPath>
+    </Reference>
+    <Reference Include="Cirrious.MvvmCross.Plugins.DownloadCache.Droid">
+      <HintPath>..\packages\MvvmCross.HotTuna.Plugin.DownloadCache.3.1.1-beta2\lib\MonoAndroid\Cirrious.MvvmCross.Plugins.DownloadCache.Droid.dll</HintPath>
+    </Reference>
+    <Reference Include="Cirrious.MvvmCross.Plugins.File">
+      <HintPath>..\packages\MvvmCross.HotTuna.Plugin.File.3.1.1-beta2\lib\MonoAndroid\Cirrious.MvvmCross.Plugins.File.dll</HintPath>
+    </Reference>
+    <Reference Include="Cirrious.MvvmCross.Plugins.File.Droid">
+      <HintPath>..\packages\MvvmCross.HotTuna.Plugin.File.3.1.1-beta2\lib\MonoAndroid\Cirrious.MvvmCross.Plugins.File.Droid.dll</HintPath>
+    </Reference>
+    <Reference Include="Cirrious.MvvmCross.Plugins.Json">
+      <HintPath>..\packages\MvvmCross.HotTuna.Plugin.Json.3.1.1-beta2\lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Cirrious.MvvmCross.Plugins.Network">
+      <HintPath>..\packages\MvvmCross.HotTuna.Plugin.Network.3.1.1-beta2\lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Network.dll</HintPath>
+    </Reference>
+    <Reference Include="Cirrious.MvvmCross.Plugins.Network.Droid">
+      <HintPath>..\packages\MvvmCross.HotTuna.Plugin.Network.3.1.1-beta2\lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Network.Droid.dll</HintPath>
+    </Reference>
+    <Reference Include="Cirrious.MvvmCross.Plugins.Visibility">
+      <HintPath>..\packages\MvvmCross.HotTuna.Plugin.Visibility.3.1.1-beta2\lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Visibility.dll</HintPath>
+    </Reference>
+    <Reference Include="Cirrious.MvvmCross.Plugins.Visibility.Droid">
+      <HintPath>..\packages\MvvmCross.HotTuna.Plugin.Visibility.3.1.1-beta2\lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Visibility.Droid.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Android" />
+    <Reference Include="mscorlib" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Xamarin.Android.Support.v4">
+      <HintPath>..\Components\xamandroidsupportv7appcompat-7.18.0\lib\android\Xamarin.Android.Support.v4.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.v7.AppCompat">
+      <HintPath>..\Components\xamandroidsupportv7appcompat-7.18.0\lib\android\Xamarin.Android.Support.v7.AppCompat.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.1-beta1\lib\portable-net40+sl5+wp80+win8+monotouch+monoandroid\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net">
+      <HintPath>..\packages\MvvmCross.PortableSupport.3.1.1-beta2\lib\MonoAndroid\System.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows">
+      <HintPath>..\packages\MvvmCross.PortableSupport.3.1.1-beta2\lib\MonoAndroid\System.Windows.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Serialization">
+      <HintPath>..\packages\MvvmCross.PortableSupport.3.1.1-beta2\lib\MonoAndroid\System.Xml.Serialization.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Bootstrap\DownloadCachePluginBootstrap.cs" />
+    <Compile Include="Bootstrap\FilePluginBootstrap.cs" />
+    <Compile Include="Bootstrap\JsonPluginBootstrap.cs" />
+    <Compile Include="Bootstrap\NetworkPluginBootstrap.cs" />
+    <Compile Include="Bootstrap\VisibilityPluginBootstrap.cs" />
+    <Compile Include="DebugTrace.cs" />
+    <Compile Include="Services\GeoLocationService.cs" />
+    <Compile Include="Services\MarshalInvokeService.cs" />
+    <Compile Include="Services\StatePersistenceService.cs" />
+    <Compile Include="LinkerPleaseInclude.cs" />
+    <Compile Include="MvvmCross\MvxActionBarActivity.cs" />
+    <Compile Include="MvvmCross\MvxActionBarEventSourceActivity.cs" />
+    <Compile Include="Resources\Resource.Designer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Setup.cs" />
+    <Compile Include="SplashScreen.cs" />
+    <Compile Include="Views\FavouritesView.cs" />
+    <Compile Include="Views\MvxActionBarBusyActivity.cs" />
+    <Compile Include="Views\PropertyFinderView.cs" />
+    <Compile Include="Views\PropertyView.cs" />
+    <Compile Include="Views\SearchResultsView.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="Resources\AboutResources.txt" />
+    <None Include="Assets\AboutAssets.txt" />
+    <AndroidResource Include="Resources\layout\SplashScreen.axml" />
+    <AndroidResource Include="Resources\layout\PropertyFinderView.axml" />
+    <AndroidResource Include="Resources\layout\item_recent_search.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\item_suggested_location.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\SearchResultView.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\item_property.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\PropertyView.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\FavouritesView.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\values\Strings.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Properties\AndroidManifest.xml" />
+    <AndroidResource Include="Resources\values\SplashStyle.xml" />
+    <AndroidResource Include="Resources\values\MvxBindingAttributes.xml" />
+    <AndroidResource Include="Resources\Drawable\splash.png" />
+    <AndroidResource Include="Resources\values\colors.xml" />
+    <AndroidResource Include="Resources\drawable-ldpi\ic_launcher.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\actionbar_tile.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_launcher.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\nostar.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\refresh.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\star.png" />
+    <AndroidResource Include="Resources\drawable-v14\actionbar_background.xml" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_launcher.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\nostar.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\refresh.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\star.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_launcher.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\nostar.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\refresh.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\star.png" />
+    <AndroidResource Include="Resources\menu\favourites_toggle.xml" />
+    <AndroidResource Include="Resources\menu\menu_propertyfinderview.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable-xhdpi\ab_bottom_solid_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ab_solid_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ab_stacked_solid_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ab_texture_tile_propertycrosstheme.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ab_transparent_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\btn_cab_done_default_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\btn_cab_done_focused_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\btn_cab_done_pressed_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\cab_background_bottom_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\cab_background_top_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\list_focused_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\list_pressed_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\menu_dropdown_panel_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\progress_bg_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\progress_primary_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\progress_secondary_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\spinner_ab_default_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\spinner_ab_disabled_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\spinner_ab_focused_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\spinner_ab_pressed_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\tab_selected_focused_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\tab_selected_pressed_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\tab_selected_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\tab_unselected_focused_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\tab_unselected_pressed_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\tab_unselected_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ab_bottom_solid_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ab_solid_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ab_stacked_solid_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ab_texture_tile_propertycrosstheme.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ab_transparent_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\btn_cab_done_default_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\btn_cab_done_focused_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\btn_cab_done_pressed_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\cab_background_bottom_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\cab_background_top_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\list_focused_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\list_pressed_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\menu_dropdown_panel_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\progress_bg_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\progress_primary_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\progress_secondary_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\spinner_ab_default_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\spinner_ab_disabled_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\spinner_ab_focused_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\spinner_ab_pressed_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\tab_selected_focused_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\tab_selected_pressed_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\tab_selected_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\tab_unselected_focused_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\tab_unselected_pressed_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\tab_unselected_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\Drawable\ab_background_textured_propertycrosstheme.xml" />
+    <AndroidResource Include="Resources\Drawable\btn_cab_done_propertycrosstheme.xml" />
+    <AndroidResource Include="Resources\Drawable\progress_horizontal_propertycrosstheme.xml" />
+    <AndroidResource Include="Resources\Drawable\selectable_background_propertycrosstheme.xml" />
+    <AndroidResource Include="Resources\Drawable\spinner_background_ab_propertycrosstheme.xml" />
+    <AndroidResource Include="Resources\Drawable\tab_indicator_ab_propertycrosstheme.xml" />
+    <AndroidResource Include="Resources\drawable-hdpi\ab_bottom_solid_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ab_solid_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ab_stacked_solid_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ab_texture_tile_propertycrosstheme.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ab_transparent_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\btn_cab_done_default_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\btn_cab_done_focused_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\btn_cab_done_pressed_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\cab_background_bottom_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\cab_background_top_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\list_focused_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\list_pressed_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\menu_dropdown_panel_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\progress_bg_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\progress_primary_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\progress_secondary_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\spinner_ab_default_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\spinner_ab_disabled_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\spinner_ab_focused_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\spinner_ab_pressed_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\tab_selected_focused_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\tab_selected_pressed_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\tab_selected_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\tab_unselected_focused_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\tab_unselected_pressed_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\tab_unselected_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ab_bottom_solid_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ab_solid_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ab_stacked_solid_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ab_texture_tile_propertycrosstheme.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ab_transparent_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\btn_cab_done_default_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\btn_cab_done_focused_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\btn_cab_done_pressed_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\cab_background_bottom_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\cab_background_top_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\list_focused_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\list_pressed_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\menu_dropdown_panel_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\progress_bg_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\progress_primary_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\progress_secondary_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\spinner_ab_default_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\spinner_ab_disabled_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\spinner_ab_focused_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\spinner_ab_pressed_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\tab_selected_focused_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\tab_selected_pressed_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\tab_selected_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\tab_unselected_focused_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\tab_unselected_pressed_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\tab_unselected_propertycrosstheme.9.png" />
+    <AndroidResource Include="Resources\values\styles_propertycrosstheme.xml" />
+    <AndroidResource Include="Resources\values-v14\styles_propertycrosstheme.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PropertyCross.Core\PropertyCross.Core.csproj">
+      <Project>{68DFCF11-8431-47CB-8A93-2E09591F81FE}</Project>
+      <Name>PropertyCross.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <XamarinComponentReference Include="xamandroidsupportv7appcompat">
+      <Version>7.18.0</Version>
+      <Visible>False</Visible>
+    </XamarinComponentReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+     Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

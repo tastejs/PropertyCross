@@ -106,28 +106,14 @@ public class PropertyFinder extends PropertyFinderAdapter implements ClickListen
 		});
 	}
 
-	public void handleFindByName(Object data, boolean parseLocation) {
+	public void handleLocationResults(Object data) {
 		try {
 			JSONObject json = new JSONObject(data.toString());
-			if (parseLocation) {
-				Vector location = LocationList.valueOf(json).getData();
-				if (!location.isEmpty()) {
-					Location l = (Location) location.elementAt(0);
-					setSearch(new GeoLocationSearch(l));
-					getQuery().setText(getSearch().getLabel());
-				}
-			} else {
-				Search search = getSearch();
-				FullTextSearch fullSearch;
-				boolean searchFromRecents = search != null && StringUtils.equalsIgnoreCase(search.getQuery(), getQuery().getText());
-				if (searchFromRecents) {
-					// Search from recents
-					fullSearch = new FullTextSearch(search.getLabel(), search.getQuery());
-				} else {
-					// Search from textfield
-					fullSearch = new FullTextSearch(getQuery().getText());
-				}
-				setSearch(fullSearch);
+			Vector location = LocationList.valueOf(json).getData();
+			if (!location.isEmpty()) {
+				Location l = (Location) location.elementAt(0);
+				setSearch(new GeoLocationSearch(l));
+				getQuery().setText(getSearch().getLabel());
 			}
 			setProperties(PropertyList.valueOf(json));
 
@@ -152,7 +138,7 @@ public class PropertyFinder extends PropertyFinderAdapter implements ClickListen
 		enableAction();
 	}
 
-	public void handleFindByPlace(Object data) {
+	public void handleAmbiguousLocation(Object data) {
 		try {
 			LocationList l = LocationList.valueOf(new JSONObject(data.toString()));
 			Vector items = new Vector();
@@ -182,18 +168,18 @@ public class PropertyFinder extends PropertyFinderAdapter implements ClickListen
 		if (e.getType() == Event.Type.FIND_ERROR) {
 			onLocationNotFound();
 		} else if (e.getType() == Event.Type.FIND_BY_NAME_RES) {
-			onLocationFoundByName(e);
-		} else if (e.getType() == Event.Type.FIND_BY_PLACE_RES) {
-			onLocationFoundByPlace(e);
+			onLocationResult(e);
+		} else if (e.getType() == Event.Type.FOUND_AMBIGIOUS_RES) {
+			onLocationAmbiguous(e);
 		} else if (e.getType() == Event.Type.FIND_BY_LOCATION_RES) {
-			onLocationFoundByName(e);
+			onLocationResult(e);
 		} else if (e.getType() == Event.Type.NETWORK_ERROR) {
 			onNetworkError();
 		}
 	}
 
-	private void onLocationFoundByName(Event e) {
-		handleFindByName(e.getValue(), false);
+	private void onLocationResult(Event e) {
+		handleLocationResults(e.getValue());
 		update();
 	}
 
@@ -202,8 +188,8 @@ public class PropertyFinder extends PropertyFinderAdapter implements ClickListen
 		enableAction();
 	}
 
-	private void onLocationFoundByPlace(Event e) {
-		handleFindByPlace(e.getValue());
+	private void onLocationAmbiguous(Event e) {
+		handleAmbiguousLocation(e.getValue());
 	}
 
 	private void onNetworkError() {
