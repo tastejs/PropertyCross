@@ -12,10 +12,10 @@
     <id>com.propertycross.titanium</id>
     <name>PropertyCross</name>
     <version>1.0</version>
-    <publisher>cprice</publisher>
+    <publisher>TasteJS</publisher>
     <url>http://propertycross.com</url>
     <description>not specified</description>
-    <copyright>2012 by Chris Price</copyright>
+    <copyright>2014 by TasteJS</copyright>
     <icon>appicon.png</icon>
     <persistent-wifi>false</persistent-wifi>
     <prerendered-icon>true</prerendered-icon>

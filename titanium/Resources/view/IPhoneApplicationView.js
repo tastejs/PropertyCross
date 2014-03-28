@@ -31,7 +31,7 @@ function IPhoneApplicationView(applicationViewModel) {
           viewModel.addToFavourites();
         });
         function updateFavouriteButton(isFavourite) {
-          favouriteButton.image = isFavourite ? '/yellow-star.png' : '/white-star.png';
+          favouriteButton.image = isFavourite ? '/star.png' : '/nostar.png';
         }
 
         viewModel.isFavourite.subscribe(updateFavouriteButton);
