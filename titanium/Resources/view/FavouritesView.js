@@ -26,16 +26,16 @@ module.exports = function (viewModel) {
       var row = Ti.UI.createTableViewRow({
         hasChild:Ti.Platform.osname === "iphone"
       });
-      row.height = '82dip';
+      row.height = '54dip';
       // tip the abstraction off that the rows have the same layout
       row.className = 'myrows';
       // use an image view rather than a plain view
       row.add(Ti.UI.createImageView({
         image:property.thumbnailUrl(),
-        top:'11dip',
-        left:'6dip',
-        width:'80dip',
-        height:'60dip'
+        top:'2dip',
+        left:'4dip',
+        width:'50dip',
+        height:'50dip'
       }));
       row.add(Titanium.UI.createLabel({
         text:'£ ' + property.price(),
@@ -44,18 +44,17 @@ module.exports = function (viewModel) {
           fontSize:'16dip',
           fontWeight:'bold'
         },
-        top:'21dip',
-        left:'100dip'
+        top:'2dip',
+        left:'60dip'
       }));
       row.add(Titanium.UI.createLabel({
         text:property.title() + ' ' + property.bedrooms() + ' bed ' + property.propertyType(),
         textAlign:'left',
         font:{
-          fontSize:'12dip',
-          fontWeight:'bold'
+          fontSize:'12dip'
         },
-        top:'46dip',
-        left:'100dip'
+        top:'22dip',
+        left:'60dip'
       }));
       return row;
     }));

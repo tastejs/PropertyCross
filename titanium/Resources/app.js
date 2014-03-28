@@ -1,6 +1,6 @@
 (function() {
 
-  var application = new (require("viewModel/ApplicationViewModel"))()
+  var application = new (require("viewModel/ApplicationViewModel"))();
   var AndroidApplicationView = require("view/AndroidApplicationView");
   var IPhoneApplicationView = require("view/IPhoneApplicationView");
 
