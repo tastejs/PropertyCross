@@ -13,14 +13,11 @@ function IPhoneApplicationView(applicationViewModel) {
 
   this.navigateForwards = function (viewModel, view) {
     if (!nav) {
-      var root = Titanium.UI.createWindow({
-        backgroundColor:"#ffffff"
-      });
-      nav = Titanium.UI.iPhone.createNavigationGroup({
+      nav = Titanium.UI.iOS.createNavigationWindow({
+        backgroundColor:"#ffffff",
         window:view.window
       });
-      root.add(nav);
-      root.open();
+      nav.open();
     } else {
       view.window.addEventListener('close', function () {
         applicationViewModel.back();
@@ -47,7 +44,7 @@ function IPhoneApplicationView(applicationViewModel) {
       }
       view.window.setRightNavButton(favouriteButton);
     }
-    nav.open(view.window);
+    nav.openWindow(view.window);
   };
 
   this.navigateBackwards = function (view) {
