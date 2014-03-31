@@ -2,3 +2,6 @@ src/build
 src/resources/sass/.sass-cache
 *.suo
 
+src/touch/sencha-touch*.js
+src/touch/resources/css
+src/touch/resources/css-debug
