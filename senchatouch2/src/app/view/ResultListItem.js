@@ -36,12 +36,12 @@ Ext.define('PropertyCross.view.ResultListItem', {
 				items: [
 					{
                         itemId: 'price',
-						style: 'font-size: 18px',
+						style: 'font-size: 18px; line-height: normal',
 						tpl:  Ext.create('Ext.XTemplate', '{[PropertyCross.util.Format.currency(values)]}')
 					},
 					{
                         itemId: 'title',
-						style: 'font-size: 12px'
+						style: 'font-size: 12px; line-height: normal;'
 					}
 				]
 			}

@@ -24,6 +24,10 @@
                             {
                                 xtype: 'textfield',
                                 label: 'Location',
+                                /*
+                                 * On small iOS 7 screens, default labelWidth of '30%' is too small
+                                 */
+                                labelWidth: 'auto',
                                 name: 'place_name',
                                 id: 'placeNameText'
                             }
@@ -40,13 +44,13 @@
                             {
                                 xtype: 'button',
                                 id: 'goButton',
-                                ui: 'confirm',
+                                ui: 'normal',
                                 text: 'Go'
                             },
                             {
                                 xtype: 'button',
                                 id: 'currLocationButton',
-                                ui: 'confirm',
+                                ui: 'action',
                                 text: 'My Location'
                             }
                         ]

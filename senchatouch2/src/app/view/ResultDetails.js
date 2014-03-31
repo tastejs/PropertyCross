@@ -4,7 +4,7 @@
     requires: ['PropertyCross.util.Format', 'Ext.Img'],
 
     config: {
-        title: 'Information',
+        title: 'Property Details',
         iconCls: 'home',
         scrollable: true,
         defaultType: 'panel',

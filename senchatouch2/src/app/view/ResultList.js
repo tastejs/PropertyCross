@@ -8,8 +8,7 @@
 			autoPaging: false,
 			loadMoreText: 'Load more results',
 			noMoreRecordsText: 'No more results',
-			loadTpl: '<div class="list-loading-text">Loading ...</div>'
-                    +'<div class="{cssPrefix}list-paging-msg">{message}</div>'
+			loadTpl: '<div class="{cssPrefix}list-paging-msg">{message}</div>'
 		}],
 		
         title: 'Results',

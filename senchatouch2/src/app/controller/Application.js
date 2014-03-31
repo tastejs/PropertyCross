@@ -132,11 +132,10 @@
         var store = Ext.getStore('favourites');
         store.load();
         var me = this;
-        var faveButton = this.getFaveButton();
-        me.getFaveButton().removeCls('faveProperty');
+        me.showFavouriteUnset();
         Ext.each(store.getData().items, function(item, index) {
             if(item && record.getData().guid === item.getData().guid) {
-                me.getFaveButton().addCls('faveProperty');
+                me.showFavouriteSet();
             }
         });
         this.getMain().push(this.resultDetails);
@@ -322,13 +321,13 @@
                 record.dirty = true;
                 store.remove(item);
                 found = true;
-                faveButton.removeCls('faveProperty');
+                me.showFavouriteUnset();
                 return false; //break..
             }
         });
         if(!found) {
             store.add(record);
-            faveButton.addCls('faveProperty');
+            me.showFavouriteSet();
         }
         //Note: sync won't fire refresh on list so we'll load again afterwards..
         store.sync();
@@ -362,5 +361,23 @@
             return;
         }
         button.hide();
+    },
+
+    showFavouriteSet: function() {
+        var faveButton = this.getFaveButton();
+        if(Ext.browser.is.IE) {
+            faveButton.setText("remove from favourites");
+        } else {
+            faveButton.setIconCls("favourite");
+        }
+    },
+
+    showFavouriteUnset: function() {
+        var faveButton = this.getFaveButton();
+        if(Ext.browser.is.IE) {
+            faveButton.setText("add to favourites");
+        } else {
+            faveButton.setIconCls("unfavourite");
+        }
     }
 });

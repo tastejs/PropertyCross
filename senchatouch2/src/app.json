@@ -72,7 +72,26 @@
      */
     "css": [
         {
-            "path": "resources/css/app.css",
+            "path": "resources/css/mountainview.css",
+            "platform": ["android"],
+            "theme": "MountainView",
+            "update": "delta"
+        },
+        {
+            "path": "resources/css/sencha-touch.css",
+            "platform": ["desktop"],
+            "update": "delta"
+        },
+        {
+            "path": "resources/css/cupertino.css",
+            "platform": ["ios"],
+            "theme": "Cupertino",
+            "update": "delta"
+        },
+        {
+            "path": "resources/css/wp8.css",
+            "platform": ["ie10"],
+            "theme": "Windows",
             "update": "delta"
         }
     ],

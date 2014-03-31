@@ -32,7 +32,7 @@
                     hidden: true,
                     // Icon's don't work on WP8 app
                     text: Ext.browser.is.IE ? 'Favourite' : undefined,
-                    iconCls: Ext.browser.is.IE ? undefined : 'star',
+                    iconCls: Ext.browser.is.IE ? undefined : 'not-important',
                     iconMask: Ext.browser.is.IE ? undefined : true,
                     showAnimation: Ext.os.is.Android ? false : {
                         type: 'fadeIn',
