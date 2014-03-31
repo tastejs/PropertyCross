@@ -1,11 +1,11 @@
-﻿Ext.define('PropertyFinder.view.Home', {
+﻿Ext.define('PropertyCross.view.Home', {
     extend: 'Ext.Container',
     xtype: 'home',
     requires: ['Ext.form.Panel', 'Ext.form.FieldSet', 'Ext.field.Text',
-            'PropertyFinder.view.SearchesListItem', 'PropertyFinder.view.SuggestedLocationsListItem'],
+            'PropertyCross.view.SearchesListItem', 'PropertyCross.view.SuggestedLocationsListItem'],
     config: {
-		id: 'home',
-        title: 'Property Finder',
+        id: 'home',
+        title: 'PropertyCross',
         scrollable: true,
         items: [
             {

@@ -40,7 +40,58 @@ Ext.define('Ext.device.notification.Abstract', {
         }
 
         if (!config.buttons) {
-            config.buttons = "OK";
+            config.buttons = ["OK", "Cancel"];
+        }
+
+        if (!Ext.isArray(config.buttons)) {
+            config.buttons = [config.buttons];
+        }
+
+        if (!config.scope) {
+            config.scope = this;
+        }
+
+        return config;
+    },
+
+    alert: function(config) {
+        if (!config.message) {
+            throw('[Ext.device.Notification#alert] You passed no message');
+        }
+
+        if (!config.scope) {
+            config.scope = this;
+        }
+
+        return config;
+    },
+
+    confirm: function(config) {
+        if (!config.message) {
+            throw('[Ext.device.Notification#confirm] You passed no message');
+        }
+
+        if (!config.buttons) {
+            config.buttons = ["OK", "Cancel"];
+        }
+
+        if (!Ext.isArray(config.buttons)) {
+            config.buttons = [config.buttons];
+        }
+
+        if (!config.scope) {
+            config.scope = this;
+        }
+
+        return config;
+    },
+    prompt: function(config) {
+        if (!config.message) {
+            throw('[Ext.device.Notification#prompt] You passed no message');
+        }
+
+        if (!config.buttons) {
+            config.buttons = ["OK", "Cancel"];
         }
 
         if (!Ext.isArray(config.buttons)) {
@@ -57,5 +108,7 @@ Ext.define('Ext.device.notification.Abstract', {
     /**
      * Vibrates the device.
      */
-    vibrate: Ext.emptyFn
+    vibrate: Ext.emptyFn,
+
+    beep: Ext.emptyFn
 });

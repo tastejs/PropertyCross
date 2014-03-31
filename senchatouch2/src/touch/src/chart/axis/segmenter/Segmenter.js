@@ -8,7 +8,7 @@
  * See {@link Ext.chart.axis.Axis}.
  * 
  */
-Ext.define("Ext.chart.axis.segmenter.Segmenter", {
+Ext.define('Ext.chart.axis.segmenter.Segmenter', {
 
     config: {
         /**
@@ -53,7 +53,7 @@ Ext.define("Ext.chart.axis.segmenter.Segmenter", {
 
     /**
      * Align value with step of units.
-     * For example, for the date segmenter, if The unit is "Month" and step is 3, the value will be aligned by
+     * For example, for the date segmenter, if the unit is "Month" and step is 3, the value will be aligned by
      * seasons.
      * 
      * @param {*} value The value to be aligned.
@@ -78,7 +78,7 @@ Ext.define("Ext.chart.axis.segmenter.Segmenter", {
      * @param {*} estStepSize The estimated step size.
      * @return {Object} Return the step size by an object of step x unit.
      * @return {Number} return.step The step count of units.
-     * @return {*} return.unit The unit.
+     * @return {Number|Object} return.unit The unit.
      */
     preferredStep: Ext.emptyFn
 });

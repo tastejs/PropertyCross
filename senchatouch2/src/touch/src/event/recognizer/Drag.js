@@ -62,6 +62,7 @@ Ext.define('Ext.event.recognizer.Drag', {
     onTouchStart: function(e) {
         if (this.callSuper(arguments) === false) {
             if (this.isStarted && this.lastMoveEvent !== null) {
+                this.lastMoveEvent.isStopped = false;
                 this.onTouchEnd(this.lastMoveEvent);
             }
             return false;
@@ -82,8 +83,7 @@ Ext.define('Ext.event.recognizer.Drag', {
         if (Math.abs(point.getDistanceTo(startPoint)) >= minDistance) {
             this.isStarted = true;
 
-            this.lastPoint = this.previousPoint = this.lastPoint = point;
-//            this.startPoint = new Ext.util.LineSegment(startPoint, point).getInBetweenPoint(minDistance);
+            this.previousPoint = this.lastPoint = point;
 
             this.resetInfo('x', e, touch);
             this.resetInfo('y', e, touch);

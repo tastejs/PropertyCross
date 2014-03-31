@@ -91,7 +91,7 @@ Ext.define('Ext.data.JsonP', {
     /**
      * @property {String} callbackKey
      * Specifies the GET parameter that will be sent to the server containing the function name to be executed when the
-     * request completes. Thus, a common request will be in the form of: 
+     * request completes. Thus, a common request will be in the form of:
      * `url?callback=Ext.data.JsonP.callback1`
      */
     callbackKey: 'callback',
@@ -290,7 +290,7 @@ Ext.define('Ext.data.JsonP', {
      * Loads the script for the given request by appending it to the HEAD element. This is
      * its own method so that users can override it (as well as {@link #createScript}).
      * @private
-     * @param request The request object.
+     * @param {Object} request The request object.
      */
     loadScript: function (request) {
         Ext.getHead().appendChild(request.script);

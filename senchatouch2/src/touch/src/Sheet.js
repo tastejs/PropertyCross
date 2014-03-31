@@ -8,7 +8,6 @@ Ext.define('Ext.Sheet', {
     extend: 'Ext.Panel',
 
     xtype: 'sheet',
-    alternateClassName: ['widget.crosscut'],
 
     requires: ['Ext.Button', 'Ext.fx.Animation'],
 
@@ -76,6 +75,19 @@ Ext.define('Ext.Sheet', {
             duration: 250,
             easing: 'ease-in'
         } : null
+    },
+
+    isInputRegex: /^(input|textarea|select|a)$/i,
+
+    beforeInitialize: function() {
+        var me = this;
+        // Temporary fix for a mysterious bug on iOS where double tapping on a sheet
+        // being animated from the bottom shift the whole body up
+        Ext.os.is.iOS && this.element.dom.addEventListener('touchstart', function(e) {
+            if (!me.isInputRegex.test(e.target.tagName)) {
+                e.preventDefault();
+            }
+        }, true);
     },
 
     platformConfig: [{

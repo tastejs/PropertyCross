@@ -19,10 +19,12 @@ Ext.define('Ext.device.orientation.Sencha', {
      *     }
      *
      * Refer to [Safari DeviceOrientationEvent Class Reference][1] for more details.
-     * 
+     *
      * [1]: http://developer.apple.com/library/safari/#documentation/SafariDOMAdditions/Reference/DeviceOrientationEventClassRef/DeviceOrientationEvent/DeviceOrientationEvent.html
      */
-    initialize: function() {
+    constructor: function() {
+        this.callSuper(arguments);
+
         Ext.device.Communicator.send({
             command: 'Orientation#watch',
             callbacks: {

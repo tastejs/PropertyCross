@@ -38,6 +38,7 @@ Ext.define("Ext.draw.sprite.Composite", {
         this.sprites.map[sprite.id] = sprite.getId();
         attr.bbox.plain.dirty = true;
         attr.bbox.transform.dirty = true;
+        return sprite;
     },
 
     /**

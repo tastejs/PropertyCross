@@ -3,12 +3,12 @@
  *
  * Pie slice sprite.
  */
-Ext.define("Ext.chart.series.sprite.PieSlice", {
+Ext.define('Ext.chart.series.sprite.PieSlice', {
     alias: 'sprite.pieslice',
     mixins: {
-        markerHolder: "Ext.chart.MarkerHolder"
+        markerHolder: 'Ext.chart.MarkerHolder'
     },
-    extend: "Ext.draw.sprite.Sector",
+    extend: 'Ext.draw.sprite.Sector',
 
     inheritableStatics: {
         def: {
@@ -104,7 +104,8 @@ Ext.define("Ext.chart.series.sprite.PieSlice", {
             midRho = (startRho + endRho) * 0.5,
             surfaceMatrix = me.surfaceMatrix,
             labelCfg = me.labelCfg || (me.labelCfg = {}),
-            labelBox, x, y;
+            labelTpl = me.getBoundMarker('labels')[0].getTemplate(),
+            labelBox, x, y, changes;
 
         surfaceMatrix.appendMatrix(attr.matrix);
 
@@ -129,6 +130,10 @@ Ext.define("Ext.chart.series.sprite.PieSlice", {
         labelCfg.calloutColor = me.attr.fillStyle;
         labelCfg.globalAlpha = attr.globalAlpha * attr.fillOpacity;
 
+        // If a slice is empty, don't display the label.
+        // This behavior can be overridden by a renderer.
+        labelCfg.hidden = (attr.startAngle == attr.endAngle);
+
         if (attr.renderer) {
             labelCfg.type = 'label';
             changes = attr.renderer.call(me, me, labelCfg, me.rendererData, me.rendererIndex);
@@ -139,7 +144,11 @@ Ext.define("Ext.chart.series.sprite.PieSlice", {
         labelBox = me.getMarkerBBox('labels', me.attr.attributeId, true);
         if (labelBox) {
             if (attr.doCallout) {
-                me.putMarker('labels', {callout: 1 - +me.sliceContainsLabel(attr, labelBox)}, me.attr.attributeId);
+                if (labelTpl.attr.display === 'outside') {
+                    me.putMarker('labels', {callout: 1}, me.attr.attributeId);
+                } else {
+                    me.putMarker('labels', {callout: 1 - +me.sliceContainsLabel(attr, labelBox)}, me.attr.attributeId);
+                }
             } else {
                 me.putMarker('labels', {globalAlpha: +me.sliceContainsLabel(attr, labelBox)}, me.attr.attributeId);
             }
@@ -151,7 +160,7 @@ Ext.define("Ext.chart.series.sprite.PieSlice", {
             middle = (attr.endRho + attr.startRho) / 2,
             outer = middle + (bbox.width + padding) / 2,
             inner = middle - (bbox.width + padding) / 2,
-            l1, l2, l3;
+            sliceAngle, l1, l2, l3;
 
         if (padding < 0) {
             return 1;
@@ -161,7 +170,8 @@ Ext.define("Ext.chart.series.sprite.PieSlice", {
         }
         l1 = Math.sqrt(attr.endRho * attr.endRho - outer * outer);
         l2 = Math.sqrt(attr.endRho * attr.endRho - inner * inner);
-        l3 = Math.abs(Math.tan(Math.abs(attr.endAngle - attr.startAngle) / 2)) * inner;
+        sliceAngle = Math.abs(attr.endAngle - attr.startAngle);
+        l3 = (sliceAngle > Math.PI/2 ? inner : Math.abs(Math.tan(sliceAngle / 2)) * inner);
         if (bbox.height + padding * 2 > Math.min(l1, l2, l3) * 2) {
             return 0;
         }

@@ -86,7 +86,7 @@ Ext.define("Ext.chart.series.sprite.Pie3DPart", {
                 endRho: "path,bbox",
                 margin: "path,bbox",
                 thickness: "path",
-                baseRotation: "path,partZIndex",
+                baseRotation: "path,partZIndex,partColor",
                 baseColor: 'partZIndex,partColor',
                 part: "path,partZIndex"
             },

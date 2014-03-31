@@ -63,6 +63,8 @@ Ext.define('Ext.data.proxy.WebStorage', {
         if (!this.getId()) {
             this.setId(model.modelName);
         }
+
+        this.callParent(arguments);
     },
 
     //inherit docs
@@ -348,6 +350,7 @@ Ext.define('Ext.data.proxy.WebStorage', {
             me.setIds(ids);
         }
 
+        delete this.cache[id];
         me.getStorageObject().removeItem(me.getRecordKey(id));
     },
 
@@ -431,8 +434,8 @@ Ext.define('Ext.data.proxy.WebStorage', {
 				return new Date(date * 1000);
 			case 'time':
 				return new Date(date);
-			default:
-				return Ext.Date.format(Ext.isDate(date) ? date : new Date(date), dateFormat);
+            default:
+                return Ext.isDate(date) ? date : Ext.Date.parse(date, dateFormat);
 		}
 	},
 

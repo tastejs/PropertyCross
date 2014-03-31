@@ -133,6 +133,14 @@ Ext.define('Ext.field.Spinner', {
         }
     },
 
+    platformConfig: [{
+        platform: 'android',
+        component: {
+            disabled: false,
+            readOnly: true
+        }
+    }],
+
     constructor: function() {
         var me = this;
 

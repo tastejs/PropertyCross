@@ -189,7 +189,7 @@ Ext.define("Ext.draw.sprite.Text", {
                                 attrs.fontFamily = part.replace(Ext.draw.sprite.Text.shortHand4Re, ' ');
                             }
                         }
-                        this.setAttributesBypassingNormalization(attrs);
+                        this.setAttributes(attrs, true);
                     };
                 })({
                     "italic": "fontStyles",
@@ -222,9 +222,9 @@ Ext.define("Ext.draw.sprite.Text", {
                     if (attrs.fontFamily) {
                         font += attrs.fontFamily + ' ';
                     }
-                    this.setAttributesBypassingNormalization({
+                    this.setAttributes({
                         font: font.substr(0, font.length - 1)
-                    });
+                    }, true);
                 }
             }
         }
@@ -239,13 +239,17 @@ Ext.define("Ext.draw.sprite.Text", {
             attr = me.attr,
             x = attr.x,
             y = attr.y,
+            dx = [],
             font = attr.font,
             text = attr.text,
             baseline = attr.textBaseline,
             alignment = attr.textAlign,
             size = Ext.draw.TextMeasurer.measureText(text, font),
+            sizes = size.sizes,
             height = size.height,
-            width = size.width;
+            width = size.width,
+            ln = sizes ? sizes.length : 0,
+            i = 0;
 
         switch (baseline) {
             case 'hanging' :
@@ -267,12 +271,20 @@ Ext.define("Ext.draw.sprite.Text", {
             case 'end' :
             case 'right' :
                 x -= width;
+                for (; i < ln; i++) {
+                    dx.push(width - sizes[i].width);
+                }
                 break;
             case 'middle' :
             case 'center' :
                 x -= width * 0.5;
+                for (; i < ln; i++) {
+                    dx.push((width - sizes[i].width) * 0.5);
+                }
                 break;
         }
+
+        attr.textAlignOffsets = dx;
 
         plain.x = x;
         plain.y = y;
@@ -281,7 +293,7 @@ Ext.define("Ext.draw.sprite.Text", {
     },
 
     setText: function (text) {
-        this.setAttributesBypassingNormalization({text: text});
+        this.setAttributes({text: text}, true);
     },
 
     setElementStyles: function (element, styles) {
@@ -299,6 +311,7 @@ Ext.define("Ext.draw.sprite.Text", {
         var attr = this.attr,
             mat = Ext.draw.Matrix.fly(attr.matrix.elements.slice(0)),
             bbox = this.getBBox(true),
+            dx = attr.textAlignOffsets,
             x, y, i, lines;
         if (attr.text.length === 0) {
             return;
@@ -311,10 +324,10 @@ Ext.define("Ext.draw.sprite.Text", {
         mat.toContext(ctx);
         for (i = 0; i < lines.length; i++) {
             if (ctx.fillStyle !== 'rgba(0, 0, 0, 0)') {
-                ctx.fillText(lines[i], x, y + bbox.height / lines.length * i);
+                ctx.fillText(lines[i], x + (dx[i] || 0), y + bbox.height / lines.length * i);
             }
             if (ctx.strokeStyle !== 'rgba(0, 0, 0, 0)') {
-                ctx.strokeText(lines[i], x, y + bbox.height / lines.length * i);
+                ctx.strokeText(lines[i], x + (dx[i] || 0), y + bbox.height / lines.length * i);
             }
         }
     }

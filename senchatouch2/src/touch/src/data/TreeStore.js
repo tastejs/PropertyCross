@@ -171,6 +171,10 @@ Ext.define('Ext.data.TreeStore', {
         return this.data.getByKey(id);
     },
 
+    getById: function(id) {
+        return this.data.getByKey(id);
+    },
+
     onNodeBeforeExpand: function(node, options, e) {
         if (node.isLoading()) {
             e.pause();

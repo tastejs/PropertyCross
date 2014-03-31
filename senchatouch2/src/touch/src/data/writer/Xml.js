@@ -8,14 +8,14 @@
  * up the XML document.
  */
 Ext.define('Ext.data.writer.Xml', {
-    
+
     /* Begin Definitions */
-    
+
     extend: 'Ext.data.writer.Writer',
     alternateClassName: 'Ext.data.XmlWriter',
-    
+
     alias: 'writer.xml',
-    
+
     /* End Definitions */
 
     config: {
@@ -44,8 +44,8 @@ Ext.define('Ext.data.writer.Xml', {
     },
 
     /**
-     * @param request
-     * @param data
+     * @param {Object} request
+     * @param {Array} data
      * @return {Object}
      */
     writeRecords: function(request, data) {
@@ -58,18 +58,18 @@ Ext.define('Ext.data.writer.Xml', {
             needsRoot = data.length !== 1,
             item,
             key;
-            
+
         // may not exist
         xml.push(me.getHeader() || '');
-        
+
         if (!root && needsRoot) {
             root = me.getDefaultDocumentRoot();
         }
-        
+
         if (root) {
             xml.push('<', root, '>');
         }
-            
+
         for (; i < len; ++i) {
             item = data[i];
             xml.push('<', record, '>');
@@ -80,11 +80,11 @@ Ext.define('Ext.data.writer.Xml', {
             }
             xml.push('</', record, '>');
         }
-        
+
         if (root) {
             xml.push('</', root, '>');
         }
-            
+
         request.setXmlData(xml.join(''));
         return request;
     }

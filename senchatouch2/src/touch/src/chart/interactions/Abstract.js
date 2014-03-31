@@ -9,7 +9,7 @@ Ext.define('Ext.chart.interactions.Abstract', {
     xtype: 'interaction',
 
     mixins: {
-        observable: "Ext.mixin.Observable"
+        observable: 'Ext.mixin.Observable'
     },
 
     config: {
@@ -52,14 +52,23 @@ Ext.define('Ext.chart.interactions.Abstract', {
 
     updateChart: function (newChart, oldChart) {
         var me = this, gestures = me.getGestures();
-        if (oldChart === newChart) {
-            return;
-        }
         if (oldChart) {
             me.removeChartListener(oldChart);
         }
         if (newChart) {
             me.addChartListener();
+        }
+    },
+
+    updateEnabled: function (enabled) {
+        var me = this,
+            chart = me.getChart();
+        if (chart) {
+            if (enabled) {
+                me.addChartListener();
+            } else {
+                me.removeChartListener(chart);
+            }
         }
     },
 
@@ -107,8 +116,11 @@ Ext.define('Ext.chart.interactions.Abstract', {
         var me = this,
             chart = me.getChart(),
             gestures = me.getGestures(),
-            gesture, fn;
-        me.listeners = me.listeners || {};
+            gesture;
+
+        if (!me.getEnabled()) {
+            return;
+        }
 
         function insertGesture(name, fn) {
             chart.on(
@@ -116,7 +128,7 @@ Ext.define('Ext.chart.interactions.Abstract', {
                 // wrap the handler so it does not fire if the event is locked by another interaction
                 me.listeners[name] = function (e) {
                     var locks = me.getLocks(), result;
-                    if (!(name in locks) || locks[name] === me) {
+                    if (me.getEnabled() && (!(name in locks) || locks[name] === me)) {
                         result = (Ext.isFunction(fn) ? fn : me[fn]).apply(this, arguments);
                         if (result === false && e && e.stopPropagation) {
                             e.stopPropagation();
@@ -128,6 +140,7 @@ Ext.define('Ext.chart.interactions.Abstract', {
             );
         }
 
+        me.listeners = me.listeners || {};
         for (gesture in gestures) {
             insertGesture(gesture, gestures[gesture]);
         }
@@ -136,7 +149,7 @@ Ext.define('Ext.chart.interactions.Abstract', {
     removeChartListener: function (chart) {
         var me = this,
             gestures = me.getGestures(),
-            gesture, fn;
+            gesture;
 
         function removeGesture(name) {
             chart.un(name, me.listeners[name]);
@@ -194,7 +207,7 @@ Ext.define('Ext.chart.interactions.Abstract', {
         if (this.stopAnimationBeforeSync) {
             chart.resizing = false;
         }
-        this.syncThrottle = +new Date() + this.throttleGap;
+        this.syncThrottle = Date.now() + this.throttleGap;
     },
 
     sync: function () {

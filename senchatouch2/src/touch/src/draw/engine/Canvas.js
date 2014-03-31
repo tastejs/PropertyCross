@@ -63,7 +63,7 @@ Ext.define('Ext.draw.engine.Canvas', {
              * Strokes the subpaths of the current default path or the given path with the current stroke style.
              * @ignore
              */
-            stroke: function (transformFillStroke) {
+            stroke: function () {
                 var strokeStyle = this.strokeStyle,
                     strokeGradient = this.strokeGradient,
                     strokeOpacity = this.strokeOpacity,
@@ -174,7 +174,6 @@ Ext.define('Ext.draw.engine.Canvas', {
                         case "Z":
                             me.closePath();
                             break;
-                        default:
                     }
                 }
             }
@@ -789,23 +788,12 @@ Ext.define('Ext.draw.engine.Canvas', {
     clear: function () {
         var me = this,
             activeCanvases = this.activeCanvases,
-            i, canvas, ctx, width, height;
+            i, canvas, ctx;
         for (i = 0; i < activeCanvases; i++) {
             canvas = me.canvases[i].dom;
             ctx = me.contexts[i];
-            width = canvas.width;
-            height = canvas.height;
-            if (Ext.os.is.Android && !Ext.os.is.Android4) {
-                // TODO: Verify this is the proper check (Chrome)
-                // On chrome this is faster:
-                //noinspection SillyAssignmentJS
-                canvas.width = canvas.width;
-                // Fill the gap between surface defaults and canvas defaults
-                me.applyDefaults(ctx);
-            } else {
-                ctx.setTransform(1, 0, 0, 1, 0, 0);
-                ctx.clearRect(0, 0, width, height);
-            }
+            ctx.setTransform(1, 0, 0, 1, 0, 0);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
         }
         me.setDirty(true);
     },

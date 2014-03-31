@@ -4,7 +4,7 @@
  *
  * 99% of the time all you need to use in this class is {@link #getScroller}.
  *
- * This should never should be extended.
+ * This should never be extended.
  */
 Ext.define('Ext.scroll.View', {
     extend: 'Ext.Evented',

@@ -14,6 +14,11 @@ Ext.define('Ext.device.SQLite', {
     ],
 
     constructor: function() {
-        return Ext.create('Ext.device.sqlite.Sencha');
+        var browserEnv = Ext.browser.is;
+        if(browserEnv.Sencha) {
+            return Ext.create('Ext.device.sqlite.Sencha');
+        }
+
+        return {};
     }
 });

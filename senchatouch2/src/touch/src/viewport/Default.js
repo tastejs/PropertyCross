@@ -121,7 +121,13 @@ Ext.define('Ext.viewport.Default', {
          */
         height: '100%',
 
-        useBodyElement: true
+        useBodyElement: true,
+
+        /**
+         * An object of all the menus on this viewport.
+         * @private
+         */
+        menus: {}
     },
 
     /**
@@ -152,7 +158,15 @@ Ext.define('Ext.viewport.Default', {
         this.doPreventZooming = bind(this.doPreventZooming, this);
         this.doBlurInput = bind(this.doBlurInput, this);
 
-        this.maximizeOnEvents = ['ready', 'orientationchange'];
+        this.maximizeOnEvents = [
+          'ready',
+          'orientationchange'
+        ];
+
+      // set default devicePixelRatio if it is not explicitly defined
+        window.devicePixelRatio = window.devicePixelRatio || 1;
+
+        this.callSuper([config]);
 
         this.orientation = this.determineOrientation();
         this.windowWidth = this.getWindowWidth();
@@ -160,13 +174,8 @@ Ext.define('Ext.viewport.Default', {
         this.windowOuterHeight = this.getWindowOuterHeight();
 
         if (!this.stretchHeights) {
-            this.stretchHeights = {};
+        this.stretchHeights = {};
         }
-
-        // set default devicePixelRatio if it is not explicitly defined
-        window.devicePixelRatio = window.devicePixelRatio || 1;
-
-        this.callParent([config]);
 
         // Android is handled separately
         if (!Ext.os.is.Android || Ext.browser.is.ChromeMobile) {
@@ -199,6 +208,9 @@ Ext.define('Ext.viewport.Default', {
     onReady: function() {
         if (this.getAutoRender()) {
             this.render();
+        }
+        if (Ext.browser.name == 'ChromeiOS') {
+            this.setHeight('-webkit-calc(100% - ' + ((window.outerHeight - window.innerHeight) / 2) + 'px)');
         }
     },
 
@@ -246,6 +258,10 @@ Ext.define('Ext.viewport.Default', {
 
             if (Ext.browser.is.Standalone) {
                 classList.push(clsPrefix + 'standalone');
+            }
+
+            if (Ext.browser.is.AndroidStock) {
+                classList.push(clsPrefix + 'android-stock');
             }
 
             classList.push(clsPrefix + orientation);
@@ -558,5 +574,671 @@ Ext.define('Ext.viewport.Default', {
     onItemFullscreenChange: function(item) {
         item.addCls(this.fullscreenItemCls);
         this.add(item);
+    },
+
+    /**
+     * Sets a menu for a given side of the Viewport.
+     *
+     * Adds functionality to show the menu by swiping from the side of the screen from the given side.
+     *
+     * If a menu is already set for a given side, it will be removed.
+     *
+     * Available sides are: `left`, `right`, `top`, and `bottom`.
+     *
+     * @param {Ext.Menu} menu The menu to assign to the viewport
+     * @param {Object} config The configuration for the menu.
+     * @param {String} config.side The side to put the menu on.
+     * @param {Boolean} config.cover True to cover the viewport content. Defaults to `true`.
+     */
+    setMenu: function(menu, config) {
+        var me = this;
+        config = config || {};
+
+        // Temporary workaround for body shifting issue
+        if (Ext.os.is.iOS && !this.hasiOSOrientationFix) {
+            this.hasiOSOrientationFix = true;
+            this.on('orientationchange', function() {
+                window.scrollTo(0, 0);
+            }, this);
+        }
+
+        if (!menu) {
+            //<debug error>
+            Ext.Logger.error("You must specify a side to dock the menu.");
+            //</debug>
+            return;
+        }
+
+        if (!config.side) {
+            //<debug error>
+            Ext.Logger.error("You must specify a side to dock the menu.");
+            //</debug>
+            return;
+        }
+
+        if (['left', 'right', 'top', 'bottom'].indexOf(config.side) == -1) {
+            //<debug error>
+            Ext.Logger.error("You must specify a valid side (left, right, top or botom) to dock the menu.");
+            //</debug>
+            return;
+        }
+
+        var menus = me.getMenus();
+
+        if (!menus) {
+            menus = {};
+        }
+
+        // Add a listener to show this menu on swipe
+        if (!me.addedSwipeListener) {
+            me.addedSwipeListener = true;
+
+            me.element.on({
+                tap: me.onTap,
+                swipestart: me.onSwipeStart,
+                edgeswipestart: me.onEdgeSwipeStart,
+                edgeswipe: me.onEdgeSwipe,
+                edgeswipeend: me.onEdgeSwipeEnd,
+                scope: me
+            });
+
+            // Add BB10 webworks API for swipe down.
+            if (window.blackberry) {
+                var toggleMenu = function() {
+                    var menus = me.getMenus(),
+                        menu = menus['top'];
+
+                    if (!menu) {
+                        return;
+                    }
+
+                    if (menu.isHidden()) {
+                        me.showMenu('top');
+                    } else {
+                        me.hideMenu('top');
+                    }
+                };
+
+                if (blackberry.app && blackberry.app.event && blackberry.app.event.onSwipeDown) {
+                    blackberry.app.event.onSwipeDown(toggleMenu); // PlayBook
+                }
+                else if (blackberry.event && blackberry.event.addEventListener) {
+                    blackberry.event.addEventListener("swipedown", toggleMenu); // BB10
+                }
+            }
+        }
+
+        menus[config.side] = menu;
+        menu.$reveal = Boolean(config.reveal);
+        menu.$cover = config.cover !== false && !menu.$reveal;
+        menu.$side = config.side;
+
+        me.fixMenuSize(menu, config.side);
+
+        if (config.side == 'left') {
+            menu.setLeft(0);
+            menu.setRight(null);
+            menu.setTop(0);
+            menu.setBottom(0);
+        }
+        else if (config.side == 'right') {
+            menu.setLeft(null);
+            menu.setRight(0);
+            menu.setTop(0);
+            menu.setBottom(0);
+        }
+        else if (config.side == 'top') {
+            menu.setLeft(0);
+            menu.setRight(0);
+            menu.setTop(0);
+            menu.setBottom(null);
+        }
+        else if (config.side == 'bottom') {
+            menu.setLeft(0);
+            menu.setRight(0);
+            menu.setTop(null);
+            menu.setBottom(0);
+        }
+
+        me.setMenus(menus);
+    },
+
+    /**
+     * Removes a menu from a specified side.
+     * @param {String} side The side to remove the menu from
+     */
+    removeMenu: function(side) {
+        var menus = this.getMenus() || {},
+            menu = menus[side];
+
+        if(menu) this.hideMenu(side);
+        delete menus[side];
+        this.setMenus(menus);
+    },
+
+    /**
+     * @private
+     * Changes the sizing of the specified menu so that it displays correctly when shown.
+     */
+    fixMenuSize: function(menu, side) {
+        if (side == 'top' || side == 'bottom') {
+            menu.setWidth('100%');
+        }
+        else if (side == 'left' || side == 'right') {
+            menu.setHeight('100%');
+        }
+    },
+
+    /**
+     * Shows a menu specified by the menu's side.
+     * @param {String} side The side which the menu is placed.
+     */
+    showMenu: function(side) {
+        var menus = this.getMenus(),
+            menu = menus[side],
+            before, after,
+            viewportBefore, viewportAfter;
+
+        if (!menu || menu.isAnimating) {
+            return;
+        }
+
+        this.hideOtherMenus(side);
+
+        before = {
+            translateX: 0,
+            translateY: 0
+        };
+
+        after = {
+            translateX: 0,
+            translateY: 0
+        };
+
+        viewportBefore = {
+            translateX: 0,
+            translateY: 0
+        };
+
+        viewportAfter = {
+            translateX: 0,
+            translateY: 0
+        };
+
+        if (menu.$reveal) {
+            Ext.getBody().insertFirst(menu.element);
+        }
+        else {
+            Ext.Viewport.add(menu);
+        }
+
+        menu.show();
+        menu.addCls('x-' + side);
+
+        var size = (side == 'left' || side == 'right') ? menu.element.getWidth() : menu.element.getHeight();
+
+        if (side == 'left') {
+            before.translateX = -size;
+            viewportAfter.translateX = size;
+        }
+        else if (side == 'right') {
+            before.translateX = size;
+            viewportAfter.translateX = -size;
+        }
+        else if (side == 'top') {
+            before.translateY = -size;
+            viewportAfter.translateY = size;
+        }
+        else if (side == 'bottom') {
+            before.translateY = size;
+            viewportAfter.translateY = -size;
+        }
+
+        if (menu.$reveal) {
+            if (Ext.browser.getPreferredTranslationMethod() != 'scrollposition') {
+                menu.translate(0, 0);
+            }
+        }
+        else {
+            menu.translate(before.translateX, before.translateY);
+        }
+
+        if (menu.$cover) {
+            menu.getTranslatable().on('animationend', function() {
+                menu.isAnimating = false;
+            }, this, {
+                single: true
+            });
+
+            menu.translate(after.translateX, after.translateY, {
+                preserveEndState: true,
+                duration: 200
+            });
+
+        }
+        else {
+            this.translate(viewportBefore.translateX, viewportBefore.translateY);
+
+
+            this.getTranslatable().on('animationend', function() {
+                menu.isAnimating = false;
+            }, this, {
+                single: true
+            });
+
+            this.translate(viewportAfter.translateX, viewportAfter.translateY, {
+                preserveEndState: true,
+                duration: 200
+            });
+        }
+
+        // Make the menu as animating
+        menu.isAnimating = true;
+    },
+
+    /**
+     * Hides a menu specified by the menu's side.
+     * @param {String} side The side which the menu is placed.
+     */
+    hideMenu: function(side, animate) {
+        var menus = this.getMenus(),
+            menu = menus[side],
+            after, viewportAfter,
+            size;
+
+        animate = (animate === false) ? false : true;
+
+        if (!menu || (menu.isHidden() || menu.isAnimating)) {
+            return;
+        }
+
+        after = {
+            translateX: 0,
+            translateY: 0
+        };
+
+        viewportAfter = {
+            translateX: 0,
+            translateY: 0
+        };
+
+        size = (side == 'left' || side == 'right') ? menu.element.getWidth() : menu.element.getHeight();
+
+        if (side == 'left') {
+            after.translateX = -size;
+        }
+        else if (side == 'right') {
+            after.translateX = size;
+        }
+        else if (side == 'top') {
+            after.translateY = -size;
+        }
+        else if (side == 'bottom') {
+            after.translateY = size;
+        }
+
+        if (menu.$cover) {
+            if (animate) {
+                menu.getTranslatable().on('animationend', function() {
+                    menu.isAnimating = false;
+                    menu.hide();
+                }, this, {
+                    single: true
+                });
+
+                menu.translate(after.translateX, after.translateY, {
+                    preserveEndState: true,
+                    duration: 200
+                });
+            }
+            else {
+                menu.translate(after.translateX, after.translateY);
+                menu.hide()
+            }
+        }
+        else {
+            if (animate) {
+                this.getTranslatable().on('animationend', function() {
+                    menu.isAnimating = false;
+                    menu.hide();
+                }, this, {
+                    single: true
+                });
+
+                this.translate(viewportAfter.translateX, viewportAfter.translateY, {
+                    preserveEndState: true,
+                    duration: 200
+                });
+            }
+            else {
+                this.translate(viewportAfter.translateX, viewportAfter.translateY);
+                menu.hide();
+            }
+        }
+    },
+
+    /**
+     * Hides all visible menus.
+     */
+    hideAllMenus: function(animation) {
+        var menus = this.getMenus();
+
+        for (var side in menus) {
+            this.hideMenu(side, animation);
+        }
+    },
+
+    /**
+     * Hides all menus except for the side specified
+     * @param {String} side         Side(s) not to hide
+     * @param {String} animation    Animation to hide with
+     */
+    hideOtherMenus: function(side, animation){
+        var menus = this.getMenus();
+
+        for (var menu in menus) {
+            if (side != menu) {
+                this.hideMenu(menu, animation);
+            }
+        }
+    },
+
+    /**
+     * Toggles the menu specified by side
+     * @param {String} side The side which the menu is placed.
+     */
+    toggleMenu: function(side) {
+        var menus = this.getMenus(), menu;
+        if (menus[side]) {
+            menu = menus[side];
+            if (menu.isHidden()) {
+                this.showMenu(side);
+            } else {
+                this.hideMenu(side);
+            }
+        }
+    },
+
+    /**
+     * @private
+     */
+    sideForDirection: function(direction) {
+        if (direction == 'left') {
+            return 'right';
+        }
+        else if (direction == 'right') {
+            return 'left';
+        }
+        else if (direction == 'up') {
+            return 'bottom';
+        }
+        else if (direction == 'down') {
+            return 'top';
+        }
+    },
+
+    /**
+     * @private
+     */
+    sideForSwipeDirection: function(direction) {
+        if (direction == "up") {
+            return  "top";
+        }
+        else if (direction == "down") {
+            return "bottom";
+        }
+        return direction;
+    },
+
+    /**
+     * @private
+     */
+    onTap: function(e) {
+        // this.hideAllMenus();
+    },
+
+    /**
+     * @private
+     */
+    onSwipeStart: function(e) {
+        var side = this.sideForSwipeDirection(e.direction);
+        this.hideMenu(side);
+    },
+
+    /**
+     * @private
+     */
+    onEdgeSwipeStart: function(e) {
+        var side = this.sideForDirection(e.direction),
+            menus = this.getMenus(),
+            menu = menus[side],
+            menuSide, checkMenu;
+
+        if (!menu || !menu.isHidden()) {
+            return;
+        }
+
+        for (menuSide in menus) {
+            checkMenu = menus[menuSide];
+            if (checkMenu.isHidden() !== false) {
+                return;
+            }
+        }
+
+        this.$swiping = true;
+
+        this.hideAllMenus(false);
+
+        // show the menu first so we can calculate the size
+        if (menu.$reveal) {
+            Ext.getBody().insertFirst(menu.element);
+        }
+        else {
+            Ext.Viewport.add(menu);
+        }
+        menu.show();
+
+        var size = (side == 'left' || side == 'right') ? menu.element.getWidth() : menu.element.getHeight(),
+            after, viewportAfter;
+
+        after = {
+            translateX: 0,
+            translateY: 0
+        };
+
+        viewportAfter = {
+            translateX: 0,
+            translateY: 0
+        };
+
+        if (side == 'left') {
+            after.translateX = -size;
+        }
+        else if (side == 'right') {
+            after.translateX = size;
+        }
+        else if (side == 'top') {
+            after.translateY = -size;
+        }
+        else if (side == 'bottom') {
+            after.translateY = size;
+        }
+
+        var transformStyleName = 'webkitTransform' in document.createElement('div').style ? 'webkitTransform' : 'transform',
+            setTransform = menu.element.dom.style[transformStyleName];
+
+        if (setTransform) {
+            menu.element.dom.style[transformStyleName] = '';
+        }
+
+        if (menu.$reveal) {
+            if (Ext.browser.getPreferredTranslationMethod() != 'scrollposition') {
+                menu.translate(0, 0);
+            }
+        }
+        else {
+            menu.translate(after.translateX, after.translateY);
+        }
+
+        if (!menu.$cover) {
+            if (setTransform) {
+                this.innerElement.dom.style[transformStyleName] = '';
+            }
+
+            this.translate(viewportAfter.translateX, viewportAfter.translateY);
+        }
+    },
+
+    /**
+     * @private
+     */
+    onEdgeSwipe: function(e) {
+        var side = this.sideForDirection(e.direction),
+            menu = this.getMenus()[side];
+
+        if (!menu || !this.$swiping) {
+            return;
+        }
+
+        var size = (side == 'left' || side == 'right') ? menu.element.getWidth() : menu.element.getHeight(),
+            after, viewportAfter,
+            movement = Math.min(e.distance - size, 0),
+            viewportMovement = Math.min(e.distance, size);
+
+        after = {
+            translateX: 0,
+            translateY: 0
+        };
+
+        viewportAfter = {
+            translateX: 0,
+            translateY: 0
+        };
+
+        if (side == 'left') {
+            after.translateX = movement;
+            viewportAfter.translateX = viewportMovement;
+        }
+        else if (side == 'right') {
+            after.translateX = -movement;
+            viewportAfter.translateX = -viewportMovement;
+        }
+        else if (side == 'top') {
+            after.translateY = movement;
+            viewportAfter.translateY = viewportMovement;
+        }
+        else if (side == 'bottom') {
+            after.translateY = -movement;
+            viewportAfter.translateY = -viewportMovement;
+        }
+
+        if (menu.$cover) {
+            menu.translate(after.translateX, after.translateY);
+        }
+        else {
+            this.translate(viewportAfter.translateX, viewportAfter.translateY);
+        }
+    },
+
+    /**
+     * @private
+     */
+    onEdgeSwipeEnd: function(e) {
+        var side = this.sideForDirection(e.direction),
+            menu = this.getMenus()[side],
+            shouldRevert = false;
+
+        if (!menu) {
+            return;
+        }
+
+        var size = (side == 'left' || side == 'right') ? menu.element.getWidth() : menu.element.getHeight(),
+            velocity = (e.flick) ? e.flick.velocity : 0;
+
+        // check if continuing in the right direction
+        if (side == 'right') {
+            if (velocity.x > 0) {
+                shouldRevert = true;
+            }
+        }
+        else if (side == 'left') {
+            if (velocity.x < 0) {
+                shouldRevert = true;
+            }
+        }
+        else if (side == 'top') {
+            if (velocity.y < 0) {
+                shouldRevert = true;
+            }
+        }
+        else if (side == 'bottom') {
+            if (velocity.y > 0) {
+                shouldRevert = true;
+            }
+        }
+
+        var movement = (shouldRevert) ? size : 0,
+            viewportMovement = (shouldRevert) ? 0 : -size,
+            after, viewportAfter;
+
+        after = {
+            translateX: 0,
+            translateY: 0
+        };
+
+        viewportAfter = {
+            translateX: 0,
+            translateY: 0
+        };
+
+        if (side == 'left') {
+            after.translateX = -movement;
+            viewportAfter.translateX = -viewportMovement;
+        }
+        else if (side == 'right') {
+            after.translateX = movement;
+            viewportAfter.translateX = viewportMovement;
+        }
+        else if (side == 'top') {
+            after.translateY = -movement;
+            viewportAfter.translateY = -viewportMovement;
+        }
+        else if (side == 'bottom') {
+            after.translateY = movement;
+            viewportAfter.translateY = viewportMovement;
+        }
+
+        // Move the viewport if cover is not enabled
+        if (menu.$cover) {
+            menu.getTranslatable().on('animationend', function() {
+                if (shouldRevert) {
+                    menu.hide();
+                }
+            }, this, {
+                single: true
+            });
+
+            menu.translate(after.translateX, after.translateY, {
+                preserveEndState: true,
+                duration: 200
+            });
+
+        }
+        else {
+            this.getTranslatable().on('animationend', function() {
+                if (shouldRevert) {
+                    menu.hide();
+                }
+            }, this, {
+                single: true
+            });
+
+            this.translate(viewportAfter.translateX, viewportAfter.translateY, {
+                preserveEndState: true,
+                duration: 200
+            });
+        }
+
+        this.$swiping = false;
     }
 });

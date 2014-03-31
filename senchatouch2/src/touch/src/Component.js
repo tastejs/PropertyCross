@@ -453,6 +453,7 @@ Ext.define('Ext.Component', {
          * @cfg {Number/String} width
          * The width of this Component; must be a valid CSS length value, e.g: `300`, `100px`, `30%`, etc.
          * By default, if this is not explicitly set, this Component's element will simply have its own natural size.
+         * If set to `auto`, it will set the width to `null` meaning it will have its own natural size.
          * @accessor
          * @evented
          */
@@ -462,6 +463,7 @@ Ext.define('Ext.Component', {
          * @cfg {Number/String} height
          * The height of this Component; must be a valid CSS length value, e.g: `300`, `100px`, `30%`, etc.
          * By default, if this is not explicitly set, this Component's element will simply have its own natural size.
+         * If set to `auto`, it will set the width to `null` meaning it will have its own natural size.
          * @accessor
          * @evented
          */
@@ -470,6 +472,7 @@ Ext.define('Ext.Component', {
         /**
          * @cfg {Number/String} minWidth
          * The minimum width of this Component; must be a valid CSS length value, e.g: `300`, `100px`, `30%`, etc.
+         * If set to `auto`, it will set the width to `null` meaning it will have its own natural size.
          * @accessor
          * @evented
          */
@@ -478,6 +481,7 @@ Ext.define('Ext.Component', {
         /**
          * @cfg {Number/String} minHeight
          * The minimum height of this Component; must be a valid CSS length value, e.g: `300`, `100px`, `30%`, etc.
+         * If set to `auto`, it will set the width to `null` meaning it will have its own natural size.
          * @accessor
          * @evented
          */
@@ -486,6 +490,7 @@ Ext.define('Ext.Component', {
         /**
          * @cfg {Number/String} maxWidth
          * The maximum width of this Component; must be a valid CSS length value, e.g: `300`, `100px`, `30%`, etc.
+         * If set to `auto`, it will set the width to `null` meaning it will have its own natural size.
          * Note that this config will not apply if the Component is 'floating' (absolutely positioned or centered)
          * @accessor
          * @evented
@@ -495,6 +500,7 @@ Ext.define('Ext.Component', {
         /**
          * @cfg {Number/String} maxHeight
          * The maximum height of this Component; must be a valid CSS length value, e.g: `300`, `100px`, `30%`, etc.
+         * If set to `auto`, it will set the width to `null` meaning it will have its own natural size.
          * Note that this config will not apply if the Component is 'floating' (absolutely positioned or centered)
          * @accessor
          * @evented
@@ -610,7 +616,7 @@ Ext.define('Ext.Component', {
         zIndex: null,
 
         /**
-         * @cfg {String/String[]/Ext.Template[]/Ext.XTemplate[]} tpl
+         * @cfg {String/String[]/Ext.Template/Ext.XTemplate[]} tpl
          * A {@link String}, {@link Ext.Template}, {@link Ext.XTemplate} or an {@link Array} of strings to form an {@link Ext.XTemplate}.
          * Used in conjunction with the {@link #data} and {@link #tplWriteMode} configurations.
          *
@@ -641,7 +647,7 @@ Ext.define('Ext.Component', {
         /**
          * @cfg {String/Mixed} showAnimation
          * Animation effect to apply when the Component is being shown.  Typically you want to use an
-         * inbound animation type such as 'fadeIn' or 'slideIn'.
+         * inbound animation type such as 'fadeIn' or 'slideIn'. For more animations, check the {@link Ext.fx.Animation#type} config.
          * @accessor
          */
         showAnimation: null,
@@ -649,7 +655,7 @@ Ext.define('Ext.Component', {
         /**
          * @cfg {String/Mixed} hideAnimation
          * Animation effect to apply when the Component is being hidden.  Typically you want to use an
-         * outbound animation type such as 'fadeOut' or 'slideOut'.
+         * outbound animation type such as 'fadeOut' or 'slideOut'. For more animations, check the {@link Ext.fx.Animation#type} config.
          * @accessor
          */
         hideAnimation: null,
@@ -856,6 +862,7 @@ Ext.define('Ext.Component', {
     /**
      * @event painted
      * @inheritdoc Ext.dom.Element#painted
+     * @param {Ext.Element} element The component's outer element (this.element)
      */
 
     /**
@@ -868,6 +875,7 @@ Ext.define('Ext.Component', {
     /**
      * @event resize
      * @inheritdoc Ext.dom.Element#resize
+     * @param {Ext.Element} element The component's outer element (this.element)
      */
 
     /**
@@ -899,6 +907,11 @@ Ext.define('Ext.Component', {
      * @private
      */
     isInner: true,
+
+    /**
+     * @private
+     */
+    activeAnimation: null,
 
     /**
      * @readonly
@@ -1196,6 +1209,11 @@ Ext.define('Ext.Component', {
             if (newUi) {
                 element.addCls(newUi, baseCls);
                 this.currentUi = baseCls + '-' + newUi;
+
+                // The first instance gets stored on the proptotype
+                if (!this.self.prototype.currentUi) {
+                    this.self.prototype.currentUi = this.currentUi;
+                }
             }
         }
     },
@@ -1894,29 +1912,33 @@ Ext.define('Ext.Component', {
 
     getInnerHtmlElement: function() {
         var innerHtmlElement = this.innerHtmlElement,
-            styleHtmlCls = this.getStyleHtmlCls();
+            styleHtmlCls;
 
         if (!innerHtmlElement || !innerHtmlElement.dom || !innerHtmlElement.dom.parentNode) {
-            this.innerHtmlElement = innerHtmlElement = this.innerElement.createChild({ cls: 'x-innerhtml ' });
+            this.innerHtmlElement = innerHtmlElement = Ext.Element.create({ cls: 'x-innerhtml' });
 
             if (this.getStyleHtmlContent()) {
+                styleHtmlCls = this.getStyleHtmlCls();
                 this.innerHtmlElement.addCls(styleHtmlCls);
                 this.innerElement.removeCls(styleHtmlCls);
             }
+            this.innerElement.appendChild(innerHtmlElement);
         }
 
         return innerHtmlElement;
     },
 
     updateHtml: function(html) {
-        var innerHtmlElement = this.getInnerHtmlElement();
+        if (!this.isDestroyed) {
+            var innerHtmlElement = this.getInnerHtmlElement();
 
-        if (Ext.isElement(html)){
-            innerHtmlElement.setHtml('');
-            innerHtmlElement.append(html);
-        }
-        else {
-            innerHtmlElement.setHtml(html);
+            if (Ext.isElement(html)){
+                innerHtmlElement.setHtml('');
+                innerHtmlElement.append(html);
+            }
+            else {
+                innerHtmlElement.setHtml(html);
+            }
         }
     },
 
@@ -1960,12 +1982,24 @@ Ext.define('Ext.Component', {
     },
 
     /**
-     * Hides this Component
-     * @param {Object/Boolean} animation (optional)
+     * Hides this Component optionally using an animation.
+     * @param {Object/Boolean} [animation] You can specify an animation here or a bool to use the {@link #hideAnimation} config.
      * @return {Ext.Component}
      * @chainable
      */
     hide: function(animation) {
+        this.setCurrentAlignmentInfo(null);
+        if(this.activeAnimation) {
+            this.activeAnimation.on({
+                animationend: function(){
+                    this.hide(animation);
+                },
+                scope: this,
+                single: true
+            });
+            return this;
+        }
+
         if (!this.getHidden()) {
             if (animation === undefined || (animation && animation.isComponent)) {
                 animation = this.getHideAnimation();
@@ -1987,12 +2021,23 @@ Ext.define('Ext.Component', {
     },
 
     /**
-     * Shows this component.
-     * @param {Object/Boolean} animation (optional)
+     * Shows this component optionally using an animation.
+     * @param {Object/Boolean} [animation] You can specify an animation here or a bool to use the {@link #showAnimation} config.
      * @return {Ext.Component}
      * @chainable
      */
     show: function(animation) {
+        if(this.activeAnimation) {
+            this.activeAnimation.on({
+                animationend: function(){
+                    this.show(animation);
+                },
+                scope: this,
+                single: true
+            });
+            return this;
+        }
+
         var hidden = this.getHidden();
         if (hidden || hidden === null) {
             if (animation === true) {
@@ -2003,6 +2048,7 @@ Ext.define('Ext.Component', {
             }
 
             if (animation) {
+                this.beforeShowAnimation();
                 this.onBefore({
                     hiddenchange: 'animateFn',
                     scope: this,
@@ -2017,20 +2063,30 @@ Ext.define('Ext.Component', {
         return this;
     },
 
+    beforeShowAnimation: function() {
+        if (this.element) {
+            this.renderElement.show();
+            this.element.removeCls(this.getHiddenCls());
+        }
+    },
+
     animateFn: function(animation, component, newState, oldState, options, controller) {
+        var me = this;
         if (animation && (!newState || (newState && this.isPainted()))) {
-            var anim = new Ext.fx.Animation(animation);
 
-            anim.setElement(component.element);
+            this.activeAnimation = new Ext.fx.Animation(animation);
+            this.activeAnimation.setElement(component.element);
 
-            if (newState) {
-                anim.setOnEnd(function() {
+            if (!Ext.isEmpty(newState)) {
+                this.activeAnimation.setOnEnd(function() {
+                    me.activeAnimation = null;
                     controller.resume();
                 });
 
                 controller.pause();
             }
-            Ext.Animator.run(anim);
+
+            Ext.Animator.run(me.activeAnimation);
         }
     },
 
@@ -2240,7 +2296,7 @@ Ext.define('Ext.Component', {
 
     /**
      * @private
-     * @param rendered
+     * @param {Boolean} rendered
      */
     setRendered: function(rendered) {
         var wasRendered = this.rendered;
@@ -2367,25 +2423,79 @@ Ext.define('Ext.Component', {
 
     /**
      * @private
-     * @param component
+     * @param {Ext.Component} component
      */
     onShowByErased: function() {
         Ext.Viewport.un('resize', 'alignTo', this);
     },
 
     /**
+     * Prepares information on aligning this to component using alignment.
+     * Also checks to see if this is already aligned to component according to alignment.
+     * @protected
+     */
+    getAlignmentInfo: function (component, alignment){
+        var alignToElement = component.isComponent ? component.renderElement : component,
+            alignToBox = alignToElement.getPageBox(),
+            element = this.renderElement,
+            box = element.getPageBox(),
+            stats = {
+                alignToBox: alignToBox,
+                alignment: alignment,
+                top: alignToBox.top,
+                left: alignToBox.left,
+                alignToWidth: alignToBox.width,
+                alignToHeight: alignToBox.height,
+                width: box.width,
+                height: box.height
+            },
+            currentAlignmentInfo = this.getCurrentAlignmentInfo(),
+            isAligned = true;
+
+        if (!Ext.isEmpty(currentAlignmentInfo)) {
+            Ext.Object.each(stats, function(key, value) {
+                if (!Ext.isObject(value) && currentAlignmentInfo[key] != value) {
+                    isAligned = false;
+                    return false;
+                }
+                return true;
+            });
+        } else {
+            isAligned = false;
+        }
+
+        return {isAligned: isAligned, stats: stats};
+    },
+
+    /**
+     * Current Alignment information from the last alignTo call
+     * @private
+     */
+    getCurrentAlignmentInfo: function() {
+        return this.$currentAlignmentInfo;
+    },
+
+    /**
+     * Sets the current Alignment information, called by alignTo
+     * @private
+     */
+    setCurrentAlignmentInfo: function(alignmentInfo) {
+        this.$currentAlignmentInfo = Ext.isEmpty(alignmentInfo) ? null : Ext.merge({}, alignmentInfo.stats ? alignmentInfo.stats : alignmentInfo);
+    },
+
+    /**
      * @private
      */
     alignTo: function(component, alignment) {
-        var alignToElement = component.isComponent ? component.renderElement : component,
-            element = this.renderElement,
-            alignToBox = alignToElement.getPageBox(),
+        var alignmentInfo = this.getAlignmentInfo(component, alignment);
+        if(alignmentInfo.isAligned) return;
+
+        var alignToBox = alignmentInfo.stats.alignToBox,
             constrainBox = this.getParent().element.getPageBox(),
-            box = element.getPageBox(),
-            alignToHeight = alignToBox.height,
-            alignToWidth = alignToBox.width,
-            height = box.height,
-            width = box.width;
+            alignToHeight = alignmentInfo.stats.alignToHeight,
+            alignToWidth = alignmentInfo.stats.alignToWidth,
+            height = alignmentInfo.stats.height,
+            width = alignmentInfo.stats.width;
 
         // Keep off the sides...
         constrainBox.bottom -= 5;
@@ -2522,6 +2632,7 @@ Ext.define('Ext.Component', {
 
         this.setLeft(left);
         this.setTop(top);
+        this.setCurrentAlignmentInfo(alignmentInfo);
     },
 
     /**

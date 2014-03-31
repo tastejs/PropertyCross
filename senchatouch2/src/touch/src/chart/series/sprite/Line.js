@@ -4,7 +4,7 @@
  *
  * Line series sprite.
  */
-Ext.define("Ext.chart.series.sprite.Line", {
+Ext.define('Ext.chart.series.sprite.Line', {
     alias: 'sprite.lineSeries',
     extend: 'Ext.chart.series.sprite.Aggregative',
 
@@ -47,10 +47,14 @@ Ext.define("Ext.chart.series.sprite.Line", {
             },
 
             updaters: {
-                "smooth": function (attr) {
-                    if (attr.smooth && attr.dataX && attr.dataY && attr.dataX.length > 2 && attr.dataY.length > 2) {
-                        this.smoothX = Ext.draw.Draw.spline(attr.dataX);
-                        this.smoothY = Ext.draw.Draw.spline(attr.dataY);
+                smooth: function (attr) {
+                    var dataX = attr.dataX,
+                        dataY = attr.dataY,
+                        path;
+                    if (attr.smooth && dataX && dataY && dataX.length > 2 && dataY.length > 2) {
+                        path = Ext.draw.Draw.smooth(dataX, dataY, 3);
+                        this.smoothX = path.smoothX;
+                        this.smoothY = path.smoothY;
                     } else {
                         delete this.smoothX;
                         delete this.smoothY;
@@ -72,7 +76,7 @@ Ext.define("Ext.chart.series.sprite.Line", {
         plain.height = ymax - ymin;
     },
 
-    drawStroke: function (surface, ctx, list, xAxis) {
+    drawStroke: function (surface, ctx, start, end, list, xAxis) {
         var attr = this.attr,
             matrix = attr.matrix,
             xx = matrix.getXX(),
@@ -81,15 +85,26 @@ Ext.define("Ext.chart.series.sprite.Line", {
             dy = matrix.getDY(),
             smooth = attr.smooth,
             step = attr.step,
-            start = list[2],
+            scale = Math.pow(2, power(attr.dataX.length, end)),
             smoothX = this.smoothX,
             smoothY = this.smoothY,
             i, j, lineConfig, changes,
             cx1, cy1, cx2, cy2, x, y, x0, y0, saveOpacity;
+
+        function power(count, end) {
+            var power = 0,
+                n = count;
+            while (n < end) {
+                power++;
+                n += count >> power;
+            }
+            return power > 0 ? power - 1 : power;
+        }
+
         ctx.beginPath();
         if (smooth && smoothX && smoothY) {
             ctx.moveTo(smoothX[start * 3] * xx + dx, smoothY[start * 3] * yy + dy);
-            for (i = 0, j = start * 3 + 1; i < list.length - 3; i += 3, j += 3) {
+            for (i = 0, j = start * 3 + 1; i < list.length - 3; i += 3, j += 3 * scale) {
                 cx1 = smoothX[j] * xx + dx;
                 cy1 = smoothY[j] * yy + dy;
                 cx2 = smoothX[j + 1] * xx + dx;
@@ -100,7 +115,7 @@ Ext.define("Ext.chart.series.sprite.Line", {
                 y0 = list[i + 1];
                 if (attr.renderer) {
                     lineConfig = {
-                        type: "line",
+                        type: 'line',
                         smooth: true,
                         step: step,
                         cx1: cx1,
@@ -153,7 +168,7 @@ Ext.define("Ext.chart.series.sprite.Line", {
                 y0 = list[i - 2];
                 if (attr.renderer) {
                     lineConfig = {
-                        type: "line",
+                        type: 'line',
                         smooth: false,
                         step: step,
                         x: x,
@@ -208,11 +223,77 @@ Ext.define("Ext.chart.series.sprite.Line", {
         }
     },
 
+    drawLabel: function (text, dataX, dataY, labelId, region) {
+        var me = this,
+            attr = me.attr,
+            label = me.getBoundMarker('labels')[0],
+            labelTpl = label.getTemplate(),
+            labelCfg = me.labelCfg || (me.labelCfg = {}),
+            surfaceMatrix = me.surfaceMatrix,
+            labelX, labelY,
+            labelOverflowPadding = attr.labelOverflowPadding,
+            halfWidth, halfHeight,
+            labelBox,
+            changes;
+
+        labelCfg.text = text;
+
+        labelBox = this.getMarkerBBox('labels', labelId, true);
+        if (!labelBox) {
+            me.putMarker('labels', labelCfg, labelId);
+            labelBox = this.getMarkerBBox('labels', labelId, true);
+        }
+
+        if (attr.flipXY) {
+            labelCfg.rotationRads = Math.PI * 0.5;
+        } else {
+            labelCfg.rotationRads = 0;
+        }
+
+        halfWidth = labelBox.width / 2;
+        halfHeight = labelBox.height / 2;
+
+        labelX = dataX;
+        if (labelTpl.attr.display === 'over') {
+            labelY = dataY + halfHeight + labelOverflowPadding;
+        } else {
+            labelY = dataY - halfHeight - labelOverflowPadding;
+        }
+
+        if (labelX <= region[0] + halfWidth) {
+            labelX = region[0] + halfWidth;
+        } else if (labelX >= region[2] - halfWidth) {
+            labelX = region[2] - halfWidth;
+        } 
+
+        if (labelY <= region[1] + halfHeight) {
+            labelY = region[1] + halfHeight;
+        } else if (labelY >= region[3] - halfHeight) {
+            labelY = region[3] - halfHeight;
+        }
+
+        labelCfg.x = surfaceMatrix.x(labelX, labelY);
+        labelCfg.y = surfaceMatrix.y(labelX, labelY);
+
+        if (labelTpl.attr.renderer) {
+            changes = labelTpl.attr.renderer.call(this, text, label, labelCfg, {store: this.getStore()}, labelId);
+            if (typeof changes === 'string') {
+                labelCfg.text = changes;
+            } else {
+                Ext.apply(labelCfg, changes);
+            }
+        }
+
+        me.putMarker('labels', labelCfg, labelId);
+    },
+
     renderAggregates: function (aggregates, start, end, surface, ctx, clip, region) {
         var me = this,
             attr = me.attr,
             dataX = attr.dataX,
             dataY = attr.dataY,
+            labels = attr.labels,
+            drawLabels = labels && !!me.getBoundMarker('labels'),
             matrix = attr.matrix,
             surfaceMatrix = surface.matrix,
             pixel = surface.devicePixelRatio,
@@ -262,9 +343,13 @@ Ext.define("Ext.chart.series.sprite.Line", {
                 }
                 markerCfg.translationX = surfaceMatrix.x(x, y);
                 markerCfg.translationY = surfaceMatrix.y(x, y);
-                me.putMarker("markers", markerCfg, index, !attr.renderer);
+                me.putMarker('markers', markerCfg, index, !attr.renderer);
+
+                if (drawLabels && labels[index]) {
+                    me.drawLabel(labels[index], x, y, index, region);
+                }
             }
-            me.drawStroke(surface, ctx, list, region[1] - pixel);
+            me.drawStroke(surface, ctx, start, end, list, region[1] - pixel);
             if (!attr.renderer) {
                 var lastPointX = dataX[dataX.length - 1] * xx + dx + pixel,
                     lastPointY = dataY[dataY.length - 1] * yy + dy,
@@ -288,7 +373,7 @@ Ext.define("Ext.chart.series.sprite.Line", {
                 if (attr.transformFillStroke) {
                     attr.inverseMatrix.toContext(ctx);
                 }
-                me.drawStroke(surface, ctx, list, region[1] - pixel);
+                me.drawStroke(surface, ctx, start, end, list, region[1] - pixel);
                 if (attr.transformFillStroke) {
                     attr.matrix.toContext(ctx);
                 }

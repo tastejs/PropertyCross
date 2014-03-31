@@ -102,9 +102,10 @@ Ext.define('Ext.chart.interactions.PanZoom', {
          * @cfg {Object/Array} axes
          * Specifies which axes should be made navigable. The config value can take the following formats:
          *
-         * - An Object whose keys correspond to the {@link Ext.chart.axis.Axis#position position} of each
+         * - An Object with keys corresponding to the {@link Ext.chart.axis.Axis#position position} of each
          *   axis that should be made navigable. Each key's value can either be an Object with further
          *   configuration options for each axis or simply `true` for a default set of options.
+         *
          *       {
          *           type: 'panzoom',
          *           axes: {
@@ -169,8 +170,7 @@ Ext.define('Ext.chart.interactions.PanZoom', {
 
         modeToggleButton: {
             cls: ['x-panzoom-toggle', 'x-zooming'],
-            iconCls: 'expand',
-            iconMask: true
+            iconCls: 'expand'
         },
 
         hideLabelInGesture: false //Ext.os.is.Android
@@ -333,6 +333,7 @@ Ext.define('Ext.chart.interactions.PanZoom', {
     onGestureEnd: function (e) {
         var me = this;
         if (me.getLocks()[me.getGesture()] === me) {
+            me.getChart().resumeThicknessChanged();
             me.showLabels();
             me.sync();
             me.unlockEvents(me.getGestures());
@@ -456,6 +457,7 @@ Ext.define('Ext.chart.interactions.PanZoom', {
     transformAxisBy: function (axis, oldVisibleRange, panX, panY, sx, sy, minZoom, maxZoom) {
         var me = this,
             visibleLength = oldVisibleRange[1] - oldVisibleRange[0],
+            visibleRange = axis.getVisibleRange(),
             actualMinZoom =  minZoom || me.getMinZoom() || axis.config.minZoom,
             actualMaxZoom =  maxZoom || me.getMaxZoom() || axis.config.maxZoom,
             region = me.getChart().getInnerRegion(),
@@ -482,6 +484,10 @@ Ext.define('Ext.chart.interactions.PanZoom', {
         left = oldVisibleRange[0];
         right = oldVisibleRange[1];
 
+        visibleRange = visibleRange[1] - visibleRange[0];
+        if (visibleLength === visibleRange && visibleRange === 1) {
+            return;
+        }
         axis.setVisibleRange([
             (oldVisibleRange[0] + oldVisibleRange[1] - visibleLength) * 0.5 - pan / length * visibleLength,
             (oldVisibleRange[0] + oldVisibleRange[1] + visibleLength) * 0.5 - pan / length * visibleLength

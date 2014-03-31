@@ -25,8 +25,8 @@ Ext.define('Ext.util.TranslatableGroup', {
             itemLength = this.getItemLength(),
             itemLengthX = itemLength.x,
             itemLengthY = itemLength.y,
-            useX = typeof x == 'number',
-            useY = typeof y == 'number',
+            useX = Ext.isNumber(x),
+            useY = Ext.isNumber(y),
             offset, i, ln, item, translateX, translateY;
 
         for (i = 0, ln = items.length; i < ln; i++) {

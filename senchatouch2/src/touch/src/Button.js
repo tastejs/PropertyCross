@@ -25,49 +25,8 @@
  *     });
  *     Ext.Viewport.add({ xtype: 'container', padding: 10, items: [button] });
  *
- * Here are the included icons available (if {@link Global_CSS#$include-default-icons $include-default-icons}
- * is set to `true`):
- * 
- * <table>
- * <tr>
- *   <td>{@img action.png action}</td>
- *   <td>{@img add.png add}</td>
- *   <td>{@img arrow_down.png arrow_down}</td>
- *   <td>{@img arrow_left.png arrow_left}</td>
- *   <td>{@img arrow_right.png arrow_right}</td>
- *   <td>{@img arrow_up.png arrow_up}</td>
- * </tr>
- * <tr>
- *   <td>{@img bookmarks.png bookmarks}</td>
- *   <td>{@img compose.png compose}</td>
- *   <td>{@img delete.png delete}</td>
- *   <td>{@img download.png download}</td>
- *   <td>{@img favorites.png favorites}</td>
- *   <td>{@img home.png home}</td>
- * </tr>
- * <tr>
- *   <td>{@img info.png info}</td>
- *   <td>{@img locate.png locate}</td>
- *   <td>{@img maps.png maps}</td>
- *   <td>{@img more.png more}</td>
- *   <td>{@img organize.png organize}</td>
- *   <td>{@img refresh.png refresh}</td>
- * </tr>
- * <tr>
- *   <td>{@img reply.png reply}</td>
- *   <td>{@img search.png search}</td>
- *   <td>{@img settings.png settings}</td>
- *   <td>{@img star.png star}</td>
- *   <td>{@img team.png team}</td>
- *   <td>{@img time.png time}</td>
- * </tr>
- * <tr>
- *   <td>{@img trash.png trash}</td>
- *   <td>{@img user.png user}</td>
- * </tr>
- * </table>
- *
- * You can also use other pictos icons by using the {@link Global_CSS#icon icon} mixin in your Sass.
+ * Sencha provides the "Font" and "PNG" icons packs from http://wwww.pictos.cc. 
+ * Use icons with the {@link Global_CSS#icon icon} mixin in your Sass.
  *
  * ## Badges
  *
@@ -253,7 +212,7 @@ Ext.define('Ext.Button', {
 
         /**
          * @cfg {String} badgeCls
-         * The CSS class to add to the Button's badge, if it has one.
+         * The CSS class to add to the Button's badge, if it has one.  Badges appear as small numbers, letters, or icons that sit on top of your button.  For instance, a small red number indicating how many updates are available.
          * @accessor
          */
         badgeCls: Ext.baseCSSPrefix + 'badge',
@@ -286,7 +245,7 @@ Ext.define('Ext.Button', {
     config: {
         /**
          * @cfg {String} badgeText
-         * Optional badge text.
+         * Optional badge text.  Badges appear as small numbers, letters, or icons that sit on top of your button.  For instance, a small red number indicating how many updates are available.
          * @accessor
          */
         badgeText: null,
@@ -429,14 +388,16 @@ Ext.define('Ext.Button', {
      */
     updateText: function(text) {
         var textElement = this.textElement;
+        
         if (textElement) {
             if (text) {
                 textElement.show();
                 textElement.setHtml(text);
-            }
-            else {
+            } else {
                 textElement.hide();
             }
+
+            this.refreshIconAlign();
         }
     },
 

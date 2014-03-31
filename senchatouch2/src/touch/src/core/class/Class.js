@@ -519,7 +519,7 @@
     ExtClass.registerPreprocessor('platformConfig', function(Class, data, hooks) {
         var platformConfigs = data.platformConfig,
             config = data.config || {},
-            platform, theme, platformConfig, i, ln, j , ln2;
+            platform, theme, platformConfig, i, ln, j, ln2, exclude;
 
         delete data.platformConfig;
 
@@ -595,6 +595,14 @@
                         case 'ie10':
                             profileMatch = /MSIE 10/.test(ua);
                             break;
+                        case 'windows':
+                            profileMatch = /MSIE 10/.test(ua) || /Trident/.test(ua);
+                            break;
+                        case 'tizen':
+                            profileMatch = /Tizen/.test(ua);
+                            break;
+                        case 'firefox':
+                            profileMatch = /Firefox/.test(ua);
                     }
                     if (profileMatch) {
                         return true;
@@ -608,13 +616,14 @@
             platformConfig = platformConfigs[i];
 
             platform = platformConfig.platform;
+            exclude = platformConfig.exclude || [];
             delete platformConfig.platform;
 
             theme = [].concat(platformConfig.theme);
             ln2 = theme.length;
             delete platformConfig.theme;
 
-            if (platform && Ext.filterPlatform(platform)) {
+            if (platform && Ext.filterPlatform(platform) && !Ext.filterPlatform(exclude)) {
                 Ext.merge(config, platformConfig);
             }
 

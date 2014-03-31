@@ -571,8 +571,8 @@ Ext.define('Ext.util.Collection', {
      * Filter by a function. Returns a _new_ collection that has been filtered. The passed function will be called with
      * each object in the collection. If the function returns `true`, the value is included otherwise it is filtered.
      * @param {Function} fn The function to be called.
-     * @param fn.o The object.
-     * @param fn.k The key.
+     * @param {Object} fn.o The object.
+     * @param {String} fn.k The key.
      * @param {Object} scope The scope (`this` reference) in which the function is executed. Defaults to this
      * MixedCollection.
      * @return {Ext.util.MixedCollection} The new filtered collection
@@ -826,7 +826,7 @@ Ext.define('Ext.util.Collection', {
             this.updateIndices();
         }
 
-        var index = this.indices[this.getKey(item)];
+        var index = item ? this.indices[this.getKey(item)] : -1;
         return (index === undefined) ? -1 : index;
     },
 
@@ -988,8 +988,8 @@ Ext.define('Ext.util.Collection', {
      * Find the index of the first matching object in this collection by a function. If the function returns `true` it
      * is considered a match.
      * @param {Function} fn The function to be called.
-     * @param fn.o The object.
-     * @param fn.k The key.
+     * @param {Object} fn.o The object.
+     * @param {String} fn.k The key.
      * @param {Object} scope The scope (`this` reference) in which the function is executed. Defaults to this
      * MixedCollection.
      * @param {Number} [start=0] The index to start searching at.

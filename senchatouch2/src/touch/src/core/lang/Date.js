@@ -3,7 +3,7 @@
 //@require Ext.Error
 
 /**
- *
+ * Note: Date values are zero-based.
  */
 Ext.Date = {
     /** @ignore */

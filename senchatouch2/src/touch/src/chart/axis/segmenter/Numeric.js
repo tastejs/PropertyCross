@@ -4,7 +4,7 @@
  * 
  * Numeric data type.
  */
-Ext.define("Ext.chart.axis.segmenter.Numeric", {
+Ext.define('Ext.chart.axis.segmenter.Numeric', {
     extend: 'Ext.chart.axis.segmenter.Segmenter',
     alias: 'segmenter.numeric',
 
@@ -22,11 +22,11 @@ Ext.define("Ext.chart.axis.segmenter.Numeric", {
 
 
     add: function (value, step, unit) {
-        return value + step * (unit.scale);
+        return value + step * unit.scale;
     },
 
     preferredStep: function (min, estStepSize) {
-        var logs = Math.floor(Math.log(estStepSize) * Math.LOG10E),
+        var logs = Math.floor(Math.log(estStepSize) * Math.LOG10E), // common logarithm of estStepSize
             scale = Math.pow(10, logs);
         estStepSize /= scale;
         if (estStepSize < 2) {
@@ -38,8 +38,35 @@ Ext.define("Ext.chart.axis.segmenter.Numeric", {
             logs++;
         }
         return {
-            unit: { fixes: -logs, scale: scale },
+            unit: {
+                // when estStepSize < 1, rounded down log10(estStepSize) is equal to -number_of_leading_zeros in estStepSize
+                fixes: -logs, // number of fractional digits
+                scale: scale
+            },
             step: estStepSize
         };
+    },
+
+    /**
+     * Wraps the provided estimated step size of a range without altering it into a step size object.
+     *
+     * @param {*} start The start point of range.
+     * @param {*} estStepSize The estimated step size.
+     * @return {Object} Return the step size by an object of step x unit.
+     * @return {Number} return.step The step count of units.
+     * @return {Object} return.unit The unit.
+     */
+
+    exactStep: function (min, estStepSize) {
+        var logs = Math.floor(Math.log(estStepSize) * Math.LOG10E),
+            scale = Math.pow(10, logs);
+        return {
+            unit: {
+                // add one decimal point if estStepSize is not a multiple of scale
+                fixes: -logs + (estStepSize % scale === 0 ? 0 : 1),
+                scale: 1
+            },
+            step: estStepSize
+        }
     }
 });

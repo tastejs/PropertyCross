@@ -1,11 +1,11 @@
-﻿Ext.define('PropertyFinder.view.Main', {
+﻿Ext.define('PropertyCross.view.Main', {
     extend: 'Ext.navigation.View',
     xtype: 'mainview',
 
     requires: [
-		'PropertyFinder.view.Home',
-        'PropertyFinder.view.ResultList',
-        'PropertyFinder.view.ResultDetails',
+		'PropertyCross.view.Home',
+        'PropertyCross.view.ResultList',
+        'PropertyCross.view.ResultDetails',
 		'Ext.data.proxy.JsonP'
     ],
 

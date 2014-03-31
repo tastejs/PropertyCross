@@ -87,7 +87,7 @@ Ext.define('Ext.chart.series.Cartesian', {
     createSprite: function () {
         var sprite = this.callSuper(),
             xAxis = this.getXAxis();
-        sprite.setFlipXY(this.getChart().getFlipXY());
+        sprite.setAttributes({flipXY: this.getChart().getFlipXY()});
         if (sprite.setAggregator && xAxis && xAxis.getAggregator) {
             if (xAxis.getAggregator) {
                 sprite.setAggregator({strategy: xAxis.getAggregator()});

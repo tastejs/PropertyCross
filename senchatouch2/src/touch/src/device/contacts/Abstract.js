@@ -41,6 +41,8 @@ Ext.define('Ext.device.contacts.Abstract', {
 
      /**
      * Returns base64 encoded image thumbnail for a contact specified in config.id
+      * **This method is for Sencha Native Packager only**
+      *
      * @return {String} base64 string
      */
 
@@ -51,6 +53,8 @@ Ext.define('Ext.device.contacts.Abstract', {
 
      /**
      * Returns localized, user readable label for a contact field (i.e. "Mobile", "Home")
+      * **This method is for Sencha Native Packager only**
+      *
      * @return {String} user readable string
      */
     getLocalizedLabel: function(config) {

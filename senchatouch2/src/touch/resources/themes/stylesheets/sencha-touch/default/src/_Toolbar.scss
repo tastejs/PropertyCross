@@ -67,8 +67,8 @@
         }
 
         .x-button,
-        .x-field-select .x-component-outer,
-        .x-field-select .x-component-outer:before {
+        .x-field-select .x-component-outer {
+        // .x-field-select .x-component-outer:before {
             @include toolbar-button($toolbar-button-color, $gradient);
         }
 
@@ -159,9 +159,16 @@ $toolbar-search-left-padding: 1.67em;
         }
     }
 
+    .x-slider-field,
+    .x-toggle-field {
+        .x-component-outer {
+            padding: 0em .3em;
+        }
+    }
+
     .x-field {
         width: 13em;
-        margin: .5em;
+        padding: .5em;
         min-height: 0;
         border-bottom: 0;
         background: transparent;

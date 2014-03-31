@@ -1,5 +1,41 @@
 /**
- * SQL proxy.
+ * SQL proxy lets you store data in a SQL database.
+ * The Sencha Touch SQL proxy outputs model data into an HTML5
+ * local database using WebSQL.
+ *
+ * You can create a Store for the proxy, for example:
+ *
+ *    Ext.require(["Ext.data.proxy.SQL"]);
+ *
+ *    Ext.define("User", {
+ *       extend: "Ext.data.Model",
+ *       config: {
+ *          fields: [ "firstName", "lastName" ]
+ *       }
+ *     });
+ *
+ *     Ext.create("Ext.data.Store", {
+ *        model: "User",
+ *        storeId: "Users",
+ *        proxy: {
+ *           type: "sql"
+ *        }
+ *     });
+ *
+ *     Ext.getStore("Users").add({
+ *        firstName: "Polly",
+ *        lastName: "Hedra"
+ *     });
+ *
+ *     Ext.getStore("Users").sync();
+ *
+ * To destroy a table use:
+ *
+ *    Ext.getStore("Users").getModel().getProxy().dropTable();
+ *
+ * To recreate a table use:
+ *
+ *     Ext.data.Store.sync() or Ext.data.Model.save()
  */
 Ext.define('Ext.data.proxy.Sql', {
     alias: 'proxy.sql',
@@ -61,6 +97,10 @@ Ext.define('Ext.data.proxy.Sql', {
         this.callParent(arguments);
     },
 
+    setException: function(operation, error) {
+        operation.setException(error);
+    },
+
     create: function (operation, callback, scope) {
         var me = this,
             db = me.getDatabaseObject(),
@@ -70,20 +110,32 @@ Ext.define('Ext.data.proxy.Sql', {
         operation.setStarted();
 
         db.transaction(function(transaction) {
-            if (!tableExists) {
-                me.createTable(transaction);
-            }
-
-            me.insertRecords(records, transaction, function(resultSet) {
-                if (operation.process(operation.getAction(), resultSet) === false) {
-                    me.fireEvent('exception', this, operation);
+                if (!tableExists) {
+                    me.createTable(transaction);
                 }
 
+                me.insertRecords(records, transaction, function(resultSet, error) {
+                    if (operation.process(operation.getAction(), resultSet) === false) {
+                        me.fireEvent('exception', me, operation);
+                    }
+
+                    if (error) {
+                        operation.setException(error);
+                    }
+                }, me);
+            },
+            function(transaction, error) {
+                me.setException(operation, error);
                 if (typeof callback == 'function') {
-                    callback.call(scope || this, operation);
+                    callback.call(scope || me, operation);
                 }
-            }, this);
-        });
+            },
+            function(transaction) {
+                if (typeof callback == 'function') {
+                    callback.call(scope || me, operation);
+                }
+            }
+        );
     },
 
     read: function(operation, callback, scope) {
@@ -112,38 +164,50 @@ Ext.define('Ext.data.proxy.Sql', {
         operation.setStarted();
 
         db.transaction(function(transaction) {
-            if (!tableExists) {
-                me.createTable(transaction);
-            }
-
-            me.selectRecords(transaction, id !== undefined ? id : params, function (resultSet, errors) {
-                if (operation.process(operation.getAction(), resultSet) === false) {
-                    me.fireEvent('exception', me, operation);
+                if (!tableExists) {
+                    me.createTable(transaction);
                 }
 
-                if (filters && filters.length) {
-                    filtered = Ext.create('Ext.util.Collection', function(record) {
-                        return record.getId();
-                    });
-                    filtered.setFilterRoot('data');
-                    for (i = 0, ln = filters.length; i < ln; i++) {
-                        if (filters[i].getProperty() === null) {
-                            filtered.addFilter(filters[i]);
-                        }
+                me.selectRecords(transaction, id !== undefined ? id : params, function (resultSet, error) {
+                    if (operation.process(operation.getAction(), resultSet) === false) {
+                        me.fireEvent('exception', me, operation);
                     }
-                    filtered.addAll(operation.getRecords());
 
-                    operation.setRecords(filtered.items.slice());
-                    resultSet.setRecords(operation.getRecords());
-                    resultSet.setCount(filtered.items.length);
-                    resultSet.setTotal(filtered.items.length);
-                }
+                    if (error) {
+                        operation.setException(error);
+                    }
 
+                    if (filters && filters.length) {
+                        filtered = Ext.create('Ext.util.Collection', function(record) {
+                            return record.getId();
+                        });
+                        filtered.setFilterRoot('data');
+                        for (i = 0, ln = filters.length; i < ln; i++) {
+                            if (filters[i].getProperty() === null) {
+                                filtered.addFilter(filters[i]);
+                            }
+                        }
+                        filtered.addAll(operation.getRecords());
+
+                        operation.setRecords(filtered.items.slice());
+                        resultSet.setRecords(operation.getRecords());
+                        resultSet.setCount(filtered.items.length);
+                        resultSet.setTotal(filtered.items.length);
+                    }
+                });
+            },
+            function(transaction, error) {
+                me.setException(operation, error);
                 if (typeof callback == 'function') {
                     callback.call(scope || me, operation);
                 }
-            });
-        });
+            },
+            function(transaction) {
+                if (typeof callback == 'function') {
+                    callback.call(scope || me, operation);
+                }
+            }
+        );
     },
 
     update: function(operation, callback, scope) {
@@ -155,20 +219,32 @@ Ext.define('Ext.data.proxy.Sql', {
         operation.setStarted();
 
         db.transaction(function (transaction) {
-            if (!tableExists) {
-                me.createTable(transaction);
-            }
-
-            me.updateRecords(transaction, records, function(resultSet, errors) {
-                if (operation.process(operation.getAction(), resultSet) === false) {
-                    me.fireEvent('exception', me, operation);
+                if (!tableExists) {
+                    me.createTable(transaction);
                 }
 
+                me.updateRecords(transaction, records, function(resultSet, errors) {
+                    if (operation.process(operation.getAction(), resultSet) === false) {
+                        me.fireEvent('exception', me, operation);
+                    }
+
+                    if (errors) {
+                       operation.setException(errors);
+                    }
+                });
+            },
+            function(transaction, error) {
+                me.setException(operation, error);
                 if (typeof callback == 'function') {
                     callback.call(scope || me, operation);
                 }
-            });
-        });
+            },
+            function(transaction) {
+                if (typeof callback == 'function') {
+                    callback.call(scope || me, operation);
+                }
+            }
+        );
     },
 
     destroy: function(operation, callback, scope) {
@@ -180,20 +256,32 @@ Ext.define('Ext.data.proxy.Sql', {
         operation.setStarted();
 
         db.transaction(function(transaction) {
-            if (!tableExists) {
-                me.createTable(transaction);
-            }
-
-            me.destroyRecords(transaction, records, function(resultSet, errors) {
-                if (operation.process(operation.getAction(), resultSet) === false) {
-                    me.fireEvent('exception', me, operation);
+                if (!tableExists) {
+                    me.createTable(transaction);
                 }
 
+                me.destroyRecords(transaction, records, function(resultSet, error) {
+                    if (operation.process(operation.getAction(), resultSet) === false) {
+                        me.fireEvent('exception', me, operation);
+                    }
+
+                    if (error) {
+                       operation.setException(error);
+                    }
+                });
+            },
+            function(transaction, error) {
+                me.setException(operation, error);
                 if (typeof callback == 'function') {
                     callback.call(scope || me, operation);
                 }
-            });
-        });
+            },
+            function(transaction) {
+                if (typeof callback == 'function') {
+                    callback.call(scope || me, operation);
+                }
+            }
+        );
     },
 
     createTable: function (transaction) {
@@ -240,7 +328,7 @@ Ext.define('Ext.data.proxy.Sql', {
                     });
 
                     if (executed === totalRecords && typeof callback == 'function') {
-                        callback.call(scope || me, result, errors);
+                        callback.call(scope || me, result, errors.length > 0 ? errors : null);
                     }
                 },
                 function (transaction, error) {
@@ -306,7 +394,6 @@ Ext.define('Ext.data.proxy.Sql', {
                 sql += ' LIMIT ' + parseInt(params.start, 10) + ', ' + parseInt(params.limit, 10);
             }
         }
-
         transaction.executeSql(sql, null,
             function(transaction, resultSet) {
                 rows = resultSet.rows;
@@ -330,13 +417,13 @@ Ext.define('Ext.data.proxy.Sql', {
                     callback.call(scope || me, result);
                 }
             },
-            function(transaction, errors) {
+            function(transaction, error) {
                 result.setSuccess(false);
                 result.setTotal(0);
                 result.setCount(0);
 
                 if (typeof callback == 'function') {
-                    callback.call(scope || me, result);
+                    callback.call(scope || me, result, error);
                 }
             }
         );
@@ -380,7 +467,7 @@ Ext.define('Ext.data.proxy.Sql', {
                     });
 
                     if (executed === totalRecords && typeof callback == 'function') {
-                        callback.call(scope || me, result, errors);
+                        callback.call(scope || me, result, errors.length > 0 ? errors : null);
                     }
                 },
                 function (transaction, error) {
@@ -433,7 +520,7 @@ Ext.define('Ext.data.proxy.Sql', {
             },
             function (transaction, error) {
                 if (typeof callback == 'function') {
-                    callback.call(scope || me, result);
+                    callback.call(scope || me, result, error);
                 }
             }
         );
@@ -466,7 +553,7 @@ Ext.define('Ext.data.proxy.Sql', {
                 }
                 data[name] = value;
             }
-        }, this);
+        }, me);
 
         return data;
     },
@@ -572,14 +659,27 @@ Ext.define('Ext.data.proxy.Sql', {
         }
     },
 
-    dropTable: function() {
+    dropTable: function(config) {
         var me = this,
             table = me.getTable(),
+            callback = config ? config.callback : null,
+            scope = config ? config.scope || me : null,
             db = me.getDatabaseObject();
 
         db.transaction(function(transaction) {
-            transaction.executeSql('DROP TABLE ' + table);
-        });
+                transaction.executeSql('DROP TABLE ' + table);
+            },
+            function(transaction, error) {
+                if (typeof callback == 'function') {
+                    callback.call(scope || me, false, table, error);
+                }
+            },
+            function(transaction) {
+                if (typeof callback == 'function') {
+                    callback.call(scope || me, true, table);
+                }
+            }
+        );
 
         me.setTableExists(false);
     },

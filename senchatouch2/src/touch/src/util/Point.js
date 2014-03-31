@@ -35,7 +35,7 @@ Ext.define('Ext.util.Point', {
         /**
          * Returns a new point from an object that has `x` and `y` properties, if that object is not an instance
          * of {@link Ext.util.Point}. Otherwise, returns the given point itself.
-         * @param object
+         * @param {Object} object
          * @return {Ext.util.Point}
          */
         from: function(object) {

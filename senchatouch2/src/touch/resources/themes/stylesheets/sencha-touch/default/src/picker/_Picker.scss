@@ -64,10 +64,16 @@
 }
 
 .x-picker-slot {
+    border-left: 2px solid #acacac;
+
     .x-dataview-item {
         height: $picker-row-height;
         line-height: $picker-row-height;
         font-weight: bold;
         padding: 0 10px;
+    }
+
+    &:first-child {
+        border-left: 0;
     }
 }

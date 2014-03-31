@@ -213,6 +213,9 @@ Ext.define('Ext.data.Connection', {
      * draw values, then this also serves as the scope for those function calls. Defaults to the browser
      * window.
      *
+     * @param {Boolean} options.xhr2 Determines is this request should use XHR2 features like FormData,
+     * UploadStatus, etc if they are avaiable.
+     *
      * @param {Number} [options.timeout=30000] The timeout in milliseconds to be used for this request.
      *
      * @param {HTMLElement/HTMLElement/String} options.form The `<form>` Element or the id of the `<form>`
@@ -257,17 +260,27 @@ Ext.define('Ext.data.Connection', {
      * __Note:__ This will be used
      * instead of params for the post data. Any params will be appended to the URL.
      *
+     * @param {Array} options.binaryData An array of bytes to submit in binary form. Any params will be appended to the URL. Returned data will be assumed to be a byte array or ArrayBuffer and placed in responseBytes. Other response types (e.g. xml / json) will not be provided.
+     *
+     * __Note:__ This will be used instead
+     * of params for the post data. Any params will be appended to the URL.
+     *
      * @param {Boolean} options.disableCaching True to add a unique cache-buster param to GET requests.
      *
      * @return {Object/null} The request object. This may be used to cancel the request.
      */
-    request : function(options) {
+    request: function(options) {
         options = options || {};
         var me = this,
             scope = options.scope || window,
             username = options.username || me.getUsername(),
             password = options.password || me.getPassword() || '',
+            useXhr2 = options.xhr2 === true && Ext.feature.has.XHR2,
             async, requestOptions, request, headers, xhr;
+
+        if(!Ext.isEmpty(username) && !Ext.isEmpty(password, true) && Ext.isEmpty(options.withCredentials)){
+            options.withCredentials = true;
+        }
 
         if (me.fireEvent('beforerequest', me, options) !== false) {
             requestOptions = me.setOptions(options, scope);
@@ -310,13 +323,57 @@ Ext.define('Ext.data.Connection', {
             };
             me.requests[request.id] = request;
 
-            // bind our statechange listener
+
+            // bind our onload/statechange listener
             if (async) {
-                xhr.onreadystatechange = Ext.Function.bind(me.onStateChange, me, [request]);
+                xhr[useXhr2 ? 'onload' : 'onreadystatechange'] = Ext.Function.bind(me.onStateChange, me, [request]);
+            }
+
+            if(useXhr2) {
+                xhr.onerror = Ext.Function.bind(me.onStateChange, me, [request]);
+            }
+
+            if(options.progress) {
+                xhr.onprogress = function(e) {
+                    if(options.progress.isProgressable) {
+                        if(e.total === 0 && options.progress.getDynamic()) {
+                            Ext.Logger.warn("Server is not configured to properly return Content-Length. Dynamic progress will be disabled");
+                            options.progress.setState.call(options.progress, "download");
+                            options.progress.setDynamic(false);
+                            xhr.onprogress = null;
+                            return;
+                        }
+
+                        Ext.callback(options.progress.updateProgress, options.progress, [(e.loaded / e.total), "download"]);
+
+                        if(e.total > 0 && !options.progress.getDynamic() && options.progress.getInitialConfig().dynamic) {
+                            options.progress.setDynamic(true);
+                        }
+                    }else if(Ext.isFunction(options.progress)) {
+                        Ext.callback(options.progress, options.progressScope || request, [e, "download"])
+                    }
+                };
+
+                if(Ext.feature.has.XHRUploadProgress) {
+                        xhr.upload.onprogress = function (e){
+                        me.fireEvent('requestuploadprogress', me, request, e);
+                        if(options.progress.isProgressable) {
+                            Ext.callback(options.progress.updateProgress, options.progress, [(e.loaded / e.total), "upload"]);
+                        }else if(Ext.isFunction(options.progress)) {
+                            Ext.callback(options.progress, options.progressScope || request, [e, "upload"])
+                        }
+                    };
+                }
+
+                if(options.progress.isProgressable) {
+                    if(!Ext.feature.has.XHRUploadProgress) options.progress.setDynamic(false);
+                    Ext.callback(options.progress.startProgress, options.progress);
+                }
             }
 
             // start the request!
             xhr.send(requestOptions.data);
+
             if (!async) {
                 return this.onComplete(request);
             }
@@ -339,6 +396,7 @@ Ext.define('Ext.data.Connection', {
         options = options || {};
 
         var id = Ext.id(),
+            me = this,
             frame = document.createElement('iframe'),
             hiddens = [],
             encoding = 'multipart/form-data',
@@ -399,7 +457,12 @@ Ext.define('Ext.data.Connection', {
             });
         }
 
-        Ext.fly(frame).on('load', Ext.Function.bind(this.onUploadComplete, this, [frame, options]), null, {single: true});
+        frame.addEventListener('load',
+            function() {
+                Ext.callback(me.onUploadComplete, me, [frame, options, id]);
+                frame.removeEventListener('load', arguments.callee)
+            }
+        );
         form.submit();
 
         Ext.fly(form).set(buf);
@@ -408,18 +471,17 @@ Ext.define('Ext.data.Connection', {
         });
     },
 
-    onUploadComplete: function(frame, options) {
-        var me = this,
-            // bogus response object
-            response = {
+    onUploadComplete: function(frame, options, id) {
+        // bogus response object
+        var response = {
                 responseText: '',
                 responseXML: null
             }, doc, firstChild;
 
         try {
-            doc = frame.contentWindow.document || frame.contentDocument || window.frames[id].document;
+            doc = frame.contentWindow || frame.contentWindow.document || frame.contentDocument || window.frames[id].document;
             if (doc) {
-                if (doc.body) {
+                if (doc.hasOwnProperty("body") && doc.body) {
                     if (this.textAreaRe.test((firstChild = doc.body.firstChild || {}).tagName)) { // json response wrapped in textarea
                         response.responseText = firstChild.value;
                     } else {
@@ -430,7 +492,16 @@ Ext.define('Ext.data.Connection', {
                 response.responseXML = doc.XMLDocument || doc;
             }
         } catch (e) {
+            response.success = false;
+            response.message = "Cross-Domain access is not permitted between frames. XHR2 is recommended for this type of request.";
+            response.error = e;
         }
+
+        this.onAfterUploadComplete(response, frame, options);
+    },
+
+    onAfterUploadComplete: function(response, frame, options) {
+        var me = this;
 
         me.fireEvent('requestcomplete', me, response, options);
 
@@ -500,9 +571,25 @@ Ext.define('Ext.data.Connection', {
         //</debug>
 
         // check for xml or json data, and make sure json data is encoded
-        data = options.rawData || options.xmlData || jsonData || null;
+        data = options.data || options.rawData || options.binaryData || options.xmlData || jsonData || null;
         if (jsonData && !Ext.isPrimitive(jsonData)) {
             data = Ext.encode(data);
+        }
+
+        // Check for binary data. Transform if needed
+        if (options.binaryData) {
+            //<debug>
+            if (!Ext.isArray(options.binaryData) && !(options.binaryData instanceof Blob)) {
+                Ext.Logger.warn("Binary submission data must be an array of byte values or a Blob! Instead got " + typeof(options.binaryData));
+            }
+            //</debug>
+            if (data instanceof Array) {
+                data = (new Uint8Array(options.binaryData));
+            }
+            if (data instanceof Uint8Array) {
+                // Note: Newer chrome version (v22 and up) warn that it is deprecated to send the ArrayBuffer and to send the ArrayBufferView instead. For FF this fails so for now send the ArrayBuffer.
+                data = data.buffer; //  send the underlying buffer, not the view, since that's not supported on versions of chrome older than 22
+            }
         }
 
         // make sure params are a url encoded string and include any extraParams if specified
@@ -626,12 +713,19 @@ Ext.define('Ext.data.Connection', {
                     }
                 }
             }
-            headers['Content-Type'] = contentType;
+            if (!(Ext.feature.has.XHR2 && data instanceof FormData)) {
+                headers['Content-Type'] = contentType;
+            }
         }
 
         if (((me.getUseDefaultXhrHeader() && options.useDefaultXhrHeader !== false) || options.useDefaultXhrHeader) && !headers['X-Requested-With']) {
             headers['X-Requested-With'] = me.getDefaultXhrHeader();
         }
+
+        if(!Ext.isEmpty(options.username) && !Ext.isEmpty(options.password)) {
+            headers['Authorization'] = "Basic " + btoa(options.username+":"+options.password);
+        }
+
         // set up all the request headers on the xhr object
         try {
             for (key in headers) {
@@ -643,6 +737,14 @@ Ext.define('Ext.data.Connection', {
             }
         } catch(e) {
             me.fireEvent('exception', key, header);
+        }
+
+        if(options.responseType) {
+            try {
+                xhr.responseType = options.responseType === "blob" && Ext.browser.is.Safari ? "arraybuffer" : options.responseType;
+            } catch (e) {
+                // nothing to do. We're still continuing with the request.
+            }
         }
 
         if (options.withCredentials) {
@@ -808,6 +910,11 @@ Ext.define('Ext.data.Connection', {
             Ext.callback(options.failure, options.scope, [response, options]);
         }
         Ext.callback(options.callback, options.scope, [options, success, response]);
+
+        if(options.progress && options.progress.isProgressable) {
+            Ext.callback(options.progress.endProgress, options.progress, [result]);
+        }
+
         delete me.requests[request.id];
         return response;
     },
@@ -815,14 +922,14 @@ Ext.define('Ext.data.Connection', {
     /**
      * Checks if the response status was successful.
      * @param {Number} status The status code.
-     * @param xhr
+     * @param {XMLHttpRequest} xhr
      * @return {Object} An object containing success/status state.
      */
     parseStatus: function(status, xhr) {
         // see: https://prototype.lighthouseapp.com/projects/8886/tickets/129-ie-mangles-http-response-status-code-204-to-1223
         status = status == 1223 ? 204 : status;
 
-        var success = (status >= 200 && status < 300) || status == 304 || (status == 0 && xhr.responseText.length > 0),
+        var success = (status >= 200 && status < 300) || status == 304 || (status == 0 && xhr.responseText && xhr.responseText.length > 0),
             isException = false;
 
         if (!success) {
@@ -851,7 +958,11 @@ Ext.define('Ext.data.Connection', {
     createResponse : function(request) {
         var xhr = request.xhr,
             headers = {},
-            lines, count, line, index, key, response;
+            lines, count, line, index, key, response,
+
+            binaryResponse = xhr.responseType === "blob" || xhr.responseType === "arraybuffer",
+            textResponse = xhr.responseType === "text",
+            documentResponse = xhr.responseType === "document";
 
         //we need to make this check here because if a request times out an exception is thrown
         //when calling getAllResponseHeaders() because the response never came back to populate it
@@ -878,7 +989,6 @@ Ext.define('Ext.data.Connection', {
 
         request.xhr = null;
         delete request.xhr;
-
         response = {
             request: request,
             requestId : request.id,
@@ -890,9 +1000,14 @@ Ext.define('Ext.data.Connection', {
             getAllResponseHeaders : function() {
                 return headers;
             },
-            responseText : xhr.responseText,
-            responseXML : xhr.responseXML
+            responseText : binaryResponse ? null : documentResponse ? null : xhr.responseText,
+            responseXML : binaryResponse ? null : textResponse ? null : xhr.responseXML,
+            responseBytes : binaryResponse ? xhr.response : null
         };
+
+        if(request.options.responseType === "blob" && xhr.responseType === "arraybuffer") {
+            response.responseBytes = new Blob([response.responseBytes], {type:xhr.getResponseHeader("Content-Type")})
+        }
 
         // If we don't explicitly tear down the xhr reference, IE6/IE7 will hold this in the closure of the
         // functions created with getResponseHeader/getAllResponseHeaders

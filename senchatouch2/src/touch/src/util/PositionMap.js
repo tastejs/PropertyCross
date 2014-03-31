@@ -19,6 +19,8 @@ Ext.define('Ext.util.PositionMap', {
             minimumHeight = this.getMinimumHeight(),
             i, previousIndex, ln;
 
+        offset = offset || 0;
+
         // We add 1 item to the count so that we can get the height of the bottom item
         count++;
         map.length = count;

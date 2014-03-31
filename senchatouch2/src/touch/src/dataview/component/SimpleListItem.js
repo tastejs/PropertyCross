@@ -80,14 +80,6 @@ Ext.define('Ext.dataview.component.SimpleListItem', {
             var disclosureProperty = dataview.getDisclosureProperty();
             disclosure[(data.hasOwnProperty(disclosureProperty) && data[disclosureProperty] === false) ? 'hide' : 'show']();
         }
-
-        /**
-         * @event updatedata
-         * Fires whenever the data of the DataItem is updated.
-         * @param {Ext.dataview.component.DataItem} this The DataItem instance.
-         * @param {Object} newData The new data.
-         */
-        me.fireEvent('updatedata', me, data);
     },
 
     destroy: function() {

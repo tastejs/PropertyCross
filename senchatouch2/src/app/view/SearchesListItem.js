@@ -1,7 +1,7 @@
-Ext.define('PropertyFinder.view.SearchesListItem', {
+Ext.define('PropertyCross.view.SearchesListItem', {
     extend: 'Ext.dataview.component.DataItem',
     xtype: 'searcheslistitem',
-    requires: ['PropertyFinder.util.Format'],
+    requires: ['PropertyCross.util.Format'],
 
 	config: {
 		layout: 'hbox',
@@ -26,7 +26,7 @@ Ext.define('PropertyFinder.view.SearchesListItem', {
             {
                 itemId: 'count',
                 cls: 'searchcount',
-                tpl:  Ext.create('Ext.XTemplate', '{[PropertyFinder.util.Format.number(values)]}')
+                tpl:  Ext.create('Ext.XTemplate', '{[PropertyCross.util.Format.number(values)]}')
             }
 		]
 	},

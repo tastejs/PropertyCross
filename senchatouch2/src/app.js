@@ -11,7 +11,7 @@
 */
 
 Ext.application({
-    name: 'PropertyFinder',
+    name: 'PropertyCross',
 
     requires: [
         'Ext.MessageBox'
@@ -20,6 +20,12 @@ Ext.application({
     views: [
         'Main'
     ],
+
+    controllers: [
+        'Application'
+    ],
+	
+	stores: ['Favourites', 'Results', 'Searches'],
 
     icon: {
         '57': 'resources/icons/Icon.png',
@@ -47,7 +53,7 @@ Ext.application({
         Ext.fly('appLoadingIndicator').destroy();
 
         // Initialize the main view
-        Ext.Viewport.add(Ext.create('PropertyFinder.view.Main'));
+        Ext.Viewport.add(Ext.create('PropertyCross.view.Main'));
     },
 
     onUpdated: function() {

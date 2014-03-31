@@ -4,7 +4,7 @@
  * 
  * CandleStick series sprite.
  */
-Ext.define("Ext.chart.series.sprite.CandleStick", {
+Ext.define('Ext.chart.series.sprite.CandleStick', {
     alias: 'sprite.candlestickSeries',
     extend: 'Ext.chart.series.sprite.Aggregative',
     inheritableStatics: {
@@ -65,7 +65,7 @@ Ext.define("Ext.chart.series.sprite.CandleStick", {
         }
     },
 
-    "candlestick": function (ctx, open, high, low, close, mid, halfWidth) {
+    candlestick: function (ctx, open, high, low, close, mid, halfWidth) {
         var minOC = Math.min(open, close),
             maxOC = Math.max(open, close);
         ctx.moveTo(mid, low);
@@ -81,14 +81,13 @@ Ext.define("Ext.chart.series.sprite.CandleStick", {
         ctx.lineTo(mid, minOC);
     },
 
-    "ohlc": function (ctx, open, high, low, close, mid, halfWidth) {
+    ohlc: function (ctx, open, high, low, close, mid, halfWidth) {
         ctx.moveTo(mid, high);
         ctx.lineTo(mid, low);
         ctx.moveTo(mid, open);
         ctx.lineTo(mid - halfWidth, open);
         ctx.moveTo(mid, close);
         ctx.lineTo(mid + halfWidth, close);
-
     },
 
     constructor: function () {

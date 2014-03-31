@@ -3,7 +3,7 @@
  */
 Ext.define('Ext.device.notification.Simulator', {
     extend: 'Ext.device.notification.Abstract',
-    requires: ['Ext.MessageBox'],
+    requires: ['Ext.MessageBox', 'Ext.util.Audio'],
 
     // @private
     msg: null,
@@ -12,7 +12,7 @@ Ext.define('Ext.device.notification.Simulator', {
         var config = this.callParent(arguments),
             buttons = [],
             ln = config.buttons.length,
-            button, i, callback, msg;
+            button, i, callback;
 
         //buttons
         for (i = 0; i < ln; i++) {
@@ -29,8 +29,6 @@ Ext.define('Ext.device.notification.Simulator', {
 
         this.msg = Ext.create('Ext.MessageBox');
 
-        msg = this.msg;
-
         callback = function(itemId) {
             if (config.callback) {
                 config.callback.apply(config.scope, [itemId]);
@@ -44,6 +42,66 @@ Ext.define('Ext.device.notification.Simulator', {
             buttons: buttons,
             fn     : callback
         });
+    },
+
+    alert: function() {
+        var config = this.callParent(arguments);
+
+        if (config.buttonName) {
+            config.buttons = [config.buttonName];
+        }
+
+        this.show(config);
+    },
+
+    confirm: function() {
+        var config = this.callParent(arguments);
+        this.show(config);
+    },
+
+    prompt: function() {
+        var config = this.callParent(arguments),
+            buttons = [],
+            ln = config.buttons.length,
+            button, i, callback;
+
+        //buttons
+        for (i = 0; i < ln; i++) {
+            button = config.buttons[i];
+            if (Ext.isString(button)) {
+                button = {
+                    text: config.buttons[i],
+                    itemId: config.buttons[i].toLowerCase()
+                };
+            }
+
+            buttons.push(button);
+        }
+
+        this.msg = Ext.create('Ext.MessageBox');
+
+        callback = function(buttonText, value) {
+            if (config.callback) {
+                config.callback.apply(config.scope, [buttonText, value]);
+            }
+        };
+
+        this.msg.prompt(config.title, config.message, callback, this.msg, config.multiLine, config.value, config.prompt);
+    },
+
+    beep: function(times) {
+        if(!Ext.isNumber(times)) times = 1;
+        var count = 0;
+        var callback = function() {
+            if(count < times) {
+                setTimeout(function() {
+                    Ext.util.Audio.beep(callback);
+                }, 50);
+            }
+            count++;
+        };
+
+        callback();
     },
 
     vibrate: function() {

@@ -111,6 +111,27 @@ Ext.define('Ext.field.Number', {
         stepValue: null
     },
 
+    applyPlaceHolder: function(value) {
+        // Android 4.1 & lower require a hack for placeholder text in number fields when using the Stock Browser
+        // details here https://code.google.com/p/android/issues/detail?id=24626
+        this._enableNumericPlaceHolderHack = ((!Ext.feature.has.NumericInputPlaceHolder) && (!Ext.isEmpty(value)));
+        return value;
+    },
+
+    onFocus: function(e) {
+        if (this._enableNumericPlaceHolderHack) {
+            this.getComponent().input.dom.setAttribute("type", "number");
+        }
+        this.callParent(arguments);
+    },
+
+    onBlur: function(e) {
+        if (this._enableNumericPlaceHolderHack) {
+            this.getComponent().input.dom.setAttribute("type", "text");
+        }
+        this.callParent(arguments);
+    },
+
     doInitValue : function() {
         var value = this.getInitialConfig().value;
 

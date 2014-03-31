@@ -1,7 +1,7 @@
 /**
  * @class Ext.draw.modifier.Highlight
  * @extends Ext.draw.modifier.Modifier
- * 
+ *
  * Highlight is a modifier that will override the attributes
  * with its `highlightStyle` attributes when `highlighted` is true.
  */
@@ -10,7 +10,7 @@ Ext.define("Ext.draw.modifier.Highlight", {
     alias: 'modifier.highlight',
 
     config: {
-        
+
         /**
          * @cfg {Boolean} enabled 'true' if the highlight is applied.
          */
@@ -87,8 +87,8 @@ Ext.define("Ext.draw.modifier.Highlight", {
 
     /**
      * Filter modifier changes if overriding source attributes.
-     * @param attr The source attributes.
-     * @param changes The modifier changes.
+     * @param {Object} attr The source attributes.
+     * @param {Object} changes The modifier changes.
      * @return {*} The filtered changes.
      */
     filterChanges: function (attr, changes) {

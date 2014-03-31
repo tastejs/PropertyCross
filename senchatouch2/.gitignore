@@ -1,6 +1,4 @@
 src/build
 src/resources/sass/.sass-cache
 *.suo
-src/cordova-wp8/PropertyCross/Bin
-src/cordova-wp8/PropertyCross/obj
 

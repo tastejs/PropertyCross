@@ -67,8 +67,8 @@
  *     Ext.Viewport.setLayout('fit');
  *     Ext.Viewport.add(chart);
  */
-Ext.define("Ext.chart.series.CandleStick", {
-    extend: "Ext.chart.series.Cartesian",
+Ext.define('Ext.chart.series.CandleStick', {
+    extend: 'Ext.chart.series.Cartesian',
     requires: ['Ext.chart.series.sprite.CandleStick'],
     alias: 'series.candlestick',
     type: 'candlestick',

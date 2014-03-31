@@ -1,4 +1,4 @@
-﻿Ext.define('PropertyFinder.controller.Application', {
+﻿Ext.define('PropertyCross.controller.Application', {
     extend: 'Ext.app.Controller',
 
     requires: ['Ext.device.Geolocation', 'Ext.MessageBox'],
@@ -74,7 +74,7 @@
         this.getSuggestedLocations().hide();
         this.getErrorMessage().hide();
         this.getPreviousSearches().show();
-        var titleListLabel = this.getListTitleLabel()
+        var titleListLabel = this.getListTitleLabel();
         if(Ext.getStore('searches').getData().length !== 0) {
             titleListLabel.setHtml("Previous Searches");
             titleListLabel.show();
@@ -122,7 +122,7 @@
     onResultSelect: function(list, index, node, record) {
         //lazy initialise result details view..
         if (!this.resultDetails) {
-            this.resultDetails = Ext.create('PropertyFinder.view.ResultDetails');
+            this.resultDetails = Ext.create('PropertyCross.view.ResultDetails');
         }
 
         // Bind the record onto the show contact view
@@ -144,7 +144,7 @@
 
     goToResultsList: function(store) {
         if (!this.resultList) {
-            this.resultList = Ext.create('PropertyFinder.view.ResultList', {store: store});
+            this.resultList = Ext.create('PropertyCross.view.ResultList', {store: store});
         }
 
         this.getMain().push(this.resultList);
@@ -340,7 +340,7 @@
 
     onListFaves: function() {
         if (!this.favesList) {
-            this.favesList = Ext.create('PropertyFinder.view.ResultList', {
+            this.favesList = Ext.create('PropertyCross.view.ResultList', {
                 store: Ext.getStore('favourites'),
                 title: 'Favourites',
                 id: 'favouritesList',

@@ -68,12 +68,30 @@ Ext.define('Ext.field.Toggle', {
          * Available options are: 'top', 'left', 'bottom' and 'right'
          * @accessor
          */
-        labelAlign: 'left'
+        labelAlign: 'left',
+
+        /**
+         * @cfg {String} activeLabel The label to add to the toggle field when it is toggled on.
+         * Only available in the Blackberry theme.
+         * @accessor
+         */
+        activeLabel: null,
+
+        /**
+         * @cfg {String} inactiveLabel The label to add to the toggle field when it is toggled off.
+         * Only available in the Blackberry theme.
+         * @accessor
+         */
+        inactiveLabel: null
     },
 
     platformConfig: [{
         theme: ['Windows'],
         labelAlign: 'left'
+    }, {
+        theme: ['Blackberry', 'MountainView'],
+        activeLabel: 'On',
+        inactiveLabel: 'Off'
     }],
 
     /**
@@ -84,13 +102,13 @@ Ext.define('Ext.field.Toggle', {
      *         xtype: 'togglefield',
      *         label: 'Event Example',
      *         listeners: {
-     *             change: function(field, newValue) {
+     *             change: function(field, newValue, oldValue) {
      *                 console.log('Value of this toggle has changed:', (newValue) ? 'ON' : 'OFF');
      *             }
      *         }
      *     });
      *
-     * @param {Ext.field.Toggle} me
+     * @param {Ext.field.Toggle} this
      * @param {Number} newValue the new value of this thumb
      * @param {Number} oldValue the old value of this thumb
      */
@@ -124,29 +142,23 @@ Ext.define('Ext.field.Toggle', {
         maxValueCls: 'x-toggle-on'
     },
 
-    /**
-     * For toggle 'on' state.
-     */
-    toggleOnLabel: 'On',
-
-    /**
-     * For toggle 'off' state.
-     */
-    toggleOffLabel: 'Off',
-
     // @private
     applyComponent: function(config) {
-        // @TODO: This also needs to be looked at
-
-//        if(!this.getLabel() && Ext.getThemeName() == 'WP') {
-//            this.setLabel(this.toggleOffLabel);
-//            this.on({
-//                scope: this,
-//                change: 'onChange'
-//            });
-//        }
-
         return Ext.factory(config, Ext.slider.Toggle);
+    },
+
+    // @private
+    updateActiveLabel: function(newActiveLabel, oldActiveLabel) {
+        if (newActiveLabel != oldActiveLabel) {
+            this.getComponent().element.dom.setAttribute('data-activelabel', newActiveLabel);
+        }
+    },
+
+    // @private
+    updateInactiveLabel: function(newInactiveLabel, oldInactiveLabel) {
+        if (newInactiveLabel != oldInactiveLabel) {
+            this.getComponent().element.dom.setAttribute('data-inactivelabel', newInactiveLabel);
+        }
     },
 
     /**
@@ -171,6 +183,10 @@ Ext.define('Ext.field.Toggle', {
 
     getValue: function() {
         return (this.getComponent().getValue() == 1) ? 1 : 0;
+    },
+
+    onSliderChange: function(component, thumb, newValue, oldValue) {
+        this.fireEvent.call(this, 'change', this, newValue, oldValue);
     },
 
     /**
