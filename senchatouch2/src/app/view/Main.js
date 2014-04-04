@@ -56,6 +56,7 @@
             this.add({
                 docked: 'bottom',
                 xtype: 'toolbar',
+                id: 'win8-appbar',
                 layout: { pack: 'center' },
                 items: navItems
             });

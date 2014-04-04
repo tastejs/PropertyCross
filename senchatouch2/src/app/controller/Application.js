@@ -8,6 +8,7 @@
             main: 'mainview',
             home: 'home',
             mainTitleBar: 'mainview titlebar',
+            mainAppBar: '#win8-appbar',
             faveButton: '#faveButton',
             resultList: 'resultlist',
             favesList: 'resultlist',
@@ -92,8 +93,10 @@
     onMainPush: function(view, item) {
         if (item.xtype === 'resultdetails') {
             this.showButton(this.getFaveButton());
+            this.showAppBar();
         } else {
             this.hideButton(this.getFaveButton());
+            this.hideAppBar();
         }
         this.hideButton(this.getListFavesButton());
 
@@ -104,8 +107,10 @@
 
     onMainPop: function(view, item) {
         this.hideButton(this.getFaveButton());
+        this.hideAppBar();
         if (item.xtype === 'resultlist') {
             this.showButton(this.getListFavesButton());
+            this.showAppBar();
         }
         this.updateBackStackDepth(-1);
     },
@@ -379,5 +384,21 @@
         } else {
             faveButton.setIconCls("unfavourite");
         }
-    }
+    },
+
+    showAppBar: function() {
+        var appBar = this.getMainAppBar();
+        if (!appBar || !appBar.isHidden()) {
+            return;
+        }
+        appBar.show();
+    },
+
+    hideAppBar: function() {
+        var appBar = this.getMainAppBar();
+        if (!appBar || appBar.isHidden()) {
+            return;
+        }
+        appBar.hide();
+    } 
 });
