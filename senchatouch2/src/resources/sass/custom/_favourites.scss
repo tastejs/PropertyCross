@@ -1,0 +1,4 @@
+
+@include icon-font('StarsIcons', inline-font-files('custom/stars.woff', woff, 'custom/stars.ttf', truetype,'custom/stars.svg', svg));
+@include icon('favourite', '"', 'StarsIcons');
+@include icon('unfavourite', '!', 'StarsIcons'); 

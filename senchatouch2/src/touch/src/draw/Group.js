@@ -1,10 +1,10 @@
 /**
  * @deprecated
  * A collection of sprites that delegates sprite functions to its elements.
- * 
+ *
  * Avoid using this multiple groups in a surface as it is error prone.
  * The group notion may be remove in future releases.
- * 
+ *
  */
 Ext.define("Ext.draw.Group", {
     mixins: {
@@ -18,7 +18,7 @@ Ext.define("Ext.draw.Group", {
     statics: {
         /**
          * @private
-         * @param name
+         * @param {String} name
          * @return {Function}
          */
         createRelayEvent: function (name) {
@@ -29,7 +29,7 @@ Ext.define("Ext.draw.Group", {
 
         /**
          * @private
-         * @param name
+         * @param {String} name
          * @return {Function}
          */
         createDispatcherMethod: function (name) {
@@ -152,7 +152,7 @@ Ext.define("Ext.draw.Group", {
 
     /**
      * Get the i-th sprite of the group.
-     * __Note:__ Do not reply on the order of the sprite. It could be changed by {@link Ext.draw.Surface#stableSort}. 
+     * __Note:__ Do not reply on the order of the sprite. It could be changed by {@link Ext.draw.Surface#stableSort}.
      * @param {Number}  index
      * @return {Ext.draw.sprite.Sprite}
      */
@@ -212,7 +212,7 @@ Ext.define("Ext.draw.Group", {
 
         /**
          * Return the minimal bounding box that contains all the sprites bounding boxes in this group.
-         * 
+         *
          * Bad performance. Avoid using it.
          */
         getBBox: function (isWithTransform) {

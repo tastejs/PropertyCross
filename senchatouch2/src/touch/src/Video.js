@@ -42,7 +42,7 @@ Ext.define('Ext.Video', {
 
     config: {
         /**
-         * @cfg {String/Array} urls
+         * @cfg {String/Array} url
          * Location of the video to play. This should be in H.264 format and in a .mov file format.
          * @accessor
          */
@@ -58,7 +58,7 @@ Ext.define('Ext.Video', {
          * @cfg
          * @inheritdoc
          */
-        cls: Ext.baseCSSPrefix + 'video'
+        baseCls: Ext.baseCSSPrefix + 'video'
     },
 
     template: [{

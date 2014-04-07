@@ -237,7 +237,7 @@ Ext.define('Ext.chart.CartesianChart', {
                 zIndex = (sprite.attr.zIndex || 0);
                 if (zIndex < zBase) {
                     // Set the sprite's zIndex
-                    zIndex += (i+1) * 100 + zBase; 
+                    zIndex += (i+1) * 100 + zBase;
                     sprite.attr.zIndex = zIndex;
                     // Iterate through its marker sprites to do the same.
                     markers = sprite.boundMarkers;

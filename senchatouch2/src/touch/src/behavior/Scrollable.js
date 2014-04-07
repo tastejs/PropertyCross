@@ -38,7 +38,7 @@ Ext.define('Ext.behavior.Scrollable', {
 
                 if (!Ext.feature.has.ProperHBoxStretching) {
                     scroller = scrollView.getScroller();
-                    direction = config.direction || 'auto';
+                    direction = (Ext.isObject(config) ? config.direction : config) || 'auto';
 
                     if (direction !== 'vertical') {
                         extraWrap = scrollerElement.wrap();

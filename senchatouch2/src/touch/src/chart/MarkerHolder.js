@@ -1,7 +1,7 @@
 /**
  * @class Ext.chart.MarkerHolder
  * @extends Ext.mixin.Mixin
- * 
+ *
  * Mixin that provides the functionality to place markers.
  */
 Ext.define("Ext.chart.MarkerHolder", {
@@ -23,8 +23,8 @@ Ext.define("Ext.chart.MarkerHolder", {
 
     /**
      *
-     * @param name {String}
-     * @param marker {Ext.chart.Markers}
+     * @param {String} name
+     * @param {Ext.chart.Markers} marker
      */
     bindMarker: function (name, marker) {
         if (marker) {

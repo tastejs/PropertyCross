@@ -58,11 +58,11 @@ $tabs-top-icon-size: $tabs-top-height - .6em;
 
                 .x-button-label {
                     margin: 0;
-                    margin-left: .3em;
+                    margin-left: .8em;
                     padding: .1em 0 .2em 0;
                     display: inline-block;
                     position: relative;
-                    top: -.4em;
+                    top: -.2em;
                 }
             }
         }
@@ -145,7 +145,7 @@ $tabs-top-icon-size: $tabs-top-height - .6em;
         .x-tab-active {
             @include color-by-background($bar-color, 90%);
             border-bottom-color: lighten($bar-color, 3%);
-    
+
             .x-button-icon:before {
                 color: $tab-active-color;
             }

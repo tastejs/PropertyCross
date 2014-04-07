@@ -99,10 +99,14 @@ Ext.define('Ext.layout.Card', {
 
     onContainerInitialized: function() {
         var container = this.container,
+            firstItem = container.getInnerAt(0),
             activeItem = container.getActiveItem();
 
         if (activeItem) {
             activeItem.show();
+            if(firstItem && firstItem !== activeItem) {
+                firstItem.hide();
+            }
         }
 
         container.on('activeitemchange', 'onContainerActiveItemChange', this);

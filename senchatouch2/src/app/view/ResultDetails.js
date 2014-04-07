@@ -1,10 +1,10 @@
-﻿Ext.define('PropertyFinder.view.ResultDetails', {
+﻿Ext.define('PropertyCross.view.ResultDetails', {
     extend: 'Ext.Container',
     xtype: 'resultdetails',
-    requires: ['PropertyFinder.util.Format', 'Ext.Img'],
+    requires: ['PropertyCross.util.Format', 'Ext.Img'],
 
     config: {
-        title: 'Information',
+        title: 'Property Details',
         iconCls: 'home',
         scrollable: true,
         defaultType: 'panel',
@@ -12,12 +12,12 @@
             {
                 padding: '15 15 0 15',
                 style: 'font-size: 24px',
-                tpl:  Ext.create('Ext.XTemplate', '{[PropertyFinder.util.Format.currency(values.price)]}')
+                tpl:  Ext.create('Ext.XTemplate', '{[PropertyCross.util.Format.currency(values.price)]}')
             },
             {
                 padding: '2 15 0 15',
                 style: 'font-size: 18px',
-                tpl:  Ext.create('Ext.XTemplate', '{[PropertyFinder.util.Format.title(values.title)]}')
+                tpl:  Ext.create('Ext.XTemplate', '{[PropertyCross.util.Format.title(values.title)]}')
             },
             {
                 xtype: 'img',

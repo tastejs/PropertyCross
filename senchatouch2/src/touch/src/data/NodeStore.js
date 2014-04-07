@@ -108,8 +108,8 @@ Ext.define('Ext.data.NodeStore', {
      * This weight algorithm has the limitation of not being able to go more then 80 levels in depth, or
      * more then 10k nodes per parent. The end result is a flat collection being correctly sorted based
      * on this one single sort function.
-     * @param node1
-     * @param node2
+     * @param {Ext.data.NodeInterface} node1
+     * @param {Ext.data.NodeInterface} node2
      * @return {Number}
      * @private
      */
@@ -206,6 +206,10 @@ Ext.define('Ext.data.NodeStore', {
             this.add(data);
             this.resumeEvents();
 
+            if(data.length === 0) {
+                this.loaded = node.loaded = true;
+            }
+
             this.fireEvent('refresh', this, this.data);
         }
     },
@@ -213,7 +217,7 @@ Ext.define('Ext.data.NodeStore', {
     /**
      * Private method used to deeply retrieve the children of a record without recursion.
      * @private
-     * @param root
+     * @param {Ext.data.NodeInterface} root
      * @return {Array}
      */
     retrieveChildNodes: function(root) {

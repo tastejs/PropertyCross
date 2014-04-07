@@ -2,10 +2,10 @@
  * @class Ext.chart.grid.RadialGrid
  * @extends Ext.draw.sprite.Path
  * 
- * Radial Grid sprite. Used by Radar to render a series of concentric circles.
+ * Radial Grid sprite. Used by Radar chart to render a series of radial lines.
  * Represents the scale of the radar chart on the yField.
  */
-Ext.define("Ext.chart.grid.RadialGrid", {
+Ext.define('Ext.chart.grid.RadialGrid', {
     extend: 'Ext.draw.sprite.Path',
     alias: 'grid.radial',
 

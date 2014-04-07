@@ -11,20 +11,23 @@
  *     var chart = new Ext.chart.PolarChart({
  *         animate: true,
  *         interactions: ['rotate'],
- *         colors: ["#115fa6", "#94ae0a", "#a61120", "#ff8809", "#ffd13e"],
+ *         colors: ['#115fa6', '#94ae0a', '#a61120', '#ff8809', '#ffd13e'],
  *         store: {
  *           fields: ['name', 'data1', 'data2', 'data3', 'data4', 'data5'],
  *           data: [
- *               {'name':'metric one', 'data1':10, 'data2':12, 'data3':14, 'data4':8, 'data5':13},
- *               {'name':'metric two', 'data1':7, 'data2':8, 'data3':16, 'data4':10, 'data5':3},
- *               {'name':'metric three', 'data1':5, 'data2':2, 'data3':14, 'data4':12, 'data5':7},
- *               {'name':'metric four', 'data1':2, 'data2':14, 'data3':6, 'data4':1, 'data5':23},
- *               {'name':'metric five', 'data1':27, 'data2':38, 'data3':36, 'data4':13, 'data5':33}
+ *               {name: 'metric one',   data1: 10, data2: 12, data3: 14, data4: 8,  data5: 13},
+ *               {name: 'metric two',   data1: 7,  data2: 8,  data3: 16, data4: 10, data5: 3},
+ *               {name: 'metric three', data1: 5,  data2: 2,  data3: 14, data4: 12, data5: 7},
+ *               {name: 'metric four',  data1: 2,  data2: 14, data3: 6,  data4: 1,  data5: 23},
+ *               {name: 'metric five',  data1: 27, data2: 38, data3: 36, data4: 13, data5: 33}
  *           ]
  *         },
  *         series: [{
  *             type: 'pie',
- *             labelField: 'name',
+ *             label: {
+ *                 field: 'name',
+ *                 display: 'rotate'
+ *             },
  *             xField: 'data3',
  *             donut: 30
  *         }]
@@ -35,7 +38,7 @@
  * In this configuration we set `pie` as the type for the series, set an object with specific style properties for highlighting options
  * (triggered when hovering elements). We also set true to `showInLegend` so all the pie slices can be represented by a legend item.
  * We set `data1` as the value of the field to determine the angle span for each pie slice. We also set a label configuration object
- * where we set the field name of the store field to be renderer as text for the label. The labels will also be displayed rotated.
+ * where we set the field name of the store field to be rendered as text for the label. The labels will also be displayed rotated.
  * We set `contrast` to `true` to flip the color of the label if it is to similar to the background color. Finally, we set the font family
  * and size through the `font` parameter.
  *
@@ -43,7 +46,7 @@
 Ext.define('Ext.chart.series.Pie', {
     extend: 'Ext.chart.series.Polar',
     requires: [
-        "Ext.chart.series.sprite.PieSlice"
+        'Ext.chart.series.sprite.PieSlice'
     ],
     type: 'pie',
     alias: 'series.pie',
@@ -52,6 +55,7 @@ Ext.define('Ext.chart.series.Pie', {
     config: {
         /**
          * @cfg {String} labelField
+         * @deprecated Use {@link Ext.chart.series.Pie#label} instead.
          * The store record field name to be used for the pie slice labels.
          */
         labelField: false,
@@ -83,6 +87,11 @@ Ext.define('Ext.chart.series.Pie', {
          */
         hidden: [],
 
+        /**
+         * @cfg {Number} Allows adjustment of the radius by a spefic perfentage.
+         */
+        radiusFactor: 100,
+
         style: {
 
         }
@@ -98,12 +107,16 @@ Ext.define('Ext.chart.series.Pie', {
         return this.getXField();
     },
 
+    applyRadius : function (radius) {
+        return radius * this.getRadiusFactor() * 0.01;
+    },
+
     updateLabelData: function () {
         var me = this,
             store = me.getStore(),
             items = store.getData().items,
             sprites = me.getSprites(),
-            labelField = me.getLabelField(),
+            labelField = me.getLabel().getTemplate().getField(),
             hidden = me.getHidden(),
             i, ln, labels, sprite;
         if (sprites.length > 0 && labelField) {
@@ -114,7 +127,7 @@ Ext.define('Ext.chart.series.Pie', {
             for (i = 0, ln = sprites.length; i < ln; i++) {
                 sprite = sprites[i];
                 sprite.setAttributes({label: labels[i]});
-                sprite.putMarker('labels', {hidden:hidden[i]}, sprite.attr.attributeId);
+                sprite.putMarker('labels', {hidden: hidden[i]}, sprite.attr.attributeId);
             }
         }
     },
@@ -137,7 +150,7 @@ Ext.define('Ext.chart.series.Pie', {
         }
 
         for (i = 0; i < length; i++) {
-            value = items[i].get(field);
+            value = Math.abs(Number(items[i].get(field))) || 0;
             if (!hidden[i]) {
                 sum += value;
             }
@@ -147,14 +160,13 @@ Ext.define('Ext.chart.series.Pie', {
             }
         }
 
-        if (sum === 0) {
-            return;
+        if (sum !== 0) {
+            sum = totalAngle / sum;
         }
-        sum = totalAngle / sum;
         for (i = 0; i < length; i++) {
             sprites[i].setAttributes({
                 startAngle: lastAngle,
-                endAngle: lastAngle = summation[i] * sum,
+                endAngle: lastAngle = (sum ? summation[i] * sum : 0),
                 globalAlpha: 1
             });
         }
@@ -206,21 +218,27 @@ Ext.define('Ext.chart.series.Pie', {
 
     getSprites: function () {
         var me = this,
-            chart = this.getChart(),
+            chart = me.getChart(),
             store = me.getStore();
         if (!chart || !store) {
-            return[];
+            return [];
         }
         me.getColors();
         me.getSubStyle();
         var items = store.getData().items,
             length = items.length,
             animation = chart && chart.getAnimate(),
-            center = me.getCenter(),
-            offsetX = me.getOffsetX(),
-            offsetY = me.getOffsetY(),
             sprites = me.sprites, sprite,
-            i, spriteCreated = false;
+            spriteIndex = 0, rendererData,
+            i, spriteCreated = false,
+            label = me.getLabel(),
+            labelTpl = label.getTemplate();
+
+        rendererData = {
+            store: store,
+            field: me.getField(),
+            series: me
+        };
 
         for (i = 0; i < length; i++) {
             sprite = sprites[i];
@@ -230,16 +248,19 @@ Ext.define('Ext.chart.series.Pie', {
                     sprite.config.highlightCfg = me.getHighlightCfg();
                     sprite.addModifier('highlight', true);
                 }
-                if (me.getLabelField()) {
-                    me.getLabel().getTemplate().setAttributes({
-                        labelOverflowPadding: this.getLabelOverflowPadding()
+                if (labelTpl.getField()) {
+                    labelTpl.setAttributes({
+                        labelOverflowPadding: me.getLabelOverflowPadding()
                     });
-                    me.getLabel().getTemplate().fx.setCustomDuration({'callout': 200});
-                    sprite.bindMarker('labels', me.getLabel());
+                    labelTpl.fx.setCustomDuration({'callout': 200});
+                    sprite.bindMarker('labels', label);
                 }
-                sprite.setAttributes(this.getStyleByIndex(i));
+                sprite.setAttributes(me.getStyleByIndex(i));
+                sprite.rendererData = rendererData;
+                sprite.rendererIndex = spriteIndex++;
                 spriteCreated = true;
             }
+            sprite.fx.setConfig(animation);
         }
         if (spriteCreated) {
             me.doUpdateStyles();
@@ -247,16 +268,66 @@ Ext.define('Ext.chart.series.Pie', {
         return me.sprites;
     },
 
+    normalizeAngle: function (angle) {
+        var pi2 = Math.PI * 2;
+        if (angle >= 0) {
+            return angle % pi2;
+        }
+        return (angle % pi2 + pi2) % pi2;
+    },
+
     betweenAngle: function (x, a, b) {
-        b -= a;
-        x -= a;
-        x %= Math.PI * 2;
-        b %= Math.PI * 2;
-        x += Math.PI * 2;
-        b += Math.PI * 2;
-        x %= Math.PI * 2;
-        b %= Math.PI * 2;
-        return x < b;
+        var normalize = this.normalizeAngle;
+        a = normalize(a);
+        b = normalize(b);
+        x = normalize(x);
+        if (b === 0) {
+            b = Math.PI * 2;
+        }
+        return x >= a && x < b;
+    },
+
+    /**
+     * Returns the pie slice for a given angle
+     * @param {Number} angle The angle to search for the slice
+     * @return {Object} An object containing the reocord, sprite, scope etc.
+     */
+    getItemForAngle: function (angle) {
+        var me      = this,
+            sprites = me.getSprites();
+
+        angle %= Math.PI * 2;
+
+        while (angle < 0) {
+            angle += Math.PI * 2;
+        }
+
+        if (sprites) {
+            var store  = me.getStore(),
+                items  = store.getData().items,
+                hidden = me.getHidden(),
+                i      = 0,
+                ln     = store.getCount();
+
+            for (; i < ln; i++) {
+                if(!hidden[i]) {
+                    // Fortunately, the id of items equals the index of it in instances list.
+                    attr = sprites[i].attr;
+
+                    if (attr.startAngle <= angle &&  attr.endAngle >= angle) {
+                        return {
+                            series: me,
+                            sprite: sprites[i],
+                            index: i,
+                            record: items[i],
+                            field: me.getXField()
+                        };
+                    }
+                }
+            }
+        }
+
+        return null;
     },
 
     getItemForPoint: function (x, y) {
@@ -303,12 +374,12 @@ Ext.define('Ext.chart.series.Pie', {
         var store = this.getStore();
         if (store) {
             var items = store.getData().items,
-                labelField = this.getLabelField(),
+                labelField = this.getLabel().getTemplate().getField(),
                 field = this.getField(),
                 hidden = this.getHidden();
             for (var i = 0; i < items.length; i++) {
                 target.push({
-                    name: labelField ? String(items[i].get(labelField))  : (field && field[i]) || this.getId(),
+                    name: labelField ? String(items[i].get(labelField))  : field + ' ' + i,
                     mark: this.getStyleByIndex(i).fillStyle || this.getStyleByIndex(i).strokeStyle || 'black',
                     disabled: hidden[i],
                     series: this.getId(),

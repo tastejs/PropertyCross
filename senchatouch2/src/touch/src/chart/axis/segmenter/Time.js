@@ -4,7 +4,7 @@
  * 
  * Time data type.
  */
-Ext.define("Ext.chart.axis.segmenter.Time", {
+Ext.define('Ext.chart.axis.segmenter.Time', {
     extend: 'Ext.chart.axis.segmenter.Segmenter',
     alias: 'segmenter.time',
 

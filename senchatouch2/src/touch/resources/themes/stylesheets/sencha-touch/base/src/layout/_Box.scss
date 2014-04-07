@@ -4,7 +4,7 @@
 
 .x-layout-box {
     @include st-box();
-    
+
     &.x-horizontal {
         @include st-box-orient(horizontal, important);
 
@@ -71,7 +71,7 @@
         &.x-horizontal > .x-layout-box-item.x-flexed {
             width: 0 !important;
         }
-        
+
         &.x-vertical > .x-layout-box-item.x-flexed {
             height: 0 !important;
         }
@@ -92,7 +92,7 @@
             }
         }
     }
-    
+
     .x-container {
         .x-dock-horizontal.x-unsized {
             .x-dock-body {

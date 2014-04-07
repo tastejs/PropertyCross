@@ -1,0 +1,6 @@
+@import 'sencha-touch/windows';
+@import 'sencha-touch/windows/all';
+
+.x-layout-box > .x-layout-box-item.x-button-back {
+	display: none !important;
+}

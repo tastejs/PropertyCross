@@ -1,15 +1,14 @@
-﻿Ext.define('PropertyFinder.view.ResultList', {
+﻿Ext.define('PropertyCross.view.ResultList', {
     extend: 'Ext.dataview.List',
     xtype: 'resultlist',
-	requires: ['Ext.plugin.ListPaging', 'PropertyFinder.util.Format', 'PropertyFinder.view.ResultListItem'],
+	requires: ['Ext.plugin.ListPaging', 'PropertyCross.util.Format', 'PropertyCross.view.ResultListItem'],
 	config: {
 		plugins: [{ 
 			xclass: 'Ext.plugin.ListPaging' ,
 			autoPaging: false,
 			loadMoreText: 'Load more results',
 			noMoreRecordsText: 'No more results',
-			loadTpl: '<div class="list-loading-text">Loading ...</div>'
-                    +'<div class="{cssPrefix}list-paging-msg">{message}</div>'
+			loadTpl: '<div class="{cssPrefix}list-paging-msg">{message}</div>'
 		}],
 		
         title: 'Results',
@@ -28,7 +27,7 @@
                         var data = store.getData();
                         var pagingPlugin = this.getPlugins()[0];
                         if(totalCount && data) {
-                            var fmt = PropertyFinder.util.Format.number;
+                            var fmt = PropertyCross.util.Format.number;
                             var xOfY = fmt(data.length) + " of " + fmt(totalCount);
                             // Title is not read after first set, but parent doesn't exist initially.
                             var titleLocation = this.parent ? this.parent.getNavigationBar() : this;

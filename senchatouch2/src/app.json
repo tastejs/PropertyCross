@@ -2,7 +2,7 @@
     /**
      * The application's namespace, used by Sencha Command to generate classes
      */
-    "name": "PropertyFinder",
+    "name": "PropertyCross",
 
     /**
      * The file path to this application's front HTML document, relative to this app.json file
@@ -32,7 +32,7 @@
      *                                      //  - "delta" to enable over-the-air delta update for this file
      *                                      //  - "full" means full update will be made when this file changes
      *          "x-bootstrap": true         // (Optional)
-     *                                      // Indicates a development mode only dependency.
+     *                                      // Indicates a development mode only dependency.  
      *                                      // These files will not be copied into the build directory or referenced
      *                                      // in the generate app.json manifest for the micro loader.
      *
@@ -72,33 +72,68 @@
      */
     "css": [
         {
-            "path": "resources/css/app.css",
+            "path": "resources/css/mountainview.css",
+            "platform": ["android"],
+            "theme": "MountainView",
             "update": "delta"
-//			"platform": ["chrome", "safari", "ios", "android", "firefox", "blackberry"],
-//			"theme": "Default"
         },
-		/*
-		{
-            "path": "resources/css/app.wp.css",
-            "update": "delta",
-			"platform": ["ie10"],
-			"theme": "Windows"
-		},
-		*/
-		{
-            "path": "resources/css/additional.css",
+        {
+            "path": "resources/css/sencha-touch.css",
+            "platform": ["desktop"],
+            "update": "delta"
+        },
+        {
+            "path": "resources/css/cupertino.css",
+            "platform": ["ios"],
+            "theme": "Cupertino",
+            "update": "delta"
+        },
+        {
+            "path": "resources/css/wp8.css",
+            "platform": ["ie10"],
+            "theme": "Windows",
             "update": "delta"
         }
     ],
-  "appCache": {
-    "cache": [
-      "index.html"
+
+    /**
+     * Used to automatically generate cache.manifest (HTML 5 application cache manifest) file when you build
+     */
+    "appCache": {
+        /**
+         * List of items in the CACHE MANIFEST section
+         */
+        "cache": [
+            "index.html"
+        ],
+        /**
+         * List of items in the NETWORK section
+         */
+        "network": [
+            "*"
+        ],
+        /**
+         * List of items in the FALLBACK section
+         */
+        "fallback": []
+    },
+
+    /**
+     * Extra resources to be copied along when build
+     */
+    "resources": [
+        "resources/images",
+        "resources/icons",
+        "resources/startup"
     ],
-    "network": [
-      "*"
+
+    /**
+     * File / directory name matchers to ignore when copying to the builds, must be valid regular expressions
+     */
+    "ignore": [
+        "\.svn$"
     ],
-    "fallback": []
-  },
+
     /**
      * Directory path to store all previous production builds. Note that the content generated inside this directory
      * must be kept intact for proper generation of deltas between updates
@@ -115,19 +150,5 @@
      * Uniquely generated id for this application, used as prefix for localStorage keys.
      * Normally you should never change this value.
      */
-    "id": "9a645ae0-16c6-11e2-89d0-073388f3ce00",
-  "resources": [
-    "resources/icons",
-    "resources/loading",
-    "config.xml"
-  ],
-  "ignore": [
-    ".svn$"
-  ],
-  "buildOptions": {
-    "product": "touch",
-    "minVersion": 3,
-    "debug": false,
-    "logger": false
-  }
+    "id": "db6f158a-0e4a-4c8e-876e-c0e96cf70fc5"
 }

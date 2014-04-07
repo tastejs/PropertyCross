@@ -113,7 +113,8 @@ Ext.define('Ext.data.Request', {
         // The following two configurations are only used by Ext.data.proxy.Direct and are just
         // for being able to retrieve them after the request comes back from the server.
         directFn: null,
-        args: null
+        args: null,
+        useDefaultXhrHeader: null
     },
 
     /**

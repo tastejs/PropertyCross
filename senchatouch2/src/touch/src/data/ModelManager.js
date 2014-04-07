@@ -1,33 +1,33 @@
 /**
  * @author Ed Spencer
- * 
+ *
  * The ModelManager keeps track of all {@link Ext.data.Model} types defined in your application.
- * 
+ *
  * ## Creating Model Instances
- * 
+ *
  * Model instances can be created by using the {@link Ext.ClassManager#create Ext.create} method. Ext.create replaces
  * the deprecated {@link #create Ext.ModelManager.create} method. It is also possible to create a model instance
  * this by using the Model type directly. The following 3 snippets are equivalent:
- * 
+ *
  *     Ext.define('User', {
  *         extend: 'Ext.data.Model',
  *         config: {
  *             fields: ['first', 'last']
  *         }
  *     });
- * 
+ *
  *     // method 1, create using Ext.create (recommended)
  *     Ext.create('User', {
  *         first: 'Ed',
  *         last: 'Spencer'
  *     });
- * 
+ *
  *     // method 2, create on the type directly
  *     new User({
  *         first: 'Ed',
  *         last: 'Spencer'
  *     });
- * 
+ *
  *     // method 3, create through the manager (deprecated)
  *     Ext.ModelManager.create({
  *         first: 'Ed',
@@ -35,20 +35,20 @@
  *     }, 'User');
  *
  * ## Accessing Model Types
- * 
+ *
  * A reference to a Model type can be obtained by using the {@link #getModel} function. Since models types
  * are normal classes, you can access the type directly. The following snippets are equivalent:
- * 
+ *
  *     Ext.define('User', {
  *         extend: 'Ext.data.Model',
  *         config: {
  *             fields: ['first', 'last']
  *         }
  *     });
- * 
+ *
  *     // method 1, access model type through the manager
  *     var UserType = Ext.ModelManager.getModel('User');
- * 
+ *
  *     // method 2, reference the type directly
  *     var UserType = User;
  */
@@ -75,8 +75,8 @@ Ext.define('Ext.data.ModelManager', {
     /**
      * Registers a model definition. All model plugins marked with `isDefault: true` are bootstrapped
      * immediately, as are any addition plugins defined in the model config.
-     * @param name
-     * @param config
+     * @param {String} name
+     * @param {Object} config
      * @return {Object}
      */
     registerType: function(name, config) {

@@ -307,10 +307,10 @@ Ext.dom.Element.addMembers({
 
     /**
      * @private
-     * @param firstClass
-     * @param secondClass
-     * @param flag
-     * @param prefix
+     * @param {String} firstClass
+     * @param {String} secondClass
+     * @param {Boolean} flag
+     * @param {String} prefix
      * @return {Mixed}
      */
     swapCls: function(firstClass, secondClass, flag, prefix) {
@@ -797,6 +797,7 @@ Ext.dom.Element.addMembers({
                 this.setStyle(styles);
             }
         }
+        return this;
     },
 
     /**

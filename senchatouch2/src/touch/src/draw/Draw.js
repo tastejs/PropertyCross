@@ -55,9 +55,9 @@ Ext.define('Ext.draw.Draw', {
 
     /**
      *
-     * @param bbox1
-     * @param bbox2
-     * @param [padding]
+     * @param {Object} bbox1
+     * @param {Object} bbox2
+     * @param {Number} [padding]
      * @return {Boolean}
      */
     isBBoxIntersect: function (bbox1, bbox2, padding) {
@@ -107,6 +107,145 @@ Ext.define('Ext.draw.Draw', {
         }
         result[j] = ny;
         return result;
+    },
+
+    /**
+     * @private
+     *
+     * Calculates bezier curve control anchor points for a particular point in a path, with a
+     * smoothing curve applied. The smoothness of the curve is controlled by the 'value' parameter.
+     * Note that this algorithm assumes that the line being smoothed is normalized going from left
+     * to right; it makes special adjustments assuming this orientation.
+     *
+     * @param {Number} prevX X coordinate of the previous point in the path
+     * @param {Number} prevY Y coordinate of the previous point in the path
+     * @param {Number} curX X coordinate of the current point in the path
+     * @param {Number} curY Y coordinate of the current point in the path
+     * @param {Number} nextX X coordinate of the next point in the path
+     * @param {Number} nextY Y coordinate of the next point in the path
+     * @param {Number} value A value to control the smoothness of the curve; this is used to
+     *                 divide the distance between points, so a value of 2 corresponds to
+     *                 half the distance between points (a very smooth line) while higher values
+     *                 result in less smooth curves. Defaults to 4.
+     * @return {Object} Object containing x1, y1, x2, y2 bezier control anchor points; x1 and y1
+     *                  are the control point for the curve toward the previous path point, and
+     *                  x2 and y2 are the control point for the curve toward the next path point.
+     */
+    getAnchors: function (prevX, prevY, curX, curY, nextX, nextY, value) {
+        value = value || 4;
+        var PI = Math.PI,
+            halfPI = PI / 2,
+            abs = Math.abs,
+            sin = Math.sin,
+            cos = Math.cos,
+            atan = Math.atan,
+            control1Length, control2Length, control1Angle, control2Angle,
+            control1X, control1Y, control2X, control2Y, alpha;
+
+        // Find the length of each control anchor line, by dividing the horizontal distance
+        // between points by the value parameter.
+        control1Length = (curX - prevX) / value;
+        control2Length = (nextX - curX) / value;
+
+        // Determine the angle of each control anchor line. If the middle point is a vertical
+        // turnaround then we force it to a flat horizontal angle to prevent the curve from
+        // dipping above or below the middle point. Otherwise we use an angle that points
+        // toward the previous/next target point.
+        if ((curY >= prevY && curY >= nextY) || (curY <= prevY && curY <= nextY)) {
+            control1Angle = control2Angle = halfPI;
+        } else {
+            control1Angle = atan((curX - prevX) / abs(curY - prevY));
+            if (prevY < curY) {
+                control1Angle = PI - control1Angle;
+            }
+            control2Angle = atan((nextX - curX) / abs(curY - nextY));
+            if (nextY < curY) {
+                control2Angle = PI - control2Angle;
+            }
+        }
+
+        // Adjust the calculated angles so they point away from each other on the same line
+        alpha = halfPI - ((control1Angle + control2Angle) % (PI * 2)) / 2;
+        if (alpha > halfPI) {
+            alpha -= PI;
+        }
+        control1Angle += alpha;
+        control2Angle += alpha;
+
+        // Find the control anchor points from the angles and length
+        control1X = curX - control1Length * sin(control1Angle);
+        control1Y = curY + control1Length * cos(control1Angle);
+        control2X = curX + control2Length * sin(control2Angle);
+        control2Y = curY + control2Length * cos(control2Angle);
+
+        // One last adjustment, make sure that no control anchor point extends vertically past
+        // its target prev/next point, as that results in curves dipping above or below and
+        // bending back strangely. If we find this happening we keep the control angle but
+        // reduce the length of the control line so it stays within bounds.
+        if ((curY > prevY && control1Y < prevY) || (curY < prevY && control1Y > prevY)) {
+            control1X += abs(prevY - control1Y) * (control1X - curX) / (control1Y - curY);
+            control1Y = prevY;
+        }
+        if ((curY > nextY && control2Y < nextY) || (curY < nextY && control2Y > nextY)) {
+            control2X -= abs(nextY - control2Y) * (control2X - curX) / (control2Y - curY);
+            control2Y = nextY;
+        }
+
+        return {
+            x1: control1X,
+            y1: control1Y,
+            x2: control2X,
+            y2: control2Y
+        };
+    },
+
+    /**
+     * Given coordinates of the points, calculates coordinates of a Bezier curve that goes through them.
+     * @param dataX x-coordinates of the points.
+     * @param dataY y-coordinates of the points.
+     * @param value A value to control the smoothness of the curve.
+     * @return {Object} Object holding two arrays, for x and y coordinates of the curve.
+     */
+    smooth: function (dataX, dataY, value) {
+        var ln = dataX.length,
+            prevX, prevY,
+            curX, curY,
+            nextX, nextY,
+            x, y,
+            smoothX = [], smoothY = [],
+            i, anchors;
+
+        for (i = 0; i < ln - 1; i++) {
+            prevX = dataX[i];
+            prevY = dataY[i];
+            if (i === 0) {
+                x = prevX;
+                y = prevY;
+                smoothX.push(x);
+                smoothY.push(y);
+                if (ln === 1) {
+                    break;
+                }
+            }
+            curX = dataX[i+1];
+            curY = dataY[i+1];
+            nextX = dataX[i+2];
+            nextY = dataY[i+2];
+            if (isNaN(nextX) || isNaN(nextY)) {
+                smoothX.push(x, curX, curX);
+                smoothY.push(y, curY, curY);
+                break;
+            }
+            anchors = this.getAnchors(prevX, prevY, curX, curY, nextX, nextY, value);
+            smoothX.push(x, anchors.x1, curX);
+            smoothY.push(y, anchors.y1, curY);
+            x = anchors.x2;
+            y = anchors.y2;
+        }
+        return {
+            smoothX: smoothX,
+            smoothY: smoothY
+        }
     },
 
     /**

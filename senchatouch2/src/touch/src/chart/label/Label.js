@@ -1,11 +1,11 @@
 /**
  * @class Ext.chart.label.Label
  * @extends Ext.draw.sprite.Text
- * 
+ *
  * Sprite used to represent labels in series.
  */
-Ext.define("Ext.chart.label.Label", {
-    extend: "Ext.draw.sprite.Text",
+Ext.define('Ext.chart.label.Label', {
+    extend: 'Ext.draw.sprite.Text',
     requires: ['Ext.chart.label.Callout'],
 
     inheritableStatics: {
@@ -20,7 +20,10 @@ Ext.define("Ext.chart.label.Label", {
                 calloutEndY: 'number',
                 calloutColor: 'color',
                 calloutVertical: 'bool',
-                labelOverflowPadding: 'number'
+                labelOverflowPadding: 'number',
+                display: 'enums(none,under,over,rotate,insideStart,insideEnd,outside)',
+                orientation: 'enums(horizontal,vertical)',
+                renderer: 'default'
             },
             defaults: {
                 callout: 0,
@@ -32,7 +35,10 @@ Ext.define("Ext.chart.label.Label", {
                 calloutEndY: 0,
                 calloutVertical: false,
                 calloutColor: 'black',
-                labelOverflowPadding: 5
+                labelOverflowPadding: 5,
+                display: 'none',
+                orientation: '',
+                renderer: null
             },
 
             dirtyTriggers: {
@@ -40,7 +46,14 @@ Ext.define("Ext.chart.label.Label", {
                 calloutPlaceX: 'transform',
                 calloutPlaceY: 'transform',
                 labelOverflowPadding: 'transform',
-                calloutRotation: 'transform'
+                calloutRotation: 'transform',
+                display: 'hidden'
+            },
+
+            updaters: {
+                hidden: function (attrs) {
+                    attrs.hidden = attrs.display === 'none';
+                }
             }
         }
     },
@@ -53,7 +66,8 @@ Ext.define("Ext.chart.label.Label", {
             customDuration: {
                 callout: 200
             }
-        }
+        },
+        field: null
     },
 
     prepareModifiers: function () {
@@ -86,6 +100,6 @@ Ext.define("Ext.chart.label.Label", {
         }
         ctx.restore();
 
-        Ext.draw.sprite.Text.prototype.render.apply(this, arguments);
+        Ext.draw.sprite.Text.prototype.render.apply(me, arguments);
     }
 });

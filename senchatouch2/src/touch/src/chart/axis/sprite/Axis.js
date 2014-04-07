@@ -6,10 +6,10 @@
  * The axis sprite. Currently all types of the axis will be rendered with this sprite.
  * TODO(touch-2.2): Split different types of axis into different sprite classes.
  */
-Ext.define("Ext.chart.axis.sprite.Axis", {
+Ext.define('Ext.chart.axis.sprite.Axis', {
     extend: 'Ext.draw.sprite.Sprite',
     mixins: {
-        markerHolder: "Ext.chart.MarkerHolder"
+        markerHolder: 'Ext.chart.MarkerHolder'
     },
 
     requires: ['Ext.draw.sprite.Text'],
@@ -21,12 +21,12 @@ Ext.define("Ext.chart.axis.sprite.Axis", {
                  * @cfg {Boolean} grid 'true' if the axis has a grid.
                  */
                 grid: 'bool',
-                
+
                 /**
                  * @cfg {Boolean} axisLine 'true' if the main line of the axis is drawn.
                  */
                 axisLine: 'bool',
-                
+
                 /**
                  * @cfg {Boolean} minorTricks 'true' if the axis has sub ticks.
                  */
@@ -148,7 +148,7 @@ Ext.define("Ext.chart.axis.sprite.Axis", {
                  * Unused.
                  */
                 data: 'default',
-                
+
                 /**
                  * @cfg {Boolean} 'true' if the estimated step size is adjusted by text size.
                  */
@@ -171,7 +171,7 @@ Ext.define("Ext.chart.axis.sprite.Axis", {
                 dataMax: 1,
                 position: '',
                 minStepSize: 0,
-                estStepSize: 42,
+                estStepSize: 20,
                 min: 0,
                 max: 1,
                 centerX: 0,
@@ -336,32 +336,48 @@ Ext.define("Ext.chart.axis.sprite.Axis", {
         if (majorTicks) {
             switch (docked) {
                 case 'right':
-                    me.iterate(majorTicks, function (position, labelText, i) {
-                        position = surface.roundPixel(position * yy + dy) + halfLineWidth;
-                        ctx.moveTo(0, position);
-                        ctx.lineTo(majorTickSize, position);
-                    });
+                    function getRightTickFn(size) {
+                        return function (position, labelText, i) {
+                            position = surface.roundPixel(position * yy + dy) + halfLineWidth;
+                            ctx.moveTo(0, position);
+                            ctx.lineTo(size, position);
+                        };
+                    }
+                    me.iterate(majorTicks, getRightTickFn(majorTickSize));
+                    minorTicks && me.iterate(minorTicks, getRightTickFn(minorTickSize));
                     break;
                 case 'left':
-                    me.iterate(majorTicks, function (position, labelText, i) {
-                        position = surface.roundPixel(position * yy + dy) + halfLineWidth;
-                        ctx.moveTo(clipRegion[2] - majorTickSize, position);
-                        ctx.lineTo(clipRegion[2], position);
-                    });
+                    function getLeftTickFn(size) {
+                        return function (position, labelText, i) {
+                            position = surface.roundPixel(position * yy + dy) + halfLineWidth;
+                            ctx.moveTo(clipRegion[2] - size, position);
+                            ctx.lineTo(clipRegion[2], position);
+                        };
+                    }
+                    me.iterate(majorTicks, getLeftTickFn(majorTickSize));
+                    minorTicks && me.iterate(minorTicks, getLeftTickFn(minorTickSize));
                     break;
                 case 'bottom':
-                    me.iterate(majorTicks, function (position, labelText, i) {
-                        position = surface.roundPixel(position * xx + dx) - halfLineWidth;
-                        ctx.moveTo(position, 0);
-                        ctx.lineTo(position, majorTickSize);
-                    });
+                    function getBottomTickFn(size) {
+                        return function (position, labelText, i) {
+                            position = surface.roundPixel(position * xx + dx) - halfLineWidth;
+                            ctx.moveTo(position, 0);
+                            ctx.lineTo(position, size);
+                        };
+                    }
+                    me.iterate(majorTicks, getBottomTickFn(majorTickSize));
+                    minorTicks && me.iterate(minorTicks, getBottomTickFn(minorTickSize));
                     break;
                 case 'top':
-                    me.iterate(majorTicks, function (position, labelText, i) {
-                        position = surface.roundPixel(position * xx + dx) - halfLineWidth;
-                        ctx.moveTo(position, clipRegion[3]);
-                        ctx.lineTo(position, clipRegion[3] - majorTickSize);
-                    });
+                    function getTopTickFn(size) {
+                        return function (position, labelText, i) {
+                            position = surface.roundPixel(position * xx + dx) - halfLineWidth;
+                            ctx.moveTo(position, clipRegion[3]);
+                            ctx.lineTo(position, clipRegion[3] - size);
+                        };
+                    }
+                    me.iterate(majorTicks, getTopTickFn(majorTickSize));
+                    minorTicks && me.iterate(minorTicks, getTopTickFn(minorTickSize));
                     break;
                 case 'angular':
                     me.iterate(majorTicks, function (position, labelText, i) {
@@ -411,43 +427,31 @@ Ext.define("Ext.chart.axis.sprite.Axis", {
             switch (docked) {
                 case 'left':
                     label.setAttributes({
-                        textAlign: 'center',
-                        textBaseline: 'middle',
                         translationX: surface.roundPixel(clipRegion[2] - padding + dx) - halfLineWidth - me.thickness / 2
                     }, true, true);
                     break;
                 case 'right':
                     label.setAttributes({
-                        textAlign: 'center',
-                        textBaseline: 'middle',
                         translationX: surface.roundPixel(padding + dx) - halfLineWidth + me.thickness / 2
                     }, true, true);
                     break;
                 case 'top':
                     label.setAttributes({
-                        textAlign: 'center',
-                        textBaseline: 'middle',
                         translationY: surface.roundPixel(clipRegion[3] - padding) - halfLineWidth - me.thickness / 2
                     }, true, true);
                     break;
                 case 'bottom':
                     label.setAttributes({
-                        textAlign: 'center',
-                        textBaseline: 'middle',
                         translationY: surface.roundPixel(padding) - halfLineWidth + me.thickness / 2
                     }, true, true);
                     break;
                 case 'radial' :
                     label.setAttributes({
-                        textAlign: 'center',
-                        textBaseline: 'middle',
                         translationX: attr.centerX
                     }, true, true);
                     break;
                 case 'angular':
                     label.setAttributes({
-                        textAlign: 'center',
-                        textBaseline: 'middle',
                         translationY: attr.centerY
                     }, true, true);
                     break;
@@ -577,25 +581,28 @@ Ext.define("Ext.chart.axis.sprite.Axis", {
     renderAxisLine: function (surface, ctx, layout, clipRegion) {
         var me = this,
             attr = me.attr,
-            halfWidth = attr.lineWidth * 0.5,
-            docked = attr.position;
+            halfLineWidth = attr.lineWidth * 0.5,
+            docked = attr.position,
+            position;
         if (attr.axisLine) {
             switch (docked) {
                 case 'left':
-                    ctx.moveTo(clipRegion[2] - halfWidth, -attr.endGap);
-                    ctx.lineTo(clipRegion[2] - halfWidth, attr.length + attr.startGap);
+                    position = surface.roundPixel(clipRegion[2]) - halfLineWidth;
+                    ctx.moveTo(position, -attr.endGap);
+                    ctx.lineTo(position, attr.length + attr.startGap);
                     break;
                 case 'right':
-                    ctx.moveTo(halfWidth, -attr.endGap);
-                    ctx.lineTo(halfWidth, attr.length + attr.startGap);
+                    ctx.moveTo(halfLineWidth, -attr.endGap);
+                    ctx.lineTo(halfLineWidth, attr.length + attr.startGap);
                     break;
                 case 'bottom':
-                    ctx.moveTo(-attr.startGap, halfWidth);
-                    ctx.lineTo(attr.length + attr.endGap, halfWidth);
+                    ctx.moveTo(-attr.startGap, halfLineWidth);
+                    ctx.lineTo(attr.length + attr.endGap, halfLineWidth);
                     break;
                 case 'top':
-                    ctx.moveTo(-attr.startGap, clipRegion[3] - halfWidth);
-                    ctx.lineTo(attr.length + attr.endGap, clipRegion[3] - halfWidth);
+                    position = surface.roundPixel(clipRegion[3]) - halfLineWidth;
+                    ctx.moveTo(-attr.startGap, position);
+                    ctx.lineTo(attr.length + attr.endGap, position);
                     break;
                 case 'angular':
                     ctx.moveTo(attr.centerX + attr.length, attr.centerY);
@@ -609,6 +616,8 @@ Ext.define("Ext.chart.axis.sprite.Axis", {
         var me = this,
             attr = me.attr,
             matrix = attr.matrix,
+            startGap = attr.startGap,
+            endGap = attr.endGap,
             xx = matrix.getXX(),
             yy = matrix.getYY(),
             dx = matrix.getDX(),
@@ -619,9 +628,9 @@ Ext.define("Ext.chart.axis.sprite.Axis", {
         if (attr.grid) {
             if (majorTicks) {
                 if (position === 'left' || position === 'right') {
-                    lastAnchor = attr.min * yy + dy;
+                    lastAnchor = attr.min * yy + dy + endGap + startGap;
                     me.iterate(majorTicks, function (position, labelText, i) {
-                        anchor = position * yy + dy;
+                        anchor = position * yy + dy + endGap;
                         me.putMarker('horizontal-' + (i % 2 ? 'odd' : 'even'), {
                             y: anchor,
                             height: lastAnchor - anchor
@@ -635,9 +644,15 @@ Ext.define("Ext.chart.axis.sprite.Axis", {
                         height: lastAnchor - anchor
                     }, j, true);
                 } else if (position === 'top' || position === 'bottom') {
-                    lastAnchor = attr.min * xx + dx;
+                    lastAnchor = attr.min * xx + dx + startGap;
+                    if (startGap) {
+                        me.putMarker('vertical-even', {
+                            x: 0,
+                            width: lastAnchor
+                        }, -1, true);
+                    }
                     me.iterate(majorTicks, function (position, labelText, i) {
-                        anchor = position * xx + dx;
+                        anchor = position * xx + dx + startGap;
                         me.putMarker('vertical-' + (i % 2 ? 'odd' : 'even'), {
                             x: anchor,
                             width: lastAnchor - anchor
@@ -645,7 +660,7 @@ Ext.define("Ext.chart.axis.sprite.Axis", {
                         lastAnchor = anchor;
                     });
                     j++;
-                    anchor = attr.length;
+                    anchor = attr.length + attr.startGap + attr.endGap;
                     me.putMarker('vertical-' + (j % 2 ? 'odd' : 'even'), {
                         x: anchor,
                         width: lastAnchor - anchor

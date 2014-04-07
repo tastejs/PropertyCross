@@ -260,6 +260,8 @@ Ext.define('Ext.data.association.HasMany', {
 
     /**
      * @private
+     * @deprecated as of v2.0.0 on an association. Instead use the store configuration.
+     *
      * Creates a function that returns an Ext.data.Store which is configured to load a set of data filtered
      * by the owner model's primary key - e.g. in a `hasMany` association where Group `hasMany` Users, this function
      * returns a Store configured to return the filtered set of a single Group's Users.
@@ -267,7 +269,6 @@ Ext.define('Ext.data.association.HasMany', {
      */
     applyStore: function(storeConfig) {
         var me = this,
-            association     = me,
             associatedModel = me.getAssociatedModel(),
             storeName       = me.getStoreName(),
             foreignKey      = me.getForeignKey(),
@@ -308,12 +309,13 @@ Ext.define('Ext.data.association.HasMany', {
                     filters      : [filter],
                     remoteFilter : true,
                     autoSync     : autoSync,
-                    modelDefaults: modelDefaults,
-                    listeners    : listeners
+                    modelDefaults: modelDefaults
                 });
 
                 store = record[storeName] = Ext.create('Ext.data.Store', config);
                 store.boundTo = record;
+
+                store.onAfter(listeners);
 
                 if (autoLoad) {
                     record[storeName].load();

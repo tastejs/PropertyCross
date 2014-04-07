@@ -50,7 +50,7 @@ Ext.define('Ext.tab.Bar', {
      */
 
     platformConfig: [{
-        theme: ['Blackberry'],
+        theme: ['Blackberry', 'CupertinoClassic', 'MountainView'],
         defaults: {
             flex: 1
         }
@@ -138,7 +138,7 @@ Ext.define('Ext.tab.Bar', {
     parseActiveTab: function(tab) {
         //we need to call getItems to initialize the items, otherwise they will not exist yet.
         if (typeof tab == 'number') {
-            return this.getInnerItems()[tab];
+			return this.getItems().items[tab];
         }
         else if (typeof tab == 'string') {
             tab = Ext.getCmp(tab);

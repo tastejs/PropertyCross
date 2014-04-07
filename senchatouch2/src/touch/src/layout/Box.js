@@ -60,6 +60,7 @@ Ext.define('Ext.layout.Box', {
          * - ** start ** : child items are packed together at left side of container
          * - ** center ** : child items are packed together at mid-width of container
          * - ** end ** : child items are packed together at right side of container
+         * - ** justify ** : child items are packed evenly across the container. Uses the 'justify-content: space-between' css property
          *
          * Please see the 'Pack and Align' section of the [Layout guide](#!/guide/layouts) for a detailed example and
          * explanation.

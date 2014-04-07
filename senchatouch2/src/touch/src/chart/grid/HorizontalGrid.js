@@ -29,10 +29,7 @@ Ext.define("Ext.chart.grid.HorizontalGrid", {
 
     render: function (surface, ctx, clipRegion) {
         var attr = this.attr,
-            x = attr.x,
             y = surface.roundPixel(attr.y),
-            w = attr.width,
-            h = attr.height,
             halfLineWidth = ctx.lineWidth * 0.5;
         ctx.beginPath();
         ctx.rect(clipRegion[0] - surface.matrix.getDX(), y + halfLineWidth, +clipRegion[2], attr.height);

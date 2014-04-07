@@ -1,7 +1,7 @@
 /**
  *
  */
-Ext.define("Ext.chart.series.sprite.Aggregative", {
+Ext.define('Ext.chart.series.sprite.Aggregative', {
     extend: 'Ext.chart.series.sprite.Cartesian',
     requires: ['Ext.draw.LimitedCache', 'Ext.draw.SegmentTree'],
     inheritableStatics: {

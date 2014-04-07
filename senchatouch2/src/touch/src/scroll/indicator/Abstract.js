@@ -4,6 +4,10 @@
 Ext.define('Ext.scroll.indicator.Abstract', {
     extend: 'Ext.Component',
 
+    requires: [
+        'Ext.TaskQueue'
+    ],
+
     config: {
         baseCls: 'x-scroll-indicator',
 
@@ -17,7 +21,12 @@ Ext.define('Ext.scroll.indicator.Abstract', {
 
         hidden: true,
 
-        ui: 'dark'
+        ui: 'dark',
+
+        /**
+         * @cfg {Boolean} [autoHide=true] Set to `false` to always show the indicator for this axis.
+         */
+        autoHide : true
     },
 
     cachedConfig: {
@@ -104,12 +113,14 @@ Ext.define('Ext.scroll.indicator.Abstract', {
     },
 
     doSetHidden: function(hidden) {
+        var me = this;
+
         if (hidden) {
-            this.setOffset(-10000);
+            me.getAutoHide() && me.setOffset(-10000);
         } else {
-            delete this.lastLength;
-            delete this.lastOffset;
-            this.updateValue(this.getValue());
+            delete me.lastLength;
+            delete me.lastOffset;
+            me.updateValue(me.getValue());
         }
     },
 

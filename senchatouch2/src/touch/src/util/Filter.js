@@ -44,7 +44,7 @@ Ext.define('Ext.util.Filter', {
         /**
          * @cfg {RegExp/Mixed} [value=null]
          * The value you want to match against. Can be a regular expression which will be used as matcher or any other
-         * value.
+         * value. Mixed can be an object or an array of objects. 
          */
         value: null,
 

@@ -84,19 +84,18 @@ Ext.define('Ext.draw.Animator', {
      */
     step: function (frameTime) {
         var me = this,
-        // TODO: Try to find a way to get rid of this copy
-            animations = me.animations.slice(),
+            animations = me.animations,
             animation,
-            i = 0, j = 0,
-            l = animations.length;
+            i = 0,
+            ln = animations.length;
 
-        for (; i < l; ++i) {
+        for (; i < ln; i++) {
             animation = animations[i];
             animation.step(frameTime);
-            if (animation.animating) {
-                animations[j++] = animation;
-            } else {
-                me.animations.splice(j, 1);
+            if (!animation.animating) {
+                animations.splice(i, 1);
+                i--;
+                ln--;
                 if (animation.fireEvent) {
                     animation.fireEvent('animationend');
                 }
@@ -106,8 +105,8 @@ Ext.define('Ext.draw.Animator', {
 
     /**
      * Register an one-time callback that will be called at the next frame.
-     * @param callback
-     * @param scope
+     * @param {Function} callback
+     * @param {Object} scope
      * @return {String}
      */
     schedule: function (callback, scope) {
@@ -125,7 +124,7 @@ Ext.define('Ext.draw.Animator', {
 
     /**
      * Cancel a registered one-time callback
-     * @param id
+     * @param {String} id
      */
     cancel: function (id) {
         if (Ext.draw.Animator.frameCallbacks[id] && Ext.draw.Animator.frameCallbacks[id].once) {
@@ -137,8 +136,8 @@ Ext.define('Ext.draw.Animator', {
     /**
      * Register a recursive callback that will be called at every frame.
      *
-     * @param callback
-     * @param scope
+     * @param {Function} callback
+     * @param {Object} scope
      * @return {String}
      */
     addFrameCallback: function (callback, scope) {
@@ -154,7 +153,7 @@ Ext.define('Ext.draw.Animator', {
 
     /**
      * Unregister a recursive callback.
-     * @param id
+     * @param {String} id
      */
     removeFrameCallback: function (id) {
         delete Ext.draw.Animator.frameCallbacks[id];

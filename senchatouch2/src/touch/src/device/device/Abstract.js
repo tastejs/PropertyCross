@@ -91,7 +91,7 @@ Ext.define('Ext.device.device.Abstract', {
      *
      * You can find a full list of available URL schemes here: [http://wiki.akosma.com/IPhone_URL_Schemes](http://wiki.akosma.com/IPhone_URL_Schemes).
      *
-     * __Note:__ This currently only works on iOS using the Sencha Native Packager. Attempting to use this on PhoneGap, iOS Simulator 
+     * __Note:__ This currently only works with the Sencha Native Packager. Attempting to use this on PhoneGap, iOS Simulator
      * or the browser will simply result in the current window location changing.**
      *
      * If successful, this will close the application (as another one opens).

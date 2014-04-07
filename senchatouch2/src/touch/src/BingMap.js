@@ -4,51 +4,52 @@ Ext.define('Ext.BingMap', {
     requires: ['Ext.util.Geolocation'],
 
     // @private
-    renderMap: function() {
-        var me = this,
-            element = me.mapContainer,
-            mapOptions = me.getMapOptions(),
-            event;
+    initMap: function() {
+        var map = this.getMap();
+        if(!map) {
+            var me = this,
+                element = me.mapContainer,
+                mapOptions = me.getMapOptions(),
+                event;
 
-        var MM = Microsoft.Maps;
-        var key = "AokX-S2lieXTaXG8pvEw3i2AKYuStBMK8RsUu6BDJ6hrL5AYv0IfQqM9zc-BAA-v";
-        //TODO Investigate why does merge lead to exception in Bing
-            mapOptions = Ext.merge({
-                credentials: key,
-                mapTypeId: "r",
-                zoom: 12
-            }, mapOptions);
+            var MM = Microsoft.Maps;
+            var key = "AokX-S2lieXTaXG8pvEw3i2AKYuStBMK8RsUu6BDJ6hrL5AYv0IfQqM9zc-BAA-v";
+            //TODO Investigate why does merge lead to exception in Bing
+                mapOptions = Ext.merge({
+                    credentials: key,
+                    mapTypeId: "r",
+                    zoom: 12
+                }, mapOptions);
 
-        // This is done separately from the above merge so we don't have to instantiate
-        // a new LatLng if we don't need to
-        if (!mapOptions.center) {
-            mapOptions.center = new MM.Location(37.381592, -122.135672); // Palo Alto
-        }
-
-        if (element.dom.firstChild) {
-            Ext.fly(element.dom.firstChild).destroy();
-        }
-
-        MM.loadModule('Microsoft.Maps.Overlays.Style', { callback: function () {
-            me.setMap(new MM.Map(element.dom,mapOptions));
-            if(mapOptions.callback){
-                mapOptions.callback();
+            // This is done separately from the above merge so we don't have to instantiate
+            // a new LatLng if we don't need to
+            if (!mapOptions.center) {
+                mapOptions.center = new MM.Location(37.381592, -122.135672); // Palo Alto
             }
+
+            if (element.dom.firstChild) {
+                Ext.fly(element.dom.firstChild).destroy();
+            }
+
+            MM.loadModule('Microsoft.Maps.Overlays.Style', { callback: function () {
+                me.setMap(new MM.Map(element.dom,mapOptions));
+                if(mapOptions.callback){
+                    mapOptions.callback();
+                }
+            }
+            });
+
+            map = me.getMap();
         }
-        });
 
-        var map = me.getMap();
-
-        //Track zoomLevel and mapType changes
-//        event = MM.event;
-        //TODO Investigate how to add listeners in Bing
-//            event.addListener(map, 'zoom_changed', Ext.bind(me.onZoomChange, me));
-//            event.addListener(map, 'maptypeid_changed', Ext.bind(me.onTypeChange, me));
-//            event.addListener(map, 'center_changed', Ext.bind(me.onCenterChange, me));
+            //Track zoomLevel and mapType changes
+    //        event = MM.event;
+            //TODO Investigate how to add listeners in Bing
+    //            event.addListener(map, 'zoom_changed', Ext.bind(me.onZoomChange, me));
+    //            event.addListener(map, 'maptypeid_changed', Ext.bind(me.onTypeChange, me));
+    //            event.addListener(map, 'center_changed', Ext.bind(me.onCenterChange, me));
 
         me.fireEvent('maprender', me, map);
-        return;
-
     },
     setMapCenter: function(coordinates) {
         var me = this,
@@ -67,7 +68,7 @@ Ext.define('Ext.BingMap', {
         }
 
         if (!map) {
-            me.renderMap();
+            me.initMap();
             map = me.getMap();
         }
 

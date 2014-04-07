@@ -45,7 +45,8 @@ Ext.define('Ext.chart.AbstractChart', {
         'Ext.chart.axis.Axis',
         'Ext.data.StoreManager',
         'Ext.chart.Legend',
-        'Ext.data.Store'
+        'Ext.data.Store',
+        'Ext.draw.engine.SvgExporter'
     ],
     /**
      * @event beforerefresh
@@ -752,8 +753,8 @@ Ext.define('Ext.chart.AbstractChart', {
                     continue;
                 }
                 axis = Ext.factory(axis, null, oldAxis = oldMap[axis.getId && axis.getId() || axis.id], 'axis');
-                axis.setChart(this);
                 if (axis) {
+                    axis.setChart(this);
                     result.push(axis);
                     result.map[axis.getId()] = axis;
                     if (!oldAxis) {
@@ -764,7 +765,7 @@ Ext.define('Ext.chart.AbstractChart', {
             }
 
             for (i in oldMap) {
-                if (!result.map[oldMap[i]]) {
+                if (!result.map[i]) {
                     oldMap[i].destroy();
                 }
             }
@@ -775,11 +776,6 @@ Ext.define('Ext.chart.AbstractChart', {
     },
 
     updateAxes: function (newAxes) {
-        var i, ln, axis;
-        for (i = 0, ln = newAxes.length; i < ln; i++) {
-            axis = newAxes[i];
-            axis.setChart(this);
-        }
         this.scheduleLayout();
     },
 
@@ -880,25 +876,26 @@ Ext.define('Ext.chart.AbstractChart', {
         }
     },
 
-    applyInteractions: function (interations, oldInterations) {
-        if (!oldInterations) {
-            oldInterations = [];
-            oldInterations.map = {};
+    applyInteractions: function (interactions, oldInteractions) {
+        if (!oldInteractions) {
+            oldInteractions = [];
+            oldInteractions.map = {};
         }
         var me = this,
-            result = [], oldMap = oldInterations.map;
+            result = [], oldMap = oldInteractions.map,
+            i, interaction;
         result.map = {};
-        interations = Ext.Array.from(interations, true);
-        for (var i = 0, ln = interations.length; i < ln; i++) {
-            var interation = interations[i];
-            if (!interation) {
+        interactions = Ext.Array.from(interactions, true);
+        for (i = 0, ln = interactions.length; i < ln; i++) {
+            interaction = interactions[i];
+            if (!interaction) {
                 continue;
             }
-            interation = Ext.factory(interation, null, oldMap[interation.getId && interation.getId() || interation.id], 'interaction');
-            interation.setChart(me);
-            if (interation) {
-                result.push(interation);
-                result.map[interation.getId()] = interation;
+            interaction = Ext.factory(interaction, null, oldMap[interaction.getId && interaction.getId() || interaction.id], 'interaction');
+            if (interaction) {
+                interaction.setChart(me);
+                result.push(interaction);
+                result.map[interaction.getId()] = interaction;
             }
         }
 
@@ -924,17 +921,17 @@ Ext.define('Ext.chart.AbstractChart', {
         }
         if (newStore) {
             newStore.on('refresh', 'onRefresh', me, null, 'after');
-            me.onRefresh();
         }
 
         me.fireEvent('storechanged', newStore, oldStore);
+        me.onRefresh();
     },
 
     /**
      * Redraw the chart. If animations are set this will animate the chart too.
      */
     redraw: function () {
-        this.fireEvent('redraw');
+        this.fireEvent('redraw', this);
     },
 
     performLayout: function () {
@@ -1025,11 +1022,11 @@ Ext.define('Ext.chart.AbstractChart', {
     },
 
     onAnimationStart: function () {
-        this.fireEvent("animationstart", this);
+        this.fireEvent('animationstart', this);
     },
 
     onAnimationEnd: function () {
-        this.fireEvent("animationend", this);
+        this.fireEvent('animationend', this);
     },
 
     onThicknessChanged: function () {
@@ -1189,7 +1186,7 @@ Ext.define('Ext.chart.AbstractChart', {
 
     /**
      * @private
-     * @param deep
+     * @param {Boolean} deep
      * @return {Array}
      */
     getRefItems: function (deep) {
@@ -1221,5 +1218,95 @@ Ext.define('Ext.chart.AbstractChart', {
         }
 
         return ans;
+    },
+
+    /**
+     * Flattens the given chart surfaces into a single image.
+     * Note: Surfaces whose class name is different from chart's engine will be omitted.
+     * @param {Array} surfaces A list of chart's surfaces to flatten.
+     * @param {String} format If set to 'image', the method will return an Image object. Otherwise, the dataURL
+     *                 of the flattened image will be returned.
+     * @returns {String|Image} An Image DOM element containing the flattened image or its dataURL.
+     */
+    flatten: function (surfaces, format) {
+        var me = this,
+            size = me.element.getSize(),
+            svg, canvas, ctx,
+            i, surface, region,
+            img, dataURL;
+
+        switch (me.engine) {
+            case 'Ext.draw.engine.Canvas':
+                canvas = document.createElement('canvas');
+                canvas.width = size.width;
+                canvas.height = size.height;
+                ctx = canvas.getContext('2d');
+                for (i = 0; i < surfaces.length; i++) {
+                    surface = surfaces[i];
+                    if (Ext.getClassName(surface) !== me.engine) {
+                        continue;
+                    }
+                    region = surface.getRegion();
+                    ctx.drawImage(surface.canvases[0].dom, region[0], region[1]);
+                }
+                dataURL = canvas.toDataURL();
+                break;
+            case 'Ext.draw.engine.Svg':
+                svg = '<?xml version="1.0" standalone="yes"?>';
+                svg += '<svg version="1.1" baseProfile="full" xmlns="http://www.w3.org/2000/svg"' +
+                    ' width="' + size.width + '"' +
+                    ' height="' + size.height + '">';
+                for (i = 0; i < surfaces.length - 1; i++) {
+                    surface = surfaces[i];
+                    if (Ext.getClassName(surface) !== me.engine) {
+                        continue;
+                    }
+                    region = surface.getRegion();
+                    svg += '<g transform="translate(' + region[0] + ',' + region[1] + ')">';
+                    svg += Ext.dom.Element.serializeNode(surface.svgElement.dom);
+                    svg += '</g>';
+                }
+                svg += '</svg>';
+                dataURL = 'data:image/svg+xml;utf8,' + svg;
+                break;
+        }
+        if (format === 'image') {
+            img = new Image();
+            img.src = dataURL;
+            return img;
+        }
+        if (format === 'stream') {
+            return dataURL.replace(/^data:image\/[^;]+/, 'data:application/octet-stream');
+        }
+        return dataURL;
+    },
+
+    save: function (download) {
+        if (download) {
+            // TODO: no control over filename, we are at the browser's mercy
+            // TODO: unfortunatelly, a.download attribute remains a novelty on mobile: http://caniuse.com/#feat=download
+            window.open(this.flatten(this.items.items, 'stream'));
+        } else {
+            Ext.Viewport.add({
+                xtype: 'panel',
+                layout: 'fit',
+                modal: true,
+                width: '90%',
+                height: '90%',
+                hideOnMaskTap: true,
+                centered: true,
+                scrollable: false,
+                items: {
+                    xtype: 'image',
+                    mode: 'img',
+                    src: this.flatten(this.items.items)
+                },
+                listeners: {
+                    hide: function () {
+                        Ext.Viewport.remove(this);
+                    }
+                }
+            }).show();
+        }
     }
 });

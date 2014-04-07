@@ -49,13 +49,13 @@
 
 @mixin st-box($important: no) {
     @if $important == important {
+        display: flex !important;
         display: -webkit-box !important;
         display: -ms-flexbox !important;
-        display: flex !important;
     } @else {
+        display: flex;
         display: -webkit-box;
         display: -ms-flexbox;
-        display: flex;
     }
 }
 
@@ -247,7 +247,7 @@
  * @param {string} $character The character
  * @param {string} $font-family The `font-family` used for this icon. Defaults to the `Pictos` font.
  */
-@mixin icon($name, $character: null, $font-family: null) {
+@mixin icon($name, $character: null, $font-family: 'Pictos') {
     $raw_character: icon-character-for-name($name);
 
     @if $character == null and $raw_character == null {
@@ -411,7 +411,7 @@
     @else if ($name == "quote") { @return "\""; }
     @else if ($name == "volume_mute") { @return "<"; }
     @else if ($name == "volume") { @return ">"; }
-    @else if ($name == "help") { @return "?"; }
+    @else if ($name == "question") { @return "?"; }
 
     // Backwards compat; icons that are not in the font
     @else if ($name == "arrow_left") { @return "["; }

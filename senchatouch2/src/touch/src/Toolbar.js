@@ -194,7 +194,7 @@ Ext.define('Ext.Toolbar', {
         if (typeof title == 'string') {
             title = {
                 title: title,
-                centered: true
+                centered : Ext.theme.is.Tizen ? false : true
             };
         }
 

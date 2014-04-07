@@ -10,14 +10,26 @@ Ext.define('Ext.device.camera.Abstract', {
     },
 
     destination: {
-        data: 0, // Returns base64-encoded string
-        file: 1  // Returns file's URI
+        data: 0,
+        file: 1,
+        'native': 2
     },
 
     encoding: {
         jpeg: 0,
         jpg: 0,
         png: 1
+    },
+
+    media: {
+        picture: 0,
+        video: 1,
+        all: 2
+    },
+
+    direction: {
+        back: 0,
+        front:1
     },
 
     /**
@@ -67,5 +79,7 @@ Ext.define('Ext.device.camera.Abstract', {
      * @param {Number} height
      * The height of the image to return
      */
-    capture: Ext.emptyFn
+    capture: Ext.emptyFn,
+    getPicture: Ext.emptyFn,
+    cleanup: Ext.emptyFn
 });

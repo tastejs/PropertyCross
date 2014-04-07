@@ -37,6 +37,13 @@ Ext.define('Ext.LoadMask', {
         message: 'Loading...',
 
         /**
+         * @cfg {String} cls
+         * The CSS Class for this component
+         * @accessor
+         */
+        cls: Ext.baseCSSPrefix + 'loading-mask',
+
+        /**
          * @cfg {String} messageCls
          * The CSS class to apply to the loading message element.
          * @accessor

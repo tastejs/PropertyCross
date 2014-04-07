@@ -63,6 +63,11 @@ Ext.define('Ext.direct.Provider', {
      * Fires when the Provider receives an exception from the server-side
      */
 
+    /**
+     * @property {Boolean} isProvider Signifies this instance is an Ext.Direct provider.
+     */
+    isProvider : true,
+
     constructor : function(config){
         this.initConfig(config);
     },

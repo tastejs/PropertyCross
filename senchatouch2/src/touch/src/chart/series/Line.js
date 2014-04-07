@@ -194,7 +194,8 @@ Ext.define('Ext.chart.series.Line', {
         return Ext.apply(parentConfig || {}, {
             fillArea: fillArea,
             step: me.config.step,
-            smooth: me.config.smooth
+            smooth: me.config.smooth,
+            selectionTolerance: me.config.selectionTolerance
         });
     }
 

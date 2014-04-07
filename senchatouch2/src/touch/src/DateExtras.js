@@ -625,7 +625,7 @@ Ext.DateExtras = {
      *     // attempt to parse Sun Feb 29 2006 03:20:01 in strict mode
      *     dt = Ext.Date.parse("2006-02-29 03:20:01", "Y-m-d H:i:s", true); // null
      *
-     * @param {String} input The raw date string.
+     * @param {String/Number} input The raw date string.
      * @param {String} format The expected date string format.
      * @param {Boolean} [strict=false] (optional) `true` to validate date strings while parsing (i.e. prevents JavaScript Date "rollover").
      * Invalid date strings will return `null` when parsed.

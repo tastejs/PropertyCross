@@ -1,4 +1,4 @@
-﻿Ext.define('PropertyFinder.model.Results', {
+﻿Ext.define('PropertyCross.model.Results', {
     extend: 'Ext.data.Model',
 
     config: {

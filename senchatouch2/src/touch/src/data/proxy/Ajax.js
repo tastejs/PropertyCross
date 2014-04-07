@@ -232,6 +232,14 @@ Ext.define('Ext.data.proxy.Ajax', {
         withCredentials: false,
 
         /**
+         * @cfg {Boolean} useDefaultXhrHeader
+         * Set this to false to not send the default Xhr header (X-Requested-With) with every request.
+         * This should be set to false when making CORS (cross-domain) requests.
+         * @accessor
+         */
+        useDefaultXhrHeader: true,
+
+        /**
          * @cfg {String} username
          * Most oData feeds require basic HTTP authentication. This configuration allows
          * you to specify the username.
@@ -270,9 +278,9 @@ Ext.define('Ext.data.proxy.Ajax', {
     /**
      * Performs Ajax request.
      * @protected
-     * @param operation
-     * @param callback
-     * @param scope
+     * @param {Ext.data.Operation} operation
+     * @param {Function} callback
+     * @param {Object} scope
      * @return {Object}
      */
     doRequest: function(operation, callback, scope) {
@@ -281,12 +289,13 @@ Ext.define('Ext.data.proxy.Ajax', {
             request = me.buildRequest(operation);
 
         request.setConfig({
-            headers  : me.getHeaders(),
-            timeout  : me.getTimeout(),
-            method   : me.getMethod(request),
-            callback : me.createRequestCallback(request, operation, callback, scope),
-            scope    : me,
-            proxy    : me
+            headers: me.getHeaders(),
+            timeout: me.getTimeout(),
+            method: me.getMethod(request),
+            callback: me.createRequestCallback(request, operation, callback, scope),
+            scope: me,
+            proxy: me,
+            useDefaultXhrHeader: me.getUseDefaultXhrHeader()
         });
 
         if (operation.getWithCredentials() || me.getWithCredentials()) {

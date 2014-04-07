@@ -26,10 +26,17 @@
             Produce base concatenation for standard distribution files
         -->
          <x-sencha-command>
+             <![CDATA[
             compile
             --ignore=${classpath.excludes}
             --include-preprocessor-tags=true
             --options=debug:true,product:touch,minVersion:3,logger:yes,charts:yes
+                exclude
+                    -namespace=Ext.device
+                and
+                exclude
+                    -file=src/ux
+                and
                 concatenate
                     --output-file=${build.dir}/sencha-touch-all-debug.js
                 and
@@ -61,6 +68,12 @@
                 union
                     +all
                 and
+                exclude
+                    -namespace=Ext.device
+                and
+                exclude
+                    -file=src/ux
+                and
                 concatenate
                     +yui
                     --output-file=${build.dir}/sencha-touch-all.js
@@ -68,6 +81,7 @@
             --options=debug:true,minVersion:2,logger:yes
                 concatenate
                     --output-file=${build.dir}/builds/sencha-touch-all-compat.js
+            ]]>
         </x-sencha-command>
 
         <loadfile property="header.text" srcfile="${build.dir}/file-header.txt"/>
@@ -101,45 +115,48 @@
     </target>
 
     <target name="build-examples" depends="init-sencha-cmd">
-        <property name="build.dir" location="${basedir}"/>
-        <for param="example.app">
-            <dirset dir="${build.dir}/examples" includes="*"/>
+        <local name="example.workspace.build.dir"/>
+        <property name="example.workspace.build.dir"
+                  value="${basedir}/built-examples"/>
+        <delete dir="${example.workspace.build.dir}"/>
+        <for param="example">
+            <dirset dir="${basedir}/examples" includes="*"/>
             <sequential>
+                <local name="example.name"/>
+                <local name="example.build.dir"/>
+                <basename file="@{example}" property="example.name"/>
+                <property name="example.build.dir"
+                          value="${example.workspace.build.dir}/${example.name}"/>
                 <if>
-                    <available file="@{example.app}/.sencha/app/sencha.cfg"/>
+                    <and>
+                        <available file="@{example}/.sencha/app/sencha.cfg"/>
+                        <available file="@{example}/build.xml"/>
+                    </and>
                     <then>
-                        <echo>*** Building @{example.app} ***</echo>
-                        
-                        <!--Update metadata files from current Cmd build-->
-                        <x-sencha-command>
-                            -sdk
-                            @{example.app}
+                        <x-sencha-command dir="@{example}" inheritall="false">
+                            <property name="app.build.dir" value="${example.build.dir}"/>
+                            <property name="build.dir" value="${example.build.dir}/production"/>
+                            <property name="skip.sass" value="1"/>
                             app
-                            upgrade
-                            -noframework
-                        </x-sencha-command>
-                        
-                        <!--Run app build with upgraded metadata files-->
-                        <x-sencha-command>
-                            -sdk
-                            @{example.app}
-                            config
-                            -p
-                            args.archive=@{example.app}/archive
-                            then
-                            config
-                            -p
-                            args.path=@{example.app}
-                            then
-                            ant
-                            -f
-                            @{example.app}/build.xml
                             build
                         </x-sencha-command>
+                        <delete dir="@{example}/archive"/>
+                        <move todir="${example.build.dir}">
+                            <fileset dir="${example.build.dir}/production" includes="**/*"/>
+                        </move>
+                        <delete dir="${example.build.dir}/production"/>
                     </then>
+                    <else>
+                        <copy todir="${example.build.dir}">
+                            <fileset dir="@{example}" includes="**/*"/>
+                        </copy>
+                    </else>
                 </if>
             </sequential>
         </for>
+        <copy todir="${example.workspace.build.dir}">
+            <fileset dir="${basedir}/examples" includes="*"/>
+        </copy>
     </target>
 
 

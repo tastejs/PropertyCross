@@ -2,12 +2,14 @@
     var lastTime = 0,
         vendors = ['ms', 'moz', 'webkit', 'o'],
         ln = vendors.length,
-        i, vendor, method;
+        i, vendor;
 
     for (i = 0; i < ln && !window.requestAnimationFrame; ++i) {
         vendor = vendors[i];
-        window.requestAnimationFrame = window[vendor + 'RequestAnimationFrame'];
-        window.cancelAnimationFrame = window[vendor + 'CancelAnimationFrame'] || window[vendor + 'CancelRequestAnimationFrame'];
+        if (window[vendor + 'RequestAnimationFrame']) {
+            window.requestAnimationFrame = window[vendor + 'RequestAnimationFrame'];
+            window.cancelAnimationFrame = window[vendor + 'CancelAnimationFrame'] || window[vendor + 'CancelRequestAnimationFrame'];
+        }
     }
 
     if (!window.Ext) {
@@ -27,7 +29,7 @@
     }
 
     if (!window.requestAnimationFrame) {
-        window.requestAnimationFrame = function(callback, element) {
+        window.requestAnimationFrame = function(callback) {
             var currTime = Ext.performance.now(),
                 timeToCall = Math.max(0, 16 - (currTime - lastTime)),
                 id = window.setTimeout(function() {
@@ -70,13 +72,23 @@ Ext.define('Ext.AnimationQueue', {
         this.whenIdle = bind(this.whenIdle, this);
         this.processIdleQueueItem = bind(this.processIdleQueueItem, this);
         this.processTaskQueueItem = bind(this.processTaskQueueItem, this);
+
+
+        // iOS has a nasty bug which causes pending requestAnimationFrame to not release
+        // the callback when the WebView is switched back and forth from / to being background process
+        // We use a watchdog timer to workaround this, and restore the pending state correctly if this happens
+        // This timer has to be set as an interval from the very beginning and we have to keep it running for
+        // as long as the app lives, setting it later doesn't seem to work
+        if (Ext.os.is.iOS) {
+            setInterval(this.watch, 500);
+        }
     },
 
     /**
      *
-     * @param fn
-     * @param [scope]
-     * @param [args]
+     * @param {Function} fn
+     * @param {Object} [scope]
+     * @param {Object} [args]
      */
     start: function(fn, scope, args) {
         this.queue.push(arguments);
@@ -102,6 +114,12 @@ Ext.define('Ext.AnimationQueue', {
         }
     },
 
+    watch: function() {
+        if (this.isRunning && Date.now() - this.lastRunTime >= 500) {
+            this.run();
+        }
+    },
+
     run: function() {
         if (!this.isRunning) {
             return;
@@ -110,6 +128,7 @@ Ext.define('Ext.AnimationQueue', {
         var queue = this.runningQueue,
             i, ln;
 
+        this.lastRunTime = Date.now();
         this.frameStartTime = Ext.performance.now();
 
         queue.push.apply(queue, this.queue);
@@ -144,6 +163,7 @@ Ext.define('Ext.AnimationQueue', {
 
     doStart: function() {
         this.animationFrameId = requestAnimationFrame(this.run);
+        this.lastRunTime = Date.now();
     },
 
     doIterate: function() {
@@ -156,9 +176,9 @@ Ext.define('Ext.AnimationQueue', {
 
     /**
      *
-     * @param fn
-     * @param [scope]
-     * @param [args]
+     * @param {Function} fn
+     * @param {Object} [scope]
+     * @param {Object} [args]
      */
     stop: function(fn, scope, args) {
         if (!this.isRunning) {

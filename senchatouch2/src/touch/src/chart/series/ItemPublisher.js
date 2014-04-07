@@ -217,7 +217,7 @@ Ext.define('Ext.chart.series.ItemPublisher', {
         var match = target.match(this.idSelectorRegex),
             dispatcher = this.dispatcher,
             targetType = this.targetType,
-            subscribers, series, id;
+            series, id;
 
         if (!match) {
             return false;
@@ -236,78 +236,6 @@ Ext.define('Ext.chart.series.ItemPublisher', {
         }
 
         return true;
-    },
-
-    unsubscribe: function (target, eventName, all) {
-        var match = target.match(this.idSelectorRegex),
-            dispatcher = this.dispatcher,
-            targetType = this.targetType,
-            subscribers, series, id;
-
-        if (!match) {
-            return false;
-        }
-
-        id = match[1];
-        series = Ext.ComponentManager.get(id);
-        if (!series) {
-            return false;
-        }
-
-        subscribers = this.getSubscribers(target, false);
-        if (!subscribers) {
-            return false;
-        }
-
-        subscribers.$length--;
-        if (subscribers.hasOwnProperty(eventName)) {
-            subscribers[eventName]--;
-            if (series.getChart()) {
-                this.detachChart(series.getChart(), [series, eventName, subscribers]);
-            }
-        }
-        return true;
-    },
-
-    relayMethod: function (e, sender, args) {
-        var chart = args[0],
-            eventName = args[1],
-            dispatcher = this.dispatcher,
-            targetType = this.targetType,
-            chartXY = chart.getEventXY(e),
-            x = chartXY[0],
-            y = chartXY[1],
-            subscriber = this.getSubscribers(chart.getId())[eventName],
-            i, ln;
-        if (subscriber) {
-            for (i = 0, ln = subscriber.length; i < ln; i++) {
-                var series = subscriber[i],
-                    item = series.getItemForPoint(x, y);
-                if (item) {
-                    dispatcher.doDispatchEvent(targetType, '#' + series.getId(), eventName, [series, item, e]);
-                    return;
-                }
-            }
-        }
-    },
-
-    detachChart: function (chart, args) {
-        var dispatcher = this.dispatcher,
-            targetType = this.targetType,
-            series = args[0],
-            eventName = args[1],
-            subscribers = args[2],
-            match = eventName.match(this.delegationRegex);
-        if (match) {
-            var chartEventName = match[1];
-            if (subscribers.hasOwnProperty(eventName)) {
-                Ext.remove(subscribers[eventName], series);
-                if (subscribers[eventName].length === 0) {
-                    chart.element.un(chartEventName, "relayMethod", this, [chart, series, eventName]);
-                }
-            }
-            dispatcher.removeListener(targetType, '#' + series.getId(), 'chartdetached', 'detachChart', this, [series, eventName, subscribers], 'after');
-        }
     },
 
     attachChart: function (chart, args) {
@@ -329,7 +257,81 @@ Ext.define('Ext.chart.series.ItemPublisher', {
         } else {
             return false;
         }
+    },
+
+    unsubscribe: function (target, eventName) {
+        var match = target.match(this.idSelectorRegex),
+            dispatcher = this.dispatcher,
+            targetType = this.targetType,
+            series, id;
+
+        if (!match) {
+            return false;
+        }
+
+        id = match[1];
+        series = Ext.ComponentManager.get(id);
+        if (!series) {
+            return false;
+        }
+
+        dispatcher.removeListener(targetType, target, 'chartattached', 'attachChart', this, 'before');
+        if (series.getChart()) {
+            this.detachChart(series.getChart(), [series, eventName]);
+        }
+        return true;
+    },
+
+    detachChart: function (chart, args) {
+        var dispatcher = this.dispatcher,
+            targetType = this.targetType,
+            series = args[0],
+            eventName = args[1],
+            subscribers = this.getSubscribers(chart.getId()),
+            match = eventName.match(this.delegationRegex),
+            index, seriesArray;
+        if (match) {
+            var chartEventName = match[1];
+            if (subscribers.hasOwnProperty(eventName)) {
+                seriesArray = subscribers[eventName];
+                index = seriesArray.indexOf(series);
+                if (index > -1) {
+                    seriesArray.splice(index, 1);
+                }
+                if (seriesArray.length === 0) {
+                    chart.element.un(chartEventName, "relayMethod", this, [chart, eventName]);
+                    dispatcher.removeListener(targetType, '#' + series.getId(), 'chartdetached', 'detachChart', this, 'after');
+                    delete subscribers[eventName];
+                }
+            }
+        }
+    },
+
+    relayMethod: function (e, sender, args) {
+        var chart = args[0],
+            eventName = args[1],
+            dispatcher = this.dispatcher,
+            targetType = this.targetType,
+            chartXY = chart.getEventXY(e),
+            x = chartXY[0],
+            y = chartXY[1],
+            subscriber = this.getSubscribers(chart.getId())[eventName],
+            i, ln;
+        if (subscriber) {
+            for (i = 0, ln = subscriber.length; i < ln; i++) {
+                var series = subscriber[i],
+                    item = series.getItemForPoint(x, y);
+                if (item) {
+                    // TODO: Don't stop at the first item.
+                    // Depending on the selectionTolerance, there might be an item in another
+                    // series that's closer to the event location. See test case 3943c.
+                    dispatcher.doDispatchEvent(targetType, '#' + series.getId(), eventName, [series, item, e]);
+                    return;
+                }
+            }
+        }
     }
+
 }, function () {
 
 });

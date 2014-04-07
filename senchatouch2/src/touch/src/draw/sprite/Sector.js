@@ -4,8 +4,8 @@
  * 
  * A sprite representing a pie slice.
  */
-Ext.define("Ext.draw.sprite.Sector", {
-    extend: "Ext.draw.sprite.Path",
+Ext.define('Ext.draw.sprite.Sector', {
+    extend: 'Ext.draw.sprite.Path',
     alias: 'sprite.sector',
     type: 'sector',
     inheritableStatics: {
@@ -14,49 +14,49 @@ Ext.define("Ext.draw.sprite.Sector", {
                 /**
                  * @cfg {Number} [centerX=0] The center coordinate of the sprite on the x-axis.
                  */
-                centerX: "number",
+                centerX: 'number',
 
                 /**
                  * @cfg {Number} [centerY=0] The center coordinate of the sprite on the y-axis.
                  */
-                centerY: "number",
+                centerY: 'number',
 
                 /**
                  * @cfg {Number} [startAngle=0] The starting angle of the sprite.
                  */
-                startAngle: "number",
+                startAngle: 'number',
 
                 /**
                  * @cfg {Number} [endAngle=0] The ending angle of the sprite.
                  */
-                endAngle: "number",
+                endAngle: 'number',
 
                 /**
                  * @cfg {Number} [startRho=0] The starting point of the radius of the sprite.
                  */
-                startRho: "number",
+                startRho: 'number',
 
                 /**
                  * @cfg {Number} [endRho=150] The ending point of the radius of the sprite.
                  */
-                endRho: "number",
+                endRho: 'number',
 
                 /**
                  * @cfg {Number} [margin=0] The margin of the sprite from the center of pie.
                  */
-                margin: "number"
+                margin: 'number'
             },
             aliases: {
                 rho: 'endRho'
             },
             dirtyTriggers: {
-                centerX: "path,bbox",
-                centerY: "path,bbox",
-                startAngle: "path,bbox",
-                endAngle: "path,bbox",
-                startRho: "path,bbox",
-                endRho: "path,bbox",
-                margin: "path,bbox"
+                centerX: 'path,bbox',
+                centerY: 'path,bbox',
+                startAngle: 'path,bbox',
+                endAngle: 'path,bbox',
+                startRho: 'path,bbox',
+                endRho: 'path,bbox',
+                margin: 'path,bbox'
             },
             defaults: {
                 centerX: 0,

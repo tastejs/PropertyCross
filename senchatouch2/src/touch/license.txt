@@ -1,5 +1,5 @@
 Sencha Touch & Sencha Touch Charts - JavaScript Libraries
-Copyright (c) 2010-2013, Sencha, Inc.
+Copyright (c) 2010-2014, Sencha, Inc.
 All rights reserved.
 licensing@sencha.com
 

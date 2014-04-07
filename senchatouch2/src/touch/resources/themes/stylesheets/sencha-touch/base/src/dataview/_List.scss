@@ -27,13 +27,6 @@
         top: 0;
         width: 100%;
 
-        &.x-item-pressed {
-            &.x-list-item-tpl,
-            .x-dock-horizontal {
-                background-color: #ddd;
-            }
-        }
-
         > .x-dock {
             height: auto;
         }
@@ -46,6 +39,13 @@
         &.x-item-selected.x-list-item-tpl {
             background-color: #ccc;
         }
+
+				&.x-item-pressed {
+					&.x-list-item-tpl,
+					.x-dock-horizontal {
+						background-color: #ddd;
+					}
+				}
 
         .x-list-item-body,
         &.x-list-item-tpl .x-innerhtml {
@@ -86,7 +86,7 @@
     .x-list-emptytext {
         text-align: center;
         pointer-events: none;
-        font-size: #333333;
+        font-color: #333333;
         @include st-box();
         @include st-box-orient(vertical);
         @include st-box-pack(center);
@@ -148,4 +148,10 @@
     .x-list-container {
         white-space: nowrap !important;
     }
+}
+
+.x-list-item-dragging {
+    border-bottom: 1px solid #ccc;
+    background: #fff !important;
+    z-index: 1;
 }

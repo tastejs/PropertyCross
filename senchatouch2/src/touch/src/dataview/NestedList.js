@@ -215,16 +215,16 @@ Ext.define('Ext.dataview.NestedList', {
         /**
          * @cfg {Ext.Container} detailContainer The container of the `detailCard`.
          * A detailContainer is a reference to the container where a detail card
-         * displays.  
+         * displays.
          *
          * See http://docs.sencha.com/touch/2-2/#!/guide/nested_list-section-4
          * and http://en.wikipedia.org/wiki/Miller_columns
-         * 
-         * The two possible values for a detailContainer are undefined (default), 
-         * which indicates that a detailCard appear in the same container, or you 
+         *
+         * The two possible values for a detailContainer are undefined (default),
+         * which indicates that a detailCard appear in the same container, or you
          * can specify a new container location. The default condition uses the
          * current List container.
-         * 
+         *
          * The following example shows creating a location for a detailContainer:
          *
          * var detailContainer = Ext.create('Ext.Container', {
@@ -236,24 +236,24 @@ Ext.define('Ext.dataview.NestedList', {
          *     detailCard: true,
          *     detailContainer: detailContainer
          * });
-         * 
-         * The default value is typically used for phone devices in portrait mode 
-         * where the small screen size dictates that the detailCard replace the 
+         *
+         * The default value is typically used for phone devices in portrait mode
+         * where the small screen size dictates that the detailCard replace the
          * current container.
          * @accessor
          */
         detailContainer: undefined,
 
         /**
-         * @cfg {Ext.Component} detailCard provides the information for a leaf 
-         * in a Miller column list. In a Miller column, users follow a 
-         * hierarchial tree structure to a leaf, which provides information 
-         * about the item in the list. The detailCard lists the information at 
+         * @cfg {Ext.Component} detailCard provides the information for a leaf
+         * in a Miller column list. In a Miller column, users follow a
+         * hierarchial tree structure to a leaf, which provides information
+         * about the item in the list. The detailCard lists the information at
          * the leaf.
-         * 
+         *
          * See http://docs.sencha.com/touch/2-2/#!/guide/nested_list-section-3
          * and http://en.wikipedia.org/wiki/Miller_columns
-         * 
+         *
          * @accessor
          */
         detailCard: null,
@@ -300,13 +300,33 @@ Ext.define('Ext.dataview.NestedList', {
         // @private
         lastActiveList: null,
 
-        ui: null
+        ui: null,
+
+        clearSelectionOnListChange: true
     },
 
-    platformConfig: [{
-        theme: ['Windows'],
-        itemHeight: 42
-    }],
+    platformConfig: [
+        {
+            theme: ['Windows'],
+            itemHeight: 42
+        },
+        {
+            theme: ['Cupertino'],
+            itemHeight: 43,
+            useTitleAsBackText: true,
+            updateTitleText: false
+        },
+        {
+            theme: ['Blackberry'],
+            toolbar: {
+                splitNavigation: true
+            }
+        },
+        {
+            theme: ['Tizen'],
+            backText: ''
+        }
+    ],
 
     /**
      * @event itemtap
@@ -590,8 +610,8 @@ Ext.define('Ext.dataview.NestedList', {
         }
 
         if (newStore) {
-            me.goToNode(newStore.getRoot());
             newStore.on(listeners);
+            me.goToNode(newStore.getRoot());
         }
     },
 
@@ -616,7 +636,13 @@ Ext.define('Ext.dataview.NestedList', {
             var me = this;
             newButton.on('tap', me.onBackTap, me);
             newButton.setText(me.getBackText());
-            me.getToolbar().insert(0, newButton);
+
+            var toolbar = me.getToolbar();
+            if (this.$backButtonContainer) {
+                this.$backButtonContainer.insert(0, newButton);
+            } else {
+                toolbar.insert(0, newButton);
+            }
         }
         else if (oldButton) {
             oldButton.destroy();
@@ -624,6 +650,23 @@ Ext.define('Ext.dataview.NestedList', {
     },
 
     applyToolbar: function (config) {
+        if (config && config.splitNavigation) {
+            Ext.apply(config, {
+                docked: 'top',
+                xtype: 'titlebar',
+                ui: 'light'
+            });
+
+            var containerConfig = (config.splitNavigation === true) ? {} : config.splitNavigation;
+
+            this.$backButtonContainer = this.add(Ext.apply({
+                xtype: 'toolbar',
+                docked: 'bottom',
+                hidden: true,
+                ui: 'dark'
+            }, containerConfig));
+        }
+
         return Ext.factory(config, Ext.TitleBar, this.getToolbar());
     },
 
@@ -649,6 +692,7 @@ Ext.define('Ext.dataview.NestedList', {
     updateTitle: function (newTitle) {
         var me = this,
             toolbar = me.getToolbar();
+
         if (toolbar) {
             if (me.getUpdateTitleText()) {
                 toolbar.setTitle(newTitle);
@@ -749,7 +793,9 @@ Ext.define('Ext.dataview.NestedList', {
                 node.expand();
 
                 me.setActiveItem(list);
-                list.deselectAll();
+                if (this.getClearSelectionOnListChange()) {
+                    list.deselectAll();
+                }
             }
             else if (firstList) {
                 //only firstList has been created
@@ -821,6 +867,13 @@ Ext.define('Ext.dataview.NestedList', {
 
         //show/hide the backButton, and update the backButton text, if one exists
         if (backButton) {
+            var toolbar = this.getToolbar(),
+                splitNavigation = toolbar.getInitialConfig("splitNavigation");
+
+            if (splitNavigation) {
+                this.$backButtonContainer[parentNode ? 'show' : 'hide']();
+            }
+
             backButton[parentNode ? 'show' : 'hide']();
             if (parentNode && me.getUseTitleAsBackText()) {
                 backButton.setText(me.renderTitleText(node.parentNode, true));
@@ -877,6 +930,7 @@ Ext.define('Ext.dataview.NestedList', {
             allowDeselect: me.getAllowDeselect(),
             itemHeight: me.getItemHeight(),
             variableHeights: me.getVariableHeights(),
+            emptyText: me.getEmptyText(),
             listeners: [
                 { event: 'itemdoubletap', fn: 'onItemDoubleTap', scope: me },
                 { event: 'itemtap', fn: 'onItemInteraction', scope: me, order: 'before'},

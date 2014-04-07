@@ -41,16 +41,18 @@
  * The reader we set up is ready to read data from our server - at the moment it will accept a response like this:
  *
  *     <?xml version="1.0" encoding="UTF-8"?>
- *     <user>
- *         <id>1</id>
- *         <name>Ed Spencer</name>
- *         <email>ed@sencha.com</email>
- *     </user>
- *     <user>
- *         <id>2</id>
- *         <name>Abe Elias</name>
- *         <email>abe@sencha.com</email>
- *     </user>
+ *     <users>
+ *          <user>
+ *              <id>1</id>
+ *              <name>Ed Spencer</name>
+ *              <email>ed@sencha.com</email>
+ *          </user>
+ *          <user>
+ *              <id>2</id>
+ *              <name>Abe Elias</name>
+ *              <email>abe@sencha.com</email>
+ *          </user>
+ *      </users>
  *
  * The XML Reader uses the configured {@link #record} option to pull out the data for each record - in this case we
  * set record to 'user', so each `<user>` above will be converted into a User model.
@@ -152,7 +154,7 @@
 Ext.define('Ext.data.reader.Xml', {
     extend: 'Ext.data.reader.Reader',
     alternateClassName: 'Ext.data.XmlReader',
-    alias : 'reader.xml',
+    alias: 'reader.xml',
 
     config: {
         /**
@@ -234,7 +236,7 @@ Ext.define('Ext.data.reader.Xml', {
      */
     getRoot: function(data) {
         var nodeName = data.nodeName,
-            root     = this.getRootProperty();
+            root = this.getRootProperty();
 
         if (!root || (nodeName && nodeName == root)) {
             return data;

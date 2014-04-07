@@ -31,7 +31,7 @@
 (function() {
 
 // Current core version
-var version = '4.1.0', Version;
+var version = '2.3.1.410', Version;
     Ext.Version = Version = Ext.extend(Object, {
 
         /**
@@ -70,7 +70,7 @@ var version = '4.1.0', Version;
         },
 
         /**
-         * @param value
+         * @param {Number} value
          * @return {Number}
          */
         toNumber: function(value) {
@@ -188,13 +188,13 @@ var version = '4.1.0', Version;
 
         /**
          * Returns whether this version matches the supplied argument. Example:
-         * 
+         *
          *     var version = new Ext.Version('1.0.2beta');
          *     console.log(version.match(1)); // true
          *     console.log(version.match(1.0)); // true
          *     console.log(version.match('1.0.2')); // true
          *     console.log(version.match('1.0.2RC')); // false
-         * 
+         *
          * @param {String/Number} target The version to compare with.
          * @return {Boolean} `true` if this version matches the target, `false` otherwise.
          */

@@ -7,7 +7,10 @@
 Ext.define("Ext.draw.sprite.AttributeParser", {
     singleton: true,
     attributeRe: /^url\(#([a-zA-Z\-]+)\)$/,
-    requires: ['Ext.draw.Color'],
+    requires: [
+        'Ext.draw.Color',
+        'Ext.draw.sprite.GradientDefinition'
+    ],
 
     "default": function (n) {
         return n;
@@ -56,8 +59,12 @@ Ext.define("Ext.draw.sprite.AttributeParser", {
         } else if (!n) {
             return 'none';
         } else if (Ext.isString(n)) {
-            return n;
-        } else if (n.type === 'linear') {
+            n = Ext.draw.sprite.GradientDefinition.get(n);
+            if (Ext.isString(n)) {
+                return n;
+            }
+        }
+        if (n.type === 'linear') {
             return Ext.create('Ext.draw.gradient.Linear', n);
         } else if (n.type === 'radial') {
             return Ext.create('Ext.draw.gradient.Radial', n);

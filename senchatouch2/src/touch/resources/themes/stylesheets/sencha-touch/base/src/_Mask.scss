@@ -63,10 +63,11 @@
 
     .x-mask-message {
         position: absolute;
-        bottom: 1.7em;
+        bottom: 5px;
+        color: #333;
+        left: 0;
+        right: 0;
         @include st-box-flex(0);
-        max-width: 13em;
-        min-width: 8em;
     }
 
     &.x-has-message {
@@ -75,7 +76,7 @@
         }
 
         .x-loading-spinner-outer {
-            height: 7.5em;
+            height: 168px;
         }
     }
 }

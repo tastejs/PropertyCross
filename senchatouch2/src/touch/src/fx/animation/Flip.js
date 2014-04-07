@@ -63,10 +63,10 @@ Ext.define('Ext.fx.animation.Flip', {
 
             case this.DIRECTION_RIGHT:
                 if (out) {
-                    toRotateY = -rotate;
+                    toRotateY = rotate;
                 }
                 else {
-                    fromRotateY = rotate;
+                    fromRotateY = -rotate;
                 }
                 break;
 

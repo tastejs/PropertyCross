@@ -5,5 +5,7 @@
 @import 'sencha-touch/default/all';
 
 // Custom code goes here..
+@import 'custom/favourites';
 
-
+// Examples of using the icon mixin:
+// @include icon('user');

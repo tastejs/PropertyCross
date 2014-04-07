@@ -151,7 +151,7 @@ Ext.dom.Element.addMembers({
 
         if (el.nodeType || el.dom || typeof el == 'string') {
             el = Ext.get(el);
-            me.dom.parentNode.insertBefore(el, me.dom);
+            me.dom.parentNode.insertBefore(el.dom, me.dom);
         } else {
             el = Ext.core.DomHelper.insertBefore(me.dom, el);
         }
@@ -159,7 +159,6 @@ Ext.dom.Element.addMembers({
         delete Ext.cache[me.id];
         Ext.removeNode(me.dom);
         me.id = Ext.id(me.dom = el);
-        Ext.dom.Element.addToCache(me.isFlyweight ? new Ext.dom.Element(me.dom) : me);
         return me;
     },
 

@@ -8,8 +8,21 @@ Ext.define('Ext.device.device.Sencha', {
         this.name = device.name;
         this.uuid = device.uuid;
         this.platform = device.platformName || Ext.os.name;
+        this.scheme = Ext.device.Communicator.send({
+            command: 'OpenURL#getScheme',
+            sync: true
+        }) || false;
 
-        this.initURL();
+        Ext.device.Communicator.send({
+            command: 'OpenURL#watch',
+            callbacks: {
+                callback: function(scheme) {
+                    this.scheme = scheme || false;
+                    this.fireEvent('schemeupdate', this, this.scheme);
+                }
+            },
+            scope: this
+        });
     },
 
     openURL: function(url) {
@@ -17,26 +30,5 @@ Ext.define('Ext.device.device.Sencha', {
             command: 'OpenURL#open',
             url: url
         });
-    },
-
-    /**
-     * @private
-     */
-    initURL: function() {
-        Ext.device.Communicator.send({
-            command: "OpenURL#watch",
-            callbacks: {
-                callback: this.updateURL
-            },
-            scope: this
-        });
-    },
-
-    /**
-     * @private
-     */
-    updateURL: function() {
-        this.scheme = device.scheme || false;
-        this.fireEvent('schemeupdate', this, this.scheme);
     }
 });

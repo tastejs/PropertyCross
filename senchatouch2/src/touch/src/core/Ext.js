@@ -140,7 +140,7 @@
          * @param {Function} superclass
          * @param {Object} overrides
          * @return {Function} The subclass constructor from the `overrides` parameter, or a generated one if not provided.
-         * @deprecated 4.0.0 Please use {@link Ext#define Ext.define} instead
+         * @deprecated 2.0.0 Please use {@link Ext#define Ext.define} instead
          */
         extend: function() {
             // inline overrides
@@ -210,7 +210,7 @@
          * @param {Object} overrides The properties to add to `origClass`. This should be specified as an object literal
          * containing one or more properties.
          * @method override
-         * @deprecated 4.1.0 Please use {@link Ext#define Ext.define} instead.
+         * @deprecated 2.0.0 Please use {@link Ext#define Ext.define} instead.
          */
         override: function(cls, overrides) {
             if (cls.$isClass) {
@@ -348,7 +348,7 @@
 
         /**
          * Returns 'true' if the passed value is a String that matches the MS Date JSON encoding format
-         * @param value {String} The string to test
+         * @param {String} value The string to test
          * @return {Boolean}
          */
         isMSDate: function(value) {
@@ -618,7 +618,7 @@
 
     /**
      * Old alias to {@link Ext#typeOf}.
-     * @deprecated 4.0.0 Please use {@link Ext#typeOf} instead.
+     * @deprecated 2.0.0 Please use {@link Ext#typeOf} instead.
      * @method
      * @alias Ext#typeOf
      */

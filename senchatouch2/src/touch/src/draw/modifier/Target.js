@@ -1,7 +1,7 @@
 /**
  * @class Ext.draw.modifier.Target
  * @extends Ext.draw.modifier.Modifier
- * 
+ *
  * This is the destination modifier that has to be put at
  * the top of the modifier stack.
  *
@@ -38,8 +38,8 @@ Ext.define("Ext.draw.modifier.Target", {
     /**
      * @private
      * Applies the appropriate dirty flags from the modifier changes.
-     * @param attr The source attributes.
-     * @param changes The modifier changes.
+     * @param {Object} attr The source attributes.
+     * @param {Object} changes The modifier changes.
      */
     setDirtyFlags: function (attr, changes) {
         Ext.apply(attr, changes);

@@ -15,8 +15,8 @@
  *     Ext.Viewport.setLayout('fit');
  *     Ext.Viewport.add(component);
  */
-Ext.define("Ext.draw.sprite.Path", {
-    extend: "Ext.draw.sprite.Sprite",
+Ext.define('Ext.draw.sprite.Path', {
+    extend: 'Ext.draw.sprite.Sprite',
     requires: ['Ext.draw.Draw', 'Ext.draw.Path'],
     alias: 'sprite.path',
     type: 'path',
@@ -34,13 +34,13 @@ Ext.define("Ext.draw.sprite.Path", {
                 }
             },
             aliases: {
-                "d": "path"
+                d: 'path'
             },
             dirtyTriggers: {
                 path: 'bbox'
             },
             updaters: {
-                "path": function (attr) {
+                path: function (attr) {
                     var path = attr.path;
                     if (!path || path.bindAttr !== attr) {
                         path = new Ext.draw.Path();

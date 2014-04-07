@@ -488,7 +488,7 @@ Ext.define('Ext.mixin.Observable', {
      *
      * A delayed, one-time listener:
      *
-     *     container.on('tap', this.handleTap, this, {
+     *     container.addListener('tap', this.handleTap, this, {
      *         single: true,
      *         delay: 100
      *     });
@@ -498,7 +498,7 @@ Ext.define('Ext.mixin.Observable', {
      * The method also allows for a single argument to be passed which is a config object containing properties which
      * specify multiple events. For example:
      *
-     *     container.on({
+     *     container.addListener({
      *         tap  : this.onTap,
      *         swipe: this.onSwipe,
      *
@@ -507,7 +507,7 @@ Ext.define('Ext.mixin.Observable', {
      *
      * One can also specify options for each event handler separately:
      *
-     *     container.on({
+     *     container.addListener({
      *         tap  : { fn: this.onTap, scope: this, single: true },
      *         swipe: { fn: button.onSwipe, scope: button }
      *     });
@@ -567,7 +567,7 @@ Ext.define('Ext.mixin.Observable', {
      *         ]
      *     });
      *
-     *     container.on({
+     *     container.addListener({
      *         // Ext.Buttons have an xtype of 'button', so we use that are a selector for our delegate
      *         delegate: 'button',
      *
@@ -783,7 +783,7 @@ Ext.define('Ext.mixin.Observable', {
     /**
      * @private
      * Creates an event handling function which re-fires the event from this object as the passed event name.
-     * @param newName
+     * @param {String} newName
      * @return {Function}
      */
     createEventRelayer: function(newName){
