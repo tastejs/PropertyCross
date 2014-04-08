@@ -3,6 +3,13 @@
 	This way, you can minify your application, and just remove the "source" folder for production
 */
 
+@media screen and (orientation: portrait) {
+   @-ms-viewport {width: 320px !important;}
+}
+@media screen and (orientation: landscape) {
+   @-ms-viewport {width: 560px !important;}
+}
+
 .header-button-right {
 	float: right;
 }
@@ -13,31 +20,38 @@
 	border-top: solid 3px #f00;
 	border-bottom: solid 3px #f00;
 }
-
-.panel-row {
-	margin: 20px 20px 20px 20px;
+.content-panel {
+	margin: 16px 16px 0;
 }
 
-.panel-row > button {
-	margin-right:16px;
+.content-panel > * {
+	margin-bottom: 10px;
 }
 
-.item {
-	position: relative;
-	/*border-bottom: 1px solid #0E0E0E*/;
-	padding: 12px 16px;
+.list-item, .list-item-with-image {
 	background-color: #f3f2f2;
-	/*background-image: url('../assets/app_results.plmo/bar_bg_selected.png');*/
 	color: black;
 	margin-top: 2px;
 	margin-bottom: 4px;
+	position: relative;
+	padding: 10px 16px;
+	font-size:16px;
+}
+.list-item-with-image {
+	min-height: 70px;
 }
 
-.item > img {
-	display: inline-block;
+.list-item-with-image > * {
+	margin-left: 60px;
+}
+.list-item-with-image > img {
+	background-image: url(../assets/home-w-60.png);
+	margin-left: 0;
+	position: absolute;
+	left: 8px;
+	top: 5px;
 	width: 60px;
 	height: 60px;
-	background-image: url(../assets/home-w-60.png);
 }
 
 .item.onyx-selected {
@@ -45,19 +59,27 @@
 
 }
 
-.recent {
+.list-item-title, .list-item-subtitle {
 	display: inline-block;
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
-	padding: 12px 0;
 }
 
-.matches {
+.list-item-subtitle {
+	display: block;
+	color: #555555;
+	font-size: 0.9em;
+}
+
+.list-item-title {
+	font-weight: bold;
+}
+
+.list-item-badge {
 	display: inline-block;
 	position:absolute;
-	right:24px;
-	top:22px;
+	right:16px;
 }
 
 
