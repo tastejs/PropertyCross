@@ -23,13 +23,12 @@ enyo.kind({
 						{kind: "enyo.Image", name: "listItemThumb"},
 						{name: "listItemPrice", classes: "list-item-title", allowHtml: "true"},
 						{name: "listItemTitle", classes: "list-item-subtitle"}
+					]},
+					{name:"more", components: [
+						{kind: "PC.Button", name: "moreButton", content: "Load more...", style: "margin-left:20px;margin-bottom:20px;", ontap: "getMoreListings"}
 					]}
 				]}
 			]}
-		]},
-		{name: "moreDrawer", kind: "onyx.Drawer", open: false, components: [
-			//{name: "moreButton", kind: "onyx.Button", style: "display:block;margin-left:20px;margin-bottom:20px;", showing: false, content: "Load more...", onclick: "getMoreListings"}
-			{name: "moreButton", kind: "PC.Button", style: "display:block;margin-left:20px;margin-bottom:20px;", showing: false, content: "Load more...", ontap: "getMoreListings"}
 		]},
 
 		{kind: "messagePopup",name: "loadingPopup",  message: "Loading..."}
@@ -37,6 +36,7 @@ enyo.kind({
 
 	listings: [],
 	listingsPage: {},
+	morePages: false,
 
 	create: function () {
 		this.inherited(arguments);
@@ -60,20 +60,28 @@ enyo.kind({
 
 	processResponse: function(json) {
 		this.listings = this.listings.concat(json.response.listings);
+		this.morePages = json.request.page < json.response.total_pages;
+
 		this.$.resultsList.setCount(this.listings.length);
-		this.$.resultsList.refresh();
+
+		if(json.request.page == 1) {
+			this.$.resultsList.reset();
+		} else {
+			this.$.resultsList.refresh();
+		}
 
 		this.$.resultsHeader.setContent(this.listings.length + " of " + json.response.total_results + " matches");
 
-		this.$.moreDrawer.setOpen(json.request.page < json.response.total_pages);
 	},
 
 	setupResultsListItem: function(inSender, inEvent) {
 		var i = inEvent.index;
+		var itemData = this.listings[i];
 		this.$.item3.addRemoveClass("onyx-selected", inSender.isSelected(inEvent.index));
-		this.$.listItemThumb.setAttribute('src', this.listings[i].thumb_url);
-		this.$.listItemPrice.setContent("&pound;" + Utils.numberWithCommas(this.listings[i].price));
-		this.$.listItemTitle.setContent(this.listings[i].title);
+		this.$.listItemThumb.setAttribute('src', itemData.thumb_url);
+		this.$.listItemPrice.setContent("&pound;" + Utils.numberWithCommas(itemData.price));
+		this.$.listItemTitle.setContent(itemData.title);
+		this.$.more.canGenerate = !this.listings[i+1] && this.morePages;
 	},
 
 	getMoreListings: function() {
