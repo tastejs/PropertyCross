@@ -9,8 +9,8 @@ enyo.kind({
 
 	components: [
 		{kind: "onyx.Toolbar", components: [
-			{name: "favoritesHeader", content: "Favorites", classes: "header-center"},
-			{kind: "PC.Button", classes:"header-button-left back-button", ontap: "goBack"}
+			{kind: "PC.Button", classes:"back-button", ontap: "goBack"},
+			{name: "favoritesHeader", content: "Favorites"}
 		]},
 		{name: "favoritesError", kind: "onyx.Drawer", open: false, classes: "panel-row error-drawer", components: [
 			{name: "favoritesErrorContent", content: "There was a problem loading the listings."}

@@ -11,8 +11,8 @@ enyo.kind({
 
 	components: [
 		{kind: "onyx.Toolbar", components: [
-			{name: "resultsHeader", content: "Property Details", classes: "header-center"},
-			{kind: "PC.Button", classes:"header-button-left back-button", ontap: "goBack"},
+			{kind: "PC.Button", classes:"back-button", ontap: "goBack"},
+			{name: "resultsHeader", content: "Property Details"},
 			{name: "fav", kind: "onyx.ToggleIconButton", src: "assets/fav.png", classes:"header-button-right", ontap: "changeFavorite"}
 		]},
 		{layoutKind: enyo.FittableColumnsLayout, fit: true, classes: "enyo-center", components: [

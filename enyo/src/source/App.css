@@ -3,21 +3,8 @@
 	This way, you can minify your application, and just remove the "source" folder for production
 */
 
-.header-center {
-	display: block;
-	text-align: center;
-}
-
 .header-button-right {
-	position: absolute;
-	right:10px;
-	top: 7px;
-}
-
-.header-button-left {
-	position: absolute;
-	left:10px;
-	top: 7px;
+	float: right;
 }
 
 .error-drawer > * {

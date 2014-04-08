@@ -9,7 +9,7 @@ enyo.kind({
 
 	components: [
 		{kind: "onyx.Toolbar", components: [
-			{content: "PropertyCross", classes: "header-center"},
+			{content: "PropertyCross"},
 			{kind: "PC.Button", content: "Faves", classes:"header-button-right", ontap: "showFaves"}
 		]},
 		{classes: "panel-row", content: "Use the form below to search for houses to buy. You can search by place-name, postcode, or click 'My location', to search in your current location!"},
