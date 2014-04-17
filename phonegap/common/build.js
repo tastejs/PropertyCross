@@ -11,7 +11,7 @@ module.exports = {
           archive: "app.zip",
           appId: "<%= pkg.appId %>",
           user: {
-            email: "propertycrossbuilds+<%= pkg.abbr %>@gmail.com",
+            email: "<%= grunt.option('pgb.email') || 'propertycrossbuilds+' + pkg.abbr + '@gmail.com' %>",
             password: "<%= grunt.option('pgb.password') %>"
           },
           download: {
