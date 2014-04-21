@@ -11,20 +11,18 @@ enyo.kind({
 
 	components: [
 		{kind: "onyx.Toolbar", components: [
-			{name: "resultsHeader", content: "Property Details", classes: "header-center"},
-			{kind: "PC.Button", classes:"header-button-left back-button", ontap: "goBack"},
-			{name: "fav", kind: "onyx.ToggleIconButton", src: "assets/fav.png", classes:"header-button-right", ontap: "changeFavorite"}
+			{kind: "PC.Button", classes:"back-button", ontap: "goBack"},
+			{name: "resultsHeader", content: "Property Details"},
+			{kind: "onyx.ToggleIconButton", name: "fav", classes:"header-button-right", src: "assets/fav.png", ontap: "changeFavorite"}
 		]},
-		{layoutKind: enyo.FittableColumnsLayout, fit: true, classes: "enyo-center", components: [
-			{name: "resultsBox", layoutKind:"FittableRowsLayout", components: [
-				{name: "propertyPrice", allowHtml: "true", style: "font-size:26px", classes: "panel-row"},
-				{name: "propertyTitle", classes: "panel-row"},
-				{layoutKind: enyo.FittableColumnsLayout, classes: "enyo-center", components: [
-					{name: "propertyPhoto", kind: "enyo.Image", classes: "listing-image"}
-				]},
-				{name: "propertyBedBath", classes: "panel-row"},
-				{name: "propertySummary", classes: "panel-row"}
-			]}
+		{kind: "FittableRows", name: "resultsBox", classes: "content-panel", fit:true, components: [
+			{name: "propertyPrice", allowHtml: "true", style: "font-size:26px"},
+			{name: "propertyTitle"},
+			{kind: "FittableColumns", classes: "enyo-center", components: [
+				{kind: "enyo.Image", name: "propertyPhoto", classes: "listing-image"}
+			]},
+			{name: "propertyBedBath"},
+			{name: "propertySummary"}
 		]}
 	],
 

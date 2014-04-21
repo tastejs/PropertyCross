@@ -9,38 +9,40 @@ enyo.kind({
 
 	components: [
 		{kind: "onyx.Toolbar", components: [
-			{content: "PropertyCross", classes: "header-center"},
+			{content: "PropertyCross"},
 			{kind: "PC.Button", content: "Faves", classes:"header-button-right", ontap: "showFaves"}
 		]},
-		{classes: "panel-row", content: "Use the form below to search for houses to buy. You can search by place-name, postcode, or click 'My location', to search in your current location!"},
-		{kind: "onyx.InputDecorator", classes: "input-wide panel-row", components: [
-			{classes: "input-wide-box", components: [
-				{name: "searchInput", kind: "enyo.Input", placeholder: "Search term", onkeypress: "searchInputKeypress"}
+		{kind: "FittableRows", classes: "content-panel", fit:true, components: [
+			{content: "Use the form below to search for houses to buy. You can search by place-name, postcode, or click 'My location', to search in your current location!"},
+			{kind: "onyx.InputDecorator", classes: "input-wide", components: [
+				{classes: "input-wide-box", components: [
+					{kind: "enyo.Input", name: "searchInput", placeholder: "Search term", onkeypress: "searchInputKeypress"}
+				]},
+				{kind: "onyx.Icon", classes: "input-right", src: "assets/cancel.png", ontap: "clearSearchInput" }
 			]},
-			{kind: "onyx.Icon", classes: "input-right", src: "assets/cancel.png", ontap: "clearSearchInput" }
-		]},
-		{classes: "panel-row", layoutKind: enyo.FittableColumnsLayout, noStretch: true, classes: "enyo-center", components: [
-			{kind: "PC.Button", content: "Go", ontap: "search"},
-			{kind: "PC.Button", content: "My location", ontap: "geolocate"}
-		]},
-		{name: "searchError", kind: "onyx.Drawer", open: false, classes: "panel-row error-drawer", components: [
-			{name: "searchErrorContent", content: "There was a problem with your search."}
-		]},
-		{kind: "Panels", name:"searchBoxes", fit:true, realtimeFit: true, classes: "panel-row", style: "margin-bottom:20px", components: [
-			{name: "recentBox", kind: "onyx.Groupbox", fit: true, layoutKind:"FittableRowsLayout", components: [
-				{kind: "onyx.GroupboxHeader", content: "Recent searches"},
-				{name: "recentList", kind: "List", fit: true, touch: true, onSetupItem: "setupRecentListItem", components: [
-					{name: "item1", style: "font-size:20px;", classes: "item enyo-border-box", ontap: "recentListItemTap", components: [
-						{name: "listItemRecent", classes: "recent"},
-						{name: "listItemMatches", classes: "matches"}
+			{kind: "FittableColumns", classes: "enyo-center", noStretch: true, components: [
+				{kind: "PC.Button", content: "Go", ontap: "search"},
+				{kind: "PC.Button", content: "My location", ontap: "geolocate"}
+			]},
+			{kind: "onyx.Drawer", name: "searchError", classes: "error-drawer", open: false, components: [
+				{name: "searchErrorContent", content: "There was a problem with your search."}
+			]},
+			{kind: "Panels", name:"searchBoxes", style: "margin-bottom:20px", fit:true, realtimeFit: true, components: [
+				{kind: "onyx.Groupbox", name: "recentBox", layoutKind:"FittableRowsLayout", fit: true, components: [
+					{kind: "onyx.GroupboxHeader", content: "Recent searches"},
+					{kind: "List", name: "recentList", onSetupItem: "setupRecentListItem", fit: true, touch: true, components: [
+						{name: "item1", classes: "list-item enyo-border-box", ontap: "recentListItemTap", components: [
+							{name: "listItemRecent", classes: "list-item-title"},
+							{name: "listItemMatches", classes: "list-item-badge"}
+						]}
 					]}
-				]}
-			]},
-			{name: "suggestedBox", kind: "onyx.Groupbox",  fit: true, layoutKind:"FittableRowsLayout", components: [
-				{kind: "onyx.GroupboxHeader", content: "Suggested locations"},
-				{name: "suggestedList", kind: "List", fit: true, touch: true, onSetupItem: "setupSuggestedListItem", components: [
-					{name: "item2", style: "font-size:20px;", classes: "item enyo-border-box", ontap: "suggestedListItemTap", components: [
-						{name: "listItemSuggested", classes: "recent"}
+				]},
+				{kind: "onyx.Groupbox", name: "suggestedBox", layoutKind:"FittableRowsLayout", fit: true, components: [
+					{kind: "onyx.GroupboxHeader", content: "Suggested locations"},
+					{kind: "List", name: "suggestedList", onSetupItem: "setupSuggestedListItem", fit: true, touch: true, components: [
+						{name: "item2",  classes: "list-item enyo-border-box", ontap: "suggestedListItemTap", components: [
+							{name: "listItemSuggested", classes: "list-item-title"}
+						]}
 					]}
 				]}
 			]}

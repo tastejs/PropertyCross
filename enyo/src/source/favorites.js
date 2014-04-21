@@ -9,20 +9,20 @@ enyo.kind({
 
 	components: [
 		{kind: "onyx.Toolbar", components: [
-			{name: "favoritesHeader", content: "Favorites", classes: "header-center"},
-			{kind: "PC.Button", classes:"header-button-left back-button", ontap: "goBack"}
+			{kind: "PC.Button", classes:"back-button", ontap: "goBack"},
+			{name: "favoritesHeader", content: "Favorites"}
 		]},
-		{name: "favoritesError", kind: "onyx.Drawer", open: false, classes: "panel-row error-drawer", components: [
-			{name: "favoritesErrorContent", content: "There was a problem loading the listings."}
-		]},
-		{name: "favoritesBox", kind: "onyx.Groupbox", classes: "panel-row", fit: true, layoutKind:"FittableRowsLayout", components: [
-			{kind: "onyx.GroupboxHeader", content: "Found locations"},
-			{name: "favoritesList", kind: "List", fit: true, touch: true, onSetupItem: "setupFavoritesListItem", components: [
-				{name: "item4", style: "font-size:20px;", classes: "item enyo-border-box", ontap: "favoritesListItemTap", components: [
-					{name: "listItemThumb", kind: "enyo.Image", style: "inline-block"},
-					{style: "display:inline-block; margin-left:14px;", components: [
-						{name: "listItemPrice", allowHtml: "true", style: "font-size:26px"},
-						{name: "listItemTitle"}
+		{kind: "FittableRows", classes: "content-panel", fit:true, components: [
+			{kind: "onyx.Drawer", name: "favoritesError", classes: "error-drawer", open: false, components: [
+				{name: "favoritesErrorContent", content: "There was a problem loading the listings."}
+			]},
+			{name: "favoritesBox", kind: "onyx.Groupbox", layoutKind:"FittableRowsLayout", fit: true, components: [
+				{kind: "onyx.GroupboxHeader", content: "Properties"},
+				{kind: "List", name: "favoritesList", fit: true, touch: true, onSetupItem: "setupFavoritesListItem", components: [
+					{name: "item4", classes: "list-item-with-image enyo-border-box", ontap: "favoritesListItemTap", components: [
+						{kind: "enyo.Image", name: "listItemThumb"},
+						{name: "listItemPrice", classes: "list-item-title", allowHtml: "true"},
+						{name: "listItemTitle", classes: "list-item-subtitle"}
 					]}
 				]}
 			]}

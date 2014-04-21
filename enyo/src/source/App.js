@@ -6,7 +6,9 @@ enyo.kind({
 		{kind: "SearchPage", name: "search", onGoResults: "showResults", onGoFaves: "showFaves"},
 		{kind: "ResultsPage", name: "results", onGoBack: "showSearch", onGoListing: "showListingFromResults"},
 		{kind: "ListingPage", name: "listing", onGoBack: "showListingSource", onChangeFav: "changeFav"},
-		{kind: "FavoritesPage", name: "favorites", onGoBack: "showSearch", onGoListing: "showListingFromFavorites"}
+		{kind: "FavoritesPage", name: "favorites", onGoBack: "showSearch", onGoListing: "showListingFromFavorites"},
+        {kind: "enyo.Signals", onbackbutton: "handleBack"},
+        {kind: "enyo.Signals", ondeviceready: "deviceReady"}
 	],
 
 	SEARCH_PAGE: 0,
@@ -15,6 +17,22 @@ enyo.kind({
 	FAVORITES_PAGE: 3,
 
 	listingSource: this.RESULTS_PAGE,
+	
+	deviceReady: function() {
+        if (navigator.splashscreen) {
+          navigator.splashscreen.hide();
+        }
+	},
+
+	handleBack:function() {
+		var control = this.getActive();
+
+		if (control.goBack) {
+			control.goBack();
+		} else if (navigator.app) {
+			navigator.app.exitApp();
+		}
+	},
 
 	showSearch: function() {
 		this.setIndex(this.SEARCH_PAGE);
