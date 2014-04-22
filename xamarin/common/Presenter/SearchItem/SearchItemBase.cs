@@ -1,8 +1,8 @@
 ﻿using System;
-using PropertyFinder.Model;
+using PropertyCross.Model;
 using System.Net;
 
-namespace PropertyFinder.Presenter
+namespace PropertyCross.Presenter
 {
   /// <summary>
   /// Represents a 'property search', which can either be a plain-text search term

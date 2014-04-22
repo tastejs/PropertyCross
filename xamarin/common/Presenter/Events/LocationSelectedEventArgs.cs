@@ -1,7 +1,7 @@
 ﻿using System;
-using PropertyFinder.Model;
+using PropertyCross.Model;
 
-namespace PropertyFinder.Presenter
+namespace PropertyCross.Presenter
 {
   public class LocationSelectedEventArgs : EventArgs
   {

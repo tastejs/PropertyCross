@@ -2,7 +2,7 @@ using System;
 using System.Timers;
 using Android.Locations;
 using Android.OS;
-using PropertyFinder.Presenter;
+using PropertyCross.Presenter;
 using System.ComponentModel;
 
 namespace com.propertycross.xamarin.android

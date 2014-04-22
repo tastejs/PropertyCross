@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PropertyFinder.Presenter
+namespace PropertyCross.Presenter
 {
   public class SearchTextChangedEventArgs : EventArgs
   {

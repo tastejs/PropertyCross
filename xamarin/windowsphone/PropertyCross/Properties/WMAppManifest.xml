@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Deployment xmlns="http://schemas.microsoft.com/windowsphone/2012/deployment" AppPlatformVersion="8.0">
+  <DefaultLanguage xmlns="" code="" />
+  <App xmlns="" ProductID="{ce5ad410-3623-4256-a7cf-933b3858f394}" Title="PropertyCross" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="PropertyCross author" Description="Sample description" Publisher="TasteJS" BitsPerPixel="32" PublisherID="{d6a148ac-142e-41da-8616-168998609e61}">
+    <IconPath IsRelative="true" IsResource="false">ApplicationIcon.png</IconPath>
+    <Capabilities>
+      <Capability Name="ID_CAP_GAMERSERVICES" />
+      <Capability Name="ID_CAP_IDENTITY_DEVICE" />
+      <Capability Name="ID_CAP_IDENTITY_USER" />
+      <Capability Name="ID_CAP_LOCATION" />
+      <Capability Name="ID_CAP_MICROPHONE" />
+      <Capability Name="ID_CAP_NETWORKING" />
+      <Capability Name="ID_CAP_PHONEDIALER" />
+      <Capability Name="ID_CAP_PUSH_NOTIFICATION" />
+      <Capability Name="ID_CAP_SENSORS" />
+      <Capability Name="ID_CAP_WEBBROWSERCOMPONENT" />
+      <Capability Name="ID_CAP_ISV_CAMERA" />
+      <Capability Name="ID_CAP_CONTACTS" />
+      <Capability Name="ID_CAP_APPOINTMENTS" />
+      <Capability Name="ID_CAP_MEDIALIB_AUDIO" />
+      <Capability Name="ID_CAP_MEDIALIB_PHOTO" />
+      <Capability Name="ID_CAP_MEDIALIB_PLAYBACK" />
+    </Capabilities>
+    <Tasks>
+      <DefaultTask Name="_default" NavigationPage="PropertyCrossView.xaml" />
+    </Tasks>
+    <Tokens>
+      <PrimaryToken TokenID="PropertyCrossToken" TaskName="_default">
+        <TemplateFlip>
+          <SmallImageURI IsResource="false" IsRelative="true">ApplicationTileIcon.png</SmallImageURI>
+          <Count>0</Count>
+          <BackgroundImageURI IsResource="false" IsRelative="true">ApplicationTileIcon.png</BackgroundImageURI>
+          <Title>PropertyCross</Title>
+          <BackContent></BackContent>
+          <BackBackgroundImageURI></BackBackgroundImageURI>
+          <BackTitle></BackTitle>
+          <DeviceLockImageURI></DeviceLockImageURI>
+          <HasLarge>false</HasLarge>
+        </TemplateFlip>
+      </PrimaryToken>
+    </Tokens>
+    <ScreenResolutions>
+      <ScreenResolution Name="ID_RESOLUTION_WVGA" />
+      <ScreenResolution Name="ID_RESOLUTION_WXGA" />
+      <ScreenResolution Name="ID_RESOLUTION_HD720P" />
+    </ScreenResolutions>
+  </App>
+</Deployment>

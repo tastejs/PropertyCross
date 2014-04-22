@@ -1,17 +1,8 @@
-Android/PropertyCross/bin
-Android/PropertyCross/obj
-Android/PropertyCross.suo
-Android/PropertyCross.userprefs
-Android/ActionBarSherlock/bin
-Android/ActionBarSherlock/obj
+bin
+obj
+*.suo
+*.userprefs
 
-iPhone/lib/NewtonsoftJson/Newtonsoft.Json/bin
-iphone/PropertyFinder/bin
-iphone/PropertyFinder/obj
-
-WindowsPhone/PropertyFinder/bin
-WindowsPhone/PropertyFinder/obj
-WindowsPhone/*.suo
-WindowsPhone/packages/SilverlightToolkitWP.4.2012.10.9
-WindowsPhone/packages/Newtonsoft.Json.4.5.10
-WindowsPhone/PropertyFinder/Toolkit.Content
+WindowsPhone/PropertyCross/Toolkit.Content
+WindowsPhone/packages/WPtoolkit.4.2013.08.16
+WindowsPhone/packages/Newtonsoft.Json.6.0.2

@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.20506</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{FF8CE29D-9A72-4FEA-83D7-5BA76194D9B5}</ProjectGuid>
+    <ProjectTypeGuids>{C089C8C0-30E0-4E22-80C0-CE093F111A43};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PropertyCross</RootNamespace>
+    <AssemblyName>PropertyCross</AssemblyName>
+    <TargetFrameworkIdentifier>WindowsPhone</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v8.0</TargetFrameworkVersion>
+    <SilverlightApplication>true</SilverlightApplication>
+    <SupportedCultures>
+    </SupportedCultures>
+    <XapOutputs>true</XapOutputs>
+    <GenerateSilverlightManifest>true</GenerateSilverlightManifest>
+    <XapFilename>PropertyCross_$(Configuration)_$(Platform).xap</XapFilename>
+    <SilverlightManifestTemplate>Properties\AppManifest.xml</SilverlightManifestTemplate>
+    <SilverlightAppEntry>PropertyCross.App</SilverlightAppEntry>
+    <ValidateXaml>true</ValidateXaml>
+    <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
+    <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\x86\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\x86\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|ARM' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\ARM\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|ARM' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\ARM\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Phone.Controls.Toolkit, Version=8.0.1.0, Culture=neutral, PublicKeyToken=b772ad94eb9ca604, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\WPtoolkit.4.2013.08.16\lib\wp8\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.2\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\Common\Model\IJsonPropertySearch.cs">
+      <Link>Model\IJsonPropertySearch.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Model\JsonFilePropertySearch.cs">
+      <Link>Model\JsonFilePropertySearch.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Model\JsonWebPropertySearch.cs">
+      <Link>Model\JsonWebPropertySearch.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Model\Location.cs">
+      <Link>Model\Location.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Model\Property.cs">
+      <Link>Model\Property.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Model\PropertyDataSource.cs">
+      <Link>Model\PropertyDataSource.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Model\PropertyDataSourceResult.cs">
+      <Link>Model\PropertyDataSourceResult.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Model\PropertyListingsResult.cs">
+      <Link>Model\PropertyListingsResult.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Model\PropertyLocationsResult.cs">
+      <Link>Model\PropertyLocationsResult.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Model\PropertyUnknownLocationResult.cs">
+      <Link>Model\PropertyUnknownLocationResult.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Model\Util.cs">
+      <Link>Model\Util.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Presenter\Events\LocationSelectedEventArgs.cs">
+      <Link>Presenter\Events\LocationSelectedEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Presenter\Events\PropertyEventArgs.cs">
+      <Link>Presenter\Events\PropertyEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Presenter\Events\SearchTextChangedEventArgs.cs">
+      <Link>Presenter\Events\SearchTextChangedEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Presenter\FavouritesPresenter.cs">
+      <Link>Presenter\FavouritesPresenter.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Presenter\PropertyCrossPresenter.cs">
+      <Link>Presenter\PropertyCrossPresenter.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Presenter\PropertyPresenter.cs">
+      <Link>Presenter\PropertyPresenter.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Presenter\RecentSearch.cs">
+      <Link>Presenter\RecentSearch.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Presenter\SearchItem\GeoLocationSearchItem.cs">
+      <Link>Presenter\SearchItem\GeoLocationSearchItem.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Presenter\SearchItem\PlainTextSearchItem.cs">
+      <Link>Presenter\SearchItem\PlainTextSearchItem.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Presenter\SearchItem\SearchItemBase.cs">
+      <Link>Presenter\SearchItem\SearchItemBase.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Presenter\SearchResultsPresenter.cs">
+      <Link>Presenter\SearchResultsPresenter.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Presenter\Services\IGeoLocationService.cs">
+      <Link>Presenter\Services\IGeoLocationService.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Presenter\Services\IMarshalInvokeService.cs">
+      <Link>Presenter\Services\IMarshalInvokeService.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Presenter\Services\INavigationService.cs">
+      <Link>Presenter\Services\INavigationService.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Presenter\Services\IStatePersistenceService.cs">
+      <Link>Presenter\Services\IStatePersistenceService.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Presenter\Services\PropertyCrossPersistentState.cs">
+      <Link>Presenter\Services\PropertyCrossPersistentState.cs</Link>
+    </Compile>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converter\UrlToImageSourceConverter.cs" />
+    <Compile Include="FavouritesView.xaml.cs">
+      <DependentUpon>FavouritesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GeoLocationService.cs" />
+    <Compile Include="MarshalInvokeService.cs" />
+    <Compile Include="PropertyCrossView.xaml.cs">
+      <DependentUpon>PropertyCrossView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NavigationService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PropertyView.xaml.cs">
+      <DependentUpon>PropertyView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SearchResultsView.xaml.cs">
+      <DependentUpon>SearchResultsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="StatePersistenceService.cs" />
+    <Compile Include="Util\LinqToVisualTree.cs" />
+    <Compile Include="Util\MetroInMotion.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="FavouritesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PropertyCrossView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PropertyView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SearchResultsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="Properties\AppManifest.xml" />
+    <None Include="Properties\WMAppManifest.xml">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ApplicationIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ApplicationTileIcon.png" />
+    <Resource Include="Images\background.jpg" />
+    <Content Include="Images\addToFavourites.png" />
+    <Content Include="Images\favourited.png" />
+    <Content Include="Images\favourites.png" />
+    <Content Include="SplashScreenImage.jpg" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ProjectExtensions />
+</Project>

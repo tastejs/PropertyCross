@@ -1,13 +1,13 @@
 ﻿
-namespace PropertyFinder.Presenter
+namespace PropertyCross.Presenter
 {
   /// <summary>
   /// A service which provides state persistence.
   /// </summary>
   public interface IStatePersistenceService
   {
-    void SaveState(PropertyFinderPersistentState state);
+    void SaveState(PropertyCrossPersistentState state);
 
-    PropertyFinderPersistentState LoadState();
+    PropertyCrossPersistentState LoadState();
   }
 }

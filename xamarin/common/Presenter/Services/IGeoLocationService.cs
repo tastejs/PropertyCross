@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PropertyFinder.Presenter
+namespace PropertyCross.Presenter
 {
   /// <summary>
   /// A service which provides location information.

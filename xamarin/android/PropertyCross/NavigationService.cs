@@ -1,16 +1,16 @@
 using System;
 using Android.App;
 using Android.Content;
-using PropertyFinder.Presenter;
+using PropertyCross.Presenter;
 using com.propertycross.xamarin.android.Views;
 
 namespace com.propertycross.xamarin.android
 {
 	public class NavigationService : INavigationService
 	{
-		private PropertyFinderApplication application;
+		private PropertyCrossApplication application;
 
-		public NavigationService(PropertyFinderApplication app)
+		public NavigationService(PropertyCrossApplication app)
 		{
 			application = app;
 		}

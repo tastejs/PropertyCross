@@ -10,7 +10,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using PropertyFinder.Model;
+using PropertyCross.Model;
 using Android.Graphics.Drawables;
 using Android.Graphics;
 

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using PropertyFinder.Model;
+using PropertyCross.Model;
 
-namespace PropertyFinder.Presenter
+namespace PropertyCross.Presenter
 {
   /// <summary>
   /// A presenter which allows the user to view their favourites.
@@ -19,11 +19,11 @@ namespace PropertyFinder.Presenter
       event EventHandler<PropertyEventArgs> PropertySelected;
     }
 
-    private PropertyFinderPersistentState _state;
+    private PropertyCrossPersistentState _state;
 
     private INavigationService _navigationService;
 
-    public FavouritesPresenter(INavigationService navigationService, PropertyFinderPersistentState state)
+    public FavouritesPresenter(INavigationService navigationService, PropertyCrossPersistentState state)
     {
       _state = state;
       _navigationService = navigationService;

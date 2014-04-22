@@ -1,4 +1,4 @@
-using PropertyFinder.Presenter;
+using PropertyCross.Presenter;
 using Android.Content;
 using System.Xml.Serialization;
 using System.IO;
@@ -8,25 +8,25 @@ namespace com.propertycross.xamarin.android
 	public class StatePersistenceService : IStatePersistenceService
 	{
 		private readonly string FileName = "data.txt";
-		private PropertyFinderApplication application;
+		private PropertyCrossApplication application;
 
-		public StatePersistenceService(PropertyFinderApplication application)
+		public StatePersistenceService(PropertyCrossApplication application)
 		{
 			this.application = application;
 		}
 
-		public void SaveState(PropertyFinderPersistentState state)
+		public void SaveState(PropertyCrossPersistentState state)
 		{
 			using(var stream = application.CurrentActivity.OpenFileOutput(FileName, FileCreationMode.Private))
 			{
-				XmlSerializer serializer = new XmlSerializer(typeof(PropertyFinderPersistentState));
+				XmlSerializer serializer = new XmlSerializer(typeof(PropertyCrossPersistentState));
 				serializer.Serialize(stream, state);
 			}
 		}
 		
-		public PropertyFinderPersistentState LoadState()
+		public PropertyCrossPersistentState LoadState()
 		{
-			PropertyFinderPersistentState state = null;
+			PropertyCrossPersistentState state = null;
 
 			try
 			{
@@ -35,8 +35,8 @@ namespace com.propertycross.xamarin.android
 				{
 					if(!reader.EndOfStream)
 					{
-						XmlSerializer serializer = new XmlSerializer(typeof(PropertyFinderPersistentState));
-						state = (PropertyFinderPersistentState) serializer.Deserialize(reader);
+						XmlSerializer serializer = new XmlSerializer(typeof(PropertyCrossPersistentState));
+						state = (PropertyCrossPersistentState) serializer.Deserialize(reader);
 						state.PersistenceService = this;
 					}
 				}
@@ -46,7 +46,7 @@ namespace com.propertycross.xamarin.android
 			}
 
 			if(state == null)
-				state = new PropertyFinderPersistentState(this);
+				state = new PropertyCrossPersistentState(this);
 			return state;
 		}
 	}

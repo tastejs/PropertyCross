@@ -1,0 +1,60 @@
+﻿<phone:PhoneApplicationPage 
+    x:Class="PropertyCross.PropertyView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d" d:DesignHeight="696" d:DesignWidth="480"
+    shell:SystemTray.IsVisible="True">
+
+  <!--LayoutRoot is the root grid where all page content is placed-->
+  <Grid x:Name="LayoutRoot"
+        Background="Black">
+    <Image Source="Images/background.jpg"
+          VerticalAlignment="Bottom"
+          Opacity="0.5"/>
+    <StackPanel Orientation="Vertical"
+                Margin="10">
+      <TextBlock x:Name="propertyTitle"
+                 Text="Huntingdon Road, Cambridge"
+                 TextWrapping="Wrap"
+                 FontSize="{StaticResource PhoneFontSizeExtraLarge}"/>
+      <Border Margin="0,15,0,5"
+              BorderThickness="2"
+              BorderBrush="#AAA">
+        <Image x:Name="propertyImage"/>
+      </Border>
+      <TextBlock x:Name="propertyPrice"
+                 Text="£350,000"
+                 Margin="0,10,0,10"
+                 TextWrapping="Wrap"
+                 FontSize="{StaticResource PhoneFontSizeExtraLarge}"/>
+      <TextBlock x:Name="propertyDetails"
+                 Text="4 bed, 2 bathrooms"
+                 Margin="0,10,0,10"
+                 Foreground="#AAA"
+                 TextWrapping="Wrap"
+                 FontSize="{StaticResource PhoneFontSizeLarge}"/>
+      <TextBlock x:Name="propertyDescription"
+                 Text="lorem ipsum"
+                 Margin="0,10,0,10"
+                 Foreground="#AAA"
+                 TextWrapping="Wrap"
+                 FontSize="{StaticResource PhoneFontSizeMedium}"/>
+    </StackPanel>
+  </Grid>
+
+  <phone:PhoneApplicationPage.ApplicationBar>
+    <shell:ApplicationBar IsVisible="True">
+      <shell:ApplicationBarIconButton IconUri="/Images/addToFavourites.png"
+                                      Text="Add to favourites"
+                                      Click="ApplicationBarIconButton_Click"/>
+    </shell:ApplicationBar>
+  </phone:PhoneApplicationPage.ApplicationBar>
+</phone:PhoneApplicationPage>

@@ -1,5 +1,5 @@
 
-namespace PropertyFinder.Presenter
+namespace PropertyCross.Presenter
 {
   public class RecentSearch
   {

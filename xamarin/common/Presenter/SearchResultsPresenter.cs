@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using PropertyFinder.Model;
+using PropertyCross.Model;
 
-namespace PropertyFinder.Presenter
+namespace PropertyCross.Presenter
 {
   /// <summary>
   /// A presenter which renders a collection of search results.
@@ -51,9 +51,9 @@ namespace PropertyFinder.Presenter
 
     private int _totalPages;
 
-    private PropertyFinderPersistentState _state;
+    private PropertyCrossPersistentState _state;
 
-    public SearchResultsPresenter(INavigationService navigationService, PropertyFinderPersistentState state,
+    public SearchResultsPresenter(INavigationService navigationService, PropertyCrossPersistentState state,
       PropertyListingsResult results, SearchItemBase searchItem, PropertyDataSource dataSource)
     {
       _state = state;

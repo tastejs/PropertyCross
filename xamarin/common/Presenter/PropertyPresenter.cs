@@ -1,7 +1,7 @@
-﻿using PropertyFinder.Model;
+﻿using PropertyCross.Model;
 using System;
 
-namespace PropertyFinder.Presenter
+namespace PropertyCross.Presenter
 {
   /// <summary>
   /// A presenter that renders a single property
@@ -22,11 +22,11 @@ namespace PropertyFinder.Presenter
 
     private Property _property;
 
-    private PropertyFinderPersistentState _state;
+    private PropertyCrossPersistentState _state;
 
     private View _view;
 
-    public PropertyPresenter(PropertyFinderPersistentState state, Property property)
+    public PropertyPresenter(PropertyCrossPersistentState state, Property property)
     {
       _state = state;
       _property = property;

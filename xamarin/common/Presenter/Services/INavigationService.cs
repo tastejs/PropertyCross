@@ -1,5 +1,5 @@
 ﻿
-namespace PropertyFinder.Presenter
+namespace PropertyCross.Presenter
 {
   /// <summary>
   /// A service which provides navigation from page to page.

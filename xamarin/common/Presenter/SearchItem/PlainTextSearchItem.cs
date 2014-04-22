@@ -1,10 +1,10 @@
 ﻿
 using System;
-using PropertyFinder.Model;
+using PropertyCross.Model;
 using System.Net;
 
 
-namespace PropertyFinder.Presenter
+namespace PropertyCross.Presenter
 {
   /// <summary>
   /// A search against a plain-text string

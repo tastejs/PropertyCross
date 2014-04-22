@@ -1,7 +1,7 @@
 ﻿
 using Newtonsoft.Json.Linq;
 
-namespace PropertyFinder.Model
+namespace PropertyCross.Model
 {
   public class Location
   {

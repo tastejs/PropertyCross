@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -14,9 +14,15 @@
     <AndroidResgenClass>Resource</AndroidResgenClass>
     <AndroidApplication>True</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
-    <AssemblyName>PropertyFinder</AssemblyName>
+    <AssemblyName>PropertyCross</AssemblyName>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
-    <TargetFrameworkVersion>v4.0.3</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.2</TargetFrameworkVersion>
+    <AndroidSupportedAbis>armeabi,armeabi-v7a,x86</AndroidSupportedAbis>
+    <AndroidStoreUncompressedFileExtensions />
+    <MandroidI18n />
+    <JavaMaximumHeapSize />
+    <JavaOptions />
+    <AndroidUseLatestPlatformSdk />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
@@ -56,11 +62,11 @@
     <Compile Include="StatePersistenceService.cs" />
     <Compile Include="GeoLocationService.cs" />
     <Compile Include="NavigationService.cs" />
-    <Compile Include="Views\PropertyFinderView.cs" />
+    <Compile Include="Views\PropertyCrossView.cs" />
     <Compile Include="RecentSearchAdapter.cs" />
     <Compile Include="Views\SearchResultsView.cs" />
     <Compile Include="SearchResultsAdapter.cs" />
-    <Compile Include="PropertyFinderApplication.cs" />
+    <Compile Include="PropertyCrossApplication.cs" />
     <Compile Include="Utils\DownloadImageTask.cs" />
     <Compile Include="Views\PropertyView.cs" />
     <Compile Include="Views\FavouritesView.cs" />
@@ -75,7 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
-    <AndroidResource Include="Resources\layout\PropertyFinderView.axml" />
+    <AndroidResource Include="Resources\layout\PropertyCrossView.axml" />
     <AndroidResource Include="Resources\layout\recent_search_row.axml" />
     <AndroidResource Include="Resources\values\themes.xml" />
     <AndroidResource Include="Resources\layout\property_search_row.axml" />
@@ -101,7 +107,7 @@
     <AndroidResource Include="Resources\drawable-hdpi\refresh.png" />
     <AndroidResource Include="Resources\drawable-mdpi\refresh.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\refresh.png" />
-    <AndroidResource Include="Resources\menu\menu_propertyfinderview.xml" />
+    <AndroidResource Include="Resources\menu\menu_propertycrossview.xml" />
     <AndroidResource Include="Resources\layout\loading_action_item.axml" />
   </ItemGroup>
   <ItemGroup>
@@ -150,8 +156,8 @@
     <Compile Include="..\..\Common\Presenter\FavouritesPresenter.cs">
       <Link>Presenter\FavouritesPresenter.cs</Link>
     </Compile>
-    <Compile Include="..\..\Common\Presenter\PropertyFinderPresenter.cs">
-      <Link>Presenter\PropertyFinderPresenter.cs</Link>
+    <Compile Include="..\..\Common\Presenter\PropertyCrossPresenter.cs">
+      <Link>Presenter\PropertyCrossPresenter.cs</Link>
     </Compile>
     <Compile Include="..\..\Common\Presenter\PropertyPresenter.cs">
       <Link>Presenter\PropertyPresenter.cs</Link>
@@ -183,24 +189,13 @@
     <Compile Include="..\..\Common\Presenter\Services\IStatePersistenceService.cs">
       <Link>Presenter\Services\IStatePersistenceService.cs</Link>
     </Compile>
-    <Compile Include="..\..\Common\Presenter\Services\PropertyFinderPersistentState.cs">
-      <Link>Presenter\Services\PropertyFinderPersistentState.cs</Link>
+    <Compile Include="..\..\Common\Presenter\Services\PropertyCrossPersistentState.cs">
+      <Link>Presenter\Services\PropertyCrossPersistentState.cs</Link>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup>
-    <Folder Include="Views\" />
-    <Folder Include="Resources\menu\" />
-    <Folder Include="Utils\" />
     <Folder Include="SupportLib\" />
-    <Folder Include="Resources\drawable-hdpi\" />
-    <Folder Include="Resources\drawable-mdpi\" />
-    <Folder Include="Resources\drawable-xhdpi\" />
-    <Folder Include="Resources\drawable-v14\" />
-    <Folder Include="Resources\drawable\" />
-    <Folder Include="Resources\drawable-ldpi\" />
-    <Folder Include="Resources\layout-v11\" />
-    <Folder Include="Resources\anim\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ActionBarSherlock\ActionBarSherlock.csproj">

@@ -10,8 +10,8 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
-using PropertyFinder.Model;
-using PropertyFinder.Presenter;
+using PropertyCross.Model;
+using PropertyCross.Presenter;
 
 using Com.Actionbarsherlock.App;
 using Com.Actionbarsherlock.View;
@@ -51,7 +51,7 @@ namespace com.propertycross.xamarin.android.Views
 
 			placeholder = BitmapFactory.DecodeResource(Resources, Resource.Drawable.ic_launcher);
 
-			var app = PropertyFinderApplication.GetApplication(this);
+			var app = PropertyCrossApplication.GetApplication(this);
 			presenter = (PropertyPresenter) app.Presenter;
 			presenter.SetView(this);
 			app.CurrentActivity = this;

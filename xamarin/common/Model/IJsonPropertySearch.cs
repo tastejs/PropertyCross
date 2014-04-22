@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net;
 
-namespace PropertyFinder.Model
+namespace PropertyCross.Model
 {
   public interface IJsonPropertySearch
   {

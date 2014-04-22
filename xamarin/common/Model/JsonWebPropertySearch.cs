@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Net;
 using System.Linq;
-using PropertyFinder.Presenter;
+using PropertyCross.Presenter;
 using System.Collections.Generic;
 using System.Threading;
 
-namespace PropertyFinder.Model
+namespace PropertyCross.Model
 {
   public class JsonWebPropertySearch : IJsonPropertySearch
   {

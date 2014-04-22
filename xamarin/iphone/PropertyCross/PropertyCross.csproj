@@ -1,0 +1,218 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{8A920BF5-B269-4BC6-AA28-3FF650CF36B2}</ProjectGuid>
+    <ProjectTypeGuids>{6BC8ED88-2882-458C-8E55-DFD12B67127B};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>PropertyCross</RootNamespace>
+    <AssemblyName>PropertyCross</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>False</Optimize>
+    <OutputPath>bin\iPhoneSimulator\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <MtouchDebug>True</MtouchDebug>
+    <MtouchProfiling>True</MtouchProfiling>
+    <MtouchLink>None</MtouchLink>
+    <Externalconsole>True</Externalconsole>
+    <MtouchI18n />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
+    <DebugType>none</DebugType>
+    <Optimize>True</Optimize>
+    <OutputPath>bin\iPhoneSimulator\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>False</ConsolePause>
+    <MtouchLink>None</MtouchLink>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>False</Optimize>
+    <OutputPath>bin\iPhone\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>False</ConsolePause>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <MtouchDebug>True</MtouchDebug>
+    <MtouchProfiling>True</MtouchProfiling>
+    <IpaPackageName />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
+    <DebugType>none</DebugType>
+    <Optimize>True</Optimize>
+    <OutputPath>bin\iPhone\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>False</ConsolePause>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <MtouchArch>ARMv7</MtouchArch>
+    <MtouchI18n />
+    <IpaPackageName />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Ad-Hoc|iPhone' ">
+    <DebugType>none</DebugType>
+    <Optimize>True</Optimize>
+    <OutputPath>bin\iPhone\Ad-Hoc</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>False</ConsolePause>
+    <BuildIpa>True</BuildIpa>
+    <CodesignKey>iPhone Distribution</CodesignKey>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AppStore|iPhone' ">
+    <DebugType>none</DebugType>
+    <Optimize>True</Optimize>
+    <OutputPath>bin\iPhone\AppStore</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>False</ConsolePause>
+    <CodesignKey>iPhone Distribution</CodesignKey>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="monotouch" />
+    <Reference Include="Newtonsoft.Json.MonoTouch">
+      <HintPath>..\lib\NewtonsoftJson\Debug\Newtonsoft.Json.MonoTouch.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Info.plist" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Main.cs" />
+    <Compile Include="AppDelegate.cs" />
+    <Compile Include="GeoLocationService.cs" />
+    <Compile Include="StatePersistenceService.cs" />
+    <Compile Include="NavigationService.cs" />
+    <Compile Include="PropertyCrossViewController.cs" />
+    <Compile Include="PropertyCrossViewController.designer.cs">
+      <DependentUpon>PropertyCrossViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SearchResultsViewController.cs" />
+    <Compile Include="SearchResultsViewController.designer.cs">
+      <DependentUpon>SearchResultsViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MarshalInvokeService.cs" />
+    <Compile Include="PropertyViewController.cs" />
+    <Compile Include="PropertyViewController.designer.cs">
+      <DependentUpon>PropertyViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\Common\Presenter\FavouritesPresenter.cs">
+      <Link>Presenter\FavouritesPresenter.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Presenter\PropertyCrossPresenter.cs">
+      <Link>Presenter\PropertyCrossPresenter.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Presenter\PropertyPresenter.cs">
+      <Link>Presenter\PropertyPresenter.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Presenter\RecentSearch.cs">
+      <Link>Presenter\RecentSearch.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Presenter\SearchResultsPresenter.cs">
+      <Link>Presenter\SearchResultsPresenter.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Presenter\Events\LocationSelectedEventArgs.cs">
+      <Link>Presenter\Events\LocationSelectedEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Presenter\Events\PropertyEventArgs.cs">
+      <Link>Presenter\Events\PropertyEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Presenter\Events\SearchTextChangedEventArgs.cs">
+      <Link>Presenter\Events\SearchTextChangedEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Presenter\SearchItem\GeoLocationSearchItem.cs">
+      <Link>Presenter\SearchItem\GeoLocationSearchItem.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Presenter\SearchItem\PlainTextSearchItem.cs">
+      <Link>Presenter\SearchItem\PlainTextSearchItem.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Presenter\SearchItem\SearchItemBase.cs">
+      <Link>Presenter\SearchItem\SearchItemBase.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Presenter\Services\IGeoLocationService.cs">
+      <Link>Presenter\Services\IGeoLocationService.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Presenter\Services\IMarshalInvokeService.cs">
+      <Link>Presenter\Services\IMarshalInvokeService.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Presenter\Services\INavigationService.cs">
+      <Link>Presenter\Services\INavigationService.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Presenter\Services\IStatePersistenceService.cs">
+      <Link>Presenter\Services\IStatePersistenceService.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Presenter\Services\PropertyCrossPersistentState.cs">
+      <Link>Presenter\Services\PropertyCrossPersistentState.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Model\IJsonPropertySearch.cs">
+      <Link>Model\IJsonPropertySearch.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Model\JsonFilePropertySearch.cs">
+      <Link>Model\JsonFilePropertySearch.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Model\JsonWebPropertySearch.cs">
+      <Link>Model\JsonWebPropertySearch.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Model\Location.cs">
+      <Link>Model\Location.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Model\Property.cs">
+      <Link>Model\Property.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Model\PropertyDataSource.cs">
+      <Link>Model\PropertyDataSource.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Model\PropertyDataSourceResult.cs">
+      <Link>Model\PropertyDataSourceResult.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Model\PropertyListingsResult.cs">
+      <Link>Model\PropertyListingsResult.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Model\PropertyLocationsResult.cs">
+      <Link>Model\PropertyLocationsResult.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Model\PropertyUnknownLocationResult.cs">
+      <Link>Model\PropertyUnknownLocationResult.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\Model\Util.cs">
+      <Link>Model\Util.cs</Link>
+    </Compile>
+    <Compile Include="FavouritesViewController.cs" />
+    <Compile Include="FavouritesViewController.designer.cs">
+      <DependentUpon>FavouritesViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TableSourceBase.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterfaceDefinition Include="PropertyCrossViewController.xib" />
+    <InterfaceDefinition Include="SearchResultsViewController.xib" />
+    <InterfaceDefinition Include="PropertyViewController.xib" />
+    <InterfaceDefinition Include="FavouritesViewController.xib" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Default.png" />
+    <Content Include="Default%402x.png" />
+    <Content Include="Icon.png" />
+    <Content Include="Icon%402x.png" />
+    <Content Include="nostar.png" />
+    <Content Include="nostar%402x.png" />
+    <Content Include="star.png" />
+    <Content Include="star%402x.png" />
+  </ItemGroup>
+</Project>

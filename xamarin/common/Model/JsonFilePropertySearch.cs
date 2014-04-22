@@ -2,7 +2,7 @@
 using System.Net;
 //using System.Windows.Threading;
 
-namespace PropertyFinder.Model
+namespace PropertyCross.Model
 {
   public class JsonFilePropertySearch : IJsonPropertySearch
   {

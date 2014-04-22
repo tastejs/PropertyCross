@@ -1,0 +1,88 @@
+﻿<phone:PhoneApplicationPage 
+    x:Class="PropertyCross.SearchResultsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    xmlns:conv="clr-namespace:PropertyCross.Converter"
+    xmlns:mm="clr-namespace:MetroInMotionUtils"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
+    shell:SystemTray.IsVisible="True">
+  
+  <Grid x:Name="LayoutRoot"
+        Background="Black">
+    <ScrollViewer Margin="5">
+      <Grid MinHeight="750">
+        <Image Source="Images/background.jpg"
+          VerticalAlignment="Bottom"
+          Opacity="0.5"/>
+        <Grid>
+          <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+          </Grid.RowDefinitions>
+
+          <TextBlock TextWrapping="Wrap"
+                     FontSize="{StaticResource PhoneFontSizeExtraLarge}"
+                     Margin="10,0,0,0">
+            <Run x:Name="propertiesShown"></Run>
+            <Run Foreground="#AAA"> of </Run>
+            <Run x:Name="totalProperties"></Run>
+            <Run Foreground="#AAA"> matches</Run>
+          </TextBlock>
+
+          <ItemsControl x:Name="list"
+                      ItemTemplate="{StaticResource propertyTemplate}"
+                      Grid.Row="1"
+                      MouseLeftButtonUp="PropertyList_MouseLeftButtonUp">
+            <ItemsControl.ItemsPanel>
+              <ItemsPanelTemplate>
+                <StackPanel Orientation="Vertical"/>
+              </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+          </ItemsControl>
+
+          
+          <!-- is enabled and visibility bindings -->
+
+          <Button Visibility="{Binding LoadMoreVisible}"
+                  Grid.Row="2"
+                  x:Name="loadMoreButton"
+                  Template="{StaticResource PropertyButtonTemplate}"
+                  mm:MetroInMotion.Tilt="3"
+                  Click="LoadMore_Click">
+            <Border Style="{StaticResource ButtonBackgroundStyle}"
+                    mm:MetroInMotion.Tilt="2">
+              <StackPanel Orientation="Vertical"
+                    HorizontalAlignment="Left">
+                <TextBlock Text="Load more ..."
+                           x:Name="loadMoreText"
+                           FontSize="{StaticResource PhoneFontSizeLarge}"/>
+                <TextBlock TextWrapping="NoWrap"
+                          VerticalAlignment="Center"
+                          FontSize="{StaticResource PhoneFontSizeSmall}">
+                <Run Foreground="#AAA">Results for </Run>
+                <Run x:Name="searchText"></Run>
+                <Run Foreground="#AAA">, showing</Run>
+                <Run x:Name="propertiesShown2"></Run>
+                <Run Foreground="#AAA" > of </Run>
+                <Run x:Name="totalProperties2"></Run>
+                <Run Foreground="#AAA" > properties </Run>
+                </TextBlock>
+              </StackPanel>
+            </Border>
+          </Button>
+        </Grid>
+      </Grid>
+    </ScrollViewer>
+  </Grid>
+ 
+</phone:PhoneApplicationPage>

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 
-namespace PropertyFinder.Model
+namespace PropertyCross.Model
 {
   public class PropertyLocationsResult : PropertyDataSourceResult
   {
