@@ -15,36 +15,43 @@
     mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
     shell:SystemTray.IsVisible="True">
 
-  <!--LayoutRoot is the root grid where all page content is placed-->
-  <Grid x:Name="LayoutRoot" Background="Black">
+    <Grid x:Name="LayoutRoot" Background="Black">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="*"/>
+      </Grid.RowDefinitions>
 
-    <Image Source="Images/background.jpg"
-          VerticalAlignment="Bottom"
-          Opacity="0.5"/>
-    
-    <ScrollViewer>
-      <Grid Margin="10">
-        <Grid.RowDefinitions>
-          <RowDefinition Height="Auto"/>
-          <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-
+      <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,12">
         <TextBlock Text="Favourites"
-                   FontSize="{StaticResource PhoneFontSizeExtraLarge}"/>
+          FontSize="{StaticResource PhoneFontSizeExtraLarge}"/>
+      </StackPanel>
+      <Grid x:Name="ContentPanel" Grid.Row="1" Margin="0,0,0,0">
+        <ScrollViewer Margin="5">
+          <Grid MinHeight="750">
+            <Image Source="Images/background.jpg"
+              VerticalAlignment="Bottom"
+              Opacity="0.5"/>
+            <Grid>
+              <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+              </Grid.RowDefinitions>
     
-        <ItemsControl ItemTemplate="{StaticResource propertyTemplate}"
-                      x:Name="favouritesList"
-                      Grid.Row="1"
-                      MouseLeftButtonUp="FavouritesList_MouseLeftButtonUp">
-          <ItemsControl.ItemsPanel>
-            <ItemsPanelTemplate>
-              <StackPanel Orientation="Vertical"/>
-            </ItemsPanelTemplate>
-          </ItemsControl.ItemsPanel>
-        </ItemsControl>
+              <ItemsControl ItemTemplate="{StaticResource propertyTemplate}"
+                              x:Name="favouritesList"
+                              Grid.Row="1"
+                              MouseLeftButtonUp="FavouritesList_MouseLeftButtonUp">
+                <ItemsControl.ItemsPanel>
+                  <ItemsPanelTemplate>
+                    <StackPanel Orientation="Vertical"/>
+                  </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+              </ItemsControl>
+            </Grid>
+          </Grid>
+        </ScrollViewer>
       </Grid>
-    </ScrollViewer>
-  </Grid>
+    </Grid>
 
 
 

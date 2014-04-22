@@ -248,10 +248,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="ApplicationTileIcon.png" />
+    <Content Include="Images\favs.addto.png" />
+    <Content Include="Images\favs.png" />
+    <Content Include="Images\favs.removefrom.png" />
     <Resource Include="Images\background.jpg" />
-    <Content Include="Images\addToFavourites.png" />
-    <Content Include="Images\favourited.png" />
-    <Content Include="Images\favourites.png" />
     <Content Include="SplashScreenImage.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />

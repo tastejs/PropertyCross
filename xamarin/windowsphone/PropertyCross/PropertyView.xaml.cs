@@ -50,7 +50,7 @@ namespace PropertyCross
       set
       {
         var btn = (ApplicationBarIconButton)ApplicationBar.Buttons[0];
-        btn.IconUri = new Uri(value ? "/Images/favourited.png" : "/Images/addToFavourites.png", UriKind.Relative);
+        btn.IconUri = new Uri(value ? "/Images/favs.removefrom.png" : "/Images/favs.addto.png", UriKind.Relative);
         btn.Text = value ? "remove favourite" : "add favourite";
       }
     }

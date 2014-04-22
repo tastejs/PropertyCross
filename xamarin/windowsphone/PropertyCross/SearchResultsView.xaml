@@ -14,75 +14,82 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
     shell:SystemTray.IsVisible="True">
-  
-  <Grid x:Name="LayoutRoot"
-        Background="Black">
-    <ScrollViewer Margin="5">
-      <Grid MinHeight="750">
-        <Image Source="Images/background.jpg"
-          VerticalAlignment="Bottom"
-          Opacity="0.5"/>
-        <Grid>
-          <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-          </Grid.RowDefinitions>
 
-          <TextBlock TextWrapping="Wrap"
-                     FontSize="{StaticResource PhoneFontSizeExtraLarge}"
-                     Margin="10,0,0,0">
-            <Run x:Name="propertiesShown"></Run>
-            <Run Foreground="#AAA"> of </Run>
-            <Run x:Name="totalProperties"></Run>
-            <Run Foreground="#AAA"> matches</Run>
-          </TextBlock>
+    <Grid x:Name="LayoutRoot" Background="Black">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="*"/>
+      </Grid.RowDefinitions>
 
-          <ItemsControl x:Name="list"
-                      ItemTemplate="{StaticResource propertyTemplate}"
-                      Grid.Row="1"
-                      MouseLeftButtonUp="PropertyList_MouseLeftButtonUp">
-            <ItemsControl.ItemsPanel>
-              <ItemsPanelTemplate>
-                <StackPanel Orientation="Vertical"/>
-              </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-          </ItemsControl>
+      <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,12">
+        <TextBlock TextWrapping="Wrap"
+                 FontSize="{StaticResource PhoneFontSizeExtraLarge}"
+                 Margin="10,0,0,0">
+        <Run x:Name="propertiesShown"></Run>
+        <Run Foreground="#AAA"> of </Run>
+        <Run x:Name="totalProperties"></Run>
+        <Run Foreground="#AAA"> matches</Run>
+        </TextBlock>
+      </StackPanel>
+      <Grid x:Name="ContentPanel" Grid.Row="1" Margin="0,0,0,0">
+        <ScrollViewer Margin="5">
+          <Grid MinHeight="750">
+            <Image Source="Images/background.jpg"
+              VerticalAlignment="Bottom"
+              Opacity="0.5"/>
+            <Grid>
+              <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+              </Grid.RowDefinitions>
+
+              <ItemsControl x:Name="list"
+                          ItemTemplate="{StaticResource propertyTemplate}"
+                          Grid.Row="1"
+                          MouseLeftButtonUp="PropertyList_MouseLeftButtonUp">
+                <ItemsControl.ItemsPanel>
+                  <ItemsPanelTemplate>
+                    <StackPanel Orientation="Vertical"/>
+                  </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+              </ItemsControl>
 
           
-          <!-- is enabled and visibility bindings -->
+              <!-- is enabled and visibility bindings -->
 
-          <Button Visibility="{Binding LoadMoreVisible}"
-                  Grid.Row="2"
-                  x:Name="loadMoreButton"
-                  Template="{StaticResource PropertyButtonTemplate}"
-                  mm:MetroInMotion.Tilt="3"
-                  Click="LoadMore_Click">
-            <Border Style="{StaticResource ButtonBackgroundStyle}"
-                    mm:MetroInMotion.Tilt="2">
-              <StackPanel Orientation="Vertical"
-                    HorizontalAlignment="Left">
-                <TextBlock Text="Load more ..."
-                           x:Name="loadMoreText"
-                           FontSize="{StaticResource PhoneFontSizeLarge}"/>
-                <TextBlock TextWrapping="NoWrap"
-                          VerticalAlignment="Center"
-                          FontSize="{StaticResource PhoneFontSizeSmall}">
-                <Run Foreground="#AAA">Results for </Run>
-                <Run x:Name="searchText"></Run>
-                <Run Foreground="#AAA">, showing</Run>
-                <Run x:Name="propertiesShown2"></Run>
-                <Run Foreground="#AAA" > of </Run>
-                <Run x:Name="totalProperties2"></Run>
-                <Run Foreground="#AAA" > properties </Run>
-                </TextBlock>
-              </StackPanel>
-            </Border>
-          </Button>
-        </Grid>
+              <Button Visibility="{Binding LoadMoreVisible}"
+                      Grid.Row="2"
+                      x:Name="loadMoreButton"
+                      Template="{StaticResource PropertyButtonTemplate}"
+                      mm:MetroInMotion.Tilt="3"
+                      Click="LoadMore_Click">
+                <Border Style="{StaticResource ButtonBackgroundStyle}"
+                        mm:MetroInMotion.Tilt="2">
+                  <StackPanel Orientation="Vertical"
+                        HorizontalAlignment="Left">
+                    <TextBlock Text="Load more ..."
+                               x:Name="loadMoreText"
+                               FontSize="{StaticResource PhoneFontSizeLarge}"/>
+                    <TextBlock TextWrapping="NoWrap"
+                              VerticalAlignment="Center"
+                              FontSize="{StaticResource PhoneFontSizeSmall}">
+                    <Run Foreground="#AAA">Results for </Run>
+                    <Run x:Name="searchText"></Run>
+                    <Run Foreground="#AAA">, showing</Run>
+                    <Run x:Name="propertiesShown2"></Run>
+                    <Run Foreground="#AAA" > of </Run>
+                    <Run x:Name="totalProperties2"></Run>
+                    <Run Foreground="#AAA" > properties </Run>
+                    </TextBlock>
+                  </StackPanel>
+                </Border>
+              </Button>
+            </Grid>
+          </Grid>
+        </ScrollViewer>
       </Grid>
-    </ScrollViewer>
-  </Grid>
+    </Grid>
  
 </phone:PhoneApplicationPage>

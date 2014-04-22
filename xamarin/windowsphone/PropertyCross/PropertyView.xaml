@@ -52,7 +52,7 @@
 
   <phone:PhoneApplicationPage.ApplicationBar>
     <shell:ApplicationBar IsVisible="True">
-      <shell:ApplicationBarIconButton IconUri="/Images/addToFavourites.png"
+      <shell:ApplicationBarIconButton IconUri="/Images/favs.addto.png"
                                       Text="Add to favourites"
                                       Click="ApplicationBarIconButton_Click"/>
     </shell:ApplicationBar>
