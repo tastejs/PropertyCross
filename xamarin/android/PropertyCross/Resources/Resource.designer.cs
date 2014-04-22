@@ -700,19 +700,22 @@ namespace com.propertycross.xamarin.android
 			public const int actionbar_tile = 2130837590;
 			
 			// aapt resource value: 0x7f020057
-			public const int ic_launcher = 2130837591;
+			public const int home = 2130837591;
 			
 			// aapt resource value: 0x7f020058
-			public const int monoandroidsplash = 2130837592;
+			public const int ic_launcher = 2130837592;
 			
 			// aapt resource value: 0x7f020059
-			public const int nostar = 2130837593;
+			public const int monoandroidsplash = 2130837593;
 			
 			// aapt resource value: 0x7f02005a
-			public const int refresh = 2130837594;
+			public const int nostar = 2130837594;
 			
 			// aapt resource value: 0x7f02005b
-			public const int star = 2130837595;
+			public const int refresh = 2130837595;
+			
+			// aapt resource value: 0x7f02005c
+			public const int star = 2130837596;
 			
 			static Drawable()
 			{

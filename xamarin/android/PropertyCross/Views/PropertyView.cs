@@ -49,7 +49,7 @@ namespace com.propertycross.xamarin.android.Views
 			overviewText = (TextView) FindViewById(Resource.Id.property_overview);
 			informationText = (TextView) FindViewById(Resource.Id.property_information);
 
-			placeholder = BitmapFactory.DecodeResource(Resources, Resource.Drawable.ic_launcher);
+			placeholder = BitmapFactory.DecodeResource(Resources, Resource.Drawable.home);
 
 			var app = PropertyCrossApplication.GetApplication(this);
 			presenter = (PropertyPresenter) app.Presenter;

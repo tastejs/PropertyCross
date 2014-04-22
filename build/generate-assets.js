@@ -285,6 +285,13 @@ async.series([
     ["xamarin/android/PropertyCross/Resources/drawable-mdpi/refresh.png", 32]
   ]),
 
+  generateOther.bind(null, "assets/home.png", [
+    // ["TARGET", WIDTH (, HEIGHT)],
+    ["xamarin/android/PropertyCross/Resources/drawable-xhdpi/home.png", 64],
+    ["xamarin/android/PropertyCross/Resources/drawable-hdpi/home.png", 48],
+    ["xamarin/android/PropertyCross/Resources/drawable-mdpi/home.png", 32]
+  ]),
+
   generateOther.bind(null, "assets/actionbar_tile.png", [
     // ["TARGET", WIDTH (, HEIGHT)],
     ["native/android/PropertyCross/res/drawable-mdpi/actionbar_tile.png", 6],

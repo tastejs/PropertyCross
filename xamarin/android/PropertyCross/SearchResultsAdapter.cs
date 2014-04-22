@@ -26,7 +26,7 @@ namespace com.propertycross.xamarin.android
 		{
 			this.context = c;
 			this.data = d;
-			placeholder = BitmapFactory.DecodeResource(context.Resources, Resource.Drawable.ic_launcher);
+			placeholder = BitmapFactory.DecodeResource(context.Resources, Resource.Drawable.home);
 		}
 
 		public override int Count
