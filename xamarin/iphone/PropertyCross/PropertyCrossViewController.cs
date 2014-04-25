@@ -32,6 +32,10 @@ namespace PropertyCross
     {
       base.ViewDidLoad ();
 
+      if (PlatformUtils.IsiOS7) {
+        EdgesForExtendedLayout = UIRectEdge.None;
+      }
+
       // initial UI state
       searchActivityIndicator.Hidden = true;
       tableView.Hidden = true;

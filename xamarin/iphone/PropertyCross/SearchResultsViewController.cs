@@ -33,7 +33,11 @@ namespace PropertyCross
 		
     public override void ViewDidLoad ()
     {
-      base.ViewDidLoad ();			
+      base.ViewDidLoad ();	
+
+      if (PlatformUtils.IsiOS7) {
+        EdgesForExtendedLayout = UIRectEdge.None;
+      }		
 
       // configure the UITableView
       _tableSource = new TableSource();

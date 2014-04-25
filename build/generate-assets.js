@@ -239,6 +239,9 @@ async.series([
     ["ionic/www/assets/splashscreens/720x1280.png", 720, 1280],
     ["ionic/www/assets/splashscreens/screen-iphone-portrait.png", 320, 480],
     ["ionic/www/assets/splashscreens/screen-iphone-portrait-2x.png", 640, 960],
+    ["xamarin/iphone/PropertyCross/Default.png", 320, 480],
+    ["xamarin/iphone/PropertyCross/Default@2x.png", 640, 960],
+    ["xamarin/iphone/PropertyCross/Default-568h@2x.png", 640, 1136],
   ]),
 
   generateOther.bind(null, "assets/star.png", [

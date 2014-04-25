@@ -23,7 +23,8 @@
     <MtouchProfiling>True</MtouchProfiling>
     <MtouchLink>None</MtouchLink>
     <Externalconsole>True</Externalconsole>
-    <MtouchI18n />
+    <MtouchI18n>
+    </MtouchI18n>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>none</DebugType>
@@ -46,7 +47,8 @@
     <CodesignKey>iPhone Developer</CodesignKey>
     <MtouchDebug>True</MtouchDebug>
     <MtouchProfiling>True</MtouchProfiling>
-    <IpaPackageName />
+    <IpaPackageName>
+    </IpaPackageName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>none</DebugType>
@@ -57,8 +59,10 @@
     <ConsolePause>False</ConsolePause>
     <CodesignKey>iPhone Developer</CodesignKey>
     <MtouchArch>ARMv7</MtouchArch>
-    <MtouchI18n />
-    <IpaPackageName />
+    <MtouchI18n>
+    </MtouchI18n>
+    <IpaPackageName>
+    </IpaPackageName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Ad-Hoc|iPhone' ">
     <DebugType>none</DebugType>
@@ -69,6 +73,11 @@
     <ConsolePause>False</ConsolePause>
     <BuildIpa>True</BuildIpa>
     <CodesignKey>iPhone Distribution</CodesignKey>
+    <IpaPackageName>
+    </IpaPackageName>
+    <MtouchI18n>
+    </MtouchI18n>
+    <MtouchArch>ARMv7</MtouchArch>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AppStore|iPhone' ">
     <DebugType>none</DebugType>
@@ -196,6 +205,7 @@
       <DependentUpon>FavouritesViewController.cs</DependentUpon>
     </Compile>
     <Compile Include="TableSourceBase.cs" />
+    <Compile Include="PlatformUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="PropertyCrossViewController.xib" />
@@ -208,6 +218,7 @@
   <ItemGroup>
     <Content Include="Default.png" />
     <Content Include="Default%402x.png" />
+    <Content Include="Default-568h%402x.png" />
     <Content Include="Icon.png" />
     <Content Include="Icon%402x.png" />
     <Content Include="nostar.png" />

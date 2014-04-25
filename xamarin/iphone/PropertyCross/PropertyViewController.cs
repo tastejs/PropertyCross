@@ -36,6 +36,10 @@ namespace PropertyCross
     {
       base.ViewDidLoad ();
 
+      if (PlatformUtils.IsiOS7) {
+        EdgesForExtendedLayout = UIRectEdge.None;
+      }
+
       NavigationItem.RightBarButtonItem = _favouriteButton;
 
       _presenter.SetView(this);
