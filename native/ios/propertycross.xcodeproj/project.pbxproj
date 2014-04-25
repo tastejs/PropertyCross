@@ -14,7 +14,7 @@
 		728463311727327700AD5EE9 /* star.png in Resources */ = {isa = PBXBuildFile; fileRef = 7284632F1727327700AD5EE9 /* star.png */; };
 		728463351727354F00AD5EE9 /* nostar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 728463331727354F00AD5EE9 /* nostar@2x.png */; };
 		728463361727354F00AD5EE9 /* star@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 728463341727354F00AD5EE9 /* star@2x.png */; };
-		72AB49E11636FA8C006B5EF1 /* PropertyFinderDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 72AB49DF1636FA8C006B5EF1 /* PropertyFinderDataModel.xcdatamodeld */; };
+		72AB49E11636FA8C006B5EF1 /* PropertyCrossDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 72AB49DF1636FA8C006B5EF1 /* PropertyCrossDataModel.xcdatamodeld */; };
 		72AB49EA1636FBEE006B5EF1 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72AB49E91636FBEE006B5EF1 /* CoreData.framework */; };
 		72AB49ED1637CA3A006B5EF1 /* SearchItemBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 72AB49EC1637CA3A006B5EF1 /* SearchItemBase.m */; };
 		72AB49F01637CA7F006B5EF1 /* PlainTextSearchItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 72AB49EF1637CA7E006B5EF1 /* PlainTextSearchItem.m */; };
@@ -35,8 +35,8 @@
 		72B98E251627644300296302 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 72B98E241627644300296302 /* Default.png */; };
 		72B98E271627644300296302 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 72B98E261627644300296302 /* Default@2x.png */; };
 		72B98E291627644300296302 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 72B98E281627644300296302 /* Default-568h@2x.png */; };
-		72B98E381627650F00296302 /* PropertyFinderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B98E361627650F00296302 /* PropertyFinderViewController.m */; };
-		72B98E391627650F00296302 /* PropertyFinderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72B98E371627650F00296302 /* PropertyFinderViewController.xib */; };
+		72B98E381627650F00296302 /* PropertyCrossViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B98E361627650F00296302 /* PropertyCrossViewController.m */; };
+		72B98E391627650F00296302 /* PropertyCrossViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72B98E371627650F00296302 /* PropertyCrossViewController.xib */; };
 		72B98E3D162767E700296302 /* Property.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B98E3C162767E700296302 /* Property.m */; };
 		72B98E401627694100296302 /* PropertyDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B98E3F1627694100296302 /* PropertyDataSource.m */; };
 		72B98E461627699700296302 /* PropertyListingResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B98E451627699700296302 /* PropertyListingResult.m */; };
@@ -63,11 +63,11 @@
 		7220D6191718630500F21A64 /* RecentSearchDataEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentSearchDataEntity.m; sourceTree = "<group>"; };
 		726CEB87163EE01C00860DD0 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		726CEB89163EE02000860DD0 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
-		7284632E1727327700AD5EE9 /* nostar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = nostar.png; path = "Property Finder/nostar.png"; sourceTree = SOURCE_ROOT; };
-		7284632F1727327700AD5EE9 /* star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = star.png; path = "Property Finder/star.png"; sourceTree = SOURCE_ROOT; };
-		728463331727354F00AD5EE9 /* nostar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "nostar@2x.png"; path = "Property Finder/nostar@2x.png"; sourceTree = SOURCE_ROOT; };
-		728463341727354F00AD5EE9 /* star@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "star@2x.png"; path = "Property Finder/star@2x.png"; sourceTree = SOURCE_ROOT; };
-		72AB49E01636FA8C006B5EF1 /* PropertyFinderDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PropertyFinderDataModel.xcdatamodel; sourceTree = "<group>"; };
+		7284632E1727327700AD5EE9 /* nostar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = nostar.png; path = PropertyCross/nostar.png; sourceTree = SOURCE_ROOT; };
+		7284632F1727327700AD5EE9 /* star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = star.png; path = PropertyCross/star.png; sourceTree = SOURCE_ROOT; };
+		728463331727354F00AD5EE9 /* nostar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "nostar@2x.png"; path = "PropertyCross/nostar@2x.png"; sourceTree = SOURCE_ROOT; };
+		728463341727354F00AD5EE9 /* star@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "star@2x.png"; path = "PropertyCross/star@2x.png"; sourceTree = SOURCE_ROOT; };
+		72AB49E01636FA8C006B5EF1 /* PropertyCrossDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PropertyCrossDataModel.xcdatamodel; sourceTree = "<group>"; };
 		72AB49E91636FBEE006B5EF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		72AB49EB1637CA3A006B5EF1 /* SearchItemBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchItemBase.h; sourceTree = "<group>"; };
 		72AB49EC1637CA3A006B5EF1 /* SearchItemBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchItemBase.m; sourceTree = "<group>"; };
@@ -100,9 +100,9 @@
 		72B98E241627644300296302 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		72B98E261627644300296302 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		72B98E281627644300296302 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		72B98E351627650F00296302 /* PropertyFinderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertyFinderViewController.h; sourceTree = "<group>"; };
-		72B98E361627650F00296302 /* PropertyFinderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PropertyFinderViewController.m; sourceTree = "<group>"; };
-		72B98E371627650F00296302 /* PropertyFinderViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PropertyFinderViewController.xib; sourceTree = "<group>"; };
+		72B98E351627650F00296302 /* PropertyCrossViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertyCrossViewController.h; sourceTree = "<group>"; };
+		72B98E361627650F00296302 /* PropertyCrossViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PropertyCrossViewController.m; sourceTree = "<group>"; };
+		72B98E371627650F00296302 /* PropertyCrossViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PropertyCrossViewController.xib; sourceTree = "<group>"; };
 		72B98E3B162767E700296302 /* Property.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Property.h; path = Model/Property.h; sourceTree = "<group>"; };
 		72B98E3C162767E700296302 /* Property.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Property.m; path = Model/Property.m; sourceTree = "<group>"; };
 		72B98E3E1627694100296302 /* PropertyDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PropertyDataSource.h; path = Model/PropertyDataSource.h; sourceTree = "<group>"; };
@@ -171,7 +171,7 @@
 			children = (
 				7220D6181718630500F21A64 /* RecentSearchDataEntity.h */,
 				7220D6191718630500F21A64 /* RecentSearchDataEntity.m */,
-				72AB49DF1636FA8C006B5EF1 /* PropertyFinderDataModel.xcdatamodeld */,
+				72AB49DF1636FA8C006B5EF1 /* PropertyCrossDataModel.xcdatamodeld */,
 				72AB4A161639A3D0006B5EF1 /* FavouritePropertyDataEntity.h */,
 				72AB4A171639A3D1006B5EF1 /* FavouritePropertyDataEntity.m */,
 				72AB4A1316391751006B5EF1 /* PersistentDataStore.h */,
@@ -209,7 +209,7 @@
 			children = (
 				726CEB89163EE02000860DD0 /* Icon@2x.png */,
 				726CEB87163EE01C00860DD0 /* Icon.png */,
-				72B98E181627644300296302 /* Property Finder */,
+				72B98E181627644300296302 /* propertycross */,
 				72B98E111627644300296302 /* Frameworks */,
 				72B98E0F1627644300296302 /* Products */,
 			);
@@ -235,7 +235,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		72B98E181627644300296302 /* Property Finder */ = {
+		72B98E181627644300296302 /* propertycross */ = {
 			isa = PBXGroup;
 			children = (
 				72AB4A1B163BBFED006B5EF1 /* Images */,
@@ -245,9 +245,9 @@
 				72AB49DD1636FA16006B5EF1 /* Test Files */,
 				72D057451630726000D41480 /* Categories */,
 				72B98E3A162767AA00296302 /* Model */,
-				72B98E351627650F00296302 /* PropertyFinderViewController.h */,
-				72B98E361627650F00296302 /* PropertyFinderViewController.m */,
-				72B98E371627650F00296302 /* PropertyFinderViewController.xib */,
+				72B98E351627650F00296302 /* PropertyCrossViewController.h */,
+				72B98E361627650F00296302 /* PropertyCrossViewController.m */,
+				72B98E371627650F00296302 /* PropertyCrossViewController.xib */,
 				72B98E211627644300296302 /* AppDelegate.h */,
 				72B98E221627644300296302 /* AppDelegate.m */,
 				72B98E4716287ECA00296302 /* SearchResultsViewController.h */,
@@ -267,7 +267,8 @@
 				72AB4A0F16389554006B5EF1 /* FavouritesViewController.m */,
 				72AB4A1016389555006B5EF1 /* FavouritesViewController.xib */,
 			);
-			path = "Property Finder";
+			name = propertycross;
+			path = PropertyCross;
 			sourceTree = "<group>";
 		};
 		72B98E191627644300296302 /* Supporting Files */ = {
@@ -378,7 +379,7 @@
 				72B98E251627644300296302 /* Default.png in Resources */,
 				72B98E271627644300296302 /* Default@2x.png in Resources */,
 				72B98E291627644300296302 /* Default-568h@2x.png in Resources */,
-				72B98E391627650F00296302 /* PropertyFinderViewController.xib in Resources */,
+				72B98E391627650F00296302 /* PropertyCrossViewController.xib in Resources */,
 				72B98E4B16287F3F00296302 /* SearchResultsViewController.xib in Resources */,
 				72D056E5162DA23300D41480 /* PropertyViewController.xib in Resources */,
 				72D05728162EDA9C00D41480 /* SearchResults.txt in Resources */,
@@ -402,7 +403,7 @@
 			files = (
 				72B98E1F1627644300296302 /* main.m in Sources */,
 				72B98E231627644300296302 /* AppDelegate.m in Sources */,
-				72B98E381627650F00296302 /* PropertyFinderViewController.m in Sources */,
+				72B98E381627650F00296302 /* PropertyCrossViewController.m in Sources */,
 				72B98E3D162767E700296302 /* Property.m in Sources */,
 				72B98E401627694100296302 /* PropertyDataSource.m in Sources */,
 				72B98E461627699700296302 /* PropertyListingResult.m in Sources */,
@@ -418,7 +419,7 @@
 				72D142B4163073E700D8EE70 /* JSONFileDataSource.m in Sources */,
 				72D142B71630742000D8EE70 /* RecentSearchesTableViewSource.m in Sources */,
 				72D142BD163076BB00D8EE70 /* PropertyDataSourceResult.m in Sources */,
-				72AB49E11636FA8C006B5EF1 /* PropertyFinderDataModel.xcdatamodeld in Sources */,
+				72AB49E11636FA8C006B5EF1 /* PropertyCrossDataModel.xcdatamodeld in Sources */,
 				72AB49ED1637CA3A006B5EF1 /* SearchItemBase.m in Sources */,
 				72AB49F01637CA7F006B5EF1 /* PlainTextSearchItem.m in Sources */,
 				72AB49F916385306006B5EF1 /* UITableViewCell+ImageHelpers.m in Sources */,
@@ -499,8 +500,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Property Finder/propertycross-Prefix.pch";
-				INFOPLIST_FILE = "Property Finder/propertycross-Info.plist";
+				GCC_PREFIX_HEADER = "PropertyCross/propertycross-Prefix.pch";
+				INFOPLIST_FILE = "PropertyCross/propertycross-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = propertycross;
 				WRAPPER_EXTENSION = app;
@@ -511,8 +512,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Property Finder/propertycross-Prefix.pch";
-				INFOPLIST_FILE = "Property Finder/propertycross-Info.plist";
+				GCC_PREFIX_HEADER = "PropertyCross/propertycross-Prefix.pch";
+				INFOPLIST_FILE = "PropertyCross/propertycross-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = propertycross;
 				WRAPPER_EXTENSION = app;
@@ -543,13 +544,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		72AB49DF1636FA8C006B5EF1 /* PropertyFinderDataModel.xcdatamodeld */ = {
+		72AB49DF1636FA8C006B5EF1 /* PropertyCrossDataModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				72AB49E01636FA8C006B5EF1 /* PropertyFinderDataModel.xcdatamodel */,
+				72AB49E01636FA8C006B5EF1 /* PropertyCrossDataModel.xcdatamodel */,
 			);
-			currentVersion = 72AB49E01636FA8C006B5EF1 /* PropertyFinderDataModel.xcdatamodel */;
-			path = PropertyFinderDataModel.xcdatamodeld;
+			currentVersion = 72AB49E01636FA8C006B5EF1 /* PropertyCrossDataModel.xcdatamodel */;
+			path = PropertyCrossDataModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
