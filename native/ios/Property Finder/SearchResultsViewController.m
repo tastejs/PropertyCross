@@ -55,6 +55,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+
 	// Do any additional setup after loading the view.
     
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Results"

@@ -87,14 +87,14 @@
 		72AB4A1416391752006B5EF1 /* PersistentDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersistentDataStore.m; sourceTree = "<group>"; };
 		72AB4A161639A3D0006B5EF1 /* FavouritePropertyDataEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavouritePropertyDataEntity.h; sourceTree = "<group>"; };
 		72AB4A171639A3D1006B5EF1 /* FavouritePropertyDataEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavouritePropertyDataEntity.m; sourceTree = "<group>"; };
-		72B98E0E1627644300296302 /* PropertyCross.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PropertyCross.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		72B98E0E1627644300296302 /* propertycross.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = propertycross.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72B98E121627644300296302 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		72B98E141627644300296302 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		72B98E161627644300296302 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		72B98E1A1627644300296302 /* Property Finder-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Property Finder-Info.plist"; sourceTree = "<group>"; };
+		72B98E1A1627644300296302 /* propertycross-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "propertycross-Info.plist"; sourceTree = "<group>"; };
 		72B98E1C1627644300296302 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		72B98E1E1627644300296302 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		72B98E201627644300296302 /* Property Finder-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Property Finder-Prefix.pch"; sourceTree = "<group>"; };
+		72B98E201627644300296302 /* propertycross-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "propertycross-Prefix.pch"; sourceTree = "<group>"; };
 		72B98E211627644300296302 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		72B98E221627644300296302 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		72B98E241627644300296302 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
@@ -218,7 +218,7 @@
 		72B98E0F1627644300296302 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				72B98E0E1627644300296302 /* PropertyCross.app */,
+				72B98E0E1627644300296302 /* propertycross.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -273,10 +273,10 @@
 		72B98E191627644300296302 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				72B98E1A1627644300296302 /* Property Finder-Info.plist */,
+				72B98E1A1627644300296302 /* propertycross-Info.plist */,
 				72B98E1B1627644300296302 /* InfoPlist.strings */,
 				72B98E1E1627644300296302 /* main.m */,
-				72B98E201627644300296302 /* Property Finder-Prefix.pch */,
+				72B98E201627644300296302 /* propertycross-Prefix.pch */,
 				72B98E241627644300296302 /* Default.png */,
 				72B98E261627644300296302 /* Default@2x.png */,
 				72B98E281627644300296302 /* Default-568h@2x.png */,
@@ -326,9 +326,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		72B98E0D1627644300296302 /* Property Finder */ = {
+		72B98E0D1627644300296302 /* propertycross */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 72B98E321627644300296302 /* Build configuration list for PBXNativeTarget "Property Finder" */;
+			buildConfigurationList = 72B98E321627644300296302 /* Build configuration list for PBXNativeTarget "propertycross" */;
 			buildPhases = (
 				72B98E0A1627644300296302 /* Sources */,
 				72B98E0B1627644300296302 /* Frameworks */,
@@ -338,9 +338,9 @@
 			);
 			dependencies = (
 			);
-			name = "Property Finder";
+			name = propertycross;
 			productName = "Property Finder";
-			productReference = 72B98E0E1627644300296302 /* PropertyCross.app */;
+			productReference = 72B98E0E1627644300296302 /* propertycross.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -349,10 +349,10 @@
 		72B98E051627644300296302 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0450;
-				ORGANIZATIONNAME = "Colin Eberhardt";
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = TasteJS;
 			};
-			buildConfigurationList = 72B98E081627644300296302 /* Build configuration list for PBXProject "Property Finder" */;
+			buildConfigurationList = 72B98E081627644300296302 /* Build configuration list for PBXProject "propertycross" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -364,7 +364,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				72B98E0D1627644300296302 /* Property Finder */,
+				72B98E0D1627644300296302 /* propertycross */,
 			);
 		};
 /* End PBXProject section */
@@ -468,6 +468,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -498,9 +499,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Property Finder/Property Finder-Prefix.pch";
-				INFOPLIST_FILE = "Property Finder/Property Finder-Info.plist";
-				PRODUCT_NAME = PropertyCross;
+				GCC_PREFIX_HEADER = "Property Finder/propertycross-Prefix.pch";
+				INFOPLIST_FILE = "Property Finder/propertycross-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				PRODUCT_NAME = propertycross;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -509,9 +511,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Property Finder/Property Finder-Prefix.pch";
-				INFOPLIST_FILE = "Property Finder/Property Finder-Info.plist";
-				PRODUCT_NAME = PropertyCross;
+				GCC_PREFIX_HEADER = "Property Finder/propertycross-Prefix.pch";
+				INFOPLIST_FILE = "Property Finder/propertycross-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				PRODUCT_NAME = propertycross;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -519,7 +522,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		72B98E081627644300296302 /* Build configuration list for PBXProject "Property Finder" */ = {
+		72B98E081627644300296302 /* Build configuration list for PBXProject "propertycross" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				72B98E301627644300296302 /* Debug */,
@@ -528,7 +531,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		72B98E321627644300296302 /* Build configuration list for PBXNativeTarget "Property Finder" */ = {
+		72B98E321627644300296302 /* Build configuration list for PBXNativeTarget "propertycross" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				72B98E331627644300296302 /* Debug */,

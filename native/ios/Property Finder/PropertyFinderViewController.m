@@ -64,6 +64,8 @@
 {
     [super viewDidLoad];
     
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    
     // create a location manager - used to search the current location
     _locationManager = [[CLLocationManager alloc] init];
     _locationManager.delegate = self;

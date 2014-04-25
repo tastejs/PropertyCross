@@ -46,6 +46,8 @@
 {
     [super viewDidLoad];
     
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
 }

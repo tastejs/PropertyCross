@@ -55,6 +55,8 @@
 {
     [super viewDidLoad];
     
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    
     self.priceLabel.text = _property.formattedPrice;
     self.titleLabel.text = _property.shortTitle;
     self.bedBathroomLabel.text = _property.bedBathroomText;
