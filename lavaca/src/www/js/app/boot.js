@@ -2,7 +2,7 @@ require.config({
   baseUrl: 'js',
   paths: {
     'es5-shim': '../components/es5-shim/es5-shim',
-    '$': '../components/jquery/index',
+    '$': '../components/jquery/jquery',
     'jquery': '../components/jquery/index',
     'hammer': '../components/hammerjs/dist/jquery.hammer',
     'mout': '../components/mout/src',
