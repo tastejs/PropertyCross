@@ -40,6 +40,9 @@
         self.pluginsDict = [[NSMutableDictionary alloc] initWithCapacity:30];
         self.settings = [[NSMutableDictionary alloc] initWithCapacity:30];
         self.whitelistHosts = [[NSMutableArray alloc] initWithCapacity:30];
+        [self.whitelistHosts addObject:@"file:///*"];
+        [self.whitelistHosts addObject:@"content:///*"];
+        [self.whitelistHosts addObject:@"data:///*"];
         self.startupPluginNames = [[NSMutableArray alloc] initWithCapacity:8];
         featureName = nil;
     }
@@ -59,7 +62,7 @@
             pluginsDict[featureName] = value;
         }
         BOOL paramIsOnload = ([paramName isEqualToString:@"onload"] && [@"true" isEqualToString : value]);
-        BOOL attribIsOnload = [@"true" isEqualToString : [attributeDict[@"onload"] lowercaseString]];
+        BOOL attribIsOnload = [@"true" isEqualToString :[attributeDict[@"onload"] lowercaseString]];
         if (paramIsOnload || attribIsOnload) {
             [self.startupPluginNames addObject:featureName];
         }
@@ -79,7 +82,7 @@
 
 - (void)parser:(NSXMLParser*)parser parseErrorOccurred:(NSError*)parseError
 {
-    NSAssert(NO, @"config.xml parse error line %d col %d", [parser lineNumber], [parser columnNumber]);
+    NSAssert(NO, @"config.xml parse error line %ld col %ld", (long)[parser lineNumber], (long)[parser columnNumber]);
 }
 
 @end

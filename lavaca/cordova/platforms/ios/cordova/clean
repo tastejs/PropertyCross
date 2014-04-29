@@ -25,20 +25,16 @@
 
 set -e
 
-XCODE_VER=$(xcodebuild -version | head -n 1 | sed -e 's/Xcode //')
-XCODE_MIN_VERSION="4.5"
-
-if [[ "$XCODE_VER" < "$XCODE_MIN_VERSION" ]]; then
-	echo "Cordova can only run in Xcode version $XCODE_MIN_VERSION or greater."
-	exit 1
-fi
-
 CORDOVA_PATH=$( cd "$( dirname "$0" )" && pwd -P)
 PROJECT_PATH="$(dirname "$CORDOVA_PATH")"
 XCODEPROJ=$( ls "$PROJECT_PATH" | grep .xcodeproj  )
 PROJECT_NAME=$(basename "$XCODEPROJ" .xcodeproj)
 
+source "$CORDOVA_PATH/check_reqs"
+
 cd "$PROJECT_PATH"
 
 xcodebuild -project "$PROJECT_NAME.xcodeproj" -configuration Debug -alltargets clean
 xcodebuild -project "$PROJECT_NAME.xcodeproj" -configuration Release -alltargets clean
+
+rm -rf "build"
