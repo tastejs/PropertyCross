@@ -1,0 +1,26 @@
+<view title="'PropertyCross'" right-buttons="rightButtons">
+  <content has-header="true" padding="true">
+    <p>Use the form below to search for houses to buy. You can search by place-name, postcode, or click 'My Location', to search in your current location.</p>
+    <div class="list list-inset">
+        <label class="item item-input">
+            <i class="icon ion-search placeholder-icon"></i>
+            <input type="text" placeholder="Search" ng-model="searchText" autocomplete="off" autocorrect="off">
+        </label>
+    </div>
+    <div class="padding">
+        <button class="button button-positive" ng-click="search(searchText)">Go</button>
+        <button class="button button-positive" ng-click="searchMyLocation()">My Location</button>
+    </div>
+
+    <div class="list card" ng-show="showRecentSearches">
+        <a ng-repeat="recentSearch in recentSearches" class="item" ng-click="search(recentSearch)">{{ recentSearch }}</a>
+    </div>
+
+    <div class="list card" ng-show="showLocations">
+        <div class="item item-divider">Please select a location below:</div>
+        <a ng-repeat="location in locations" class="item" ng-click="search(location.key)">{{ location.value }}</a>
+    </div>
+
+    <p class="padding assertive" ng-show="showError">{{ errorMessage }}</p>
+  </content>
+</view>

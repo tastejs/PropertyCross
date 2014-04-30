@@ -1,37 +1,20 @@
 /**
- * A Sprite is an object rendered in a Drawing surface. There are different options and types of sprites.
- * The configuration of a Sprite is an object with the following properties:
+ * A sprite is an object rendered in a drawing {@link Ext.draw.Surface}.
+ * The Sprite class itself is an abstract class and is not meant to be used directly.
+ * Every sprite in the Draw and Chart packages is a subclass of the Ext.draw.sprite.Sprite.
+ * The standard Sprite subclasses are:
  *
- * Additionally there are three transform objects that can be set with `setAttributes` which are `translate`, `rotate` and
- * `scale`.
- *
- * For translate, the configuration object contains `x` and `y` attributes that indicate where to
- * translate the object. For example:
- *
- *     sprite.setAttributes({
- *       translate: {
- *        x: 10,
- *        y: 10
- *       }
- *     }, true);
- *
- * For rotation, the configuration object contains `x` and `y` attributes for the center of the rotation (which are optional),
- * and a `degrees` attribute that specifies the rotation in degrees. For example:
- *
- *     sprite.setAttributes({
- *       rotate: {
- *        degrees: 90
- *       }
- *     }, true);
- *
- * For scaling, the configuration object contains `x` and `y` attributes for the x-axis and y-axis scaling. For example:
- *
- *     sprite.setAttributes({
- *       scale: {
- *        x: 10,
- *        y: 3
- *       }
- *     }, true);
+ * * {@link Ext.draw.sprite.Path} - A sprite that represents a path.
+ * * {@link Ext.draw.sprite.Rect} - A sprite that represents a rectangle.
+ * * {@link Ext.draw.sprite.Circle} - A sprite that represents a circle.
+ * * {@link Ext.draw.sprite.Sector} - A sprite representing a pie slice.
+ * * {@link Ext.draw.sprite.Arc} - A sprite that represents a circular arc.
+ * * {@link Ext.draw.sprite.Ellipse} - A sprite that represents an ellipse.
+ * * {@link Ext.draw.sprite.EllipticalArc} - A sprite that represents an elliptical arc.
+ * * {@link Ext.draw.sprite.Text} - A sprite that represents text.
+ * * {@link Ext.draw.sprite.Image} -  A sprite that represents an image.
+ * * {@link Ext.draw.sprite.Instancing} - A sprite that represents multiple instances based on the given template.
+ * * {@link Ext.draw.sprite.Composite} - Represents a group of sprites.
  *
  * Sprites can be created with a reference to a {@link Ext.draw.Surface}
  *
@@ -42,33 +25,17 @@
  *      var sprite = Ext.create('Ext.draw.sprite.Sprite', {
  *          type: 'circle',
  *          fill: '#ff0',
- *          surface: drawComponent.surface,
+ *          surface: drawComponent.getSurface('main'),
  *          radius: 5
  *      });
  *
  * Sprites can also be added to the surface as a configuration object:
  *
- *      var sprite = drawComponent.surface.add({
+ *      var sprite = drawComponent.getSurface('main').add({
  *          type: 'circle',
  *          fill: '#ff0',
  *          radius: 5
  *      });
- *
- * In order to properly apply properties and render the sprite we have to
- * `show` the sprite setting the option `redraw` to `true`:
- *
- *      sprite.show(true);
- *
- * The constructor configuration object of the Sprite can also be used and passed into the {@link Ext.draw.Surface}
- * `add` method to append a new sprite to the canvas. For example:
- *
- *     drawComponent.surface.add({
- *         type: 'circle',
- *         fill: '#ffc',
- *         radius: 100,
- *         x: 100,
- *         y: 100
- *     });
  */
 Ext.define('Ext.draw.sprite.Sprite', {
     alias: 'sprite.sprite',
@@ -98,7 +65,7 @@ Ext.define('Ext.draw.sprite.Sprite', {
                 strokeStyle: "color",
 
                 /**
-                 * @cfg {String} [fillStyle="none"] The color of the shadow (a CSS color value).
+                 * @cfg {String} [fillStyle="none"] The color of the shape (a CSS color value).
                  */
                 fillStyle: "color",
 
@@ -126,6 +93,16 @@ Ext.define('Ext.draw.sprite.Sprite', {
                  * @cfg {String} [lineJoin="miter"] The style of the line join.
                  */
                 lineJoin: "enums(round,bevel,miter)",
+
+                /**
+                 * @cfg {Array} An array of non-negative numbers specifying a dash/space sequence.
+                 */
+                lineDash: "data",
+
+                /**
+                 * @cfg {Number} A number specifying how far into the line dash sequence drawing commences.
+                 */
+                lineDashOffset: "number",
 
                 /**
                  * @cfg {Number} [miterLimit=1] Sets the distance between the inner corner and the outer corner where two lines meet.
@@ -250,6 +227,8 @@ Ext.define('Ext.draw.sprite.Sprite', {
                 strokeStyle: "none",
                 fillStyle: "none",
                 lineWidth: 1,
+                lineDash: [],
+                lineDashOffset: 0,
                 lineCap: "butt",
                 lineJoin: "miter",
                 miterLimit: 1,
@@ -293,6 +272,8 @@ Ext.define('Ext.draw.sprite.Sprite', {
                 lineWidth: "canvas",
                 lineCap: "canvas",
                 lineJoin: "canvas",
+                lineDash: "canvas",
+                lineDashOffset: "canvas",
                 miterLimit: "canvas",
 
                 shadowColor: "canvas",
@@ -592,12 +573,19 @@ Ext.define('Ext.draw.sprite.Sprite', {
         return this;
     },
 
+    /**
+     * Applies sprite's attributes to the given context.
+     * @param {Object} ctx Context to apply sprite's attributes to.
+     * @param {Array} region The region of the context to be affected by gradients.
+     */
     useAttributes: function (ctx, region) {
         this.applyTransformations();
         var attrs = this.attr,
             canvasAttributes = attrs.canvasAttributes,
             strokeStyle = canvasAttributes.strokeStyle,
             fillStyle = canvasAttributes.fillStyle,
+            lineDash = canvasAttributes.lineDash,
+            lineDashOffset = canvasAttributes.lineDashOffset,
             id;
 
         if (strokeStyle) {
@@ -618,6 +606,14 @@ Ext.define('Ext.draw.sprite.Sprite', {
             }
         }
 
+        if (lineDash && ctx.setLineDash) {
+            ctx.setLineDash(lineDash);
+        }
+
+        if (lineDashOffset && typeof ctx.lineDashOffset === 'number') {
+            ctx.lineDashOffset = lineDashOffset;
+        }
+
         for (id in canvasAttributes) {
             if (canvasAttributes[id] !== undefined && canvasAttributes[id] !== ctx[id]) {
                 ctx[id] = canvasAttributes[id];
@@ -631,7 +627,12 @@ Ext.define('Ext.draw.sprite.Sprite', {
         }
     },
 
-    // @private
+    /**
+     * @private
+     *
+     * Calculates forward and inverse transform matrices.
+     * @param {Boolean} force Forces recalculation of transform matrices even when sprite's transform attributes supposedly haven't changed.
+     */
     applyTransformations: function (force) {
         if (!force && !this.attr.dirtyTransform) {
             return;

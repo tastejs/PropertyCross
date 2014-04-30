@@ -83,7 +83,7 @@ Ext.define('Ext.picker.Picker', {
     extend: 'Ext.Sheet',
     alias : 'widget.picker',
     alternateClassName: 'Ext.Picker',
-    requires: ['Ext.picker.Slot', 'Ext.TitleBar', 'Ext.data.Model'],
+    requires: ['Ext.picker.Slot', 'Ext.TitleBar', 'Ext.data.Model', 'Ext.util.InputBlocker'],
 
     isPicker: true,
 
@@ -276,6 +276,19 @@ Ext.define('Ext.picker.Picker', {
             ui: 'round',
             text: ''
         }
+    }, {
+        theme: ['CupertinoClassic'],
+        toolbar: {
+            ui: 'black'
+        }
+    }, {
+        theme: ['MountainView'],
+        toolbarPosition: 'bottom',
+        toolbar: {
+            defaults: {
+                flex: 1
+            }
+        }
     }],
 
     initialize: function() {
@@ -297,8 +310,6 @@ Ext.define('Ext.picker.Picker', {
             delegate: 'pickerslot',
             slotpick: 'onSlotPick'
         });
-
-        me.inputBlocker = new Ext.util.InputBlocker();
     },
 
     /**
@@ -480,7 +491,7 @@ Ext.define('Ext.picker.Picker', {
         }
 
         this.hide();
-        this.inputBlocker.unblockInputs();
+        Ext.util.InputBlocker.unblockInputs();
     },
 
     /**
@@ -490,7 +501,7 @@ Ext.define('Ext.picker.Picker', {
     onCancelButtonTap: function() {
         this.fireEvent('cancel', this);
         this.hide();
-        this.inputBlocker.unblockInputs();
+        Ext.util.InputBlocker.unblockInputs();
     },
 
     /**
@@ -511,7 +522,7 @@ Ext.define('Ext.picker.Picker', {
         if (!this.isHidden()) {
             this.setValue(this._value);
         }
-        this.inputBlocker.blockInputs();
+        Ext.util.InputBlocker.blockInputs();
     },
 
     /**

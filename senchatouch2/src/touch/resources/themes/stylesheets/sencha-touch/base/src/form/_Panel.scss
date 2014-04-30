@@ -38,7 +38,7 @@
 
 .x-label-align-left,
 .x-label-align-right {
-    @include st-box-orient(horizontal);
+    @include st-box-orient(horizontal, important);
 
     .x-component-outer {
         @include st-box-flex(1, 0px);

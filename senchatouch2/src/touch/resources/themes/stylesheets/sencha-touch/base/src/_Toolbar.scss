@@ -6,6 +6,7 @@
     position: relative;
     background-color: #eee;
     min-height: 2.6em;
+    overflow: hidden;
 
     &.x-docked-top {
         border-bottom: 1px solid;
@@ -34,6 +35,15 @@
     font-weight: bold;
 
     max-width: 100%;
+
+    &.x-title-align-left {
+      padding-left: 10px;
+    }
+
+
+    &.x-title-align-right {
+      padding-right: 10px;
+    }
 
     .x-innerhtml {
         @include ellipsis;

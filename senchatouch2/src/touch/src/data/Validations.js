@@ -24,7 +24,7 @@ Ext.define('Ext.data.Validations', {
         lengthMessage: 'is the wrong length',
 
         /**
-         * @property {Boolean} formatMessage
+         * @property {String} formatMessage
          * The default error message used when a format validation fails.
          */
         formatMessage: 'is the wrong format',

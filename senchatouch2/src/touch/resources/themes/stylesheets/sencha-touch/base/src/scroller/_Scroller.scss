@@ -18,8 +18,19 @@
     position: absolute;
     min-width: 100%;
     min-height: 100%;
-    width: auto !important;
-    height: auto !important;
+		height: auto !important;
+		width: auto !important;
+
+		// Attempt to fix oversized bug, needs to be looked at later
+		/*
+		&.x-scroll-scroller-vertical {
+			height: auto !important;
+		}
+
+		&.x-scroll-scroller-horizontal {
+			width: auto !important;
+		}
+		*/
 }
 
 .x-scroll-stretcher {

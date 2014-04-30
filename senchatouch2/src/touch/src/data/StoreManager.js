@@ -56,7 +56,7 @@ Ext.define('Ext.data.StoreManager', {
     },
 
     /**
-     * Gets a registered Store by id.
+     * Gets a registered Store by its id, returns a passed store instance, or returns a new instance of a store created with the supplied configuration.
      * @param {String/Object} store The `id` of the Store, or a Store instance, or a store configuration.
      * @return {Ext.data.Store}
      */

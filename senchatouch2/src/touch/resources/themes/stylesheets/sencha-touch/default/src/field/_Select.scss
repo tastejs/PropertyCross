@@ -35,17 +35,17 @@
         }
 
         &:before {
-            z-index: 1;
-            @include insertion(4em,auto,0,auto);
-            right: 0;
-            bottom: 0;
+            // z-index: 1;
+            // @include insertion(4em,auto,0,auto);
+            // right: 0;
+            // bottom: 0;
 
-            @if $include-border-radius {
-                @include border-right-radius($form-fieldset-radius);
-            }
-            @if $include-highlights {
-                @include background-image(linear-gradient(left, color-stops(rgba(255,255,255,0), white .5)));
-            }
+            // @if $include-border-radius {
+            //     @include border-right-radius($form-fieldset-radius);
+            // }
+            // @if $include-highlights {
+            //     @include background-image(linear-gradient(left, color-stops(rgba(255,255,255,0), white .5)));
+            // }
         }
     }
 }

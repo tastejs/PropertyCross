@@ -1,6 +1,7 @@
 src/build
 src/resources/sass/.sass-cache
 *.suo
-src/cordova-wp8/PropertyCross/Bin
-src/cordova-wp8/PropertyCross/obj
 
+src/touch/sencha-touch*.js
+src/touch/resources/css
+src/touch/resources/css-debug

@@ -77,6 +77,22 @@ Ext.define('Ext.chart.series.Bar', {
         }
     },
 
+    getItemForPoint: function (x, y) {
+        if (this.getSprites()) {
+            var me = this,
+                chart = me.getChart(),
+                padding = chart.getInnerPadding();
+
+            // Convert the coordinates because the "items" sprites that draw the bars ignore the chart's InnerPadding.
+            // See also Ext.chart.series.sprite.Bar.getItemForPoint(x,y) regarding the series's vertical coordinate system.
+            //
+            // TODO: Cleanup the bar sprites.
+            arguments[0] = x - padding.left;
+            arguments[1] = y + padding.bottom;
+            return me.callParent(arguments);
+        }
+    },
+
     updateXAxis: function (axis) {
         axis.setLabelInSpan(true);
         this.callSuper(arguments);

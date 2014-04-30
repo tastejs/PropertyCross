@@ -4,7 +4,7 @@
  * 
  * Processor for axis data that can be interpolated.
  */
-Ext.define("Ext.chart.axis.layout.Continuous", {
+Ext.define('Ext.chart.axis.layout.Continuous', {
     extend: 'Ext.chart.axis.layout.Layout',
     alias: 'axisLayout.continuous',
     config: {
@@ -19,7 +19,13 @@ Ext.define("Ext.chart.axis.layout.Continuous", {
     //@inheritdoc
     snapEnds: function (context, min, max, estStepSize) {
         var segmenter = context.segmenter,
-            out = context.segmenter.preferredStep(min, estStepSize),
+            axis = this.getAxis(),
+            minimum = axis.getMinimum(),
+            maximum = axis.getMaximum(),
+            majorTickSteps = axis.getMajorTickSteps(),
+            out = majorTickSteps && Ext.isNumber(minimum) && Ext.isNumber(maximum) && segmenter.exactStep ?
+                segmenter.exactStep(min, (max - min) / majorTickSteps) :
+                segmenter.preferredStep(min, estStepSize),
             unit = out.unit,
             step = out.step,
             from = segmenter.align(min, step, unit),
@@ -36,5 +42,35 @@ Ext.define("Ext.chart.axis.layout.Continuous", {
                 return segmenter.add(this.from, this.step * current, unit);
             }
         };
+    },
+
+    snapMinorEnds: function (context) {
+        var majorTicks = context.majorTicks,
+            minorTickSteps = this.getAxis().getMinorTickSteps(),
+            segmenter = context.segmenter,
+            min = majorTicks.min,
+            max = majorTicks.max,
+            from = majorTicks.from,
+            unit = majorTicks.unit,
+            step = majorTicks.step / minorTickSteps,
+            scaledStep = step * unit.scale,
+            fromMargin = from - min,
+            offset = Math.floor(fromMargin / scaledStep),
+            extraSteps = offset + Math.floor((max - majorTicks.to) / scaledStep) + 1,
+            steps = majorTicks.steps * minorTickSteps + extraSteps;
+        return {
+            min: min,
+            max: max,
+            from: min + fromMargin % scaledStep,
+            to: segmenter.add(from, steps * step, unit),
+            step: step,
+            steps: steps,
+            unit: unit,
+            get: function (current) {
+                return (current % minorTickSteps + offset + 1 !== 0) ? // don't render minor tick in major tick position
+                    segmenter.add(this.from, this.step * current, unit) :
+                    null;
+            }
+        }
     }
 });

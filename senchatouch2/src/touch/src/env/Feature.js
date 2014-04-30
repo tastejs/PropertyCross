@@ -24,6 +24,9 @@ Ext.define('Ext.env.Feature', {
             };
         }
 
+        Ext.theme.is = {};
+        Ext.theme.is[Ext.theme.name] = true;
+
         Ext.onDocumentReady(function() {
             this.registerTest({
                 ProperHBoxStretching: function() {
@@ -71,6 +74,16 @@ Ext.define('Ext.env.Feature', {
 
         if (typeof elementStyle[name] !== 'undefined'
             || typeof elementStyle[Ext.browser.getStylePrefix(name) + cName] !== 'undefined') {
+            return true;
+        }
+
+        return false;
+    },
+
+    isStyleSupportedWithoutPrefix: function(name, tag) {
+        var elementStyle = this.getTestElement(tag).style;
+
+        if (typeof elementStyle[name] !== 'undefined') {
             return true;
         }
 
@@ -182,6 +195,9 @@ Ext.define('Ext.env.Feature', {
      * - Video - supports the `<video>` tag.
      * - ClassList - supports the HTML5 classList API.
      * - LocalStorage - LocalStorage is supported and can be written to.
+     * - NumericInputPlaceHolder - Supports placeholders on numeric input fields
+     * - XHR2 - Supports XMLHttpRequest 
+     * - XHRUploadProgress - Supports XMLHttpRequest upload progress info
      *
      * [1]: https://developer.mozilla.org/en/DOM/range
      * [2]: https://developer.mozilla.org/en/DOM/range.createContextualFragment
@@ -214,7 +230,7 @@ Ext.define('Ext.env.Feature', {
         },
 
         Touch: function() {
-            return this.isEventSupported('touchstart') && !(Ext.os && Ext.os.name.match(/Windows|MacOS|Linux/) && !Ext.os.is.BlackBerry6);
+            return Ext.browser.is.Ripple || (this.isEventSupported('touchstart') && !(Ext.os && Ext.os.name.match(/Windows|MacOS|Linux/) && !Ext.os.is.BlackBerry6));
         },
 
         Pointer: function() {
@@ -262,6 +278,10 @@ Ext.define('Ext.env.Feature', {
             return this.isStyleSupported('transform');
         },
 
+        CssTransformNoPrefix: function() {
+            return this.isStyleSupportedWithoutPrefix('transform');
+        },
+
         Css3dTransforms: function() {
             // See https://sencha.jira.com/browse/TOUCH-1544
             return this.has('CssTransforms') && this.isStyleSupported('perspective') && !Ext.browser.is.AndroidStock2;
@@ -301,6 +321,22 @@ Ext.define('Ext.env.Feature', {
             } catch ( e ) {}
 
             return supported;
+        },
+
+        XHR2 : function() {
+          return window.ProgressEvent && window.FormData && window.XMLHttpRequest && ('withCredentials' in new XMLHttpRequest);
+        },
+
+        XHRUploadProgress : function() {
+            if(window.XMLHttpRequest && !Ext.browser.is.AndroidStock) {
+                var xhr = new XMLHttpRequest();
+                return xhr && ('upload' in xhr) && ('onprogress' in xhr.upload);
+            }
+            return false;
+        },
+
+        NumericInputPlaceHolder: function() {
+            return !(Ext.browser.is.AndroidStock4 && Ext.os.version.getMinor() < 2);
         }
     });
 

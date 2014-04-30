@@ -4,7 +4,7 @@
  * 
  * Radar series sprite.
  */
-Ext.define("Ext.chart.series.sprite.Radar", {
+Ext.define('Ext.chart.series.sprite.Radar', {
     alias: 'sprite.radar',
     extend: 'Ext.chart.series.sprite.Polar',
 
@@ -19,6 +19,7 @@ Ext.define("Ext.chart.series.sprite.Radar", {
             maxY = attr.dataMaxY,
             dataX = attr.dataX,
             dataY = attr.dataY,
+            rangeY = attr.rangeY,
             endRho = attr.endRho,
             startRho = attr.startRho,
             baseRotation = attr.baseRotation,
@@ -29,13 +30,13 @@ Ext.define("Ext.chart.series.sprite.Radar", {
         ctx.beginPath();
         for (i = 0; i < length; i++) {
             th = (dataX[i] - minX) / (maxX - minX + 1) * 2 * Math.PI + baseRotation;
-            r = dataY[i] / maxY * (endRho - startRho) + startRho;
+            r = dataY[i] / (rangeY ? rangeY[1] : maxY) * (endRho - startRho) + startRho;
             x = matrix.x(centerX + Math.cos(th) * r, centerY + Math.sin(th) * r);
             y = matrix.y(centerX + Math.cos(th) * r, centerY + Math.sin(th) * r);
             ctx.lineTo(x, y);
             markerCfg.translationX = surfaceMatrix.x(x, y);
             markerCfg.translationY = surfaceMatrix.y(x, y);
-            me.putMarker("markers", markerCfg, i, true);
+            me.putMarker('markers', markerCfg, i, true);
         }
         ctx.closePath();
         ctx.fillStroke(attr);

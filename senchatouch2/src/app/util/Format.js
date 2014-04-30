@@ -1,4 +1,4 @@
-﻿Ext.define('PropertyFinder.util.Format', {
+﻿Ext.define('PropertyCross.util.Format', {
     extend: 'Ext.Base',
     statics: {
         currency: function(value) {

@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ti:app xmlns:ti="http://ti.appcelerator.org">
     <deployment-targets>
+        <target device="tizen">false</target>
         <target device="mobileweb">false</target>
         <target device="iphone">true</target>
         <target device="ipad">false</target>
         <target device="android">true</target>
         <target device="blackberry">false</target>
     </deployment-targets>
-    <sdk-version>2.1.2.GA</sdk-version>
+    <sdk-version>3.2.2.GA</sdk-version>
     <id>com.propertycross.titanium</id>
     <name>PropertyCross</name>
-    <version>1.0</version>
-    <publisher>cprice</publisher>
+    <version>1.4</version>
+    <publisher>TasteJS</publisher>
     <url>http://propertycross.com</url>
     <description>not specified</description>
-    <copyright>2012 by Chris Price</copyright>
+    <copyright>2014 by TasteJS</copyright>
     <icon>appicon.png</icon>
     <persistent-wifi>false</persistent-wifi>
     <prerendered-icon>true</prerendered-icon>
@@ -31,36 +32,18 @@
         </orientations>
     </iphone>
     <android xmlns:android="http://schemas.android.com/apk/res/android">
-        <tool-api-level>14</tool-api-level>
-        <manifest>
-            <uses-sdk targetSdkVersion="14"/>
-            <application android:debuggable="false"
-                android:icon="@drawable/appicon"
-                android:label="Property Cross" android:name="PropertycrossApplication">
-                <!-- TI_APPLICATION -->
-                <activity
-                    android:configChanges="keyboardHidden|orientation"
+        <manifest android:versionName="1.4.0">
+            <application android:label="PropertyCross - Titanium" android:theme="@style/Theme.MyTheme">
+                <activity android:name=".PropertycrossActivity"
                     android:screenOrientation="portrait"
-                    android:label="Property Cross"
-                    android:name=".PropertycrossActivity" android:theme="@style/Theme.MyTheme">
+                    android:configChanges="keyboardHidden|orientation">
                     <intent-filter>
                         <action android:name="android.intent.action.MAIN"/>
                         <category android:name="android.intent.category.LAUNCHER"/>
                     </intent-filter>
                 </activity>
-                <activity
-                    android:configChanges="keyboardHidden|orientation" android:name="org.appcelerator.titanium.TiActivity"/>
-                <activity
-                    android:configChanges="keyboardHidden|orientation"
-                    android:name="org.appcelerator.titanium.TiTranslucentActivity" android:theme="@android:style/Theme.Translucent"/>
-                <activity
-                    android:configChanges="keyboardHidden|orientation"
-                    android:name="org.appcelerator.titanium.TiModalActivity" android:theme="@android:style/Theme.Translucent"/>
-                <activity
-                    android:configChanges="keyboardHidden|orientation" android:name="ti.modules.titanium.ui.TiTabActivity"/>
-                <activity android:name="ti.modules.titanium.ui.android.TiPreferencesActivity"/>
-                <service android:exported="false" android:name="org.appcelerator.titanium.analytics.TiAnalyticsService"/>
             </application>
+            <uses-sdk android:minSdkVersion="14" android:targetSdkVersion="14"/>
         </manifest>
     </android>
     <mobileweb>

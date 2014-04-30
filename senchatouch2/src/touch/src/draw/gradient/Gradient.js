@@ -1,6 +1,6 @@
 /**
  * @class Ext.draw.gradient.Gradient
- * 
+ *
  * Creates a gradient.
  */
 Ext.define("Ext.draw.gradient.Gradient", {
@@ -45,7 +45,7 @@ Ext.define("Ext.draw.gradient.Gradient", {
             member.alias = 'gradient.' + member.type;
         }
     },
-    
+
     constructor: function (config) {
         config = config || {};
         this.gradientCache = new Ext.draw.LimitedCache({
@@ -62,16 +62,16 @@ Ext.define("Ext.draw.gradient.Gradient", {
     /**
      * @protected
      * Generates the gradient for the given context.
-     * @param ctx The context.
-     * @param bbox 
+     * @param {Ext.draw.engine.SvgContext} ctx The context.
+     * @param {Object} bbox
      * @return {Object}
      */
     generateGradient: Ext.emptyFn,
 
     /**
      * @private
-     * @param ctx
-     * @param bbox
+     * @param {Ext.draw.engine.SvgContext} ctx
+     * @param {Object} bbox
      * @return {*}
      */
     getGradient: function (ctx, bbox) {

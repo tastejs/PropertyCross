@@ -99,7 +99,7 @@ Ext.define('Ext.draw.Surface', {
         /**
          * Stably sort the list of sprites by their zIndex.
          * TODO: Improve the performance. Reduce gc impact.
-         * @param list
+         * @param {Array} list
          */
         stableSort: function (list) {
             if (list.length < 2) {
@@ -115,7 +115,7 @@ Ext.define('Ext.draw.Surface', {
                     keys[zIndex].push(list[i]);
                 }
             }
-            sortedKeys = Object.keys(keys).sort(function (a, b) {return a - b;});
+            sortedKeys = Ext.Object.getKeys(keys).sort(function (a, b) {return a - b;});
             for (i = 0, ln = sortedKeys.length; i < ln; i++) {
                 result.push.apply(result, keys[sortedKeys[i]]);
             }
@@ -174,7 +174,7 @@ Ext.define('Ext.draw.Surface', {
 
     /**
      * Round the number to align to the pixels on device.
-     * @param num The number to align.
+     * @param {Number} num The number to align.
      * @return {Number} The resultant alignment.
      */
     roundPixel: function (num) {
@@ -183,7 +183,7 @@ Ext.define('Ext.draw.Surface', {
 
     /**
      * Mark the surface to render after another surface is updated.
-     * @param surface The surface to wait for.
+     * @param {Ext.draw.Surface} surface The surface to wait for.
      */
     waitFor: function (surface) {
         var me = this,
@@ -292,6 +292,7 @@ Ext.define('Ext.draw.Surface', {
             component.element.dom.appendChild(this.element.dom);
         }
     },
+
     /**
      * Add a Sprite to the surface.
      * You can put any number of object as parameter.
@@ -312,16 +313,14 @@ Ext.define('Ext.draw.Surface', {
         var me = this,
             args = Array.prototype.slice.call(arguments),
             argIsArray = Ext.isArray(args[0]),
-            sprite, items, i, ln, results, group, groups;
+            results = [],
+            sprite, sprites, items, i, ln, group, groups;
 
-        items = argIsArray ? args[0] : args;
-        results = [];
-        for (i = 0, ln = items.length; i < ln; i++) {
-            sprite = items[i];
-            if (!items[i]) {
-                continue;
-            }
-            sprite = me.prepareItems(args[0])[0];
+        items = Ext.Array.clean(argIsArray ? args[0] : args);
+        sprites = me.prepareItems(items);
+
+        for (i = 0, ln = sprites.length; i < ln; i++) {
+            sprite = sprites[i];
             groups = sprite.group;
             if (groups.length) {
                 for (i = 0, ln = groups.length; i < ln; i++) {
@@ -338,6 +337,7 @@ Ext.define('Ext.draw.Surface', {
 
         me.dirtyZIndex = true;
         me.setDirty(true);
+
         if (!argIsArray && results.length === 1) {
             return results[0];
         } else {
@@ -415,6 +415,7 @@ Ext.define('Ext.draw.Surface', {
     prepareItems: function (items) {
         items = [].concat(items);
         // Make sure defaults are applied and item is initialized
+
         var me = this,
             item, i, ln, j,
             removeSprite = function (sprite) {
@@ -428,7 +429,7 @@ Ext.define('Ext.draw.Surface', {
                 item = items[i] = me.createItem(item);
             }
             for (j = 0; j < item.group.length; j++) {
-                me.getGroup(item.group[i]).add(item);
+                me.getGroup(item.group[j]).add(item);
             }
             item.on('beforedestroy', removeSprite, me);
         }
@@ -484,7 +485,7 @@ Ext.define('Ext.draw.Surface', {
     /**
      * @private
      * @deprecated Do not use groups directly
-     * @param id
+     * @param {String} id
      * @return {Ext.draw.Group} The group.
      */
     createGroup: function (id) {
@@ -502,7 +503,7 @@ Ext.define('Ext.draw.Surface', {
     /**
      * @private
      * @deprecated Do not use groups directly
-     * @param group
+     * @param {Ext.draw.Group} group
      */
     removeGroup: function (group) {
         if (Ext.isString(group)) {
@@ -526,8 +527,8 @@ Ext.define('Ext.draw.Surface', {
 
     /**
      * @deprecated Use the `sprite.getBBox(isWithoutTransform)` directly.
-     * @param sprite
-     * @param isWithoutTransform
+     * @param {Ext.draw.sprite.Sprite} sprite
+     * @param {Boolean} isWithoutTransform
      * @return {Object}
      */
     getBBox: function (sprite, isWithoutTransform) {
@@ -614,7 +615,6 @@ Ext.define('Ext.draw.Surface', {
 
             for (i = 0, ln = items.length; i < ln; i++) {
                 item = items[i];
-                item.applyTransformations();
                 if (false === me.renderSprite(item)) {
                     return;
                 }

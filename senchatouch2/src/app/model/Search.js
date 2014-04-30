@@ -1,4 +1,4 @@
-﻿Ext.define('PropertyFinder.model.Search', {
+﻿Ext.define('PropertyCross.model.Search', {
     extend: 'Ext.data.Model',
     requires: ['Ext.data.identifier.Uuid'],
     config: {
@@ -14,7 +14,7 @@
         },
         proxy: {
             type: 'localstorage',
-            id  : 'PropertyFinder-Searches' //should be unique..
+            id  : 'PropertyCross-Searches' //should be unique..
         }
     }
 });

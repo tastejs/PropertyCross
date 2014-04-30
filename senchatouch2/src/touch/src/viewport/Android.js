@@ -5,13 +5,29 @@
 Ext.define('Ext.viewport.Android', {
     extend: 'Ext.viewport.Default',
 
+    config: {
+        translatable: {
+            translationMethod: 'csstransform'
+        }
+    },
+
     constructor: function() {
-        this.on('orientationchange', 'doFireOrientationChangeEvent', this, { prepend: true });
         this.on('orientationchange', 'hideKeyboardIfNeeded', this, { prepend: true });
 
-        this.callParent(arguments);
+        this.callSuper(arguments);
 
-        this.addWindowListener('resize', Ext.Function.bind(this.onResize, this));
+        this.bodyElement.on('resize', this.onResize, this, {
+            buffer: 1
+        });
+    },
+
+    getWindowWidth: function () {
+        return this.element.getWidth();
+
+    },
+
+    getWindowHeight: function () {
+        return this.element.getHeight();
     },
 
     getDummyInput: function() {
@@ -23,6 +39,7 @@ Ext.define('Ext.viewport.Android', {
             this.dummyInput = input = document.createElement('input');
             input.style.position = 'absolute';
             input.style.opacity = '0';
+            input.style.pointerEvents = 'none';
             document.body.appendChild(input);
         }
 
@@ -98,28 +115,6 @@ Ext.define('Ext.viewport.Android', {
         return this;
     },
 
-    applyAutoMaximize: function(autoMaximize) {
-        autoMaximize = this.callParent(arguments);
-
-        this.on('add', 'fixSize', this, { single: true });
-        if (!autoMaximize) {
-            this.on('ready', 'fixSize', this, { single: true });
-            this.onAfter('orientationchange', 'doFixSize', this, { buffer: 100 });
-        }
-        else {
-            this.un('ready', 'fixSize', this);
-            this.unAfter('orientationchange', 'doFixSize', this);
-        }
-    },
-
-    fixSize: function() {
-        this.doFixSize();
-    },
-
-    doFixSize: function() {
-        this.setHeight(this.getWindowHeight());
-    },
-
     determineOrientation: function() {
         return (this.getWindowHeight() >= this.getWindowWidth()) ? this.PORTRAIT : this.LANDSCAPE;
     },
@@ -154,6 +149,41 @@ Ext.define('Ext.viewport.Android', {
     isHeightMaximized: function(height) {
         this.scrollToTop();
         return this.getWindowHeight() === height;
+    },
+
+    supportsOrientation: function () {
+        return false;
+    },
+
+    onResize: function () {
+        this.waitUntil(function () {
+            var oldWidth = this.windowWidth,
+                oldHeight = this.windowHeight,
+                width = this.getWindowWidth(),
+                height = this.getWindowHeight(),
+                currentOrientation = this.getOrientation(),
+                newOrientation = this.determineOrientation();
+
+            return ((oldWidth !== width && oldHeight !== height) && currentOrientation !== newOrientation);
+        }, function () {
+            var currentOrientation = this.getOrientation(),
+                newOrientation = this.determineOrientation();
+
+            this.fireOrientationChangeEvent(newOrientation, currentOrientation);
+         }, Ext.emptyFn, 250);
+    },
+
+    doPreventZooming: function (e) {
+        // Don't prevent right mouse event
+        if ('button' in e && e.button !== 0) {
+            return;
+        }
+
+        var target = e.target;
+
+        if (target && target.nodeType === 1 && !this.isInputRegex.test(target.tagName) && !this.focusedElement) {
+            e.preventDefault();
+        }
     }
 
 }, function() {
@@ -240,27 +270,6 @@ Ext.define('Ext.viewport.Android', {
                     && ((height >= oldHeight - this.addressBarHeight) || !this.focusedElement)) {
                         this.scrollToTop();
                 }
-            },
-
-            fixSize: function() {
-                var orientation = this.getOrientation(),
-                    outerHeight = window.outerHeight,
-                    outerWidth = window.outerWidth,
-                    actualOuterHeight;
-
-                // On some Android 2 devices such as the Kindle Fire, outerWidth and outerHeight are reported wrongly
-                // when navigating from another page that has larger size.
-                if (orientation === 'landscape' && (outerHeight < outerWidth)
-                    || orientation === 'portrait' && (outerHeight >= outerWidth)) {
-                    actualOuterHeight = this.getActualWindowOuterHeight();
-                }
-                else {
-                    actualOuterHeight = this.getWindowHeight();
-                }
-
-                this.waitUntil(function() {
-                    return actualOuterHeight > this.getWindowHeight();
-                }, this.doFixSize, this.doFixSize, 50, 1000);
             }
         });
     }
@@ -283,11 +292,7 @@ Ext.define('Ext.viewport.Android', {
 
     if (version.gtEq('4')) {
         this.override({
-            doBlurInput: Ext.emptyFn,
-            onResize: function() {
-                this.callParent();
-                this.doFixSize();
-            }
+            doBlurInput: Ext.emptyFn
         });
     }
 });

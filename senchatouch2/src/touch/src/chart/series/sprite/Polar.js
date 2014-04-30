@@ -4,9 +4,9 @@
  * 
  * Polar sprite.
  */
-Ext.define("Ext.chart.series.sprite.Polar", {
+Ext.define('Ext.chart.series.sprite.Polar', {
     mixins: {
-        markerHolder: "Ext.chart.MarkerHolder"
+        markerHolder: 'Ext.chart.MarkerHolder'
     },
     extend: 'Ext.draw.sprite.Sprite',
     inheritableStatics: {
@@ -31,6 +31,15 @@ Ext.define("Ext.chart.series.sprite.Polar", {
                  * @cfg {Number} [dataMaxY=2] Data maximum on the y-axis.
                  */
                 dataMaxY: 'number',
+
+                /**
+                 * @cfg {Array} Data range derived from all the series bound to the x-axis.
+                 */
+                rangeX: 'data',
+                /**
+                 * @cfg {Array} Data range derived from all the series bound to the y-axis.
+                 */
+                rangeY: 'data',
 
                 /**
                  * @cfg {Object} [dataY=null] Data items on the y-axis.

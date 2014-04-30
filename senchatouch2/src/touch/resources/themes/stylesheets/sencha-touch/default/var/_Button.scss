@@ -8,7 +8,8 @@
 $button-height: 1.8em;
 
 /**
- * @var {measurement} $button-radius Default border-radius for buttons.
+ * @var {measurement} $button-radius
+ * Default border-radius for buttons. Please note, you can only use `em` as a value here.
  */
 $button-radius: .4em !default;
 

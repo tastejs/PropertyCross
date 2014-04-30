@@ -1,9 +1,9 @@
-﻿Ext.define('PropertyFinder.store.Results', {
+﻿Ext.define('PropertyCross.store.Results', {
     extend: 'Ext.data.Store',
 
     config: {
         storeId: 'results',
-        model: 'PropertyFinder.model.Results',
+        model: 'PropertyCross.model.Results',
         autoLoad: false, //need to set place_name or centre_point param before loading.
         pageSize: 20,
         proxy: {

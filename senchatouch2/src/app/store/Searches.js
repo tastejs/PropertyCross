@@ -1,9 +1,9 @@
-﻿Ext.define('PropertyFinder.store.Searches', {
+﻿Ext.define('PropertyCross.store.Searches', {
     extend: 'Ext.data.Store',
     config: {
         storeId: 'searches',
         autoLoad: true,
-        model: 'PropertyFinder.model.Search',
+        model: 'PropertyCross.model.Search',
         sorters: {
             property: 'searchTimeMS',
             direction: 'DESC'

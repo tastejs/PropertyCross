@@ -1,4 +1,4 @@
-﻿Ext.define('PropertyFinder.controller.Application', {
+﻿Ext.define('PropertyCross.controller.Application', {
     extend: 'Ext.app.Controller',
 
     requires: ['Ext.device.Geolocation', 'Ext.MessageBox'],
@@ -8,6 +8,7 @@
             main: 'mainview',
             home: 'home',
             mainTitleBar: 'mainview titlebar',
+            mainAppBar: '#win8-appbar',
             faveButton: '#faveButton',
             resultList: 'resultlist',
             favesList: 'resultlist',
@@ -74,7 +75,7 @@
         this.getSuggestedLocations().hide();
         this.getErrorMessage().hide();
         this.getPreviousSearches().show();
-        var titleListLabel = this.getListTitleLabel()
+        var titleListLabel = this.getListTitleLabel();
         if(Ext.getStore('searches').getData().length !== 0) {
             titleListLabel.setHtml("Previous Searches");
             titleListLabel.show();
@@ -92,8 +93,10 @@
     onMainPush: function(view, item) {
         if (item.xtype === 'resultdetails') {
             this.showButton(this.getFaveButton());
+            this.showAppBar();
         } else {
             this.hideButton(this.getFaveButton());
+            this.hideAppBar();
         }
         this.hideButton(this.getListFavesButton());
 
@@ -104,8 +107,10 @@
 
     onMainPop: function(view, item) {
         this.hideButton(this.getFaveButton());
+        this.hideAppBar();
         if (item.xtype === 'resultlist') {
             this.showButton(this.getListFavesButton());
+            this.showAppBar();
         }
         this.updateBackStackDepth(-1);
     },
@@ -122,7 +127,7 @@
     onResultSelect: function(list, index, node, record) {
         //lazy initialise result details view..
         if (!this.resultDetails) {
-            this.resultDetails = Ext.create('PropertyFinder.view.ResultDetails');
+            this.resultDetails = Ext.create('PropertyCross.view.ResultDetails');
         }
 
         // Bind the record onto the show contact view
@@ -132,11 +137,10 @@
         var store = Ext.getStore('favourites');
         store.load();
         var me = this;
-        var faveButton = this.getFaveButton();
-        me.getFaveButton().removeCls('faveProperty');
+        me.showFavouriteUnset();
         Ext.each(store.getData().items, function(item, index) {
             if(item && record.getData().guid === item.getData().guid) {
-                me.getFaveButton().addCls('faveProperty');
+                me.showFavouriteSet();
             }
         });
         this.getMain().push(this.resultDetails);
@@ -144,7 +148,7 @@
 
     goToResultsList: function(store) {
         if (!this.resultList) {
-            this.resultList = Ext.create('PropertyFinder.view.ResultList', {store: store});
+            this.resultList = Ext.create('PropertyCross.view.ResultList', {store: store});
         }
 
         this.getMain().push(this.resultList);
@@ -322,13 +326,13 @@
                 record.dirty = true;
                 store.remove(item);
                 found = true;
-                faveButton.removeCls('faveProperty');
+                me.showFavouriteUnset();
                 return false; //break..
             }
         });
         if(!found) {
             store.add(record);
-            faveButton.addCls('faveProperty');
+            me.showFavouriteSet();
         }
         //Note: sync won't fire refresh on list so we'll load again afterwards..
         store.sync();
@@ -340,7 +344,7 @@
 
     onListFaves: function() {
         if (!this.favesList) {
-            this.favesList = Ext.create('PropertyFinder.view.ResultList', {
+            this.favesList = Ext.create('PropertyCross.view.ResultList', {
                 store: Ext.getStore('favourites'),
                 title: 'Favourites',
                 id: 'favouritesList',
@@ -362,5 +366,39 @@
             return;
         }
         button.hide();
-    }
+    },
+
+    showFavouriteSet: function() {
+        var faveButton = this.getFaveButton();
+        if(Ext.browser.is.IE) {
+            faveButton.setText("remove from favourites");
+        } else {
+            faveButton.setIconCls("favourite");
+        }
+    },
+
+    showFavouriteUnset: function() {
+        var faveButton = this.getFaveButton();
+        if(Ext.browser.is.IE) {
+            faveButton.setText("add to favourites");
+        } else {
+            faveButton.setIconCls("unfavourite");
+        }
+    },
+
+    showAppBar: function() {
+        var appBar = this.getMainAppBar();
+        if (!appBar || !appBar.isHidden()) {
+            return;
+        }
+        appBar.show();
+    },
+
+    hideAppBar: function() {
+        var appBar = this.getMainAppBar();
+        if (!appBar || appBar.isHidden()) {
+            return;
+        }
+        appBar.hide();
+    } 
 });

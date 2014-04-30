@@ -14,8 +14,7 @@ Ext.define('Ext.event.publisher.Dom', {
 
     idOrClassSelectorRegex: /^([#|\.])([\w\-]+)$/,
 
-    handledEvents: ['click', 'focus', 'blur', 'paste', 'input', 'change',
-                    'mousemove', 'mousedown', 'mouseup', 'mouseover', 'mouseout',
+    handledEvents: ['focus', 'blur', 'paste', 'input', 'change',
                     'keyup', 'keydown', 'keypress', 'submit',
                     'transitionend', 'animationstart', 'animationend'],
 
@@ -115,16 +114,17 @@ Ext.define('Ext.event.publisher.Dom', {
             doc = document;
         }
 
-        var defaultView = doc.defaultView,
-            addEventListener;
+        var defaultView = doc.defaultView;
 
-        if (defaultView && defaultView.addEventListener) {
-            addEventListener = defaultView.addEventListener;
+        if (Ext.os.is.iOS && Ext.os.version.getMajor() < 5) {
+            document.addEventListener(eventName, this.onEvent, !this.doesEventBubble(eventName));
+        }
+        else if (defaultView && defaultView.addEventListener) {
+            doc.defaultView.addEventListener(eventName, this.onEvent, !this.doesEventBubble(eventName));
         }
         else {
-            addEventListener = doc.addEventListener;
+            doc.addEventListener(eventName, this.onEvent, !this.doesEventBubble(eventName));
         }
-        addEventListener(eventName, this.onEvent, !this.doesEventBubble(eventName));
         return this;
     },
 
@@ -133,17 +133,17 @@ Ext.define('Ext.event.publisher.Dom', {
             doc = document;
         }
 
-        var defaultView = doc.defaultView,
-            removeEventListener;
+        var defaultView = doc.defaultView;
 
-        if (defaultView && defaultView.removeEventListener) {
-            removeEventListener = defaultView.removeEventListener;
+        if (Ext.os.is.iOS && Ext.os.version.getMajor() < 5) {
+            document.removeEventListener(eventName, this.onEvent, !this.doesEventBubble(eventName));
+        }
+        else if (defaultView && defaultView.addEventListener) {
+            doc.defaultView.removeEventListener(eventName, this.onEvent, !this.doesEventBubble(eventName));
         }
         else {
-            removeEventListener = doc.addEventListener;
+            doc.removeEventListener(eventName, this.onEvent, !this.doesEventBubble(eventName));
         }
-        removeEventListener(eventName, this.onEvent, !this.doesEventBubble(eventName));
-
         return this;
     },
 
@@ -332,7 +332,13 @@ Ext.define('Ext.event.publisher.Dom', {
             event.setDelegatedTarget(target);
 
             if (hasIdSubscribers) {
-                id = target.id;
+                // We use getAttribute instead of referencing id here as forms can have there properties overridden by children
+                // Example:
+                //  <form id="myForm">
+                //      <input name="id">
+                //  </form>
+                // form.id === input node named id whereas form.getAttribute("id") === "myForm"
+                id = target.getAttribute("id");
 
                 if (id) {
                     if (idSubscribers.hasOwnProperty(id)) {
@@ -420,7 +426,6 @@ Ext.define('Ext.event.publisher.Dom', {
 
     onEvent: function(e) {
         var eventName = this.eventNameMap[e.type];
-
         // Set the current frame start time to be the timestamp of the event.
         Ext.frameStartTime = e.timeStamp;
 

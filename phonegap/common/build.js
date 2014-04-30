@@ -11,7 +11,7 @@ module.exports = {
           archive: "app.zip",
           appId: "<%= pkg.appId %>",
           user: {
-            email: "propertycrossbuilds+<%= pkg.abbr %>@gmail.com",
+            email: "<%= grunt.option('pgb.email') || 'propertycrossbuilds+' + pkg.abbr + '@gmail.com' %>",
             password: "<%= grunt.option('pgb.password') %>"
           },
           download: {
@@ -57,7 +57,7 @@ module.exports = {
     config.copy.configXml.options.process = function(content) {
       var impl = grunt.config.get("pkg.implName");
       grunt.log.oklns("Setting implementation name to "+impl);
-      return content.replace(/\[IMPL\]/g, impl).replace(/\[ID\]/g, grunt.config.get("pkg.abbr"));
+      return content.replace(/\[IMPL\]/g, impl).replace(/\[ID\]/g, grunt.config.get("pkg.abbr")).replace(/\[VERSION\]/g, grunt.config.get("pkg.version"));
     }
 
     if (mutateConfig) {

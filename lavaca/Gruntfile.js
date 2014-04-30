@@ -285,7 +285,7 @@ module.exports = function( grunt ) {
     pkg: {
       ios: {
         options: {
-          identity: 'iPhone Distribution: Mutual Mobile'
+          identity: grunt.option('ios.identity')
         },
         files: [
           {

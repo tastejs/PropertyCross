@@ -1,7 +1,7 @@
 /**
  * @class Ext.chart.PolarChart
  * @extends Ext.chart.AbstractChart
- * 
+ *
  * Creates a chart that uses polar coordinates.
  */
 Ext.define('Ext.chart.PolarChart', {
@@ -157,6 +157,8 @@ Ext.define('Ext.chart.PolarChart', {
             seriesItem = series[i];
             seriesItem.getSprites();
         }
-        this.renderFrame();
+
+        me.renderFrame();
+        me.callSuper(arguments);
     }
 });

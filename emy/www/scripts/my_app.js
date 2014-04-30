@@ -378,7 +378,7 @@ window.myApp = {
 	}
 
 };
-myApp.init();
+document.addEventListener('deviceready', myApp.init, false);
 }(document, window));
 
 function nestoriaSearchCallback(datas, isRecent)

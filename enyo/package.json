@@ -1,6 +1,6 @@
 {
-  "name": "property-cross-enyo",
-  "version": "1.3.0",
+  "name": "enyo",
+  "version": "1.4.0",
   "abbr": "enyo",
   "implName": "Enyo",
   "contributors": [{

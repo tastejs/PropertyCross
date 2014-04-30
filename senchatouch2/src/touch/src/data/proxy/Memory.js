@@ -47,7 +47,7 @@
  *             type: 'memory',
  *             reader: {
  *                 type: 'json',
- *                 root: 'users'
+ *                 rootProperty: 'users'
  *             }
  *         }
  *     });

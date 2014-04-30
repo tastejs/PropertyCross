@@ -127,7 +127,7 @@ Ext.define('Ext.navigation.Bar', {
     },
 
     platformConfig: [{
-        platform: ['blackberry'],
+        theme: ['Blackberry'],
         animation: false
     }],
 

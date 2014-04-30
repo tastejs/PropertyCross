@@ -1,0 +1,11 @@
+{
+  "name": "neomad",
+  "version": "1.4.0",
+  "abbr": "neomad",
+  "implName": "NeoMAD",
+  "contributors": [{
+    "name": "Neomades",
+    "username": "nmingo-neomades"
+  }],
+  "platforms": ["android", "ios", "windowsphone"]
+}

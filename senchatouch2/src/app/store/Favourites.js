@@ -1,9 +1,9 @@
-Ext.define('PropertyFinder.store.Favourites', {
+Ext.define('PropertyCross.store.Favourites', {
     extend: 'Ext.data.Store',
 
     config: {
 		storeId: 'favourites',
-		model: 'PropertyFinder.model.Results',
+		model: 'PropertyCross.model.Results',
         autoLoad: true
     }
 });

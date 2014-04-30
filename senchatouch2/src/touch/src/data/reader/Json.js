@@ -261,7 +261,7 @@ Ext.define('Ext.data.reader.Json', {
      * We create this method because `root` is now a config so `getRoot` is already defined, but in the old
      * data package `getRoot` was passed a data argument and it would return the data inside of the `root`
      * property. This method handles both cases.
-     * @param data (Optional)
+     * @param {Array/Object} [data]
      * @return {String/Object} Returns the config root value if this method was called without passing
      * data. Else it returns the object in the data bound to the root.
      * @private

@@ -1,0 +1,68 @@
+﻿<Application
+    x:Class="PropertyCross.WindowsPhone.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:windowsPhone="clr-namespace:PropertyCross.WindowsPhone"
+    xmlns:nativeConverters="clr-namespace:PropertyCross.WindowsPhone.NativeConverters">
+
+    <!--Application Resources-->
+    <Application.Resources>
+        <ResourceDictionary>
+        <windowsPhone:LocalizedStrings x:Key="LocalizedStrings"/>
+            <nativeConverters:NativeNegatedConverter x:Key="NativeNegatedConverter"></nativeConverters:NativeNegatedConverter>
+            <nativeConverters:NativeVisibilityConverter x:Key="VisibilityConverter"></nativeConverters:NativeVisibilityConverter>
+            <nativeConverters:NativeInvertedVisibilityConverter x:Key="InvertedVisibilityConverter"></nativeConverters:NativeInvertedVisibilityConverter>
+            <nativeConverters:BooleanToFavouriteImageUri x:Key="BooleanToFavouriteImageUri"></nativeConverters:BooleanToFavouriteImageUri>
+
+            <DataTemplate x:Key="propertyTemplate">
+                <Border Style="{StaticResource ButtonBackgroundStyle}"
+              >
+                    <StackPanel Orientation="Horizontal">
+                        <Border Width="80" Height="80"
+                  Padding="2" Margin="0,0,10,0"
+                  Background="#aaa"
+                  HorizontalAlignment="Center">
+                            <Image Source="{Binding Path=ImageUri}"
+                           Stretch="Fill"/>
+                        </Border>
+                        <StackPanel Orientation="Vertical" Width="350">
+                            <TextBlock Text="{Binding Path=PriceText}"
+                      FontSize="30"/>
+                            <TextBlock Text="{Binding Path=DetailsText}"
+                      Foreground="#aaa"
+                      TextWrapping="NoWrap"
+                      TextTrimming="WordEllipsis"
+                      FontSize="22"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </DataTemplate>
+            <ControlTemplate TargetType="Button" x:Key="PropertyButtonTemplate">
+                <ContentControl x:Name="ContentContainer"
+                      HorizontalContentAlignment="Left"
+                      ContentTemplate="{TemplateBinding ContentTemplate}"
+                      Content="{TemplateBinding Content}"/>
+            </ControlTemplate>
+
+            <Style TargetType="Border" x:Key="ButtonBackgroundStyle">
+                <Setter Property="Width" Value="460"/>
+                <Setter Property="Height" Value="100"/>
+                <Setter Property="Margin" Value="10,5"/>
+                <Setter Property="Padding" Value="10"/>
+                <Setter Property="Background" Value="#77888888"/>
+            </Style>
+        </ResourceDictionary>
+
+
+    </Application.Resources>
+
+    <Application.ApplicationLifetimeObjects>
+        <!--Required object that handles lifetime events for the application-->
+        <shell:PhoneApplicationService
+            Launching="Application_Launching" Closing="Application_Closing"
+            Activated="Application_Activated" Deactivated="Application_Deactivated"/>
+    </Application.ApplicationLifetimeObjects>
+
+</Application>

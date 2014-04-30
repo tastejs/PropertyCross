@@ -137,6 +137,11 @@ Ext.define('Ext.tab.Panel', {
         });
     },
 
+    platformConfig: [{
+        theme: ['Blackberry'],
+        tabBarPosition: 'bottom'
+    }],
+
     /**
      * Tab panels should not be scrollable. Instead, you should add scrollable to any item that
      * you want to scroll.

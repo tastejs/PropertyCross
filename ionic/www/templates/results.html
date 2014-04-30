@@ -1,0 +1,15 @@
+<view title="title">
+  <content has-header="true">
+    <div class="list">
+      <a ng-repeat="property in properties" class="item item-avatar" href="#/property/{{property.guid}}">
+        <img ng-src="{{property.thumbnailURL}}" />
+        <h2>{{property.price}}</h2>
+        <p>{{property.title}}</p>
+      </a>
+      <a class="item load-more" ng-click="loadMore()">
+        <h2>Load more...</h2>
+        <p>{{'Showing ' + title}}</p>
+      </a>
+    </div>
+  </content>
+</view>

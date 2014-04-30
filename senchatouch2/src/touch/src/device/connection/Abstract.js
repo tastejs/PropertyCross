@@ -2,12 +2,23 @@
  * @private
  */
 Ext.define('Ext.device.connection.Abstract', {
+    extend: 'Ext.Evented',
     mixins: ['Ext.mixin.Observable'],
 
     config: {
         online: false,
         type: null
     },
+
+    /**
+     * @event online
+     * Fires when the device goes online
+     */
+    
+    /**
+     * @event offline
+     * Fires when the device goes offline
+     */
 
     /**
      * @property {String} UNKNOWN

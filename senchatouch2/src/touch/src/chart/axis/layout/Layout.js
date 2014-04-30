@@ -1,7 +1,7 @@
 /**
  * @abstract
  * @class Ext.chart.axis.layout.Layout
- * 
+ *
  * Interface used by Axis to process its data into a meaningful layout.
  */
 Ext.define("Ext.chart.axis.layout.Layout", {
@@ -18,7 +18,7 @@ Ext.define("Ext.chart.axis.layout.Layout", {
 
     /**
      * Processes the data of the series bound to the axis.
-     * @param series The bound series.
+     * @param {Ext.chart.series.Series} series The bound series.
      */
     processData: function (series) {
         var me = this,
@@ -40,7 +40,7 @@ Ext.define("Ext.chart.axis.layout.Layout", {
 
     /**
      * Calculates the position of major ticks for the axis.
-     * @param context
+     * @param {Object} context
      */
     calculateMajorTicks: function (context) {
         var me = this,
@@ -52,22 +52,25 @@ Ext.define("Ext.chart.axis.layout.Layout", {
             estStepSize = attr.estStepSize * zoom,
             out = me.snapEnds(context, attr.min, attr.max, estStepSize);
         if (out) {
-            me.trimByRange(context, out, viewMin - zoom * (1 + attr.startGap), viewMax + zoom * (1 + attr.endGap));
+            me.trimByRange(context, out, viewMin, viewMax);
             context.majorTicks = out;
         }
     },
 
     /**
      * Calculates the position of sub ticks for the axis.
-     * @param context
+     * @param {Object} context
      */
     calculateMinorTicks: function (context) {
-        // TODO: Finish Minor ticks.
+        var attr = context.attr;
+        if (this.snapMinorEnds) {
+            context.minorTicks = this.snapMinorEnds(context);
+        }
     },
 
     /**
      * Calculates the position of tick marks for the axis.
-     * @param context
+     * @param {Object} context
      * @return {*}
      */
     calculateLayout: function (context) {
@@ -89,19 +92,19 @@ Ext.define("Ext.chart.axis.layout.Layout", {
 
     /**
      * Snaps the data bound to the axis to meaningful tick marks.
-     * @param context
-     * @param min
-     * @param max
-     * @param estStepSize
+     * @param {Object} context
+     * @param {Number} min
+     * @param {Number} max
+     * @param {Number} estStepSize
      */
     snapEnds: Ext.emptyFn,
 
     /**
      * Trims the layout of the axis by the defined minimum and maximum.
-     * @param context
-     * @param out
-     * @param trimMin
-     * @param trimMax
+     * @param {Object} context
+     * @param {Object} out
+     * @param {Number} trimMin
+     * @param {Number} trimMax
      */
     trimByRange: function (context, out, trimMin, trimMax) {
         var segmenter = context.segmenter,

@@ -33,12 +33,24 @@
 @import "compass/css3/images";
 
 $default-gradient: matte !default;
+$support-for-original-webkit-gradients: false;
 
 @mixin background-gradient($bg-color, $type: $default-gradient, $direction: top, $contrast: 1) {
     background-image: none;
     background-color: $bg-color;
 
     @if $type != null and $bg-color != transparent {
+        // Get around IE10  quirks [EXTJSIV-9723]
+        // @if $direction == top {
+        //     $direction: 180deg;
+        // } @else if $direction == right {
+        //     $direction: 270deg;
+        // } @else if $direction == bottom {
+        //     $direction: 0deg;
+        // } @else if $direction == left {
+        //     $direction: 90deg;
+        // }
+
         // Color stops provided
         @if type-of($type) == "list" {
             @include background-image(linear-gradient($direction, $type));

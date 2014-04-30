@@ -1,10 +1,10 @@
 $.mvc.controller.create("search", {
     views: {
-        "resultsTpl": "views/result.tpl",
-        "recentSearchTpl": "views/recentSearch.tpl",
-        "headerTpl": "views/resultListHeader.tpl",
-        "locationTpl": "views/locationList.tpl",
-        "loadMoreTpl": "views/loadMore.tpl"
+        "resultsTpl": "views/result.html",
+        "recentSearchTpl": "views/recentSearch.html",
+        "headerTpl": "views/resultListHeader.html",
+        "locationTpl": "views/locationList.html",
+        "loadMoreTpl": "views/loadMore.html"
     },
     $resultList: $("#resultList"),
     $errorMessage: $("#errorMessage"),
@@ -37,7 +37,7 @@ $.mvc.controller.create("search", {
         var recentSearch = new RecentSearch();
         var that = this;
 
-        recentSearch.get(recentSearchId, function(existing) {
+        recentSearch.fetch(recentSearchId, function(existing) {
             if (existing.display_name !== "") {
                 //if recent search already exists, needs to move to top
                 recentSearch.remove(function() {
@@ -70,8 +70,9 @@ $.mvc.controller.create("search", {
 
     /* Adds properties to the model, updates the results view and transitions to results view */
     updatePropertiesList: function(response) {
-        var that = this;
-        response.listings.forEach(function(prop) {
+        var that = this, i, prop;
+        for (i = 0; i < response.listings.length; i++) {
+            prop = response.listings[i];
             var property = new Property();
             property.id = prop.guid;
             property.set({
@@ -89,7 +90,7 @@ $.mvc.controller.create("search", {
                     fave: false
                 }));
             });
-        });
+        }
         var numResults = that.$resultList.find("a").length;
         var totalResults = response.total_results;
 
@@ -213,7 +214,7 @@ $.mvc.controller.create("search", {
     /* Searches on a recently searched location */
     recent: function(placeName) {
         var that = this;
-        recentSearch.get(placeName, function(search) {
+        recentSearch.fetch(placeName, function(search) {
             that.displayName = search.display_name;
             that.performSearch(placeName);
         });
@@ -241,7 +242,7 @@ $.mvc.controller.create("search", {
     init: function() {
         var that = this;
         var recentSearch = new RecentSearch();
-        recentSearch.getAll(function(searches) {
+        recentSearch.fetchAll(function(searches) {
             if (searches.length !== 0) {
                 $("#recentSearchLabel").show();
             }

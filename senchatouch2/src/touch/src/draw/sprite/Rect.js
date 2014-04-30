@@ -18,8 +18,8 @@
  *     Ext.Viewport.setLayout('fit');
  *     Ext.Viewport.add(component);
  */
-Ext.define("Ext.draw.sprite.Rect", {
-    extend: "Ext.draw.sprite.Path",
+Ext.define('Ext.draw.sprite.Rect', {
+    extend: 'Ext.draw.sprite.Path',
     alias: 'sprite.rect',
     type: 'rect',
     inheritableStatics: {

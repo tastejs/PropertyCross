@@ -297,7 +297,6 @@
         });
         //</deprecated>
 
-        // TODO(zhangbei): do we have a better way to convert color names to rgb?
         this.addStatics({
             /**
              * Returns a flyweight instance of Ext.draw.Color.

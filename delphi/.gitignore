@@ -1,2 +1,4 @@
 # build directory
 source/iOSDevice
+source/Android
+source/__history

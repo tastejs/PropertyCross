@@ -1,7 +1,7 @@
 /**
  * @class Ext.chart.label.Callout
  * @extends Ext.draw.modifier.Modifier
- * 
+ *
  * This is a modifier to place labels and callouts by additional attributes.
  */
 Ext.define("Ext.chart.label.Callout", {
@@ -22,7 +22,7 @@ Ext.define("Ext.chart.label.Callout", {
             bbox = attr.bbox.plain,
             width = (bbox.width || 0) + attr.labelOverflowPadding,
             height = (bbox.height || 0) + attr.labelOverflowPadding,
-            dx, dy, r;
+            dx, dy;
 
         if ('callout' in changes) {
             callout = changes.callout;
@@ -48,7 +48,7 @@ Ext.define("Ext.chart.label.Callout", {
             }
 
             if (calloutVertical) {
-                rotationRads = rotationRads * (1 - callout) + Math.PI / 2 * callout;
+                rotationRads = rotationRads * (1 - callout) - Math.PI / 2 * callout;
                 temp = width;
                 width = height;
                 height = temp;

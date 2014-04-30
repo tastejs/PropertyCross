@@ -12,16 +12,16 @@ Ext.dom.Element.override({
      * Gets the current X position of the element based on page coordinates.  Element must be part of the DOM tree to have page coordinates (`display:none` or elements not appended return `false`).
      * @return {Number} The X position of the element
      */
-    getX: function(el) {
-        return this.getXY(el)[0];
+    getX: function() {
+        return this.getXY()[0];
     },
 
     /**
      * Gets the current Y position of the element based on page coordinates.  Element must be part of the DOM tree to have page coordinates (`display:none` or elements not appended return `false`).
      * @return {Number} The Y position of the element
      */
-    getY: function(el) {
-        return this.getXY(el)[1];
+    getY: function() {
+        return this.getXY()[1];
     },
 
     /**
@@ -269,18 +269,19 @@ Ext.dom.Element.override({
      */
     getPageBox: function(getRegion) {
         var me = this,
-            el = me.dom,
-            w = el.offsetWidth,
+            el = me.dom;
+
+        if (!el) {
+            return new Ext.util.Region();
+        }
+
+        var w = el.offsetWidth,
             h = el.offsetHeight,
             xy = me.getXY(),
             t = xy[1],
             r = xy[0] + w,
             b = xy[1] + h,
             l = xy[0];
-
-        if (!el) {
-            return new Ext.util.Region();
-        }
 
         if (getRegion) {
             return new Ext.util.Region(t, r, b, l);

@@ -1,13 +1,13 @@
 /**
  * Radial gradient.
- * 
+ *
  *     @example preview miniphone
  *     var component = new Ext.draw.Component({
  *       items: [{
  *         type: 'circle',
- *         cx: 100,
- *         cy: 100,
- *         r: 25,
+ *         cx: 50,
+ *         cy: 50,
+ *         r: 100,
  *         fillStyle: {
  *           type: 'radial',
  *           start: {

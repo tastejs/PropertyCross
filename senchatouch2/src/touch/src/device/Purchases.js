@@ -1,8 +1,8 @@
 /**
- * 
+ *
  *
  * @mixins Ext.device.purchases.Sencha
- * 
+ *
  * @aside guide native_apis
  */
 Ext.define('Ext.device.Purchases', {
@@ -14,6 +14,12 @@ Ext.define('Ext.device.Purchases', {
     ],
 
     constructor: function() {
-        return Ext.create('Ext.device.purchases.Sencha');
+        var browserEnv = Ext.browser.is;
+
+        if (browserEnv.WebView && browserEnv.Sencha) {
+            return Ext.create('Ext.device.purchases.Sencha');
+        }
+
+        return {};
     }
 });

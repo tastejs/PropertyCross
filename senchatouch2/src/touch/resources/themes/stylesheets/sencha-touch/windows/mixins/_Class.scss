@@ -4,29 +4,6 @@ $default-gradient: null;
  * @class Global_CSS
  */
 
-///**
-// * Includes a base64-encoded icon for use within tab bars and buttons (With the component parameter iconMask: true).
-// *
-// *     @include pictos-iconmask('attachment');
-// *
-// * @param {string} $name The name of the icon to be included. This is to match the name of the icon file (located at resources/themes/images/default/pictos) without its extention (.png).
-// */
-//@mixin pictos-iconmask($name) {
-//    .x-tab .x-button-icon.#{$name},
-//    .x-button .x-button-icon.x-icon-mask.#{$name} {
-//        @include icon($name);
-//    }
-//}
-
-//@mixin icon($name, $background-color: transparent, $size: 1.1em,$position: 50% 50%) {
-//  webkit-mask-image: theme_image('windows-phone/dark', "pictos/" + $name + ".png");
-//  background-image: theme_image('windows-phone/dark', "pictos/" + $name + ".png");
-//  background-color: $background-color;
-//  background-position: $position;
-//  background-repeat: no-repeat;
-//  background-size: $size;
-//}
-
 /**
  * Includes the default styles for toolbar buttons, mostly used as a helper function.
  *

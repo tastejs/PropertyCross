@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<HorizontalLayout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    marginBottom="4"
+    marginTop="4"
+    backgroundColor="#80808080"
+    stretchHorizontalMode="MATCH_PARENT"
+    stretchVerticalMode="MATCH_CONTENT"
+    xsi:noNamespaceSchemaLocation="http://www.neomades.com/XSD/3.5.0/layout.xsd" >
+
+    <!-- Picture -->
+
+    <ImageLabel
+        id="@+id/ITEM_IMAGE"
+        height="50"
+        marginRight="4"
+        stretchHorizontalMode="MATCH_CONTENT"
+        stretchVerticalMode="MATCH_CONTENT"
+        width="50" />
+
+    <VerticalLayout
+        marginRight="4"
+        stretchHorizontalMode="MATCH_PARENT"
+        stretchVerticalMode="MATCH_CONTENT" >
+
+        <!-- Title -->
+
+        <TextLabel
+            id="@+id/ITEM_PRICE"
+            contentAlignment="BOTTOM|LEFT"
+            stretchHorizontalMode="MATCH_PARENT"
+            stretchVerticalMode="MATCH_CONTENT"/>
+        <!-- Description -->
+
+        <TextLabel
+            id="@+id/ITEM_DESC"
+            contentAlignment="TOP|LEFT"
+            stretchHorizontalMode="MATCH_PARENT"
+            stretchVerticalMode="MATCH_CONTENT"
+            textColor="#B0B0B0" />
+    </VerticalLayout>
+
+</HorizontalLayout>

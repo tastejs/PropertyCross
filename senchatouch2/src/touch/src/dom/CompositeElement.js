@@ -35,22 +35,4 @@ Ext.define('Ext.dom.CompositeElement', {
         return Ext.get(el);
     }
 
-}, function() {
-    Ext.dom.Element.select = function(selector, unique, root) {
-        var elements;
-
-        if (typeof selector == "string") {
-            elements = Ext.dom.Element.selectorFunction(selector, root);
-        }
-        else if (selector.length !== undefined) {
-            elements = selector;
-        }
-        else {
-            //<debug>
-            throw new Error("[Ext.select] Invalid selector specified: " + selector);
-            //</debug>
-        }
-
-        return (unique === true) ? new Ext.CompositeElement(elements) : new Ext.CompositeElementLite(elements);
-    };
 });

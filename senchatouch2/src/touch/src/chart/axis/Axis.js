@@ -4,30 +4,30 @@
  * Defines axis for charts.
  *
  * Using the current model, the type of axis can be easily extended. By default, Sencha Touch provides three different
- * type of axis:
+ * types of axis:
  *
- *  * **Numeric**: the data attached with this axes are considered to be numeric and continuous.
- *  * **Time**: the data attached with this axes are considered (or get converted into) date/time and they are continuous.
- *  * **Category**: the data attached with this axes conforms a finite set. They be evenly placed on the axis and displayed in the same form they were provided.
+ *  * **numeric** - the data attached with this axes are considered to be numeric and continuous.
+ *  * **time** - the data attached with this axes are considered (or get converted into) date/time and they are continuous.
+ *  * **category** - the data attached with this axes conforms a finite set. They will be evenly placed on the axis and displayed in the same form they were provided.
  *
- * The behavior of axis can be easily changed by setting different types of axis layout and axis segmenter to the axis.
+ * The behavior of an axis can be easily changed by setting different types of axis layout and axis segmenter to the axis.
  *
- * Axis layout defines how the data points are places. Using continuous layout, the data points will be distributed by
- * there numeric value. Using discrete layout the data points will be spaced evenly, Furthermore, if you want to combine
- * the data points with the duplicate values in a discrete layout, you should use combinedDuplicate layout.
+ * Axis layout defines how the data points are placed. Using continuous layout, the data points will be distributed by
+ * the numeric value. Using discrete layout the data points will be spaced evenly. Furthermore, if you want to combine
+ * the data points with the duplicate values in a discrete layout, you should use combineDuplicate layout.
  *
  * Segmenter defines the way to segment data range. For example, if you have a Date-type data range from Jan 1, 1997 to
  * Jan 1, 2017, the segmenter will segement the data range into years, months or days based on the current zooming
  * level.
  *
- * It is possible to write custom axis layouts and segmenters to extends this behavior by simply implement interfaces
+ * It is possible to write custom axis layouts and segmenters to extends this behavior by simply implementing interfaces
  * {@link Ext.chart.axis.layout.Layout} and {@link Ext.chart.axis.segmenter.Segmenter}.
  *
  * Here's an example for the axes part of a chart definition:
  * An example of axis for a series (in this case for an area chart that has multiple layers of yFields) could be:
  *
  *     axes: [{
- *         type: 'Numeric',
+ *         type: 'numeric',
  *         position: 'left',
  *         title: 'Number of Hits',
  *         grid: {
@@ -40,7 +40,7 @@
  *         },
  *         minimum: 0
  *     }, {
- *         type: 'Category',
+ *         type: 'category',
  *         position: 'bottom',
  *         title: 'Month of the Year',
  *         grid: true,
@@ -51,7 +51,7 @@
  *         }
  *     }]
  *
- * In this case we use a `Numeric` axis for displaying the values of the Area series and a `Category` axis for displaying the names of
+ * In this case we use a `numeric` axis for displaying the values of the Area series and a `category` axis for displaying the names of
  * the store elements. The numeric axis is placed on the left of the screen, while the category axis is placed at the bottom of the chart.
  * Both the category and numeric axes have `grid` set, which means that horizontal and vertical lines will cover the chart background. In the
  * category axis the labels will be rotated so they can fit the space better.
@@ -89,6 +89,8 @@ Ext.define('Ext.chart.axis.Axis', {
          * The label configuration object for the Axis. This object may include style attributes
          * like `spacing`, `padding`, `font` that receives a string or number and
          * returns a new string with the modified values.
+         *
+         * For more supported values, see the configurations for {@link Ext.chart.label.Label}.
          */
         label: { x: 0, y: 0, textBaseline: 'middle', textAlign: 'center', fontSize: 12, fontFamily: 'Helvetica' },
 
@@ -112,6 +114,10 @@ Ext.define('Ext.chart.axis.Axis', {
 
         /**
          * @cfg {Function} renderer Allows direct customisation of rendered axis sprites.
+         * @param {String} label The label.
+         * @param {Object|Ext.chart.axis.layout.Layout} layout The layout configuration used by the axis.
+         * @param {String} lastLabel The last label.
+         * @return {String} The label to display.
          */
         renderer: null,
 
@@ -191,17 +197,13 @@ Ext.define('Ext.chart.axis.Axis', {
         hidden: false,
 
         /**
-         * @private
          * @cfg {Number} majorTickSteps
-         * Will be supported soon.
          * If `minimum` and `maximum` are specified it forces the number of major ticks to the specified value.
          */
         majorTickSteps: false,
 
         /**
-         * @private
          * @cfg {Number} [minorTickSteps=0]
-         * Will be supported soon.
          * The number of small ticks between two major ticks.
          */
         minorTickSteps: false,
@@ -366,14 +368,14 @@ Ext.define('Ext.chart.axis.Axis', {
         switch (this.getPosition()) {
             case 'left':
             case 'right':
-                return "vertical";
+                return 'vertical';
             case 'top':
             case 'bottom':
-                return "horizontal";
+                return 'horizontal';
             case 'radial':
-                return "radial";
+                return 'radial';
             case 'angular':
-                return "angular";
+                return 'angular';
         }
     },
 
@@ -385,12 +387,12 @@ Ext.define('Ext.chart.axis.Axis', {
         switch (this.getPosition()) {
             case 'left':
             case 'right':
-                return "horizontal";
+                return 'horizontal';
             case 'top':
             case 'bottom':
-                return "vertical";
+                return 'vertical';
             case 'radial':
-                return "circular";
+                return 'circular';
             case 'angular':
                 return "radial";
         }
@@ -510,10 +512,10 @@ Ext.define('Ext.chart.axis.Axis', {
     updateChart: function (newChart, oldChart) {
         var me = this, surface;
         if (oldChart) {
-            oldChart.un("serieschanged", me.onSeriesChanged, me);
+            oldChart.un('serieschanged', me.onSeriesChanged, me);
         }
         if (newChart) {
-            newChart.on("serieschanged", me.onSeriesChanged, me);
+            newChart.on('serieschanged', me.onSeriesChanged, me);
             if (newChart.getSeries()) {
                 me.onSeriesChanged(newChart);
             }
@@ -726,7 +728,6 @@ Ext.define('Ext.chart.axis.Axis', {
             chart = me.getChart(),
             animation = chart.getAnimate(),
             baseSprite, style,
-            gridAlignment = me.getGridAlignment(),
             length = me.getLength();
 
         // If animation is false, then stop animation.

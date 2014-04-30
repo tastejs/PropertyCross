@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:local="http://schemas.android.com/apk/res-auto"   
+    android:layout_width="match_parent"
+    android:layout_height="?android:attr/listPreferredItemHeight"
+    android:orientation="horizontal">
+  <Mvx.MvxImageView
+      android:id="@+id/property_thumb"
+      android:layout_width="?android:attr/listPreferredItemHeight"
+      android:layout_height="match_parent"
+      android:layout_marginRight="4dp"
+      android:contentDescription="@string/property_img_description"
+      android:src="@drawable/ic_launcher"
+      local:MvxBind="ImageUrl ImageUri"
+      /> 
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_marginRight="4dp"
+      android:orientation="vertical">
+    <TextView
+        android:id="@+id/property_search_price"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="bottom"
+        android:textSize="18sp"
+        android:textStyle="bold" 
+         local:MvxBind="Text PriceText"/>
+    <TextView
+        android:id="@+id/property_search_details"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:textSize="14sp"
+        android:gravity="top"
+        android:textColor="@color/row_detail_color"
+        android:singleLine="true"
+        android:ellipsize="end"
+        local:MvxBind="Text DetailsText"/>
+  </LinearLayout>
+</LinearLayout>

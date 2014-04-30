@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<FrameLayout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	stretchHorizontalMode="MATCH_PARENT" stretchVerticalMode="MATCH_PARENT"
+	xsi:noNamespaceSchemaLocation="http://www.neomades.com/XSD/3.5.0/layout.xsd">
+
+	<Include refLayout="@layout/PROPERTY_SPLASH"/>
+
+	<VerticalLayout padding="4" contentAlignment="HCENTER|VCENTER"
+		stretchHorizontalMode="MATCH_PARENT" stretchVerticalMode="MATCH_PARENT">
+		<TextLabel id="@+id/LABEL_NO_ITEM"
+                   visible="false"
+                   stretchHorizontalMode="MATCH_PARENT"
+                   stretchVerticalMode="MATCH_CONTENT"
+                   textColor="#000000"/>
+		<ListView id="@+id/PROPERTY_LIST" listIndicatorVisible="true"
+			selectionColorEnabled="false" stretchHorizontalMode="MATCH_PARENT"
+			marginLeft="8" marginRight="8" stretchVerticalMode="MATCH_PARENT" />
+	</VerticalLayout>
+
+</FrameLayout>

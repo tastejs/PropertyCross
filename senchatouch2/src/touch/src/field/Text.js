@@ -185,13 +185,13 @@ Ext.define('Ext.field.Text', {
         readOnly: null,
 
         /**
-         * @cfg {Object} component The inner component for this field, which defaults to an input text. You are also
-         * able to use the {@link Ext.field.File} component by using the `file` xtype.
+         * @cfg {Object} component The inner component for this field, which defaults to an input text.
          * @accessor
          */
         component: {
             xtype: 'input',
-            type : 'text'
+            type: 'text',
+            fastFocus: true
         },
 
         bubbleEvents: ['action']
@@ -216,7 +216,7 @@ Ext.define('Ext.field.Text', {
         });
 
         // set the originalValue of the textfield, if one exists
-        me.originalValue = me.originalValue || "";
+        me.originalValue = me.getValue() || "";
         me.getComponent().originalValue = me.originalValue;
 
         me.syncEmptyCls();
@@ -237,7 +237,7 @@ Ext.define('Ext.field.Text', {
     updateValue: function(newValue) {
         var component  = this.getComponent(),
             // allows newValue to be zero but not undefined or null (other falsey values)
-            valueValid = newValue !== undefined && newValue !== null;
+            valueValid = newValue !== undefined && newValue !== null && newValue !== "";
 
         if (component) {
             component.setValue(newValue);
@@ -351,7 +351,7 @@ Ext.define('Ext.field.Text', {
         var me         = this,
             value      = me.getValue(),
             // allows value to be zero but not undefined or null (other falsey values)
-            valueValid = value !== undefined && value !== null;
+            valueValid = value !== undefined && value !== null && value !== "";
 
         if (me.getClearIcon() && !me.getDisabled() && !me.getReadOnly() && valueValid) {
             me.element.addCls(Ext.baseCSSPrefix + 'field-clearable');
@@ -379,9 +379,9 @@ Ext.define('Ext.field.Text', {
         // getValue to ensure that we are in sync with the dom
         var value      = me.getValue(),
             // allows value to be zero but not undefined or null (other falsey values)
-            valueValid = value !== undefined && value !== null;
+            valueValid = value !== undefined && value !== null && value !== "";
 
-        this[valueValid && value !== this.originalValue ? 'showClearIcon' : 'hideClearIcon']();
+        this[valueValid ? 'showClearIcon' : 'hideClearIcon']();
 
         if (e.browserEvent.keyCode === 13) {
             me.fireAction('action', [me, e], 'doAction');
@@ -398,7 +398,7 @@ Ext.define('Ext.field.Text', {
 
     // @private
     doClearIconTap: function(me, e) {
-        me.setValue(this.originalValue);
+        me.setValue('');
 
         //sync with the input
         me.getValue();

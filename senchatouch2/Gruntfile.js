@@ -17,7 +17,7 @@ module.exports = function(grunt) {
     config.defaultTask.splice(1, 0, "exec");
     config.clean.push("src/build/**")
     config.compress.main.files.push(
-      { expand: true, src: ["**/*"], cwd: "src/build/package/PropertyFinder", dest: "www" }
+      { expand: true, src: ["**/*"], cwd: "src/build/package/PropertyCross", dest: "www" }
     );
   });
 

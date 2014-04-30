@@ -20,7 +20,8 @@ Ext.define('Ext.MessageBox', {
     requires: [
         'Ext.Toolbar',
         'Ext.field.Text',
-        'Ext.field.TextArea'
+        'Ext.field.TextArea',
+        'Ext.util.InputBlocker'
     ],
 
     config: {
@@ -146,6 +147,8 @@ Ext.define('Ext.MessageBox', {
     }, {
         theme: ['Blackberry'],
         ui: 'plain'
+    }, {
+        theme: ['MoutainView']
     }],
 
     statics: {
@@ -210,7 +213,6 @@ Ext.define('Ext.MessageBox', {
         }
 
         this.callParent([config]);
-        this.inputBlocker = new Ext.util.InputBlocker();
     },
 
     /**
@@ -224,12 +226,25 @@ Ext.define('Ext.MessageBox', {
             };
         }
 
+        var minHeight = '1.3em';
+        if (Ext.theme.is.Cupertino) {
+            minHeight = '1.5em'
+        } else if (Ext.filterPlatform('blackberry') || Ext.filterPlatform('ie10')) {
+            minHeight = '2.6em';
+        }
+
         Ext.applyIf(config, {
             docked: 'top',
-            minHeight: (Ext.filterPlatform('blackberry') || Ext.filterPlatform('ie10')) ? '2.6em' : '1.3em',
+            minHeight: minHeight,
             ui: Ext.filterPlatform('blackberry') ? 'light' : 'dark',
             cls   : this.getBaseCls() + '-title'
         });
+
+        if (Ext.theme.is.Tizen) {
+            Ext.applyIf(config, {
+                centered: false
+            });
+        }
 
         return Ext.factory(config, Ext.Toolbar, this.getTitle());
     },
@@ -261,16 +276,24 @@ Ext.define('Ext.MessageBox', {
                 me.buttonsToolbar.removeAll();
                 me.buttonsToolbar.setItems(newButtons);
             } else {
+                var layout = {
+                    type: 'hbox',
+                    pack: 'center'
+                };
+
+                var isFlexed = Ext.theme.is.CupertinoClassic  || Ext.theme.is.MountainView  || Ext.theme.is.Blackberry;
+
                 me.buttonsToolbar = Ext.create('Ext.Toolbar', {
-                    docked     : 'bottom',
+                    docked: 'bottom',
                     defaultType: 'button',
-                    layout     : {
-                        type: 'hbox',
-                        pack: 'center'
+                    defaults: {
+                        flex: (isFlexed) ? 1 : undefined,
+                        ui: (Ext.theme.is.Blackberry) ? 'action' : undefined
                     },
-                    ui         : me.getUi(),
-                    cls        : me.getBaseCls() + '-buttons',
-                    items      : newButtons
+                    layout: layout,
+                    ui: me.getUi(),
+                    cls: me.getBaseCls() + '-buttons',
+                    items: newButtons
                 });
 
                 me.add(me.buttonsToolbar);
@@ -330,15 +353,14 @@ Ext.define('Ext.MessageBox', {
      * @private
      */
     updateIconCls: function(newIconCls, oldIconCls) {
-        var me = this;
-
         //ensure the title and button elements are added first
         this.getTitle();
         this.getButtons();
 
         if (newIconCls) {
             this.add(newIconCls);
-        } else {
+        }
+        else {
             this.remove(oldIconCls);
         }
     },
@@ -401,6 +423,7 @@ Ext.define('Ext.MessageBox', {
                 prompt = this.getPrompt();
 
             if (typeof config.fn == 'function') {
+                button.disable();
                 this.on({
                     hiddenchange: function() {
                         config.fn.call(
@@ -409,6 +432,7 @@ Ext.define('Ext.MessageBox', {
                             prompt ? prompt.getValue() : null,
                             config
                         );
+                        button.enable();
                     },
                     single: true,
                     scope: this
@@ -499,7 +523,7 @@ Ext.define('Ext.MessageBox', {
      * @return {Ext.MessageBox} this
      */
     show: function(initialConfig) {
-        this.inputBlocker.blockInputs();
+        Ext.util.InputBlocker.blockInputs();
         //if it has not been added to a container, add it to the Viewport.
         if (!this.getParent() && Ext.Viewport) {
             Ext.Viewport.add(this);

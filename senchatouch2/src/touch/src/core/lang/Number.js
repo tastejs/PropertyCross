@@ -102,7 +102,7 @@ Ext.Number.from('abc', 1); // returns 1
 /**
  * This method is deprecated, please use {@link Ext.Number#from Ext.Number.from} instead
  *
- * @deprecated 4.0.0 Replaced by Ext.Number.from
+ * @deprecated 2.0.0 Replaced by Ext.Number.from
  * @member Ext
  * @method num
  */

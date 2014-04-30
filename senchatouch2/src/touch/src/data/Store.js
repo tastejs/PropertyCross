@@ -475,6 +475,7 @@ Ext.define('Ext.data.Store', {
 
         /**
          * @cfg {String} model
+         * Returns Ext.data.Model and not a String.
          * Name of the {@link Ext.data.Model Model} associated with this store.
          * The string is used as an argument for {@link Ext.ModelManager#getModel}.
          * @accessor
@@ -489,13 +490,15 @@ Ext.define('Ext.data.Store', {
         proxy: undefined,
 
         /**
-         * @cfg {Object[]} fields
-         * This may be used in place of specifying a {@link #model} configuration. The fields should be a
+         * @cfg {Object[]/Ext.util.Collection} fields
+         * Returns Ext.util.Collection not just an Object.
+         * Use in place of specifying a {@link #model} configuration. The fields should be a
          * set of {@link Ext.data.Field} configuration objects. The store will automatically create a {@link Ext.data.Model}
          * with these fields. In general this configuration option should be avoided, it exists for the purposes of
          * backwards compatibility. For anything more complicated, such as specifying a particular id property or
          * associations, a {@link Ext.data.Model} should be defined and specified for the {@link #model}
          * config.
+         * @return Ext.util.Collection
          * @accessor
          */
         fields: null,
@@ -506,6 +509,10 @@ Ext.define('Ext.data.Store', {
          *
          * If this is set to `true`, you will have to manually call the {@link #method-load} method after you {@link #method-sort}, to retrieve the sorted
          * data from the server.
+         *
+         * {@link #buffered Buffered} stores automatically set this to `true`. Buffered stores contain an abitrary
+         * subset of the full dataset which depends upon various configurations and which pages have been requested
+         * for rendering. Such *sparse* datasets are ineligible for local sorting.
          * @accessor
          */
         remoteSort: false,
@@ -516,6 +523,10 @@ Ext.define('Ext.data.Store', {
          *
          * If this is set to `true`, you will have to manually call the {@link #method-load} method after you {@link #method-filter} to retrieve the filtered
          * data from the server.
+         *
+         * {@link #buffered Buffered} stores automatically set this to `true`. Buffered stores contain an abitrary
+         * subset of the full dataset which depends upon various configurations and which pages have been requested
+         * for rendering. Such *sparse* datasets are ineligible for local filtering.
          * @accessor
          */
         remoteFilter: false,
@@ -523,6 +534,10 @@ Ext.define('Ext.data.Store', {
         /**
          * @cfg {Boolean} remoteGroup
          * `true` to defer any grouping operation to the server. If `false`, grouping is done locally on the client.
+         *
+         * {@link #buffered Buffered} stores automatically set this to `true`. Buffered stores contain an abitrary
+         * subset of the full dataset which depends upon various configurations and which pages have been requested
+         * for rendering. Such *sparse* datasets are ineligible for local grouping.
          * @accessor
          */
         remoteGroup: false,
@@ -545,7 +560,7 @@ Ext.define('Ext.data.Store', {
         sorters: null,
 
         /**
-         * @cfg {Object[]} grouper
+         * @cfg {Object} grouper
          * A configuration object for this Store's {@link Ext.util.Grouper grouper}.
          *
          * For example, to group a store's items by the first letter of the last name:
@@ -598,7 +613,17 @@ Ext.define('Ext.data.Store', {
          * @cfg {Number} pageSize
          * The number of records considered to form a 'page'. This is used to power the built-in
          * paging using the nextPage and previousPage functions.
-         * @accessor
+         *
+         * If this Store is {@link #buffered}, pages are loaded into a page cache before the Store's
+         * data is updated from the cache. The pageSize is the number of rows loaded into the cache in one request.
+         * This will not affect the rendering of a buffered grid, but a larger page size will mean fewer loads.
+         *
+         * In a buffered grid, scrolling is monitored, and the page cache is kept primed with data ahead of the
+         * direction of scroll to provide rapid access to data when scrolling causes it to be required. Several pages
+         * in advance may be requested depending on various parameters.
+         *
+         * It is recommended to tune the {@link #pageSize}, {@link #trailingBufferZone} and
+         * {@link #leadingBufferZone} configurations based upon the conditions pertaining in your deployed application.
          */
         pageSize: 25,
 
@@ -616,6 +641,13 @@ Ext.define('Ext.data.Store', {
          * @accessor
          */
         clearOnPageLoad: true,
+
+        /**
+         * @cfg {Object} params Parameters to send into the proxy for any CRUD operations
+         *
+         * @accessor
+         */
+        params: {},
 
         modelDefaults: {},
 
@@ -638,7 +670,117 @@ Ext.define('Ext.data.Store', {
          * @cfg {Boolean} destroyRemovedRecords This configuration allows you to prevent destroying record
          * instances when they are removed from this store and are not in any other store.
          */
-        destroyRemovedRecords: true
+        destroyRemovedRecords: true,
+
+        /**
+         * @cfg {Boolean} buffered
+         * Allows the Store to prefetch and cache in a **page cache**, pages of Records, and to then satisfy
+         * loading requirements from this page cache.
+         *
+         * To use buffered Stores, initiate the process by loading the first page. The number of rows rendered are
+         * determined automatically, and the range of pages needed to keep the cache primed for scrolling is
+         * requested and cached.
+         * Example:
+         *
+         *     myStore.loadPage(1); // Load page 1
+         *
+         * A {@link Ext.grid.plugin.BufferedRenderer BufferedRenderer} is instantiated which will monitor the scrolling in the grid, and
+         * refresh the view's rows from the page cache as needed. It will also pull new data into the page
+         * cache when scrolling of the view draws upon data near either end of the prefetched data.
+         *
+         * The margins which trigger view refreshing from the prefetched data are {@link Ext.grid.plugin.BufferedRenderer#numFromEdge},
+         * {@link Ext.grid.plugin.BufferedRenderer#leadingBufferZone} and {@link Ext.grid.plugin.BufferedRenderer#trailingBufferZone}.
+         *
+         * The margins which trigger loading more data into the page cache are, {@link #leadingBufferZone} and
+         * {@link #trailingBufferZone}.
+         *
+         * By default, only 5 pages of data are cached in the page cache, with pages "scrolling" out of the buffer
+         * as the view moves down through the dataset.
+         * Setting this value to zero means that no pages are *ever* scrolled out of the page cache, and
+         * that eventually the whole dataset may become present in the page cache. This is sometimes desirable
+         * as long as datasets do not reach astronomical proportions.
+         *
+         * Selection state may be maintained across page boundaries by configuring the SelectionModel not to discard
+         * records from its collection when those Records cycle out of the Store's primary collection. This is done
+         * by configuring the SelectionModel like this:
+         *
+         *     selModel: {
+         *         pruneRemoved: false
+         *     }
+         *
+         */
+        buffered: false,
+
+        /**
+         * @cfg {Object/Array} plugins
+         * @accessor
+         * An object or array of objects that will provide custom functionality for this component.  The only
+         * requirement for a valid plugin is that it contain an init method that accepts a reference of type Ext.Component.
+         *
+         * When a component is created, if any plugins are available, the component will call the init method on each
+         * plugin, passing a reference to itself.  Each plugin can then call methods or respond to events on the
+         * component as needed to provide its functionality.
+         *
+         * For examples of plugins, see Ext.plugin.PullRefresh and Ext.plugin.ListPaging
+         *
+         * ## Example code
+         *
+         * A plugin by alias:
+         *
+         *     Ext.create('Ext.dataview.List', {
+         *         config: {
+         *             plugins: 'listpaging',
+         *             itemTpl: '<div class="item">{title}</div>',
+         *             store: 'Items'
+         *         }
+         *     });
+         *
+         * Multiple plugins by alias:
+         *
+         *     Ext.create('Ext.dataview.List', {
+         *         config: {
+         *             plugins: ['listpaging', 'pullrefresh'],
+         *             itemTpl: '<div class="item">{title}</div>',
+         *             store: 'Items'
+         *         }
+         *     });
+         *
+         * Single plugin by class name with config options:
+         *
+         *     Ext.create('Ext.dataview.List', {
+         *         config: {
+         *             plugins: {
+         *                 xclass: 'Ext.plugin.ListPaging', // Reference plugin by class
+         *                 autoPaging: true
+         *             },
+         *
+         *             itemTpl: '<div class="item">{title}</div>',
+         *             store: 'Items'
+         *         }
+         *     });
+         *
+         * Multiple plugins by class name with config options:
+         *
+         *     Ext.create('Ext.dataview.List', {
+         *         config: {
+         *             plugins: [
+         *                 {
+         *                     xclass: 'Ext.plugin.PullRefresh',
+         *                     pullRefreshText: 'Pull to refresh...'
+         *                 },
+         *                 {
+         *                     xclass: 'Ext.plugin.ListPaging',
+         *                     autoPaging: true
+         *                 }
+         *             ],
+         *
+         *             itemTpl: '<div class="item">{title}</div>',
+         *             store: 'Items'
+         *         }
+         *     });
+         *
+         */
+        plugins: null
     },
 
     /**
@@ -693,6 +835,39 @@ Ext.define('Ext.data.Store', {
         this.callParent(arguments);
     },
 
+    applyPlugins: function(config) {
+        var ln, i, configObj;
+
+        if (!config) {
+            return config;
+        }
+
+        config = [].concat(config);
+
+        for (i = 0, ln = config.length; i < ln; i++) {
+            configObj = config[i];
+            config[i] = Ext.factory(configObj, 'Ext.plugin.Plugin', null, 'plugin');
+        }
+
+        return config;
+    },
+
+    updatePlugins: function(newPlugins, oldPlugins) {
+        var ln, i;
+
+        if (newPlugins) {
+            for (i = 0, ln = newPlugins.length; i < ln; i++) {
+                newPlugins[i].init(this);
+            }
+        }
+
+        if (oldPlugins) {
+            for (i = 0, ln = oldPlugins.length; i < ln; i++) {
+                Ext.destroy(oldPlugins[i]);
+            }
+        }
+    },
+
     /**
      * @private
      * @return {Ext.util.Collection}
@@ -741,10 +916,11 @@ Ext.define('Ext.data.Store', {
             }
 
             if (fields) {
-                model = new Ext.Class({
+                model = Ext.define('Ext.data.Store.ImplicitModel-' + (this.getStoreId() || Ext.id()), {
                     extend: 'Ext.data.Model',
                     config: {
                         fields: fields,
+                        useCache: false,
                         proxy: this.getProxy()
                     }
                 });
@@ -808,7 +984,7 @@ Ext.define('Ext.data.Store', {
     /**
      * We are using applyData so that we can return nothing and prevent the `this.data`
      * property to be overridden.
-     * @param data
+     * @param {Array/Object} data
      */
     applyData: function(data) {
         var me = this,
@@ -850,6 +1026,15 @@ Ext.define('Ext.data.Store', {
         this.setData(null);
     },
 
+    /**
+     * Uses the configured {@link Ext.data.reader.Reader reader} to convert the data into records
+     * and adds it to the Store. Use this when you have raw data that needs to pass trough converters,
+     * mappings and other extra logic from the reader.
+     *
+     * If your data is already formated and ready for consumption, use {@link #add} method.
+     *
+     * @param {Object[]} data Array of data to load
+     */
     addData: function(data) {
         var reader = this.getProxy().getReader(),
             resultSet = reader.read(data),
@@ -928,7 +1113,7 @@ Ext.define('Ext.data.Store', {
             };
         }
 
-        grouper = Ext.factory(grouper, Ext.util.Grouper, this.getGrouper());
+        grouper = Ext.factory(grouper, Ext.util.Grouper);
         return grouper;
     },
 
@@ -951,6 +1136,9 @@ Ext.define('Ext.data.Store', {
                     }
                 });
             }
+        }
+        if (oldGrouper) {
+            this.fireEvent('refresh', this, data);
         }
     },
 
@@ -1019,6 +1207,9 @@ Ext.define('Ext.data.Store', {
      * Sample usage:
      *
      *     myStore.add({some: 'data2'}, {some: 'other data2'});
+     *
+     * Use {@link #addData} method instead if you have raw data that need to pass
+     * through the data reader.
      *
      * @param {Ext.data.Model[]/Ext.data.Model...} model An array of Model instances
      * or Model configuration objects, or variable number of Model instance or config arguments.
@@ -1117,7 +1308,7 @@ Ext.define('Ext.data.Store', {
             removed = [],
             isPhantom,
             items = me.data.items,
-            record, index, j;
+            record, index;
 
         for (; i < ln; i++) {
             record = records[i];
@@ -1275,7 +1466,8 @@ Ext.define('Ext.data.Store', {
     },
 
     /**
-     * Returns a range of Records between specified indices.
+     * Returns a range of Records between specified indices. Note that if the store is filtered, only filtered results
+     * are returned.
      * @param {Number} [startIndex=0] (optional) The starting index.
      * @param {Number} [endIndex=-1] (optional) The ending index (defaults to the last Record in the Store).
      * @return {Ext.data.Model[]} An array of Records.
@@ -1401,7 +1593,7 @@ Ext.define('Ext.data.Store', {
 
     /**
      * This gets called by a record after is gets erased from the server.
-     * @param record
+     * @param {Ext.data.Model} record
      * @private
      */
     afterErase: function(record) {
@@ -1573,7 +1765,7 @@ Ext.define('Ext.data.Store', {
                     anyMatch     : anyMatch,
                     caseSensitive: caseSensitive,
                     id           : property
-                }
+                };
             }
         }
 
@@ -1603,7 +1795,7 @@ Ext.define('Ext.data.Store', {
 
         data.filter({
             filterFn: function(record) {
-                return fn.call(scope || me, record, record.getId())
+                return fn.call(scope || me, record, record.getId());
             }
         });
 
@@ -1739,7 +1931,7 @@ Ext.define('Ext.data.Store', {
     },
 
     /**
-     * @param record
+     * @param {Ext.data.Model} record
      * @return {null}
      */
     getGroupString: function(record) {
@@ -1874,6 +2066,7 @@ Ext.define('Ext.data.Store', {
             limit: pageSize,
             addRecords: false,
             action: 'read',
+            params: this.getParams(),
             model: this.getModel()
         });
 
@@ -1912,7 +2105,7 @@ Ext.define('Ext.data.Store', {
      * @return {Object} return.updated
      * @return {Object} return.removed
      */
-    sync: function() {
+    sync: function(options) {
         var me = this,
             operations = {},
             toCreate = me.getNewRecords(),
@@ -1936,10 +2129,10 @@ Ext.define('Ext.data.Store', {
         }
 
         if (needsSync && me.fireEvent('beforesync', this, operations) !== false) {
-            me.getProxy().batch({
+            me.getProxy().batch(Ext.merge({
                 operations: operations,
                 listeners: me.getBatchListeners()
-            });
+            }, options || {}));
         }
 
         return {
@@ -2249,7 +2442,7 @@ Ext.define('Ext.data.Store', {
      * load operation, passing in calculated `start` and `limit` params.
      * @param {Number} page The number of the page to load.
      * @param {Object} options See options for {@link #method-load}.
-     * @param scope
+     * @param {Object} scope
      */
     loadPage: function(page, options, scope) {
         if (typeof options === 'function') {
@@ -2295,11 +2488,17 @@ Ext.define('Ext.data.Store', {
         this.clearData();
         var proxy = this.getProxy();
         if (proxy) {
-            // TODO: Use un() instead of clearListeners() when TOUCH-2723 is fixed.
-//          proxy.un('metachange', 'onMetaChange', this);
-            proxy.clearListeners();
+            proxy.onDestroy();
         }
         Ext.data.StoreManager.unregister(this);
+
+        Ext.destroy(this.getPlugins());
+
+        if (this.implicitModel && this.getModel()) {
+          delete Ext.data.ModelManager.types[this.getModel().getName()];
+        }
+        Ext.destroy(this.data);
+
         this.callParent(arguments);
     }
 

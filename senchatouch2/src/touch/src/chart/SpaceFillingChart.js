@@ -1,7 +1,7 @@
 /**
  * @class Ext.chart.SpaceFillingChart
  * @extends Ext.chart.AbstractChart
- * 
+ *
  * Creates a chart that fills the entire area of the chart.
  * e.g. Gauge, Treemap
  */
@@ -51,6 +51,8 @@ Ext.define('Ext.chart.SpaceFillingChart', {
             seriesItem = series[i];
             seriesItem.getSprites();
         }
-        this.renderFrame();
+
+        me.renderFrame();
+        me.callSuper(arguments);
     }
 });

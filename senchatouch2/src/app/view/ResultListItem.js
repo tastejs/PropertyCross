@@ -1,8 +1,8 @@
-Ext.define('PropertyFinder.view.ResultListItem', {
+Ext.define('PropertyCross.view.ResultListItem', {
     extend: 'Ext.dataview.component.ListItem',
     xtype: 'resultlistitem',
 	
-	requires: ['Ext.Img', 'PropertyFinder.util.Format'],
+	requires: ['Ext.Img', 'PropertyCross.util.Format'],
 	
 	config: {
 		layout: 'hbox',
@@ -36,12 +36,12 @@ Ext.define('PropertyFinder.view.ResultListItem', {
 				items: [
 					{
                         itemId: 'price',
-						style: 'font-size: 18px',
-						tpl:  Ext.create('Ext.XTemplate', '{[PropertyFinder.util.Format.currency(values)]}')
+						style: 'font-size: 18px; line-height: normal',
+						tpl:  Ext.create('Ext.XTemplate', '{[PropertyCross.util.Format.currency(values)]}')
 					},
 					{
                         itemId: 'title',
-						style: 'font-size: 12px'
+						style: 'font-size: 12px; line-height: normal;'
 					}
 				]
 			}

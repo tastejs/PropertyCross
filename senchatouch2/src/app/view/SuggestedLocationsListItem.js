@@ -1,4 +1,4 @@
-Ext.define('PropertyFinder.view.SuggestedLocationsListItem', {
+Ext.define('PropertyCross.view.SuggestedLocationsListItem', {
     extend: 'Ext.dataview.component.DataItem',
     xtype: 'suggestedlocationslistitem',
     

@@ -2,10 +2,10 @@
  * This class is used to check if the current device is currently online or not. It has three different implementations:
  *
  * - Sencha Packager
- * - PhoneGap
+ * - Cordova
  * - Simulator
  *
- * Both the Sencha Packager and PhoneGap implementations will use the native functionality to determine if the current
+ * Both the Sencha Packager and Cordova implementations will use the native functionality to determine if the current
  * device is online. The Simulator version will simply use `navigator.onLine`.
  *
  * When this singleton ({@link Ext.device.Connection}) is instantiated, it will automatically decide which version to
@@ -30,7 +30,7 @@
  * - {@link Ext.device.Connection#CELL_3G CELL_3G} - Cell 3G connection
  * - {@link Ext.device.Connection#CELL_4G CELL_4G} - Cell 4G connection
  * - {@link Ext.device.Connection#NONE NONE} - No network connection
- * 
+ *
  * @mixins Ext.device.connection.Abstract
  *
  * @aside guide native_apis
@@ -41,10 +41,10 @@ Ext.define('Ext.device.Connection', {
     requires: [
         'Ext.device.Communicator',
         'Ext.device.connection.Sencha',
-        'Ext.device.connection.PhoneGap',
+        'Ext.device.connection.Cordova',
         'Ext.device.connection.Simulator'
     ],
-    
+
     /**
      * @event onlinechange
      * @inheritdoc Ext.device.connection.Sencha#onlinechange
@@ -54,15 +54,12 @@ Ext.define('Ext.device.Connection', {
         var browserEnv = Ext.browser.is;
 
         if (browserEnv.WebView) {
-            if (browserEnv.PhoneGap) {
-                return Ext.create('Ext.device.connection.PhoneGap');
-            }
-            else {
+            if (browserEnv.Cordova) {
+                return Ext.create('Ext.device.connection.Cordova');
+            } else if (browserEnv.Sencha) {
                 return Ext.create('Ext.device.connection.Sencha');
             }
         }
-        else {
-            return Ext.create('Ext.device.connection.Simulator');
-        }
+        return Ext.create('Ext.device.connection.Simulator');
     }
 });

@@ -1,6 +1,6 @@
 /**
  * @class Ext.draw.modifier.Modifier
- * 
+ *
  * Each sprite has a stack of modifiers. The resulting attributes of sprite is
  * the content of the stack top. When setting attributes to a sprite,
  * changes will be pushed-down though the stack of modifiers and pop-back the
@@ -22,7 +22,7 @@ Ext.define("Ext.draw.modifier.Modifier", {
         next: null,
 
         /**
-         * @cfg {Ext.draw.sprite.Sprite} sprite The sprite that the modifier is bound.
+         * @cfg {Ext.draw.sprite.Sprite} sprite The sprite to which the modifier belongs.
          */
         sprite: null
     },
@@ -45,9 +45,9 @@ Ext.define("Ext.draw.modifier.Modifier", {
 
     /**
      * Validate attribute set before use.
-     * 
+     *
      * @param {Object} attr The attribute to be validated. Note that it may be already initialized, so do
-     * not override properties that has already be used.
+     * not override properties that have already been used.
      */
     prepareAttributes: function (attr) {
         if (this._previous) {
@@ -56,9 +56,9 @@ Ext.define("Ext.draw.modifier.Modifier", {
     },
 
     /**
-     * Invoked when changes need to be popped up to the top. 
-     * @param attributes The source attributes.
-     * @param changes The changes to be popped up.
+     * Invoked when changes need to be popped up to the top.
+     * @param {Object} attributes The source attributes.
+     * @param {Object} changes The changes to be popped up.
      */
     popUp: function (attributes, changes) {
         if (this._next) {
@@ -69,9 +69,9 @@ Ext.define("Ext.draw.modifier.Modifier", {
     },
 
     /**
-     * Invoked when changes need to pushed down to the sprite.
-     * @param attr The source attributes.
-     * @param {Object} changes The changes to make. This object might be changed unexpectedly inside the method. 
+     * Invoked when changes need to be pushed down to the sprite.
+     * @param {Object} attr The source attributes.
+     * @param {Object} changes The changes to make. This object might be changed unexpectedly inside the method.
      * @return {Mixed}
      */
     pushDown: function (attr, changes) {

@@ -13,7 +13,7 @@ $.mvc.controller.create("favourites", {
         var $resultList = $("#resultList");
         $resultList.empty();
 
-        favourites.getAll(function(faves) {
+        favourites.fetchAll(function(faves) {
 
             if (faves.length === 0) {
                 $resultList.html("You have not added any properties to your favourites");
@@ -46,11 +46,11 @@ $.mvc.controller.create("favourites", {
 
     addRemove: function(id) {
         var that = this;
-        favourites.get(id, function(fave) {
+        favourites.fetch(id, function(fave) {
             //if property doesn't exist as a favourite then add it
             if (fave.property === '') {
 
-                properties.get(id, function(property) {
+                properties.fetch(id, function(property) {
 
                     var fave = new Favourites();
                     fave.id = id;

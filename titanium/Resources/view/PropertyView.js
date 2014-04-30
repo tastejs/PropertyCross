@@ -4,15 +4,15 @@ var ko = require("lib/knockout");
 module.exports = function (viewModel) {
 
   var window = Titanium.UI.createWindow({
-    title:"Details"
+    title:"Property Details"
   });
 
   var view = Titanium.UI.createView({
     layout:'vertical',
-    top:'6dip',
-    right:'6dip',
-    bottom:'6dip',
-    left:'6dip'
+    top:'8dip',
+    right:'16dip',
+    bottom:'8dip',
+    left:'16dip'
   });
 
   var price = Titanium.UI.createLabel({
@@ -22,7 +22,6 @@ module.exports = function (viewModel) {
       fontSize:'19dip',
       fontWeight:'bold'
     },
-    top:'6dip',
     width:Ti.UI.FILL
   });
   view.add(price);
@@ -42,6 +41,8 @@ module.exports = function (viewModel) {
     image:viewModel.thumbnailUrl(),
     height:'50%',
     top:'6dip',
+    right:'16dip',
+    left:'16dip',
     width:Ti.UI.FILL
   });
   view.add(image);

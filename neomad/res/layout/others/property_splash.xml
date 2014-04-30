@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<VerticalLayout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	stretchHorizontalMode="MATCH_PARENT" stretchVerticalMode="MATCH_PARENT" 
+	xsi:noNamespaceSchemaLocation="http://www.neomades.com/XSD/3.5.0/layout.xsd">
+	<ImageLabel stretchHorizontalMode="MATCH_CONTENT" layoutAlignment="BOTTOM|LEFT"
+		stretchVerticalMode="MATCH_CONTENT" image="@image/SCREEN_BG_IMAGE" />
+</VerticalLayout>

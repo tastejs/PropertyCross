@@ -23,7 +23,7 @@
  *         plugins: [
  *             {
  *                 xclass: 'Ext.plugin.PullRefresh',
- *                 pullRefreshText: 'Pull down for more new Tweets!'
+ *                 pullText: 'Pull down for more new Tweets!'
  *             }
  *         ],
  *
@@ -48,27 +48,16 @@ Ext.define('Ext.plugin.PullRefresh', {
         list: null,
 
         /**
-         * @cfg {String} pullRefreshText The text that will be shown while you are pulling down.
+         * @cfg {String} pullText The text that will be shown while you are pulling down.
          * @accessor
          */
-        pullRefreshText: 'Pull down to refresh...',
+        pullText: 'Pull down to refresh...',
 
         /**
-         * @cfg {String} releaseRefreshText The text that will be shown after you have pulled down enough to show the release message.
+         * @cfg {String} releaseText The text that will be shown after you have pulled down enough to show the release message.
          * @accessor
          */
-        releaseRefreshText: 'Release to refresh...',
-
-        /**
-         * @cfg {String} lastUpdatedText The text to be shown in front of the last updated time.
-         * @accessor
-         */
-        lastUpdatedText: 'Last Updated:',
-
-        /**
-         * @cfg {String} lastUpdatedDateFormat The format to be used on the last updated date.
-         */
-        lastUpdatedDateFormat: 'm/d/Y h:iA',
+        releaseText: 'Release to refresh...',
 
         /**
          * @cfg {String} loadingText The text that will be shown while the list is refreshing.
@@ -83,15 +72,33 @@ Ext.define('Ext.plugin.PullRefresh', {
         loadedText: 'Loaded.',
 
         /**
+         * @cfg {String} lastUpdatedText The text to be shown in front of the last updated time.
+         * @accessor
+         */
+        lastUpdatedText: 'Last Updated:&nbsp;',
+
+        /**
+         * @cfg {Boolean} scrollerAutoRefresh Determines whether the attached scroller should automatically track size changes of its container.
+         * Enabling this will have performance impacts but will be necessary if your list size changes dynamically. For example if your list contains images
+         * that will be loading and have unspecified heights.
+         */
+        scrollerAutoRefresh: false,
+
+        /**
          * @cfg {Boolean} autoSnapBack Determines whether the pulldown should automatically snap back after data has been loaded.
          * If false call {@link #snapBack}() to manually snap the pulldown back.
          */
         autoSnapBack: true,
+
         /**
          * @cfg {Number} snappingAnimationDuration The duration for snapping back animation after the data has been refreshed
          * @accessor
          */
         snappingAnimationDuration: 300,
+        /**
+         * @cfg {String} lastUpdatedDateFormat The format to be used on the last updated date.
+         */
+        lastUpdatedDateFormat: 'm/d/Y h:iA',
 
         /**
          * @cfg {Number} overpullSnapBackDuration The duration for snapping back when pulldown has been lowered further then its height.
@@ -100,44 +107,50 @@ Ext.define('Ext.plugin.PullRefresh', {
 
         /**
          * @cfg {Ext.XTemplate/String/Array} pullTpl The template being used for the pull to refresh markup.
+         * Will be passed a config object with properties state, message and updated
+         *
          * @accessor
          */
         pullTpl: [
-            '<div class="x-list-pullrefresh">',
-                '<div class="x-list-pullrefresh-arrow"></div>',
-                '<div class="x-loading-spinner">',
-                    '<span class="x-loading-top"></span>',
-                    '<span class="x-loading-right"></span>',
-                    '<span class="x-loading-bottom"></span>',
-                    '<span class="x-loading-left"></span>',
-                '</div>',
-                '<div class="x-list-pullrefresh-wrap">',
-                    '<h3 class="x-list-pullrefresh-message"></h3>',
-                    '<div class="x-list-pullrefresh-updated"></div>',
-                '</div>',
+            '<div class="x-list-pullrefresh-arrow"></div>',
+            '<div class="x-loading-spinner">',
+                '<span class="x-loading-top"></span>',
+                '<span class="x-loading-right"></span>',
+                '<span class="x-loading-bottom"></span>',
+                '<span class="x-loading-left"></span>',
+            '</div>',
+            '<div class="x-list-pullrefresh-wrap">',
+                '<h3 class="x-list-pullrefresh-message">{message}</h3>',
+                '<div class="x-list-pullrefresh-updated">{updated}</div>',
             '</div>'
         ].join(''),
 
         translatable: true
     },
 
-    /**
-     * @event latestfeteched
-     * Fires when the latest data has been fetched
-     */
-
-    isRefreshing: false,
-    currentViewState: '',
-
-    initialize: function() {
-        this.callParent();
-
-        this.on({
-            painted: 'onPainted',
-            scope: this
-        });
+    // @private
+    $state: "pull",
+    // @private
+    getState: function() {
+        return this.$state
+    },
+    // @private
+    setState: function(value) {
+        this.$state = value;
+        this.updateView();
+    },
+    // @private
+    $isSnappingBack: false,
+    // @private
+    getIsSnappingBack: function() {
+        return this.$isSnappingBack;
+    },
+    // @private
+    setIsSnappingBack: function(value) {
+        this.$isSnappingBack = value;
     },
 
+    // @private
     init: function(list) {
         var me = this;
 
@@ -145,12 +158,23 @@ Ext.define('Ext.plugin.PullRefresh', {
         me.initScrollable();
     },
 
+    getElementConfig: function() {
+        return {
+            reference: 'element',
+            classList: ['x-unsized'],
+            children: [
+                {
+                    reference: 'innerElement',
+                    className: Ext.baseCSSPrefix + 'list-pullrefresh'
+                }
+            ]
+        };
+    },
+
+    // @private
     initScrollable: function() {
         var me = this,
             list = me.getList(),
-            store = list.getStore(),
-            pullTpl = me.getPullTpl(),
-            element = me.element,
             scrollable = list.getScrollable(),
             scroller;
 
@@ -159,65 +183,51 @@ Ext.define('Ext.plugin.PullRefresh', {
         }
 
         scroller = scrollable.getScroller();
+        scroller.setAutoRefresh(this.getScrollerAutoRefresh());
 
         me.lastUpdated = new Date();
 
         list.insert(0, me);
 
-        // We provide our own load mask so if the Store is autoLoading already disable the List's mask straight away,
-        // otherwise if the Store loads later allow the mask to show once then remove it thereafter
-        if (store) {
-            if (store.isAutoLoading()) {
-                list.setLoadingText(null);
-            } else {
-                store.on({
-                    load: {
-                        single: true,
-                        fn: function() {
-                            list.setLoadingText(null);
-                        }
-                    }
-                });
-            }
-        }
-
-        pullTpl.overwrite(element, []);
-
-        me.loadingElement = element.getFirstChild();
-        me.messageEl = element.down('.x-list-pullrefresh-message');
-        me.updatedEl = element.down('.x-list-pullrefresh-updated');
-
-        me.maxScroller = scroller.getMaxPosition();
-
         scroller.on({
-            maxpositionchange: me.setMaxScroller,
             scroll: me.onScrollChange,
             scope: me
         });
 
-		me.resetRefreshState();
+        this.updateView();
     },
 
-    onScrollableChange: function() {
-        this.initScrollable();
+    // @private
+    applyPullTpl: function(config) {
+        if (config instanceof Ext.XTemplate) {
+            return config
+        } else {
+            return new Ext.XTemplate(config);
+        }
     },
 
+    // @private
     updateList: function(newList, oldList) {
         var me = this;
 
         if (newList && newList != oldList) {
             newList.on({
                 order: 'after',
-                scrollablechange: me.onScrollableChange,
+                scrollablechange: me.initScrollable,
                 scope: me
             });
         } else if (oldList) {
             oldList.un({
                 order: 'after',
-                scrollablechange: me.onScrollableChange,
+                scrollablechange: me.initScrollable,
                 scope: me
             });
         }
+    },
+
+    // @private
+    getPullHeight: function() {
+       return this.innerElement.getHeight();
     },
 
     /**
@@ -235,7 +245,7 @@ Ext.define('Ext.plugin.PullRefresh', {
             model: store.getModel(),
             limit: store.getPageSize(),
             action: 'read',
-			sorters: store.getSorters(),
+            sorters: store.getSorters(),
             filters: store.getRemoteFilter() ? store.getFilters() : []
         });
 
@@ -250,15 +260,11 @@ Ext.define('Ext.plugin.PullRefresh', {
      * timeline between the new and the old records.
      */
     onLatestFetched: function(operation) {
-        var store      = this.getList().getStore(),
-            list       = this.getList(),
-            scroller   = list.getScrollable().getScroller(),
-            scrollerOffsetX = scroller.position.x,
-            scrollerOffsetY = scroller.position.y,
+        var store = this.getList().getStore(),
             oldRecords = store.getData(),
             newRecords = operation.getRecords(),
-            length     = newRecords.length,
-            toInsert   = [],
+            length = newRecords.length,
+            toInsert = [],
             newRecord, oldRecord, i;
 
         for (i = 0; i < length; i++) {
@@ -275,162 +281,173 @@ Ext.define('Ext.plugin.PullRefresh', {
         }
 
         store.insert(0, toInsert);
-        scroller.scrollTo(scrollerOffsetX, scrollerOffsetY);
-
-        this.setViewState('loaded');
-        this.fireEvent('latestfetched');
+        this.setState("loaded");
+        this.fireEvent('latestfetched', this, toInsert);
         if (this.getAutoSnapBack()) {
             this.snapBack();
         }
     },
 
-    snapBack: function() {
-        var me = this,
-            list = me.getList(),
+    /**
+     * Snaps the List back to the top after a pullrefresh is complete
+     * @param {Boolean=} force Force the snapback to occur regardless of state {optional}
+     */
+    snapBack: function(force) {
+        if(this.getState() !== "loaded" && force !== true) return;
+
+        var list = this.getList(),
             scroller = list.getScrollable().getScroller();
 
+        scroller.refresh();
+        scroller.minPosition.y = 0;
+
         scroller.on({
-            scrollend: function() {
-                this.resetRefreshState();
-            },
+            scrollend: this.onSnapBackEnd,
             single: true,
-            scope: me
+            scope: this
         });
 
-        scroller.minPosition.y = 0;
-        scroller.scrollTo(null, 0, {duration: me.getSnappingAnimationDuration()});
+        this.setIsSnappingBack(true);
+        scroller.scrollTo(null, 0, {duration: this.getSnappingAnimationDuration()});
     },
 
-    onPainted: function() {
-        this.pullHeight = this.loadingElement.getHeight();
+    /**
+     * @private
+     * Called when PullRefresh has been snapped back to the top
+     */
+    onSnapBackEnd: function() {
+        this.setState("pull");
+        this.setIsSnappingBack(false);
     },
 
-    setMaxScroller: function(scroller, position) {
-        this.maxScroller = position;
-    },
-
+    /**
+     * @private
+     * Called when the Scroller updates from the list
+     * @param scroller
+     * @param x
+     * @param y
+     */
     onScrollChange: function(scroller, x, y) {
         if (y <= 0) {
-            this.onBounceTop(y);
-        }
-        if (y > this.maxScroller.y) {
-            this.onBounceBottom(y);
+            var pullHeight = this.getPullHeight(),
+                isSnappingBack = this.getIsSnappingBack();
+
+            if(this.getState() === "loaded" && !isSnappingBack) {
+                this.snapBack();
+            }
+
+            if (this.getState() !== "loading" && this.getState() !=="loaded") {
+                if (-y >= pullHeight + 10) {
+                    this.setState("release");
+                    scroller.getContainer().onBefore({
+                        dragend: 'onScrollerDragEnd',
+                        single: true,
+                        scope: this
+                    });
+                } else if ((this.getState() === "release") && (-y < pullHeight + 10)) {
+                    this.setState("pull");
+                    scroller.getContainer().unBefore({
+                        dragend: 'onScrollerDragEnd',
+                        single: true,
+                        scope: this
+                    });
+                }
+            }
+            this.getTranslatable().translate(0, -y);
         }
     },
 
     /**
      * @private
+     * Called when the user is done dragging, this listener is only added when the user has pulled far enough for a refresh
      */
-    applyPullTpl: function(config) {
-        return (Ext.isObject(config) && config.isTemplate) ? config : new Ext.XTemplate(config);
-    },
-
-    onBounceTop: function(y) {
-        var me = this,
-            pullHeight = me.pullHeight,
-            list = me.getList(),
-            scroller = list.getScrollable().getScroller();
-
-        if (!me.isReleased) {
-            if (!pullHeight) {
-                me.onPainted();
-                pullHeight = me.pullHeight;
-            }
-            if (!me.isRefreshing && -y >= pullHeight + 10) {
-                me.isRefreshing = true;
-
-                me.setViewState('release');
-
-                scroller.getContainer().onBefore({
-                    dragend: 'onScrollerDragEnd',
-                    single: true,
-                    scope: me
-                });
-            }
-            else if (me.isRefreshing && -y < pullHeight + 10) {
-                me.isRefreshing = false;
-                me.setViewState('pull');
-            }
-        }
-
-        me.getTranslatable().translate(0, -y);
-    },
-
     onScrollerDragEnd: function() {
-        var me = this;
-
-        if (me.isRefreshing) {
-            var list = me.getList(),
+        if (this.getState() !== "loading") {
+            var list = this.getList(),
                 scroller = list.getScrollable().getScroller(),
                 translateable = scroller.getTranslatable();
 
-            translateable.setEasingY({duration:this.getOverpullSnapBackDuration()});
-            scroller.minPosition.y = -me.pullHeight;
+            this.setState("loading");
+            translateable.setEasingY({duration: this.getOverpullSnapBackDuration()});
+            scroller.minPosition.y = -this.getPullHeight();
             scroller.on({
-                scrollend: 'loadStore',
+                scrollend: 'fetchLatest',
                 single: true,
-                scope: me
+                scope: this
             });
-
-            me.isReleased = true;
         }
     },
 
-    loadStore: function() {
-        var me = this;
+    /**
+     * @private
+     * Updates the content based on the PullRefresh Template
+     */
+    updateView: function() {
+        var state = this.getState(),
+            lastUpdatedText = this.getLastUpdatedText() + Ext.util.Format.date(this.lastUpdated, this.getLastUpdatedDateFormat()),
+            templateConfig = {state: state, updated: lastUpdatedText},
+            stateFn = state.charAt(0).toUpperCase() + state.slice(1).toLowerCase(),
+            fn = "get" + stateFn + "Text";
 
-        me.setViewState('loading');
-        me.isReleased = false;
-        me.fetchLatest();
-    },
-
-    onBounceBottom: Ext.emptyFn,
-
-    setViewState: function(state) {
-        var me = this,
-            prefix = Ext.baseCSSPrefix,
-            messageEl = me.messageEl,
-            loadingElement = me.loadingElement;
-
-        if (state === me.currentViewState) {
-            return me;
-        }
-        me.currentViewState = state;
-
-        if (messageEl && loadingElement) {
-            switch (state) {
-                case 'pull':
-                    messageEl.setHtml(me.getPullRefreshText());
-                    loadingElement.removeCls([prefix + 'list-pullrefresh-release', prefix + 'list-pullrefresh-loading']);
-                break;
-
-                case 'release':
-                    messageEl.setHtml(me.getReleaseRefreshText());
-                    loadingElement.addCls(prefix + 'list-pullrefresh-release');
-                break;
-
-                case 'loading':
-                    messageEl.setHtml(me.getLoadingText());
-                    loadingElement.addCls(prefix + 'list-pullrefresh-loading');
-                break;
-
-                case 'loaded':
-                    messageEl.setHtml(me.getLoadedText());
-                    loadingElement.addCls(prefix + 'list-pullrefresh-loaded');
-                    break;
-            }
+        if (this[fn] && Ext.isFunction(this[fn])) {
+            templateConfig.message = this[fn].call(this);
         }
 
-        return me;
-    },
-
-    resetRefreshState: function() {
-        var me = this;
-
-        me.isRefreshing = false;
-        me.lastUpdated = new Date();
-
-        me.setViewState('pull');
-        me.updatedEl.setHtml(this.getLastUpdatedText() + '&nbsp;' + Ext.util.Format.date(me.lastUpdated, me.getLastUpdatedDateFormat()));
+        this.innerElement.removeCls(["loaded", "loading", "release", "pull"], Ext.baseCSSPrefix + "list-pullrefresh");
+        this.innerElement.addCls(this.getState(), Ext.baseCSSPrefix + "list-pullrefresh");
+        this.getPullTpl().overwrite(this.innerElement, templateConfig);
     }
+}, function() {
+    //<deprecated product=touch since=2.3>
+
+    /**
+     * Updates the PullRefreshText.
+     * @method setPullRefreshText
+     * @param {String} text
+     * @deprecated 2.3.0 Please use {@link #setPullText} instead.
+     */
+    Ext.deprecateClassMethod(this, 'setPullRefreshText', 'setPullText');
+
+    /**
+     * Updates the ReleaseRefreshText.
+     * @method setReleaseRefreshText
+     * @param {String} text
+     * @deprecated 2.3.0 Please use {@link #setReleaseText} instead.
+     */
+    Ext.deprecateClassMethod(this, 'setReleaseRefreshText', 'setReleaseText');
+
+    this.override({
+        constructor: function(config) {
+            if (config) {
+                /**
+                 * @cfg {String} pullReleaseText
+                 * Optional Text during the Release State.
+                 * @deprecated 2.3.0 Please use {@link #releaseText} instead
+                 */
+                if (config.hasOwnProperty('pullReleaseText')) {
+                    //<debug warn>
+                    Ext.Logger.deprecate("'pullReleaseText' config is deprecated, please use 'releaseText' config instead", this);
+                    //</debug>
+                    config.releaseText = config.pullReleaseText;
+                    delete config.pullReleaseText;
+                }
+
+                /**
+                 * @cfg {String} pullRefreshText
+                 * Optional Text during the Pull State.
+                 * @deprecated 2.3.0 Please use {@link #pullText} instead
+                 */
+                if (config.hasOwnProperty('pullRefreshText')) {
+                    //<debug warn>
+                    Ext.Logger.deprecate("'pullRefreshText' config is deprecated, please use 'pullText' config instead", this);
+                    //</debug>
+                    config.pullText = config.pullRefreshText;
+                    delete config.pullRefreshText;
+                }
+            }
+
+            this.callParent([config]);
+        }
+    });
+    //</deprecated>
 });

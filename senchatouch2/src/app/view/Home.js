@@ -1,11 +1,11 @@
-﻿Ext.define('PropertyFinder.view.Home', {
+﻿Ext.define('PropertyCross.view.Home', {
     extend: 'Ext.Container',
     xtype: 'home',
     requires: ['Ext.form.Panel', 'Ext.form.FieldSet', 'Ext.field.Text',
-            'PropertyFinder.view.SearchesListItem', 'PropertyFinder.view.SuggestedLocationsListItem'],
+            'PropertyCross.view.SearchesListItem', 'PropertyCross.view.SuggestedLocationsListItem'],
     config: {
-		id: 'home',
-        title: 'Property Finder',
+        id: 'home',
+        title: 'PropertyCross',
         scrollable: true,
         items: [
             {
@@ -24,6 +24,10 @@
                             {
                                 xtype: 'textfield',
                                 label: 'Location',
+                                /*
+                                 * On small iOS 7 screens, default labelWidth of '30%' is too small
+                                 */
+                                labelWidth: 'auto',
                                 name: 'place_name',
                                 id: 'placeNameText'
                             }
@@ -40,13 +44,13 @@
                             {
                                 xtype: 'button',
                                 id: 'goButton',
-                                ui: 'confirm',
+                                ui: 'normal',
                                 text: 'Go'
                             },
                             {
                                 xtype: 'button',
                                 id: 'currLocationButton',
-                                ui: 'confirm',
+                                ui: 'action',
                                 text: 'My Location'
                             }
                         ]
