@@ -409,7 +409,7 @@ module.exports = function( grunt ) {
     initCordova: {
       init: {
         options: {
-          appName: 'PropertyCross - lavaca',
+          appName: 'PropertyCross',
           id: 'com.propertycross.lavaca'
         }
       }

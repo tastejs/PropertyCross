@@ -4,7 +4,7 @@
 	    id="com.propertycross.lavaca"
 	    version="1.1.0">
 
-    <name>PropertyCross - lavaca</name>
+    <name>PropertyCross</name>
 
     <description>
         Part of the PropertyCross project, the Lavaca implementation.

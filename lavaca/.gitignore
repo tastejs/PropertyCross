@@ -12,6 +12,10 @@
 /cordova/platforms/android/gen/*
 /cordova/platforms/android/assets/www
 
+/cordova/platforms/android/CordovaLib
+/cordova/platforms/android/ant-build
+/cordova/platforms/android/ant-gen
+
 /cordova/platforms/ios/PropertyCross.xcodeproj/project.xcworkspace/xcuserdata
 /cordova/platforms/ios/PropertyCross.xcodeproj/xcuserdata
 /cordova/platforms/ios/CordovaLib/CordovaLib.xcodeproj/xcuserdata
