@@ -10,8 +10,8 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using PropertyFinder.Presenter;
-using PropertyFinder.Model;
+using PropertyCross.Presenter;
+using PropertyCross.Model;
 using Com.Actionbarsherlock.App;
 using Com.Actionbarsherlock.View;
 
@@ -33,7 +33,7 @@ namespace com.propertycross.xamarin.android.Views
 
 			ListAdapter = new SearchResultsAdapter(this, new List<Property>() {});
 			
-			var app = PropertyFinderApplication.GetApplication(this);
+			var app = PropertyCrossApplication.GetApplication(this);
 			presenter = (FavouritesPresenter) app.Presenter;
 			app.CurrentActivity = this;
 		}

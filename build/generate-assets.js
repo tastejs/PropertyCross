@@ -63,6 +63,10 @@ async.series([
     ["assets/frameworks/xamarin.png", "xamarin/android/PropertyCross/Resources/drawable-ldpi/ic_launcher.png", 36],
     ["assets/frameworks/xamarin.png", "xamarin/android/PropertyCross/Resources/drawable-mdpi/ic_launcher.png", 48],
     ["assets/frameworks/xamarin.png", "xamarin/android/PropertyCross/Resources/drawable-xhdpi/ic_launcher.png", 96],
+    ["assets/frameworks/xamarin.png", "xamarin/iphone/PropertyCross/Icon.png", 57],
+    ["assets/frameworks/xamarin.png", "xamarin/iphone/PropertyCross/Icon@2x.png", 114],
+    ["assets/frameworks/xamarin.png", "xamarin/windowsphone/PropertyCross/ApplicationIcon.png", 66],
+    ["assets/frameworks/xamarin.png", "xamarin/windowsphone/PropertyCross/ApplicationTileIcon.png", 173],
     ["assets/frameworks/sencha.png", "senchatouch2/www/assets/icons/36x36.png", 36],
     ["assets/frameworks/sencha.png", "senchatouch2/www/assets/icons/48x48.png", 48],
     ["assets/frameworks/sencha.png", "senchatouch2/www/assets/icons/72x72.png", 72],
@@ -184,7 +188,6 @@ async.series([
     ["rhomobile/app/loading.png",640, 960],
     ["titanium/Resources/iphone/Default.png", 320, 480],
     ["titanium/Resources/iphone/Default@2x.png", 640, 960],
-    ["senchatouch2/src/resources/loading/Default.png", 320, 480],
     ["kendoui/www/assets/splashscreens/200x320.png", 200, 320],
     ["kendoui/www/assets/splashscreens/320x480.png", 320, 480],
     ["kendoui/www/assets/splashscreens/480x800.png", 480, 800],
@@ -236,6 +239,9 @@ async.series([
     ["ionic/www/assets/splashscreens/720x1280.png", 720, 1280],
     ["ionic/www/assets/splashscreens/screen-iphone-portrait.png", 320, 480],
     ["ionic/www/assets/splashscreens/screen-iphone-portrait-2x.png", 640, 960],
+    ["xamarin/iphone/PropertyCross/Default.png", 320, 480],
+    ["xamarin/iphone/PropertyCross/Default@2x.png", 640, 960],
+    ["xamarin/iphone/PropertyCross/Default-568h@2x.png", 640, 1136],
   ]),
 
   generateOther.bind(null, "assets/star.png", [
@@ -243,6 +249,8 @@ async.series([
     ["xamarin/android/PropertyCross/Resources/drawable-xhdpi/star.png", 64],
     ["xamarin/android/PropertyCross/Resources/drawable-hdpi/star.png", 48],
     ["xamarin/android/PropertyCross/Resources/drawable-mdpi/star.png", 32],
+    ["xamarin/iphone/PropertyCross/star.png", 25],
+    ["xamarin/iphone/PropertyCross/star@2x.png", 50],
     ["titanium/Resources/android/images/res-hdpi/star.png", 48],
     ["titanium/Resources/android/images/res-mdpi/star.png", 32],
     ["titanium/Resources/android/images/res-xhdpi/star.png", 64],
@@ -255,17 +263,19 @@ async.series([
 
   generateOther.bind(null, "assets/nostar.png", [
     // ["TARGET", WIDTH (, HEIGHT)],
-    ["native/android/PropertyCross/res/drawable-hdpi/nostar.png", 48],
-    ["native/android/PropertyCross/res/drawable-mdpi/nostar.png", 32],
-    ["native/android/PropertyCross/res/drawable-xhdpi/nostar.png", 64],
+    ["xamarin/android/PropertyCross/Resources/drawable-xhdpi/nostar.png", 64],
+    ["xamarin/android/PropertyCross/Resources/drawable-hdpi/nostar.png", 48],
+    ["xamarin/android/PropertyCross/Resources/drawable-mdpi/nostar.png", 32],
+    ["xamarin/iphone/PropertyCross/nostar.png", 25],
+    ["xamarin/iphone/PropertyCross/nostar@2x.png", 50],
     ["titanium/Resources/android/images/res-hdpi/nostar.png", 48],
     ["titanium/Resources/android/images/res-mdpi/nostar.png", 32],
     ["titanium/Resources/android/images/res-xhdpi/nostar.png", 64],
     ["titanium/Resources/iphone/nostar.png", 32],
     ["titanium/Resources/iphone/nostar@2x.png", 64],
-    ["xamarin/android/PropertyCross/Resources/drawable-xhdpi/nostar.png", 64],
-    ["xamarin/android/PropertyCross/Resources/drawable-hdpi/nostar.png", 48],
-    ["xamarin/android/PropertyCross/Resources/drawable-mdpi/nostar.png", 32]
+    ["native/android/PropertyCross/res/drawable-hdpi/nostar.png", 48],
+    ["native/android/PropertyCross/res/drawable-mdpi/nostar.png", 32],
+    ["native/android/PropertyCross/res/drawable-xhdpi/nostar.png", 64]
   ]),
 
   generateOther.bind(null, "assets/refresh.png", [
@@ -276,6 +286,13 @@ async.series([
     ["xamarin/android/PropertyCross/Resources/drawable-xhdpi/refresh.png", 64],
     ["xamarin/android/PropertyCross/Resources/drawable-hdpi/refresh.png", 48],
     ["xamarin/android/PropertyCross/Resources/drawable-mdpi/refresh.png", 32]
+  ]),
+
+  generateOther.bind(null, "assets/home.png", [
+    // ["TARGET", WIDTH (, HEIGHT)],
+    ["xamarin/android/PropertyCross/Resources/drawable-xhdpi/home.png", 64],
+    ["xamarin/android/PropertyCross/Resources/drawable-hdpi/home.png", 48],
+    ["xamarin/android/PropertyCross/Resources/drawable-mdpi/home.png", 32]
   ]),
 
   generateOther.bind(null, "assets/actionbar_tile.png", [

@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json.Linq;
 
-namespace PropertyFinder.Model
+namespace PropertyCross.Model
 {
   public static class Util
   {

@@ -2,7 +2,7 @@
 using System.Net;
 using Newtonsoft.Json.Linq;
 
-namespace PropertyFinder.Model
+namespace PropertyCross.Model
 {
   public class PropertyDataSource
   {

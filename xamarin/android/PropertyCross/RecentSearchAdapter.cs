@@ -10,7 +10,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using PropertyFinder.Presenter;
+using PropertyCross.Presenter;
 
 namespace com.propertycross.xamarin.android
 {

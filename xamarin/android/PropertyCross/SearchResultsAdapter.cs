@@ -10,7 +10,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using PropertyFinder.Model;
+using PropertyCross.Model;
 using Android.Graphics.Drawables;
 using Android.Graphics;
 
@@ -26,7 +26,7 @@ namespace com.propertycross.xamarin.android
 		{
 			this.context = c;
 			this.data = d;
-			placeholder = BitmapFactory.DecodeResource(context.Resources, Resource.Drawable.ic_launcher);
+			placeholder = BitmapFactory.DecodeResource(context.Resources, Resource.Drawable.home);
 		}
 
 		public override int Count

@@ -2,7 +2,7 @@
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 
-namespace PropertyFinder.Model
+namespace PropertyCross.Model
 {
   /// <summary>
   /// The results of a property search. This might contain a lst of properties, an error response, or 

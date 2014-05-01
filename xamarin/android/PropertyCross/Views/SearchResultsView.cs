@@ -8,9 +8,9 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
-using PropertyFinder.Presenter;
+using PropertyCross.Presenter;
 using System.Collections.Generic;
-using PropertyFinder.Model;
+using PropertyCross.Model;
 using Com.Actionbarsherlock.App;
 using Com.Actionbarsherlock.View;
 
@@ -41,7 +41,7 @@ namespace com.propertycross.xamarin.android.Views
 			ListView.AddFooterView(footer);
 			ListAdapter = new SearchResultsAdapter(this, new List<Property>() {});
 
-			var app = PropertyFinderApplication.GetApplication(this);
+			var app = PropertyCrossApplication.GetApplication(this);
 			presenter = (SearchResultsPresenter) app.Presenter;
 			presenter.SetView(this);
 			app.CurrentActivity = this;

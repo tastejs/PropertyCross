@@ -1,6 +1,6 @@
 using System;
 using Android.Widget;
-using PropertyFinder.Model;
+using PropertyCross.Model;
 using System.Collections.Generic;
 using Android.Content;
 using Android.Views;
