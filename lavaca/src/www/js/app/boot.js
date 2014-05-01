@@ -1,19 +1,16 @@
 require.config({
   baseUrl: 'js',
   paths: {
-    'es5-shim': 'libs/es5-shim',
-    '$': 'libs/jquery-2.0.0',
-    'jquery': 'libs/jquery-2.0.0',
-    'jquery-mobile': 'libs/jquery-mobile',
-    'cordova': 'libs/cordova',
-    'mout': 'libs/mout/src',
-    'docCookies': 'libs/docCookies',
-    'dust': 'libs/dust-full-1.1.1',
-    'dust-helpers': 'libs/dust-helpers-1.1.0',
-    'rdust': 'libs/require-dust',
-    'iScroll': 'libs/iscroll-lite-4.1.6',
-    'lavaca': 'Lavaca',
-    'Lavaca': 'lavaca'
+    'es5-shim': '../components/es5-shim/es5-shim',
+    '$': '../components/jquery/jquery',
+    'jquery': '../components/jquery/index',
+    'hammer': '../components/hammerjs/dist/jquery.hammer',
+    'mout': '../components/mout/src',
+    'dust': '../components/dustjs-linkedin/dist/dust-full-2.0.4',
+    'dust-helpers': '../components/dustjs-linkedin-helpers/dist/dust-helpers-1.1.1',
+    'rdust': '../components/require-dust/require-dust',
+    'iScroll': '../components/iscroll/dist/iscroll-lite-min',
+    'lavaca': '../components/lavaca/src'
   },
   shim: {
     $: {
@@ -22,13 +19,14 @@ require.config({
     jquery: {
       exports: '$'
     },
+    hammer: {
+      deps: ['$'],
+      exports: 'Hammer'
+    },
     dust: {
       exports: 'dust'
     },
     'dust-helpers': {
-      deps: ['dust']
-    },
-    templates: {
       deps: ['dust']
     }
   }

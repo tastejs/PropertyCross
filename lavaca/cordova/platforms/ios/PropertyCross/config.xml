@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.propertycross.lavaca" version="1.1.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+    <preference name="AllowInlineMediaPlayback" value="false" />
+    <preference name="AutoHideSplashScreen" value="true" />
+    <preference name="BackupWebStorage" value="cloud" />
+    <preference name="DisallowOverscroll" value="false" />
+    <preference name="EnableViewportScale" value="false" />
+    <preference name="FadeSplashScreen" value="true" />
+    <preference name="FadeSplashScreenDuration" value=".25" />
+    <preference name="KeyboardDisplayRequiresUserAction" value="true" />
+    <preference name="MediaPlaybackRequiresUserAction" value="false" />
+    <preference name="ShowSplashScreenSpinner" value="true" />
+    <preference name="SuppressesIncrementalRendering" value="false" />
+    <preference name="TopActivityIndicator" value="gray" />
+    <preference name="GapBetweenPages" value="0" />
+    <preference name="PageLength" value="0" />
+    <preference name="PaginationBreakingMode" value="page" />
+    <preference name="PaginationMode" value="unpaginated" />
+    <feature name="LocalStorage">
+        <param name="ios-package" value="CDVLocalStorage" />
+    </feature>
+    <name>PropertyCross</name>
+    <description>
+        Part of the PropertyCross project, the Lavaca implementation.
+    </description>
+    <author href="http://propertycross.com">
+        The TasteJS team, and contributors
+    </author>
+    <feature name="http://api.phonegap.com/1.0/geolocation" />
+    <feature name="http://api.phonegap.com/1.0/network" />
+    <feature name="SplashScreen">
+        <param name="android-package" value="org.apache.cordova.splashscreen.SplashScreen" />
+        <param name="ios-package" value="CDVSplashScreen" />
+    </feature>
+    <preference name="phonegap-version" value="3.1.0" />
+    <preference name="target-device" value="handset" />
+    <preference name="Orientation" value="portrait" />
+    <preference name="WebViewBounce" value="false" />
+    <preference name="prerendered-icon" value="true" />
+    <preference name="AutoHideSplashScreen" value="false" />
+    <preference name="SplashScreenDelay" value="10000" />
+    <preference name="android-minSdkVersion" value="17" />
+    <preference name="android-targetSdkVersion" value="17" />
+    <icon src="assets/icons/icon-72-2x.png" />
+    <icon gap:density="ldpi" gap:platform="android" src="assets/icons/36x36.png" />
+    <icon gap:density="mdpi" gap:platform="android" src="assets/icons/48x48.png" />
+    <icon gap:density="hdpi" gap:platform="android" src="assets/icons/72x72.png" />
+    <icon gap:density="xhdpi" gap:platform="android" src="assets/icons/96x96.png" />
+    <icon gap:platform="ios" height="57" src="assets/icons/icon-57.png" width="57" />
+    <icon gap:platform="ios" height="72" src="assets/icons/icon-72.png" width="72" />
+    <icon gap:platform="ios" height="114" src="assets/icons/icon-57-2x.png" width="114" />
+    <icon gap:platform="ios" height="144" src="assets/icons/icon-72-2x.png" width="144" />
+    <gap:plugin name="org.apache.cordova.geolocation" />
+    <gap:plugin name="org.apache.cordova.network-information" />
+    <gap:plugin name="org.apache.cordova.splashscreen" />
+    <gap:splash gap:density="ldpi" gap:platform="android" src="assets/splashscreens/200x320.png" />
+    <gap:splash gap:density="mdpi" gap:platform="android" src="assets/splashscreens/320x480.png" />
+    <gap:splash gap:density="hdpi" gap:platform="android" src="assets/splashscreens/480x800.png" />
+    <gap:splash gap:density="xhdpi" gap:platform="android" src="assets/splashscreens/720x1280.png" />
+    <gap:splash gap:platform="ios" height="480" src="assets/splashscreens/screen-iphone-portrait.png" width="320" />
+    <gap:splash gap:platform="ios" height="960" src="assets/splashscreens/screen-iphone-portrait-2x.png" width="640" />
+    <access origin="http://api.nestoria.co.uk" />
+    <access origin="http://*.nestoria.nestimg.com" />
+    <gap:platform name="ios" />
+    <gap:platform name="android" />
+</widget>

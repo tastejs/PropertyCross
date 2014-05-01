@@ -3,11 +3,11 @@ module.exports = function(grunt) {
 
   /* server.js */
   var express = require('express'),
-      util = require('util'),
-      http = require('http');
+      util = require('util');
 
   var startServer = function(config) {
     config = config || {};
+    var requester = require(config.proxyProtocol);
     var server = express();
     var hourMs = config.hourMs || 0*60*60,
         vhost = config.vhost || 'localhost',
@@ -21,7 +21,7 @@ module.exports = function(grunt) {
       var postData = request.body;
       var options = {
         host: host,
-        port: '80',
+        port: config.proxyPort,
         method: request.method,
         path: request.originalUrl.replace(new RegExp(apiPrefix), ''),
         headers: {}
@@ -34,7 +34,7 @@ module.exports = function(grunt) {
       if ('POST' === request.method && typeof postData === 'object') {
         postData = JSON.stringify(postData);
       }
-      var req = http.request(options, function(res) {
+      var req = requester.request(options, function(res) {
         var output = '';
         console.log(options.method + ' @ ' + options.host + options.path + ' Code: '+ res.statusCode);
         res.setEncoding('utf8');
@@ -92,12 +92,14 @@ module.exports = function(grunt) {
     var options = this.options({
     });
     var server = startServer({
-        host: 'localhost', // override this with your third party API host, such as 'search.twitter.com'.
+        host: options.apiBaseUrl, // override this with your third party API host, such as 'search.twitter.com'.
         hourMs: 0*60*60,
         vhost: options.vhost,
         base: options.base,
         port: options.port,
-        apiPrefix: options.apiPrefix
+        apiPrefix: options.apiPrefix,
+        proxyPort: options.proxyPort || '80',
+        proxyProtocol: options.proxyProtocol || 'http'
     }),
     args = this.args,
     done = args[args.length-1] === 'watch' ? function() {} : this.async();
