@@ -134,6 +134,12 @@ function SearchViewModel() {
         return this.get("locations").length > 0;
     };
 
+    this.formSubmitted = function(event) {
+        // Blur input to close keyboard and submit typed data to binding
+        $(".searchTerm").blur();
+        this.stringSearch(event);
+    }
+
     //executes a string search for the given location
     this.stringSearch = function(event) {
         event.preventDefault();
