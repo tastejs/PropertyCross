@@ -135,7 +135,8 @@ function SearchViewModel() {
     };
 
     this.formSubmitted = function(event) {
-        // Blur input to close keyboard and submit typed data to binding
+        // Blur function will close keyboard.  This will cause text enter by the keyboard to be sent to the model.
+        // Without this the model will not get the entered text.
         $(".searchTerm").blur();
         this.stringSearch(event);
     }

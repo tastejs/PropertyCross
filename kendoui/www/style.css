@@ -73,6 +73,7 @@
     font-size: .9rem;
 }
 
+/* Kendo UI would put the header and footer in reverse order for Android, which is not what we want. */
 .km-android .km-view {
   -moz-box-direction: normal;
   -webkit-box-direction: normal;
