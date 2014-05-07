@@ -14,14 +14,13 @@ Enyo has a dependency mechanism (package.js) to enable a basic modular approach 
 
 ##Application Structure
 
-	repo/
-		...
-		enyo/  #this is the project directory and where index.html (for a deployed app) and debug.html (for building and testing) are located
-			assets/  #this is where you can place application assets, such as images
-			enyo/  #the unminified framework source
-			lib/  #the unminified module sources
-			source/ #the application source
-		...
+ + `src/`
+   + `enyo/` - the unminified framework source
+   + `lib/` - the unminified module sources
+   + `source/` - the application source
+   + `index.html` - for a deployed app
+   + `debug.html` - for building and testing
+ + `assets/` - application assets, such as images, as well as icons and splashscreens used by PhoneGap
 
 ##Building The Application
 

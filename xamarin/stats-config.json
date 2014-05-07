@@ -1,8 +1,8 @@
 {
   "common": "common/*.cs",
   "ios": {
-    "include":"iphone/PropertyFinder/*.cs",
-    "exclude":"iphone/PropertyFinder/*.designer.cs"
+    "include":"iphone/PropertyCross/*.cs",
+    "exclude":"iphone/PropertyCross/*.designer.cs"
   },
   "android": {
     "include":"android/PropertyCross/*.cs",
