@@ -1,19 +1,25 @@
 /*Property list item*/
+.propertyListItem {
+    /* Needed to clear the float associated with the property image */
+    overflow: hidden;
+}
+
 .propertyListItem img {
     float: left;
     margin-right: 10px;
+    height: 60px;
+    width: 80px;
 }
 .propertyListItem h3, .propertyListItem p {
     margin-top: 4px;
     margin-bottom: 4px;
+    line-height: 1em;
 }
 .propertyListItem p {
-    font-size: .9rem
-}
-
-.km-button.isFave .km-icon{
-    color: yellow;
-    background: none;
+    font-size: .9rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /*Error message*/
@@ -24,6 +30,7 @@
 /*Total results count for recent searches*/
 .totalResults {
     background: #CCC;
+    color: #3E3E3E;
     float: right;
     margin-right: 30px;
     padding: 0 5px;
@@ -33,19 +40,24 @@
 /*Property details*/
 .propertyDetails img {
     width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    box-sizing: border-box;
 }
 
 /*Search form*/
+.searchForm {
+    margin-left: 3%;
+    margin-right: 3%;
+}
+
 .searchForm input {
-    width: 94%;
-    height: 40px;
-    margin: 8px 3%;
+    box-sizing: border-box;
     padding-left: 10px;
     padding-right: 10px;
+    width: 94%;
 }
-.searchForm div a:first-child {
-    margin-left: 3%;
-}
+
 .searchForm img {
     float: right;
 }
@@ -59,4 +71,30 @@
 }
 #loadMore p {
     font-size: .9rem;
+}
+
+/* Kendo UI would put the header and footer in reverse order for Android, which is not what we want. */
+.km-android .km-view {
+  -moz-box-direction: normal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.km-android .km-view-title {
+    visibility: visible;
+}
+
+.km-android .km-button.isFave, .km-wp8 .km-button.isFave {
+    background-color: white;
+}
+
+.km-android .km-button.isFave .km-icon, .km-wp8 .km-button.isFave .km-icon:after {
+    color: black;
+}
+
+.km-ios7 .km-button.isFave .km-icon:after {
+    /* Equivalent to filled in favorite font icon */
+    content: "\e30c";
 }

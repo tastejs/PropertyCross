@@ -10,23 +10,9 @@ var resultsViewModel = new ResultsViewModel();
 var propertyViewModel = new PropertyViewModel();
 var favouritesViewModel = new FavouritesViewModel();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+document.addEventListener("deviceready", function() {
+    if (navigator.splashscreen) {
+      navigator.splashscreen.hide();
+    }
+}, false);
 

@@ -134,6 +134,13 @@ function SearchViewModel() {
         return this.get("locations").length > 0;
     };
 
+    this.formSubmitted = function(event) {
+        // Blur function will close keyboard.  This will cause text enter by the keyboard to be sent to the model.
+        // Without this the model will not get the entered text.
+        $(".searchTerm").blur();
+        this.stringSearch(event);
+    }
+
     //executes a string search for the given location
     this.stringSearch = function(event) {
         event.preventDefault();

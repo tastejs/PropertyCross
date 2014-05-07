@@ -5,5 +5,5 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON("package.json")
   };
 
-  require("../phonegap/common").build(grunt, config);
+  require("../phonegap/common-with-winphone").build(grunt, config);
 };

@@ -19,6 +19,8 @@
     <script type="text/javascript" src="viewModel/FavouritesViewModel.js"></script>
     <script type="text/javascript" src="viewModel/Formatter.js"></script>
 
+    <script type="text/javascript" src="cordova.js"></script>
+
     <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -35,13 +37,13 @@
         <div data-role="header">
             <div data-role="navbar">
                 <span data-role="view-title">PropertyCross</span>
-                <a data-role="button" data-align="right" data-bind="click: goToFaves">Faves</a>
+                <a data-role="button" data-align="right" data-bind="click: goToFaves" data-icon="mostviewed"></a>
             </div>
         </div>
 
         <p>Use the form below to search for houses to buy. You can search by place-name, postcode, or click 'My location', to search in your current location</p>
-        <form data-bind="events: {submit: stringSearch}" class="searchForm">
-            <input type="search" data-bind="value: searchTerm" />
+        <form data-bind="events: {submit: formSubmitted}" class="searchForm">
+            <input type="search" data-bind="value: searchTerm" class="searchTerm" />
             <div>
                 <a data-role="button" data-bind="click: stringSearch">Go</a>
                 <a data-role="button" data-bind="click: locationSearch">Use My Location</a>
@@ -119,7 +121,7 @@
         <div data-role="header">
             <div data-role="navbar">
                 <a data-role="backbutton" data-align="left">Back</a>
-                <span data-role="view-title">Information</span>
+                <span data-role="view-title">Property Details</span>
                 <a data-role="button" data-align="right" data-icon="favorites" data-bind="click: addRemoveFave, visible: notFave"></a>
                 <a data-role="button" data-align="right" data-icon="favorites" data-bind="click: addRemoveFave, visible: isFave" class="isFave"></a>
 
