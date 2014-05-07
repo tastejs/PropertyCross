@@ -1,9 +1,13 @@
 {
-  "name": "lavaca-starter",
-  "version": "2.3.2",
-  "description": "A Lavaca app",
-  "main": "Gruntfile.js",
-  "url": "http://getlavaca.com",
+  "name": "lavaca",
+  "version": "1.0.0",
+  "implName": "lavaca",
+  "contributors": [{
+    "name": "George Henderson",
+    "username": "georgehenderson",
+    "hash": "a7c81a624fd68bde3e032853c8af7dbe"
+  }],
+  "platforms": ["android", "ios"],
   "devDependencies": {
     "mout": "0.x",
     "fs-extra": "~0.6.3",
