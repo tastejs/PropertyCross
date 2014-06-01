@@ -15,6 +15,6 @@ This section lists blog posts, articles and other related information:
 * [Introducing PropertyCross](http://www.scottlogic.co.uk/blog/colin/2012/12/introducing-propertycross-helping-you-select-a-cross-platform-mobile-framework/) - a blog post which covers some of the reasons why this project was started.
 * [PropertyCross Android Implementation Shootout](http://blog.trackabout.com/2013/03/05/propertycross-android-implementation-shootout/) - a blog post by Larry Silverman, who used PropertyCross to help their company decide which framework they should use for mobile development.
 
-#Licence
+#License
 MIT License
 PropertyCross is brought to you by Colin Eberhardt, Chris Price and a whole host of contributors!
