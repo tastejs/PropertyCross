@@ -10,9 +10,7 @@ define(function(require, exports, module) {
     var GridLayout       = require('famous/views/GridLayout');
     var RenderController = require('famous/views/RenderController');
 
-    var RecentSearchView = require('views/RecentSearchView');
-
-    function PropertySearchView() {
+    function SearchPageView() {
         View.apply(this, arguments);
 
         _createLayout.call(this);
@@ -22,15 +20,13 @@ define(function(require, exports, module) {
         _createSearchButtons.call(this);
         _createResponseRenderer.call(this);
 
-        this.recentSearchView = new RecentSearchView({});
-
         this.responseRenderer.show(this.recentSearchView);
     }
 
-    PropertySearchView.prototype = Object.create(View.prototype);
-    PropertySearchView.prototype.constructor = PropertySearchView;
+    SearchPageView.prototype = Object.create(View.prototype);
+    SearchPageView.prototype.constructor = SearchPageView;
 
-    PropertySearchView.DEFAULT_OPTIONS = {
+    SearchPageView.DEFAULT_OPTIONS = {
         contentPadding: 10
     };
 
@@ -116,5 +112,5 @@ define(function(require, exports, module) {
         this.surfaces.push(this.responseRenderer);
     }
 
-    module.exports = PropertySearchView;
+    module.exports = SearchPageView;
 });

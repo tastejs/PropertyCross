@@ -1,31 +1,63 @@
 
 define(function(require, exports, module) {
     'use strict';
-    var View               = require('famous/core/View');
-    var Surface            = require('famous/core/Surface');
-    var HeaderFooterLayout = require('famous/views/HeaderFooterLayout');
+    var Transform = require('famous/core/Transform');
+    var View      = require('famous/core/View');
 
-    var PropertySearchView = require('views/PropertySearchView');
+    var HeaderFooter = require('famous/views/HeaderFooterLayout');
+    var Lightbox     = require('famous/views/Lightbox');
+
+    var FavouritesPageView = require('views/FavouritesPageView');
+    var FooterView         = require('views/FooterView');
+    var HeaderView         = require('views/HeaderView');
+    var ListingPageView    = require('views/ListingPageView');
+    var ResultsPageView    = require('views/ResultsPageView');
+    var SearchPageView     = require('views/SearchPageView');
 
     function AppView() {
         View.apply(this, arguments);
 
         _createLayout.call(this);
-        _createContent.call(this);
+        _createLightbox.call(this);
+        _createPages.call(this);
+
         _createHeader.call(this);
-        _createFooter.call(this);
+        //_createFooter.call(this);
+
+        if (this.options.initialPage) {
+            var initialPage = this.pages[this.options.initialPage];
+            this.lightbox.show(initialPage, { duration : 0 });
+        }
+
     }
 
     AppView.prototype = Object.create(View.prototype);
     AppView.prototype.constructor = AppView;
 
     AppView.DEFAULT_OPTIONS = {
-        headerSize: 50,
-        footerSize: 50
+        headerSize: 40,
+        //footerSize: 40,
+        initialPage: 'search',
+        lightboxOpts: {
+            inOpacity: 0.1,
+            outOpacity: 0.1,
+            inOrigin: [1, 0],
+            outOrigin: [-1, 0],
+            showOrigin: [0, 0],
+            inTransform: Transform.translate(0, 0, 10),
+            outTransform: Transform.translate(0, 0, -10),
+            inTransition: { duration: 500, curve: 'easeOut' },
+            outTransition: { duration: 500, curve: 'easeOut' },
+            overlap: true
+        }
+    };
+
+    AppView.prototype.navigateTo = function(pageName) {
+        this.lightbox.show(this.pages[pageName]);
     };
 
     function _createLayout() {
-        this.layout = new HeaderFooterLayout({
+        this.layout = new HeaderFooter({
             headerSize: this.options.headerSize,
             footerSize: this.options.footerSize
         });
@@ -34,36 +66,34 @@ define(function(require, exports, module) {
     }
 
     function _createHeader() {
-        var surface = new Surface({
-            content: 'PropertyCross',
-            properties: {
-                backgroundColor: 'black',
-                color: 'white',
-                fontSize: '20px',
-                lineHeight: this.options.headerSize + 'px',
-                textAlign: 'center'
-            }
+        var view = new HeaderView({
+            headerSize: this.options.headerSize
         });
 
-        this.layout.header.add(surface);
+        this.layout.header.add(view);
     }
 
     function _createFooter() {
-        var surface = new Surface({
-            properties: {
-                backgroundColor: 'Grey'
-            }
+        var view = new FooterView({
+            footerSize: this.options.footerSize
         });
 
-        this.layout.footer.add(surface);
+        this.layout.footer.add(view);
     }
 
-    function _createContent() {
-        var propertySearchView = new PropertySearchView({
-            size: [200, 200]
-        });
+    function _createLightbox() {
+        this.lightbox = new Lightbox(this.options.lightboxOpts);
 
-        this.layout.content.add(propertySearchView);
+        this.layout.content.add(this.lightbox);
+    }
+
+    function _createPages() {
+        this.pages = {
+            favourites : new FavouritesPageView(),
+            listing    : new ListingPageView(),
+            results    : new ResultsPageView(),
+            search     : new SearchPageView()
+        };
     }
 
     module.exports = AppView;

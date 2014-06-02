@@ -1,14 +1,31 @@
-/* globals define */
+
 define(function(require, exports, module) {
     'use strict';
-    // import dependencies
-    var Engine = require('famous/core/Engine');
+    var Engine  = require('famous/core/Engine');
     var AppView = require('views/AppView');
+    var Timer   = require('famous/utilities/Timer');
 
-    // create the main context
     var mainContext = Engine.createContext();
 
-    var appView = new AppView();
+    var appView = new AppView({
+        initialPage: 'favourites'
+    });
 
     mainContext.add(appView);
+    
+    //_demoPages(1);
+
+    function _demoPages(duration) {
+        var index = 0;
+        var pages = [
+            'favourites',
+            'listing',
+            'results',
+            'search'
+        ];
+        Timer.setInterval(function() {
+            index = (index + 1) % pages.length;
+            appView.navigateTo(pages[index]);
+        }, duration * 1000);
+    }
 });
