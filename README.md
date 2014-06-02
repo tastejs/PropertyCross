@@ -17,4 +17,5 @@ This section lists blog posts, articles and other related information:
 
 #Licence
 MIT License
+
 PropertyCross is brought to you by Colin Eberhardt, Chris Price and a whole host of contributors!
