@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html>
+<html class="no-js" ng-app="propertycross">
     <head>
         <title>PropertyCross - Famo.us</title>
         <meta name="viewport" content="width=device-width, maximum-scale=1, user-scalable=no" />
@@ -7,27 +7,20 @@
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black" />
         
-        <link rel="stylesheet" type="text/css" href="lib/famous/core/famous.css" />
+        <link rel="stylesheet" href="lib/famous-angular/dist/famous-angular.css">
         
         <!-- build:css(app/) css/app.css -->
         <link rel="stylesheet" type="text/css" href="styles/app.css" />
-        <!-- bower:css -->
-        <!-- endbower -->
-        <!-- endbuild -->
-        
-        <!-- build:js(app/) src/polyfills.js -->
-        <script type="text/javascript" src="lib/famous-polyfills/functionPrototypeBind.js"></script>
-        <script type="text/javascript" src="lib/famous-polyfills/classList.js"></script>
-        <script type="text/javascript" src="lib/famous-polyfills/requestAnimationFrame.js"></script>
         <!-- endbuild -->
         
         <!-- process:remove:dev -->
-        <script type="text/javascript" src="src/main.js"></script>
         <!-- /process -->
         
         <!-- process:remove:dist -->
         <script type="text/javascript" src="lib/requirejs/require.js" data-main="src/requireConfig"></script>
         <!-- /process -->
     </head>
-    <body></body>
+    <body>
+    <div ui-view></div>
+    </body>
 </html>

@@ -1,0 +1,26 @@
+<fa-app class="full-screen">
+  <fa-header-footer-layout>
+    <fa-surface class="header-bar" ng-bind="heading" fa-size="[undefined, 50]" fa-background-color="'rgb(0,0,0)'" fa-color="'rgb(255,255,255)'">
+      {{listing.heading}}
+    </fa-surface>
+
+    <fa-container-surface fa-options="{ properties: {overflow : 'hidden'} }">
+    <fa-scroll-view fa-pipe-from="ui.eventHandler">
+        <fa-view ng-repeat="item in listing.items">
+          <fa-modifier fa-size="[undefined, 80]">
+
+            <fa-surface class="property-listing" fa-pipe-to="ui.eventHandler" fa-click="ui.navigate({ id: item.guid })">
+              <p class="property-listing-price single-line" ng-bind="item.price"></p>
+              <p class="property-listing-description single-line" ng-bind="item.title"></p>
+            </fa-surface>
+
+            <fa-modifier fa-origin="[0, 0.5]" fa-size="item.thumb.size" fa-translate="[10, 0]">
+              <fa-image-surface class='property-image' fa-image-url="{{item.thumb.url}}"></fa-image-surface>
+            </fa-modifier>
+
+          </fa-modifier>
+        </fa-view>
+      </fa-scroll-view>
+    </fa-container-surface>
+  </fa-header-footer-layout>
+</fa-app>

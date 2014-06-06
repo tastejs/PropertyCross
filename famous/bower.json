@@ -2,10 +2,12 @@
   "name": "famo.us",
   "version": "1.0.0",
   "homepage": "http://propertycross.com/famous/",
-  "authors": [{
-    "name": "Matthew Dunsdon",
-    "url": "http://github.com/mdunsdon/"
-  }],
+  "authors": [
+    {
+      "name": "Matthew Dunsdon",
+      "url": "http://github.com/mdunsdon/"
+    }
+  ],
   "main": "app/index.html",
   "moduleType": [
     "amd"
@@ -24,7 +26,12 @@
   "dependencies": {
     "requirejs": "~2.1.11",
     "almond": "~0.2.9",
-    "famous-polyfills": "git+https://github.com/Famous/polyfills.git#0.1.1",
-    "famous": "git+https://github.com/Famous/famous.git#0.2.0"
+    "angular": "1.2.18",
+    "angular-animate": "~1.2.16",
+	"angular-resource": "~1.2.16",
+    "angular-touch": "~1.2.16",
+    "angular-ui-router": "~0.2.10",
+    "famous": "0.2.1",
+    "famous-angular": "~0.0.15"
   }
 }
