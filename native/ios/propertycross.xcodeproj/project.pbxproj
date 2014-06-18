@@ -22,8 +22,6 @@
 		72AB49FC16385420006B5EF1 /* UIImage+UIImageHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 72AB49FB16385420006B5EF1 /* UIImage+UIImageHelpers.m */; };
 		72AB49FE16388982006B5EF1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72AB49FD16388982006B5EF1 /* CoreLocation.framework */; };
 		72AB4A0716388C92006B5EF1 /* GeolocationSearchItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 72AB4A0616388C92006B5EF1 /* GeolocationSearchItem.m */; };
-		72AB4A1116389555006B5EF1 /* FavouritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72AB4A0F16389554006B5EF1 /* FavouritesViewController.m */; };
-		72AB4A1216389555006B5EF1 /* FavouritesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72AB4A1016389555006B5EF1 /* FavouritesViewController.xib */; };
 		72AB4A1516391753006B5EF1 /* PersistentDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 72AB4A1416391752006B5EF1 /* PersistentDataStore.m */; };
 		72AB4A181639A3D2006B5EF1 /* FavouritePropertyDataEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 72AB4A171639A3D1006B5EF1 /* FavouritePropertyDataEntity.m */; };
 		72B98E131627644300296302 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72B98E121627644300296302 /* UIKit.framework */; };
@@ -35,15 +33,9 @@
 		72B98E251627644300296302 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 72B98E241627644300296302 /* Default.png */; };
 		72B98E271627644300296302 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 72B98E261627644300296302 /* Default@2x.png */; };
 		72B98E291627644300296302 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 72B98E281627644300296302 /* Default-568h@2x.png */; };
-		72B98E381627650F00296302 /* PropertyCrossViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B98E361627650F00296302 /* PropertyCrossViewController.m */; };
-		72B98E391627650F00296302 /* PropertyCrossViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72B98E371627650F00296302 /* PropertyCrossViewController.xib */; };
 		72B98E3D162767E700296302 /* Property.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B98E3C162767E700296302 /* Property.m */; };
 		72B98E401627694100296302 /* PropertyDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B98E3F1627694100296302 /* PropertyDataSource.m */; };
 		72B98E461627699700296302 /* PropertyListingResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B98E451627699700296302 /* PropertyListingResult.m */; };
-		72B98E4916287ECB00296302 /* SearchResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B98E4816287ECA00296302 /* SearchResultsViewController.m */; };
-		72B98E4B16287F3F00296302 /* SearchResultsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72B98E4A16287F3F00296302 /* SearchResultsViewController.xib */; };
-		72D056E1162DA0A800D41480 /* PropertyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72D056DF162DA0A700D41480 /* PropertyViewController.m */; };
-		72D056E5162DA23300D41480 /* PropertyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72D056E4162DA23300D41480 /* PropertyViewController.xib */; };
 		72D05728162EDA9C00D41480 /* SearchResults.txt in Resources */ = {isa = PBXBuildFile; fileRef = 72D05727162EDA9C00D41480 /* SearchResults.txt */; };
 		72D05732162F22C200D41480 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 72D05731162F22C200D41480 /* Location.m */; };
 		72D05735162F23EA00D41480 /* PropertyLocationsResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 72D05734162F23EA00D41480 /* PropertyLocationsResult.m */; };
@@ -56,6 +48,11 @@
 		72D142B4163073E700D8EE70 /* JSONFileDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 72D142B3163073E700D8EE70 /* JSONFileDataSource.m */; };
 		72D142B71630742000D8EE70 /* RecentSearchesTableViewSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 72D142B61630742000D8EE70 /* RecentSearchesTableViewSource.m */; };
 		72D142BD163076BB00D8EE70 /* PropertyDataSourceResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 72D142BC163076BB00D8EE70 /* PropertyDataSourceResult.m */; };
+		7666A7D11950A37700D25767 /* SearchResultsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7666A7D01950A37700D25767 /* SearchResultsTableViewController.m */; };
+		766CA1F81950835C00F54A41 /* FavouritesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 766CA1F71950835C00F54A41 /* FavouritesTableViewController.m */; };
+		766CA1FB19508C7200F54A41 /* PropertyDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 766CA1FA19508C7200F54A41 /* PropertyDetailsViewController.m */; };
+		76B51A5019502C4000975893 /* PropertySearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76B51A4F19502C4000975893 /* PropertySearchViewController.m */; };
+		76D45B3D194F3472006B36CB /* PropertyCross.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76D45B3C194F3472006B36CB /* PropertyCross.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,9 +77,6 @@
 		72AB49FD16388982006B5EF1 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		72AB4A0516388C91006B5EF1 /* GeolocationSearchItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeolocationSearchItem.h; sourceTree = "<group>"; };
 		72AB4A0616388C92006B5EF1 /* GeolocationSearchItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeolocationSearchItem.m; sourceTree = "<group>"; };
-		72AB4A0E16389554006B5EF1 /* FavouritesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavouritesViewController.h; sourceTree = "<group>"; };
-		72AB4A0F16389554006B5EF1 /* FavouritesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavouritesViewController.m; sourceTree = "<group>"; };
-		72AB4A1016389555006B5EF1 /* FavouritesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FavouritesViewController.xib; sourceTree = "<group>"; };
 		72AB4A1316391751006B5EF1 /* PersistentDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersistentDataStore.h; sourceTree = "<group>"; };
 		72AB4A1416391752006B5EF1 /* PersistentDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersistentDataStore.m; sourceTree = "<group>"; };
 		72AB4A161639A3D0006B5EF1 /* FavouritePropertyDataEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavouritePropertyDataEntity.h; sourceTree = "<group>"; };
@@ -100,21 +94,12 @@
 		72B98E241627644300296302 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		72B98E261627644300296302 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		72B98E281627644300296302 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		72B98E351627650F00296302 /* PropertyCrossViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertyCrossViewController.h; sourceTree = "<group>"; };
-		72B98E361627650F00296302 /* PropertyCrossViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PropertyCrossViewController.m; sourceTree = "<group>"; };
-		72B98E371627650F00296302 /* PropertyCrossViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PropertyCrossViewController.xib; sourceTree = "<group>"; };
 		72B98E3B162767E700296302 /* Property.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Property.h; path = Model/Property.h; sourceTree = "<group>"; };
 		72B98E3C162767E700296302 /* Property.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Property.m; path = Model/Property.m; sourceTree = "<group>"; };
 		72B98E3E1627694100296302 /* PropertyDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PropertyDataSource.h; path = Model/PropertyDataSource.h; sourceTree = "<group>"; };
 		72B98E3F1627694100296302 /* PropertyDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PropertyDataSource.m; path = Model/PropertyDataSource.m; sourceTree = "<group>"; };
 		72B98E441627699700296302 /* PropertyListingResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PropertyListingResult.h; path = Model/PropertyListingResult.h; sourceTree = "<group>"; };
 		72B98E451627699700296302 /* PropertyListingResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PropertyListingResult.m; path = Model/PropertyListingResult.m; sourceTree = "<group>"; };
-		72B98E4716287ECA00296302 /* SearchResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultsViewController.h; sourceTree = "<group>"; };
-		72B98E4816287ECA00296302 /* SearchResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultsViewController.m; sourceTree = "<group>"; };
-		72B98E4A16287F3F00296302 /* SearchResultsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchResultsViewController.xib; sourceTree = "<group>"; };
-		72D056DE162DA0A700D41480 /* PropertyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertyViewController.h; sourceTree = "<group>"; };
-		72D056DF162DA0A700D41480 /* PropertyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PropertyViewController.m; sourceTree = "<group>"; };
-		72D056E4162DA23300D41480 /* PropertyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PropertyViewController.xib; sourceTree = "<group>"; };
 		72D05727162EDA9C00D41480 /* SearchResults.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SearchResults.txt; sourceTree = "<group>"; };
 		72D05730162F22C100D41480 /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Location.h; path = Model/Location.h; sourceTree = "<group>"; };
 		72D05731162F22C200D41480 /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Location.m; path = Model/Location.m; sourceTree = "<group>"; };
@@ -139,6 +124,15 @@
 		72D142B61630742000D8EE70 /* RecentSearchesTableViewSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentSearchesTableViewSource.m; sourceTree = "<group>"; };
 		72D142BB163076BB00D8EE70 /* PropertyDataSourceResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PropertyDataSourceResult.h; path = Model/PropertyDataSourceResult.h; sourceTree = "<group>"; };
 		72D142BC163076BB00D8EE70 /* PropertyDataSourceResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PropertyDataSourceResult.m; path = Model/PropertyDataSourceResult.m; sourceTree = "<group>"; };
+		7666A7CF1950A37700D25767 /* SearchResultsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultsTableViewController.h; sourceTree = "<group>"; };
+		7666A7D01950A37700D25767 /* SearchResultsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultsTableViewController.m; sourceTree = "<group>"; };
+		766CA1F61950835C00F54A41 /* FavouritesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavouritesTableViewController.h; sourceTree = "<group>"; };
+		766CA1F71950835C00F54A41 /* FavouritesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavouritesTableViewController.m; sourceTree = "<group>"; };
+		766CA1F919508C7200F54A41 /* PropertyDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertyDetailsViewController.h; sourceTree = "<group>"; };
+		766CA1FA19508C7200F54A41 /* PropertyDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PropertyDetailsViewController.m; sourceTree = "<group>"; };
+		76B51A4E19502C4000975893 /* PropertySearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertySearchViewController.h; sourceTree = "<group>"; };
+		76B51A4F19502C4000975893 /* PropertySearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PropertySearchViewController.m; sourceTree = "<group>"; };
+		76D45B3C194F3472006B36CB /* PropertyCross.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PropertyCross.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -245,17 +239,15 @@
 				72AB49DD1636FA16006B5EF1 /* Test Files */,
 				72D057451630726000D41480 /* Categories */,
 				72B98E3A162767AA00296302 /* Model */,
-				72B98E351627650F00296302 /* PropertyCrossViewController.h */,
-				72B98E361627650F00296302 /* PropertyCrossViewController.m */,
-				72B98E371627650F00296302 /* PropertyCrossViewController.xib */,
+				76D45B3C194F3472006B36CB /* PropertyCross.storyboard */,
+				76B51A4E19502C4000975893 /* PropertySearchViewController.h */,
+				76B51A4F19502C4000975893 /* PropertySearchViewController.m */,
 				72B98E211627644300296302 /* AppDelegate.h */,
 				72B98E221627644300296302 /* AppDelegate.m */,
-				72B98E4716287ECA00296302 /* SearchResultsViewController.h */,
-				72B98E4816287ECA00296302 /* SearchResultsViewController.m */,
-				72B98E4A16287F3F00296302 /* SearchResultsViewController.xib */,
-				72D056DE162DA0A700D41480 /* PropertyViewController.h */,
-				72D056DF162DA0A700D41480 /* PropertyViewController.m */,
-				72D056E4162DA23300D41480 /* PropertyViewController.xib */,
+				7666A7CF1950A37700D25767 /* SearchResultsTableViewController.h */,
+				7666A7D01950A37700D25767 /* SearchResultsTableViewController.m */,
+				766CA1F919508C7200F54A41 /* PropertyDetailsViewController.h */,
+				766CA1FA19508C7200F54A41 /* PropertyDetailsViewController.m */,
 				72D0573B163067EC00D41480 /* LocationsTableViewSource.h */,
 				72D0573C163067ED00D41480 /* LocationsTableViewSource.m */,
 				72D0574116306D0A00D41480 /* TableViewDataSourceBase.h */,
@@ -263,9 +255,8 @@
 				72D0574416306DA100D41480 /* TableViewDataSourceDelegate.h */,
 				72D142B51630742000D8EE70 /* RecentSearchesTableViewSource.h */,
 				72D142B61630742000D8EE70 /* RecentSearchesTableViewSource.m */,
-				72AB4A0E16389554006B5EF1 /* FavouritesViewController.h */,
-				72AB4A0F16389554006B5EF1 /* FavouritesViewController.m */,
-				72AB4A1016389555006B5EF1 /* FavouritesViewController.xib */,
+				766CA1F61950835C00F54A41 /* FavouritesTableViewController.h */,
+				766CA1F71950835C00F54A41 /* FavouritesTableViewController.m */,
 			);
 			name = propertycross;
 			path = PropertyCross;
@@ -379,12 +370,9 @@
 				72B98E251627644300296302 /* Default.png in Resources */,
 				72B98E271627644300296302 /* Default@2x.png in Resources */,
 				72B98E291627644300296302 /* Default-568h@2x.png in Resources */,
-				72B98E391627650F00296302 /* PropertyCrossViewController.xib in Resources */,
-				72B98E4B16287F3F00296302 /* SearchResultsViewController.xib in Resources */,
-				72D056E5162DA23300D41480 /* PropertyViewController.xib in Resources */,
+				76D45B3D194F3472006B36CB /* PropertyCross.storyboard in Resources */,
 				72D05728162EDA9C00D41480 /* SearchResults.txt in Resources */,
 				72D057371630635B00D41480 /* AmbiguousSearchResults.txt in Resources */,
-				72AB4A1216389555006B5EF1 /* FavouritesViewController.xib in Resources */,
 				726CEB88163EE01C00860DD0 /* Icon.png in Resources */,
 				726CEB8A163EE02000860DD0 /* Icon@2x.png in Resources */,
 				728463301727327700AD5EE9 /* nostar.png in Resources */,
@@ -403,12 +391,10 @@
 			files = (
 				72B98E1F1627644300296302 /* main.m in Sources */,
 				72B98E231627644300296302 /* AppDelegate.m in Sources */,
-				72B98E381627650F00296302 /* PropertyCrossViewController.m in Sources */,
+				766CA1FB19508C7200F54A41 /* PropertyDetailsViewController.m in Sources */,
 				72B98E3D162767E700296302 /* Property.m in Sources */,
 				72B98E401627694100296302 /* PropertyDataSource.m in Sources */,
 				72B98E461627699700296302 /* PropertyListingResult.m in Sources */,
-				72B98E4916287ECB00296302 /* SearchResultsViewController.m in Sources */,
-				72D056E1162DA0A800D41480 /* PropertyViewController.m in Sources */,
 				72D05732162F22C200D41480 /* Location.m in Sources */,
 				72D05735162F23EA00D41480 /* PropertyLocationsResult.m in Sources */,
 				72D0573A1630655500D41480 /* PropertyUnkownLocationResult.m in Sources */,
@@ -424,8 +410,10 @@
 				72AB49F01637CA7F006B5EF1 /* PlainTextSearchItem.m in Sources */,
 				72AB49F916385306006B5EF1 /* UITableViewCell+ImageHelpers.m in Sources */,
 				72AB49FC16385420006B5EF1 /* UIImage+UIImageHelpers.m in Sources */,
+				766CA1F81950835C00F54A41 /* FavouritesTableViewController.m in Sources */,
 				72AB4A0716388C92006B5EF1 /* GeolocationSearchItem.m in Sources */,
-				72AB4A1116389555006B5EF1 /* FavouritesViewController.m in Sources */,
+				76B51A5019502C4000975893 /* PropertySearchViewController.m in Sources */,
+				7666A7D11950A37700D25767 /* SearchResultsTableViewController.m in Sources */,
 				72AB4A1516391753006B5EF1 /* PersistentDataStore.m in Sources */,
 				72AB4A181639A3D2006B5EF1 /* FavouritePropertyDataEntity.m in Sources */,
 				7220D61A1718630500F21A64 /* RecentSearchDataEntity.m in Sources */,
