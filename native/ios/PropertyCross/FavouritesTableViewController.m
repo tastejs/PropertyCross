@@ -23,15 +23,14 @@
     Property* _selectedProperty;
 }
 
-- (void)viewDidLoad
+- (void)viewWillAppear:(BOOL)animated
 {
-    [super viewDidLoad];
-
+    [super viewWillAppear:animated];
+    
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     _properties = appDelegate.persistentDataStore.favourites;
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -93,6 +92,5 @@
         [propertyDetailsViewController setProperty:_selectedProperty];
     }
 }
-
 
 @end
