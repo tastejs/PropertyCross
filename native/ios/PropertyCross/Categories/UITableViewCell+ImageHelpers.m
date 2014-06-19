@@ -10,9 +10,13 @@
 
 @implementation UITableViewCell (ImageHelpers)
 
-- (void) loadImageFromURLInBackground:(NSString *)imageURL
+- (void) loadImageFromURLInBackground:(NSString *)imageURL withDefaultImageOrNil:(UIImage*)defaultImage
 {
     self.imageView.frame = CGRectMake(self.imageView.frame.origin.x, self.imageView.frame.origin.y, 60, 60);
+    
+    if (defaultImage != nil) {
+        self.imageView.image = defaultImage;
+    }
     
     dispatch_queue_t downloadQueue = dispatch_queue_create("image downloader", NULL);
     dispatch_async(downloadQueue, ^{

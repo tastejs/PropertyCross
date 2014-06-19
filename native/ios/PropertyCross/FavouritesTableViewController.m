@@ -21,6 +21,14 @@
 {
     NSArray* _properties;
     Property* _selectedProperty;
+    UIImage* _homeImage;
+}
+
+-(void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    _homeImage = [UIImage imageNamed:@"Home.png"];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -49,25 +57,17 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell* cell = (UITableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"cell"];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
-                                      reuseIdentifier:@"cell"];
-    }
-    
+    UITableViewCell* cell = (UITableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"PropertyCell"];
+
     FavouritePropertyDataEntity* propertyEntity = _properties[indexPath.row];
     Property* property = [Property propertyFromFavouritePropertyDataEntity:propertyEntity];
+
     cell.textLabel.text = property.formattedPrice;
     cell.detailTextLabel.text = property.title;
-    [cell loadImageFromURLInBackground:property.thumbnailUrl];
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    [cell loadImageFromURLInBackground:property.thumbnailUrl
+                 withDefaultImageOrNil:_homeImage];
     
     return cell;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 70.0f;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

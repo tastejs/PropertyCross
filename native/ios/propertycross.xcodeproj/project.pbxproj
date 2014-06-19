@@ -51,6 +51,7 @@
 		7666A7D11950A37700D25767 /* SearchResultsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7666A7D01950A37700D25767 /* SearchResultsTableViewController.m */; };
 		766CA1F81950835C00F54A41 /* FavouritesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 766CA1F71950835C00F54A41 /* FavouritesTableViewController.m */; };
 		766CA1FB19508C7200F54A41 /* PropertyDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 766CA1FA19508C7200F54A41 /* PropertyDetailsViewController.m */; };
+		769EE1A4195347AB0030FC15 /* Home.png in Resources */ = {isa = PBXBuildFile; fileRef = 769EE1A3195347AB0030FC15 /* Home.png */; };
 		76B51A5019502C4000975893 /* PropertySearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76B51A4F19502C4000975893 /* PropertySearchViewController.m */; };
 		76D45B3D194F3472006B36CB /* PropertyCross.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76D45B3C194F3472006B36CB /* PropertyCross.storyboard */; };
 /* End PBXBuildFile section */
@@ -130,6 +131,7 @@
 		766CA1F71950835C00F54A41 /* FavouritesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavouritesTableViewController.m; sourceTree = "<group>"; };
 		766CA1F919508C7200F54A41 /* PropertyDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertyDetailsViewController.h; sourceTree = "<group>"; };
 		766CA1FA19508C7200F54A41 /* PropertyDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PropertyDetailsViewController.m; sourceTree = "<group>"; };
+		769EE1A3195347AB0030FC15 /* Home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Home.png; path = PropertyCross/Home.png; sourceTree = SOURCE_ROOT; };
 		76B51A4E19502C4000975893 /* PropertySearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertySearchViewController.h; sourceTree = "<group>"; };
 		76B51A4F19502C4000975893 /* PropertySearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PropertySearchViewController.m; sourceTree = "<group>"; };
 		76D45B3C194F3472006B36CB /* PropertyCross.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PropertyCross.storyboard; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 		72AB4A1B163BBFED006B5EF1 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				769EE1A3195347AB0030FC15 /* Home.png */,
 				728463331727354F00AD5EE9 /* nostar@2x.png */,
 				728463341727354F00AD5EE9 /* star@2x.png */,
 				7284632E1727327700AD5EE9 /* nostar.png */,
@@ -372,6 +375,7 @@
 				72B98E291627644300296302 /* Default-568h@2x.png in Resources */,
 				76D45B3D194F3472006B36CB /* PropertyCross.storyboard in Resources */,
 				72D05728162EDA9C00D41480 /* SearchResults.txt in Resources */,
+				769EE1A4195347AB0030FC15 /* Home.png in Resources */,
 				72D057371630635B00D41480 /* AmbiguousSearchResults.txt in Resources */,
 				726CEB88163EE01C00860DD0 /* Icon.png in Resources */,
 				726CEB8A163EE02000860DD0 /* Icon@2x.png in Resources */,

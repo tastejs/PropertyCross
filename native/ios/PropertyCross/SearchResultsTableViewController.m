@@ -23,6 +23,14 @@
     SearchItemBase* _searchItem;
     BOOL _isLoading;
     Property* _selectedProperty;
+    UIImage* _homeImage;
+}
+
+-(void)viewDidLoad
+{
+    [super viewDidLoad];
+
+    _homeImage = [UIImage imageNamed:@"Home.png"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -53,63 +61,64 @@
     return _properties.count + (loadMoreVisible ? 1 : 0);
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+// produceLoadMoreDescriptionWithTitle:withCount:withTotal
+- (NSMutableAttributedString *)produceLoadMoreDescriptionWithTitle:(NSString *)title withCount:(NSNumber *)count withTotal:(NSNumber *)total
 {
-    return 70.0f;
-}
+    // Create the attributes
+    UIFont *boldFont = [UIFont boldSystemFontOfSize:13.0f];
+    UIFont *regularFont = [UIFont systemFontOfSize:13.0f];
 
+    NSDictionary *regularFontAttributes = @{ NSFontAttributeName : regularFont};
+    NSDictionary *boldFontAttributes = @{ NSFontAttributeName : boldFont};
+    
+    NSString* countText =[NSString stringWithFormat:@"%@", count];
+    NSString* totalText =[NSString stringWithFormat:@"%@", total];
+
+    // Create the attributed string
+    NSString* plainText = [NSString stringWithFormat:@"Results for %@, showing %@ of %@ properties",
+                      _searchItem.displayText, countText, totalText];
+    NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:plainText
+                                                                                       attributes:regularFontAttributes];
+    
+    // make certain components bold
+    [attributedText setAttributes:boldFontAttributes
+                            range:NSMakeRange(12, title.length)];
+    [attributedText setAttributes:boldFontAttributes
+                            range:NSMakeRange(12 + title.length + 10, countText.length)];
+    [attributedText setAttributes:boldFontAttributes
+                            range:NSMakeRange(12 + title.length + 10 + countText.length + 4, totalText.length)];
+    return attributedText;
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell* cell = (UITableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"cell"];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
-                                      reuseIdentifier:@"cell"];
-    }
+    UITableViewCell* cell;
     
     if (indexPath.row < _properties.count)
     {
+        cell = (UITableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"PropertyCell"];
+
         // render a property
         Property* property = _properties[indexPath.row];
+
         cell.textLabel.text = property.formattedPrice;
         cell.detailTextLabel.text = property.title;
-        [cell loadImageFromURLInBackground:property.thumbnailUrl];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        [cell loadImageFromURLInBackground:property.thumbnailUrl
+                     withDefaultImageOrNil:_homeImage];
     }
     else
     {
+        cell = (UITableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"LoadMoreCell"];
+
         // render a load more indicator
         cell.textLabel.text = _isLoading ? @"Loading ..." : @"Load more ...";
         
-        // Create the attributes
-        UIFont *boldFont = [UIFont boldSystemFontOfSize:13.0f];
-        UIFont *regularFont = [UIFont systemFontOfSize:13.0f];
-        NSDictionary *regularFontAttributes = @{ NSFontAttributeName : regularFont};
-        NSDictionary *boldFontAttributes = @{ NSFontAttributeName : boldFont};
-        
-        NSString* propertiesCountText =[NSString stringWithFormat:@"%d", _properties.count];
-        NSString* totalResultsText =[NSString stringWithFormat:@"%@", _result.totalResults];
-        
-        // Create the attributed string
-        NSString* text = [NSString stringWithFormat:@"Results for %@, showing %@ of %@ properties",
-                          _searchItem.displayText, propertiesCountText, totalResultsText];
-        NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:text
-                                                                                           attributes:regularFontAttributes];
-        
-        // make certain components bold
-        [attributedText setAttributes:boldFontAttributes
-                                range:NSMakeRange(12,totalResultsText.length)];
-        [attributedText setAttributes:boldFontAttributes
-                                range:NSMakeRange(12 + totalResultsText.length + 10, propertiesCountText.length)];
-        [attributedText setAttributes:boldFontAttributes
-                                range:NSMakeRange(12 + totalResultsText.length + 10 + propertiesCountText.length + 4, totalResultsText.length)];
-        
-        cell.detailTextLabel.font = [UIFont systemFontOfSize:13.0f];
-        cell.detailTextLabel.attributedText =attributedText;
-        cell.imageView.image = nil;
+        cell.detailTextLabel.attributedText = [self produceLoadMoreDescriptionWithTitle:_searchItem.displayText
+                                                                              withCount:[NSNumber numberWithUnsignedInteger:_properties.count]
+                                                                              withTotal:_result.totalResults];
     }
-    
-    return  cell;
+
+    return cell;
 }
 
 - (void)loadMore
