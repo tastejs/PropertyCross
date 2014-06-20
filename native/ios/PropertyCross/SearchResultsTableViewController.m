@@ -48,7 +48,7 @@
     _datasource = datasource;
     _result = result;
     _properties = result.properties;
-    self.title = [NSString stringWithFormat:@"%d of %@ results", _properties.count, _result.totalResults];
+    self.title = [NSString stringWithFormat:@"%lu of %lu results", (unsigned long)_properties.count, (unsigned long)_result.totalResults];
     [self.tableView reloadData];
 }
 
@@ -56,13 +56,13 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    BOOL loadMoreVisible = _properties.count < [_result.totalResults integerValue];
+    BOOL loadMoreVisible = _properties.count < _result.totalResults;
     
     return _properties.count + (loadMoreVisible ? 1 : 0);
 }
 
 // produceLoadMoreDescriptionWithTitle:withCount:withTotal
-- (NSMutableAttributedString *)produceLoadMoreDescriptionWithTitle:(NSString *)title withCount:(NSNumber *)count withTotal:(NSNumber *)total
+- (NSMutableAttributedString *)produceLoadMoreDescriptionWithTitle:(NSString *)title withCount:(NSUInteger)count withTotal:(NSUInteger)total
 {
     // Create the attributes
     UIFont *boldFont = [UIFont boldSystemFontOfSize:13.0f];
@@ -71,8 +71,8 @@
     NSDictionary *regularFontAttributes = @{ NSFontAttributeName : regularFont};
     NSDictionary *boldFontAttributes = @{ NSFontAttributeName : boldFont};
     
-    NSString* countText =[NSString stringWithFormat:@"%@", count];
-    NSString* totalText =[NSString stringWithFormat:@"%@", total];
+    NSString* countText =[NSString stringWithFormat:@"%lu", (unsigned long)count];
+    NSString* totalText =[NSString stringWithFormat:@"%lu", (unsigned long)total];
 
     // Create the attributed string
     NSString* plainText = [NSString stringWithFormat:@"Results for %@, showing %@ of %@ properties",
@@ -111,10 +111,8 @@
         cell = (UITableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"LoadMoreCell"];
 
         // render a load more indicator
-        cell.textLabel.text = _isLoading ? @"Loading ..." : @"Load more ...";
-        
-        cell.detailTextLabel.attributedText = [self produceLoadMoreDescriptionWithTitle:_searchItem.displayText
-                                                                              withCount:[NSNumber numberWithUnsignedInteger:_properties.count]
+        cell.textLabel.text = _isLoading ? @"Loading ..." : @"Load more ...";        cell.detailTextLabel.attributedText = [self produceLoadMoreDescriptionWithTitle:_searchItem.displayText
+                                                                              withCount:_properties.count
                                                                               withTotal:_result.totalResults];
     }
 
@@ -144,13 +142,13 @@
             _properties = [NSArray arrayWithArray:mutableProperties];
             
             // render the new results
-            self.title = [NSString stringWithFormat:@"%d of %@ results", _properties.count, _result.totalResults];
+            self.title = [NSString stringWithFormat:@"%lu of %tu results", (unsigned long)_properties.count, _result.totalResults];
             [self.tableView reloadData];
         }
     };
     
     [_searchItem findPropertiesWithDataSource:_datasource
-                                   pageNumber:[NSNumber numberWithInt:_pageNumber]
+                                   pageNumber: _pageNumber
                                        result:success
                                         error:nil];
 }

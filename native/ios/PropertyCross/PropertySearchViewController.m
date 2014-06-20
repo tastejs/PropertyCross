@@ -162,7 +162,7 @@
     [self.loadingIndicator startAnimating];
     
     [_searchItem findPropertiesWithDataSource:_dataSource
-                                   pageNumber:@1
+                                   pageNumber:1
                                        result:success
                                         error:error];
 }

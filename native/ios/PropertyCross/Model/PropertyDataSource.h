@@ -24,14 +24,14 @@ typedef void(^PropertyDataSourceResultError)(NSString* result);
 
 // finds properties which match the given plain-text string
 -(void)findPropertiesForSearchString: (NSString*) searchString
-                          pageNumber:(NSNumber *)page
+                          pageNumber:(NSUInteger *)page
                              success: (PropertyDataSourceResultSuccess) successResult
                                error:(PropertyDataSourceResultError)errorResult;
 
 // finds properties which match the given geolocation
 -(void)findPropertiesForLatitude: (double) latitude
                        longitude: (double) longitude
-                      pageNumber:(NSNumber *)page
+                      pageNumber:(NSUInteger *)page
                          success: (PropertyDataSourceResultSuccess) successResult
                            error:(PropertyDataSourceResultError)errorResult;
 

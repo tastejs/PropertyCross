@@ -13,7 +13,7 @@
 @implementation SearchItemBase
 
 - (void) findPropertiesWithDataSource:(PropertyDataSource *)propertyDataSource
-                           pageNumber:(NSNumber*)page
+                           pageNumber:(NSUInteger*)page
                                result:(PropertyDataSourceResultSuccess)successResult
                                 error:(PropertyDataSourceResultError)errorResult
 {
@@ -39,7 +39,7 @@
         item.latitude = [entity.latitude doubleValue];
         item.longitude = [entity.longitude doubleValue];
         item.displayText = entity.displayString;
-        item.matches = entity.matches;
+        item.matches = [entity.matches unsignedIntegerValue];
         return item;
     }
     else
@@ -47,7 +47,7 @@
         PlainTextSearchItem* item = [[PlainTextSearchItem alloc] init];
         item.displayText = entity.displayString;
         item.searchText = entity.searchString;
-        item.matches = entity.matches;
+        item.matches = [entity.matches unsignedIntegerValue];
         return item;
     }
 }

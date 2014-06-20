@@ -25,11 +25,11 @@
     entity.longitude = [NSNumber numberWithDouble:self.longitude];
     entity.displayString = self.displayText;
     entity.isLocationSearch = [NSNumber numberWithBool:YES];
-    entity.matches = self.matches;
+    entity.matches = [NSNumber numberWithUnsignedInteger:self.matches];
 }
 
 - (void)findPropertiesWithDataSource:(PropertyDataSource *)propertyDataSource
-                          pageNumber:(NSNumber *)page
+                          pageNumber:(NSUInteger *)page
                               result:(PropertyDataSourceResultSuccess)successResult
                                error:(PropertyDataSourceResultError)errorResult
 {
