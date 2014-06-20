@@ -11,7 +11,7 @@
 
 #import "TableViewDataSourceDelegate.h"
 
-@interface PropertySearchViewController : UIViewController <TableViewDataSourceDelegate, CLLocationManagerDelegate>
+@interface PropertySearchViewController : UIViewController <TableViewDataSourceDelegate, CLLocationManagerDelegate, UISearchBarDelegate>
 - (IBAction)performTextSearch:(id)sender;
 - (IBAction)performGeolocationSearch:(id)sender;
 

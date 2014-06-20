@@ -74,7 +74,14 @@
     [self executeSearch];
 }
 
--(IBAction)performGeolocationSearch:(id)sender
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    [searchBar resignFirstResponder];
+    _searchItem = [PlainTextSearchItem plainTextSearchItemFromString:searchBar.text];
+    [self executeSearch];
+}
+
+- (IBAction)performGeolocationSearch:(id)sender
 {
     [_locationManager startUpdatingLocation];
     _awaitingLocation = YES;
