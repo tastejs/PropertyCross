@@ -15,6 +15,14 @@ function initialize() {
       app.ready(navigator.splashscreen.hide);
     });
   }
+
+  if(window.cordova) {
+    document.addEventListener("backbutton", handleBackButton, true);
+  }
+}
+
+function handleBackButton() {
+  $.ui.goBack();
 }
 
 if(window.cordova) {
