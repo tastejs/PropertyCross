@@ -1,6 +1,6 @@
 function initialize() {
 
-  if (cordova.platformId === "windowsphone") {
+  if (window.cordova != undefined && cordova.platformId === "windowsphone") {
     console.log("Windows Phone 8");
     $(".addRemoveFave").text("Fave");
   }
@@ -17,4 +17,8 @@ function initialize() {
   }
 }
 
-document.addEventListener("deviceready", initialize, false);
+if(window.cordova) {
+  document.addEventListener("deviceready", initialize, false);
+} else {
+  $(document).ready(initialize)
+}

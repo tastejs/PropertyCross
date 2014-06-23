@@ -13,7 +13,7 @@
         <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
         <!-- @font-face icons don't work in WP -->
         <script type="text/javascript">
-        if (cordova.platformId !== 'windowsphone') {
+        if (window.cordova === undefined || cordova.platformId !== 'windowsphone') {
           document.write('<link rel="stylesheet" type="text/css" href="css/icons.css" />');
         }
         </script>
