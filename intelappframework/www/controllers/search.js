@@ -15,6 +15,8 @@ $.mvc.controller.create("search", {
     placeName: '',
     displayName: '',
     pageNum: 1,
+    searchResults: [],
+    totalResults: 1,
 
     /* Sets the display name locally - this is either the long_title of the location object, or formatted coordinates in the case of geo search */
     setDisplayName: function(location, placeNameOrCoords) {
@@ -85,36 +87,40 @@ $.mvc.controller.create("search", {
                 bathroom_number: prop.bathroom_number
             });
             property.save(function() {
+                that.searchResults.push(property);
                 that.$resultList.append($.template("resultsTpl", {
                     property: property,
                     fave: false
                 }));
             });
         }
-        var numResults = that.$resultList.find("a").length;
-        var totalResults = response.total_results;
+        this.totalResults = response.total_results;
+
+        this.refreshResultsHeader();
+
+    },
+
+    refreshResultsHeader: function() {
+        var numResults = $.mvc.controller.formatter.number(this.searchResults.length);
+        var totalResults = $.mvc.controller.formatter.number(this.totalResults);
 
         $("#resultListHeader h1").html(
             $.template("headerTpl", {
-            numResults: $.mvc.controller.formatter.number(numResults),
-            totalResults: $.mvc.controller.formatter.number(totalResults)
+            numResults: numResults,
+            totalResults: totalResults
         }));
-
-        //This is not needed anymore since headers are moved around in the dom and not cloned
-        //$.ui.updateHeaderElements($("#resultListHeader")); //unfortunately needed for load more to update num results value in the header
 
         if (numResults === totalResults) {
             this.$loadMore.hide();
         } else {
             this.$loadMore.find("a span").html(
                 $.template("loadMoreTpl", {
-                numResults: $.mvc.controller.formatter.number(numResults),
-                totalResults: $.mvc.controller.formatter.number(totalResults),
+                numResults: numResults,
+                totalResults: totalResults,
                 searchTerm: this.displayName
             }));
             this.$loadMore.show();
         }
-
     },
 
     /* Outputs the results of a search to the DOM and switches the view to the results view */
@@ -154,6 +160,7 @@ $.mvc.controller.create("search", {
         this.$locList.hide();
         $("#locListLabel").hide();
 
+        this.searchResults = [];
         this.$resultList.empty();
         this.pageNum = 1;
         var that = this;
@@ -180,15 +187,58 @@ $.mvc.controller.create("search", {
         });
     },
 
+    /* Updates results page to show search results */
+    show: function() {
+        var that = this;
+        this.refreshResultsList(function() {
+            that.refreshResultsHeader();
+            $.ui.loadContent("results", false, false, "slide");
+        });
+    },
+
+    refreshResultsList: function(callback) {
+        var that = this;
+        this.$resultList.empty();
+
+        if (this.searchResults.length === 0) {
+            $.ui.loadContent("main", false, false, "slide");
+            return;
+        } else {
+            $.each(this.searchResults, function(index, prop) {
+                var property = new Property();
+                property.id = prop.id;
+                property.set({
+                    thumb_url: prop.thumb_url,
+                    price: prop.price,
+                    title: prop.title,
+                    summary: prop.summary,
+                    img_url: prop.img_url,
+                    bedroom_number: prop.bedroom_number,
+                    bathroom_number: prop.bathroom_number
+                });
+                property.save(function() {
+                    that.$resultList.append($.template("resultsTpl", {
+                        property: prop,
+                        fave: false
+                    }));
+                });
+            });
+        }
+        callback();
+    },
+
     /* Performs a string search, using the value entered in the input box */
-    string: function() {
-        var location = $('#stringSearch').val();
+    string: function () {
+        var searchBox = $('#stringSearch');
+        var location = searchBox.val();
         if (location === "") {
             this.setErrorMessage("Please enter a location to search for");
         } else {
             this.displayName = '';
             this.performSearch(location);
         }
+        // Remove keyboard focus
+        searchBox.blur();
     },
 
     /* Performs a geo location search */

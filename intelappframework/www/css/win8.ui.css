@@ -1,0 +1,17 @@
+
+@-ms-viewport{width:320px;user-zoom:fixed;max-zoom:1;min-zoom:1;}
+
+
+#afui.win8 .list > li > a:after {
+    content: ""
+}
+
+#afui.win8 #results a {
+    background:#3f3f3f;
+    margin-bottom:10px;
+}
+
+#afui.win8 #recentSearches li {
+    background:#00aba9;
+    margin-bottom: 10px;
+}
