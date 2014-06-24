@@ -6,6 +6,30 @@
     content: ""
 }
 
+#afui.win8 .icon:before {
+    font-family: 'Segoe UI Symbol';
+}
+
+#afui.win8 .icon.favourite:before {
+    content: "\E113";
+}
+
+#afui.win8 .icon.home:before {
+    content: "\E10F";
+}
+
+#afui.win8 .icon.magnifier:before {
+    content: "\E11A";
+}
+
+#afui.win8 .icon.star:before {
+    content: "\E113";
+}
+
+#afui.win8 .icon.unfavourite:before {
+    content: "\E195";
+}
+
 #afui.win8 #results a {
     background:#3f3f3f;
     margin-bottom:10px;
