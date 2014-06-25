@@ -7,17 +7,18 @@ $.mvc.controller.create("results", {
     goToProperty: function(id, favesPage) {
         this.favesPage = favesPage === "true";
         properties.fetch(id, function(property) {
-            //$("#property").html($.template("propertyTpl",{property:property}));
             $.ui.updatePanel("#propertyContent", $.template("propertyTpl", {
                 property: property
             }));
-            var $addRemoveFaveButton = $(".addRemoveFave");
-            $addRemoveFaveButton.attr("href", "/favourites/addRemove/" + id);
+            var faveController = $.mvc.controller.favourites;
+            
+            var propertyFaveButton = $("#propertyFaveButton");
+            propertyFaveButton.attr("href", "/favourites/addRemove/" + id);
             favourites.isFave(id, function(isFave) {
                 if (isFave) {
-                    $addRemoveFaveButton.addClass("fave");
+                    faveController.styleFaved(propertyFaveButton);
                 } else {
-                    $addRemoveFaveButton.removeClass("fave");
+                    faveController.styleUnfaved(propertyFaveButton);
                 }
             });
             if (property.bedroom_number == 0) {

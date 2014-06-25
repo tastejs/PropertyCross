@@ -47,6 +47,7 @@ $.mvc.controller.create("favourites", {
     addRemove: function(id) {
         var that = this;
         favourites.fetch(id, function(fave) {
+            var button = $("#propertyFaveButton");
             //if property doesn't exist as a favourite then add it
             if (fave.property === '') {
 
@@ -58,15 +59,23 @@ $.mvc.controller.create("favourites", {
                         property: property
                     });
                     fave.save(function() {
-                        $("#addRemoveFave").addClass("fave");
+                        that.styleFaved(button);
                     });
                 });
             } else {
                 //else remove from favourites
                 fave.remove(function() {
-                    $("#addRemoveFave").removeClass("fave");
+                    that.styleUnfaved(button);
                 });
             }
         });
+    },
+
+    styleFaved: function(button) {
+        button.removeClass("unfavourite").addClass("favourite");
+    },
+
+    styleUnfaved: function(button) {
+        button.removeClass("favourite").addClass("unfavourite");
     }
 });

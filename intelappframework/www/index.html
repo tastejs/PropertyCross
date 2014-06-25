@@ -1,101 +1,94 @@
 <!DOCTYPE html>
-<!--HTML5 doctype-->
 <html>
+<head>
+    <title>PropertyCross</title>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" type="text/css" href="css/af.ui.css" />
+    <link rel="stylesheet" type="text/css" href="css/icons.css" />
+    <link rel="stylesheet" type="text/css" href="css/favicons.css" />
+    <link rel="stylesheet" type="text/css" href="css/styles.css" />
+    <link rel="stylesheet" type="text/css" href="css/win8.ui.css" />
 
-    <head>
-        <title>PropertyCross</title>
-        <meta http-equiv="Content-type" content="text/html; charset=utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <link rel="stylesheet" type="text/css" href="css/af.ui.css" />
-        <link rel="stylesheet" type="text/css" href="css/styles.css" />
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/appframework.ui.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/jq.mvc.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/jq.template.js"></script>
+    <script type="text/javascript" charset="utf-8" src="app.js"></script>
 
-        <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
-        <!-- @font-face icons don't work in WP -->
-        <script type="text/javascript">
-        if (cordova.platformId !== 'windowsphone') {
-          document.write('<link rel="stylesheet" type="text/css" href="css/icons.css" />');
+    <!-- boiler plate code that appears to be required... -->
+    <script type="text/javascript">
+        $.ui.animateHeaders = false;
+        $.ui.backButtonText = "Back";
+        $.ui.useOSThemes = true;
+
+        $.ui.loadDefaultHash = false;
+        if (!((window.DocumentTouch && document instanceof DocumentTouch) || 'ontouchstart' in window)) {
+            var script = document.createElement("script");
+            script.src = "plugins/af.desktopBrowsers.js";
+            var tag = $("head").append(script);
         }
-        </script>
-        <script type="text/javascript" charset="utf-8" src="js/appframework.ui.min.js"></script>
-        <script type="text/javascript" charset="utf-8" src="js/jq.mvc.min.js"></script>
-        <script type="text/javascript" charset="utf-8" src="js/jq.template.js"></script>
-        <script type="text/javascript" charset="utf-8" src="app.js"></script>
+    </script>
+</head>
+<body>
+    <div id="afui">
+        <div id="content">
 
-        <!-- boiler plate code that appears to be required... -->
-        <script type="text/javascript">
-        $.ui.animateHeaders=false;
-        $.ui.backButtonText="Back";
+            <!-- Home view -->
+            <header id="homeHeader">
+                <h1>PropertyCross</h1>
+                <a id="listFaves" href="/favourites/show" class="button button-right">Faves</a>
+            </header>
+            <div id="main" class="panel" selected="true" data-header="homeHeader">
+                <p>Use the form below to search for houses to buy. You can search by place-name, postcode, or click 'My location', to search in your current location!</p>
+                <form onsubmit="$.mvc.route('/search/string');return false;" >
+                    <input type="search" class="jq-ui-forms" id="stringSearch">
+                    <img id="loadingSpinner" src="img/spinner.gif" />
+                    <a href="/search/string" class="button">GO</a>
+                    <a href="/search/geo" class="button">Use My Location</a>
+                </form>
+                <p id="errorMessage"></p>
 
-        $.ui.loadDefaultHash=false;
-            if (!((window.DocumentTouch && document instanceof DocumentTouch) || 'ontouchstart' in window)) {
-                var script = document.createElement("script");
-                script.src = "plugins/af.desktopBrowsers.js";
-                var tag = $("head").append(script);
+                <h3 id="locListLabel">Please select a location below:</h3>
+                <ul class="list" id="locList"></ul>
 
-            }
-        </script>
-    </head>
-    <body>
-        <div id="afui">
-            <div id="content">
-
-                <!-- Home view -->
-                <header id="homeHeader">
-                    <h1>PropertyCross</h1>
-                    <a id="listFaves" href="/favourites/show" class="button" >Faves</a>
-                </header>
-                <div id="main" class="panel" selected="true"   data-header="homeHeader">
-                    <p>Use the form below to search for houses to buy. You can search by place-name, postcode, or click 'My location', to search in your current location!</p>
-                    <form action="javascript: $.mvc.route('/search/string');" >
-                        <input type="text" class="jq-ui-forms" id="stringSearch">
-                        <img id="loadingSpinner" src="img/spinner.gif" />
-                        <a href="/search/string" class="button">GO</a>
-                        <a href="/search/geo" class="button">Use My Location</a>
-                    </form>
-                    <p id="errorMessage"></p>
-
-                    <h3 id="locListLabel">Please select a location below:</h3>
-                    <ul class="list" id="locList"></ul>
-
-                    <h3 id="recentSearchLabel">Recent Searches</h3>
-                    <ul class="list" id="recentSearches"></ul>
-                </div>
-
-                <!-- Result view -->
-                <header id="resultListHeader">
-                    <a id="backButton" href="javascript: $.ui.goBack()" class="button">Back</a>
-                    <h1></h1>
-                </header>
-                <div id="results" class="panel" title="Back"  data-header="resultListHeader">
-                    <div id="resultList" ></div>
-                    <div id="loadMore">
-                        <a href="/search/loadMore">
-                            <h3>Load more...</h3>
-                            <span></span>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Property details view -->
-                <header id="propertyDetailsHeader">
-                    <a id="backButton" href="/results/backToResults" class="button">Back</a> <!-- The in built framework back button didn't seem to play nicely so manually adding it -->
-                    <h1>Information</h1>
-                    <a class="addRemoveFave button icon star" style="padding-left:13px"></a>
-                </header>
-                <div id="property" class="panel" title="Back"  data-header="propertyDetailsHeader">
-                    <a class="addRemoveFave button icon star" style="padding-left:13px"></a>
-                    <div id="propertyContent"> </div>
-                </div>
-
-
-
+                <h3 id="recentSearchLabel">Recent Searches</h3>
+                <ul class="list" id="recentSearches"></ul>
             </div>
-            <div id="navbar">
-                    <a href="#main" class="icon home">Home</a>
-                    <a href="#results" class="icon magnifier">Results</a>
-                    <a href="/favourites/show" class="icon star">Faves</a>
+
+            <!-- Result view -->
+            <header id="resultListHeader">
+                <a id="backButton" href="javascript: $.ui.goBack()" class="button">Back</a>
+                <h1></h1>
+            </header>
+            <div id="results" class="panel" title="Back" data-header="resultListHeader">
+                <div><p id="resultList"></p></div>
+                <div id="loadMore">
+                    <a href="/search/loadMore">
+                        <h3>Load more...</h3>
+                        <span></span>
+                    </a>
                 </div>
+            </div>
+
+            <!-- Property details view -->
+            <header id="propertyDetailsHeader">
+                <a id="backButton" href="/results/backToResults" class="button">Back</a> <!-- The in built framework back button didn't seem to play nicely so manually adding it -->
+                <h1>Property Details</h1>
+                <a id="propertyFaveButton" class="icon button button-right" style="padding-left:13px"></a>
+            </header>
+            <div id="property" class="panel" title="Back" data-header="propertyDetailsHeader">
+                <div id="propertyContent"> </div>
+            </div>
         </div>
-    </body>
+        <div id="navbar">
+            <a href="#main" class="icon home">Home</a>
+            <a href="/search/show" class="icon magnifier">Results</a>
+            <a href="/favourites/show" class="icon star">Faves</a>
+        </div>
+    </div>
+</body>
 </html>
