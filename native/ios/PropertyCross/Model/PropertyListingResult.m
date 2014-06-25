@@ -16,9 +16,9 @@
 {
     PropertyListingResult* result = [[PropertyListingResult alloc] init];
     
-    result.totalPages = [jsonData NSNumberForKey:@"total_pages"];
-    result.pageNumber = [jsonData NSNumberForKey:@"page"];
-    result.totalResults = [jsonData NSNumberForKey:@"total_results"];
+    result.totalPages = [[jsonData NSNumberForKey:@"total_pages"] unsignedIntegerValue];
+    result.pageNumber = [[jsonData NSNumberForKey:@"page"] unsignedIntegerValue];
+    result.totalResults = [[jsonData NSNumberForKey:@"total_results"] unsignedIntegerValue];
     
     NSArray* listings = (NSArray*)[jsonData objectForKey:@"listings"];
     NSMutableArray* properties = [[NSMutableArray alloc] init];

@@ -8,7 +8,6 @@
 
 #import "AppDelegate.h"
 
-#import "PropertyCrossViewController.h"
 #import "PersistentDataStore.h"
 
 @implementation AppDelegate
@@ -22,13 +21,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    
-    PropertyCrossViewController* propertyCrossController = [[PropertyCrossViewController alloc] init];
-    UINavigationController* navigationController = [[UINavigationController alloc] initWithRootViewController:propertyCrossController];
-        
-    self.window.rootViewController = navigationController;
-    [self.window makeKeyAndVisible];
     return YES;
 }
 

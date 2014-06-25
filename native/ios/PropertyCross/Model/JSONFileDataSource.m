@@ -11,7 +11,7 @@
 @implementation JSONFileDataSource
 
 - (void)findPropertiesForSearchString: (NSString *)searchString
-                           pageNumber: (NSNumber*) page
+                           pageNumber: (NSUInteger*) page
                               success: (JSONDataSourceSuccess)successResult
                                 error: (JSONDataSourceError) errorResult
 {
@@ -26,7 +26,7 @@
 
 - (void)findPropertiesForLatitude: (double)latitude
                         longitude: (double)longitude
-                       pageNumber: (NSNumber *)page
+                       pageNumber: (NSUInteger *)page
                           success: (JSONDataSourceSuccess)successResult
                             error: (JSONDataSourceError)errorResult
 {

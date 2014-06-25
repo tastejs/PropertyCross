@@ -20,12 +20,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell* cell = (UITableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"cell"];
-    if (!cell)
-    {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                      reuseIdentifier:@"cell"];
-    }
+    UITableViewCell* cell = (UITableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"LocationCell"];
     
     Location* location = (Location*)self.items[indexPath.row];
     cell.textLabel.text = location.displayName;
@@ -33,9 +28,9 @@
     return cell;
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+- (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    return @"Select a location below:";
+    return (UITableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"LocationHeaderCell"];
 }
 
 @end

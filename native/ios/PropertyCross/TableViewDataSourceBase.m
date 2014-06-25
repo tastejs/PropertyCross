@@ -35,4 +35,9 @@
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 30;
+}
+
 @end

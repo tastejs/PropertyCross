@@ -18,14 +18,14 @@ typedef void(^JSONDataSourceError)(NSString* result);
 
 // finds properties which match the given plain-text string
 -(void)findPropertiesForSearchString: (NSString*) searchString
-                          pageNumber: (NSNumber*) page
+                          pageNumber: (NSUInteger*) page
                              success: (JSONDataSourceSuccess) successResult
                                error: (JSONDataSourceError) errorResult;
 
 // find properties at the given geolocation
 -(void)findPropertiesForLatitude: (double) latitude
                        longitude: (double) longitude
-                      pageNumber: (NSNumber*) page
+                      pageNumber: (NSUInteger*) page
                          success: (JSONDataSourceSuccess) successResult
                            error: (JSONDataSourceError) errorResult;
 

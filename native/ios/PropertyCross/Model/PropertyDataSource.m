@@ -29,7 +29,7 @@
 
 - (void)findPropertiesForLatitude:(double)latitude
                         longitude:(double)longitude
-                       pageNumber:(NSNumber *)page
+                       pageNumber:(NSUInteger *)page
                           success:(PropertyDataSourceResultSuccess)successResult
                             error:(PropertyDataSourceResultError)errorResult
 {
@@ -45,7 +45,7 @@
 }
 
 - (void)findPropertiesForSearchString:(NSString *)searchString
-                           pageNumber:(NSNumber *)page
+                           pageNumber:(NSUInteger *)page
                               success:(PropertyDataSourceResultSuccess)successResult
                                 error:(PropertyDataSourceResultError)errorResult
 {

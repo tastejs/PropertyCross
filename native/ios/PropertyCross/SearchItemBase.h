@@ -17,11 +17,11 @@
 @property NSString* displayText;
 
 // teh number of matching properties
-@property NSNumber* matches;
+@property NSUInteger* matches;
 
 // executes the search that this item represents
 -(void) findPropertiesWithDataSource:(PropertyDataSource*) propertyDataSource
-                          pageNumber:(NSNumber *)page
+                          pageNumber:(NSUInteger *)page
                               result:(PropertyDataSourceResultSuccess) successResult
                                error:(PropertyDataSourceResultError)errorResult;
 

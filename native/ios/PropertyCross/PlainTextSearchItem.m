@@ -30,7 +30,7 @@
 }
 
 - (void) findPropertiesWithDataSource:(PropertyDataSource *)propertyDataSource
-                           pageNumber:(NSNumber *)page
+                           pageNumber:(NSUInteger *)page
                                result:(PropertyDataSourceResultSuccess)successResult
                                 error:(PropertyDataSourceResultError)errorResult
 {
@@ -49,7 +49,7 @@
     entity.displayString = self.displayText;
     entity.timestamp = [NSDate date];
     entity.isLocationSearch = [NSNumber numberWithBool:NO];
-    entity.matches = self.matches;
+    entity.matches = [NSNumber numberWithUnsignedInteger: self.matches];
 }
 
 @end

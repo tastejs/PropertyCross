@@ -14,11 +14,11 @@
 // the property database.
 @interface PropertyListingResult : PropertyDataSourceResult
 
-@property NSNumber* totalResults;
+@property NSUInteger totalResults;
 
-@property NSNumber* pageNumber;
+@property NSUInteger pageNumber;
 
-@property NSNumber* totalPages;
+@property NSUInteger totalPages;
 
 @property NSArray* properties;
 
