@@ -26,12 +26,6 @@
   "dependencies": {
     "requirejs": "~2.1.11",
     "almond": "~0.2.9",
-    "angular": "1.2.18",
-    "angular-animate": "~1.2.16",
-	"angular-resource": "~1.2.16",
-    "angular-touch": "~1.2.16",
-    "angular-ui-router": "~0.2.10",
-    "famous": "0.2.1",
-    "famous-angular": "~0.0.15"
+    "famous": "0.2.1"
   }
 }
