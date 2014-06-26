@@ -4,55 +4,18 @@
 
     angular.module('propertycross.controllers', ['propertycross.services'])
 
-    .controller('HomeCtrl', function($scope, $state, NestoriaApi, SearchResults, Properties) {
-        function successNestoriaResponse(response) {
-            var location = response.locations[0];
-
-            var searchResult = {
-                place_name: location.place_name,
-                retrieved: [],
-                title: location.long_title,
-                total: response.total_results
-            };
-            
-            var titleShortner = /^[^,]*,[^,]*/;
-
-            angular.forEach(response.listings, function(listing) {
-                var title = listing.title;
-                if (titleShortner.test(title)) {
-                    title = titleShortner.exec(title)[0];
+    .controller('HomeCtrl', function($scope, $state, PropertySearch, SearchResults, Properties, UiUtils) {
+        
+        function propertySearchWrapper(propertySearchAction) {
+            propertySearchAction().then(function(response) {
+                if (response.place_name !== undefined) {
+                    $state.go('listing', { location: response.place_name });
+                } else {
+                    console.log("Ambiguous result");
                 }
-
-                var property = {
-                    bathrooms : listing.bathroom_number,
-                    bedrooms : listing.bedroom_number,
-                    guid : listing.guid,
-                    img: {
-                        size: [listing.img_width, listing.img_height],
-                        url : listing.img_url
-                    },
-                    price : '£' + listing.price_formatted.replace(/ GBP$/, ''),
-                    summary : listing.summary,
-                    thumb : {
-                        size: [listing.thumb_width, listing.thumb_height],
-                        url : listing.thumb_url
-                    },
-                    title : title
-                };
-
-                Properties.store(property);
-                this.retrieved.push(property.guid);
-                
-            }, searchResult);
-
-            SearchResults.store(searchResult);
-//            UiUtils.hideLoadingIndicator();
-            $state.go('listing', { location: searchResult.place_name });
-        }
-
-        function rejectNestoriaResponse(response) {
-            console.log("Search results [error]");
-            console.log(angular.toJson(response));
+            },function (response) {
+                console.log("Error occurred");
+            });
         }
 
         $scope.ui = {
@@ -64,50 +27,56 @@
         $scope.search = {
             query: '',
             basicSearch: function() {
-//                UiUtils.displayLoadingIndicator();
+                UiUtils.displayLoadingIndicator();
                 var query = $scope.search.query;
-                var page = 1;
-                NestoriaApi.textBasedSearch(query, page).then(
-                    successNestoriaResponse,
-                    rejectNestoriaResponse);
+
+                propertySearchWrapper(function() {
+                    return PropertySearch.queryByPlaceName(query, 1);
+                });
             },
             geoLocatedSearch: function() {
-//                UiUtils.displayLoadingIndicator();
-                var page = 1;
+                UiUtils.displayLoadingIndicator();
                 var latitude = 51.454513;
                 var longitude = -2.587910;
-                NestoriaApi.coordinateBasedSearch(latitude, longitude, page).then(
-                    successNestoriaResponse,
-                    rejectNestoriaResponse);
+
+                propertySearchWrapper(function() {
+                    return PropertySearch.queryByCoordinates(latitude, longitude, 1);
+                });
             }
         };
     })
 
-    .controller('ListingCtrl', function($scope, $state, $stateParams, $famous, Properties, SearchResults) {
+    .controller('ListingCtrl', function($scope, $state, $stateParams, $famous, PropertySearch, Properties, SearchResults, UiUtils) {
 
-        var searchResults = SearchResults.load($stateParams.location);
         var count = 0;
-        var total = searchResults.total;
+        var results = undefined;
 
-        function updateListing() {
-            angular.forEach(searchResults.retrieved, function(entity) {
+        function updateListing(response) {
+            results = response;
+
+            angular.forEach(response.retrieved, function(entity) {
                 var property = Properties.load(entity);
                 if(property !== undefined) {
                     this.push(property);
                 }
             }, $scope.listing.items);
 
-            count += searchResults.retrieved.length;
-            $scope.listing.heading = count + ' of ' + total + ' matches';
+            count += response.retrieved.length;
+            $scope.listing.heading = count + ' of ' + response.total + ' matches';
+            UiUtils.hideLoadingIndicator();
+        }
+        
+        function handleError(response) {
+            // Should never happen
+            console.log("Unable to search for '" + $stateParams.location + "'");
+            UiUtils.hideLoadingIndicator();
         }
 
-//        $scope.loadMore = function() {
-//            UiUtils.displayLoadingIndicator();
-//            searchResults.fetchMore().then(function() {
-//                updateListing();
-//                UiUtils.hideLoadingIndicator();
-//            });
-//        };
+        UiUtils.displayLoadingIndicator();
+
+        SearchResults.load($stateParams.location).then(updateListing, function() {
+            PropertySearch.queryByPlaceName($stateParams.location, 1).then(updateListing, handleError);
+        });
 
         var EventHandler = $famous['famous/core/EventHandler'];
 
@@ -115,6 +84,11 @@
             eventHandler: new EventHandler(),
             navigate: function(item) {
                 $state.go('details', { id: item.id });
+            },
+            loadMore: function() {
+                if (results !== undefined) {
+                    PropertySearch.getNextPage(results).then(updateListing, handleError);
+                }
             }
         };
 
@@ -122,8 +96,6 @@
             heading: '',
             items: []
         };
-
-        updateListing();
     })
 
     .controller('DetailsCtrl', function($scope, $stateParams, Favourites, Properties) {
