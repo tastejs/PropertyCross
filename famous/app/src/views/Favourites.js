@@ -3,26 +3,24 @@ define(function(require, exports, module) {
     'use strict';
     var RenderNode = require('famous/core/RenderNode');
     var Surface    = require('famous/core/Surface');
-    var View       = require('famous/core/View');
 
     var FlexibleLayout = require('famous/views/FlexibleLayout');
     var ScrollView     = require('famous/views/ScrollView');
 
-    var PropertyView = require('views/PropertyView');
+    var PropertyView = require('views/Property');
+    var View         = require('prototypes/View');
 
-    function ResultsPageView() {
+    function Favourites() {
         View.apply(this, arguments);
 
         _createLayout.call(this);
         _createList.call(this);
     }
 
-    ResultsPageView.prototype = Object.create(View.prototype);
-    ResultsPageView.prototype.constructor = ResultsPageView;
+    Favourites.prototype = Object.create(View.prototype);
+    Favourites.prototype.constructor = Favourites;
 
-    ResultsPageView.DEFAULT_OPTIONS = {
-        size: [undefined, 40]
-    };
+    Favourites.DEFAULT_OPTIONS = {};
 
     function _createLayout() {
         var layout = new FlexibleLayout({
@@ -60,5 +58,5 @@ define(function(require, exports, module) {
         this.surfaces.push(renderNode);
     }
 
-    module.exports = ResultsPageView;
+    module.exports = Favourites;
 });

@@ -2,30 +2,45 @@
 define(function(require, exports, module) {
     'use strict';
     var Engine  = require('famous/core/Engine');
-    var AppView = require('views/AppView');
     var Timer   = require('famous/utilities/Timer');
+
+    var ApplicationStateViewModel = require('viewmodels/ApplicationState');
+    var ApplicationStateView      = require('views/ApplicationState');
 
     var mainContext = Engine.createContext();
 
-    var appView = new AppView({
-        initialPage: 'search'
+    var model = new ApplicationStateViewModel();
+
+    model.defineState({
+        name: 'search',
+        model: require('viewmodels/Search'),
+        view: require('views/Search')
+    }).defineState({
+        name: 'listing',
+        model: require('viewmodels/Listing'),
+        view: require('views/Listing')
+    }).defineState({
+        name: 'results',
+        model: require('viewmodels/Results'),
+        view: require('views/Results')
+    }).defineState({
+        name: 'favourites',
+        model: require('viewmodels/Favourites'),
+        view: require('views/Favourites')
     });
 
-    mainContext.add(appView);
-    
-    // _demoPages(1);
+    var view = new ApplicationStateView();
+    view.bindToModel(model);
 
-    function _demoPages(duration) {
-        var index = 0;
-        var pages = [
-            'favourites',
-            'listing',
-            'results',
-            'search'
-        ];
-        Timer.setInterval(function() {
-            index = (index + 1) % pages.length;
-            appView.navigateTo(pages[index]);
-        }, duration * 1000);
-    }
+    mainContext.add(view);
+
+    model.navigateToState('search');
+
+    /*
+    view.attachHeader(new HeaderView({
+        headerSize: 40,
+        backgroundColor: '#ff5722',
+        color: 'white'
+    }));
+    */
 });

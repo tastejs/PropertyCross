@@ -3,13 +3,14 @@ define(function(require, exports, module) {
     'use strict';
     var RenderNode = require('famous/core/RenderNode');
     var Surface    = require('famous/core/Surface');
-    var View       = require('famous/core/View');
 
     var StateModifier  = require('famous/modifiers/StateModifier');
     var ImageSurface   = require('famous/surfaces/ImageSurface');
     var FlexibleLayout = require('famous/views/FlexibleLayout');
 
-    function ListingPageView() {
+    var View         = require('prototypes/View');
+
+    function Listing() {
         View.apply(this, arguments);
 
         _createLayout.call(this);
@@ -20,10 +21,10 @@ define(function(require, exports, module) {
         _createDescriptionLabel.call(this);
     }
 
-    ListingPageView.prototype = Object.create(View.prototype);
-    ListingPageView.prototype.constructor = ListingPageView;
+    Listing.prototype = Object.create(View.prototype);
+    Listing.prototype.constructor = Listing;
 
-    ListingPageView.DEFAULT_OPTIONS = {
+    Listing.DEFAULT_OPTIONS = {
         price: '£140,000',
         title: 'Brambling Mews, Morley',
         imageUrl: 'http://3.l.uk.nestoria.nestimg.com/lis/4/a/1/07189369db21930fc53e4f176b91f1056deaa.1.jpg',
@@ -115,5 +116,5 @@ define(function(require, exports, module) {
         this.surfaces.push(surface);
     }
 
-    module.exports = ListingPageView;
+    module.exports = Listing;
 });
