@@ -1,0 +1,9 @@
+{
+  "name": "famous",
+  "version": "0.0.0",
+  "dependencies": {
+      "requirejs": "~2.1.11",
+      "jasmine": "~2.0.0"
+  },
+  "devDependencies": {}
+}

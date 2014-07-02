@@ -11,22 +11,22 @@ define(function(require, exports, module) {
 
     var model = new ApplicationStateViewModel();
 
-    model.defineState({
-        name: 'search',
-        model: require('viewmodels/Search'),
-        view: require('views/Search')
-    }).defineState({
-        name: 'listing',
-        model: require('viewmodels/Listing'),
-        view: require('views/Listing')
-    }).defineState({
-        name: 'results',
-        model: require('viewmodels/Results'),
-        view: require('views/Results')
-    }).defineState({
-        name: 'favourites',
-        model: require('viewmodels/Favourites'),
-        view: require('views/Favourites')
+    model.defineState('search', {
+        url:       '/Search',
+        view:      require('views/Search'),
+        viewmodel: require('viewmodels/Search')
+    }).defineState('listing', {
+        url:       '/Listing/:guid',
+        view:      require('views/Listing'),
+        viewmodel: require('viewmodels/Listing')
+    }).defineState('results', {
+        url:       '/Results/:query',
+        view:      require('views/Results'),
+        viewmodel: require('viewmodels/Results')
+    }).defineState('favourites', {
+        url:       '/Favourites',
+        view:      require('views/Favourites'),
+        viewmodel: require('viewmodels/Favourites')
     });
 
     var view = new ApplicationStateView();

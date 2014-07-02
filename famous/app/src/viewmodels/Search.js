@@ -18,12 +18,22 @@ define(function(require, exports, module) {
 
     Search.prototype.performTextSearch = function(text) {
         console.log('Perform Text Search');
-        this._applicationState.navigateToState('results', {});
+
+        var placeName = 'Bristol';
+
+        this._applicationState.navigateToState('results', {
+            query: placeName
+        });
     }
 
     Search.prototype.performGeoSearch = function() {
         console.log('Perform Geo Search');
-        this._applicationState.navigateToState('listing', {});
+
+        var location = 'Loc_2.232_-34.33';
+        
+        this._applicationState.navigateToState('results', {
+            query: location
+        });
     }
 
     module.exports = Search;
