@@ -7,9 +7,16 @@ define(function(require, exports, module) {
     var ApplicationStateViewModel = require('viewmodels/ApplicationState');
     var ApplicationStateView      = require('views/ApplicationState');
 
+    var UserNotifierViewModel = require('viewmodels/UserNotifier');
+    var UserNotifierView      = require('views/UserNotifier');
+
     var mainContext = Engine.createContext();
 
-    var model = new ApplicationStateViewModel();
+    var notifier = new UserNotifierViewModel();
+    var notifierView = new UserNotifierView();
+    notifierView.bindToModel(notifier);
+
+    var model = new ApplicationStateViewModel(notifier);
 
     model.defineState('search', {
         url:       '/Search',
@@ -29,10 +36,12 @@ define(function(require, exports, module) {
         viewmodel: require('viewmodels/Favourites')
     });
 
-    var view = new ApplicationStateView();
-    view.bindToModel(model);
+    var appView = new ApplicationStateView();
+    appView.bindToModel(model);
 
-    mainContext.add(view);
+    mainContext.add(appView);
+    mainContext.add(notifierView);
+
 
     model.navigateToState('search');
 

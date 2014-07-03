@@ -10,8 +10,10 @@ define(function(require, exports, module) {
      * @description
      */
 
-    function ApplicationState() {
+    function ApplicationState(errorNotifier) {
         ViewModel.apply(this, arguments);
+
+        this._errorNotifier = errorNotifier;
 
         this._previousViews = {};
         this._stateDefinitions = {};
@@ -26,6 +28,10 @@ define(function(require, exports, module) {
     ApplicationState.prototype.defineState = function(name, options) {
         this._stateDefinitions[name] = options;
         return this;
+    };
+
+    ApplicationState.prototype.displayUserNotification = function(title, details) {
+        return this._errorNotifier.displayUserNotification(title, details);
     };
 
     ApplicationState.prototype.currentView = function() {
