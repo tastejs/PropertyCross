@@ -13,7 +13,8 @@
       'models':     'app/src/models',
       'prototypes': 'app/src/prototypes',
       'viewmodels':    'app/src/viewmodels',
-      'views':      'app/src/views'
+      'views':      'app/src/views',
+      'utils':      'test/utils'
     },
     shim: {
       'jasmine': {
@@ -32,6 +33,7 @@
 
   // Define all of your specs here. These are RequireJS modules.
   var specs = [
+    'test/spec/ApplicationState',
     'test/spec/BrowserHistory'
   ];
 

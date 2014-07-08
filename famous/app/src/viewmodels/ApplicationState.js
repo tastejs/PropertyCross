@@ -1,8 +1,8 @@
 /*globals define*/
 define(function(require, exports, module) {
     'use strict';
-    var ViewModel = require('prototypes/ViewModel');
-    var BrowserHistory   = require('models/BrowserHistory');
+    var BrowserHistory = require('models/BrowserHistory');
+    var ViewModel      = require('prototypes/ViewModel');
 
     /*
      * @name ApplicationState
@@ -10,16 +10,17 @@ define(function(require, exports, module) {
      * @description
      */
 
-    function ApplicationState(errorNotifier) {
+    function ApplicationState(userNotifier) {
         ViewModel.apply(this, arguments);
 
-        this._errorNotifier = errorNotifier;
+        this._userNotifier = userNotifier;
 
         this._previousViews = {};
         this._stateDefinitions = {};
         this._view = null;
 
-        BrowserHistory.on('pop-state', _handleStatePopEvent.bind(this));
+        BrowserHistory.on('pop-state', _handlePopState.bind(this));
+        BrowserHistory.on('push-state', _handlePushState.bind(this));
     }
 
     ApplicationState.prototype = Object.create(ViewModel.prototype);
@@ -31,32 +32,39 @@ define(function(require, exports, module) {
     };
 
     ApplicationState.prototype.displayUserNotification = function(title, details) {
-        return this._errorNotifier.displayUserNotification(title, details);
+        if(this._userNotifier !== undefined) {
+            return this._userNotifier.displayUserNotification(title, details);
+        }
+        return false;
     };
 
     ApplicationState.prototype.currentView = function() {
         return this._view;
-    }
+    };
 
     ApplicationState.prototype.goBack = function() {
         BrowserHistory.back();
-        return true;
-    }
+    };
 
     ApplicationState.prototype.navigateToState = function(name, options) {
         var stateDefinition = this._stateDefinitions[name];
         if(stateDefinition === undefined) return false;
 
-        var url = '#' + stateDefinition.url;
+        var PageViewModel = stateDefinition.viewmodel;
+        var View = stateDefinition.view;
 
+        var view = new View();
+        view.bindToModel(new PageViewModel(this, options));
+
+        var url = '#' + stateDefinition.url;
         BrowserHistory.pushState(options, name, url);
 
-        _createAndShowState.call(this, stateDefinition, options);
+        this.setCurrentView(view);
 
         this._previousViews[url] = this._view;
 
         return true;
-    }
+    };
 
     ApplicationState.prototype.setCurrentView = function(view, goBack) {
         this._view = view;
@@ -65,23 +73,20 @@ define(function(require, exports, module) {
             view: view,
             goBack: goBack
         });
+    };
+
+    function _handlePopState(data) {
+        if(data !== null) {
+            var view = this._previousViews[data.url];
+
+            this.setCurrentView(view, true);
+        }
     }
 
-    function _createAndShowState(stateDefinition, options) {
-        var PageViewModel = stateDefinition.viewmodel;
-        var View = stateDefinition.view;
+    function _handlePushState(data) {
+        var view = this._previousViews[data.url];
 
-        var view = new View();
-        view.bindToModel(new PageViewModel(this, options));
-
-        this.setCurrentView(view);
-    }
-
-    function _handleStatePopEvent(data) {
-        var url = data.location.hash;
-        var view = this._previousViews[url];
-
-        this.setCurrentView(view, true);
+        this.setCurrentView(view, false);
     }
 
     module.exports = ApplicationState;
