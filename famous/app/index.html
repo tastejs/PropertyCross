@@ -17,7 +17,15 @@
         <!-- /process -->
         
         <!-- process:remove:dist -->
+        <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="lib/requirejs/require.js" data-main="src/requireConfig"></script>
+        <script type="text/javascript">
+window.onerror = function(msg, url, line) {  
+  //save error and send to server for example.
+  alert ("error: " + msg + "\n" + "file: " + url + "\n" + "line: " + line);
+  return true;
+};
+        </script>
         <!-- /process -->
     </head>
     <body>

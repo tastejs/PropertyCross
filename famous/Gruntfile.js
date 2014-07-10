@@ -1,22 +1,16 @@
-/*global module:false*/
-
-/*Generated initially from grunt-init, heavily inspired by yo webapp*/
-
 module.exports = function(grunt) {
   'use strict';
 
-  // Time how long tasks take. Can help when optimizing build times
-  require('time-grunt')(grunt);
+  var config = {
+    pkg: grunt.file.readJSON("package.json")
+  };
 
-  // Load grunt config
-  require('load-grunt-config')(grunt, {
-    init: true,
-    data: {
-      config: {
-        // Configurable paths
-        app: 'app',
-        dist: 'dist'
-      }
-    }
+  grunt.loadNpmTasks("grunt-exec");
+
+  require("../phonegap/common-with-winphone").build(grunt, config, function(config) {
+    config.compress.main.files.push(
+      { expand: true, src: ["**/*"], cwd: "app", dest: "www" }
+    );
   });
+
 };
