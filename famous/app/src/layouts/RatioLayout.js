@@ -7,26 +7,28 @@ define(function(require, exports, module) {
     var EventHandler = require('famous/core/EventHandler');
     var Transitionable = require('famous/transitions/Transitionable');
 
-    function MarginLayout(options) {
-        this.options = Object.create(MarginLayout.DEFAULT_OPTIONS);
+    function RatioLayout(options) {
+        this.options = Object.create(RatioLayout.DEFAULT_OPTIONS);
         this.optionsManager = new OptionsManager(this.options);
         if (options) this.setOptions(options);
 
         this.id = Entity.register(this);
 
-        this._margins = new Transitionable(this.options.margins);
+        this._ratio = new Transitionable(this.options.ratio);
         this._nodes = [];
+        this._size = undefined;
 
         this._eventOutput = new EventHandler();
         EventHandler.setOutputHandler(this, this._eventOutput);
     }
 
-    MarginLayout.DEFAULT_OPTIONS = {
-        margins : [0, 0, 0, 0],
+    RatioLayout.DEFAULT_OPTIONS = {
+        direction: 0,
+        ratio: [1, 1],
         transition: false
     };
-    
-    MarginLayout.prototype.add = function add(child) {
+
+    RatioLayout.prototype.add = function add(child) {
         var childNode = (child instanceof RenderNode) ? child : new RenderNode(child);
         this._nodes.push(childNode);
         return childNode;
@@ -39,34 +41,35 @@ define(function(require, exports, module) {
      * @method render
      * @return {Object} Render spec for this component
      */
-    MarginLayout.prototype.render = function render() {
+    RatioLayout.prototype.render = function render() {
         return this.id;
     };
 
     /**
-     * Patches the MarginLayouts instance's options with the passed-in ones.
+     * Patches the RatioLayouts instance's options with the passed-in ones.
      *
      * @method setOptions
-     * @param {Options} options An object of configurable options for the MarginLayout instance.
+     * @param {Options} options An object of configurable options for the RatioLayout instance.
      */
-    MarginLayout.prototype.setOptions = function setOptions(options) {
+    RatioLayout.prototype.setOptions = function setOptions(options) {
         this.optionsManager.setOptions(options);
     };
 
     /**
-     * Sets the associated margin values for sizing the renderables.
+     * Sets the associated ratio values for sizing the renderables.
      *
      * @method setMargins
      * @param {Array} margins Array of margins corresponding to the percentage sizes each renderable should be
      */
-    MarginLayout.prototype.setMargins = function setMargins(margins, transition, callback) {
+    RatioLayout.prototype.setRatio = function setRatio(ratios, transition, callback) {
         if (transition === undefined) transition = this.options.transition;
-        var currMargins = this._margins;
-        if (currMargins.get().length === 0) transition = undefined;
-        if (currMargins.isActive()) currMargins.halt();
-        currMargins.set(margins, transition, callback);
+        var currRatios = this._ratio;
+        if (currRatios.get().length === 0) transition = undefined;
+        if (currRatios.isActive()) currRatios.halt();
+        currRatios.set(ratios, transition, callback);
     };
 
+    RatioLayout.prototype.getSize = function getSize() { return this._size; }
     /**
      * Apply changes from this component to the corresponding document element.
      * This includes changes to classes, styles, size, content, opacity, origin,
@@ -76,22 +79,19 @@ define(function(require, exports, module) {
      * @method commit
      * @param {Context} context commit context
      */
-    MarginLayout.prototype.commit = function commit(context) {
+    RatioLayout.prototype.commit = function commit(context) {
         var parentSize = context.size;
         var parentTransform = context.transform;
         var parentOrigin = context.origin;
 
-        var margins = this._margins.get();
-        var size;
-        var transform;
+        var ratio = this._ratio.get();
+        var scaleFactor = parentSize[this.options.direction] / ratio[this.options.direction];
+        this._size = [ ratio[0] * scaleFactor , ratio[1] * scaleFactor ];
 
         var result = [];
         for (var i = 0; i < this._nodes.length; i++) {
-            transform = Transform.translate(margins[0], margins[1]);
-            size = [parentSize[0] - margins[0] - margins[2], parentSize[1] - margins[1] - margins[3]];
             result.push({
-                transform : transform,
-                size: size,
+                size: this._size,
                 target : this._nodes[i].render()
             });
         }
@@ -101,10 +101,10 @@ define(function(require, exports, module) {
 
         return {
             transform: parentTransform,
-            size: parentSize,
+            size: this._size,
             target: result
         };
     };
 
-    module.exports = MarginLayout;
+    module.exports = RatioLayout;
 });

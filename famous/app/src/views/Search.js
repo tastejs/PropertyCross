@@ -5,7 +5,7 @@ define(function(require, exports, module) {
     var RenderNode       = require('famous/core/RenderNode');
     var StateModifier    = require('famous/modifiers/StateModifier');
     var InputSurface     = require('famous/surfaces/InputSurface');
-    var FlexibleLayout   = require('famous/views/FlexibleLayout');
+    var SequentialLayout   = require('famous/views/SequentialLayout');
     var GridLayout       = require('famous/views/GridLayout');
     var RenderController = require('famous/views/RenderController');
 
@@ -32,9 +32,8 @@ define(function(require, exports, module) {
     };
 
     function _createLayout() {
-        var layout = new FlexibleLayout({
-            direction: 1,
-            ratios: [true, true, true, 1]
+        var layout = new SequentialLayout({
+            direction: 1
         });
 
         this.surfaces = [];
@@ -91,7 +90,8 @@ define(function(require, exports, module) {
             }
         });
         this.searchButton.on('click', function() {
-            this._model.performTextSearch('Bristol');
+            var searchText = this.searchInput.getValue();
+            this._model.performTextSearch(searchText);
         }.bind(this));
 
         buttons.push(this.searchButton);
@@ -105,7 +105,10 @@ define(function(require, exports, module) {
             }
         });
         this.geoSearchButton.on('click', function() {
-            this._model.performGeoSearch();
+            var latitude = 51.454513;
+            var longitude = -2.587910;
+
+            this._model.performGeoSearch(latitude, longitude);
         }.bind(this));
 
         buttons.push(this.geoSearchButton);

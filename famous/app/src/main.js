@@ -24,8 +24,8 @@ define(function(require, exports, module) {
         viewmodel: require('viewmodels/Search')
     }).defineState('listing', {
         url:       '/Listing/:guid',
-        view:      require('views/Listing'),
-        viewmodel: require('viewmodels/Listing')
+        view:      require('views/ListingDetails'),
+        viewmodel: require('viewmodels/ListingDetails')
     }).defineState('results', {
         url:       '/Results/:query',
         view:      require('views/Results'),
@@ -44,12 +44,4 @@ define(function(require, exports, module) {
 
 
     model.navigateToState('search');
-
-    /*
-    view.attachHeader(new HeaderView({
-        headerSize: 40,
-        backgroundColor: '#ff5722',
-        color: 'white'
-    }));
-    */
 });

@@ -63,7 +63,7 @@ define(function(require, exports, module) {
 
     function _setupBindings() {
         this._modelEvents.on('state-navigation', _stateNavigation.bind(this));
-        this._modelEvents.on('model-bound', _modelBound.bind(this));
+        this._modelEvents.on('bound-model', _modelBound.bind(this));
     }
 
     function _modelBound(model) {

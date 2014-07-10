@@ -7,7 +7,7 @@ define(function(require, exports, module) {
     var FlexibleLayout = require('famous/views/FlexibleLayout');
     var ScrollView     = require('famous/views/ScrollView');
 
-    var PropertyView = require('views/Property');
+    var ListingEntry = require('views/ListingEntry');
     var View         = require('prototypes/View');
 
     function Favourites() {
@@ -44,13 +44,13 @@ define(function(require, exports, module) {
         scrollview.sequenceFrom(items);
 
         for (var i = 0; i < 100; i++) {
-            var property = new PropertyView({
+            var listing = new ListingEntry({
                 size: [undefined, 80]
             });
 
-            property.pipe(scrollview);
+            listing.pipe(scrollview);
 
-            items.push(property);
+            items.push(listing);
         }
 
         renderNode.add(scrollview);

@@ -1,20 +1,18 @@
 
 define(function(require, exports, module) {
     'use strict';
-    var RenderNode = require('famous/core/RenderNode');
     var Surface    = require('famous/core/Surface');
 
-    var FlexibleLayout = require('famous/views/FlexibleLayout');
-    var ScrollView     = require('famous/views/ScrollView');
+    var ScrollContainer = require('famous/views/ScrollContainer');
 
-    var PropertyView = require('views/Property');
+    var ListingEntry = require('views/ListingEntry');
     var View         = require('prototypes/View');
 
     function Results() {
         View.apply(this, arguments);
 
         _createLayout.call(this);
-        _createList.call(this);
+        _setupBindings.call(this);
     }
 
     Results.prototype = Object.create(View.prototype);
@@ -25,39 +23,45 @@ define(function(require, exports, module) {
     };
 
     function _createLayout() {
-        var layout = new FlexibleLayout({
-            direction: 1,
-            ratios: [1]
+        this._scrollContainer = new ScrollContainer({
+            scrollview: {direction: 1}
         });
 
-        this.surfaces = [];
+        this._items = [];
 
-        layout.sequenceFrom(this.surfaces);
+        this._scrollContainer.sequenceFrom(this._items);
 
-        this.add(layout);
+        this.add(this._scrollContainer);
     }
 
-    function _createList() {
-        var renderNode = new RenderNode();
-        var scrollview = new ScrollView();
+    function _setupBindings() {
+        this._modelEvents.on('update-listing', _updateListing.bind(this));
+        this._modelEvents.on('bound-model', _modelBound.bind(this));
+    }
 
-        var items = [];
+    function _modelBound(model) {
+        _updateListing.call(this, model.listings());
+    }
 
-        scrollview.sequenceFrom(items);
+    function _updateListing(listings) {
+        var self = this;
 
-        for (var i = 0; i < 100; i++) {
-            var property = new PropertyView({
-                size: [undefined, 80]
+        listings.forEach(function(item) {
+            var listing = new ListingEntry({
+                imageUrl: item.thumb.url,
+                price: item.price,
+                size: [undefined, 80],
+                title: item.title
             });
 
-            property.pipe(scrollview);
+            listing.pipe(self._scrollContainer);
 
-            items.push(property);
-        }
+            listing.on('click', function(event) {
+                self._model.displayListing(item.guid);
+            });
 
-        renderNode.add(scrollview);
-
-        this.surfaces.push(renderNode);
+            self._items.push(listing);
+        });
     }
 
     module.exports = Results;

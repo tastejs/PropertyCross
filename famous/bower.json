@@ -26,6 +26,7 @@
   "dependencies": {
     "requirejs": "~2.1.11",
     "almond": "~0.2.9",
-    "famous": "0.2.1"
+    "famous": "0.2.1",
+    "zeptojs": "1.1.4"
   }
 }

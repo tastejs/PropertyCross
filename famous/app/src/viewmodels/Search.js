@@ -2,6 +2,8 @@
 define(function(require, exports, module) {
     'use strict';
     var PageViewModel = require('prototypes/PageViewModel');
+
+    var PropertySearch = require('models/PropertySearch');
     
     /*
      * @name Search
@@ -17,23 +19,29 @@ define(function(require, exports, module) {
     Search.prototype.constructor = Search;
 
     Search.prototype.performTextSearch = function(text) {
-        console.log('Perform Text Search');
+        PropertySearch.textBasedSearch(text).then(
+            _onSuccessfulPropertySearch.bind(this),
+            _onFailedPropertySearch.bind(this)).done();
+    };
 
-        var placeName = 'Bristol';
+    Search.prototype.performGeoSearch = function(latitude, longitude) {
+        PropertySearch.coordinateBasedSearch(latitude, longitude).then(
+            _onSuccessfulPropertySearch.bind(this),
+            _onFailedPropertySearch.bind(this)).done();
+    };
 
-        this._applicationState.navigateToState('results', {
-            query: placeName
-        });
+    function _onSuccessfulPropertySearch(searchResult) {
+        if(searchResult.state === "unambiguous") {
+            this._applicationState.navigateToState('results', {
+                query: searchResult.location.place_name
+            });
+        } else if(searchResult.state === "ambiguous") {
+            console.log("ambiguous result");
+        }
     }
 
-    Search.prototype.performGeoSearch = function() {
-        console.log('Perform Geo Search');
-
-        var location = 'Loc_2.232_-34.33';
-        
-        this._applicationState.navigateToState('results', {
-            query: location
-        });
+    function _onFailedPropertySearch(searchResult) {
+        console.log('fail search', searchResult);
     }
 
     module.exports = Search;

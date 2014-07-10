@@ -3,6 +3,7 @@ define(function(require, exports, module) {
     'use strict';
     var EventHandler = require('famous/core/EventHandler');
     var FamousView = require('famous/core/View');
+    var Entity = require('famous/core/Entity');
 
     /*
      * @name View
@@ -12,6 +13,7 @@ define(function(require, exports, module) {
 
     function View() {
         FamousView.apply(this, arguments);
+        this.id = Entity.register(this);
 
         this._modelEvents = new EventHandler();
 
@@ -27,8 +29,28 @@ define(function(require, exports, module) {
     View.prototype.bindToModel = function(model) {
         this._model = model;
         this._modelEvents.subscribe(model);
-        this._modelEvents.emit('model-bound', model);
+        this._modelEvents.emit('bound-model', model);
     }
+
+    View.prototype.render = function render() {
+        return this.id;
+    };
+
+    View.prototype.commit = function commit(context) {
+        var parentSize = context.size;
+        var parentTransform = context.transform;
+        var parentOrigin = context.origin;
+
+        var result = [{
+            target: this._node.render()
+        }];
+
+        return {
+            transform: parentTransform,
+            size: parentSize,
+            target: result
+        };
+    };
 
     module.exports = View;
 });
