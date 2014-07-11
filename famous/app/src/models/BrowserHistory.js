@@ -5,11 +5,17 @@ define(function(require, exports, module) {
 
     var _event = new EventHandler();
 
-    var depth = -1;
+    var depth = 0;
 
     var BrowserHistory = {
         back: function() {
             window.history.back();
+        },
+        canGoBack: function() {
+            return depth > 0;
+        },
+        noState: function() {
+            return !history.state;
         },
         pushState: function(data, title, url) {
             depth += 1;
@@ -21,6 +27,19 @@ define(function(require, exports, module) {
             };
 
             window.history.pushState(state, title, url);
+        },
+        replaceState: function(data, title, url) {
+            var state = {
+                data: data,
+                depth: depth,
+                url: url
+            };
+
+            window.history.replaceState(state, title, url);
+        },
+        reset: function() {
+            depth = 0;
+            window.history.replaceState(null, '');
         }
     };
 
@@ -38,7 +57,7 @@ define(function(require, exports, module) {
                 state: state.data
             });
         } else {
-            depth = -1;
+            depth = 0;
 
             _event.emit('pop-state', null);
         }

@@ -1,8 +1,11 @@
 /*globals define*/
 define(function(require, exports, module) {
     'use strict';
-    var BrowserHistory = require('models/BrowserHistory');
-    var ViewModel      = require('prototypes/ViewModel');
+    var BrowserHistory  = require('models/BrowserHistory');
+    var HeaderView      = require('views/ApplicationHeader');
+    var HeaderViewModel = require('viewmodels/ApplicationHeader');
+    var ViewModel       = require('prototypes/ViewModel');
+
 
     /*
      * @name ApplicationState
@@ -19,6 +22,14 @@ define(function(require, exports, module) {
         this._stateDefinitions = {};
         this._view = null;
 
+        this._headerView = new HeaderView({
+            headerSize: 40,
+            backgroundColor: '#ff5722',
+            color: 'white'
+        });
+        this._headerView.bindToModel(new HeaderViewModel(this));
+
+        BrowserHistory.reset();
         BrowserHistory.on('pop-state', _handlePopState.bind(this));
         BrowserHistory.on('push-state', _handlePushState.bind(this));
     }
@@ -57,23 +68,31 @@ define(function(require, exports, module) {
         view.bindToModel(new PageViewModel(this, options));
 
         var url = '#' + stateDefinition.url;
-        BrowserHistory.pushState(options, name, url);
+        if(BrowserHistory.noState()) {
+            BrowserHistory.replaceState(options, name, url);
+        } else {
+            BrowserHistory.pushState(options, name, url);
+        }
 
-        this.setCurrentView(view);
+        this.setCurrentView(view, false);
 
         this._previousViews[url] = this._view;
 
         return true;
     };
 
-    ApplicationState.prototype.setCurrentView = function(view, goBack) {
+    ApplicationState.prototype.setCurrentView = function(view, goingBack) {
         this._view = view;
 
         this._eventOutput.emit('state-navigation', {
+            goingBack: goingBack,
             view: view,
-            goBack: goBack
         });
     };
+
+    ApplicationState.prototype.updateHeading = function() {
+        this._eventOutput.emit('update-heading', this._view);
+    }
 
     function _handlePopState(data) {
         if(data !== null) {

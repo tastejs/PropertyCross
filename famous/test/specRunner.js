@@ -8,6 +8,11 @@
       'jasmine': 'test/lib/jasmine/lib/jasmine-core/jasmine',
       'jasmine-html': 'test/lib/jasmine/lib/jasmine-core/jasmine-html',
       'boot': 'test/lib/jasmine/lib/jasmine-core/boot',
+      'zepto': 'app/lib/zeptojs/src/zepto',
+      'zepto.ajax': 'app/lib/zeptojs/src/ajax',
+      'zepto.callbacks': 'app/lib/zeptojs/src/callbacks',
+      'zepto.deferred': 'app/lib/zeptojs/src/deferred',
+      'zepto.event': 'app/lib/zeptojs/src/event',
 
       'layouts':    'app/src/layouts',
       'models':     'app/src/models',
@@ -27,9 +32,20 @@
       'boot': {
         deps: ['jasmine', 'jasmine-html'],
         exports: 'window.jasmineRequire'
-      }
+      },
+      'zepto': {
+        exports: 'Zepto'
+      },
+      'zepto.ajax': {
+        deps: ['zepto.callbacks', 'zepto.deferred', 'zepto.event'],
+        exports: 'Zepto'
+      },
+      'zepto.callbacks': ['zepto'],
+      'zepto.deferred': ['zepto'],
+      'zepto.event': ['zepto']
     }
   });
+
 
   // Define all of your specs here. These are RequireJS modules.
   var specs = [

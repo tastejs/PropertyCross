@@ -87,6 +87,10 @@ define(function(require, exports, module) {
         });
         node.add(background);
 
+        var contentNode = node.add(new StateModifier({
+            transform: Transform.translate(0, 0, 1)
+        }));
+
         var title = new Surface({
             content: data.title,
             properties: {
@@ -132,8 +136,8 @@ define(function(require, exports, module) {
         margins.title.add(title);
         margins.details.add(details);
 
-        node.add(modifiers.title).add(margins.title);
-        node.add(modifiers.details).add(margins.details);
+        contentNode.add(modifiers.title).add(margins.title);
+        contentNode.add(modifiers.details).add(margins.details);
     }
 
     function _notificationSize(state) {

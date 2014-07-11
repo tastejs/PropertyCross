@@ -1,12 +1,11 @@
 
 define(function(require, exports, module) {
     'use strict';
-    var Transform     = require('famous/core/Transform');
-    var StateModifier = require('famous/modifiers/StateModifier');
-    var HeaderFooter  = require('famous/views/HeaderFooterLayout');
-    var Lightbox      = require('famous/views/Lightbox');
+    var HeaderFooter     = require('famous/views/HeaderFooterLayout');
+    var Transform        = require('famous/core/Transform');
+    var RenderController = require('famous/views/RenderController');
+    var StateModifier    = require('famous/modifiers/StateModifier');
 
-    var HeaderView = require('views/ApplicationHeader');
     var View       = require('prototypes/View');
 
     function ApplicationState() {
@@ -15,25 +14,14 @@ define(function(require, exports, module) {
         _createLayout.call(this);
         _setupBindings.call(this);
 
-        this.lightboxes.header.show(new HeaderView({
-            headerSize: 40,
-            backgroundColor: '#ff5722',
-            color: 'white'
-        }), { duration: 0 });
+        this._view = null;
     }
 
     ApplicationState.prototype = Object.create(View.prototype);
     ApplicationState.prototype.constructor = ApplicationState;
 
     ApplicationState.DEFAULT_OPTIONS = {
-        lightboxOpts: {
-            inOpacity: 0.1,
-            outOpacity: 0.1,
-            inOrigin: [1, 0],
-            outOrigin: [-1, 0],
-            showOrigin: [0, 0],
-            inTransform: Transform.translate(0, 0, 10),
-            outTransform: Transform.translate(0, 0, -10),
+        contollerOpts: {
             inTransition: { duration: 500, curve: 'easeOut' },
             outTransition: { duration: 500, curve: 'easeOut' },
             overlap: true
@@ -43,20 +31,14 @@ define(function(require, exports, module) {
     function _createLayout() {
         this.layout = new HeaderFooter();
 
-        this.lightboxes = {
-            header: new Lightbox(this.options.lightboxOpts),
-            content: new Lightbox(this.options.lightboxOpts),
-            footer: new Lightbox(this.options.lightboxOpts)
-        };
+        this.controller = new RenderController(this.options.contollerOpts);
 
-        this.modifiers = {
-            header: new StateModifier({ size: [undefined, 40] }),
-            footer: new StateModifier({ size: [undefined, 0] })
-        };
+        var opacityMap = function(progress) { return progress; };
 
-        this.layout.header.add(this.modifiers.header).add(this.lightboxes.header);
-        this.layout.content.add(this.lightboxes.content);
-        this.layout.footer.add(this.modifiers.footer).add(this.lightboxes.footer);
+        this.controller.inOpacityFrom(opacityMap);
+        this.controller.outOpacityFrom(opacityMap);
+
+        this.layout.content.add(this.controller);
 
         this.add(this.layout);
     }
@@ -67,24 +49,42 @@ define(function(require, exports, module) {
     }
 
     function _modelBound(model) {
-        _navigateToState.call(this, model.currentView());
+        this.layout.header.add(model._headerView);
+        _navigateToState.call(this, model.currentView(), false);
     }
 
     function _stateNavigation(data) {
-        _navigateToState.call(this, data.view);
+        _navigateToState.call(this, data.view, data.goingBack);
     }
 
-    function _navigateToState(view) {
-        if(view === undefined) return;
+    function _navigateToState(view, navigationBackwards) {
+        if(view === undefined || view === this._view) return;
+        console.log("navigationBackwards", navigationBackwards);
 
-        var container = this.lightboxes.content;
-        
-        if (container._showing) {
-            container.show(view);
+        var leftEnterExit = function(progress) {
+            return [progress - 1, 0];
+        };
+
+        var rightEnterExit = function(progress) {
+            return [1 - progress, 0];
+        };
+
+        if(navigationBackwards) {
+            this.controller.inOriginFrom(leftEnterExit);
+            this.controller.outOriginFrom(rightEnterExit);
         } else {
-            container.show(view, { duration : 0 });
+            this.controller.inOriginFrom(rightEnterExit);
+            this.controller.outOriginFrom(leftEnterExit);
         }
         
+        if (this._view === null) {
+            this.controller.show(view, { duration : 0 });
+        } else {
+            this.controller.hide();
+            this.controller.show(view);
+        }
+
+        this._view = view;
     }
 
     module.exports = ApplicationState;

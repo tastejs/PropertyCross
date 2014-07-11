@@ -13,6 +13,8 @@ define(function(require, exports, module) {
 
     function Search(applicationStateModel) {
         PageViewModel.apply(this, arguments);
+
+        this._title = "PropertyCross";
     }
 
     Search.prototype = Object.create(PageViewModel.prototype);

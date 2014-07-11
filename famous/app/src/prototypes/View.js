@@ -32,6 +32,10 @@ define(function(require, exports, module) {
         this._modelEvents.emit('bound-model', model);
     }
 
+    View.prototype.getModel = function() {
+        return this._model;
+    }
+
     View.prototype.render = function render() {
         return this.id;
     };
@@ -39,6 +43,7 @@ define(function(require, exports, module) {
     View.prototype.commit = function commit(context) {
         var parentSize = context.size;
         var parentTransform = context.transform;
+        var parentOpacity = context.opacity;
         var parentOrigin = context.origin;
 
         var result = [{
@@ -48,6 +53,7 @@ define(function(require, exports, module) {
         return {
             transform: parentTransform,
             size: parentSize,
+            opacity: parentOpacity,
             target: result
         };
     };

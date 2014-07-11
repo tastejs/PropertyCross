@@ -14,6 +14,7 @@ define(function(require, exports, module) {
     function ListingDetails(applicationStateModel, state) {
         PageViewModel.apply(this, arguments);
 
+        this._title = "Property Details";
         this._listing = PropertyStore.load(state.guid);
     }
 

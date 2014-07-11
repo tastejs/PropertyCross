@@ -2,7 +2,7 @@
 <html class="no-js" ng-app="propertycross">
     <head>
         <title>PropertyCross - Famo.us</title>
-        <meta name="viewport" content="width=device-width, maximum-scale=1, user-scalable=no" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black" />
@@ -20,11 +20,11 @@
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="lib/requirejs/require.js" data-main="src/requireConfig"></script>
         <script type="text/javascript">
-window.onerror = function(msg, url, line) {  
-  //save error and send to server for example.
-  alert ("error: " + msg + "\n" + "file: " + url + "\n" + "line: " + line);
-  return true;
-};
+            window.onerror = function(msg, url, line) {
+              //save error and send to server for example.
+              alert ("error: " + msg + "\n" + "file: " + url + "\n" + "line: " + line);
+              return true;
+            };
         </script>
         <!-- /process -->
     </head>

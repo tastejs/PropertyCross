@@ -39,6 +39,9 @@ define(function(require, exports, module) {
             this.push(item);
         }, this._listings);
 
+        this._title = this._listings.length + " of " + queryResults.total + " matches";
+        this._applicationState.updateHeading();
+
         this._eventOutput.emit("update-listing", this._listings);
     }
 

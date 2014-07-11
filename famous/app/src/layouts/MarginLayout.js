@@ -79,6 +79,7 @@ define(function(require, exports, module) {
     MarginLayout.prototype.commit = function commit(context) {
         var parentSize = context.size;
         var parentTransform = context.transform;
+        var parentOpacity = context.opacity;
         var parentOrigin = context.origin;
 
         var margins = this._margins.get();
@@ -102,6 +103,7 @@ define(function(require, exports, module) {
         return {
             transform: parentTransform,
             size: parentSize,
+            opacity: parentOpacity,
             target: result
         };
     };

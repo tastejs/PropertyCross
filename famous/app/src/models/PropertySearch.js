@@ -74,7 +74,8 @@ define(function(require, exports, module) {
                         return {
                             location : zepto.map(data.response.locations, _locationMapper)[0],
                             listings : zepto.map(data.response.listings, _listingMapper),
-                            state : 'unambiguous'
+                            state : 'unambiguous',
+                            total: data.response.total_results
                         };
                     case '200':
                     case '202':

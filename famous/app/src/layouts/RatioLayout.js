@@ -82,6 +82,7 @@ define(function(require, exports, module) {
     RatioLayout.prototype.commit = function commit(context) {
         var parentSize = context.size;
         var parentTransform = context.transform;
+        var parentOpacity = context.opacity;
         var parentOrigin = context.origin;
 
         var ratio = this._ratio.get();
@@ -102,6 +103,7 @@ define(function(require, exports, module) {
         return {
             transform: parentTransform,
             size: this._size,
+            opacity: parentOpacity,
             target: result
         };
     };

@@ -115,7 +115,7 @@ define(function(require, exports, module) {
             it('should trigger \'state-navigation\' event', function(done) {
 
                 function callbackFromStateNavigation(data) {
-                    expect(data.goBack).toBeTruthy();
+                    expect(data.goingBack).toBeTruthy();
                     expect(data.view).toBe(startingView);
                     done();
                 }

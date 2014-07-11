@@ -18,5 +18,9 @@ define(function(require, exports, module) {
     PageViewModel.prototype = Object.create(ViewModel.prototype);
     PageViewModel.prototype.constructor = PageViewModel;
 
+    PageViewModel.prototype.getTitle = function() {
+        return this._title;
+    }
+
     module.exports = PageViewModel;
 });

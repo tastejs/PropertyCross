@@ -44,4 +44,10 @@ define(function(require, exports, module) {
 
 
     model.navigateToState('search');
+
+    document.addEventListener("deviceready", function() {
+        if (navigator.splashscreen) {
+          navigator.splashscreen.hide();
+        }
+    }, false);
 });
