@@ -7,10 +7,11 @@ define(function(require, exports, module) {
     var StateModifier    = require('famous/modifiers/StateModifier');
     var ImageSurface     = require('famous/surfaces/ImageSurface');
     var SequentialLayout = require('famous/views/SequentialLayout');
-    var FlexibleLayout = require('famous/views/FlexibleLayout');
+    var Transform = require('famous/core/Transform');
 
-    var View         = require('prototypes/View');
-    var RatioLayout  = require('layouts/RatioLayout');
+    var FavouriteButton = require('widgets/FavouriteButton');
+    var RatioLayout     = require('layouts/RatioLayout');
+    var View            = require('prototypes/View');
 
     function ListingDetails() {
         View.apply(this, arguments);
@@ -18,6 +19,7 @@ define(function(require, exports, module) {
         _createLayout.call(this);
 
         _createImageBanner.call(this);
+        _createFavouriteButton.call(this);
         _createDetails.call(this);
 
         _setupBindings.call(this);
@@ -60,6 +62,29 @@ define(function(require, exports, module) {
         this.surfaces.push(node);
     }
 
+    function _createFavouriteButton() {
+        var buttonSize = 56;
+
+        this._favouriteButton = new FavouriteButton({
+            backgroundColor: '#ff5722',
+            color: '#ccc',
+            size: buttonSize
+        });
+
+        var self = this;
+        this._favouriteButton.on("click", function() {
+            self._model.toggleFavourites();
+        });
+
+        var node = new RenderNode();
+
+        node.add(new StateModifier({
+            align: [1, 0],
+            transform: Transform.translate(-buttonSize,0,buttonSize)
+        })).add(this._favouriteButton);
+
+        this.surfaces.push(node);
+    }
     function _createDetails() {
         this._title = new Surface({
             size: [undefined, 40],
@@ -122,6 +147,8 @@ define(function(require, exports, module) {
             this._price.setContent(listing.price);
             this._rooms.setContent(rooms);
             this._summary.setContent(listing.summary);
+            
+            this._favouriteButton.setFavourite(model.isFavourite());
         }.bind(this));
     }
 

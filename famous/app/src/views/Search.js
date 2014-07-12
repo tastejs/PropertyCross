@@ -16,6 +16,7 @@ define(function(require, exports, module) {
 
         _createLayout.call(this);
 
+        _createFavouritesButtons.call(this);
         _createInstructionalText.call(this);
         _createSearchInput.call(this);
         _createSearchButtons.call(this);
@@ -43,7 +44,37 @@ define(function(require, exports, module) {
         this.add(layout);
     }
 
+    function _createFavouritesButtons() {
+        
+        this.favouritesButton = new Surface({
+            content: 'My Favourites',
+            properties: {
+                backgroundColor: '#AAA',
+                lineHeight: '40px',
+                textAlign: 'center'
+            }
+        });
+
+        var self = this;
+
+        this.favouritesButton.on('click', function() {
+            self._model.goToFavourites();
+        });
+
+        var layoutNode = new RenderNode();
+
+        var modifier = new StateModifier({
+            size: [150, 40],
+            origin: [1,0]
+        });
+
+        layoutNode.add(modifier).add(this.favouritesButton);
+
+        this.surfaces.push(layoutNode);
+    }
+
     function _createInstructionalText() {
+
         var surface = new Surface({
             size: [undefined, 100],
             content: 'Use the form below to search for houses to buy. '

@@ -42,7 +42,6 @@ define(function(require, exports, module) {
     mainContext.add(appView);
     mainContext.add(notifierView);
 
-
     model.navigateToState('search');
 
     document.addEventListener("deviceready", function() {

@@ -32,6 +32,10 @@ define(function(require, exports, module) {
             _onFailedPropertySearch.bind(this)).done();
     };
 
+    Search.prototype.goToFavourites = function() {
+        this._applicationState.navigateToState('favourites', {});
+    }
+
     function _onSuccessfulPropertySearch(searchResult) {
         if(searchResult.state === "unambiguous") {
             this._applicationState.navigateToState('results', {

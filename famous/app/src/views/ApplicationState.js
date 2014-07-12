@@ -59,7 +59,6 @@ define(function(require, exports, module) {
 
     function _navigateToState(view, navigationBackwards) {
         if(view === undefined || view === this._view) return;
-        console.log("navigationBackwards", navigationBackwards);
 
         var leftEnterExit = function(progress) {
             return [progress - 1, 0];
