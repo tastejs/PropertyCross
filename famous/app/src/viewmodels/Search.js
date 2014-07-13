@@ -39,7 +39,8 @@ define(function(require, exports, module) {
     function _onSuccessfulPropertySearch(searchResult) {
         if(searchResult.state === "unambiguous") {
             this._applicationState.navigateToState('results', {
-                query: searchResult.location.place_name
+                query: searchResult.location.place_name,
+                title: searchResult.location.title
             });
         } else if(searchResult.state === "ambiguous") {
             console.log("ambiguous result");

@@ -12,9 +12,9 @@ define(function(require, exports, module) {
 
     var MarginLayout = require('layouts/MarginLayout');
 
-    var View         = require('prototypes/View');
+    var View         = require('famous/core/View');
 
-    function ListingEntry() {
+    function LoadMoreEntry() {
         View.apply(this, arguments);
 
         var modifier = new StateModifier({
@@ -22,20 +22,17 @@ define(function(require, exports, module) {
         });
 
         this.node = this.add(modifier);
+        this._loading = false;
 
         _createBacking.call(this);
-        _createImage.call(this);
         _createDescription.call(this);
     }
 
-    ListingEntry.prototype = Object.create(View.prototype);
-    ListingEntry.prototype.constructor = ListingEntry;
+    LoadMoreEntry.prototype = Object.create(View.prototype);
+    LoadMoreEntry.prototype.constructor = LoadMoreEntry;
 
-    ListingEntry.DEFAULT_OPTIONS = {
-        imageUrl: 'http://s.uk.nestoria.nestimg.com/i/all/all/all/g/cs4.png',
-        price: '£0,000',
-        size: [undefined, undefined],
-        title: 'Property'
+    LoadMoreEntry.DEFAULT_OPTIONS = {
+        size: [undefined, undefined]
     };
 
     function _createBacking() {
@@ -46,45 +43,27 @@ define(function(require, exports, module) {
         });
         this.node.add(surface);
 
+        var self = this;
         var eventHandler = this._eventOutput;
 
         surface.on('click', function(event) {
-            eventHandler.emit('click', event);
-        });
-    }
-
-    function _createImage() {
-        this.imageSize = [this.options.size[1], this.options.size[1]];
-
-        var layout = new MarginLayout({
-            margins: [10, 10, 10, 10]
-        });
-
-        var surface = new ImageSurface({
-            content: this.options.imageUrl,
-            properties: {
-                pointerEvents: 'none'
+            self._title.setContent("Loading ...");
+            if(!self._loading) {
+                self._loading = true;
+                eventHandler.emit('loading-more', event);
             }
         });
-
-        layout.add(surface);
-
-        var modifier = new StateModifier({
-            size: this.imageSize
-        });
-
-        this.node.add(modifier).add(layout);
     }
 
     function _createDescription() {
         var imageSize = this.options.size[1];
 
         var layout = new MarginLayout({
-            margins: [this.imageSize[0], 10, 10, 10]
+            margins: [imageSize, 10, 10, 10]
         });
 
-        var priceSurface = new Surface({
-            content: this.options.price,
+        this._title = new Surface({
+            content: "Load more...",
             size: [undefined, 20],
             properties: {
                 fontSize: '20px',
@@ -96,8 +75,13 @@ define(function(require, exports, module) {
             }
         });
 
-        var titleSurface = new Surface({
-            content: this.options.title,
+        var descriptionContent = "Results for <b>" +
+            this.options.searchTerm + "</b>, showing <b>" +
+            this.options.count + "</b> of <b>" +
+            this.options.total + "</b> properties";
+
+        this._description = new Surface({
+            content: descriptionContent,
             size: [undefined, 20],
             properties: {
                 fontSize: '16px',
@@ -109,22 +93,22 @@ define(function(require, exports, module) {
             }
         });
 
-        var priceModifier = new StateModifier({
+        var titleModifier = new StateModifier({
             align: [0.5, 0.5],
             origin: [0.5, 1],
             transform: Transform.translate(0, -5, 0)
         });
-        var titleModifier = new StateModifier({
+        var descriptionModifier = new StateModifier({
             align: [0.5, 0.5],
             origin: [0.5, 0],
             transform: Transform.translate(0, 5, 0)
         });
 
-        layout.add(priceModifier).add(priceSurface);
-        layout.add(titleModifier).add(titleSurface);
+        layout.add(titleModifier).add(this._title);
+        layout.add(descriptionModifier).add(this._description);
 
         this.node.add(layout);
     }
 
-    module.exports = ListingEntry;
+    module.exports = LoadMoreEntry;
 });

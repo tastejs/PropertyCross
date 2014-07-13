@@ -5,7 +5,7 @@ define(function(require, exports, module) {
 
     var ScrollContainer = require('famous/views/ScrollContainer');
 
-    var ListingEntry = require('views/ListingEntry');
+    var ListingEntry = require('widgets/ListingEntry');
     var View         = require('prototypes/View');
 
     function Favourites() {

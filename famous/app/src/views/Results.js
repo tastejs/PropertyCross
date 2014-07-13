@@ -5,8 +5,9 @@ define(function(require, exports, module) {
 
     var ScrollContainer = require('famous/views/ScrollContainer');
 
-    var ListingEntry = require('views/ListingEntry');
-    var View         = require('prototypes/View');
+    var ListingEntry  = require('widgets/ListingEntry');
+    var LoadMoreEntry = require('widgets/LoadMoreEntry');
+    var View          = require('prototypes/View');
 
     function Results() {
         View.apply(this, arguments);
@@ -40,13 +41,18 @@ define(function(require, exports, module) {
     }
 
     function _modelBound(model) {
-        _updateListing.call(this, model.listings());
+        _updateListing.call(this, {
+            listings: model.listings(),
+            searchTerm: model.searchTerm(),
+            total: 22
+        });
     }
 
-    function _updateListing(listings) {
-        var self = this;
+    function _updateListing(data) {
+        //Clear all items
+        this._items.splice(0,this._items.length);
 
-        listings.forEach(function(item) {
+        data.listings.forEach(function(item) {
             var listing = new ListingEntry({
                 imageUrl: item.thumb.url,
                 price: item.price,
@@ -54,14 +60,29 @@ define(function(require, exports, module) {
                 title: item.title
             });
 
-            listing.pipe(self._scrollContainer);
+            listing.pipe(this._scrollContainer);
 
             listing.on('click', function(event) {
-                self._model.displayListing(item.guid);
-            });
+                this._model.displayListing(item.guid);
+            }.bind(this));
 
-            self._items.push(listing);
+            this._items.push(listing);
+        }, this);
+
+        if (this._items.length === 0 || this._items.length >= data.total) return;
+
+        var loadMoreButton = new LoadMoreEntry({
+            count: this._items.length,
+            searchTerm: data.searchTerm,
+            size: [undefined, 80],
+            total: data.total
         });
+
+        loadMoreButton.on("loading-more", function() {
+            this._model.loadMore();
+        }.bind(this));
+
+        this._items.push(loadMoreButton);
     }
 
     module.exports = Results;
