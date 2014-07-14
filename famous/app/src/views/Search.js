@@ -10,6 +10,7 @@ define(function(require, exports, module) {
     var ScrollContainer  = require('famous/views/ScrollContainer');
     var RenderController = require('famous/views/RenderController');
 
+    var LocationEntry     = require('widgets/LocationEntry');
     var RecentSearchEntry = require('widgets/RecentSearchEntry');
 
     var View         = require('prototypes/View');
@@ -187,8 +188,10 @@ define(function(require, exports, module) {
     }
 
     function _setupBindings() {
-        this._modelEvents.on('update-recentsearches', _updateListing.bind(this));
         this._modelEvents.on('bound-model', _modelBound.bind(this));
+        this._modelEvents.on('show-locations', _showLocations.bind(this));
+        this._modelEvents.on('show-recentsearch', _showRecentSearches.bind(this));
+        this._modelEvents.on('update-recentsearches', _updateListing.bind(this));
     }
 
     function _modelBound(model) {
@@ -221,6 +224,47 @@ define(function(require, exports, module) {
         _updateListing.call(this, model.recentSearches());
     }
 
+    function _showLocations(locations) {
+        var model = this._model;
+
+        var label = new Surface({
+            content: 'Please select a location below:',
+            properties: {
+                color: '#888',
+                fontSize: '16px',
+                lineHeight: '25px',
+                padding: this.options.contentPadding + 'px'
+            }
+        });
+
+        var modifier = new StateModifier({
+            size: [undefined, 45],
+            origin: [0.5, 1]
+        });
+
+        var node = new RenderNode();
+        node.add(modifier).add(label);
+
+        this._messageArea.show(node);
+
+        //Clear all items
+        this._items.splice(0,this._items.length);
+        locations.forEach(function(item) {
+            var entry = new LocationEntry({
+                query: item.place_name,
+                size: [undefined, 40],
+                title: item.title
+            });
+
+            entry.on('select-location', function(options) {
+                this._model.performLocationSearch(options.query);
+            }.bind(this));
+
+            this._items.push(entry);
+
+        }, this);
+    }
+
     function _updateListing(recentSearches) {
         //Clear all items
         this._items.splice(0,this._items.length);
@@ -237,7 +281,7 @@ define(function(require, exports, module) {
             });
 
             button.on('select-recentsearch', function(options) {
-                this._model.performRecentSearch(options);
+                this._model.performRecentSearch(options.query);
             }.bind(this));
 
             this._items.push(button);

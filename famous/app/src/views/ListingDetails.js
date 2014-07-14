@@ -128,6 +128,7 @@ define(function(require, exports, module) {
         this.surfaces.push(this._rooms);
 
         this._summary = new Surface({
+            size: [undefined, 100],
             content: this.options.summary,
             properties: {
                 padding: '10px'

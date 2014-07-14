@@ -41,16 +41,18 @@ define(function(require, exports, module) {
         }.bind(this));
     };
 
-    Search.prototype.performRecentSearch = function(options) {
-        var search = {
-            query: options.query,
-            title: options.title,
-            total: options.count
-        };
+    Search.prototype.performRecentSearch = function(query) {
+        PropertySearch.queryProperties(query, 1).then(
+            _onSuccessfulPropertySearch.bind(this),
+            _onFailedPropertySearch.bind(this)).done();
+    };
 
-        RecentSearchStore.store(search);
+    Search.prototype.performLocationSearch = function(query) {
+        this._eventOutput.emit("show-recentsearch");
 
-        this._applicationState.navigateToState('results', search);
+        PropertySearch.queryProperties(query, 1).then(
+            _onSuccessfulPropertySearch.bind(this),
+            _onFailedPropertySearch.bind(this)).done();
     };
 
     Search.prototype.goToFavourites = function() {
@@ -73,7 +75,7 @@ define(function(require, exports, module) {
 
             this._applicationState.navigateToState('results', search);
         } else if(searchResult.state === "ambiguous") {
-            console.log("ambiguous result");
+            this._eventOutput.emit("show-locations", searchResult.locations);
         }
     }
 
