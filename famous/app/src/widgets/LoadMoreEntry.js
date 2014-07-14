@@ -2,13 +2,9 @@
 define(function(require, exports, module) {
     'use strict';
     var StateModifier = require('famous/modifiers/StateModifier');
-    var ImageSurface  = require('famous/surfaces/ImageSurface');
 
-    var RenderNode = require('famous/core/RenderNode');
     var Surface    = require('famous/core/Surface');
     var Transform  = require('famous/core/Transform');
-
-    var FlexibleLayout = require('famous/views/FlexibleLayout');
 
     var MarginLayout = require('layouts/MarginLayout');
 

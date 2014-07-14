@@ -5,9 +5,12 @@ define(function(require, exports, module) {
     var RenderNode       = require('famous/core/RenderNode');
     var StateModifier    = require('famous/modifiers/StateModifier');
     var InputSurface     = require('famous/surfaces/InputSurface');
-    var SequentialLayout   = require('famous/views/SequentialLayout');
+    var FlexibleLayout   = require('famous/views/FlexibleLayout');
     var GridLayout       = require('famous/views/GridLayout');
+    var ScrollContainer  = require('famous/views/ScrollContainer');
     var RenderController = require('famous/views/RenderController');
+
+    var RecentSearchEntry = require('widgets/RecentSearchEntry');
 
     var View         = require('prototypes/View');
 
@@ -16,25 +19,32 @@ define(function(require, exports, module) {
 
         _createLayout.call(this);
 
-        _createFavouritesButtons.call(this);
+        _createFavouritesButton.call(this);
         _createInstructionalText.call(this);
         _createSearchInput.call(this);
         _createSearchButtons.call(this);
-        _createResponseRenderer.call(this);
+        _createMessageArea.call(this);
+        _createList.call(this);
 
-        this.responseRenderer.show(this.recentSearchView);
+        _setupBindings.call(this);
     }
 
     Search.prototype = Object.create(View.prototype);
     Search.prototype.constructor = Search;
 
     Search.DEFAULT_OPTIONS = {
-        contentPadding: 10
+        contentPadding: 10,
+        contollerOpts: {
+            inTransition: { duration: 500, curve: 'easeOut' },
+            outTransition: { duration: 500, curve: 'easeOut' },
+            overlap: true
+        }
     };
 
     function _createLayout() {
-        var layout = new SequentialLayout({
-            direction: 1
+        var layout = new FlexibleLayout({
+            direction: 1,
+            ratios: [true, true, true, true, true, 1]
         });
 
         this.surfaces = [];
@@ -44,7 +54,7 @@ define(function(require, exports, module) {
         this.add(layout);
     }
 
-    function _createFavouritesButtons() {
+    function _createFavouritesButton() {
         
         this.favouritesButton = new Surface({
             content: 'My Favourites',
@@ -152,10 +162,86 @@ define(function(require, exports, module) {
         this.surfaces.push(layoutNode);
     }
 
-    function _createResponseRenderer() {
-        this.responseRenderer = new RenderController();
+    function _createMessageArea() {
+        
+        this._messageArea = new RenderController(this.options.contollerOpts);
 
-        this.surfaces.push(this.responseRenderer);
+        var node = new RenderNode();
+        node.add(new StateModifier({
+            size: [undefined, 50],
+        })).add(this._messageArea);
+
+        this.surfaces.push(node);
+    }
+
+    function _createList() {
+        var scrollContainer = new ScrollContainer({
+            scrollview: {direction: 1}
+        });
+
+        this._items = [];
+
+        scrollContainer.sequenceFrom(this._items);
+
+        this.surfaces.push(scrollContainer);
+    }
+
+    function _setupBindings() {
+        this._modelEvents.on('update-recentsearches', _updateListing.bind(this));
+        this._modelEvents.on('bound-model', _modelBound.bind(this));
+    }
+
+    function _modelBound(model) {
+        _showRecentSearches.call(this);
+    }
+
+    function _showRecentSearches() {
+        var model = this._model;
+
+        var label = new Surface({
+            content: 'Recent searches:',
+            properties: {
+                color: '#888',
+                fontSize: '16px',
+                lineHeight: '25px',
+                padding: this.options.contentPadding + 'px'
+            }
+        });
+
+        var modifier = new StateModifier({
+            size: [undefined, 45],
+            origin: [0.5, 1]
+        });
+
+        var node = new RenderNode();
+        node.add(modifier).add(label);
+
+        this._messageArea.show(node);
+
+        _updateListing.call(this, model.recentSearches());
+    }
+
+    function _updateListing(recentSearches) {
+        //Clear all items
+        this._items.splice(0,this._items.length);
+
+        var itemsToDisplayLimit = Math.min(recentSearches.length, 5);
+
+        for(var i = 0; i < itemsToDisplayLimit; i++) {
+            var item = recentSearches[i];
+            var button = new RecentSearchEntry({
+                count: item.total,
+                query: item.query,
+                size: [undefined, 40],
+                title: item.title
+            });
+
+            button.on('select-recentsearch', function(options) {
+                this._model.performRecentSearch(options);
+            }.bind(this));
+
+            this._items.push(button);
+        }
     }
 
     module.exports = Search;

@@ -17,6 +17,7 @@ define(function(require, exports, module) {
         this._listings = [];
         this._query = state.query;
         this._searchTerm = state.title;
+        this._total = state.total;
         this._page = 1;
 
         this.loadMore();
@@ -32,6 +33,10 @@ define(function(require, exports, module) {
     Results.prototype.searchTerm = function() {
         return this._searchTerm;
     };
+
+    Results.prototype.total = function() {
+        return this._total;
+    }
 
     Results.prototype.displayListing = function(listingGuid) {
         this._applicationState.navigateToState('listing', {
@@ -51,14 +56,13 @@ define(function(require, exports, module) {
             this._listings.push(item);
         }, this);
 
-        console.log("this._listings", this._listings);
-        this._title = this._listings.length + " of " + queryResults.total + " matches";
+        this._title = this._listings.length + " of " + this._total + " matches";
         this._applicationState.updateHeading();
 
         this._eventOutput.emit("update-listing", {
             searchTerm: this._searchTerm,
             listings: this._listings,
-            total: queryResults.total
+            total: this._total
         });
     }
 

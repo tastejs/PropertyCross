@@ -44,7 +44,7 @@ define(function(require, exports, module) {
         _updateListing.call(this, {
             listings: model.listings(),
             searchTerm: model.searchTerm(),
-            total: 22
+            total: model.total()
         });
     }
 
