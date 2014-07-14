@@ -9,6 +9,8 @@ define(function(require, exports, module) {
     var GridLayout       = require('famous/views/GridLayout');
     var ScrollContainer  = require('famous/views/ScrollContainer');
     var RenderController = require('famous/views/RenderController');
+    
+    var Transform = require('famous/core/Transform');
 
     var LocationEntry     = require('widgets/LocationEntry');
     var RecentSearchEntry = require('widgets/RecentSearchEntry');
@@ -56,11 +58,12 @@ define(function(require, exports, module) {
     }
 
     function _createFavouritesButton() {
-        
         this.favouritesButton = new Surface({
-            content: 'My Favourites',
+            content: '\u2605',
+            size: [60, 40],
             properties: {
-                backgroundColor: '#AAA',
+                fontSize: '25px',
+                color: 'white',
                 lineHeight: '40px',
                 textAlign: 'center'
             }
@@ -74,12 +77,16 @@ define(function(require, exports, module) {
 
         var layoutNode = new RenderNode();
 
-        var modifier = new StateModifier({
-            size: [150, 40],
-            origin: [1,0]
+        var positionModifier = new StateModifier({
+            origin: [1,0],
+            align: [1, -1],
+            transform: Transform.translate(0, -40, 0)
+        });
+        var parentSizeModifier = new StateModifier({
+            size: [undefined, 0]
         });
 
-        layoutNode.add(modifier).add(this.favouritesButton);
+        layoutNode.add(parentSizeModifier).add(positionModifier).add(this.favouritesButton);
 
         this.surfaces.push(layoutNode);
     }
@@ -190,6 +197,7 @@ define(function(require, exports, module) {
     function _setupBindings() {
         this._modelEvents.on('bound-model', _modelBound.bind(this));
         this._modelEvents.on('show-locations', _showLocations.bind(this));
+        this._modelEvents.on('show-message', _showMessage.bind(this));
         this._modelEvents.on('show-recentsearch', _showRecentSearches.bind(this));
         this._modelEvents.on('update-recentsearches', _updateListing.bind(this));
     }
@@ -222,6 +230,32 @@ define(function(require, exports, module) {
         this._messageArea.show(node);
 
         _updateListing.call(this, model.recentSearches());
+    }
+
+    function _showMessage(options) {
+        var label = new Surface({
+            content: options.message,
+            properties: {
+                color: '#e51c23',
+                fontSize: '12px',
+                lineHeight: '16px',
+                padding: this.options.contentPadding + 'px',
+                textAlign: 'center'
+            }
+        });
+
+        var modifier = new StateModifier({
+            size: [undefined, 45],
+            origin: [0.5, 1]
+        });
+
+        var node = new RenderNode();
+        node.add(modifier).add(label);
+
+        this._messageArea.show(node);
+
+        //Clear all items
+        this._items.splice(0,this._items.length);
     }
 
     function _showLocations(locations) {
