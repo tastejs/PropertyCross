@@ -56,10 +56,9 @@ define(function(require, exports, module) {
     }
 
     function _createDescription() {
-        var imageSize = this.options.size[1];
 
         var layout = new MarginLayout({
-            margins: [imageSize, 10, 10, 10]
+            margins: [10, 10, 10, 10]
         });
 
         this._title = new Surface({

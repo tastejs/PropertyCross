@@ -44,7 +44,8 @@ define(function(require, exports, module) {
             cursor: 'default',
             fontSize: fontSize + 'px',
             lineHeight: diameter + 'px',
-            textAlign: 'center'
+            textAlign: 'center',
+            zIndex: 50
         };
 
         var favouriteButton = new Surface({

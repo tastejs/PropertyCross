@@ -23,11 +23,11 @@ define(function(require, exports, module) {
         view:      require('views/Search'),
         viewmodel: require('viewmodels/Search')
     }).defineState('listing', {
-        url:       '/Listing/:guid',
+        url:       '/Listing',
         view:      require('views/ListingDetails'),
         viewmodel: require('viewmodels/ListingDetails')
     }).defineState('results', {
-        url:       '/Results/:query',
+        url:       '/Results',
         view:      require('views/Results'),
         viewmodel: require('viewmodels/Results')
     }).defineState('favourites', {

@@ -136,10 +136,7 @@ define(function(require, exports, module) {
             }
         });
         this.geoSearchButton.on('click', function() {
-            var latitude = 51.454513;
-            var longitude = -2.587910;
-
-            this._model.performGeoSearch(latitude, longitude);
+            this._model.performGeoSearch();
         }.bind(this));
 
         buttons.push(this.geoSearchButton);

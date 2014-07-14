@@ -86,22 +86,6 @@ define(function(require, exports, module) {
         this.surfaces.push(node);
     }
     function _createDetails() {
-        this._title = new Surface({
-            size: [undefined, 40],
-            content: this.options.title,
-            properties: {
-                fontWeight: 'bold',
-                fontSize: '20px',
-                lineHeight: '20px',
-                overflow: 'hidden',
-                padding: '10px',
-                pointerEvents: 'none',
-                textOverflow: 'ellipsis',
-                whiteSpace: 'nowrap'
-            }
-        });
-        this.surfaces.push(this._title);
-
         this._price = new Surface({
             size: [undefined, 44],
             content: this.options.price,
@@ -117,6 +101,22 @@ define(function(require, exports, module) {
             }
         });
         this.surfaces.push(this._price);
+
+        this._title = new Surface({
+            size: [undefined, 40],
+            content: this.options.title,
+            properties: {
+                fontWeight: 'bold',
+                fontSize: '20px',
+                lineHeight: '20px',
+                overflow: 'hidden',
+                padding: '10px',
+                pointerEvents: 'none',
+                textOverflow: 'ellipsis',
+                whiteSpace: 'nowrap'
+            }
+        });
+        this.surfaces.push(this._title);
 
         this._rooms = new Surface({
             size: [undefined, 30],

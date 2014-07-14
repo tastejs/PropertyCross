@@ -21,7 +21,13 @@ require.config({
             ],
             exports: 'Zepto'
         },
-        'zepto.event': [
+        'zepto.event': {
+            deps: [
+                'zepto.ie'
+            ],
+            exports: 'Zepto'
+        },
+        'zepto.ie': [
             'zepto'
         ]
     },
@@ -33,7 +39,8 @@ require.config({
         'zepto.ajax': '../lib/zeptojs/src/ajax',
         'zepto.callbacks': '../lib/zeptojs/src/callbacks',
         'zepto.deferred': '../lib/zeptojs/src/deferred',
-        'zepto.event': '../lib/zeptojs/src/event'
+        'zepto.event': '../lib/zeptojs/src/event',
+        'zepto.ie': '../lib/zeptojs/src/ie'
     },
     packages: [
 

@@ -27,7 +27,7 @@ define(function(require, exports, module) {
             _onFailedPropertySearch.bind(this)).done();
     };
 
-    Search.prototype.performGeoSearch = function(latitude, longitude) {
+    Search.prototype.performGeoSearch = function() {
         Geolocation.getCurrentPosition().then(function(location) {
             PropertySearch.coordinateBasedSearch(
                 location.latitude, location.longitude).then(
