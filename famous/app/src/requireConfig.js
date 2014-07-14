@@ -15,9 +15,12 @@ require.config({
         'zepto.callbacks': [
             'zepto'
         ],
-        'zepto.deferred': [
-            'zepto'
-        ],
+        'zepto.deferred': {
+            deps: [
+                'zepto'
+            ],
+            exports: 'Zepto'
+        },
         'zepto.event': [
             'zepto'
         ]

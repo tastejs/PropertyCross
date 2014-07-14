@@ -4,6 +4,7 @@ define(function(require, exports, module) {
     var PageViewModel = require('prototypes/PageViewModel');
 
     var PropertySearch = require('models/PropertySearch');
+    var Geolocation    = require('models/Geolocation');
     
     /*
      * @name Search
@@ -27,9 +28,12 @@ define(function(require, exports, module) {
     };
 
     Search.prototype.performGeoSearch = function(latitude, longitude) {
-        PropertySearch.coordinateBasedSearch(latitude, longitude).then(
-            _onSuccessfulPropertySearch.bind(this),
-            _onFailedPropertySearch.bind(this)).done();
+        Geolocation.getCurrentPosition().then(function(location) {
+            PropertySearch.coordinateBasedSearch(
+                location.latitude, location.longitude).then(
+                _onSuccessfulPropertySearch.bind(this),
+                _onFailedPropertySearch.bind(this)).done();
+        }.bind(this));
     };
 
     Search.prototype.goToFavourites = function() {
