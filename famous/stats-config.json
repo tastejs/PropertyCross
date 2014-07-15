@@ -1,0 +1,7 @@
+{
+  "common":[
+    "app/src/*.js",
+    "app/styles/*.css",
+    "app/index.html"
+  ]
+}
