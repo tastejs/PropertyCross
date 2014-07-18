@@ -8,7 +8,7 @@
     },
     "rules": {
         "valid-jsdoc": 0,
-        "curly": [1, "multi"],
+        "curly": [1, "all"],
         "brace-style": [1, "stroustrup"],
         "consistent-this": 2,
         "no-constant-condition": 1,

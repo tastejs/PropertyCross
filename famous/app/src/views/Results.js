@@ -1,8 +1,6 @@
 
 define(function(require, exports, module) {
     'use strict';
-    var Surface    = require('famous/core/Surface');
-
     var ScrollContainer = require('famous/views/ScrollContainer');
 
     var ListingEntry  = require('widgets/ListingEntry');
@@ -62,14 +60,16 @@ define(function(require, exports, module) {
 
             listing.pipe(this._scrollContainer);
 
-            listing.on('click', function(event) {
+            listing.on('click', function() {
                 this._model.displayListing(item.guid);
             }.bind(this));
 
             this._items.push(listing);
         }, this);
 
-        if (this._items.length === 0 || this._items.length >= data.total) return;
+        if (this._items.length === 0 || this._items.length >= data.total) {
+            return;
+        }
 
         var loadMoreButton = new LoadMoreEntry({
             count: this._items.length,
@@ -78,7 +78,7 @@ define(function(require, exports, module) {
             total: data.total
         });
 
-        loadMoreButton.on("loading-more", function() {
+        loadMoreButton.on('loading-more', function() {
             this._model.loadMore();
         }.bind(this));
 

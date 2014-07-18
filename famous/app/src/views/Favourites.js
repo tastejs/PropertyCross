@@ -1,8 +1,6 @@
 
 define(function(require, exports, module) {
     'use strict';
-    var Surface    = require('famous/core/Surface');
-
     var ScrollContainer = require('famous/views/ScrollContainer');
 
     var ListingEntry = require('widgets/ListingEntry');
@@ -45,8 +43,6 @@ define(function(require, exports, module) {
         //Clear all items
         this._items.splice(0,this._items.length);
 
-        var self = this;
-
         listings.forEach(function(item) {
             var listing = new ListingEntry({
                 imageUrl: item.thumb.url,
@@ -55,14 +51,14 @@ define(function(require, exports, module) {
                 title: item.title
             });
 
-            listing.pipe(self._scrollContainer);
+            listing.pipe(this._scrollContainer);
 
-            listing.on('click', function(event) {
-                self._model.displayListing(item.guid);
-            });
+            listing.on('click', function() {
+                this._model.displayListing(item.guid);
+            }.bind(this));
 
-            self._items.push(listing);
-        });
+            this._items.push(listing);
+        }, this);
     }
 
     module.exports = Favourites;

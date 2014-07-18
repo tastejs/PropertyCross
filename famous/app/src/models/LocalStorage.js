@@ -5,10 +5,9 @@ define(function(require, exports, module) {
     var localStorage = window.localStorage;
     var json = window.JSON;
 
-    
     var LocalStorage = {
         readObject: function(key) {
-            var stringRepresentation = localStorage.getItem(key) || "{}";
+            var stringRepresentation = localStorage.getItem(key) || '{}';
             return json.parse(stringRepresentation);
         },
         writeObject: function(key, data) {

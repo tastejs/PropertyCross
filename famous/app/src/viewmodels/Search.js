@@ -6,7 +6,7 @@ define(function(require, exports, module) {
     var PropertySearch    = require('models/PropertySearch');
     var Geolocation       = require('models/Geolocation');
     var RecentSearchStore = require('models/RecentSearchStore');
-    
+
     /*
      * @name Search
      * @constructor
@@ -16,10 +16,10 @@ define(function(require, exports, module) {
     function Search(applicationStateModel) {
         PageViewModel.apply(this, arguments);
 
-        this._title = "PropertyCross";
+        this._title = 'PropertyCross';
 
-        RecentSearchStore.on("changed-recentsearches", function(recentSearches) {
-            this._eventOutput.emit("update-recentsearches", recentSearches);
+        RecentSearchStore.on('changed-recentsearches', function(recentSearches) {
+            this._eventOutput.emit('update-recentsearches', recentSearches);
         }.bind(this));
     }
 
@@ -43,7 +43,7 @@ define(function(require, exports, module) {
                 _onSuccessfulPropertySearch.bind(this),
                 _onFailedPropertySearch.bind(this)).done();
         }.bind(this), function(error) {
-            this._eventOutput.emit("show-message", {
+            this._eventOutput.emit('show-message', {
                 message: error
             });
         }.bind(this));
@@ -74,39 +74,42 @@ define(function(require, exports, module) {
     };
 
     function _beforeSearch() {
-        this._eventOutput.emit("show-recentsearch");
+        this._eventOutput.emit('show-recentsearch');
     }
 
     function _onSuccessfulPropertySearch(searchResult) {
-        if(searchResult.state === "unambiguous") {
+        if (searchResult.state === 'unambiguous') {
             var search = {
                 query: searchResult.location.place_name,
                 title: searchResult.location.title,
                 total: searchResult.total
             };
 
-            if(search.total === null) {
-                this._eventOutput.emit("show-message", {
-                    message: "There were no properties found for the given location."
+            if (search.total === null) {
+                this._eventOutput.emit('show-message', {
+                    message: 'There were no properties found for the given location.'
                 });
-            } else {
+            }
+            else {
             RecentSearchStore.store(search);
 
             this._applicationState.navigateToState('results', search);
             }
-        } else if(searchResult.state === "ambiguous") {
-            this._eventOutput.emit("show-locations", searchResult.locations);
-        } else {
-            this._eventOutput.emit("show-message", {
-                message: "The location given was not recognised."
+        }
+        else if (searchResult.state === 'ambiguous') {
+            this._eventOutput.emit('show-locations', searchResult.locations);
+        }
+        else {
+            this._eventOutput.emit('show-message', {
+                message: 'The location given was not recognised.'
             });
         }
     }
 
-    function _onFailedPropertySearch(searchResult) {
-        this._eventOutput.emit("show-message", {
-            message: "An error occurred while searching. " +
-            "Please check your network connection and try again."
+    function _onFailedPropertySearch() {
+        this._eventOutput.emit('show-message', {
+            message: 'An error occurred while searching. ' +
+            'Please check your network connection and try again.'
         });
     }
 

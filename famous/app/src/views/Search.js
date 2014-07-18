@@ -9,7 +9,7 @@ define(function(require, exports, module) {
     var GridLayout       = require('famous/views/GridLayout');
     var ScrollContainer  = require('famous/views/ScrollContainer');
     var RenderController = require('famous/views/RenderController');
-    
+
     var Transform = require('famous/core/Transform');
 
     var LocationEntry     = require('widgets/LocationEntry');
@@ -69,11 +69,9 @@ define(function(require, exports, module) {
             }
         });
 
-        var self = this;
-
         this.favouritesButton.on('click', function() {
             self._model.goToFavourites();
-        });
+        }.bind(this));
 
         var layoutNode = new RenderNode();
 
@@ -171,13 +169,15 @@ define(function(require, exports, module) {
     }
 
     function _createMessageArea() {
-        
+
         this._messageArea = new RenderController(this.options.contollerOpts);
 
+        var modifier = new StateModifier({
+            size: [undefined, 50]
+        });
+
         var node = new RenderNode();
-        node.add(new StateModifier({
-            size: [undefined, 50],
-        })).add(this._messageArea);
+        node.add(modifier).add(this._messageArea);
 
         this.surfaces.push(node);
     }
@@ -202,7 +202,7 @@ define(function(require, exports, module) {
         this._modelEvents.on('update-recentsearches', _updateListing.bind(this));
     }
 
-    function _modelBound(model) {
+    function _modelBound() {
         _showRecentSearches.call(this);
     }
 
@@ -259,8 +259,6 @@ define(function(require, exports, module) {
     }
 
     function _showLocations(locations) {
-        var model = this._model;
-
         var label = new Surface({
             content: 'Please select a location below:',
             properties: {
@@ -305,7 +303,11 @@ define(function(require, exports, module) {
 
         var itemsToDisplayLimit = Math.min(recentSearches.length, 5);
 
-        for(var i = 0; i < itemsToDisplayLimit; i++) {
+        function recentSearchSelected(options) {
+            this._model.performRecentSearch(options.query);
+        }
+
+        for (var i = 0; i < itemsToDisplayLimit; i++) {
             var item = recentSearches[i];
             var button = new RecentSearchEntry({
                 count: item.total,
@@ -314,9 +316,7 @@ define(function(require, exports, module) {
                 title: item.title
             });
 
-            button.on('select-recentsearch', function(options) {
-                this._model.performRecentSearch(options.query);
-            }.bind(this));
+            button.on('select-recentsearch', recentSearchSelected.bind(this));
 
             this._items.push(button);
         }

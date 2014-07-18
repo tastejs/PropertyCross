@@ -37,7 +37,7 @@ define(function(require, exports, module) {
 
     function _locationMapper(item) {
         return {
-            place_name: item.place_name,
+            'place_name': item.place_name,
             title: item.long_title
         };
     }
@@ -49,25 +49,25 @@ define(function(require, exports, module) {
             pretty: '1',
             action: 'search_listings',
             encoding: 'json',
-            listing_type: 'buy'
+            'listing_type': 'buy'
         };
 
-        for(var param in query) {
+        for (var param in query) {
             urlParameters[param] = query[param];
         }
 
-        var url = 'http://api.nestoria.co.uk/api?' + ajax.param(urlParameters) + "&callback=?";
+        var url = 'http://api.nestoria.co.uk/api?' + ajax.param(urlParameters) + '&callback=?';
 
-        if(cache[url] !== undefined) {
+        if (cache[url] !== undefined) {
             var cacheDefer = zepto.Deferred();
 
             cacheDefer.resolve(cache[url]);
             return cacheDefer.promise();
-        } else {
+        }
+        else {
             return ajax.ajax({ url: url }).then(function(data, status) {
-                var response = {};
 
-                switch(data.response.application_response_code) {
+                switch (data.response.application_response_code) {
                     case '100':
                     case '101':
                     case '110':
@@ -85,7 +85,7 @@ define(function(require, exports, module) {
                         };
                     default:
                         return { state : 'fail' };
-                };
+                }
             }, function(_, errorType, error) {
                 return {
                     error: error || defaultErrorMessage,
@@ -102,21 +102,21 @@ define(function(require, exports, module) {
         var searchTerm = latitude.toFixed(2) + ',' + longitude.toFixed(2);
 
         return _queryNestoria({
-            centre_point: searchTerm,
+            'centre_point': searchTerm,
             page: 1
         });
     };
 
     module.exports.textBasedSearch = function(query) {
         return _queryNestoria({
-            place_name: query,
+            'place_name': query,
             page: 1
         });
     };
 
     module.exports.queryProperties = function(query, page) {
         return _queryNestoria({
-            place_name: query,
+            'place_name': query,
             page: page
         });
     };

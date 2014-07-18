@@ -39,16 +39,15 @@ define(function(require, exports, module) {
         });
         this.node.add(surface);
 
-        var self = this;
         var eventHandler = this._eventOutput;
 
         surface.on('click', function(event) {
-            self._title.setContent("Loading ...");
-            if(!self._loading) {
-                self._loading = true;
+            this._title.setContent('Loading ...');
+            if (!this._loading) {
+                this._loading = true;
                 eventHandler.emit('loading-more', event);
             }
-        });
+        }.bind(this));
     }
 
     function _createDescription() {
@@ -58,7 +57,7 @@ define(function(require, exports, module) {
         });
 
         this._title = new Surface({
-            content: "Load more...",
+            content: 'Load more...',
             size: [undefined, 20],
             properties: {
                 fontSize: '20px',
@@ -70,10 +69,10 @@ define(function(require, exports, module) {
             }
         });
 
-        var descriptionContent = "Results for <b>" +
-            this.options.searchTerm + "</b>, showing <b>" +
-            this.options.count + "</b> of <b>" +
-            this.options.total + "</b> properties";
+        var descriptionContent = 'Results for <b>' +
+            this.options.searchTerm + '</b>, showing <b>' +
+            this.options.count + '</b> of <b>' +
+            this.options.total + '</b> properties';
 
         this._description = new Surface({
             content: descriptionContent,

@@ -18,15 +18,15 @@ define(function(require, exports, module) {
                     defer.resolve(coordinates);
                 },
                 function(error) {
-                    var message = "";
+                    var message = '';
                     switch (error.code) {
                         case error.PERMISSION_DENIED:
-                            message = "The use of location is currently disabled.";
+                            message = 'The use of location is currently disabled.';
                             break;
                         case error.POSITION_UNAVAILABLE:
                         case error.PERMISSION_DENIED_TIMEOUT:
-                            message = "Unable to detect current location. " +
-                                "Please ensure location is turned on in your phone settings and try again.";
+                            message = 'Unable to detect current location. ' +
+                                'Please ensure location is turned on in your phone settings and try again.';
                             break;
                     }
                     defer.reject(message);

@@ -1,8 +1,8 @@
 
 define(function(require, exports, module) {
-    "use strict";
+    'use strict';
 
-    var View             = require("famous/core/View");
+    var View = require('famous/core/View');
 
     function VisibilityLayout() {
         View.apply(this, arguments);
@@ -17,19 +17,19 @@ define(function(require, exports, module) {
         visible: true
     };
 
-    VisibilityLayout.prototype.hide = function(){
+    VisibilityLayout.prototype.hide = function() {
         this.visible = false;
     };
 
-    VisibilityLayout.prototype.show = function(){
+    VisibilityLayout.prototype.show = function() {
         this.visible = true;
     };
 
-    VisibilityLayout.prototype.render = function(){
+    VisibilityLayout.prototype.render = function() {
         return this.visible ? this._node.render() : undefined;
-    }
+    };
 
-    function _create(){
+    function _create() {
         this.visible = this.options.visible;
     }
 

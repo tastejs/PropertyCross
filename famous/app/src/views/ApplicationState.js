@@ -2,9 +2,7 @@
 define(function(require, exports, module) {
     'use strict';
     var HeaderFooter     = require('famous/views/HeaderFooterLayout');
-    var Transform        = require('famous/core/Transform');
     var RenderController = require('famous/views/RenderController');
-    var StateModifier    = require('famous/modifiers/StateModifier');
 
     var View       = require('prototypes/View');
 
@@ -33,7 +31,9 @@ define(function(require, exports, module) {
 
         this.controller = new RenderController(this.options.contollerOpts);
 
-        var opacityMap = function(progress) { return progress; };
+        function opacityMap(progress) {
+            return progress;
+        }
 
         this.controller.inOpacityFrom(opacityMap);
         this.controller.outOpacityFrom(opacityMap);
@@ -58,27 +58,31 @@ define(function(require, exports, module) {
     }
 
     function _navigateToState(view, navigationBackwards) {
-        if(view === undefined || view === this._view) return;
+        if (view === undefined || view === this._view) {
+            return;
+        }
 
-        var leftEnterExit = function(progress) {
+        function leftEnterExit(progress) {
             return [progress - 1, 0];
-        };
+        }
 
-        var rightEnterExit = function(progress) {
+        function rightEnterExit(progress) {
             return [1 - progress, 0];
-        };
+        }
 
-        if(navigationBackwards) {
+        if (navigationBackwards) {
             this.controller.inOriginFrom(leftEnterExit);
             this.controller.outOriginFrom(rightEnterExit);
-        } else {
+        }
+        else {
             this.controller.inOriginFrom(rightEnterExit);
             this.controller.outOriginFrom(leftEnterExit);
         }
-        
+
         if (this._view === null) {
             this.controller.show(view, { duration : 0 });
-        } else {
+        }
+        else {
             this.controller.hide();
             this.controller.show(view);
         }

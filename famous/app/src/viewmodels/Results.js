@@ -4,7 +4,7 @@ define(function(require, exports, module) {
 
     var PageViewModel = require('prototypes/PageViewModel');
     var PropertySearch = require('models/PropertySearch');
-    
+
     /*
      * @name Results
      * @constructor
@@ -36,7 +36,7 @@ define(function(require, exports, module) {
 
     Results.prototype.total = function() {
         return this._total;
-    }
+    };
 
     Results.prototype.displayListing = function(listingGuid) {
         this._applicationState.navigateToState('listing', {
@@ -56,10 +56,10 @@ define(function(require, exports, module) {
             this._listings.push(item);
         }, this);
 
-        this._title = this._listings.length + " of " + this._total + " matches";
+        this._title = this._listings.length + ' of ' + this._total + ' matches';
         this._applicationState.updateHeading();
 
-        this._eventOutput.emit("update-listing", {
+        this._eventOutput.emit('update-listing', {
             searchTerm: this._searchTerm,
             listings: this._listings,
             total: this._total

@@ -27,10 +27,10 @@ define(function(require, exports, module) {
     };
 
     FavouriteButton.prototype.setFavourite = function(value) {
-        if(this._flipper.flipped !== value) {
+        if (this._flipper.flipped !== value) {
             this._flipper.flip({ duration: 0 });
         }
-    }
+    };
 
     function _createButton() {
         var diameter = this.options.size;
@@ -65,8 +65,8 @@ define(function(require, exports, module) {
             unfavourite: unfavouriteButton
         };
 
-        this._buttons.favourite.on("click", _buttonClicked.bind(this));
-        this._buttons.unfavourite.on("click", _buttonClicked.bind(this));
+        this._buttons.favourite.on('click', _buttonClicked.bind(this));
+        this._buttons.unfavourite.on('click', _buttonClicked.bind(this));
     }
 
     function _createAnimator() {
@@ -76,7 +76,7 @@ define(function(require, exports, module) {
 
         this._flipper.setBack(this._buttons.favourite);
         this._flipper.setFront(this._buttons.unfavourite);
-        
+
         this.add(new StateModifier({
             origin: [0.5, 0.5]
         })).add(this._flipper);
@@ -87,7 +87,7 @@ define(function(require, exports, module) {
             curve: Easing.outBounce,
             duration: 1000
         });
-        this._eventOutput.emit("click", event);
+        this._eventOutput.emit('click', event);
     }
 
     module.exports = FavouriteButton;

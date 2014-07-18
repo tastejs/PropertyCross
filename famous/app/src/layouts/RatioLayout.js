@@ -1,5 +1,6 @@
 
 define(function(require, exports, module) {
+    'use strict';
     var Entity = require('famous/core/Entity');
     var Transform = require('famous/core/Transform');
     var OptionsManager = require('famous/core/OptionsManager');
@@ -10,7 +11,9 @@ define(function(require, exports, module) {
     function RatioLayout(options) {
         this.options = Object.create(RatioLayout.DEFAULT_OPTIONS);
         this.optionsManager = new OptionsManager(this.options);
-        if (options) this.setOptions(options);
+        if (options) {
+            this.setOptions(options);
+        }
 
         this.id = Entity.register(this);
 
@@ -59,17 +62,26 @@ define(function(require, exports, module) {
      * Sets the associated ratio values for sizing the renderables.
      *
      * @method setMargins
-     * @param {Array} margins Array of margins corresponding to the percentage sizes each renderable should be
+     * @param {Array} ratios Array of margins corresponding to the percentage sizes each renderable should be
      */
     RatioLayout.prototype.setRatio = function setRatio(ratios, transition, callback) {
-        if (transition === undefined) transition = this.options.transition;
+        if (transition === undefined) {
+            transition = this.options.transition;
+        }
         var currRatios = this._ratio;
-        if (currRatios.get().length === 0) transition = undefined;
-        if (currRatios.isActive()) currRatios.halt();
+        if (currRatios.get().length === 0) {
+            transition = undefined;
+        }
+        if (currRatios.isActive()) {
+            currRatios.halt();
+        }
         currRatios.set(ratios, transition, callback);
     };
 
-    RatioLayout.prototype.getSize = function getSize() { return this._size; }
+    RatioLayout.prototype.getSize = function getSize() {
+        return this._size;
+    };
+
     /**
      * Apply changes from this component to the corresponding document element.
      * This includes changes to classes, styles, size, content, opacity, origin,
@@ -87,7 +99,7 @@ define(function(require, exports, module) {
 
         var ratio = this._ratio.get();
         var scaleFactor = parentSize[this.options.direction] / ratio[this.options.direction];
-        this._size = [ ratio[0] * scaleFactor , ratio[1] * scaleFactor ];
+        this._size = [ ratio[0] * scaleFactor, ratio[1] * scaleFactor ];
 
         var result = [];
         for (var i = 0; i < this._nodes.length; i++) {
@@ -97,8 +109,9 @@ define(function(require, exports, module) {
             });
         }
 
-        if (parentSize && (parentOrigin[0] !== 0 && parentOrigin[1] !== 0))
+        if (parentSize && (parentOrigin[0] !== 0 && parentOrigin[1] !== 0)) {
             parentTransform = Transform.moveThen([-parentSize[0]*parentOrigin[0], -parentSize[1]*parentOrigin[1], 0], parentTransform);
+        }
 
         return {
             transform: parentTransform,

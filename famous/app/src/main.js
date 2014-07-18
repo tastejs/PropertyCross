@@ -2,7 +2,6 @@
 define(function(require, exports, module) {
     'use strict';
     var Engine  = require('famous/core/Engine');
-    var Timer   = require('famous/utilities/Timer');
 
     var ApplicationStateViewModel = require('viewmodels/ApplicationState');
     var ApplicationStateView      = require('views/ApplicationState');
@@ -44,7 +43,7 @@ define(function(require, exports, module) {
 
     model.navigateToState('search');
 
-    document.addEventListener("deviceready", function() {
+    document.addEventListener('deviceready', function() {
         if (navigator.splashscreen) {
           navigator.splashscreen.hide();
         }

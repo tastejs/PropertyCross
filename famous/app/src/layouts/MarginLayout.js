@@ -1,5 +1,6 @@
 
 define(function(require, exports, module) {
+    'use strict';
     var Entity = require('famous/core/Entity');
     var Transform = require('famous/core/Transform');
     var OptionsManager = require('famous/core/OptionsManager');
@@ -10,7 +11,9 @@ define(function(require, exports, module) {
     function MarginLayout(options) {
         this.options = Object.create(MarginLayout.DEFAULT_OPTIONS);
         this.optionsManager = new OptionsManager(this.options);
-        if (options) this.setOptions(options);
+        if (options) {
+            this.setOptions(options);
+        }
 
         this.id = Entity.register(this);
 
@@ -25,7 +28,7 @@ define(function(require, exports, module) {
         margins : [0, 0, 0, 0],
         transition: false
     };
-    
+
     MarginLayout.prototype.add = function add(child) {
         var childNode = (child instanceof RenderNode) ? child : new RenderNode(child);
         this._nodes.push(childNode);
@@ -60,10 +63,16 @@ define(function(require, exports, module) {
      * @param {Array} margins Array of margins corresponding to the percentage sizes each renderable should be
      */
     MarginLayout.prototype.setMargins = function setMargins(margins, transition, callback) {
-        if (transition === undefined) transition = this.options.transition;
+        if (transition === undefined) {
+            transition = this.options.transition;
+        }
         var currMargins = this._margins;
-        if (currMargins.get().length === 0) transition = undefined;
-        if (currMargins.isActive()) currMargins.halt();
+        if (currMargins.get().length === 0) {
+            transition = undefined;
+        }
+        if (currMargins.isActive()) {
+            currMargins.halt();
+        }
         currMargins.set(margins, transition, callback);
     };
 
@@ -97,8 +106,9 @@ define(function(require, exports, module) {
             });
         }
 
-        if (parentSize && (parentOrigin[0] !== 0 && parentOrigin[1] !== 0))
+        if (parentSize && (parentOrigin[0] !== 0 && parentOrigin[1] !== 0)) {
             parentTransform = Transform.moveThen([-parentSize[0]*parentOrigin[0], -parentSize[1]*parentOrigin[1], 0], parentTransform);
+        }
 
         return {
             transform: parentTransform,

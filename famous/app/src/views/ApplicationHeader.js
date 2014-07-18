@@ -43,12 +43,12 @@ define(function(require, exports, module) {
                 textAlign: 'center'
             }
         });
-        
+
         this.layoutNode.add(this._title);
     }
 
     function _createBackButton() {
-        
+
         this.backButton = new Surface({
             content: 'Back',
             size: [60, undefined],
@@ -60,10 +60,9 @@ define(function(require, exports, module) {
             }
         });
 
-        var self = this;
-        this.backButton.on("click", function() {
-            self._model.goBack();
-        });
+        this.backButton.on('click', function() {
+            this._model.goBack();
+        }.bind(this));
 
         this.buttonModifier = new VisibilityLayout();
         this.buttonModifier.add(this.backButton);
@@ -72,8 +71,13 @@ define(function(require, exports, module) {
     }
 
     function _updateUI(data) {
-        this._title.setContent(data.title || "");
-        data.canGoBack ? this.buttonModifier.show() : this.buttonModifier.hide();
+        this._title.setContent(data.title || '');
+        if (data.canGoBack) {
+            this.buttonModifier.show();
+        }
+        else {
+            this.buttonModifier.hide();
+        }
     }
 
     module.exports = ApplicationHeader;

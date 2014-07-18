@@ -20,7 +20,7 @@ define(function(require, exports, module) {
 
     PageViewModel.prototype.getTitle = function() {
         return this._title;
-    }
+    };
 
     module.exports = PageViewModel;
 });

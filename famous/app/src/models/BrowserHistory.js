@@ -49,14 +49,15 @@ define(function(require, exports, module) {
         var state = event.state;
         var previousDepth = depth;
 
-        if(state !== null) {
+        if (state !== null) {
             depth = state.depth;
 
             _event.emit(depth < previousDepth ? 'pop-state' : 'push-state', {
                 url: state.url,
                 state: state.data
             });
-        } else {
+        }
+        else {
             depth = 0;
 
             _event.emit('pop-state', null);

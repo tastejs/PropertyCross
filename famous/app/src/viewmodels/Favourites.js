@@ -3,7 +3,7 @@ define(function(require, exports, module) {
     'use strict';
     var PageViewModel  = require('prototypes/PageViewModel');
     var FavouritesStore = require('models/FavouritesStore');
-    
+
     /*
      * @name Favourites
      * @constructor
@@ -12,12 +12,12 @@ define(function(require, exports, module) {
 
     function Favourites(applicationStateModel) {
         PageViewModel.apply(this, arguments);
-        
-        this._title = "Favourites";
+
+        this._title = 'Favourites';
 
         this._listings = FavouritesStore.query();
 
-        FavouritesStore.on("changed-favourites", _favouritesChanged.bind(this));
+        FavouritesStore.on('changed-favourites', _favouritesChanged.bind(this));
     }
 
     Favourites.prototype = Object.create(PageViewModel.prototype);
@@ -36,7 +36,7 @@ define(function(require, exports, module) {
     function _favouritesChanged(favourites) {
         this._listings = favourites;
 
-        this._eventOutput.emit("update-listing", this._listings);
+        this._eventOutput.emit('update-listing', this._listings);
     }
 
     module.exports = Favourites;

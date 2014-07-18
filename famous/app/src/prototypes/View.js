@@ -30,11 +30,11 @@ define(function(require, exports, module) {
         this._model = model;
         this._modelEvents.subscribe(model);
         this._modelEvents.emit('bound-model', model);
-    }
+    };
 
     View.prototype.getModel = function() {
         return this._model;
-    }
+    };
 
     View.prototype.render = function render() {
         return this.id;
@@ -44,7 +44,6 @@ define(function(require, exports, module) {
         var parentSize = context.size;
         var parentTransform = context.transform;
         var parentOpacity = context.opacity;
-        var parentOrigin = context.origin;
 
         var result = [{
             target: this._node.render()

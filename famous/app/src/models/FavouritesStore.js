@@ -6,12 +6,12 @@ define(function(require, exports, module) {
     var EventHandler = require('famous/core/EventHandler');
 
     var _event = new EventHandler();
-    var _key = "Favourites";
+    var _key = 'Favourites';
     var _cache = LocalStorage.readObject(_key);
 
     function onChange() {
         LocalStorage.writeObject(_key, _cache);
-        _event.emit("changed-favourites", FavouritesStore.query());
+        _event.emit('changed-favourites', FavouritesStore.query());
     }
 
     var FavouritesStore = {
@@ -20,7 +20,7 @@ define(function(require, exports, module) {
         },
         query: function() {
             var result = [];
-            for(var key in _cache) {
+            for (var key in _cache) {
                 result.push(_cache[key]);
             }
             return result;

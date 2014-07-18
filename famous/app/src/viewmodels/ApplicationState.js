@@ -6,7 +6,6 @@ define(function(require, exports, module) {
     var HeaderViewModel = require('viewmodels/ApplicationHeader');
     var ViewModel       = require('prototypes/ViewModel');
 
-
     /*
      * @name ApplicationState
      * @constructor
@@ -43,7 +42,7 @@ define(function(require, exports, module) {
     };
 
     ApplicationState.prototype.displayUserNotification = function(title, details) {
-        if(this._userNotifier !== undefined) {
+        if (this._userNotifier !== undefined) {
             return this._userNotifier.displayUserNotification(title, details);
         }
         return false;
@@ -59,7 +58,9 @@ define(function(require, exports, module) {
 
     ApplicationState.prototype.navigateToState = function(name, options) {
         var stateDefinition = this._stateDefinitions[name];
-        if(stateDefinition === undefined) return false;
+        if (stateDefinition === undefined) {
+            return false;
+        }
 
         var PageViewModel = stateDefinition.viewmodel;
         var View = stateDefinition.view;
@@ -68,9 +69,10 @@ define(function(require, exports, module) {
         view.bindToModel(new PageViewModel(this, options));
 
         var url = '#' + stateDefinition.url;
-        if(BrowserHistory.noState()) {
+        if (BrowserHistory.noState()) {
             BrowserHistory.replaceState(options, name, url);
-        } else {
+        }
+        else {
             BrowserHistory.pushState(options, name, url);
         }
 
@@ -86,16 +88,16 @@ define(function(require, exports, module) {
 
         this._eventOutput.emit('state-navigation', {
             goingBack: goingBack,
-            view: view,
+            view: view
         });
     };
 
     ApplicationState.prototype.updateHeading = function() {
         this._eventOutput.emit('update-heading', this._view);
-    }
+    };
 
     function _handlePopState(data) {
-        if(data !== null) {
+        if (data !== null) {
             var view = this._previousViews[data.url];
 
             this.setCurrentView(view, true);

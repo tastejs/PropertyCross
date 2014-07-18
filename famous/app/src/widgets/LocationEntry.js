@@ -3,7 +3,6 @@ define(function(require, exports, module) {
     'use strict';
     var StateModifier = require('famous/modifiers/StateModifier');
     var Surface       = require('famous/core/Surface');
-    var Transform     = require('famous/core/Transform');
 
     var MarginLayout = require('layouts/MarginLayout');
 
@@ -40,15 +39,14 @@ define(function(require, exports, module) {
         });
         this.node.add(surface);
 
-        var self = this;
         var eventHandler = this._eventOutput;
 
-        surface.on('click', function(event) {
+        surface.on('click', function() {
             eventHandler.emit('select-location', {
-                query: self.options.query,
-                title: self.options.title
+                query: this.options.query,
+                title: this.options.title
             });
-        });
+        }.bind(this));
     }
 
     function _createTitle() {

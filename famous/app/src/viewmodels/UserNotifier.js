@@ -2,7 +2,7 @@
 define(function(require, exports, module) {
     'use strict';
     var PageViewModel = require('prototypes/PageViewModel');
-    
+
     /*
      * @name UserNotifier
      * @constructor

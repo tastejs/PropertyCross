@@ -15,7 +15,7 @@ define(function(require, exports, module) {
     function ListingDetails(applicationStateModel, state) {
         PageViewModel.apply(this, arguments);
 
-        this._title = "Property Details";
+        this._title = 'Property Details';
 
         this._listing = PropertyStore.load(state.guid);
         this._isFavourite = !!FavouritesStore.load(state.guid);
@@ -33,12 +33,13 @@ define(function(require, exports, module) {
 
     ListingDetails.prototype.toggleFavourites = function() {
         this._isFavourite = !this._isFavourite;
-        if(this._isFavourite) {
+        if (this._isFavourite) {
             FavouritesStore.store(this._listing);
-        } else {
+        }
+        else {
             FavouritesStore.remove(this._listing);
         }
-    }
+    };
 
     module.exports = ListingDetails;
 });

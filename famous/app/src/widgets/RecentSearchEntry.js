@@ -41,16 +41,15 @@ define(function(require, exports, module) {
         });
         this.node.add(surface);
 
-        var self = this;
         var eventHandler = this._eventOutput;
 
-        surface.on('click', function(event) {
+        surface.on('click', function() {
             eventHandler.emit('select-recentsearch', {
-                query: self.options.query,
-                title: self.options.title,
-                count: self.options.count
+                query: this.options.query,
+                title: this.options.title,
+                count: this.options.count
             });
-        });
+        }.bind(this));
     }
 
     function _createTitle() {

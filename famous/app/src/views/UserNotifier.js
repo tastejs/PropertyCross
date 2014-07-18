@@ -61,7 +61,7 @@ define(function(require, exports, module) {
         var enterLeaveTransition = {
             duration: this.options.transitionDuration,
             curve: 'easeInOut'
-        }
+        };
 
         state.set(1, enterLeaveTransition)
             .set(1, {

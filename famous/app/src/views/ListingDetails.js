@@ -71,10 +71,9 @@ define(function(require, exports, module) {
             size: buttonSize
         });
 
-        var self = this;
-        this._favouriteButton.on("click", function() {
+        this._favouriteButton.on('click', function() {
             self._model.toggleFavourites();
-        });
+        }.bind(this));
 
         var node = new RenderNode();
 
@@ -141,14 +140,14 @@ define(function(require, exports, module) {
         this._modelEvents.on('bound-model', function(model) {
             var listing = model.listing();
 
-            var rooms = listing.bedrooms + " beds, " + listing.bathrooms + " bathrooms";
+            var rooms = listing.bedrooms + ' beds, ' + listing.bathrooms + ' bathrooms';
 
-            this._imageBanner.setContent(listing.img.url)
+            this._imageBanner.setContent(listing.img.url);
             this._title.setContent(listing.title);
             this._price.setContent(listing.price);
             this._rooms.setContent(rooms);
             this._summary.setContent(listing.summary);
-            
+
             this._favouriteButton.setFavourite(model.isFavourite());
         }.bind(this));
     }

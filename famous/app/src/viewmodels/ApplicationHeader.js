@@ -4,8 +4,7 @@ define(function(require, exports, module) {
 
     var BrowserHistory  = require('models/BrowserHistory');
     var PageViewModel   = require('prototypes/PageViewModel');
-    var PropertySearch  = require('models/PropertySearch');
-    
+
     /*
      * @name ApplicationHeader
      * @constructor
@@ -14,7 +13,7 @@ define(function(require, exports, module) {
 
     function ApplicationHeader(applicationStateModel) {
         PageViewModel.apply(this, arguments);
-        
+
         this._applicationState.on('state-navigation', _stateNavigation.bind(this));
         this._applicationState.on('update-heading', _updateHeading.bind(this));
     }
@@ -24,7 +23,7 @@ define(function(require, exports, module) {
 
     ApplicationHeader.prototype.goBack = function() {
         this._applicationState.goBack();
-    }
+    };
 
     function _stateNavigation(data) {
         _updateHeading.call(this, data.view);
@@ -35,7 +34,7 @@ define(function(require, exports, module) {
 
         this._eventOutput.emit('update-ui', {
             title: pageViewModel.getTitle(),
-            canGoBack: BrowserHistory.canGoBack(),
+            canGoBack: BrowserHistory.canGoBack()
         });
     }
 
