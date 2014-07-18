@@ -30,7 +30,6 @@ npm install -g grunt-cli bower
 To get started, you run
 
 ```
-cd vendor
 npm install && bower install
 ```
 

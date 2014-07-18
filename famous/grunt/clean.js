@@ -10,5 +10,12 @@ module.exports = {
       ]
     }]
   },
-  server: '.tmp'
+  server: '.tmp',
+  phonegap: [
+    'build',
+    'app.zip',
+    '*.apk',
+    '*.ipa',
+    '*.xap'
+  ]
 };
