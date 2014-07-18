@@ -10,8 +10,13 @@ The PropertyCross implementation depends on Famo.us to handle the rendering, ani
 
 ###Interesting Observations with Famo.us
 
+#### Mobile pages with Famo.us
+Famo.us does not define a mobile page, or a mechanism to navigating between them.  This meant the implementation took responsibility for tracking the routing and page transitions.
+
+Libraries like 'crossroads.js' may be a good provide a good fit for handling the routing of pages and state, however these were not considered when this app was initially implemented.
+
 ####MVVM with Famo.us
-In order bring MVVM into the implementation, the event system in Famo.us was used alongside the Prototypical Inheritance Javascript.  The architecture of Famo.us enabling you to create your custom views and receive and send events, it seemed acceptable to allow views to have direct access to view models and to listen to respond to events emitted view models.
+In order bring MVVM into the implementation, the event system in Famo.us was used alongside the Prototypical Inheritance in Javascript.  The architecture of Famo.us enables you to create your custom views and receive and send events, it seemed acceptable to allow views to have direct access to view models and to listen to respond to events emitted view models.
 
 With the event system in Famo.us providing some useful features (such as event piping and event mapping), a Model - View - Presenter or Model - View - Adaptor architecture might provide a better mapping.  For an implementation as complex as PropertyCross, this did not seem to be worth the effort, but for more complex applications this architecture may be a more suitable / scalable solution.
 
