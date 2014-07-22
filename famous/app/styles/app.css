@@ -1,0 +1,20 @@
+
+@-ms-viewport{width:320px;user-zoom:fixed;max-zoom:1;min-zoom:1;}
+
+html {
+  background: #fff;
+}
+
+body {
+    margin: 0;
+    font-family: sans-serif;
+    -ms-content-zooming: none;
+    -ms-user-select: none;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+}
+
+.famous-surface {
+    box-sizing: border-box;
+}

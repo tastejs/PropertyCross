@@ -1,0 +1,77 @@
+
+define(function(require, exports, module) {
+    'use strict';
+    var StateModifier = require('famous/modifiers/StateModifier');
+    var Surface       = require('famous/core/Surface');
+
+    var MarginLayout = require('layouts/MarginLayout');
+
+    var View         = require('famous/core/View');
+
+    function LocationEntry() {
+        View.apply(this, arguments);
+
+        var modifier = new StateModifier({
+            size: this.options.size
+        });
+
+        this.node = this.add(modifier);
+        this._loading = false;
+
+        _createBacking.call(this);
+        _createTitle.call(this);
+    }
+
+    LocationEntry.prototype = Object.create(View.prototype);
+    LocationEntry.prototype.constructor = LocationEntry;
+
+    LocationEntry.DEFAULT_OPTIONS = {
+        query: 'query',
+        size: [undefined, undefined],
+        title: 'title'
+    };
+
+    function _createBacking() {
+        var surface = new Surface({
+            properties: {
+                borderBottom: '1px solid #DDD'
+            }
+        });
+        this.node.add(surface);
+
+        var eventHandler = this._eventOutput;
+
+        surface.on('click', function() {
+            eventHandler.emit('select-location', {
+                query: this.options.query,
+                title: this.options.title
+            });
+        }.bind(this));
+    }
+
+    function _createTitle() {
+
+        var layout = new MarginLayout({
+            margins: [10, 10, 10, 10]
+        });
+
+        var title = new Surface({
+            content: this.options.title,
+            size: [undefined, 20],
+            properties: {
+                fontSize: '16px',
+                lineHeight: '20px',
+                overflow: 'hidden',
+                pointerEvents: 'none',
+                textOverflow: 'ellipsis',
+                whiteSpace: 'nowrap'
+            }
+        });
+
+        layout.add(title);
+
+        this.node.add(layout);
+    }
+
+    module.exports = LocationEntry;
+});

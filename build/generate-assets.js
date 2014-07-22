@@ -48,8 +48,8 @@ async.series([
     ["assets/frameworks/mgwt.png", "mgwt/src/main/webapp/assets/icons/icon-72-2x.png", 144],
     ["assets/frameworks/native.png", "native/ios/Icon.png", 57],
     ["assets/frameworks/native.png", "native/ios/Icon@2x.png", 114],
-    ["assets/frameworks/native.png", "native/ios/Property Finder/Icon.png", 57],
-    ["assets/frameworks/native.png", "native/ios/Property Finder/Icon@2x.png", 114],
+    ["assets/frameworks/native.png", "native/ios/PropertyCross/Icon.png", 57],
+    ["assets/frameworks/native.png", "native/ios/PropertyCross/Icon@2x.png", 114],
     ["assets/frameworks/native.png", "native/windowsphone/PropertyFinder/ApplicationIcon.png", 66],
     ["assets/frameworks/native.png", "native/windowsphone/PropertyFinder/ApplicationTileIcon.png", 173],
     ["assets/frameworks/rhomobile.png", "rhomobile/icon/icon.png", 72],
@@ -176,7 +176,16 @@ async.series([
     ["assets/frameworks/xamarinmvvmcross.png", "xamarinmvvmcross/PropertyCross.Droid/Resources/drawable-mdpi/ic_launcher.png", 48],
     ["assets/frameworks/xamarinmvvmcross.png", "xamarinmvvmcross/PropertyCross.Droid/Resources/drawable-xhdpi/ic_launcher.png", 96],
     ["assets/frameworks/xamarinmvvmcross.png", "xamarinmvvmcross/PropertyCross.Touch/Icon.png", 57],
-    ["assets/frameworks/xamarinmvvmcross.png", "xamarinmvvmcross/PropertyCross.Touch/Icon@2x.png", 114]
+    ["assets/frameworks/xamarinmvvmcross.png", "xamarinmvvmcross/PropertyCross.Touch/Icon@2x.png", 114],
+    ["assets/frameworks/famous.png", "famous/app/assets/icons/36x36.png", 36],
+    ["assets/frameworks/famous.png", "famous/app/assets/icons/48x48.png", 48],
+    ["assets/frameworks/famous.png", "famous/app/assets/icons/72x72.png", 72],
+    ["assets/frameworks/famous.png", "famous/app/assets/icons/96x96.png", 96],
+    ["assets/frameworks/famous.png", "famous/app/assets/icons/icon-57.png", 57],
+    ["assets/frameworks/famous.png", "famous/app/assets/icons/icon-72.png", 72],
+    ["assets/frameworks/famous.png", "famous/app/assets/icons/icon-57-2x.png", 114],
+    ["assets/frameworks/famous.png", "famous/app/assets/icons/icon-72-2x.png", 144],
+    ["assets/frameworks/famous.png", "famous/app/assets/icons/ApplicationIcon.png", 66]
   ]),
 
   generateSplashscreens.bind(null, "assets/splashscreen-bottom-640x640.png", [
