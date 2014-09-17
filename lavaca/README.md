@@ -9,7 +9,7 @@ An implementation of the PropertyCross app using Lavaca.
 
 * An AMD architecture utilizing ([require.js](http://requirejs.org/))
 * A build system leveraging ([Grunt](http://gruntjs.com/))
-* A JavaScript MVC framework -> [learn more](3.0.-MVC-in-Lavaca)
+* A JavaScript MVC framework -> [learn more](http://getlavaca.com/#/guide/MVC-in-Lavaca#@0)
 * Integration with [Cordova / PhoneGap](http://phonegap.com) out-of-the-box
 * A JavaScript documentation generation system ([YUIDoc](http://yui.github.io/yuidoc/))
 * A unit testing framework ([Jasmine](http://pivotal.github.io/jasmine/))
