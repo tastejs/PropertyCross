@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en" ng-app="app">
+  <head>
+    <meta charset="utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <title>PropertyCross</title>  
+    
+    <link rel="stylesheet" href="lib/onsen/css/onsenui.css">  
+    <link rel="stylesheet" href="styles/onsen-css-components.css">  
+    <link rel="stylesheet" href="styles/app.css"/>
+    
+    <script src="lib/onsen/js/angular/angular.js"></script>    
+    <script src="lib/onsen/js/angular/angular-resource.js"></script>    
+    <script src="lib/onsen/js/onsenui.js"></script>    
+    
+    <script src="cordova.js"></script>  
+    <script src="js/app.js"></script>  
+    <script src="js/services.js"></script>  
+  </head>
+
+  <body ng-controller="AppController">    
+    <ons-navigator var="app.navigator">
+      <ons-page>
+
+        <ons-toolbar>
+          <div class="center">PropertyCross</div>
+          <div class="right">
+            <ons-toolbar-button ng-click="app.navigator.pushPage('favourites.html')">Faves</ons-toolbar-button>
+          </div>
+        </ons-toolbar>
+        <p>
+          Use the form below to search for houses to buy. You can search by place-name, postcode, or click 'My location', to search in your current location!
+        </p>
+
+        <form ng-submit="search()">
+          <p>
+            <input type="search" ng-model="data.query" value="" placeholder="Search" class="search-input">
+          </p>
+
+          <p>
+            <ons-button ng-click="search()">Go</ons-button>
+            <ons-button ng-click="searchByLocation()">My location</ons-button>
+          </p>
+        </form>
+
+        <p ng-show="data.searchError" class="search-error">{{ data.errorMessage }}</p>
+
+        <div ng-show="data.recent.length > 0 && data.suggestions.length == 0">
+          <h4>Recent searches:</h4>
+          <ons-list modifier="inset">
+            <ons-list-item
+              modifier="tappable" 
+              ng-repeat="s in data.recent|reverse" 
+              ng-click="search(s.query)">
+              {{ s.query }} <small>({{ s.results }})</small>
+            </ons-list-item>
+          </ons-list>
+        </div>
+
+        <div ng-show="data.suggestions.length > 0">
+          <h4>Please select a location below:</h4>
+          <ons-list modifier="inset">
+            <ons-list-item 
+              modifier="tappable" 
+              ng-repeat="suggestion in data.suggestions" 
+              ng-click="search(suggestion.place_name)">
+              {{ suggestion.long_title }}
+            </ons-list-item>
+          </ons-list>
+        </div>
+
+      </ons-page>
+    </ons-navigator>
+
+    <ons-template id="favourites.html">
+      <ons-page ng-controller="FavouritesController">
+        <ons-toolbar>
+          <div class="left"><ons-back-button>Back</ons-back-button></div>
+          <div class="center">Favourites</div>
+        </ons-toolbar>
+
+        <p ng-hide="hasFavourites()">
+          No favs!
+        </p>
+
+        <ons-list ng-show="hasFavourites()">
+          <ons-list-item 
+            ng-repeat="(guid, favourite) in favourites" 
+            ng-click="showDetails(guid)" 
+            modifier="chevron" 
+            class="list-item-container">
+            <div class="list-item-left">
+              <img ng-src="{{ favourite.thumb_url }}" class="list-item-image">
+            </div>
+            <div class="list-item-right">
+              <div class="list-item-content">
+                <div class="list-item-price">&pound;{{ favourite.price|largeNumber }}</div>
+                <span class="list-item-description">{{ favourite.title|fixTitle }}</span>
+              </div>
+            </div> 
+          </ons-list-item>
+        </ons-list>
+      </ons-page>
+    </ons-template>
+
+    <ons-template id="results.html">
+      <ons-page ng-controller="ResultsController">
+        <ons-toolbar>
+          <div class="left"><ons-back-button>Back</ons-back-button></div>
+          <div class="center">{{ data.listings.length }} of {{ data.result.total_results }} matches</div>
+        </ons-toolbar>
+        <ons-list>
+          <ons-list-item 
+            ng-repeat="listing in data.listings" 
+            ng-click="showDetails($index)" 
+            modifier="chevron" 
+            class="list-item-container">
+            <div class="list-item-left">
+              <img ng-src="{{ listing.thumb_url }}" class="list-item-image">
+            </div>
+            <div class="list-item-right">
+              <div class="list-item-content">
+                <div class="list-item-price">&pound;{{ listing.price|largeNumber }}</div>
+                <span class="list-item-description">{{ listing.title|fixTitle }}</span>
+              </div>
+            </div> 
+          </ons-list-item>
+          <ons-list-item 
+            ng-show="data.result.page < data.result.total_pages" 
+            modifier="chevron" 
+            ng-click="loadMore()" 
+            class="list-item-container">
+            <div class="list-item-right">
+              <div style="margin-left: 0px;" class="list-item-content">
+                <div class="list-item-price">
+                  <span ng-show="data.loadingMore">
+                    Loading...
+                  </span>
+                  <span ng-hide="data.loadingMore">
+                    Load more...
+                  </span>
+                </div>
+                <span class="list-item-description">
+                  Results for <strong>{{ data.query }}</strong>, showing <strong>{{ data.listings.length }}</strong> of <strong>{{ data.result.total_results }}</strong> properties
+                </span>
+              </div>
+            </div>            
+          </ons-list-item>
+        </ons-list>   
+      </ons-page>
+    </ons-template>
+
+    <ons-template id="details.html">
+      <ons-page ng-controller="DetailsController">
+        <ons-toolbar>
+          <div class="left"><ons-back-button>Back</ons-back-button></div>
+          <div class="center">Property Details</div>
+          <div class="right">
+            <ons-toolbar-button ng-click="toggleFavourite()">
+              <ons-icon class="favourite-heart" size="35px" icon="{{ isFavourite() ? 'ion-ios7-heart' : 'ion-ios7-heart-outline' }}"></ons-icon>
+            </ons-toolbar-button>
+          </div>
+        </ons-toolbar>
+        <h2>&pound;{{ data.current.price|largeNumber }}</h2>
+        <h3>{{ data.current.title|fixTitle }}</h3>
+        <p>
+          <img ng-src="{{ data.current.img_url }}"></img>
+        </p>
+        <p>{{ data.current.bedroom_number }} bed, {{ data.current.bathroom_number }} bathrooms</p>
+        <p>{{ data.current.summary }}</p> 
+      </ons-page>
+    </ons-template>
+
+    <ons-modal var="app.modal">
+      <ons-icon icon="spinner" spin="true" size="50px"></ons-icon>
+    </ons-modal>
+  </body>  
+</html>
