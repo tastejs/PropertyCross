@@ -59,6 +59,7 @@
 
     $scope.searchByLocation = function() {
       app.modal.show();
+      $scope.hideError();
 
       navigator.geolocation.getCurrentPosition(function(location) {
         var coords = location.coords.latitude + "," + location.coords.longitude;
