@@ -1,10 +1,16 @@
 {
-  "common": [
-    "www/**"
-  ],
-  "windowsphone":[
-    "merges/winphone/**"
-  ],
+  "common": {
+    "include": "www/**",
+    "exclude": [
+      "www/assets/*",
+      "www/lib/*",
+      "*.gif"
+    ]
+  },
+  "windowsphone": {
+    "include": "merges/winphone/**",
+    "exclude": "*.png"
+  },
   "android":[
     "merges/android/**"
   ],
