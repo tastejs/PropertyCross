@@ -10,3 +10,4 @@ app.zip
 *.xap
 /neomad/bin
 /neomad/out
+*.lloc
