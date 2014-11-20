@@ -12,14 +12,14 @@ find('.', "*/stats-config.json", function (statsConfigFiles) {
         stats = {},
         deferred = Q.defer();
     async.forEach(Object.keys(statsConfig), function(key, callback) {
-      countChars(statsRoot, statsConfig[key], function(error, count) {
+      count(statsRoot, statsConfig[key], process.argv.indexOf("lloc") > -1 ? countLogicalLinesOfCode : countLinesOfCode, function(error, count) {
         if (!error && count > 0) {
           stats[key] = count;
         }
         callback(error);
       });
     }, function() {
-      deferred.resolve({ pie: createPie(stats), statsRoot: statsRoot });
+      deferred.resolve({ statsRoot: statsRoot, lineCounts: stats, pie: createPie(stats) });
     });
     return deferred.promise;
   });
@@ -40,16 +40,62 @@ function printYAML(stats) {
 function printJSON(stats) {
   console.log(JSON.stringify({
     stats: stats
-  }));
+  }, null, 2));
 }
 
-function countChars(root, filter, callback) {
+function countLogicalLinesOfCode(file) {
+  var fileExt = file.split('.').pop();
+  if (fileExt == "lloc") {
+    return 0;
+  }
+
+  var fileContent = fs.readFileSync(file).toString();
+
+  if (["h", "m", "cs", "java", "js", "css", "scss", "as"].indexOf(fileExt) > -1) { // C-style
+    // Remove block comments: /* foo */
+    fileContent = fileContent.replace(/\/\*([\s\S]*?)\*\//g, '');
+    // Remove lines containing only line comment
+    fileContent = fileContent.replace(/^\s*\/\/.*?$/gm, '');
+    // Remove lines containing only open/close item/block ({}[],)
+    fileContent = fileContent.replace(/^(\s|[\{\}\[\]\,])*?$/gm, '');
+  } else if (["erb", "mxml", "xml", "html"].indexOf(fileExt) > -1) { // XML-style
+    // Remove block comments: <!-- foo -->
+    fileContent = fileContent.replace(/\<\!\-\-([\s\S]*?)\-\-\>/g, '');
+  } else if (["rb", "coffee"].indexOf(fileExt) > -1) { // Ruby-style
+    // Remove lines containing only line comment: # foo
+    fileContent = fileContent.replace(/^\s*#[^#].+?$/gm, '');
+    if (fileExt == "rb") {
+      // Remove lines containing only close block ("end")
+      fileContent = fileContent.replace(/^\s*end.*?$/gm, '');
+    } else if (fileExt == "coffee") {
+      // Remove block comments: ### foo ###
+      fileContent = fileContent.replace(/###([\s\S]*?)###/g, '');
+    }
+  } else {
+    console.log("Warning: File " + file + " is not classified for LLOC analysis");
+  }
+
+  // Remove blank lines
+  fileContent = fileContent.replace(/^\s*$/gm, '');
+
+  if (process.argv.indexOf("verify") > -1) {
+      fs.writeFileSync(file + ".lloc", fileContent);
+  }
+
+  return fileContent.match(/\n/g).length;
+}
+
+function countLinesOfCode(file) {
+  return fs.readFileSync(file).toString().match(/\n/g).length
+}
+
+function count(root, filter, counter, callback) {
   if (!filter) {
     return callback(Number.NaN);
   }
   find(root, filter, function (files) {
     var count = files.map(function(file) {
-      var lines = fs.readFileSync(file).toString().match(/\n/g).length
+      var lines = counter(file);
 //      console.log(file, lines);
       return lines;
     }).reduce(function (sum, chars) {
