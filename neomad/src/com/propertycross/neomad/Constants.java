@@ -74,7 +74,7 @@ public class Constants implements TargetInfo {
 	 * Conditioning by platform
 	 */
 	static {
-		if (WINDOWS_PHONE_7) {
+		if (WINDOWS_PHONE) {
 			SCREEN_WITH_BG_IMAGE = true;
 			LAYOUT_PATH = "metro";
 			MENU_ITEM_PATH = "metro";
