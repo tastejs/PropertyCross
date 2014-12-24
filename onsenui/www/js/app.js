@@ -63,7 +63,7 @@
 
       var rnd = function(num) {
         return Math.round(num * 100) / 100;
-      }
+      };
 
       navigator.geolocation.getCurrentPosition(function(location) {
         var coords = rnd(location.coords.latitude) + "," + rnd(location.coords.longitude);
