@@ -3908,4 +3908,5 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   vertical-align: middle;
   text-align: center;
   color: #fff;
+  white-space: normal;
 }
