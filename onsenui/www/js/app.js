@@ -61,8 +61,12 @@
       app.modal.show();
       $scope.hideError();
 
+      var rnd = function(num) {
+        return Math.round(num * 100) / 100;
+      }
+
       navigator.geolocation.getCurrentPosition(function(location) {
-        var coords = location.coords.latitude + "," + location.coords.longitude;
+        var coords = rnd(location.coords.latitude) + "," + rnd(location.coords.longitude);
         $scope.search(coords);
       }, function() {
         app.modal.hide();

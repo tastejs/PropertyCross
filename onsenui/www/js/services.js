@@ -36,7 +36,7 @@
 
         resource.search(params, function(response) {
           var r = response.response;
-          if (query.length > 0) {
+          if (query.length > 0 && r.listings && r.listings.length > 0) {
             RecentSearches.add(query.toLowerCase(), r.total_results ? r.total_results : 0);
           }
           q.resolve(r);
