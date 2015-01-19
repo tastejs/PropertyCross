@@ -1,0 +1,15 @@
+{
+  "common": "PropertyCross_Intersoft.Core/**/*.cs",
+  "ios": {
+    "include": "PropertyCross_Intersoft.iOS/**/*.cs",
+    "exclude": "PropertyCross_Intersoft.iOS/**/*.designer.cs"
+  },
+  "android": {
+    "include": "PropertyCross_Intersoft.Android/**/*.cs",
+    "exclude": "PropertyCross_Intersoft.Android/**/*.Designer.cs"
+  },
+  "windowsphone": {
+    "include": "PropertyCross_Intersoft.WinPhone/**/*.cs",
+    "exclude": "PropertyCross_Intersoft.WinPhone/**/*.designer.cs"
+  }
+}

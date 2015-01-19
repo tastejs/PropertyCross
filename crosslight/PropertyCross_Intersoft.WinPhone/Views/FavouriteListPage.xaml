@@ -1,0 +1,70 @@
+﻿<Intersoft:PhoneApplicationPage
+    x:Class="PropertyCross_Intersoft.WinPhone.Views.FavouriteListPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:Intersoft="clr-namespace:Intersoft.Crosslight.WinPhone;assembly=Intersoft.Crosslight.WinPhone"
+    xmlns:IntersoftServices="clr-namespace:Intersoft.Crosslight.WinPhone.Services;assembly=Intersoft.Crosslight.WinPhone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:behaviors="clr-namespace:Intersoft.Crosslight.WinPhone.Behaviors;assembly=Intersoft.Crosslight.WinPhone"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="PortraitOrLandscape"  Orientation="Portrait"
+    shell:SystemTray.IsVisible="True">
+
+    <!--Data context is set to sample data above and LayoutRoot contains the root grid where all other page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+
+        <StackPanel Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock Text="Favourites" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle2Style}"/>
+        </StackPanel>
+
+        <!--ContentPanel contains LongListSelector and LongListSelector ItemTemplate. Place additional content here-->
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <phone:LongListSelector Margin="0,0,-12,0" ItemsSource="{Binding SourceItems}"
+                                    IsGroupingEnabled="false"
+                                    IntersoftServices:NavigationService.EnableItemNavigation="true"
+                                    IntersoftServices:NavigationService.DetailNavigationTarget="PropertyDetailViewModel">
+
+                <phone:LongListSelector.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="0,0,0,17">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Border Width="60" Height="60" Grid.Column="0">
+                                <Image Source="{Binding ThumbUrl}" Stretch="UniformToFill"/>
+                            </Border>
+                            <StackPanel Grid.Column="1">
+                                <TextBlock Text="{Binding PriceFormatted2}" TextTrimming="WordEllipsis" Style="{StaticResource PhoneTextLargeStyle}"/>
+                                <TextBlock Text="{Binding Title}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </phone:LongListSelector.ItemTemplate>
+            </phone:LongListSelector>
+        </Grid>
+
+        <!--Uncomment to see an alignment grid to help ensure your controls are
+            aligned on common boundaries.  The image has a top margin of -32px to
+            account for the System Tray. Set this to 0 (or remove the margin altogether)
+            if the System Tray is hidden.
+
+            Before shipping remove this XAML and the image itself.-->
+        <!--<Image Source="/Assets/AlignmentGrid.png" VerticalAlignment="Top" Height="800" Width="480" Margin="0,-32,0,0" Grid.Row="0" Grid.RowSpan="2" IsHitTestVisible="False" />-->
+    </Grid>
+
+
+
+</Intersoft:PhoneApplicationPage>

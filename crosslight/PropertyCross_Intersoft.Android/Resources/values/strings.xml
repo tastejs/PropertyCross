@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="add">Add</string>
+  <string name="application_name">PropertyCross_Intersoft.Android</string>
+  <string name="cancel">Cancel</string>
+  <string name="check_all">Select All</string>
+  <string name="delete">Delete</string>
+  <string name="display_name">Display Name</string>
+  <string name="done">Done</string>
+  <string name="Search">Favourites</string>
+  <string name="dont_have_account">Don\'t have an account?</string>
+  <string name="learn_more">Learn More</string>
+  <string name="login_with_facebook">Login with Facebook</string>
+  <string name="mark_as_sold">Mark as Sold</string>
+  <string name="more">More</string>
+  <string name="password">Password</string>
+  <string name="powered_by">Powered by Crosslight®</string>
+  <string name="register">Register</string>
+  <string name="save">Save</string>
+  <string name="search">Search</string>
+  <string name="username">Username</string>
+  <string name="update">Update</string>
+  <string name="welcome">Welcome to My App</string>
+  <string name="MarkAsSold">Mark as Sold</string>
+</resources>
