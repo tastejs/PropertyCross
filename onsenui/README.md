@@ -2,7 +2,7 @@
 
 ##Overview
 
-This is an implementation of the PropertyCross app using [Onsen UI](http://onsen.ui). Onsen UI is a free and open source hybrid app framework released under the Apache License. It provides native-like UI components using HTML5, JavaScript and CSS. It's built using Angular directives to provide custom tags. The framework includes useful components like sliding menu, list view, dialogs, etc. that are all optimized for mobile development.
+This is an implementation of the PropertyCross app using [Onsen UI](http://onsen.io/). Onsen UI is a free and open source hybrid app framework released under the Apache License. It provides native-like UI components using HTML5, JavaScript and CSS. It's built using Angular directives to provide custom tags. The framework includes useful components like sliding menu, list view, dialogs, etc. that are all optimized for mobile development.
 
 Although Onsen UI is designed to be used with any SPA framework, since it's built using Angular they work great together when designing apps. In the PropertyCross implementation Angular controllers and services are used for the application logic.
 
