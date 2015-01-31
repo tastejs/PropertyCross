@@ -2,9 +2,9 @@
 
 This project demonstrates the Crosslight-powered Property app for iOS 8, Android, and Windows Phone. It uses the specifications and features as exposed in [PropertyCross](http://www.propertycross.com) site. The purpose of the PropertyCross project is to help developers discover the available development tools with their own language, approaches, and design pattern. Ultimately, this helps developers to pick the right tools for their cross-platform mobile apps development.
 
-Crosslight is an advanced cross-platform mobile development toolset that makes enterprise mobile apps development truly a breeze. Leveraging extensible architecture, MVVM design pattern and integration with Xamarin Platforms, Crosslight lets you easily build powerful iOS, Android and Windows native apps with a common application codebase including domain model, data access, and user interaction logic. And that's nearly 96% of your project's codebase. Built with cutting-edge portable framework and MVVM pattern, Crosslight enables you to build cross-platform mobile apps by leveraging the programming skills and tools you loved – such as C#, MVVM, .NET and Visual Studio.
+[Crosslight](http://www.intersoftpt.com/crosslight) is a commercial cross-platform mobile development toolset from Intersoft which is geared towards enterprise app development. With Crosslight you use an extensible MVVM architecture and the Xamarin platform to build native iOS, Android and Windows Phone applications from a common codebase.
 
-The Crosslight implementation of PropertyCross offers the highest level of code sharing among all platforms, contributing 100% UI logic sharing. Leveraging Model-ViewModel-View (MVVM) design pattern, Crosslight significantly reduce the total line-of-code required to build the PropertyCross app, shaving off nearly 75% amount of code compared to native approaches.
+The Crosslight Foundation provides a set of APIs that support application development, these include a cross-platform binding framework (adding binding to iOS and Android), an Entity Designer for data modeling, a cross-platform navigation model and presenter services. As a result, Crosslight applications allow you to share more code between platforms than a Xamarin equivalent.
 
 
 #Building This Application
