@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android"
+   android:exitFadeDuration="@android:integer/config_mediumAnimTime">
+
+  <!-- For more information on State List Drawable, go to http://developer.android.com/guide/topics/resources/drawable-resource.html#StateList-->
+  <item android:drawable="@android:color/holo_blue_light" android:state_activated="true" />
+
+</selector>
