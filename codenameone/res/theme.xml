@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<resource majorVersion="1" minorVersion="6" useXmlUI="false">
+    <image name="favorite_sel" type="multi"  />
+    <image name="favorite_unsel" type="multi"  />
+    <image name="placeholder" type="multi"  />
+    <theme name="Theme">
+        <val key="@includeNativeBool" value="true" />
+        <font key="LargeTitle.font" type="system" face="0" style="1" size="16" />
+        <font key="SecondaryTitle.font" type="system" face="0" style="0" size="16" />
+    </theme>
+</resource>
