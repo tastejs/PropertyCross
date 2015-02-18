@@ -1,0 +1,111 @@
+/*** DEFAULTS ***/
+
+"Window": {
+  backgroundColor: 'white'
+}
+
+"ListView[platform=ios]": {
+  separatorInsets: {
+    left: 0
+  }
+}
+
+"Label": {
+  font: {
+    fontSize: 14
+  },
+  color: '#000'
+}
+
+"TextField": {
+  font: {
+    fontSize: 14
+  },
+  color: '#000'
+}
+
+/*** HELPER CLASSES ***/
+
+".margin": {
+  left: 6,
+  top: 6,
+  right: 6,
+  bottom: 6
+}
+
+".margin-left": {
+  left: 6
+}
+
+".margin-top": {
+  top: 6
+}
+
+".margin-right": {
+  right: 6
+}
+
+".margin-bottom": {
+  bottom: 6
+}
+
+".left": {
+  left: 0
+}
+
+".top": {
+  top: 0
+}
+
+".right": {
+  right: 0
+}
+
+".bottom": {
+  bottom: 0
+}
+
+".vertical": {
+  layout: 'vertical'
+}
+
+".horizontal": {
+  layout: 'horizontal'
+}
+
+".width-fill": {
+  width: Ti.UI.FILL
+}
+
+".height-fill": {
+  height: Ti.UI.FILL
+}
+
+".width-size": {
+  width: Ti.UI.SIZE
+}
+
+".height-size": {
+  height: Ti.UI.SIZE
+}
+
+".h1": {
+  font: {
+    fontSize: 19,
+    fontWeight: 'bold'
+  }
+}
+
+".bold": {
+  font: {
+    fontWeight: 'bold'
+  }
+}
+
+".left": {
+  left: 0
+}
+
+".hide": {
+  visible: false
+}

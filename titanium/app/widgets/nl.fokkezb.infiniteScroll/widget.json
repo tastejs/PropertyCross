@@ -1,0 +1,13 @@
+{
+	"id": "nl.fokkezb.infiniteScroll",
+	"name": "Infinite Scroll for TableView and ListView",
+	"description" : "Scroll down to the end of the TableView or ListView to load more.",
+	"author": "Fokke Zandbergen",
+	"version": "1.4.4",
+	"copyright":"Copyright (c) 2014",
+	"license":"Apache License, Version 2.0",
+	"min-alloy-version": "1.0",
+	"min-titanium-version":"2.1",
+	"tags":"table,view,infinite,endless,dynamic,scroll",
+	"platforms":"ios,android,mobileweb,blackberry"
+}

@@ -1,0 +1,20 @@
+"TextField": {
+  returnKeyType: Ti.UI.RETURNKEY_SEARCH
+}
+
+"TextField[platform=ios]": {
+  borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED
+}
+
+"ActivityIndicator[platform=ios]": {
+  style: Ti.UI.iPhone.ActivityIndicatorStyle.DARK
+}
+
+"ItemTemplate": {
+  accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DISCLOSURE
+}
+
+// Android: So it doesn't cover the disclosure arrow
+".subtitle[platform=android]": {
+  right: 30
+}

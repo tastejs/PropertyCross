@@ -1,0 +1,20 @@
+{
+  "global": {
+    "url": "http://api.nestoria.co.uk/api",
+    "request": {
+      "country": "uk",
+      "action": "search_listings",
+      "encoding": "json",
+      "listing_type": "buy",
+      "page": 1
+    }
+  },
+  "env:development": {},
+  "env:test": {},
+  "env:production": {},
+  "os:android": {},
+  "os:ios": {},
+  "dependencies": {
+    "nl.fokkezb.infiniteScroll": "1.4.4"
+  }
+}

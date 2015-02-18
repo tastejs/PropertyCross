@@ -1,0 +1,25 @@
+<Alloy>
+
+  <!-- Create an empty model to use for data-binding -->
+  <Model id="property" src="property" instance="true" />
+
+	<Window id="win" onClose="onClose">
+
+    <!-- 
+    iOS: Add button to toggle as favorite
+    Android: Will do this in the controller
+    -->
+    <RightNavButton platform="ios" id="favorite" onClick="toggleFavorite" />
+
+    <!-- Wrap rest of view, adding margin and vertical layout using global helper classes in app.tss -->
+    <View class="margin vertical">
+      <Label class="h1 left" text="{$.property.price_formatted_symbol}" />
+      <Label class="left margin-top" text="{$.property.title}" />
+      <ImageView class="margin-top width-fill" image="{$.property.img_url}" />
+      <Label class="left margin-top" text="{$.property.stats}" />
+      <Label class="left margin-top" text="{$.property.summary}" />
+    </View>
+
+  </Window>
+
+</Alloy>

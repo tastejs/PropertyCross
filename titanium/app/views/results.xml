@@ -1,0 +1,26 @@
+<Alloy>
+	<Window id="win" onClose="onClose">
+
+    <!-- Set default item template and event listener for tapping on the list -->
+    <ListView id="list" defaultItemTemplate="property" onItemclick="onItemclick">
+      
+      <!-- Create template to use for items -->
+      <Templates>
+        <ItemTemplate name="property">
+          <ImageView bindId="image" class="margin-left margin-top margin-bottom" />
+          <Label bindId="title" class="bold margin-top indent" />
+          <Label bindId="subtitle" class="margin-bottom indent subtitle" />
+        </ItemTemplate>
+      </Templates>
+
+      <!--
+      Use data-binding to populate this from the results collection
+      We name the function Alloy creates for data-binding so we can manually call it first time
+      -->
+      <ListSection dataCollection="results" dataTransform="transformData" dataFunction="renderData">
+        <ListItem itemId="{guid}" image:image="{img_url}" title:text="{price_formatted_symbol}" subtitle:text="{title_expanded}" />
+      </ListSection>
+
+    </ListView>
+  </Window>
+</Alloy>

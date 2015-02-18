@@ -1,0 +1,66 @@
+<Alloy>
+
+  <!-- Create a global instance of the BackBone search collection -->
+  <Collection src="search" />
+
+  <!-- iOS: Show title in NavigationWindow's toolbar -->
+	<Window id="win" title="PropertyCross">
+    
+    <!-- iOS: Add rightNavButton to open favorites -->
+    <RightNavButton platform="ios" title="Favs" onClick="openFavorites" />
+
+    <!-- Android: Add menuItem to open favourites -->
+    <Menu platform="android">
+      <MenuItem title="Favourites" showAsAction="Ti.Android.SHOW_AS_ACTION_ALWAYS | Ti.Android.SHOW_AS_ACTION_WITH_TEXT" onClick="openFavorites" />
+    </Menu>
+
+    <!-- Android: Add ProgressIndicator to ActionBar to show while searching -->
+    <ProgressIndicator ns="Ti.UI.Android" id="spinner" platform="android" location="Ti.UI.Android.PROGRESS_INDICATOR_STATUS_BAR" />
+
+    <!-- Wrap rest of view, adding margin and vertical layout using global helper classes in app.tss -->
+    <View class="margin vertical">
+
+      <Label>Use the form below to search for houses to buy. You can search by place-name, postcode, or click 'My location', to search in your current location</Label>
+
+      <TextField id="search" class="width-fill margin-top" onReturn="onReturn">
+
+        <!-- iOS: Add activityIndicator to TextField to show while searching -->
+        <ActivityIndicator platform="ios" id="spinner" class="margin-right" />
+
+      </TextField>
+
+      <Button class="margin-top width-fill" onClick="detectLocation">My Location</Button>
+
+      <!-- Empty label to use for feedback -->
+      <Label id="message" class="width-fill margin-top" />
+
+      <!-- Wrap title and list of recent/ambigious locations and hide it using app.tss helper class -->
+      <View id="options" class="hide vertical">
+        
+        <Label id="optionsTitle" class="h1 width-fill" />
+
+        <!-- Set default item template and event listener for tapping on the list -->
+        <ListView defaultItemTemplate="option" onItemclick="selectOption">
+
+          <!-- Create template to use for items -->
+          <Templates>
+            <ItemTemplate name="option">
+              <Label bindId="title" class="bold left" />
+              <Label bindId="subtitle" class="right subtitle" />
+            </ItemTemplate>
+          </Templates>
+
+          <!-- Use data-binding to populate this from the search collection -->
+          <ListSection dataCollection="search" dataFilter="filterData">
+            <ListItem itemId="{place_name}" title:text="{long_title}" subtitle:text="{total_results}" />
+          </ListSection>
+
+        </ListView>
+
+      </View>
+
+    </View>
+
+	</Window>
+
+</Alloy>

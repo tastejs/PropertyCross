@@ -1,0 +1,21 @@
+// We use these classes in the controller to set the icon/title of the action/toolbar button
+
+".nostar[platform=ios]": {
+  image: '/images/nostar.png'
+}
+
+".star[platform=ios]": {
+  image: '/images/star.png'
+}
+
+".nostar[platform=android]": {
+  showAsAction: Ti.Android.SHOW_AS_ACTION_ALWAYS,
+  icon: '/images/nostar.png',
+  title: 'Add to Favourites'
+}
+
+".star[platform=android]": {
+  showAsAction: Ti.Android.SHOW_AS_ACTION_ALWAYS,
+  icon: '/images/star.png',
+  title: 'Remove from Favourites'
+}
