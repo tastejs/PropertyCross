@@ -11,7 +11,7 @@
 
     <!-- Android: Add menuItem to open favourites -->
     <Menu platform="android">
-      <MenuItem title="Favourites" showAsAction="Ti.Android.SHOW_AS_ACTION_ALWAYS | Ti.Android.SHOW_AS_ACTION_WITH_TEXT" onClick="openFavorites" />
+      <MenuItem title="Favourites" onClick="openFavorites" />
     </Menu>
 
     <!-- Android: Add ProgressIndicator to ActionBar to show while searching -->

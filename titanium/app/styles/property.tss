@@ -1,3 +1,7 @@
+"MenuItem": {
+  showAsAction: Ti.Android.SHOW_AS_ACTION_ALWAYS
+}
+
 // We use these classes in the controller to set the icon/title of the action/toolbar button
 
 ".nostar[platform=ios]": {

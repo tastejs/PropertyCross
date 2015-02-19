@@ -23,27 +23,17 @@ var favorite;
 
   if (OS_ANDROID) {
 
-    // We need to wait until the window is open to get the activity
-    $.win.addEventListener('open', function onOpen() {
+    // Called when the actionbar is presented
+    $.win.activity.onPrepareOptionsMenu = function onPrepareOptionsMenu(e) {
 
-      // Only once please
-      $.win.removeEventListener('open', onOpen);
+      // FIXME: $.favorite is not there because Alloy UI code executes after it merges $.__views
+      $.favorite || ($.favorite = $.__views.favorite);
 
-      // Called when the actionbar is (re)rendered
-      $.win.activity.onCreateOptionsMenu = function onCreateOptionsMenu(e) {
-
-        // Add the favorite button using the right style
-        $.favorite = e.menu.add($.createStyle({
-          classes: favorite ? 'star' : 'nostar'
-        }));
-
-        $.favorite.addEventListener('click', toggleFavorite);
-      };
-
-      // Triggers the actionbar to rerender, showing the new button
-      $.win.activity.invalidateOptionsMenu();
-
-    });
+      // Add the favorite button using the right style
+      $.favorite.icon = $.createStyle({
+        classes: favorite ? 'star' : 'nostar'
+      }).icon;
+    };
   }
 
 })(arguments[0] || {});

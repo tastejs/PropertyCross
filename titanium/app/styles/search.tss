@@ -1,3 +1,7 @@
+"MenuItem": {
+  showAsAction: Ti.Android.SHOW_AS_ACTION_ALWAYS | Ti.Android.SHOW_AS_ACTION_WITH_TEXT
+}
+
 "TextField": {
   returnKeyType: Ti.UI.RETURNKEY_SEARCH
 }
@@ -6,7 +10,7 @@
   borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED
 }
 
-"ActivityIndicator[platform=ios]": {
+"ActivityIndicator": {
   style: Ti.UI.iPhone.ActivityIndicatorStyle.DARK
 }
 
