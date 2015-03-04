@@ -26,7 +26,7 @@ var favorite;
     // Called when the actionbar is presented
     $.win.activity.onPrepareOptionsMenu = function onPrepareOptionsMenu(e) {
 
-      // FIXME: $.favorite is not there because Alloy UI code executes after it merges $.__views
+      // FIXME: https://jira.appcelerator.org/browse/ALOY-1175
       $.favorite || ($.favorite = $.__views.favorite);
 
       // Add the favorite button using the right style

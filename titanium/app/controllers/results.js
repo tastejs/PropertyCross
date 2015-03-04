@@ -19,6 +19,7 @@ var infiniteScroll;
   if (!args.favorites) {
 
     // We use a widget providing cross-platform infiniteScroll behavior
+    // FIXME: Cannot create in view because of https://jira.appcelerator.org/browse/ALOY-1251
     infiniteScroll = Alloy.createWidget('nl.fokkezb.infiniteScroll');
     infiniteScroll.on('end', loadMore);
     infiniteScroll.init($.list);
