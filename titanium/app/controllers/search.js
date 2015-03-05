@@ -184,3 +184,13 @@ function selectOption(e) {
     place_name: e.itemId
   });
 }
+
+// Called when the window is closed
+function onClose() {
+
+  // Clean up data-binding listeners
+  $.destroy();
+
+  // Clean up listener set in constructor
+  searches.off('fetch reset', showOptions);
+}

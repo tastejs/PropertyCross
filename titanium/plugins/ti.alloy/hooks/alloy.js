@@ -155,6 +155,9 @@ exports.init = function (logger, config, cli, appc) {
 						process.exit(1);
 					} else {
 						logger.info(__('Alloy compiler completed successfully'));
+
+						afs.exists(path.join(cli.argv["project-dir"], 'build', 'i18n')) && process.argv.push('--i18n-dir', 'build');
+						afs.exists(path.join(cli.argv["project-dir"], 'build', 'platform')) && (cli.argv['platform-dir'] = 'build/platform');
 					}
 					finished();
 				});
@@ -163,24 +166,9 @@ exports.init = function (logger, config, cli, appc) {
 	}
 
 	cli.addHook('build.pre.compile', function (build, finished) {
-		// TODO: Remove this workaround when the CLI reports the right deploy type for android
-		var deployType = build.deployType;
-		var target = build.target;
+		var deployType = build.deployType,
+			target = build.target;
 
-		if (cli.argv.platform === 'android') {
-			switch(target) {
-				case 'dist-playstore':
-					deployType = 'production';
-					break;
-				case 'device':
-					deployType = 'test';
-					break;
-				case 'emulator':
-				default:
-					deployType = 'development';
-					break;
-			}
-		}
 		run(build.deviceFamily, deployType, target, finished);
 	});
 
