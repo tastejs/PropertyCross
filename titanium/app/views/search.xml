@@ -4,7 +4,7 @@
   <Collection src="search" />
 
   <!-- iOS: Show title in NavigationWindow's toolbar -->
-	<Window id="win" title="PropertyCross">
+  <Window id="win" title="PropertyCross" onClose="onClose">
     
     <!-- iOS: Add rightNavButton to open favorites -->
     <RightNavButton platform="ios" title="Favs" onClick="openFavorites" />
