@@ -1,13 +1,31 @@
 {
-  "common":{
-    "include":"Resources/*.js",
-    "exclude":[
-      "Resources/lib/*.js",
-      "Resources/*Android*.js",
-      "Resources/*IPhone*.js"
+  "common": {
+    "include": [
+      "app"
+    ],
+    "exclude": [
+      "app/assets/android",
+      "app/assets/iphone",
+      "platform"
     ]
   },
-  "ios":"Resources/*IPhone*.js",
-  "android":"Resources/*Android*.js",
-  "windowsphone":null
+  "ios": {
+    "include": [
+      "app/assets/iphone"
+    ],
+    "exclude": [
+      "app/assets/android",
+      "platform"
+    ]
+  },
+  "android": {
+    "include": [
+      "app/assets/android",
+      "platform"
+    ],
+    "exclude": [
+      "app/assets/iphone"
+    ]
+  }
+  "windowsphone": null
 }

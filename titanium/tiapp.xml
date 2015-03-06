@@ -1,58 +1,61 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <ti:app xmlns:ti="http://ti.appcelerator.org">
-    <deployment-targets>
-        <target device="tizen">false</target>
-        <target device="mobileweb">false</target>
-        <target device="iphone">true</target>
-        <target device="ipad">false</target>
-        <target device="android">true</target>
-        <target device="blackberry">false</target>
-    </deployment-targets>
-    <sdk-version>3.2.2.GA</sdk-version>
-    <id>com.propertycross.titanium</id>
-    <name>PropertyCross</name>
-    <version>1.4</version>
-    <publisher>TasteJS</publisher>
-    <url>http://propertycross.com</url>
-    <description>not specified</description>
-    <copyright>2014 by TasteJS</copyright>
-    <icon>appicon.png</icon>
-    <persistent-wifi>false</persistent-wifi>
-    <prerendered-icon>true</prerendered-icon>
-    <statusbar-style>default</statusbar-style>
-    <statusbar-hidden>false</statusbar-hidden>
-    <fullscreen>false</fullscreen>
-    <navbar-hidden>false</navbar-hidden>
-    <analytics>false</analytics>
-    <guid>fec9bf47-b927-455b-a29d-92a1512298d9</guid>
-    <property name="ti.ui.defaultunit">system</property>
-    <iphone>
-        <orientations device="iphone">
-            <orientation>Ti.UI.PORTRAIT</orientation>
-        </orientations>
-    </iphone>
-    <android xmlns:android="http://schemas.android.com/apk/res/android">
-        <manifest android:versionName="1.4.0">
-            <application android:label="PropertyCross - Titanium" android:theme="@style/Theme.MyTheme">
-                <activity android:name=".PropertycrossActivity"
-                    android:screenOrientation="portrait"
-                    android:configChanges="keyboardHidden|orientation">
-                    <intent-filter>
-                        <action android:name="android.intent.action.MAIN"/>
-                        <category android:name="android.intent.category.LAUNCHER"/>
-                    </intent-filter>
-                </activity>
-            </application>
-            <uses-sdk android:minSdkVersion="14" android:targetSdkVersion="14"/>
-        </manifest>
-    </android>
-    <mobileweb>
-        <precache/>
-        <splash>
-            <enabled>true</enabled>
-            <inline-css-images>true</inline-css-images>
-        </splash>
-        <theme>default</theme>
-    </mobileweb>
-    <modules/>
+  <sdk-version>3.5.0.GA</sdk-version>
+  <id>com.propertycross.titanium</id>
+  <name>PropertyCross</name>
+  <version>2.0.0</version>
+  <publisher>Fokke Zandbergen</publisher>
+  <url>http://propertycross.com</url>
+  <description>Titanium Alloy version of PropertyCross</description>
+  <copyright>2015 by Fokke Zandbergen</copyright>
+  <icon>appicon.png</icon>
+  <analytics>false</analytics>
+  <guid>fec9bf47-b927-455b-a29d-92a1512298d9</guid>
+  <property name="ti.ui.defaultunit" type="string">dp</property>
+  <ios>
+    <plist>
+      <dict>
+        <key>UISupportedInterfaceOrientations</key>
+        <array>
+          <string>UIInterfaceOrientationPortrait</string>
+        </array>
+        <key>UIRequiresPersistentWiFi</key>
+        <false/>
+        <key>UIPrerenderedIcon</key>
+        <true/>
+        <key>UIStatusBarHidden</key>
+        <false/>
+        <key>UIStatusBarStyle</key>
+        <string>UIStatusBarStyleDefault</string>
+        <key>NSLocationWhenInUseUsageDescription</key>
+        <string>Search based on your current location.</string>
+      </dict>
+    </plist>
+  </ios>
+  <android xmlns:android="http://schemas.android.com/apk/res/android">
+    <manifest>
+      <application>
+        <activity android:name=".PropertycrossActivity" android:label="@string/app_name" android:theme="@style/Theme.Titanium" android:configChanges="keyboardHidden|screenSize" android:screenOrientation="portrait">
+          <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+          </intent-filter>
+        </activity>
+        <activity android:name="org.appcelerator.titanium.TiActivity" android:configChanges="keyboardHidden|screenSize" android:screenOrientation="portrait" />
+        <activity android:name="org.appcelerator.titanium.TiTranslucentActivity" android:configChanges="keyboardHidden|screenSize" android:screenOrientation="portrait" android:theme="@style/Theme.AppCompat.Translucent" />
+      </application>
+    </manifest>
+  </android>
+  <modules/>
+  <deployment-targets>
+    <target device="tizen">false</target>
+    <target device="mobileweb">false</target>
+    <target device="iphone">true</target>
+    <target device="ipad">false</target>
+    <target device="android">true</target>
+    <target device="blackberry">false</target>
+  </deployment-targets>
+  <plugins>
+    <plugin version="1.0">ti.alloy</plugin>
+  </plugins>
 </ti:app>

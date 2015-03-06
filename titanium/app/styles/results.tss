@@ -1,0 +1,21 @@
+"ItemTemplate": {
+  height: 72,
+  accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DISCLOSURE
+}
+
+"ImageView": {
+  width: 80,
+  height: 60,
+
+  // The originals are 160x120, so iOS can  use these for retina screens
+  hires: true
+}
+
+".indent": {
+  left: 92
+}
+
+// Android: So it doesn't cover the disclosure arrow
+".subtitle[platform=android]": {
+  right: 30
+}

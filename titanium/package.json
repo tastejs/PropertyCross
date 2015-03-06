@@ -1,11 +1,15 @@
 {
   "name": "titanium",
-  "version": "1.4.0",
+  "version": "2.0.0",
   "implName": "Titanium",
   "contributors": [{
     "name": "Chris Price",
     "username": "chrisprice",
     "hash": "b6fe36176ec7c9475374a5cd3b7bef1a"
+  }, {
+    "name": "Fokke Zandbergen",
+    "username": "fokkezb",
+    "hash": "445cfd80fb62fb449a1d7cb9c99c7555"
   }],
   "platforms": ["android", "ios"]
 }

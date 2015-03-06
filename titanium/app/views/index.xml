@@ -1,0 +1,15 @@
+<Alloy>
+
+  <!--
+  Uses xp.ui.js library for a cross-platform API
+  iOS: Creates a NavigationWindow
+  Android: Creates an API to stack windows
+  -->
+	<NavigationWindow id="nav" module="xp.ui">
+
+    <!-- Require the search controller, providing the root window -->
+    <Require src="search" />
+
+	</NavigationWindow>
+
+</Alloy>
