@@ -85,16 +85,12 @@ define(function (require, exports, module) {
 
     // ----- public functions
 
-    this.findProperties = function (location, pageNumber, callback, errorCallback) {
-      this.jsonDataSource.findProperties(location, pageNumber, function (results) {
-        callback(parseResponse(results));
-      }, errorCallback);
+    this.findProperties = function (location, pageNumber) {
+      return this.jsonDataSource.findProperties(location, pageNumber).pipe(parseResponse);
     };
 
-    this.findPropertiesByCoordinate = function (latitude, longitude, pageNumber, callback, errorCallback) {
-      this.jsonDataSource.findPropertiesByCoordinate(latitude, longitude, pageNumber, function (results) {
-        callback(parseResponse(results));
-      }, errorCallback);
+    this.findPropertiesByCoordinate = function (latitude, longitude, pageNumber) {
+      return this.jsonDataSource.findPropertiesByCoordinate(latitude, longitude, pageNumber).pipe(parseResponse);
     };
   }
 

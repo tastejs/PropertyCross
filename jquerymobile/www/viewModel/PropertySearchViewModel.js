@@ -45,6 +45,7 @@ define(function (require, exports, module) {
 
       that.userMessage("");
       that.isSearchEnabled(false);
+      $.mobile.loading( "show", { textVisible: false, theme: "a" });
 
       function errorCallback(error) {
         /// <summary>
@@ -52,6 +53,7 @@ define(function (require, exports, module) {
         /// </summary>
         that.userMessage("An error occurred while searching. Please check your network connection and try again.");
         that.isSearchEnabled(true);
+        $.mobile.loading("hide");
       }
 
       function successCallback(results) {
@@ -84,9 +86,10 @@ define(function (require, exports, module) {
         }
 
         that.isSearchEnabled(true);
+        $.mobile.loading("hide");
       }
 
-      this.searchLocation.executeSearch(1, successCallback, errorCallback);
+      this.searchLocation.executeSearch(1).then(successCallback, errorCallback);
     };
 
     this.searchMyLocation = function () {
@@ -99,6 +102,9 @@ define(function (require, exports, module) {
         that.userMessage("The use of location is currently disabled. Please enable via the 'about' page.");
         return;
       }
+
+      that.isSearchEnabled(false);
+      $.mobile.loading( "show", { textVisible: false, theme: "a" });
 
       function successCallback(result) {
         var location = new GeolocationViewModel(application);
@@ -114,6 +120,8 @@ define(function (require, exports, module) {
 
       function errorCallback() {
         that.userMessage("Unable to detect current location. Please ensure location is turned on in your phone settings and try again.");
+        that.isSearchEnabled(true);
+        $.mobile.loading("hide");
       }
 
       navigator.geolocation.getCurrentPosition(successCallback, errorCallback);

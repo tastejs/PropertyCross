@@ -34,7 +34,7 @@ define(function (require, exports, module) {
     this.loadMore = function () {
       this.pageNumber(this.pageNumber() + 1);
       this.isLoading(true);
-      this.searchLocation().executeSearch(this.pageNumber(), function (results) {
+      this.searchLocation().executeSearch(this.pageNumber()).done(function (results) {
         that.isLoading(false);
         results.data.forEach(function (property) {
           var viewModel = new PropertyViewModel(application);
