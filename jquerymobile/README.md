@@ -4,7 +4,7 @@ Visit the [jQuery Mobile page](http://propertycross.com/jquerymobile/) on the Pr
 
 ##Introduction
 
-[jQuery Mobile](http://jquerymobile.com) is a HTML5 framework which makes it easy to create mobile applications, by using own set of UI widgets. This is achieved by providing HTML that is marked up with various jQuery Mobile specific attributes, which is then processed to generate the final markup. Within PropertyCross jQuery Mobile is combined with [KnockoutJS](http://knockoutjs.com/), which provides a presentation model (MVVM), [RequireJS](http://requirejs.org/), for dependency management, and [Cordova / PhoneGap](http://phonegap.com/), which packages the HTML / JavaScript within a native wrapper for app-store deployment. Cordova also provides a set of APIs for accessing native phone functionalities which are not available via HTML specifications.
+[jQuery Mobile](http://jquerymobile.com) is a HTML5 framework which makes it easy to create mobile applications, by using its set of UI widgets. This is achieved by providing HTML that is marked up with various jQuery Mobile specific attributes, which is then processed to generate the final markup. Within PropertyCross jQuery Mobile is combined with [KnockoutJS](http://knockoutjs.com/), which provides a presentation model (MVVM), [RequireJS](http://requirejs.org/), for dependency management, and [Cordova / PhoneGap](http://phonegap.com/), which packages the HTML / JavaScript within a native wrapper for app-store deployment. Cordova also provides a set of APIs for accessing native phone functionalities which are not available via HTML specifications.
 
 ##Building the Application
 
