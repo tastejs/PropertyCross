@@ -19,7 +19,7 @@ define(function (require, exports, module) {
     this.displayString = undefined;
     this.totalResults = 0;
 
-    // ----- framework functions 
+    // ----- framework functions
 
     this.initialise = function (searchString) {
       /// <summary>
@@ -38,11 +38,11 @@ define(function (require, exports, module) {
       this.displayString = location.longTitle;
     };
 
-    this.executeSearch = function (pageNumber, callback, errorCallback) {
+    this.executeSearch = function (pageNumber) {
       /// <summary>
       /// Executes a search by the search string represented by this view model for the given page
       /// </summary>
-      application.propertyDataSource.findProperties(this.searchString, pageNumber, callback, errorCallback);
+      return application.propertyDataSource.findProperties(this.searchString, pageNumber);
     };
   }
 

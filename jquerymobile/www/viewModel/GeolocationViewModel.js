@@ -27,12 +27,12 @@ define(function (require, exports, module) {
       this.displayString = lat.toFixed(2) + ", " + lon.toFixed(2);
     };
 
-    this.executeSearch = function (pageNumber, callback, errorCallback) {
+    this.executeSearch = function (pageNumber) {
       /// <summary>
       /// Executes a search by the geolocation represented by this view model for the given page
       /// </summary>
-      application.propertyDataSource.findPropertiesByCoordinate(
-          this.lat, this.lon, pageNumber, callback, errorCallback);
+      return application.propertyDataSource.findPropertiesByCoordinate(
+          this.lat, this.lon, pageNumber);
     };
 
   }

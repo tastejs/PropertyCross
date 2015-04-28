@@ -9,24 +9,23 @@ define(function (require, exports, module) {
 
     // ----- private functions
 
-    function ajaxRequest(uri, params, callback, errorCallback) {
+    function ajaxRequest(uri, params) {
       /// <summary>
-      /// Performs a JSON request via the jQuery-JSONP library
-      /// http://code.google.com/p/jquery-jsonp/
+      /// Performs a JSON request via jQuery
+      /// https://learn.jquery.com/ajax/working-with-jsonp/
       /// </summary>
-      $.jsonp({
-        dataType:"jsonp",
+      return $.ajax({
+        url: uri,
+        // Tell jQuery we're expecting JSONP
+        dataType: "jsonp",
         data:params,
-        url:uri,
-        timeout:5000,
-        success: callback,
-        error: errorCallback
+        timeout:5000
       });
     }
 
     // ----- public functions
 
-    this.findProperties = function (location, pageNumber, callback, errorCallback) {
+    this.findProperties = function (location, pageNumber) {
       /// <summary>
       /// Finds properties based on a location string
       /// </summary>
@@ -38,14 +37,13 @@ define(function (require, exports, module) {
             encoding:"json",
             listing_type:"buy",
             page:pageNumber,
-            place_name:location,
-            callback:"_jqjsp"
+            place_name:location
           };
 
-      ajaxRequest(query, params, callback, errorCallback);
+      return ajaxRequest(query, params);
     };
 
-    this.findPropertiesByCoordinate = function (latitude, longitude, pageNumber, callback, errorCallback) {
+    this.findPropertiesByCoordinate = function (latitude, longitude, pageNumber) {
       /// <summary>
       /// Finds properties based on lat / long values
       /// </summary>
@@ -57,11 +55,10 @@ define(function (require, exports, module) {
             encoding:"json",
             listing_type:"buy",
             page:pageNumber,
-            centre_point:latitude + "," + longitude,
-            callback:"_jqjsp"
+            centre_point:latitude + "," + longitude
           };
 
-      ajaxRequest(query, params, callback, errorCallback);
+      return ajaxRequest(query, params);
     };
   };
 });

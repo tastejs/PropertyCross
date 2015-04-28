@@ -33,3 +33,8 @@ div.propertyView h3
 {
   margin: 5px 0;
 }
+
+.ui-header .ui-title
+{
+  margin: 0 20%;
+}
