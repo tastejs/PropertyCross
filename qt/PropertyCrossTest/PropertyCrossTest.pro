@@ -1,13 +1,23 @@
 TEMPLATE  = app
 QT       += testlib
+QT       += network
+QT       += core
+QT       += widgets
 CONFIG   += testcase
 
 SOURCES += \
     src/TestSuite.cpp \
     src/TestAll.cpp \
-    src/TestCase1.cpp
+    ../PropertyCrossLib/Model/property.cpp \
+    ../PropertyCrossLib/Model/jsonhandler.cpp \
+    src/TestProperty.cpp \
+    src/TestJsonHandler.cpp
+
 
 HEADERS += \
-    include/TestSuite.h
+    include/TestSuite.h \
+    ../PropertyCrossLib/Model/property.h \
+    ../PropertyCrossLib/Model/jsonhandler.h
 
-INCLUDEPATH += ./include
+INCLUDEPATH += ./include \
+    ../PropertyCrossLib//Model

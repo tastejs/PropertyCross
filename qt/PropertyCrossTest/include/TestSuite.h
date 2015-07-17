@@ -2,13 +2,13 @@
 #define TESTSUITE_H
 
 #include <QObject>
-#include <vector>
+#include <QVector>
 
 class TestSuite : public QObject
 {
     Q_OBJECT
 public:
-    static std::vector<QObject*> m_suites;
+    static QVector<QObject*> m_suites;
 
 public:
     explicit TestSuite();

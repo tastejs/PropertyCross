@@ -1,0 +1,70 @@
+#include "jsonhandler.h"
+
+
+#include <QJsonArray>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QSharedPointer>
+#include <QtNetwork/QNetworkAccessManager>
+#include <QtNetwork/QNetworkRequest>
+#include <QtNetwork/QNetworkReply>
+
+QSharedPointer<QNetworkAccessManager> JsonHandler::manager  = QSharedPointer<QNetworkAccessManager>(0);
+//example: http://api.nestoria.co.uk/api?country=uk&pretty=1&action=search_listings&encoding=json&listing_type=buy&page=1&place_name=leeds
+//options:
+//place_name=leeds - listing from string
+//centre_point=51.684183,-3.431481 -- geo listing
+//place_name=newcr -- suggest locations
+static const QString baseUrl = "http://api.nestoria.co.uk/api?country=uk&pretty=1&action=search_listings&encoding=json&listing_type=buy";
+
+
+
+JsonHandler::JsonHandler(QObject *parent) :
+    QObject(parent)
+{
+    if(manager.isNull()) {
+    manager = QSharedPointer<QNetworkAccessManager>(new QNetworkAccessManager(this));
+    }
+    connect(manager.data(), SIGNAL(finished(QNetworkReply*)), this, SLOT(replyFinished(QNetworkReply*)));
+}
+
+void JsonHandler::getFromString(QString location, int page) {
+    manager->get(QNetworkRequest(QUrl(baseUrl+"&place_name="+location+"&page="+page)));
+  }
+void JsonHandler::getFromLocation(float latitude, float longtitude, int page) {
+    manager->get(QNetworkRequest(QUrl(baseUrl+"&centre_point="+latitude+","+longtitude+"&page="+page)));
+  }
+//void JsonHandler::getListedLocations(QString location, int page) {
+//    manager->get(QNetworkRequest(QUrl(baseUrl+"&place_name="+location+"&page="+page)));
+//  }
+
+void JsonHandler::startRequest(QUrl url)
+{
+    manager->get(QNetworkRequest(url));
+}
+
+void JsonHandler::replyFinished(QNetworkReply* reply)
+{
+    QSharedPointer<QList<Property> >  properties = QSharedPointer<QList<Property> >(new QList<Property>);
+    if(reply)
+    {
+        QJsonParseError error;
+        QString replyString = (QString)reply->readAll();
+        QJsonDocument doc = QJsonDocument::fromJson(replyString.toUtf8(), &error);
+
+        QJsonValue responseValue = doc.object().value(QString("response"));
+        QJsonValue listingsValue = responseValue.toObject().value(QString("listings"));
+
+        QJsonArray listingsArray = listingsValue.toArray();
+
+        for( int i = 0; i < listingsArray.size(); ++i )
+        {
+            QJsonObject arrayObject = listingsArray[i].toObject();
+            QJsonValue  objectValue = arrayObject.value(QString("img_url"));
+
+            properties->append(Property(arrayObject));
+//            qDebug() << objectValue.toString();
+        }
+    }
+    emit propertiesReady(properties);
+}

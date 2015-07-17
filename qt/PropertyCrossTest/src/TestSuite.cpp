@@ -1,6 +1,6 @@
 #include "TestSuite.h"
 
-std::vector<QObject*> TestSuite::m_suites;
+QVector<QObject*> TestSuite::m_suites;
 
 TestSuite::TestSuite() : QObject()
 {
