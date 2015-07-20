@@ -1,12 +1,14 @@
 #include "property.h"
-Property::Property() :
+Property::Property(QObject *parent) :
+   QObject(parent),
     m_price(0),
     m_bedrooms(0),
     m_bathrooms(0) {
 
 }
 
-Property::Property(const QJsonObject& jsonObj) :
+Property::Property(const QJsonObject& jsonObj, QObject *parent) :
+   QObject(parent),
     m_price(0),
     m_bedrooms(0),
     m_bathrooms(0)

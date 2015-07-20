@@ -47,8 +47,8 @@ void startRequest(QUrl url);
 void replyFinished(QNetworkReply* reply);
 
 signals:
-    void propertiesReady(QSharedPointer<QList<Property> >);
-    void locationsReady(QSharedPointer<QList<Location> >);
+    void propertiesReady(QSharedPointer<QList<Property*> >);
+    void locationsReady(QSharedPointer<QList<Location*> >);
     void errorRetrievingRequest();
 private:
     static QSharedPointer<QNetworkAccessManager> manager;

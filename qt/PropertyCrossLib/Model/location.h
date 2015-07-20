@@ -3,12 +3,14 @@
 
 #include <QString>
 #include <QJsonObject>
+#include <QObject>
 
-class Location
+class Location : public QObject
 {
+    Q_OBJECT
 public:
-    Location();
-    explicit Location(const QJsonObject &jsonObj);
+    Location(QObject *parent = 0);
+    explicit Location(const QJsonObject &jsonObj, QObject *parent = 0 );
     QString getDisplayName() const;
     void setDisplayName(const QString &value);
 

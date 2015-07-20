@@ -58,7 +58,7 @@ void JsonHandler::replyFinished(QNetworkReply* reply)
 //        qDebug()<<"ResponceCode "<<statusCode;
 
         if((statusCode==100) || (statusCode==101) || (statusCode==110) ) {
-        QSharedPointer<QList<Property> >  properties = QSharedPointer<QList<Property> >(new QList<Property>);
+        QSharedPointer<QList<Property*> >  properties = QSharedPointer<QList<Property*> >(new QList<Property*>);
             QJsonValue listingsValue = responseValue.toObject().value(QString("listings"));
 
             QJsonArray listingsArray = listingsValue.toArray();
@@ -66,20 +66,22 @@ void JsonHandler::replyFinished(QNetworkReply* reply)
             for( int i = 0; i < listingsArray.size(); ++i )
             {
                 QJsonObject arrayObject = listingsArray[i].toObject();
-                properties->append(Property(arrayObject));
+                Property* tmp = new Property(arrayObject);
+                properties->append(tmp);
                 //            qDebug() << objectValue.toString();
             }
             emit propertiesReady(properties);
         }
         else if((statusCode==200) || (statusCode==201)) {
-        QSharedPointer<QList<Location> >  locations = QSharedPointer<QList<Location> >(new QList<Location>);
+        QSharedPointer<QList<Location*> >  locations = QSharedPointer<QList<Location*> >(new QList<Location*>);
             qDebug()<<"In Location Listings";
             QJsonValue listingsValue = responseValue.toObject().value(QString("locations"));
             QJsonArray listingsArray = listingsValue.toArray();
             for( int i = 0; i < listingsArray.size(); ++i )
             {
                 QJsonObject arrayObject = listingsArray[i].toObject();
-                locations->append(Location(arrayObject));
+                Location* tmp = new Location(arrayObject);
+                locations->append(tmp);
                 //            qDebug() << objectValue.toString();
             }
             emit locationsReady(locations);

@@ -1,11 +1,13 @@
 #include "location.h"
 
-Location::Location()
+Location::Location(QObject *parent):
+   QObject(parent)
+
 {
 
 }
 
-Location::Location(const QJsonObject &jsonObj) {
+Location::Location(const QJsonObject &jsonObj, QObject *parent ) :  QObject(parent){
 
     m_displayName             = jsonObj.value(QString("long_title")).toString();
     m_name             = jsonObj.value(QString("place_name")).toString();
