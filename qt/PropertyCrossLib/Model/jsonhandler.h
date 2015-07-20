@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include "property.h"
+#include "location.h"
 #include "../include/ipropertyhandler.h"
 
 #include <QtNetwork/QNetworkAccessManager>
@@ -16,7 +17,10 @@ class JsonHandler : public QObject, public IPropertyHandler {
     Q_OBJECT
 public:
     JsonHandler(QObject *parent = 0);
-    virtual ~JsonHandler () {qDebug()<<"Json exiting"; }//manager.reset(); }
+    virtual ~JsonHandler () {
+        //temp fix to reset manager on exit
+        manager.reset();
+    }
 
 public slots:
     /** Get a list of properties from a location-string, e.g. "London"
@@ -37,13 +41,15 @@ public slots:
     @return a pointer to a list of the properties
     */
     //TODO not working - needed?
-//    void getListedLocations(QString location, int page);
+    void getListedLocations(QString location, int page);
 
 void startRequest(QUrl url);
 void replyFinished(QNetworkReply* reply);
 
 signals:
     void propertiesReady(QSharedPointer<QList<Property> >);
+    void locationsReady(QSharedPointer<QList<Location> >);
+    void errorRetrievingRequest();
 private:
     static QSharedPointer<QNetworkAccessManager> manager;
 

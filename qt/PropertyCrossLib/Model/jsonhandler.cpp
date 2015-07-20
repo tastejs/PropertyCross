@@ -34,18 +34,19 @@ void JsonHandler::getFromString(QString location, int page) {
 void JsonHandler::getFromLocation(float latitude, float longtitude, int page) {
     manager->get(QNetworkRequest(QUrl(baseUrl+"&centre_point="+latitude+","+longtitude+"&page="+page)));
   }
-//void JsonHandler::getListedLocations(QString location, int page) {
-//    manager->get(QNetworkRequest(QUrl(baseUrl+"&place_name="+location+"&page="+page)));
-//  }
+void JsonHandler::getListedLocations(QString location, int page) {
+    manager->get(QNetworkRequest(QUrl(baseUrl+"&place_name="+location+"&page="+page)));
+  }
 
 void JsonHandler::startRequest(QUrl url)
 {
+    if(manager.isNull())
+        return;
     manager->get(QNetworkRequest(url));
 }
 
 void JsonHandler::replyFinished(QNetworkReply* reply)
 {
-    QSharedPointer<QList<Property> >  properties = QSharedPointer<QList<Property> >(new QList<Property>);
     if(reply)
     {
         QJsonParseError error;
@@ -53,18 +54,39 @@ void JsonHandler::replyFinished(QNetworkReply* reply)
         QJsonDocument doc = QJsonDocument::fromJson(replyString.toUtf8(), &error);
 
         QJsonValue responseValue = doc.object().value(QString("response"));
-        QJsonValue listingsValue = responseValue.toObject().value(QString("listings"));
+        int statusCode = responseValue.toObject().value(QString("application_response_code")).toString().toInt();
+//        qDebug()<<"ResponceCode "<<statusCode;
 
-        QJsonArray listingsArray = listingsValue.toArray();
+        if((statusCode==100) || (statusCode==101) || (statusCode==110) ) {
+        QSharedPointer<QList<Property> >  properties = QSharedPointer<QList<Property> >(new QList<Property>);
+            QJsonValue listingsValue = responseValue.toObject().value(QString("listings"));
 
-        for( int i = 0; i < listingsArray.size(); ++i )
-        {
-            QJsonObject arrayObject = listingsArray[i].toObject();
-            QJsonValue  objectValue = arrayObject.value(QString("img_url"));
+            QJsonArray listingsArray = listingsValue.toArray();
 
-            properties->append(Property(arrayObject));
-//            qDebug() << objectValue.toString();
+            for( int i = 0; i < listingsArray.size(); ++i )
+            {
+                QJsonObject arrayObject = listingsArray[i].toObject();
+                properties->append(Property(arrayObject));
+                //            qDebug() << objectValue.toString();
+            }
+            emit propertiesReady(properties);
+        }
+        else if((statusCode==200) || (statusCode==201)) {
+        QSharedPointer<QList<Location> >  locations = QSharedPointer<QList<Location> >(new QList<Location>);
+            qDebug()<<"In Location Listings";
+            QJsonValue listingsValue = responseValue.toObject().value(QString("locations"));
+            QJsonArray listingsArray = listingsValue.toArray();
+            for( int i = 0; i < listingsArray.size(); ++i )
+            {
+                QJsonObject arrayObject = listingsArray[i].toObject();
+                locations->append(Location(arrayObject));
+                //            qDebug() << objectValue.toString();
+            }
+            emit locationsReady(locations);
+            //TODO
+
+        } else {
+            emit errorRetrievingRequest();
         }
     }
-    emit propertiesReady(properties);
 }
