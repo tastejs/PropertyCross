@@ -4,6 +4,7 @@
 #include <QObject>
 #include "property.h"
 #include "location.h"
+#include "recentsearches.h"
 #include "../include/ipropertyhandler.h"
 
 #include <QtNetwork/QNetworkAccessManager>
@@ -49,6 +50,7 @@ void replyFinished(QNetworkReply* reply);
 signals:
     void propertiesReady(QSharedPointer<QList<Property*> >);
     void locationsReady(QSharedPointer<QList<Location*> >);
+    void successfullySearched(Search location);
     void errorRetrievingRequest();
 private:
     static QSharedPointer<QNetworkAccessManager> manager;

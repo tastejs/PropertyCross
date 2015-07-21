@@ -1,26 +1,29 @@
 #include "property.h"
-Property::Property(QObject *parent) :
-   QObject(parent),
+#include <QDebug>
+Property::Property()://QObject *parent) :
+   //QObject(parent),
     m_price(0),
     m_bedrooms(0),
     m_bathrooms(0) {
 
 }
 
-Property::Property(const QJsonObject& jsonObj, QObject *parent) :
-   QObject(parent),
+Property::Property(const QJsonObject& jsonObj)://, QObject *parent) :
+//   QObject(parent),
     m_price(0),
     m_bedrooms(0),
     m_bathrooms(0)
 {
-    m_bathrooms = jsonObj.value(QString("bathroom_number")).toString().toInt(0);
-    m_bedrooms  = jsonObj.value(QString("bedroom_number")).toString().toInt(0);
+    m_bathrooms = jsonObj.value(QString("bathroom_number")).toInt(0);
+    m_bedrooms  = jsonObj.value(QString("bedroom_number")).toInt(0);
     m_guid             = jsonObj.value(QString("guid")).toString();
     m_imageUrl           = jsonObj.value(QString("img_url")).toString();
     m_price            = jsonObj.value(QString("price")).toInt(0);
     m_summary          = jsonObj.value(QString("summary")).toString();
     m_thumbnailUrl         = jsonObj.value(QString("thumb_url")).toString();
     m_title            = jsonObj.value(QString("title")).toString();
+    m_propertyType     = jsonObj.value(QString("property_type")).toString();
+//    qDebug() <<"Property has"<<m_bedrooms<<","<<m_bathrooms;
 }
 
 QString Property::getGuid() const

@@ -21,23 +21,23 @@ ApplicationWindow {
     }
     toolBar: ToolBar {
         width: mainWindow.width
-        visible: false
+        visible: true
         RowLayout {
             anchors.fill: parent
             ToolButton {text: 'ToolBarItem'}
         }
-    }
-
-    SearchResultsView {
-        id: searchResultsView
-        visible: false
-        enabled: false
     }
     PropertyView {
        id: propertyView
        visible: false
        enabled: false
     }
+    SearchResultsView {
+        id: searchResultsView
+        visible: false
+        enabled: false
+    }
+
 
     RootView {
         id: rootView

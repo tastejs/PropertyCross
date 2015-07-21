@@ -8,6 +8,8 @@
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkRequest>
 #include <QtNetwork/QNetworkReply>
+#include <QString>
+#include "recentsearches.h"
 
 QSharedPointer<QNetworkAccessManager> JsonHandler::manager  = QSharedPointer<QNetworkAccessManager>(0);
 //example: http://api.nestoria.co.uk/api?country=uk&pretty=1&action=search_listings&encoding=json&listing_type=buy&page=1&place_name=leeds
@@ -71,6 +73,9 @@ void JsonHandler::replyFinished(QNetworkReply* reply)
                 //            qDebug() << objectValue.toString();
             }
             emit propertiesReady(properties);
+            emit successfullySearched(Search(doc.object().value(QString("request")).toObject().value(QString("location")).toString(),doc.object().value(QString("response")).toObject().value(QString("total_results")).toInt()));
+            //emit successfullySearched(test);
+            qDebug() << "Emitt ready properties";
         }
         else if((statusCode==200) || (statusCode==201)) {
         QSharedPointer<QList<Location*> >  locations = QSharedPointer<QList<Location*> >(new QList<Location*>);
@@ -85,9 +90,9 @@ void JsonHandler::replyFinished(QNetworkReply* reply)
                 //            qDebug() << objectValue.toString();
             }
             emit locationsReady(locations);
-            //TODO
-
+            qDebug() << "Emitting ready locations";
         } else {
+            qDebug() << "Emitting error retrieving";
             emit errorRetrievingRequest();
         }
     }
