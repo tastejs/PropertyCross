@@ -28,22 +28,11 @@ int main(int argc, char *argv[])
 //    propertyListing.addProperty(Property("ab"));
 
     QQmlApplicationEngine engine;
-        engine.rootContext()->setContextProperty("cppPropertyListing", &propertyListing);
-        engine.rootContext()->setContextProperty("cppRecentSearches", &recentSearches);
-        engine.rootContext()->setContextProperty("cppJsonHandler", &handler);
-        //engine.rootContext()->setContextObject("");
+    engine.rootContext()->setContextProperty("cppPropertyListing", &propertyListing);
+    engine.rootContext()->setContextProperty("cppRecentSearches",  &recentSearches);
+    engine.rootContext()->setContextProperty("cppJsonHandler",     &handler);;
     engine.load(QUrl(QStringLiteral("qrc:/qml/MainWindow.qml")));
 
-
-
-    QObject *rootObject = engine.rootObjects().first();
-
-
-    QObject *buttonGo = rootObject->findChild<QObject*>("buttonGo");
-    if(buttonGo!=0)
-    QObject::connect(buttonGo, SIGNAL(searchFor(QString, int)), &handler, SLOT(getFromString(QString,int)));
-    else
-        qWarning() << "Couldn't find Go Button!";
     /*QObject *qPropertyListing = rootObject->findChild<QObject*>("listView_recentSearches");
     if(qPropertyListing!=0){
 //    QObject::connect(&propertyListing, SIGNAL(ready()), qPropertyListing, SLOT(addToListing()));
@@ -52,10 +41,9 @@ int main(int argc, char *argv[])
     else{
         qWarning() << "Could not find propertyListing";
     }*/
-    QObject::connect(&handler, SIGNAL(propertiesReady(QSharedPointer<QList<Property*> >)), &propertyListing, SLOT(addToListing(QSharedPointer<QList<Property*> >)));
-    QObject::connect(&handler, SIGNAL(successfullySearched(Search)),&searchesStorage, SLOT(addNewSearch(Search)));
-    QObject::connect(&searchesStorage , SIGNAL(recentSearchesChanged()),&recentSearches, SLOT(reloadSearchesFromStorage()));
-
+    QObject::connect(&handler,          SIGNAL(propertiesReady(QSharedPointer<QList<Property*> >)), &propertyListing, SLOT(addToListing(QSharedPointer<QList<Property*> >)));
+    QObject::connect(&handler,          SIGNAL(successfullySearched(Search)),                       &searchesStorage, SLOT(addNewSearch(Search)));
+    QObject::connect(&searchesStorage , SIGNAL(recentSearchesChanged()),                            &recentSearches,  SLOT(reloadSearchesFromStorage()));
 
     return app.exec();
 }

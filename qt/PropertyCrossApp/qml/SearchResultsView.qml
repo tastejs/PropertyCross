@@ -14,6 +14,7 @@ Rectangle {
 //    title: "PropertyCross"
     id: searchResultsWindow
 //    focus: true
+
     Keys.onReleased: {
         console.log("Key pressed!")
 //        if (event.key === Qt.Key_Back) {
@@ -30,8 +31,8 @@ Rectangle {
     ColumnLayout {
         anchors.fill: parent
         spacing: 5
-        ListView {
 
+        ListView {
             id: listView_recentSearches
             objectName: "listView_recentSearches"
 //                onAddProperty : {addElement(title, price, imgurl)}
@@ -62,6 +63,7 @@ Rectangle {
                 Layout.fillWidth: true
                 height: 80
                 RowLayout {
+
                     Image {
                         width:50
                         height:50
@@ -69,6 +71,7 @@ Rectangle {
                         sourceSize.height: 80
                         sourceSize.width: 80
                     }
+
                     ColumnLayout {
                         Text {
                             horizontalAlignment: Text.AlignRight
@@ -79,6 +82,7 @@ Rectangle {
                             text: title+", "+bedrooms+" bed "+propertyType
                         }
                     }
+
                     MouseArea {
                         anchors.fill: parent
                         onClicked: {
@@ -88,7 +92,7 @@ Rectangle {
                             propertyView.focus = true;
                             propertyView.visible = true;
                             propertyView.enabled = true;
-        propertyView.propertyLayout.loadProperty(summary,price, bedrooms,bathrooms,propertyType,title, imageUrl)
+                            propertyView.propertyLayout.loadProperty(summary,price, bedrooms,bathrooms,propertyType,title, imageUrl)
                         }
                     }
                 }
@@ -113,8 +117,8 @@ Rectangle {
                     listView_recentSearches.addElement(title, price, imgurl)
                 }
             }*/
-
         } //end of ListView
+
         Text {
             text: "Showing..."
             Layout.preferredHeight: 80
@@ -128,4 +132,3 @@ Rectangle {
         }
     }
 }
-

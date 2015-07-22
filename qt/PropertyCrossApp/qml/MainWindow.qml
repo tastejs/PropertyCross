@@ -19,6 +19,7 @@ ApplicationWindow {
             }
         }
     }
+
     toolBar: ToolBar {
         width: mainWindow.width
         visible: true
@@ -27,17 +28,18 @@ ApplicationWindow {
             ToolButton {text: 'ToolBarItem'}
         }
     }
+
     PropertyView {
        id: propertyView
        visible: false
        enabled: false
     }
+
     SearchResultsView {
         id: searchResultsView
         visible: false
         enabled: false
     }
-
 
     RootView {
         id: rootView

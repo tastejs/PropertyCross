@@ -3,11 +3,15 @@ import QtQuick.Controls 1.2
 import QtQuick.Layouts 1.2
 
 Rectangle {
+    id: rootView
+
     ColumnLayout {
         spacing: 5
-        //anchors.fill: parent
+
+//        anchors.fill: parent
         width: mainWindow.width
         height: mainWindow.height
+
         Text {
 //            width: mainWindow.width/2
             wrapMode: Text.WrapAtWordBoundaryOrAnywhere
@@ -17,11 +21,13 @@ Rectangle {
             clip: true
             text: "Use the form below to search for houses to buy. You can search by place-name, postcode, or click 'My location', to search in your current location!"
         }
+
         TextField {
             id: textFieldSearchLocation
             Layout.fillWidth: true;
             width: mainWindow.width
         }
+
         Button {
             id:buttonGo
             objectName: "buttonGo"
@@ -38,8 +44,10 @@ Rectangle {
                     searchResultsView.focus = true
                     rootView.visible = false
                     rootView.enabled = false
+                    cppJsonHandler.getFromString(textFieldSearchLocation.text, 0)
                 }
         }
+
         Button {
             id:buttonMyLocation
             text: qsTr("My Location")
@@ -54,6 +62,7 @@ Rectangle {
                     //win.show();
                 }
         }
+
         Label {
            id: label_status
            objectName: "label_status"
@@ -139,6 +148,7 @@ Rectangle {
                 }
             }
         } //end listview
+
         Label {
             id: label_suggestedLocations
             text: qsTr("<b>Please select a location below</b>")
@@ -224,10 +234,4 @@ Rectangle {
             }
         } //end listview
     }
-
-
 }
-
-
-
-

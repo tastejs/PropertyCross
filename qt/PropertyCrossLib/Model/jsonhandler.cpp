@@ -25,20 +25,23 @@ JsonHandler::JsonHandler(QObject *parent) :
     QObject(parent)
 {
     if(manager.isNull()) {
-    manager = QSharedPointer<QNetworkAccessManager>(new QNetworkAccessManager(this));
+        manager = QSharedPointer<QNetworkAccessManager>(new QNetworkAccessManager(this));
     }
+
     connect(manager.data(), SIGNAL(finished(QNetworkReply*)), this, SLOT(replyFinished(QNetworkReply*)));
 }
 
 void JsonHandler::getFromString(QString location, int page) {
     manager->get(QNetworkRequest(QUrl(baseUrl+"&place_name="+location+"&page="+page)));
-  }
+}
+
 void JsonHandler::getFromLocation(float latitude, float longtitude, int page) {
     manager->get(QNetworkRequest(QUrl(baseUrl+"&centre_point="+latitude+","+longtitude+"&page="+page)));
-  }
+}
+
 void JsonHandler::getListedLocations(QString location, int page) {
     manager->get(QNetworkRequest(QUrl(baseUrl+"&place_name="+location+"&page="+page)));
-  }
+}
 
 void JsonHandler::startRequest(QUrl url)
 {
@@ -59,8 +62,9 @@ void JsonHandler::replyFinished(QNetworkReply* reply)
         int statusCode = responseValue.toObject().value(QString("application_response_code")).toString().toInt();
 //        qDebug()<<"ResponceCode "<<statusCode;
 
-        if((statusCode==100) || (statusCode==101) || (statusCode==110) ) {
-        QSharedPointer<QList<Property*> >  properties = QSharedPointer<QList<Property*> >(new QList<Property*>);
+        if((statusCode==100) || (statusCode==101) || (statusCode==110) )
+        {
+            QSharedPointer<QList<Property*> >  properties = QSharedPointer<QList<Property*> >(new QList<Property*>);
             QJsonValue listingsValue = responseValue.toObject().value(QString("listings"));
 
             QJsonArray listingsArray = listingsValue.toArray();
@@ -78,7 +82,7 @@ void JsonHandler::replyFinished(QNetworkReply* reply)
             qDebug() << "Emitt ready properties";
         }
         else if((statusCode==200) || (statusCode==201)) {
-        QSharedPointer<QList<Location*> >  locations = QSharedPointer<QList<Location*> >(new QList<Location*>);
+            QSharedPointer<QList<Location*> >  locations = QSharedPointer<QList<Location*> >(new QList<Location*>);
             qDebug()<<"In Location Listings";
             QJsonValue listingsValue = responseValue.toObject().value(QString("locations"));
             QJsonArray listingsArray = listingsValue.toArray();

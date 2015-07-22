@@ -1,5 +1,5 @@
 TEMPLATE=subdirs
 
-SUBDIRS=PropertyCrossApp \
-PropertyCrossLib \
+SUBDIRS=PropertyCrossLib \
+PropertyCrossApp \
 PropertyCrossTest
