@@ -51,6 +51,7 @@ signals:
     void propertiesReady(QSharedPointer<QList<Property*> >);
     void locationsReady(QSharedPointer<QList<Location*> >);
     void successfullySearched(Search location);
+    void successfullySearched(QString location, int page, int totalResults);
     void errorRetrievingRequest();
 private:
     static QSharedPointer<QNetworkAccessManager> manager;

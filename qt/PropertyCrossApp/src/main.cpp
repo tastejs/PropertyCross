@@ -20,6 +20,7 @@ int main(int argc, char *argv[])
 //    qmlRegisterType<PropertyListing>("com.propertycross", 1,0, "PropertyListing");
 //    qmlRegisterType<PropertyListingModel>("PropertyCross", 1,0, "PropertyListingModel");
 //    qmlRegisterType<Location>("PropertyCross", 1,0, "Location");
+//    qmlRegisterType<Search>("PropertyCross", 1,0, "Search");
 
     JsonHandler handler;
     PropertyListingModel propertyListing;

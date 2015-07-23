@@ -93,7 +93,7 @@ QHash<int, QByteArray> PropertyListingModel::roleNames() const {
 
    void PropertyListingModel::addToListing(QSharedPointer<QList<Property*> > ptrList) {
       qDebug() << QString("Received list") ;
-      m_properties.clear();
+//      m_properties.clear();
       for(int i=0; i<ptrList->size(); i++){
     //  m_properties.append(ptrList->at(i));
 //    m_properties << (*property);
@@ -103,4 +103,10 @@ QHash<int, QByteArray> PropertyListingModel::roleNames() const {
 //      emit addProperty(ptrList->at(i)->getTitle(), QString::number(ptrList->at(i)->getPrice()), ptrList->at(i)->getImageUrl());
       }
  //     emit ready();
+   }
+
+   void PropertyListingModel::resetListing() {
+       beginResetModel();
+       m_properties.clear();
+       endResetModel();
    }

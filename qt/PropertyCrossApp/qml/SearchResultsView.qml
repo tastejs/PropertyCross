@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.2
 import QtQuick.Window 2.2
+//import PropertyCross 1.0
 
 Rectangle {
 //    width: 640
@@ -28,7 +29,7 @@ Rectangle {
         spacing: 5
 
         ListView {
-            id: listView_recentSearches
+            id: listView_properties
             objectName: "listView_recentSearches"
 //            width: parent.width
 //            height: parent.height
@@ -75,18 +76,37 @@ Rectangle {
                     }
                 }
             }
-        } //end of ListView
-
+            footer: Item {
+                Layout.fillWidth: true
+                height: 80
         Text {
-            text: "Showing..."
+            id: listView_properties_footer
+//            text: "Results for <b>"+location//+"</b>, showing <b>"+(page+1)*20+"</b> of <b>"+totalresults+"</b> properties."
             Layout.preferredHeight: 80
             MouseArea {
+                id: text_loadMoreProperties
+                property int page
+                property string name
                 anchors.fill: parent
                 Layout.fillWidth: true
                 onClicked: {
-                    console.log("Clicked on more")
+                    cppJsonHandler.getFromString(name, page)
+                    console.log("Clicked on more "+(page)+" of location "+name)
+                }
+            }
+            Connections {
+                target: cppJsonHandler
+                onSuccessfullySearched: {
+                    //TODO handle zero (or <20) houses, last page
+            listView_properties_footer.text = "Results for <b>"+location+"</b>, showing <b>"+(page*20)+"</b> of <b>"+totalResults+"</b> properties."
+                    console.log("Successfully searched for "+location+" on page"+page+" has results "+totalResults)
+                    text_loadMoreProperties.page = page
+                    text_loadMoreProperties.name = location
                 }
             }
         }
+            }
+        } //end of ListView
+
     }
 }

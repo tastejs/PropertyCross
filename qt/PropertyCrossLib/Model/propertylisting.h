@@ -51,6 +51,7 @@ public:
     QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
 public slots:
    void addToListing(QSharedPointer<QList<Property*> > ptrList);
+   void resetListing();
 
 protected:
     QHash<int, QByteArray> roleNames() const;

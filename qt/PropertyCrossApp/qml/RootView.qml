@@ -44,6 +44,7 @@ Rectangle {
                     searchResultsView.focus = true
                     rootView.visible = false
                     rootView.enabled = false
+                    cppPropertyListing.resetListing()
                     cppJsonHandler.getFromString(textFieldSearchLocation.text, 0)
                 }
         }
@@ -137,12 +138,13 @@ Rectangle {
                         anchors.fill: parent
                         onClicked: {
                             console.log("Clicked on "+search)
-                    cppJsonHandler.getFromString(displayName, 0)
+                    cppJsonHandler.getFromString(search, 0)
                     searchResultsView.visible= true
                     searchResultsView.enabled = true
                     searchResultsView.focus = true;
                     rootView.visible = false
                     rootView.enabled = false
+                    cppPropertyListing.resetListing()
                         }
                     }
                 }

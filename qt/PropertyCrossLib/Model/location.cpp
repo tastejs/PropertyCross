@@ -74,7 +74,9 @@ QHash<int, QByteArray> LocationListingModel::roleNames() const {
 
    void LocationListingModel::addToListing(QSharedPointer<QList<Location*> > ptrList) {
       qDebug() << QString("Received Location list") ;
+    beginResetModel();//QModelIndex(), rowCount(), rowCount());
       m_locations.clear();
+    endResetModel();
       for(int i=0; i<ptrList->size(); i++){
     beginInsertRows(QModelIndex(), rowCount(), rowCount());
     m_locations.append(*ptrList->at(i));
