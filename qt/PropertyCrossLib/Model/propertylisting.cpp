@@ -93,6 +93,7 @@ QHash<int, QByteArray> PropertyListingModel::roleNames() const {
 
    void PropertyListingModel::addToListing(QSharedPointer<QList<Property*> > ptrList) {
       qDebug() << QString("Received list") ;
+      m_properties.clear();
       for(int i=0; i<ptrList->size(); i++){
     //  m_properties.append(ptrList->at(i));
 //    m_properties << (*property);

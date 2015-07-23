@@ -35,10 +35,10 @@ Rectangle {
             text: qsTr("Go")
             anchors.horizontalCenter: parent.horizontalCenter
             Layout.fillWidth: true
-            signal searchFor(string msg, int page)
+//            signal searchFor(string msg, int page)
                 onClicked: {
                     console.log("Clicked Go Button");
-                    buttonGo.searchFor(textFieldSearchLocation.text, 0)
+//                    buttonGo.searchFor(textFieldSearchLocation.text, 0)
                     searchResultsView.visible= true
                     searchResultsView.enabled = true
                     searchResultsView.focus = true
@@ -137,7 +137,7 @@ Rectangle {
                         anchors.fill: parent
                         onClicked: {
                             console.log("Clicked on "+search)
-                    buttonGo.searchFor(search, 0)
+                    cppJsonHandler.getFromString(displayName, 0)
                     searchResultsView.visible= true
                     searchResultsView.enabled = true
                     searchResultsView.focus = true;
@@ -182,8 +182,8 @@ Rectangle {
             Layout.fillHeight: true
             //Layout.fillWidth: true
 
-            model: //cppRecentSearches
-                ListModel {
+            model: cppSuggestedLocations
+/*                ListModel {
                 //dummy data for this ListView
                 ListElement {
                     search: "Grey"
@@ -204,7 +204,7 @@ Rectangle {
                     search: "Green"
                     results: "100"
                 }
-            }
+            }*/
             delegate: Item {
                 x: 5
                 Layout.fillWidth: true
@@ -212,17 +212,18 @@ Rectangle {
                 RowLayout {
                     Text {
                         id: nameText
-                        text: search
-                    }
-                    Text {
-                        horizontalAlignment: Text.AlignRight
-                        text: "("+results+")"
+                        text: displayName
                     }
                     MouseArea {
                         anchors.fill: parent
                         onClicked: {
-                            console.log("Clicked on "+search)
-                    buttonGo.searchFor(search, 0)
+                            console.log("Clicked on "+displayName)
+//                    searchFor(displayName, 0)
+                    cppJsonHandler.getFromString(displayName, 0)
+                    label_suggestedLocations.visible = false
+                    listView_suggestedLocations.visible = false
+                    label_recentSearches.visible = true
+                    listView_recentSearches.visible = true
                     searchResultsView.visible= true
                     searchResultsView.enabled = true
                     searchResultsView.focus = true;

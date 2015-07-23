@@ -1,13 +1,15 @@
 #include "location.h"
 
-Location::Location(QObject *parent):
-   QObject(parent)
+#include <QSharedPointer>
+#include <QDebug>
 
+Location::Location()//QObject *parent):
+   //QObject(parent)
 {
 
 }
 
-Location::Location(const QJsonObject &jsonObj, QObject *parent ) :  QObject(parent){
+Location::Location(const QJsonObject &jsonObj) {//, QObject *parent ) :  QObject(parent){
 
     m_displayName             = jsonObj.value(QString("long_title")).toString();
     m_name             = jsonObj.value(QString("place_name")).toString();
@@ -33,4 +35,50 @@ void Location::setName(const QString &value)
 }
 
 
+
+LocationListingModel::LocationListingModel(QObject *parent)
+    : QAbstractListModel(parent)
+{
+}
+
+void LocationListingModel::addLocation(const Location &location)
+{
+    beginInsertRows(QModelIndex(), rowCount(), rowCount());
+    m_locations << location;
+    endInsertRows();
+}
+
+int LocationListingModel::rowCount(const QModelIndex & parent) const {
+    Q_UNUSED(parent);
+    return m_locations.count();
+}
+
+QVariant LocationListingModel::data(const QModelIndex & index, int role) const {
+    if (index.row() < 0 || index.row() >= m_locations.count())
+        return QVariant();
+
+    const Location &location = m_locations[index.row()];
+    if (role == DisplayNameRole)
+        return location.getDisplayName();
+    else if (role == NameRole)
+        return location.getName();
+    return QVariant();
+}
+
+QHash<int, QByteArray> LocationListingModel::roleNames() const {
+    QHash<int, QByteArray> roles;
+    roles[DisplayNameRole] = "displayName";
+    roles[NameRole] = "name";
+    return roles;
+}
+
+   void LocationListingModel::addToListing(QSharedPointer<QList<Location*> > ptrList) {
+      qDebug() << QString("Received Location list") ;
+      m_locations.clear();
+      for(int i=0; i<ptrList->size(); i++){
+    beginInsertRows(QModelIndex(), rowCount(), rowCount());
+    m_locations.append(*ptrList->at(i));
+    endInsertRows();
+      }
+   }
 

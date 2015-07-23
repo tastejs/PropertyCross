@@ -3,7 +3,7 @@ import QtQuick.Layouts 1.2
 import QtQuick.Window 2.2
 //import ShptrProperty 1.0
 //import com.propertycross 1.0
-import PropertyCross 1.0
+//import PropertyCross 1.0
 //import com.propertylisting 1.0
 //PropertyView { id: propertyView }
 
