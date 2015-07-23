@@ -12,7 +12,8 @@ SOURCES += \
     Model/jsonhandler.cpp \
     Model/location.cpp \
     Model/propertylisting.cpp \
-    Model/recentsearches.cpp
+    Model/recentsearches.cpp \
+    Model/favourites.cpp
 
 HEADERS += \
     include/Application.h \
@@ -21,7 +22,8 @@ HEADERS += \
     include/ipropertyhandler.h \
     Model/location.h \
     Model/propertylisting.h \
-    Model/recentsearches.h
+    Model/recentsearches.h \
+    Model/favourites.h
 
 INCLUDEPATH += ./include
 

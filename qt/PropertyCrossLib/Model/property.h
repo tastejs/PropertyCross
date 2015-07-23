@@ -39,6 +39,10 @@ public:
     QString getImageUrl() const;
     void setImageUrl(const QString &value);
 
+    QList<QString> toList() const;
+    static Property fromList(QList<QVariant> list);
+    static Property fromStrings(QString guid, QString summary, QString price, QString bedrooms, QString bathrooms, QString propertyType, QString title, QString thumbnailUrl, QString imgurl);
+
 private:
      QString m_guid;
      QString m_summary;

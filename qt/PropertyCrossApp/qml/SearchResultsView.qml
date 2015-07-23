@@ -30,7 +30,7 @@ Rectangle {
 
         ListView {
             id: listView_properties
-            objectName: "listView_recentSearches"
+//            objectName: "listView_recentSearches"
 //            width: parent.width
 //            height: parent.height
             Layout.fillHeight: true
@@ -71,7 +71,7 @@ Rectangle {
                             propertyView.focus = true;
                             propertyView.visible = true;
                             propertyView.enabled = true;
-                            propertyView.propertyLayout.loadProperty(summary,price, bedrooms,bathrooms,propertyType,title, imageUrl)
+                            propertyView.propertyLayout.loadProperty(guid, summary,price, bedrooms,bathrooms,propertyType,title, thumbnailUrl, imageUrl)
                         }
                     }
                 }

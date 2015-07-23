@@ -4,5 +4,10 @@
         <file>qml/RootView.qml</file>
         <file>qml/PropertyView.qml</file>
         <file>qml/SearchResultsView.qml</file>
+        <file>qml/FavouritesView.qml</file>
+        <file>res/ic_launcher.png</file>
+        <file>res/nostar.png</file>
+        <file>res/refresh.png</file>
+        <file>res/star.png</file>
     </qresource>
 </RCC>

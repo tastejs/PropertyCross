@@ -2,6 +2,7 @@
 #include "jsonhandler.h"
 #include "propertylisting.h"
 #include "recentsearches.h"
+#include "favourites.h"
 
 #include <QQmlApplicationEngine>
 #include <QObject>
@@ -27,27 +28,30 @@ int main(int argc, char *argv[])
     LocationListingModel locationListing;
     RecentSearchesModel recentSearches;
     RecentSearchesStorage searchesStorage;
-//    propertyListing.addProperty(Property("ab"));
+    Favourites favourites;
+    FavouritedPropertyListingModel favouritesListing;
 
     QQmlApplicationEngine engine;
     engine.rootContext()->setContextProperty("cppPropertyListing", &propertyListing);
+    engine.rootContext()->setContextProperty("cppFavouritesListing", &favouritesListing);
     engine.rootContext()->setContextProperty("cppSuggestedLocations", &locationListing);
     engine.rootContext()->setContextProperty("cppRecentSearches",  &recentSearches);
-    engine.rootContext()->setContextProperty("cppJsonHandler",     &handler);;
+    engine.rootContext()->setContextProperty("cppJsonHandler",     &handler);
+    engine.rootContext()->setContextProperty("cppFavouritesHandler", &favourites);
     engine.load(QUrl(QStringLiteral("qrc:/qml/MainWindow.qml")));
 
-    /*QObject *qPropertyListing = rootObject->findChild<QObject*>("listView_recentSearches");
-    if(qPropertyListing!=0){
-//    QObject::connect(&propertyListing, SIGNAL(ready()), qPropertyListing, SLOT(addToListing()));
-//    QObject::connect(&propertyListing, SIGNAL(addProperty(QString, QString, QString)), qPropertyListing, SLOT(addElement(QString, QString, QString)));
-    }
-    else{
-        qWarning() << "Could not find propertyListing";
-    }*/
+//    QObject *qtoolButton_star = rootObject->findChild<QObject*>("toolButton_star");
+//    if(qtoolButton_star!=0){
+//    QObject::connect(&qtoolButton_star, SIGNAL(onClicked()), &favourites, SLOT(addNewFavourite(Property)));
+//    }
+//    else{
+//        qWarning() << "Could not find Favourite Toolbutton";
+//    }
     QObject::connect(&handler,          SIGNAL(propertiesReady(QSharedPointer<QList<Property*> >)), &propertyListing, SLOT(addToListing(QSharedPointer<QList<Property*> >)));
     QObject::connect(&handler,          SIGNAL(locationsReady(QSharedPointer<QList<Location*> >)), &locationListing, SLOT(addToListing(QSharedPointer<QList<Location*> >)));
     QObject::connect(&handler,          SIGNAL(successfullySearched(Search)),                       &searchesStorage, SLOT(addNewSearch(Search)));
     QObject::connect(&searchesStorage , SIGNAL(recentSearchesChanged()),                            &recentSearches,  SLOT(reloadSearchesFromStorage()));
+    QObject::connect(&favourites , SIGNAL(favouritedPropertiesChanged()), &favouritesListing,  SLOT(reloadFavouritedFromStorage()));
 
     return app.exec();
 }

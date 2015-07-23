@@ -108,6 +108,52 @@ void Property::setImageUrl(const QString &value)
     m_imageUrl = value;
 }
 
+QList<QString> Property::toList() const
+{
+   QList<QString> list;
+   list.append(m_guid);
+   list.append(m_summary);
+     list.append(QString::number(m_price));
+     list.append(QString::number(m_bedrooms));
+     list.append(QString::number(m_bathrooms));
+     list.append(m_propertyType);
+     list.append(m_title);
+     list.append(m_thumbnailUrl);
+     list.append(m_imageUrl);
+     return list;
+}
+
+Property Property::fromList(QList<QVariant> list)
+{
+   Property property;
+   property.setGuid(list[0].toString());
+   property.setSummary(list[1].toString());
+   property.setPrice(list[2].toString().toInt());
+   property.setBedrooms(list[3].toString().toInt());
+   property.setBathrooms(list[4].toString().toInt());
+   property.setPropertyType(list[5].toString());
+   property.setTitle(list[6].toString());
+   property.setThumbnailUrl(list[7].toString());
+   property.setImageUrl(list[8].toString());
+   return property;
+}
+
+Property Property::fromStrings(QString guid, QString summary, QString price, QString bedrooms, QString bathrooms, QString propertyType, QString title, QString thumbnailUrl, QString imageUrl)
+{
+   Property property;
+   property.setGuid(guid);
+   property.setSummary(summary);
+   property.setPrice(price.toInt());
+   property.setBedrooms(bedrooms.toInt());
+   property.setBathrooms(bathrooms.toInt());
+   property.setPropertyType(propertyType);
+   property.setTitle(title);
+   property.setThumbnailUrl(thumbnailUrl);
+   property.setImageUrl(imageUrl);
+   return property;
+
+}
+
 
 
 

@@ -19,21 +19,64 @@ ApplicationWindow {
             }
         }
     }
+    PropertyView {
+       id: propertyView
+       visible: false
+       enabled: false
+       property bool isFavourite
+    }
 
     toolBar: ToolBar {
         width: mainWindow.width
         visible: true
         RowLayout {
             anchors.fill: parent
-            ToolButton {text: 'ToolBarItem'}
+            ToolButton {
+                id:toolButton_Favourites
+                text: 'Favourites'
+                Layout.alignment: Qt.AlignRight
+                onClicked: {
+                    favouritesView.visible= true
+                    favouritesView.enabled = true
+                    favouritesView.focus = true;
+                    rootView.visible = false
+                    rootView.enabled = false
+//                    cppPropertyListing.resetListing()
+                        }
+                visible: {
+                    if(propertyView.visible==true)
+                        false
+                    else
+                        true
+                }
+            }
+            ToolButton {
+                id: toolButton_star
+                signal toggleFavourite()
+                iconSource: {
+                    if(propertyView.isFavourite)
+                        "qrc:///res/star.png"
+                    else
+                        "qrc:///res/nostar.png"
+                }
+                property bool isFavourite
+                visible: {
+                    if(toolButton_Favourites.visible==true)
+                        false
+                    else
+                        true
+                }
+                Layout.alignment: Qt.AlignRight
+                onClicked: {
+                    //propertyLayout.addToFavourites()
+//                    toolButton_star.toggleFavourite()
+                    propertyView.propertyLayout.toggleFavourite()
+                }
+            }
+
         }
     }
 
-    PropertyView {
-       id: propertyView
-       visible: false
-       enabled: false
-    }
 
     SearchResultsView {
         id: searchResultsView
@@ -41,6 +84,11 @@ ApplicationWindow {
         enabled: false
     }
 
+    FavouritesView {
+        id: favouritesView
+        visible: false
+        enabled: false
+    }
     RootView {
         id: rootView
         visible: true
