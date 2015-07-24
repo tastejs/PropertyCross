@@ -15,6 +15,7 @@ public slots:
     void getPosition();
     void positionUpdated(QGeoPositionInfo);
     void positionError(QGeoPositionInfoSource::Error);
+    void positionError();
 signals:
     void getPosition(QString position);
     void getPositionError();

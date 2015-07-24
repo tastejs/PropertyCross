@@ -50,6 +50,10 @@ Item {
                     cppJsonHandler.getFromString(textFieldSearchLocation.text, 0)
                     label_status.text = ""
                 }
+            Keys.onReturnPressed:
+            {
+                Qt.inputMethod.hide();
+            }
         }
 
         Button {
