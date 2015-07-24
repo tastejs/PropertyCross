@@ -5,26 +5,24 @@ import QtQuick.Layouts 1.2
 Item {
     id: rootView
     state: "showingRoot"
+    width: 640
 
+    //Text eliding doesn't seem to work in a Layout, so put Text outside of layout
+        Text {
+            id: textIntroduction
+            wrapMode: Text.WordWrap
+            elide: Text.ElideRight
+            anchors.left: parent.left
+            width: parent.width
+            text: "Use the form below to search for houses to buy. You can search by place-name, postcode, or click 'My location', to search in your current location!"
+            textFormat: Text.PlainText
+        }
     ColumnLayout {
         spacing: 5
-
-//        anchors.fill: parent
-        //width: mainWindow.width
-        height: mainWindow.height
-        Layout.fillWidth: true
-        Layout.fillHeight: true
-
-        Text {
-//            width: mainWindow.width/2
-            wrapMode: Text.WrapAtWordBoundaryOrAnywhere
-            elide: Text.ElideRight
-            maximumLineCount: 5
-            width: mainWindow.width
-         //   width: mainWindow.width
-            clip: true
-            text: "Use the form below to search for houses to buy. You can search by place-name, postcode, or click 'My location', to search in your current location!"
-        }
+        clip: true
+        anchors.top:  textIntroduction.bottom
+        height: parent.height
+        width: parent.width
 
         TextField {
             id: textFieldSearchLocation
@@ -44,13 +42,9 @@ Item {
                     console.log("Clicked Go Button");
 //                    buttonGo.searchFor(textFieldSearchLocation.text, 0)
                     stack.push("qrc:///qml/SearchResultsView.qml")
-//                    searchResultsView.visible= true
-//                    searchResultsView.enabled = true
-//                    searchResultsView.focus = true
-//                    rootView.visible = false
-//                    rootView.enabled = false
                     cppPropertyListing.resetListing()
                     cppJsonHandler.getFromString(textFieldSearchLocation.text, 0)
+                    label_status.text = ""
                 }
         }
 
@@ -78,6 +72,7 @@ Item {
                 onErrorRetrievingRequest: {
                label_status.text = "The location given was not recognised"
                     console.log("in errorRetrieving")
+                    stack.pop()
 //        searchResultsView.visible = false
 //        searchResultsView.enabled = false
 //        rootView.visible = true
@@ -132,7 +127,6 @@ Item {
                 height: 40
                 RowLayout {
                     Text {
-                        id: nameText
                         text: search
                     }
                     Text {
@@ -189,7 +183,6 @@ Item {
                 height: 40
                 RowLayout {
                     Text {
-                        id: nameText
                         text: displayName
                     }
                     MouseArea {

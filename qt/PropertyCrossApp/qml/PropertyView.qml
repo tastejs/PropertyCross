@@ -70,6 +70,8 @@ Item {
         Text {
 //            id: summary
             text: propertyLayout.summary
+            wrapMode: Text.WrapAtWordBoundaryOrAnywhere
+            width: parent.width
         }
 
         function loadProperty(guid_, summary_,price_, bedrooms_,bathrooms_,propertyType_,title_, thumbnailUrl_, imageUrl_) {

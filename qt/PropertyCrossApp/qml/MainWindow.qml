@@ -9,7 +9,7 @@ ApplicationWindow {
     title: qsTr("PropertyCross")
     visible: true
     id : mainWindow
-    menuBar: MenuBar {
+/*    menuBar: MenuBar {
         Menu {
             visible: true
             MenuItem{
@@ -18,7 +18,7 @@ ApplicationWindow {
                 //onClicked: console.log("Clicked on Favourites")
             }
         }
-    }
+    }*/
    /* PropertyView {
         id: propertyView
         visible: false
@@ -103,6 +103,7 @@ ApplicationWindow {
     StackView {
         id:stack
         anchors.fill: parent
+        width: parent.width
         focus: true
         //        Keys.onReleased: if (event.key === Qt.Key_Back && stackView.depth > 1) {
         Keys.onReleased: if ((event.key === Qt.Key_F1 || event.key === Qt.Key_Back) && stack.depth > 1) {
@@ -111,7 +112,7 @@ ApplicationWindow {
                          }
         ListView {
       //      model: pageModel
-            anchors.fill: parent
+//            anchors.fill: parent
 //            delegate: AndroidDelegate {
 //                text: title
 //                onClicked: stackView.push(Qt.resolvedUrl(page))

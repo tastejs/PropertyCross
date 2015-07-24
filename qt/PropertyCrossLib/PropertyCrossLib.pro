@@ -13,7 +13,8 @@ SOURCES += \
     Model/location.cpp \
     Model/propertylisting.cpp \
     Model/recentsearches.cpp \
-    Model/favourites.cpp
+    Model/favourites.cpp \
+    Model/position.cpp
 
 HEADERS += \
     include/Application.h \
@@ -23,7 +24,8 @@ HEADERS += \
     Model/location.h \
     Model/propertylisting.h \
     Model/recentsearches.h \
-    Model/favourites.h
+    Model/favourites.h \
+    Model/position.h
 
 INCLUDEPATH += ./include
 

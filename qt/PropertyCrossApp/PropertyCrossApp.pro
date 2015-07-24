@@ -1,6 +1,7 @@
 TEMPLATE = app
 QT       += core
 QT       += qml quick widgets
+QT       += positioning
 
 TARGET = PropertyCross
 CONFIG   += C++11

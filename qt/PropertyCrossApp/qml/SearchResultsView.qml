@@ -4,10 +4,11 @@ import QtQuick.Window 2.2
 //import PropertyCross 1.0
 
 Item {
-//    width: 640
-//    height:800
+    width: parent.width
+    height:parent.height
 //    anchors.fill: parent
     id: searchResultsView
+    state: "showingResults"
 //    focus: true
 
     ColumnLayout {
@@ -27,15 +28,16 @@ Item {
                 signal loadProperty(string guid, string summary,string price, string bedrooms,string bathrooms,string propertyType,string title, string thumbnailUrl, string imageUrl)
                 //            x: 5
                 Layout.fillWidth: true
-                height: 80
+//                height: parent.height/5
                 RowLayout {
+                height: parent.height
 
                     Image {
-                        width:50
-                        height:50
+//                        width:50
+//                        height:50
                         source: thumbnailUrl
-                        sourceSize.height: 80
-                        sourceSize.width: 80
+                        sourceSize.height: parent.height
+                        sourceSize.width: parent.width
                     }
 
                     ColumnLayout {
@@ -65,7 +67,7 @@ Item {
         Text {
             id: listView_properties_footer
 //            text: "Results for <b>"+location//+"</b>, showing <b>"+(page+1)*20+"</b> of <b>"+totalresults+"</b> properties."
-            Layout.preferredHeight: 80
+            Layout.preferredHeight: parent.height/5
             MouseArea {
                 id: text_loadMoreProperties
                 property int page
