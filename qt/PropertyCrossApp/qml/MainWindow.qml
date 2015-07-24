@@ -105,7 +105,7 @@ ApplicationWindow {
         anchors.fill: parent
         focus: true
         //        Keys.onReleased: if (event.key === Qt.Key_Back && stackView.depth > 1) {
-        Keys.onReleased: if (event.key === Qt.Key_F1 && stack.depth > 1) {
+        Keys.onReleased: if ((event.key === Qt.Key_F1 || event.key === Qt.Key_Back) && stack.depth > 1) {
                              stack.pop();
                              event.accepted = true;
                          }
