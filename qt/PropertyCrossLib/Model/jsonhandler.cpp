@@ -35,7 +35,12 @@ void JsonHandler::getFromString(QString location, int page) {
     manager->get(QNetworkRequest(QUrl(baseUrl+"&place_name="+location+"&page="+QString::number(page+1))));
     QUrl test(baseUrl+"&place_name="+location+"&page="+QString::number(page+1));
 qDebug() << "Getting: "<<    test.toString();
-  //  qDebug() << "Started request to get page "<<page<<" of "<<location;
+//  qDebug() << "Started request to get page "<<page<<" of "<<location;
+}
+
+void JsonHandler::getFromString(QString location)
+{
+getFromString(location,0);
 }
 
 void JsonHandler::getFromLocation(float latitude, float longtitude, int page) {

@@ -2,6 +2,7 @@ TEMPLATE = lib
 QT       += core
 QT	 += qml quick
 QT       += network
+QT       += positioning
 
 TARGET    = PropertyCrossLib
 CONFIG   += C++11

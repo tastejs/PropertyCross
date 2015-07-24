@@ -4,6 +4,7 @@ QT       += network
 QT       += core
 QT       += widgets
 QT       += qml
+QT       += positioning
 CONFIG   += testcase
 CONFIG   += C++11
 
@@ -16,6 +17,7 @@ SOURCES += \
      ../PropertyCrossLib/Model/jsonhandler.cpp \
     ../PropertyCrossLib/Model/recentsearches.cpp \
     ../PropertyCrossLib/Model/propertylisting.cpp \
+    ../PropertyCrossLib/Model/position.cpp \
     src/TestProperty.cpp \
     src/TestJsonHandler.cpp \
     src/TestLocation.cpp
@@ -28,7 +30,8 @@ HEADERS += \
     ../PropertyCrossLib/Model/location.h \
     ../PropertyCrossLib/Model/jsonhandler.h \
     ../PropertyCrossLib/Model/recentsearches.h \
-    ../PropertyCrossLib/Model/propertylisting.h
+    ../PropertyCrossLib/Model/propertylisting.h \
+    ../PropertyCrossLib/Model/position.h
 
 INCLUDEPATH += ./include \
     ../PropertyCrossLib//Model

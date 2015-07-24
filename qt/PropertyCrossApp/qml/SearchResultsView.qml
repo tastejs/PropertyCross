@@ -28,9 +28,8 @@ Item {
                 signal loadProperty(string guid, string summary,string price, string bedrooms,string bathrooms,string propertyType,string title, string thumbnailUrl, string imageUrl)
                 //            x: 5
                 Layout.fillWidth: true
-//                height: parent.height/5
+                height: 80//parent.height
                 RowLayout {
-                height: parent.height
 
                     Image {
 //                        width:50

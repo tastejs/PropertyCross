@@ -28,6 +28,10 @@ Item {
             id: textFieldSearchLocation
             Layout.fillWidth: true;
             width: mainWindow.width
+            Keys.onReturnPressed:
+            {
+                Qt.inputMethod.hide();
+            }
         }
 
         Button {
@@ -55,11 +59,7 @@ Item {
             Layout.fillWidth: true
                 onClicked: {
                     console.log("Clicked My location Button");
-
-
-                    //var component = Qt.createComponent("SearchResultsWindow.qml");
-                    //var win = component.createObject(mainWindow);
-                    //win.show();
+                    cppGpsPosition.getPosition();
                 }
         }
 
@@ -71,13 +71,16 @@ Item {
                 target: cppJsonHandler
                 onErrorRetrievingRequest: {
                label_status.text = "The location given was not recognised"
-                    console.log("in errorRetrieving")
+                    console.log("in error Retrieving from JsonHandler")
                     stack.pop()
-//        searchResultsView.visible = false
-//        searchResultsView.enabled = false
-//        rootView.visible = true
-//        rootView.enabled = true
-//        rootView.focus = true
+                }
+            }
+            Connections {
+                target: cppGpsPosition
+                onGetPositionError: {
+               label_status.text = "The location given was not recognised"
+                    console.log("in error Retrieving from GPSHandler")
+                    stack.pop()
                 }
             }
         }
@@ -99,28 +102,6 @@ Item {
             //Layout.fillWidth: true
 
             model: cppRecentSearches
-                /*ListModel {
-                //dummy data for this ListView
-                ListElement {
-                    name: "Grey"
-                    results: "50"
-                }
-
-                ListElement {
-                    name: "Red"
-                    results: "100"
-                }
-
-                ListElement {
-                    name: "Blue"
-                    results: "100"
-                }
-
-                ListElement {
-                    name: "Green"
-                    results: "100"
-                }
-            }*/
             delegate: Item {
                 x: 5
                 Layout.fillWidth: true
@@ -189,7 +170,6 @@ Item {
                         anchors.fill: parent
                         onClicked: {
                             console.log("Clicked on "+displayName)
-//                    searchFor(displayName, 0)
                     cppJsonHandler.getFromString(displayName, 0)
                     label_suggestedLocations.visible = false
                     listView_suggestedLocations.visible = false

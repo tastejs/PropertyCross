@@ -30,6 +30,7 @@ public slots:
     @return a pointer to a list of the properties
     */
     void getFromString(QString location, int page);
+    void getFromString(QString location);
     /** Get a list of properties from a location-coordinate
     @param location the location for which to search
     @param page which page of the string to get
