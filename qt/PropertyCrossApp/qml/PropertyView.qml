@@ -1,34 +1,20 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.2
 
-Rectangle {
-    anchors.fill: parent
-    focus: true
-    Keys.onReleased: {
-        console.log("Key pressed!")
-//        if (event.key === Qt.Key_Back) {
-            console.log("Back key!")
-        event.accepted            = true;
-        propertyView.visible      = false
-        propertyView.enabled      = false
-        searchResultsView.visible = true
-        searchResultsView.enabled = true
-        searchResultsView.focus   = true
- //       }
-    }
-
-//    onVisibleChanged: {
-//        if(visible==true) {
-//        toolButton_Favourites.visible = false;
-//        } else {
-//            toolButton_Favourites.visible = true;
-//        }
-//    }
+Item {
+    id: propertyView
+    property bool isFavourite
+    state: "showingProperty"
 
     property alias propertyLayout : propertyLayout
+    onActiveFocusChanged:{
+        if(activeFocus === false)
+        toolButton_Favourites.visible = true;
+    }
 
     ColumnLayout {
         id: propertyLayout
+        objectName: "propertyLayout"
         property string guid
         property string summary
         property string price
@@ -38,13 +24,40 @@ Rectangle {
         property string bedrooms
         property string bathrooms
         property string propertyType
+        onGuidChanged: {
+            if(cppFavouritesHandler.isFavourited(guid))
+                propertyView.isFavourite = true
+            else
+                propertyView.isFavourite = false
+        }
+//    onEnabledChanged: {
+//        if(enabled==true) {
+//        toolButton_Favourites.visible = false;
+//            toolButton_Star.visible = true
+//        } else {
+//            toolButton_Favourites.visible = true;
+//            toolButton_Star.visible = false
+//        }
+//    }
+        Connections {
+            target: cppShownProperty
+            onShowProperty: {
+                propertyLayout.loadProperty(guid, summary,price, bedrooms,bathrooms,propertyType,title, thumbnailUrl, imageUrl)
+                toolButton_star.loadStarIcon(cppFavouritesHandler.isFavourited(propertyLayout.guid))
+            }
+        }
+        Connections {
+            target: cppFavouritesHandler
+            onToggleFavourite: propertyLayout.toggleFavourite()
+            onFavouritedPropertiesChanged:toolButton_star.loadStarIcon(cppFavouritesHandler.isFavourited(propertyLayout.guid))
+        }
+
         Text {
 //            id: price
             text: "<b>£"+propertyLayout.price+"</b>"
         }
         Text {
-//            id: title
-           text: propertyLayout.title
+//           text: propertyLayout.title
         }
         Image {
 //            id: image
@@ -59,18 +72,18 @@ Rectangle {
             text: propertyLayout.summary
         }
 
-        function loadProperty(guid_, summary_,price_, bedrooms_,bathrooms_,propertyType_,title_, thumbnailUrl_, imgurl_) {
+        function loadProperty(guid_, summary_,price_, bedrooms_,bathrooms_,propertyType_,title_, thumbnailUrl_, imageUrl_) {
+            console.log("Loading property "+title_+ "imgurl:"+imageUrl_)
             propertyLayout.guid = guid_
             propertyLayout.summary = summary_
             propertyLayout.price = price_
             propertyLayout.title = title_
-            propertyLayout.imageUrl = imgurl_
+            propertyLayout.imageUrl = imageUrl_
             propertyLayout.thumbnailUrl = thumbnailUrl_
             propertyLayout.bedrooms = bedrooms_
             propertyLayout.bathrooms = bathrooms_
             propertyLayout.propertyType = propertyType_
 //            price.text = "<b>£"+price_+"</b>"
-//            title.text = title_
             //image.source = imgurl_
 //            rooms.text = bedrooms_+" bed, "+bathrooms_+" bathroom "+propertyType_
 //            summary.text = summary_
@@ -81,10 +94,9 @@ Rectangle {
            cppFavouritesHandler.removeFavourite(propertyLayout.guid, propertyLayout.summary, propertyLayout.price, propertyLayout.bedrooms, propertyLayout.bathrooms, propertyLayout.propertyType, propertyLayout.title, propertyLayout.thumbnailUrl, propertyLayout.imageUrl)
                 propertyView.isFavourite = false
             } else {
-            cppFavouritesHandler.addNewFavourite(propertyLayout.guid, propertyLayout.summary, propertyLayout.price, propertyLayout.bedrooms, propertyLayout.bathrooms, propertyLayout.propertyType, propertyLayout.title, propertyLayout.thumbnailUrl, propertyLayout.imgurl)
+            cppFavouritesHandler.addNewFavourite(propertyLayout.guid, propertyLayout.summary, propertyLayout.price, propertyLayout.bedrooms, propertyLayout.bathrooms, propertyLayout.propertyType, propertyLayout.title, propertyLayout.thumbnailUrl, propertyLayout.imageUrl)
                 propertyView.isFavourite = true
             }
-
         }
         function addToFavourites() {
             cppFavouritesHandler.addNewFavourite(summary, price, bedrooms, bathrooms, propertyType, title, imgurl)

@@ -30,6 +30,7 @@ int main(int argc, char *argv[])
     RecentSearchesStorage searchesStorage;
     Favourites favourites;
     FavouritedPropertyListingModel favouritesListing;
+    PropertyDelegate shownProperty;
 
     QQmlApplicationEngine engine;
     engine.rootContext()->setContextProperty("cppPropertyListing", &propertyListing);
@@ -38,20 +39,22 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("cppRecentSearches",  &recentSearches);
     engine.rootContext()->setContextProperty("cppJsonHandler",     &handler);
     engine.rootContext()->setContextProperty("cppFavouritesHandler", &favourites);
+    engine.rootContext()->setContextProperty("cppShownProperty", &shownProperty);
     engine.load(QUrl(QStringLiteral("qrc:/qml/MainWindow.qml")));
-
-//    QObject *qtoolButton_star = rootObject->findChild<QObject*>("toolButton_star");
-//    if(qtoolButton_star!=0){
+//QObject *rootObject = engine.rootObjects().first();
+//    QObject *qtoolButton_star = rootObject->findChild<QObject*>("propertyLayout");
+    //if(qtoolButton_star!=0){
 //    QObject::connect(&qtoolButton_star, SIGNAL(onClicked()), &favourites, SLOT(addNewFavourite(Property)));
 //    }
 //    else{
-//        qWarning() << "Could not find Favourite Toolbutton";
+//        qWarning() << "Could not find propertyLayout";
 //    }
     QObject::connect(&handler,          SIGNAL(propertiesReady(QSharedPointer<QList<Property*> >)), &propertyListing, SLOT(addToListing(QSharedPointer<QList<Property*> >)));
     QObject::connect(&handler,          SIGNAL(locationsReady(QSharedPointer<QList<Location*> >)), &locationListing, SLOT(addToListing(QSharedPointer<QList<Location*> >)));
     QObject::connect(&handler,          SIGNAL(successfullySearched(Search)),                       &searchesStorage, SLOT(addNewSearch(Search)));
     QObject::connect(&searchesStorage , SIGNAL(recentSearchesChanged()),                            &recentSearches,  SLOT(reloadSearchesFromStorage()));
     QObject::connect(&favourites , SIGNAL(favouritedPropertiesChanged()), &favouritesListing,  SLOT(reloadFavouritedFromStorage()));
+//    QObject::connect(engine.rootObjects().first() , SIGNAL(loadProperty(QString guid, QString summary, QString price, QString bedrooms, QString bathrooms, QString propertyType, QString title, QString thumbnailUrl, QString imgurl)), &shownProperty,  SLOT(changeProperty(QString guid, QString summary, QString price, QString bedrooms, QString bathrooms, QString propertyType, QString title, QString thumbnailUrl, QString imgurl)));
 
     return app.exec();
 }

@@ -154,6 +154,30 @@ Property Property::fromStrings(QString guid, QString summary, QString price, QSt
 
 }
 
+PropertyDelegate::PropertyDelegate(QObject *parent) :
+QObject(parent)
+{
+
+}
+
+void PropertyDelegate::changeProperty(QString guid, QString summary, QString price, QString bedrooms, QString bathrooms, QString propertyType, QString title, QString thumbnailUrl, QString imageUrl)
+{
+    if(guid!=m_property.getGuid())
+    emit propertyChanged(guid, summary, price, bedrooms, bathrooms, propertyType, title, thumbnailUrl, imageUrl);
+    emit showProperty(guid, summary, price, bedrooms, bathrooms, propertyType, title, thumbnailUrl, imageUrl);
+
+   m_property.setGuid(guid);
+   m_property.setSummary(summary);
+   m_property.setPrice(price.toInt());
+   m_property.setBedrooms(bedrooms.toInt());
+   m_property.setBathrooms(bathrooms.toInt());
+   m_property.setPropertyType(propertyType);
+   m_property.setTitle(title);
+   m_property.setThumbnailUrl(thumbnailUrl);
+   m_property.setImageUrl(imageUrl);
+
+}
+
 
 
 

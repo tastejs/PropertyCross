@@ -19,12 +19,12 @@ ApplicationWindow {
             }
         }
     }
-    PropertyView {
-       id: propertyView
-       visible: false
-       enabled: false
-       property bool isFavourite
-    }
+   /* PropertyView {
+        id: propertyView
+        visible: false
+        enabled: false
+        property bool isFavourite
+    }*/
 
     toolBar: ToolBar {
         width: mainWindow.width
@@ -36,15 +36,13 @@ ApplicationWindow {
                 text: 'Favourites'
                 Layout.alignment: Qt.AlignRight
                 onClicked: {
-                    favouritesView.visible= true
-                    favouritesView.enabled = true
-                    favouritesView.focus = true;
-                    rootView.visible = false
-                    rootView.enabled = false
-//                    cppPropertyListing.resetListing()
-                        }
+//                    stack.push(pageModel{favouritesView});
+                    stack.push("qrc:///qml/FavouritesView.qml")
+                    console.log("Now in"+stack.currentItem.state)
+                    cppPropertyListing.resetListing()
+                }
                 visible: {
-                    if(propertyView.visible==true)
+                    if(stack.currentItem.state==="showingProperty")
                         false
                     else
                         true
@@ -53,47 +51,87 @@ ApplicationWindow {
             ToolButton {
                 id: toolButton_star
                 signal toggleFavourite()
-                iconSource: {
-                    if(propertyView.isFavourite)
-                        "qrc:///res/star.png"
+                function loadStarIcon(value) {
+                    if(value===true)
+                        iconSource =  "qrc:///res/star.png"
                     else
-                        "qrc:///res/nostar.png"
+                        iconSource =  "qrc:///res/nostar.png"
+
+                }
+
+                iconSource: {
+                    //if(propertyView.isFavourite)
+                        "qrc:///res/star.png"
+                   // else
+                     //   "qrc:///res/nostar.png"
                 }
                 property bool isFavourite
                 visible: {
                     if(toolButton_Favourites.visible==true)
-                        false
+                    false
                     else
                         true
                 }
                 Layout.alignment: Qt.AlignRight
                 onClicked: {
                     //propertyLayout.addToFavourites()
-//                    toolButton_star.toggleFavourite()
-                    propertyView.propertyLayout.toggleFavourite()
+                    //                    toolButton_star.toggleFavourite()
+//                    propertyView.propertyLayout.toggleFavourite()
+                    cppFavouritesHandler.triggerFavouriteToggle()
                 }
             }
 
         }
     }
+   /* ListModel {
+        id: pageModel
+        ListElement {
+            title: "Search Results"
+            page: "qml/SearchResultsView.qml"
+        }
+        ListElement {
+            title: "Favourites View"
+            page: "qml/FavouritesView.qml"
+            name: "favouritesView"
+        }
+        ListElement {
+            title: "Property"
+            page: "qml/PropertyView.qml"
+        }
 
-
-    SearchResultsView {
-        id: searchResultsView
-        visible: false
-        enabled: false
+    }*/
+    StackView {
+        id:stack
+        anchors.fill: parent
+        focus: true
+        //        Keys.onReleased: if (event.key === Qt.Key_Back && stackView.depth > 1) {
+        Keys.onReleased: if (event.key === Qt.Key_F1 && stack.depth > 1) {
+                             stack.pop();
+                             event.accepted = true;
+                         }
+        ListView {
+      //      model: pageModel
+            anchors.fill: parent
+//            delegate: AndroidDelegate {
+//                text: title
+//                onClicked: stackView.push(Qt.resolvedUrl(page))
+//            }
+        }
+            initialItem: RootView {
+                id: rootView
+        ////        visible: true
+        ////        enabled: true
+            }
     }
 
-    FavouritesView {
-        id: favouritesView
-        visible: false
-        enabled: false
-    }
-    RootView {
-        id: rootView
-        visible: true
-        enabled: true
-    }
+
+    //    SearchResultsView {
+    //        id: searchResultsView
+    //    }
+    //
+    //    FavouritesView {
+    //        id: favouritesView
+    //    }
 
 }
 

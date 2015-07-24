@@ -2,15 +2,17 @@ import QtQuick 2.0
 import QtQuick.Controls 1.2
 import QtQuick.Layouts 1.2
 
-Rectangle {
+Item {
     id: rootView
 
     ColumnLayout {
         spacing: 5
 
 //        anchors.fill: parent
-        width: mainWindow.width
+        //width: mainWindow.width
         height: mainWindow.height
+        Layout.fillWidth: true
+        Layout.fillHeight: true
 
         Text {
 //            width: mainWindow.width/2
@@ -18,6 +20,7 @@ Rectangle {
             elide: Text.ElideRight
             maximumLineCount: 5
             width: mainWindow.width
+         //   width: mainWindow.width
             clip: true
             text: "Use the form below to search for houses to buy. You can search by place-name, postcode, or click 'My location', to search in your current location!"
         }
@@ -39,11 +42,12 @@ Rectangle {
                 onClicked: {
                     console.log("Clicked Go Button");
 //                    buttonGo.searchFor(textFieldSearchLocation.text, 0)
-                    searchResultsView.visible= true
-                    searchResultsView.enabled = true
-                    searchResultsView.focus = true
-                    rootView.visible = false
-                    rootView.enabled = false
+                    stack.push("qrc:///qml/SearchResultsView.qml")
+//                    searchResultsView.visible= true
+//                    searchResultsView.enabled = true
+//                    searchResultsView.focus = true
+//                    rootView.visible = false
+//                    rootView.enabled = false
                     cppPropertyListing.resetListing()
                     cppJsonHandler.getFromString(textFieldSearchLocation.text, 0)
                 }
@@ -73,11 +77,11 @@ Rectangle {
                 onErrorRetrievingRequest: {
                label_status.text = "The location given was not recognised"
                     console.log("in errorRetrieving")
-        searchResultsView.visible = false
-        searchResultsView.enabled = false
-        rootView.visible = true
-        rootView.enabled = true
-        rootView.focus = true
+//        searchResultsView.visible = false
+//        searchResultsView.enabled = false
+//        rootView.visible = true
+//        rootView.enabled = true
+//        rootView.focus = true
                 }
             }
         }
@@ -139,11 +143,7 @@ Rectangle {
                         onClicked: {
                             console.log("Clicked on "+search)
                     cppJsonHandler.getFromString(search, 0)
-                    searchResultsView.visible= true
-                    searchResultsView.enabled = true
-                    searchResultsView.focus = true;
-                    rootView.visible = false
-                    rootView.enabled = false
+                    stack.push("qrc:///qml/SearchResultsView.qml")
                     cppPropertyListing.resetListing()
                         }
                     }
@@ -167,11 +167,8 @@ Rectangle {
                     listView_suggestedLocations.visible = true
                     label_recentSearches.visible = false
                     listView_recentSearches.visible = false
-                    searchResultsView.visible = false
-                    searchResultsView.enabled = false
-                    rootView.visible = true
-                    rootView.enabled = true
-                    rootView.focus = true
+//                    stack.push("qrc:///qml/SearchResultsView.qml")
+                    stack.pop()
                     console.log("in Suggesting locations")
                 }
             }
@@ -185,28 +182,6 @@ Rectangle {
             //Layout.fillWidth: true
 
             model: cppSuggestedLocations
-/*                ListModel {
-                //dummy data for this ListView
-                ListElement {
-                    search: "Grey"
-                    results: "50"
-                }
-
-                ListElement {
-                    search: "Red"
-                    results: "100"
-                }
-
-                ListElement {
-                    search: "Blue"
-                    results: "100"
-                }
-
-                ListElement {
-                    search: "Green"
-                    results: "100"
-                }
-            }*/
             delegate: Item {
                 x: 5
                 Layout.fillWidth: true
@@ -226,11 +201,7 @@ Rectangle {
                     listView_suggestedLocations.visible = false
                     label_recentSearches.visible = true
                     listView_recentSearches.visible = true
-                    searchResultsView.visible= true
-                    searchResultsView.enabled = true
-                    searchResultsView.focus = true;
-                    rootView.visible = false
-                    rootView.enabled = false
+                    stack.push("qrc:///qml/SearchResultsView.qml")
                         }
                     }
                 }

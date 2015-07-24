@@ -1,21 +1,11 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.2
+import QtQuick.Controls 1.4
 
-Rectangle {
-    anchors.fill: parent
-    focus: true
-    Keys.onReleased: {
-        console.log("Key pressed!")
-//        if (event.key === Qt.Key_Back) {
-            console.log("Back key!")
-        event.accepted            = true;
-        favouritesView.visible      = false
-        favouritesView.enabled      = false
-        rootView.visible = true
-        rootView.enabled = true
-        rootView.focus   = true
- //       }
-    }
+Item {
+//    anchors.fill: parent
+    id: favouritesView
+    state:"showingFavourites"
     Text {
         id: text_noFavourites
 //        text: "No favourites"
@@ -31,6 +21,7 @@ Rectangle {
 
         ListView {
             id: listView_FavouritedProperties
+    anchors.fill: parent
 //            objectName: "listView_FavouritedProperties"
 //            width: parent.width
 //            height: parent.height
@@ -67,12 +58,14 @@ Rectangle {
                         anchors.fill: parent
                         onClicked: {
                             console.log("Clicked on "+title)
-                            favouritesView.visible = false;
-                            favouritesView.enabled = false;
-                            propertyView.focus = true;
-                            propertyView.visible = true;
-                            propertyView.enabled = true;
-                            propertyView.propertyLayout.loadProperty(guid, summary,price, bedrooms,bathrooms,propertyType,title, thumbnailUrl, imageUrl)
+                            stack.push("qrc:///qml/PropertyView.qml")
+//                            favouritesView.visible = false;
+//                            favouritesView.enabled = false;
+//                            propertyView.focus = true;
+//                            propertyView.visible = true;
+//                            propertyView.enabled = true;
+                            //propertyLayout.loadProperty(guid, summary,price, bedrooms,bathrooms,propertyType,title, thumbnailUrl, imageUrl)
+                            cppShownProperty.changeProperty(guid, summary,price, bedrooms,bathrooms,propertyType,title, thumbnailUrl, imageUrl)
                         }
                     }
                 }

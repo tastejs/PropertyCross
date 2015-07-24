@@ -55,4 +55,21 @@ private:
      QString m_imageUrl;
 };
 
+
+class PropertyDelegate : public QObject {
+    Q_OBJECT
+public:
+    PropertyDelegate(QObject* parent = 0);
+    virtual ~PropertyDelegate () {}
+
+public slots:
+    void changeProperty(QString guid, QString summary, QString price, QString bedrooms, QString bathrooms, QString propertyType, QString title, QString thumbnailUrl, QString imageUrl);
+signals:
+    void propertyChanged(QString guid, QString summary, QString price, QString bedrooms, QString bathrooms, QString propertyType, QString title, QString thumbnailUrl, QString imageUrl);
+    void showProperty(QString guid, QString summary, QString price, QString bedrooms, QString bathrooms, QString propertyType, QString title, QString thumbnailUrl, QString imageUrl);
+private:
+    Property m_property;
+};
+
+
 #endif // PROPERTY_H

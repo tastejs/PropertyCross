@@ -17,8 +17,13 @@ public slots:
 void addNewFavourite(QString guid, QString summary, QString price, QString bedrooms, QString bathrooms, QString propertyType, QString title, QString thumbnailUrl, QString imageUrl);
 void removeFavourite(QString guid, QString summary, QString price, QString bedrooms, QString bathrooms, QString propertyType, QString title, QString thumbnailUrl, QString imageUrl);
     const QList<Property> getFavouritedProperties();
+    bool isFavourited(QString property);
+
+public slots:
+   void triggerFavouriteToggle();
 signals:
     void favouritedPropertiesChanged();
+   void toggleFavourite();
 private:
 
 };

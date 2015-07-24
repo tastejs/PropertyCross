@@ -11,6 +11,7 @@ SOURCES += \
     src/TestSuite.cpp \
     src/TestAll.cpp \
     ../PropertyCrossLib/Model/property.cpp \
+    ../PropertyCrossLib/Model/favourites.cpp \
     ../PropertyCrossLib/Model/location.cpp \
      ../PropertyCrossLib/Model/jsonhandler.cpp \
     ../PropertyCrossLib/Model/recentsearches.cpp \
@@ -23,6 +24,7 @@ SOURCES += \
 HEADERS += \
     include/TestSuite.h \
     ../PropertyCrossLib/Model/property.h \
+    ../PropertyCrossLib/Model/favourites.h \
     ../PropertyCrossLib/Model/location.h \
     ../PropertyCrossLib/Model/jsonhandler.h \
     ../PropertyCrossLib/Model/recentsearches.h \

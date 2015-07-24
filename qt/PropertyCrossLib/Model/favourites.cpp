@@ -19,7 +19,7 @@ void Favourites::addNewFavourite(Property property)
     storageList.insert(property.getGuid(),QVariant(property.toList()));
     settings.setValue("favouritedProperties", storageList);
     emit favouritedPropertiesChanged();
-    qDebug() << "Emit favouritedPropertiesChanged";
+    qDebug() << "Emit favouritedPropertiesChanged(added)";
 
 }
 
@@ -54,9 +54,21 @@ const QList<Property> Favourites::getFavouritedProperties()
     for(auto i=favouritedProperties.begin(); i!=favouritedProperties.end(); i++){
         properties.append(Property::fromList(i.value().toList()));
     }
-    qDebug() << "There are "<<properties.count()<<" favourited properties";
+//    qDebug() << "There are "<<properties.count()<<" favourited properties";
     return properties;
 }
+
+bool Favourites::isFavourited(QString property)
+{
+    QSettings settings;
+    QList<Property> properties;
+    QMap <QString, QVariant> favouritedProperties = settings.value("favouritedProperties").toMap();
+    return favouritedProperties.contains(property);
+}
+   void Favourites::triggerFavouriteToggle()
+   {
+      emit  toggleFavourite();
+   }
 
 FavouritedPropertyListingModel::FavouritedPropertyListingModel(QObject *parent)
     : QAbstractListModel(parent)
@@ -141,13 +153,14 @@ QHash<int, QByteArray> FavouritedPropertyListingModel::roleNames() const {
     Favourites favourites;
     resetListing();
    QList<Property> properties = favourites.getFavouritedProperties();
-    qDebug() << "Having read"<<properties.count() << "properties";
+ //   qDebug() << "Having read"<<properties.count() << "properties";
    for(auto i = properties.begin(); i!=properties.end(); i++) {
     beginInsertRows(QModelIndex(), rowCount(), rowCount());
     m_properties.append(*i);
     endInsertRows();
    }
-   qDebug() <<"Reloaded favourited properties, now there are" <<m_properties.count();
+  // qDebug() <<"Reloaded favourited properties, now there are" <<m_properties.count();
 
    }
+
 

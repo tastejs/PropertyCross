@@ -3,26 +3,12 @@ import QtQuick.Layouts 1.2
 import QtQuick.Window 2.2
 //import PropertyCross 1.0
 
-Rectangle {
+Item {
 //    width: 640
 //    height:800
-    anchors.fill: parent
-//    title: "PropertyCross"
-    id: searchResultsWindow
+//    anchors.fill: parent
+    id: searchResultsView
 //    focus: true
-
-    Keys.onReleased: {
-        console.log("Key pressed!")
-//        if (event.key === Qt.Key_Back) {
-            console.log("Back key!")
-            event.accepted = true;
-        searchResultsWindow.visible = false
-        searchResultsWindow.enabled = false
-        rootView.visible = true
-        rootView.enabled = true
-        rootView.focus = true
- //       }
-    }
 
     ColumnLayout {
         anchors.fill: parent
@@ -38,6 +24,7 @@ Rectangle {
             model: cppPropertyListing
             delegate: Item {
                 id: propertyDelegate
+                signal loadProperty(string guid, string summary,string price, string bedrooms,string bathrooms,string propertyType,string title, string thumbnailUrl, string imageUrl)
                 //            x: 5
                 Layout.fillWidth: true
                 height: 80
@@ -66,12 +53,8 @@ Rectangle {
                         anchors.fill: parent
                         onClicked: {
                             console.log("Clicked on "+title)
-                            searchResultsWindow.visible = false;
-                            searchResultsWindow.enabled = false;
-                            propertyView.focus = true;
-                            propertyView.visible = true;
-                            propertyView.enabled = true;
-                            propertyView.propertyLayout.loadProperty(guid, summary,price, bedrooms,bathrooms,propertyType,title, thumbnailUrl, imageUrl)
+                            stack.push("qrc:///qml/PropertyView.qml")
+                            cppShownProperty.changeProperty(guid, summary,price, bedrooms,bathrooms,propertyType,title, thumbnailUrl, imageUrl)
                         }
                     }
                 }
