@@ -19,7 +19,7 @@ OTHER_FILES += \
 RESOURCES += \
     myresources.qrc
 
-ANDROID_EXTRA_LIBS += libPropertyCrossLib.so
+#ANDROID_EXTRA_LIBS += libPropertyCrossLib.so
 DISTFILES += \
     qml/RootView.qml \
     qml/SearchResultsView.qml \
@@ -38,3 +38,9 @@ DISTFILES += \
 
 INCLUDEPATH += $$PWD/../PropertyCrossLib
 DEPENDPATH += $$PWD/../PropertyCrossLib
+
+contains(ANDROID_TARGET_ARCH,armeabi-v7a) {
+    ANDROID_EXTRA_LIBS = \
+        $$PWD/../../build-PropertyCross-Android_for_armeabi_v7a_GCC_4_8_Qt_5_5_0-Debug/android-build/libs/armeabi-v7a/libPropertyCrossLib.so
+#    ANDROID_BUNDLED_IN_LIB = libPropertyCrossLib.so
+}

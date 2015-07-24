@@ -42,10 +42,10 @@ ApplicationWindow {
                     cppPropertyListing.resetListing()
                 }
                 visible: {
-                    if(stack.currentItem.state==="showingProperty")
-                        false
-                    else
+                    if(stack.currentItem.state==="showingRoot")
                         true
+                    else
+                        false
                 }
             }
             ToolButton {
@@ -67,10 +67,10 @@ ApplicationWindow {
                 }
                 property bool isFavourite
                 visible: {
-                    if(toolButton_Favourites.visible==true)
-                    false
+                    if(stack.currentItem.state==="showingProperty")
+                    true
                     else
-                        true
+                        false
                 }
                 Layout.alignment: Qt.AlignRight
                 onClicked: {

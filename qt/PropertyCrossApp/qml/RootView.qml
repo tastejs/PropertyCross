@@ -4,6 +4,7 @@ import QtQuick.Layouts 1.2
 
 Item {
     id: rootView
+    state: "showingRoot"
 
     ColumnLayout {
         spacing: 5
