@@ -3,12 +3,14 @@
 #include <QtTest/QtTest>
 #include "property.h"
 #include "jsonhandler.h"
+//#include "search.h"
 
 #include <QUrl>
 #include <QSignalSpy>
 
 Q_DECLARE_METATYPE( QSharedPointer<QList<Property*> > )
 Q_DECLARE_METATYPE( QSharedPointer<QList<Location*> > )
+Q_DECLARE_METATYPE( Search )
 
 class TestJsonHandler: public TestSuite
 {
@@ -26,12 +28,16 @@ void TestJsonHandler::can_make_requests_with_String()
     JsonHandler handler(this);
     qRegisterMetaType<QSharedPointer<QList<Property*> > >("QSharedPointer<QList<Property> >");
     QSignalSpy spy(&handler, SIGNAL(propertiesReady(QSharedPointer<QList<Property> >)));
+    QSignalSpy spySucessfullSearch(&handler, SIGNAL(successfullySearched(Search)));
+    QSignalSpy spySucessfullString(&handler, SIGNAL(successfullySearched(QString,int,int)));
     //Try to get SECOND page from LONDON listing
     handler.getFromString("London",1);
     //Give the request 2seconds of time
     QTest::qWait(2000);
     //handler should have emitted one signal by now
     QCOMPARE(spy.count(), 1);
+    QCOMPARE(spySucessfullSearch.count(),1);
+    QCOMPARE(spySucessfullString.count(),1);
     QList<QVariant> arguments = spy.takeFirst();
     if(arguments.size()>0) {
         QSharedPointer<QList<Property*> > listing = arguments.first().value<QSharedPointer<QList<Property*> > >();
@@ -41,6 +47,23 @@ void TestJsonHandler::can_make_requests_with_String()
         qDebug() <<listing->at(0)->getTitle();
     } else {
         QFAIL("Could not retrieve property listing");
+    }
+    arguments = spySucessfullSearch.first();
+    if(arguments.size()>0) {
+        Search search = arguments.first().value<Search>();
+        qDebug() << "Search was: "<<search.search()<<" , count was:"<<search.results();
+//        QVERIFY(search.search()=="London");
+        QVERIFY(search.results()>0);
+    } else {
+        QFAIL("could not get arguments for sucessful Search");
+    }
+    arguments = spySucessfullString.first();
+    if(arguments.size()==3) {
+        QVERIFY(arguments.at(0).value<QString>()==QString("London"));
+        QVERIFY(arguments.at(1).value<int>() == 2);
+        QVERIFY(arguments.at(1).value<int>() > 0);
+    } else {
+        QFAIL("could not get arguments for sucessful Search");
     }
 }
 

@@ -4,8 +4,8 @@ import QtQuick.Window 2.2
 import QtQuick.Layouts 1.2
 
 ApplicationWindow {
-//    width: 640
-//    height:800
+    width: 1080
+    height: 1701
     title: qsTr("PropertyCross")
     visible: true
     id : mainWindow
@@ -29,8 +29,17 @@ ApplicationWindow {
     toolBar: ToolBar {
         width: mainWindow.width
         visible: true
+        id: toolbar
         RowLayout {
             anchors.fill: parent
+            Image {
+                source: "qrc:///res/ic_launcher.png"
+            //    Layout.maximumHeight: toolbar.height
+              //  Layout.maximumWidth: toolbar.height
+                Layout.maximumHeight:20
+                Layout.maximumWidth: 20
+            }
+
             ToolButton {
                 id:toolButton_Favourites
                 text: 'Favourites'
@@ -65,6 +74,8 @@ ApplicationWindow {
                    // else
                      //   "qrc:///res/nostar.png"
                 }
+                height: toolbar.height
+                width: toolbar.height
                 property bool isFavourite
                 visible: {
                     if(stack.currentItem.state==="showingProperty")

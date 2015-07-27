@@ -5,9 +5,15 @@ import QtQuick.Layouts 1.2
 Item {
     id: rootView
     state: "showingRoot"
-    width: 640
+//    width: 640
+//    height: 800
 
     //Text eliding doesn't seem to work in a Layout, so put Text outside of layout
+    ColumnLayout {
+        clip: true
+       // anchors.top:  textIntroduction.bottom
+        height: parent.height
+        width: parent.width
         Text {
             id: textIntroduction
             wrapMode: Text.WordWrap
@@ -16,20 +22,21 @@ Item {
             width: parent.width
             text: "Use the form below to search for houses to buy. You can search by place-name, postcode, or click 'My location', to search in your current location!"
             textFormat: Text.PlainText
+            Layout.maximumWidth: parent.width
         }
-    ColumnLayout {
-        spacing: 5
-        clip: true
-        anchors.top:  textIntroduction.bottom
-        height: parent.height
-        width: parent.width
+
 
         TextField {
             id: textFieldSearchLocation
             Layout.fillWidth: true;
-            width: mainWindow.width
+//            width: mainWindow.width
+
             Keys.onReturnPressed:
             {
+                    stack.push("qrc:///qml/SearchResultsView.qml")
+                    cppPropertyListing.resetListing()
+                    cppJsonHandler.getFromString(textFieldSearchLocation.text, 0)
+                    label_status.text = ""
                 Qt.inputMethod.hide();
             }
         }
@@ -49,11 +56,8 @@ Item {
                     cppPropertyListing.resetListing()
                     cppJsonHandler.getFromString(textFieldSearchLocation.text, 0)
                     label_status.text = ""
+                    Qt.inputMethod.hide()
                 }
-            Keys.onReturnPressed:
-            {
-                Qt.inputMethod.hide();
-            }
         }
 
         Button {
@@ -92,30 +96,37 @@ Item {
         Label {
             id: label_recentSearches
             text: qsTr("<b>Recent searches</b>")
+        }
             Rectangle {
                 border.color: "black"
                 border.width: 2
-                width: mainWindow.width
+                width: parent.width
+                height: 2
             }
-        }
 
         ListView {
             id: listView_recentSearches
             width: mainWindow.width
             Layout.fillHeight: true
-            //Layout.fillWidth: true
+            Layout.fillWidth: true
 
             model: cppRecentSearches
             delegate: Item {
-                x: 5
+               // x: 5
                 Layout.fillWidth: true
-                height: 40
+                height: 100//listView_recentSearches.height/4
                 RowLayout {
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    Layout.alignment: Qt.AlignVCenter
                     Text {
                         text: search
+                        verticalAlignment: Text.verticalCenter
                     }
                     Text {
+                        Layout.fillWidth: true
                         horizontalAlignment: Text.AlignRight
+                        anchors.verticalCenter: Text.AlignVCenter
                         text: "("+results+")"
                     }
                     MouseArea {
@@ -128,6 +139,12 @@ Item {
                         }
                     }
                 }
+            Rectangle {
+                border.color: "darkgrey"
+                border.width: 2
+                height: 2
+                width: rootView.width
+            }
             }
         } //end listview
 
@@ -138,7 +155,7 @@ Item {
             Rectangle {
                 border.color: "black"
                 border.width: 2
-                width: mainWindow.width
+                width: rootView.width
             }
             Connections {
                 target: cppJsonHandler
@@ -163,9 +180,8 @@ Item {
 
             model: cppSuggestedLocations
             delegate: Item {
-                x: 5
                 Layout.fillWidth: true
-                height: 40
+                height: listView_suggestedLocations.height/4
                 RowLayout {
                     Text {
                         text: displayName
@@ -183,6 +199,11 @@ Item {
                         }
                     }
                 }
+            Rectangle {
+                border.color: "black"
+                border.width: 2
+                width: rootView.width
+            }
             }
         } //end listview
     }

@@ -6,6 +6,9 @@ Item {
 //    anchors.fill: parent
     id: favouritesView
     state:"showingFavourites"
+    ColumnLayout {
+        anchors.fill: parent
+
     Text {
         id: text_noFavourites
 //        text: "No favourites"
@@ -32,15 +35,17 @@ Item {
                 id: favouritedPropertyDelegate
                 //            x: 5
                 Layout.fillWidth: true
-                height: 80
+            height: favouritesView.height/9
+            width: favouritesView.width
                 RowLayout {
 
                     Image {
-                        width:50
-                        height:50
+                        id: image_favouritedProperty
+                        Layout.minimumWidth: favouritedPropertyDelegate.height
+                        Layout.minimumHeight: favouritedPropertyDelegate.height
                         source: thumbnailUrl
-                        sourceSize.height: 80
-                        sourceSize.width: 80
+                        //sourceSize.height: 80
+                        //sourceSize.width: 80
                     }
 
                     ColumnLayout {
@@ -51,6 +56,9 @@ Item {
                         Text {
                             id: titleText
                             text: title+", "+bedrooms+" bed "+propertyType
+                            wrapMode: Text.WrapAtWordBoundaryOrAnywhere
+                            Layout.maximumWidth: favouritedPropertyDelegate.width-image_favouritedProperty.width
+                            color: "darkgrey"
                         }
                     }
 
@@ -69,6 +77,13 @@ Item {
                         }
                     }
                 }
+                    Rectangle {
+                border.color: "grey"
+                border.width: 2
+                height: 2
+                width: favouritedPropertyDelegate.width
+                    }
             }
         } //end of ListView
+    }
 }

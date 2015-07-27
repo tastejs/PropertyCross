@@ -28,19 +28,25 @@ Item {
                 signal loadProperty(string guid, string summary,string price, string bedrooms,string bathrooms,string propertyType,string title, string thumbnailUrl, string imageUrl)
                 //            x: 5
                 Layout.fillWidth: true
-                height: 120//parent.height
+                Layout.maximumWidth: parent.width
+                height: searchResultsView.height/9
+                width: searchResultsView.width
                 RowLayout {
                     spacing: 10
 
                     Image {
+                        id: image_property
                         width:parent.width
                         height:parent.height
+                        //Layout.minimumHeight: propertyDelegate.height
+                        //Layout.minimumWidth: propertyDelegate.height
                         source: thumbnailUrl
                         sourceSize.height: parent.height
                         sourceSize.width: parent.width
                     }
 
                     ColumnLayout {
+                        anchors.left: image_property.right
                         Text {
                             horizontalAlignment: Text.AlignRight
                             text: "<b>£"+price+"</b>"
@@ -48,6 +54,10 @@ Item {
                         Text {
                             id: titleText
                             text: title+", "+bedrooms+" bed "+propertyType
+                            wrapMode: Text.WrapAtWordBoundaryOrAnywhere
+                            //Layout.maximumWidth: propertyDelegate.width-image_property.width
+                            width: parent.width
+                            color: "darkgrey"
                         }
                     }
 
@@ -60,6 +70,12 @@ Item {
                         }
                     }
                 }
+                    Rectangle {
+                border.color: "grey"
+                border.width: 2
+                height: 2
+                width: propertyDelegate.width
+                    }
             }
             footer: Item {
                 Layout.fillWidth: true

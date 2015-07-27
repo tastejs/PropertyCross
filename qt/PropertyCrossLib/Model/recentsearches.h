@@ -9,6 +9,7 @@
 
 class Search {
 public:
+    Search();
     Search(QString search, int results);
     QString search() const;
     void setSearch(const QString &search);

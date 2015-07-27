@@ -25,7 +25,14 @@ DISTFILES += \
     qml/RootView.qml \
     qml/SearchResultsView.qml \
     qml/PropertyView.qml \
-    qml/FavouritesView.qml
+    qml/FavouritesView.qml \
+    android/AndroidManifest.xml \
+    android/gradle/wrapper/gradle-wrapper.jar \
+    android/gradlew \
+    android/res/values/libs.xml \
+    android/build.gradle \
+    android/gradle/wrapper/gradle-wrapper.properties \
+    android/gradlew.bat
 
 #contains(ANDROID_TARGET_ARCH,armeabi-v7a) {
 #    ANDROID_EXTRA_LIBS =
@@ -45,3 +52,5 @@ contains(ANDROID_TARGET_ARCH,armeabi-v7a) {
         $$PWD/../../build-PropertyCross-Android_for_armeabi_v7a_GCC_4_9_Qt_5_5_0-Debug/android-build/libs/armeabi-v7a/libPropertyCrossLib.so
 #    ANDROID_BUNDLED_IN_LIB = libPropertyCrossLib.so
 }
+
+ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android

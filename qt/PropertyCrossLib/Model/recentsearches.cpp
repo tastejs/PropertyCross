@@ -85,6 +85,12 @@ QHash<int, QByteArray> RecentSearchesModel::roleNames() const {
     return roles;
 }
 
+Search::Search()
+{
+//    m_search = QString("");
+    m_results = 0;
+}
+
 Search::Search(QString search, int results) :
     m_search(search), m_results(results)
 {

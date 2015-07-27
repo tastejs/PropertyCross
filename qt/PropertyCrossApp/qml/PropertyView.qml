@@ -55,23 +55,33 @@ Item {
         Text {
 //            id: price
             text: "<b>£"+propertyLayout.price+"</b>"
+            font.pixelSize: text_rooms.font.pixelSize*2
+            font.bold: true
         }
         Text {
 //           text: propertyLayout.title
+            text: propertyLayout.title
+            font.pixelSize: text_rooms.font.pixelSize*1.5
+            wrapMode: Text.WrapAtWordBoundaryOrAnywhere
+            width: parent.width
+//            Layout.maximumWidth: propertyView.width
         }
         Image {
 //            id: image
             source: propertyLayout.imageUrl
+            width: propertyView.width
         }
         Text {
 //            id: rooms
-            text: propertyLayout.bedrooms+" bed, "+propertyLayout.bathrooms+" bathroom "+propertyLayout.propertyType
+            id: text_rooms
+            text: propertyLayout.bedrooms+" bed, "+propertyLayout.bathrooms+" bathroom "+propertyLayout.propertyType+"\n"
         }
         Text {
 //            id: summary
             text: propertyLayout.summary
             wrapMode: Text.WrapAtWordBoundaryOrAnywhere
             width: parent.width
+//            Layout.maximumWidth: propertyView.width
         }
 
         function loadProperty(guid_, summary_,price_, bedrooms_,bathrooms_,propertyType_,title_, thumbnailUrl_, imageUrl_) {
