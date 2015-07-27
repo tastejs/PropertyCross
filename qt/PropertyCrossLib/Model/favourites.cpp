@@ -46,6 +46,19 @@ void Favourites::removeFavourite(QString guid, QString summary, QString price, Q
     removeFavourite(Property::fromStrings(guid, summary, price, bedrooms, bathrooms, propertyType, title, thumbnailUrl, imageUrl));
 }
 
+void Favourites::removeAllFavourites()
+{
+    QSettings settings;
+    QMap<QString, QVariant> storageList =  settings.value("favouritedProperties").toMap();
+    if(storageList.count()==0)
+        return;
+    storageList.clear();
+    settings.setValue("favouritedProperties", storageList);
+    emit favouritedPropertiesChanged();
+    qDebug() << "Emit removeAllFavourites";
+
+}
+
 const QList<Property> Favourites::getFavouritedProperties()
 {
     QSettings settings;

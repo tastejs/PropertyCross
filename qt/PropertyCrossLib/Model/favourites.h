@@ -14,16 +14,15 @@ public:
 public slots:
     void addNewFavourite(Property property);
     void removeFavourite(Property property);
-void addNewFavourite(QString guid, QString summary, QString price, QString bedrooms, QString bathrooms, QString propertyType, QString title, QString thumbnailUrl, QString imageUrl);
-void removeFavourite(QString guid, QString summary, QString price, QString bedrooms, QString bathrooms, QString propertyType, QString title, QString thumbnailUrl, QString imageUrl);
+    void addNewFavourite(QString guid, QString summary, QString price, QString bedrooms, QString bathrooms, QString propertyType, QString title, QString thumbnailUrl, QString imageUrl);
+    void removeFavourite(QString guid, QString summary, QString price, QString bedrooms, QString bathrooms, QString propertyType, QString title, QString thumbnailUrl, QString imageUrl);
+    void removeAllFavourites();
     const QList<Property> getFavouritedProperties();
     bool isFavourited(QString property);
-
-public slots:
-   void triggerFavouriteToggle();
+    void triggerFavouriteToggle();
 signals:
     void favouritedPropertiesChanged();
-   void toggleFavourite();
+    void toggleFavourite();
 private:
 
 };
@@ -51,9 +50,9 @@ public:
 
     QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
 public slots:
-   void addToListing(QSharedPointer<QList<Property*> > ptrList);
-   void resetListing();
-   void reloadFavouritedFromStorage();
+    void addToListing(QSharedPointer<QList<Property*> > ptrList);
+    void resetListing();
+    void reloadFavouritedFromStorage();
 
 
 protected:

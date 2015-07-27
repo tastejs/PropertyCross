@@ -20,7 +20,9 @@ SOURCES += \
     ../PropertyCrossLib/Model/position.cpp \
     src/TestProperty.cpp \
     src/TestJsonHandler.cpp \
-    src/TestLocation.cpp
+    src/TestLocation.cpp \
+    src/TestPosition.cpp \
+    src/TestFavourites.cpp
 
 
 HEADERS += \

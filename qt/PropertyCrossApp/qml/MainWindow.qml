@@ -4,8 +4,8 @@ import QtQuick.Window 2.2
 import QtQuick.Layouts 1.2
 
 ApplicationWindow {
-    width: 640
-    height:800
+//    width: 640
+//    height:800
     title: qsTr("PropertyCross")
     visible: true
     id : mainWindow
