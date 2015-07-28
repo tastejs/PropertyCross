@@ -140,14 +140,35 @@ Item {
             id: label_recentSearches
             text: "<b>"+qsTr("Recent searches")+"</b>"
         }
+        Label {
+            id: label_suggestedLocations
+            Layout.leftMargin: rootView.activeMargin
+            Layout.rightMargin: rootView.activeMargin
+            text: qsTr("<b>Please select a location below</b>")
+            visible: false
+            Rectangle {
+                border.color: "black"
+                border.width: 2
+                width: rootView.width
+            }
+            Connections {
+                target: cppJsonHandler
+                onLocationsReady: {
+                    label_suggestedLocations.visible = true
+                    listView_suggestedLocations.visible = true
+                    label_recentSearches.visible = false
+                    listView_recentSearches.visible = false
+                    rootView.incoming()
+                    console.log("in Suggesting locations")
+                }
+            }
+        }
         Rectangle {
             Layout.leftMargin: rootView.activeMargin
             Layout.rightMargin: rootView.activeMargin
-            //didn't want to work with rootView?!
             width: rootView.width- Layout.leftMargin-Layout.rightMargin
             Layout.fillWidth: true
             height: 2
-            visible: true
             color: 'black'
         }
 
@@ -210,32 +231,9 @@ Item {
                     color: index==0 ? "#00000000" : 'lightgrey'
                     width: listView_recentSearches.width
                 }
-            }
+            } //end delegate
         } //end listview
 
-        Label {
-            id: label_suggestedLocations
-            Layout.leftMargin: rootView.activeMargin
-            Layout.rightMargin: rootView.activeMargin
-            text: qsTr("<b>Please select a location below</b>")
-            visible: false
-            Rectangle {
-                border.color: "black"
-                border.width: 2
-                width: rootView.width
-            }
-            Connections {
-                target: cppJsonHandler
-                onLocationsReady: {
-                    label_suggestedLocations.visible = true
-                    listView_suggestedLocations.visible = true
-                    label_recentSearches.visible = false
-                    listView_recentSearches.visible = false
-                    rootView.incoming()
-                    console.log("in Suggesting locations")
-                }
-            }
-        }
 
         ListView {
             id: listView_suggestedLocations
@@ -244,27 +242,50 @@ Item {
             visible: false
             width: mainWindow.width
             Layout.fillHeight: true
-            //Layout.fillWidth: true
+            Layout.fillWidth: true
 
             model: cppSuggestedLocations
             delegate: Item {
+                id: delegate_suggestedLocations
                 Layout.fillWidth: true
-                height: listView_suggestedLocations.height/4
-                RowLayout {
+                height: listView_suggestedLocations.height/5
+                Layout.fillHeight: true
+                Rectangle {
+                    Layout.fillWidth: true
+                    height: delegate_suggestedLocations.height
+                    width: listView_suggestedLocations.width
+                    Layout.fillHeight: true
+                    id: rectangle_suggestedLocationsRow
+                    color: "#00FFFFFF"
                     Text {
                         text: displayName
-                    }
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked: {
-                            rootView.startSearch(displayName)
+                        Layout.alignment: Qt.AlignCenter
+                        height: parent.height
+                        width: listView_suggestedLocations.width
+                        verticalAlignment: Text.AlignVCenter
+
+                MouseArea {
+                    anchors.fill: parent
+                        width: listView_suggestedLocations.width
+                        height: parent.height
+                        onPressedChanged: {
+                            if(pressed)
+                            rectangle_suggestedLocationsRow.color = 'grey'
+                            else
+                            rectangle_suggestedLocationsRow.color = '#00FFFFFF'
                         }
+                    onClicked: {
+                        rootView.startSearch(displayName);
+                    }
+                }
                     }
                 }
                 Rectangle {
-                    border.color: "black"
-                    border.width: 2
-                    width: rootView.width
+//                    anchors.top: item_test.bottom
+                    height: 2
+                    //don't show in first item
+                    color: index==0 ? "#00000000" : 'lightgrey'
+                    width: listView_suggestedLocations.width
                 }
             }
         } //end listview
