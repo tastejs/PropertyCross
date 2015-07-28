@@ -12,8 +12,14 @@ Item {
         toolButton_Favourites.visible = true;
     }
 
+            Layout.leftMargin: rootView.activeMargin
+            Layout.rightMargin: rootView.activeMargin
     ColumnLayout {
         id: propertyLayout
+        Layout.fillWidth: true
+        width: parent.width
+            Layout.leftMargin: rootView.activeMargin
+            Layout.rightMargin: rootView.activeMargin
         objectName: "propertyLayout"
         property string guid
         property string summary
@@ -55,33 +61,46 @@ Item {
         Text {
 //            id: price
             text: "<b>£"+propertyLayout.price+"</b>"
+            Layout.leftMargin: rootView.activeMargin
+            Layout.rightMargin: rootView.activeMargin
             font.pixelSize: text_rooms.font.pixelSize*2
             font.bold: true
         }
         Text {
 //           text: propertyLayout.title
-            text: propertyLayout.title
+            Layout.leftMargin: rootView.activeMargin
+            Layout.rightMargin: rootView.activeMargin
+            text: propertyLayout.title+propertyView.width
             font.pixelSize: text_rooms.font.pixelSize*1.5
             wrapMode: Text.WrapAtWordBoundaryOrAnywhere
             width: parent.width
-//            Layout.maximumWidth: propertyView.width
+            Layout.maximumWidth: parent.width
         }
         Image {
 //            id: image
+            Layout.leftMargin: rootView.activeMargin
+            Layout.rightMargin: rootView.activeMargin
             source: propertyLayout.imageUrl
-            width: propertyView.width
+//            height: property
+            width: parent.width
+            fillMode: Image.Stretch
+            Layout.fillWidth: true
         }
         Text {
 //            id: rooms
             id: text_rooms
+            Layout.leftMargin: rootView.activeMargin
+            Layout.rightMargin: rootView.activeMargin
             text: propertyLayout.bedrooms+" bed, "+propertyLayout.bathrooms+" bathroom "+propertyLayout.propertyType+"\n"
         }
         Text {
 //            id: summary
+            Layout.leftMargin: rootView.activeMargin
+            Layout.rightMargin: rootView.activeMargin
             text: propertyLayout.summary
             wrapMode: Text.WrapAtWordBoundaryOrAnywhere
             width: parent.width
-//            Layout.maximumWidth: propertyView.width
+            Layout.maximumWidth: parent.width
         }
 
         function loadProperty(guid_, summary_,price_, bedrooms_,bathrooms_,propertyType_,title_, thumbnailUrl_, imageUrl_) {
