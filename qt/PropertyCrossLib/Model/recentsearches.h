@@ -32,6 +32,7 @@ signals:
     void recentSearchesChanged();
 public slots:
     void addNewSearch(Search search);
+    void deleteAllRecentSearches();
     private:
 };
 

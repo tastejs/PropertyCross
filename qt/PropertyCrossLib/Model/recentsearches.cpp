@@ -33,6 +33,17 @@ void RecentSearchesStorage::addNewSearch(Search search)
     qDebug() << "Emit recentSearchesChanged";
 }
 
+void RecentSearchesStorage::deleteAllRecentSearches()
+{
+    QSettings settings;
+    QMap<QString, QVariant> storageList =  settings.value("recentSearches").toMap();
+    if(storageList.count()==0)
+        return;
+    storageList.clear();
+    settings.setValue("recentSearches", storageList);
+    emit recentSearchesChanged();
+}
+
 
 RecentSearchesModel::RecentSearchesModel(QObject *parent)
     : QAbstractListModel(parent)

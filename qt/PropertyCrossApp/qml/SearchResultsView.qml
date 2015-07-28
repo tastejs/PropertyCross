@@ -10,6 +10,12 @@ Item {
     id: searchResultsView
     state: "showingResults"
 //    focus: true
+    Connections {
+        target: cppJsonHandler
+        onSuccessfullySearched: {
+            busyIndicator.visible = false
+        }
+    }
 
     ColumnLayout {
         anchors.fill: parent

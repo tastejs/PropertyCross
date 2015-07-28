@@ -1,7 +1,9 @@
-import QtQuick 2.0
+import QtQuick 2.5
 import QtQuick.Controls 1.2
 import QtQuick.Window 2.2
 import QtQuick.Layouts 1.2
+import QtQuick.Controls.Styles 1.4
+
 
 ApplicationWindow {
     width: 1080
@@ -9,7 +11,7 @@ ApplicationWindow {
     title: qsTr("PropertyCross")
     visible: true
     id : mainWindow
-/*    menuBar: MenuBar {
+    /*    menuBar: MenuBar {
         Menu {
             visible: true
             MenuItem{
@@ -19,7 +21,7 @@ ApplicationWindow {
             }
         }
     }*/
-   /* PropertyView {
+    /* PropertyView {
         id: propertyView
         visible: false
         enabled: false
@@ -30,22 +32,70 @@ ApplicationWindow {
         width: mainWindow.width
         visible: true
         id: toolbar
+          style: ToolBarStyle {
+//        padding {
+//            left: 0
+//            right: 0
+//            top: 0
+//            bottom: 0
+//        }
+        background: Rectangle {
+            color: "black"
+        }
+    }
         RowLayout {
             anchors.fill: parent
             Image {
                 source: "qrc:///res/ic_launcher.png"
-            //    Layout.maximumHeight: toolbar.height
-              //  Layout.maximumWidth: toolbar.height
-                Layout.maximumHeight:20
-                Layout.maximumWidth: 20
+                //iconSource: "qrc:///res/ic_launcher.png"
+                Layout.maximumHeight: toolButton_Favourites.height*2.5
+                Layout.maximumWidth: toolButton_Favourites.height*2.5
+                height: toolButton_Favourites.height*2.5
+                width: toolButton_Favourites.height*2.5
+
+                //  Layout.maximumWidth: toolbar.height
+
+            }
+            Text {
+                text: "PropertyCross"
+                Layout.alignment: Qt.AlignLeft
+                color: "white"
             }
 
+            BusyIndicator {
+                id: busyIndicator
+                Layout.alignment: Qt.AlignRight
+                Layout.maximumHeight: toolButton_Favourites.height
+                Layout.maximumWidth: toolButton_Favourites.height
+                running: true
+                visible: false
+                //  anchors.verticalCenter: parent.verticalCenter
+                style: BusyIndicatorStyle {
+                    indicator: Image {
+                        source: "qrc:///res/refresh.png"
+                        RotationAnimator on rotation {
+                            running: control.running
+                            loops: Animation.Infinite
+                            duration: 2000
+                            from: 0 ; to: 360
+                        }
+                    }
+                }
+            }
             ToolButton {
                 id:toolButton_Favourites
-                text: 'Favourites'
+//                text: 'Favourites'
+                style: ButtonStyle {
+                   label: Text {
+                       color: 'white'
+                       text: 'Favourites'
+                   }
+                  background: Rectangle { color: control.pressed||control.hover ? 'grey' : 'black'}
+                }
+
                 Layout.alignment: Qt.AlignRight
                 onClicked: {
-//                    stack.push(pageModel{favouritesView});
+                    //                    stack.push(pageModel{favouritesView});
                     stack.push("qrc:///qml/FavouritesView.qml")
                     console.log("Now in"+stack.currentItem.state)
                     cppPropertyListing.resetListing()
@@ -70,16 +120,16 @@ ApplicationWindow {
 
                 iconSource: {
                     //if(propertyView.isFavourite)
-                        "qrc:///res/star.png"
-                   // else
-                     //   "qrc:///res/nostar.png"
+                    "qrc:///res/star.png"
+                    // else
+                    //   "qrc:///res/nostar.png"
                 }
                 height: toolbar.height
                 width: toolbar.height
                 property bool isFavourite
                 visible: {
                     if(stack.currentItem.state==="showingProperty")
-                    true
+                        true
                     else
                         false
                 }
@@ -87,14 +137,14 @@ ApplicationWindow {
                 onClicked: {
                     //propertyLayout.addToFavourites()
                     //                    toolButton_star.toggleFavourite()
-//                    propertyView.propertyLayout.toggleFavourite()
+                    //                    propertyView.propertyLayout.toggleFavourite()
                     cppFavouritesHandler.triggerFavouriteToggle()
                 }
             }
 
         }
     }
-   /* ListModel {
+    /* ListModel {
         id: pageModel
         ListElement {
             title: "Search Results"
@@ -122,18 +172,18 @@ ApplicationWindow {
                              event.accepted = true;
                          }
         ListView {
-      //      model: pageModel
-//            anchors.fill: parent
-//            delegate: AndroidDelegate {
-//                text: title
-//                onClicked: stackView.push(Qt.resolvedUrl(page))
-//            }
+            //      model: pageModel
+            //            anchors.fill: parent
+            //            delegate: AndroidDelegate {
+            //                text: title
+            //                onClicked: stackView.push(Qt.resolvedUrl(page))
+            //            }
         }
-            initialItem: RootView {
-                id: rootView
-        ////        visible: true
-        ////        enabled: true
-            }
+        initialItem: RootView {
+            id: rootView
+            ////        visible: true
+            ////        enabled: true
+        }
     }
 
 

@@ -5,151 +5,218 @@ import QtQuick.Layouts 1.2
 Item {
     id: rootView
     state: "showingRoot"
-//    width: 640
-//    height: 800
+    //    width: 640
+    //    height: 800
+   // width: parent.width
+    property int activeMargin: width/100
+    function startSearch(term) {
+        stack.push("qrc:///qml/SearchResultsView.qml")
+        cppPropertyListing.resetListing()
+        cppJsonHandler.getFromString(term)
+        buttonGo.enabled = false
+        buttonMyLocation.enabled = false
+        textFieldSearchLocation.enabled = false
+        //cppJsonHandler.getFromString(textFieldSearchLocation.text, 0)
+        label_status.text = ""
+        Qt.inputMethod.hide();
+        busyIndicator.visible = true
+    }
+
+    function incoming() {
+        buttonGo.enabled = true
+        buttonMyLocation.enabled = true
+        textFieldSearchLocation.enabled = true
+        //cppJsonHandler.getFromString(textFieldSearchLocation.text, 0)
+        label_status.text = ""
+        busyIndicator.visible = false
+        stack.pop()
+
+    }
+
+    Connections {
+        target: cppGpsPosition
+        //                onGetPosition: {
+        //                    textFieldSearchLocation.text = position
+        //              }
+    }
 
     //Text eliding doesn't seem to work in a Layout, so put Text outside of layout
     ColumnLayout {
         clip: true
-       // anchors.top:  textIntroduction.bottom
+        // anchors.top:  textIntroduction.bottom
         height: parent.height
         width: parent.width
         Text {
+            Layout.leftMargin: rootView.activeMargin
+            Layout.rightMargin: rootView.activeMargin
+            Layout.margins: 20
             id: textIntroduction
-            wrapMode: Text.WordWrap
+            wrapMode: Text.WrapAtWordBoundaryOrAnywhere
             elide: Text.ElideRight
-            anchors.left: parent.left
-            width: parent.width
-            text: "Use the form below to search for houses to buy. You can search by place-name, postcode, or click 'My location', to search in your current location!"
+            width: parent.width-Layout.leftMarin-Layout.rightMargin
+            text: qsTr("Use the form below to search for houses to buy. You can search by place-name, postcode, or click 'My location', to search in your current location!")
             textFormat: Text.PlainText
-            Layout.maximumWidth: parent.width
+            Layout.maximumWidth: parent.width-Layout.leftMargin-Layout.rightMargin
         }
 
 
         TextField {
+            Layout.leftMargin: rootView.activeMargin
+            Layout.rightMargin: rootView.activeMargin
+            Layout.maximumWidth: parent.width-Layout.leftMargin-Layout.rightMargin
             id: textFieldSearchLocation
             Layout.fillWidth: true;
-//            width: mainWindow.width
+            width: parent.width
 
             Keys.onReturnPressed:
             {
-                    stack.push("qrc:///qml/SearchResultsView.qml")
-                    cppPropertyListing.resetListing()
-                    cppJsonHandler.getFromString(textFieldSearchLocation.text, 0)
-                    label_status.text = ""
-                Qt.inputMethod.hide();
+                rootView.startSearch(textFieldSearchLocation.text)
             }
         }
 
         Button {
             id:buttonGo
+            Layout.leftMargin: rootView.activeMargin
+            Layout.rightMargin: rootView.activeMargin
+            Layout.maximumWidth: parent.width-Layout.leftMargin-Layout.rightMargin
             objectName: "buttonGo"
-//            width: mainWindow.width
             text: qsTr("Go")
             anchors.horizontalCenter: parent.horizontalCenter
+            width: parent.width-2*Layout.rightMargin
             Layout.fillWidth: true
-//            signal searchFor(string msg, int page)
-                onClicked: {
-                    console.log("Clicked Go Button");
-//                    buttonGo.searchFor(textFieldSearchLocation.text, 0)
-                    stack.push("qrc:///qml/SearchResultsView.qml")
-                    cppPropertyListing.resetListing()
-                    cppJsonHandler.getFromString(textFieldSearchLocation.text, 0)
-                    label_status.text = ""
-                    Qt.inputMethod.hide()
-                }
+            //            signal searchFor(string msg, int page)
+            onClicked: {
+                console.log("Clicked Go Button");
+                rootView.startSearch(textFieldSearchLocation.text)
+            }
         }
 
         Button {
             id:buttonMyLocation
+            Layout.leftMargin: rootView.activeMargin
+            Layout.rightMargin: rootView.activeMargin
+            Layout.maximumWidth: parent.width-Layout.leftMargin-Layout.rightMargin
             text: qsTr("My Location")
             anchors.horizontalCenter: parent.horizontalCenter
             Layout.fillWidth: true
-                onClicked: {
-                    console.log("Clicked My location Button");
-                    cppGpsPosition.getPosition();
-                }
+            onClicked: {
+                console.log("Clicked My location Button");
+                cppGpsPosition.getPosition();
+            }
         }
 
         Label {
-           id: label_status
-           objectName: "label_status"
-           text: ""
+            id: label_status
+            objectName: "label_status"
+            text: ""
+            Layout.leftMargin: rootView.activeMargin
+            Layout.rightMargin: rootView.activeMargin
             Connections {
                 target: cppJsonHandler
                 onErrorRetrievingRequest: {
-               label_status.text = "The location given was not recognised"
                     console.log("in error Retrieving from JsonHandler")
-                    stack.pop()
+                    label_suggestedLocations.visible = false
+                    listView_suggestedLocations.visible = false
+                    label_recentSearches.visible = true
+                    listView_recentSearches.visible = true
+                    rootView.incoming()
+                    label_status.text = "The location given was not recognised"
+
                 }
             }
             Connections {
                 target: cppGpsPosition
                 onGetPositionError: {
-               label_status.text = "The location given was not recognised"
+                    label_status.text = "The location given was not recognised"
                     console.log("in error Retrieving from GPSHandler")
-                    stack.pop()
+                    rootView.incoming()
                 }
             }
         }
 
         Label {
+            Layout.leftMargin: rootView.activeMargin
+            Layout.rightMargin: rootView.activeMargin
             id: label_recentSearches
-            text: qsTr("<b>Recent searches</b>")
+            text: "<b>"+qsTr("Recent searches")+"</b>"
         }
-            Rectangle {
-                border.color: "black"
-                border.width: 2
-                width: parent.width
-                height: 2
-            }
+        Rectangle {
+            Layout.leftMargin: rootView.activeMargin
+            Layout.rightMargin: rootView.activeMargin
+            //didn't want to work with rootView?!
+            width: rootView.width- Layout.leftMargin-Layout.rightMargin
+            Layout.fillWidth: true
+            height: 2
+            visible: true
+            color: 'black'
+        }
 
         ListView {
+            Layout.leftMargin: rootView.activeMargin
+            Layout.rightMargin: rootView.activeMargin
             id: listView_recentSearches
             width: mainWindow.width
             Layout.fillHeight: true
             Layout.fillWidth: true
-
+            clip: true
             model: cppRecentSearches
             delegate: Item {
-               // x: 5
+                id: delegate_recentSearches
                 Layout.fillWidth: true
-                height: 100//listView_recentSearches.height/4
-                RowLayout {
+                height: listView_recentSearches.height/5
+                Layout.fillHeight: true
+                Rectangle {
                     Layout.fillWidth: true
+                    height: delegate_recentSearches.height
+                    width: listView_recentSearches.width
                     Layout.fillHeight: true
-                    Layout.alignment: Qt.AlignVCenter
+                    id: rectangle_recentSearchesRow
+                    color: "#00FFFFFF"
                     Text {
                         text: search
-                        verticalAlignment: Text.verticalCenter
+                        Layout.alignment: Qt.AlignCenter
+                        height: parent.height
+                        verticalAlignment: Text.AlignVCenter
                     }
                     Text {
-                        Layout.fillWidth: true
+                        id: text_totalResults
                         horizontalAlignment: Text.AlignRight
-                        anchors.verticalCenter: Text.AlignVCenter
+                        verticalAlignment: Text.AlignVCenter
+                        Layout.alignment:  Qt.AlignRight | Qt.AlignVCenter
+                        width: listView_recentSearches.width
+                        height: parent.height
                         text: "("+results+")"
-                    }
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked: {
-                            console.log("Clicked on "+search)
-                    cppJsonHandler.getFromString(search, 0)
-                    stack.push("qrc:///qml/SearchResultsView.qml")
-                    cppPropertyListing.resetListing()
+
+                MouseArea {
+                    anchors.fill: parent
+                        width: listView_recentSearches.width
+                        height: parent.height
+                        onPressedChanged: {
+                            if(pressed)
+                            rectangle_recentSearchesRow.color = 'grey'
+                            else
+                            rectangle_recentSearchesRow.color = '#00FFFFFF'
                         }
+                    onClicked: {
+                        rootView.startSearch(search);
                     }
                 }
-            Rectangle {
-                border.color: "darkgrey"
-                border.width: 2
-                height: 2
-                width: rootView.width
-            }
+                    }
+                }
+                Rectangle {
+//                    anchors.top: item_test.bottom
+                    height: 2
+                    //don't show in first item
+                    color: index==0 ? "#00000000" : 'lightgrey'
+                    width: listView_recentSearches.width
+                }
             }
         } //end listview
 
         Label {
             id: label_suggestedLocations
+            Layout.leftMargin: rootView.activeMargin
+            Layout.rightMargin: rootView.activeMargin
             text: qsTr("<b>Please select a location below</b>")
             visible: false
             Rectangle {
@@ -164,8 +231,7 @@ Item {
                     listView_suggestedLocations.visible = true
                     label_recentSearches.visible = false
                     listView_recentSearches.visible = false
-//                    stack.push("qrc:///qml/SearchResultsView.qml")
-                    stack.pop()
+                    rootView.incoming()
                     console.log("in Suggesting locations")
                 }
             }
@@ -173,6 +239,8 @@ Item {
 
         ListView {
             id: listView_suggestedLocations
+            Layout.leftMargin: rootView.activeMargin
+            Layout.rightMargin: rootView.activeMargin
             visible: false
             width: mainWindow.width
             Layout.fillHeight: true
@@ -189,21 +257,15 @@ Item {
                     MouseArea {
                         anchors.fill: parent
                         onClicked: {
-                            console.log("Clicked on "+displayName)
-                    cppJsonHandler.getFromString(displayName, 0)
-                    label_suggestedLocations.visible = false
-                    listView_suggestedLocations.visible = false
-                    label_recentSearches.visible = true
-                    listView_recentSearches.visible = true
-                    stack.push("qrc:///qml/SearchResultsView.qml")
+                            rootView.startSearch(displayName)
                         }
                     }
                 }
-            Rectangle {
-                border.color: "black"
-                border.width: 2
-                width: rootView.width
-            }
+                Rectangle {
+                    border.color: "black"
+                    border.width: 2
+                    width: rootView.width
+                }
             }
         } //end listview
     }
