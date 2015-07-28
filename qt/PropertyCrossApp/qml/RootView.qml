@@ -9,13 +9,27 @@ Item {
     //    height: 800
    // width: parent.width
     property int activeMargin: width/100
-    function startSearch(term) {
-        stack.push("qrc:///qml/SearchResultsView.qml")
-        cppPropertyListing.resetListing()
-        cppJsonHandler.getFromString(term)
+    onVisibleChanged: {
+        if(visible == false)
+            incoming()
+    }
+
+    function disableElements() {
         buttonGo.enabled = false
         buttonMyLocation.enabled = false
         textFieldSearchLocation.enabled = false
+    }
+    function enableElements() {
+        buttonGo.enabled = true
+        buttonMyLocation.enabled = true
+        textFieldSearchLocation.enabled = true
+    }
+
+    function startSearch(term) {
+        stack.push("qrc:///qml/SearchResultsView.qml")
+        disableElements()
+        cppPropertyListing.resetListing()
+        cppJsonHandler.getFromString(term)
         //cppJsonHandler.getFromString(textFieldSearchLocation.text, 0)
         label_status.text = ""
         Qt.inputMethod.hide();
@@ -23,21 +37,19 @@ Item {
     }
 
     function incoming() {
-        buttonGo.enabled = true
-        buttonMyLocation.enabled = true
-        textFieldSearchLocation.enabled = true
+        enableElements()
         //cppJsonHandler.getFromString(textFieldSearchLocation.text, 0)
         label_status.text = ""
         busyIndicator.visible = false
-        stack.pop()
+        //stack.pop()
 
     }
 
     Connections {
         target: cppGpsPosition
-        //                onGetPosition: {
-        //                    textFieldSearchLocation.text = position
-        //              }
+                        onFetchPosition: {
+                            textFieldSearchLocation.text = position
+                      }
     }
 
     //Text eliding doesn't seem to work in a Layout, so put Text outside of layout
@@ -101,7 +113,7 @@ Item {
             Layout.fillWidth: true
             onClicked: {
                 console.log("Clicked My location Button");
-                cppGpsPosition.getPosition();
+                cppGpsPosition.startPositionRequest();
             }
         }
 
@@ -120,13 +132,14 @@ Item {
                     label_recentSearches.visible = true
                     listView_recentSearches.visible = true
                     rootView.incoming()
+                    stack.pop()
                     label_status.text = "The location given was not recognised"
 
                 }
             }
             Connections {
                 target: cppGpsPosition
-                onGetPositionError: {
+                onFetchPositionError: {
                     label_status.text = "The location given was not recognised"
                     console.log("in error Retrieving from GPSHandler")
                     rootView.incoming()

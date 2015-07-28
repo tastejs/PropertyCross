@@ -15,7 +15,7 @@ void TestPosition::can_get_position()
 Position position;
     QSignalSpy spyString(&position, SIGNAL(getPosition(QString)));
     QSignalSpy spyError(&position, SIGNAL(getPositionError()));
-    position.getPosition();
+    position.startPositionRequest();
     QTest::qWait(2000);
    qDebug() << "Got location: " <<  spyString.first().first().value<QString>();
     QCOMPARE(spyString.count(),1);

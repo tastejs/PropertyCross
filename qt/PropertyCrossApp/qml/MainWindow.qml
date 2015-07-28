@@ -16,7 +16,6 @@ ApplicationWindow {
             visible: true
             MenuItem{
                 text: qsTr('MenuItem')
-                //TODO real onClick handler
                 //onClicked: console.log("Clicked on Favourites")
             }
         }
@@ -33,32 +32,74 @@ ApplicationWindow {
         visible: true
         id: toolbar
           style: ToolBarStyle {
-//        padding {
-//            left: 0
-//            right: 0
-//            top: 0
-//            bottom: 0
-//        }
         background: Rectangle {
             color: "black"
         }
     }
         RowLayout {
             anchors.fill: parent
+            ToolButton {
+                id: menu_back
+                //iconSource: "qrc:///res/ic_ab_back_holo_dark.png"
+
+                Image {
+                source: "qrc:///res/ic_ab_back_holo_dark.png"
+//                anchors.fill: parent
+                Layout.fillHeight: true
+                height: parent.height
+                fillMode: Image.Stretch
+                anchors.margins: 4
+                }
+                //height: toolButton_Favourites.height*2.5
+                //width: toolButton_Favourites.height*2.5
+                //Layout.fillHeight: true
+                //Layout.fillWidth: true
+                //Layout.maximumHeight: toolButton_Favourites.height*2.5
+                //Layout.maximumWidth: toolButton_Favourites.height*2.5
+                visible: {
+                    if(stack.depth == 1)
+                        false
+                    else
+                        true
+                }
+                onClicked: {
+                    //rootView.incoming()
+                    stack.pop()
+                }
+            }
+
             Image {
                 source: "qrc:///res/ic_launcher.png"
                 //iconSource: "qrc:///res/ic_launcher.png"
-                Layout.maximumHeight: toolButton_Favourites.height*2.5
-                Layout.maximumWidth: toolButton_Favourites.height*2.5
-                height: toolButton_Favourites.height*2.5
-                width: toolButton_Favourites.height*2.5
+                Layout.alignment: Qt.AlignLeft
+                //TODO make dynamic
+                height: 80
+//                Layout.maximumHeight: toolButton_Favourites.height*2.5
+//                Layout.maximumWidth: toolButton_Favourites.height*2.5
+//                height: toolButton_Favourites.height*2.5
+//                width: toolButton_Favourites.height*2.5
 
                 //  Layout.maximumWidth: toolbar.height
 
             }
             Text {
-                text: "PropertyCross"
+                text: {
+                    if(stack.currentItem.state==="showingRoot")
+                    "PropertyCross"
+                    else if(stack.currentItem.state==="showingFavourites")
+                        "Favourites"
+                    else if(stack.currentItem.state==="showingProperty")
+                        "Property Details"
+                }
+                        Connections {
+                            target: cppJsonHandler
+                            onSuccessfullySearched: {
+                                //toolbar_text.text =  "Showing "+page*20+" of "+totalResults
+                            }
+                        }
+                id: toolbar_text
                 Layout.alignment: Qt.AlignLeft
+                Layout.fillWidth: true
                 color: "white"
             }
 
@@ -67,6 +108,7 @@ ApplicationWindow {
                 Layout.alignment: Qt.AlignRight
                 Layout.maximumHeight: toolButton_Favourites.height
                 Layout.maximumWidth: toolButton_Favourites.height
+                Layout.fillHeight: true
                 running: true
                 visible: false
                 //  anchors.verticalCenter: parent.verticalCenter
@@ -85,19 +127,22 @@ ApplicationWindow {
             ToolButton {
                 id:toolButton_Favourites
 //                text: 'Favourites'
+                height: parent.height
+                Layout.fillHeight: true
                 style: ButtonStyle {
                    label: Text {
                        color: 'white'
                        text: 'Favourites'
+                       verticalAlignment: Text.AlignVCenter
                    }
                   background: Rectangle { color: control.pressed||control.hover ? 'grey' : 'black'}
                 }
 
                 Layout.alignment: Qt.AlignRight
                 onClicked: {
-                    //                    stack.push(pageModel{favouritesView});
+                    rootView.disableElements()
                     stack.push("qrc:///qml/FavouritesView.qml")
-                    console.log("Now in"+stack.currentItem.state)
+                    //console.log("Now in"+stack.currentItem.state)
                     cppPropertyListing.resetListing()
                 }
                 visible: {
@@ -109,23 +154,28 @@ ApplicationWindow {
             }
             ToolButton {
                 id: toolButton_star
+                Layout.maximumHeight: toolButton_Favourites.height
+                Layout.maximumWidth: toolButton_Favourites.height
+                height: toolbar.height
+                width: toolbar.height
+                Layout.fillHeight: true
+                Layout.fillWidth: true
                 signal toggleFavourite()
                 function loadStarIcon(value) {
                     if(value===true)
-                        iconSource =  "qrc:///res/star.png"
+//                        iconSource =  "qrc:///res/star.png"
+                        toolBar_imageStar.source = "qrc:///res/star.png"
                     else
-                        iconSource =  "qrc:///res/nostar.png"
-
+//                        iconSource =  "qrc:///res/nostar.png"
+                        toolBar_imageStar.source = "qrc:///res/nostar.png"
+                }
+                Image {
+                    id: toolBar_imageStar
+                    source: "qrc:///res/star.png"
+                            anchors.fill: parent
+                            anchors.margins: 4
                 }
 
-                iconSource: {
-                    //if(propertyView.isFavourite)
-                    "qrc:///res/star.png"
-                    // else
-                    //   "qrc:///res/nostar.png"
-                }
-                height: toolbar.height
-                width: toolbar.height
                 property bool isFavourite
                 visible: {
                     if(stack.currentItem.state==="showingProperty")
@@ -135,66 +185,27 @@ ApplicationWindow {
                 }
                 Layout.alignment: Qt.AlignRight
                 onClicked: {
-                    //propertyLayout.addToFavourites()
-                    //                    toolButton_star.toggleFavourite()
-                    //                    propertyView.propertyLayout.toggleFavourite()
                     cppFavouritesHandler.triggerFavouriteToggle()
                 }
             }
 
         }
     }
-    /* ListModel {
-        id: pageModel
-        ListElement {
-            title: "Search Results"
-            page: "qml/SearchResultsView.qml"
-        }
-        ListElement {
-            title: "Favourites View"
-            page: "qml/FavouritesView.qml"
-            name: "favouritesView"
-        }
-        ListElement {
-            title: "Property"
-            page: "qml/PropertyView.qml"
-        }
 
-    }*/
     StackView {
         id:stack
         anchors.fill: parent
         width: parent.width
         focus: true
-        //        Keys.onReleased: if (event.key === Qt.Key_Back && stackView.depth > 1) {
         Keys.onReleased: if ((event.key === Qt.Key_F1 || event.key === Qt.Key_Back) && stack.depth > 1) {
                              stack.pop();
                              event.accepted = true;
                          }
-        ListView {
-            //      model: pageModel
-            //            anchors.fill: parent
-            //            delegate: AndroidDelegate {
-            //                text: title
-            //                onClicked: stackView.push(Qt.resolvedUrl(page))
-            //            }
-        }
+        ListView { }
         initialItem: RootView {
             id: rootView
-            ////        visible: true
-            ////        enabled: true
         }
     }
-
-
-    //    SearchResultsView {
-    //        id: searchResultsView
-    //    }
-    //
-    //    FavouritesView {
-    //        id: favouritesView
-    //    }
-
 }
 
 

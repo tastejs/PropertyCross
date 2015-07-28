@@ -4,44 +4,42 @@ import QtQuick.Window 2.2
 //import PropertyCross 1.0
 
 Item {
-            Layout.leftMargin: rootView.activeMargin
-            Layout.rightMargin: rootView.activeMargin
-//    anchors.fill: parent
+    Layout.leftMargin: rootView.activeMargin
+    Layout.rightMargin: rootView.activeMargin
+    //    anchors.fill: parent
     id: searchResultsView
     state: "showingResults"
-//    focus: true
+    //    focus: true
     Connections {
         target: cppJsonHandler
         onSuccessfullySearched: {
             busyIndicator.visible = false
+            toolbar_text.text,   page*20+" of "+totalResults+" matches"
         }
     }
 
     ColumnLayout {
         anchors.fill: parent
         spacing: 5
-            Layout.leftMargin: rootView.activeMargin
-            Layout.rightMargin: rootView.activeMargin
+        Layout.leftMargin: rootView.activeMargin
+        Layout.rightMargin: rootView.activeMargin
 
         ListView {
             id: listView_properties
             Layout.leftMargin: rootView.activeMargin
             Layout.rightMargin: rootView.activeMargin
             width: searchResultsView.width
-//            objectName: "listView_recentSearches"
-//            width: parent.width
-//            height: parent.height
+            //            objectName: "listView_recentSearches"
+            //            width: parent.width
+            //            height: parent.height
             Layout.fillHeight: true
             Layout.fillWidth: true
             model: cppPropertyListing
             delegate: Item {
                 id: propertyDelegate
                 signal loadProperty(string guid, string summary,string price, string bedrooms,string bathrooms,string propertyType,string title, string thumbnailUrl, string imageUrl)
-                //            x: 5
                 Layout.fillWidth: true
-//                Layout.maximumWidth: parent.width
                 height: searchResultsView.height/9
-              //  width: searchResultsView.width
                 Rectangle {
                     Layout.fillWidth: true
                     height: propertyDelegate.height
@@ -97,49 +95,72 @@ Item {
                         }
                         onPressedChanged: {
                             if(pressed)
-                            rectangle_propertyRow.color = 'grey'
+                                rectangle_propertyRow.color = 'grey'
                             else
-                            rectangle_propertyRow.color = '#00FFFFFF'
+                                rectangle_propertyRow.color = '#00FFFFFF'
                         }
                     }
                 }
-                    Rectangle {
-                color: "grey"
-                height: 2
-                width: propertyDelegate.width
-                    }
+                Rectangle {
+                    color: "grey"
+                    height: 2
+                    width: propertyDelegate.width
+                }
             }
+
             footer: Item {
                 Layout.fillWidth: true
-                height: 80
-        Text {
-            id: listView_properties_footer
-//            text: "Results for <b>"+location//+"</b>, showing <b>"+(page+1)*20+"</b> of <b>"+totalresults+"</b> properties."
-            Layout.preferredHeight: parent.height/5
-            MouseArea {
-                id: text_loadMoreProperties
-                property int page
-                property string name
-                anchors.fill: parent
-                Layout.fillWidth: true
-                onClicked: {
-                    cppJsonHandler.getFromString(name, page)
-                    console.log("Clicked on more "+(page)+" of location "+name)
+                Layout.fillHeight: true
+                width: searchResultsView.width
+                height: searchResultsView.height/9
+//                height: searchResultsView.height/9
+                id: listView_propertiesFooter
+                            property int page
+                            property string name
+                Rectangle {
+                    height: listView_propertiesFooter.height
+                    width: listView_properties.width
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
+                    id: rectangle_propertiesFooter
+                    color: "#00FFFFFF"
+                    Text {
+                        wrapMode: Text.WrapAtWordBoundaryOrAnywhere
+                        verticalAlignment: Text.AlignVCenter
+                        horizontalAlignment: Text.AlignHCenter
+                            id: text_loadMoreProperties
+                            height: parent.height
+                            width: parent.width
+                        MouseArea {
+                            anchors.fill: parent
+                            Layout.fillWidth: true
+                            height: parent.height
+                            width: listView_properties.width
+                            onClicked: {
+                                cppJsonHandler.getFromString(listView_propertiesFooter.name, listView_propertiesFooter.page)
+                                console.log("Clicked on more "+(listView_propertiesFooter.page)+" of location "+listView_propertiesFooter.name)
+                            }
+                            onPressedChanged: {
+                                if(pressed)
+                                    rectangle_propertiesFooter.color = 'grey'
+                                else
+                                    rectangle_propertiesFooter.color = '#00FFFFFF'
+                            }
+                        }
+                        Connections {
+                            target: cppJsonHandler
+                            onSuccessfullySearched: {
+                                //TODO handle zero (or <20) houses, last page
+                                text_loadMoreProperties.text = "Results for <b>"+location+"</b>, showing <b>"+(page*20)+"</b> of <b>"+totalResults+"</b> properties."
+                                console.log("Successfully searched for "+location+" on page"+page+" has results "+totalResults)
+                                listView_propertiesFooter.page = page
+                                listView_propertiesFooter.name = location
+                            }
+                        }
+                    }
                 }
             }
-            Connections {
-                target: cppJsonHandler
-                onSuccessfullySearched: {
-                    //TODO handle zero (or <20) houses, last page
-            listView_properties_footer.text = "Results for <b>"+location+"</b>, showing <b>"+(page*20)+"</b> of <b>"+totalResults+"</b> properties."
-                    console.log("Successfully searched for "+location+" on page"+page+" has results "+totalResults)
-                    text_loadMoreProperties.page = page
-                    text_loadMoreProperties.name = location
-                }
-            }
-        }
-            }
-        } //end of ListView
+            } //end of ListView
 
+        }
     }
-}

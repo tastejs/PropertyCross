@@ -12,13 +12,13 @@ class Position : public QObject
 public:
     Position(QObject *parent = 0);
 public slots:
-    void getPosition();
+    void startPositionRequest();
     void positionUpdated(QGeoPositionInfo);
     void positionError(QGeoPositionInfoSource::Error);
     void positionError();
 signals:
-    void getPosition(QString position);
-    void getPositionError();
+    void fetchPosition(QString position);
+    void fetchPositionError();
 private:
     QGeoPositionInfoSource* m_positionSource;
 };

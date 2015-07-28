@@ -7,7 +7,7 @@ Position::Position(QObject* parent) :
     QObject(parent)
 { }
 
-void Position::getPosition()
+void Position::startPositionRequest()
 {
    m_positionSource = QGeoPositionInfoSource::createDefaultSource(this);
 
@@ -28,19 +28,19 @@ void Position::getPosition()
 
 void Position::positionUpdated(QGeoPositionInfo position)
 {
-   emit getPosition(QString("coord_"+QString::number(position.coordinate().latitude(),'f')+","+QString::number(position.coordinate().longitude(),'f')));
+   emit fetchPosition(QString("coord_"+QString::number(position.coordinate().latitude(),'f')+","+QString::number(position.coordinate().longitude(),'f')));
     qDebug()<<"Got coordinate:"<<QString::number(position.coordinate().latitude(),'f');
 }
 
 void Position::positionError(QGeoPositionInfoSource::Error /*error*/)
 {
-    emit getPositionError();
+    emit fetchPositionError();
     qDebug() << "Error in getting Position from platform";
 }
 
 void Position::positionError()
 {
-    emit getPositionError();
+    emit fetchPositionError();
     qDebug() << "Error in getting Position from platform(timeOut)";
 }
 

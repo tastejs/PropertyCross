@@ -7,9 +7,10 @@ Item {
     state: "showingProperty"
 
     property alias propertyLayout : propertyLayout
-    onActiveFocusChanged:{
-        if(activeFocus === false)
-        toolButton_Favourites.visible = true;
+    onVisibleChanged:{
+        if(visible == true)
+//        toolButton_Favourites.visible = true;
+            toolbar_text.text = "Property Details"
     }
 
             Layout.leftMargin: rootView.activeMargin
