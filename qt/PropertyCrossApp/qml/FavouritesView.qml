@@ -3,7 +3,6 @@ import QtQuick.Layouts 1.2
 import QtQuick.Controls 1.4
 
 Item {
-    //    anchors.fill: parent
     id: favouritesView
     state:"showingFavourites"
     Layout.leftMargin: rootView.activeMargin
@@ -19,8 +18,8 @@ Item {
             Layout.leftMargin: rootView.activeMargin
             Layout.rightMargin: rootView.activeMargin
             anchors.fill: parent
-                            verticalAlignment: Text.AlignVCenter
-                            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+            horizontalAlignment: Text.AlignHCenter
             text: "No Favourites yet"
             visible:  {
                 if(listView_FavouritedProperties.count==0) {
@@ -74,12 +73,6 @@ Item {
                             id: titleText
                             text: title+", "+bedrooms+" bed "+propertyType
                             wrapMode: Text.WrapAtWordBoundaryOrAnywhere
-                            //Layout.maximumWidth: favouritedPropertyDelegate.width-image_favouritedProperty.width
-                            //width: parent.width
-                            //anchors.left: image_favouritedProperty.right
-                            //verticalAlignment: Text.AlignVCenter
-                            //anchors.top: text_favouritedPropertyPrice.bottom
-                            //height: parent.height
                             color: "darkgrey"
                             Layout.leftMargin: rootView.activeMargin
                             Layout.rightMargin: rootView.activeMargin
@@ -97,7 +90,7 @@ Item {
                         }
                         onPressedChanged: {
                             if(pressed)
-                                rectangle_favouritedPropertyRow.color = 'grey'
+                                rectangle_favouritedPropertyRow.color = 'silver'
                             else
                                 rectangle_favouritedPropertyRow.color = '#00FFFFFF'
                         }

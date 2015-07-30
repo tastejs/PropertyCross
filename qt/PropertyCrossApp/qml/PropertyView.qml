@@ -9,7 +9,6 @@ Item {
     property alias propertyLayout : propertyLayout
     onVisibleChanged:{
         if(visible == true)
-//        toolButton_Favourites.visible = true;
             toolbar_text.text = "Property Details"
     }
 
@@ -37,15 +36,6 @@ Item {
             else
                 propertyView.isFavourite = false
         }
-//    onEnabledChanged: {
-//        if(enabled==true) {
-//        toolButton_Favourites.visible = false;
-//            toolButton_Star.visible = true
-//        } else {
-//            toolButton_Favourites.visible = true;
-//            toolButton_Star.visible = false
-//        }
-//    }
         Connections {
             target: cppShownProperty
             onShowProperty: {
@@ -60,7 +50,6 @@ Item {
         }
 
         Text {
-//            id: price
             text: "<b>£"+propertyLayout.price+"</b>"
             Layout.leftMargin: rootView.activeMargin
             Layout.rightMargin: rootView.activeMargin
@@ -68,34 +57,29 @@ Item {
             font.bold: true
         }
         Text {
-//           text: propertyLayout.title
             Layout.leftMargin: rootView.activeMargin
             Layout.rightMargin: rootView.activeMargin
-            text: propertyLayout.title+propertyView.width
+            text: propertyLayout.title
             font.pixelSize: text_rooms.font.pixelSize*1.5
             wrapMode: Text.WrapAtWordBoundaryOrAnywhere
             width: parent.width
             Layout.maximumWidth: parent.width
         }
         Image {
-//            id: image
             Layout.leftMargin: rootView.activeMargin
             Layout.rightMargin: rootView.activeMargin
             source: propertyLayout.imageUrl
-//            height: property
             width: parent.width
             fillMode: Image.Stretch
             Layout.fillWidth: true
         }
         Text {
-//            id: rooms
             id: text_rooms
             Layout.leftMargin: rootView.activeMargin
             Layout.rightMargin: rootView.activeMargin
             text: propertyLayout.bedrooms+" bed, "+propertyLayout.bathrooms+" bathroom "+propertyLayout.propertyType+"\n"
         }
         Text {
-//            id: summary
             Layout.leftMargin: rootView.activeMargin
             Layout.rightMargin: rootView.activeMargin
             text: propertyLayout.summary
@@ -115,11 +99,6 @@ Item {
             propertyLayout.bedrooms = bedrooms_
             propertyLayout.bathrooms = bathrooms_
             propertyLayout.propertyType = propertyType_
-//            price.text = "<b>£"+price_+"</b>"
-            //image.source = imgurl_
-//            rooms.text = bedrooms_+" bed, "+bathrooms_+" bathroom "+propertyType_
-//            summary.text = summary_
-
         }
         function toggleFavourite() {
             if(propertyView.isFavourite) {

@@ -50,7 +50,7 @@ int main(int argc, char *argv[])
     QObject::connect(&handler,          SIGNAL(successfullySearched(Search)),                       &searchesStorage, SLOT(addNewSearch(Search)));
     QObject::connect(&searchesStorage , SIGNAL(recentSearchesChanged()),                            &recentSearches,  SLOT(reloadSearchesFromStorage()));
     QObject::connect(&favourites , SIGNAL(favouritedPropertiesChanged()), &favouritesListing,  SLOT(reloadFavouritedFromStorage()));
-    QObject::connect(&gpsPosition , SIGNAL(getPosition(QString)), &handler,  SLOT(getFromString(QString)));
+//    QObject::connect(&gpsPosition , SIGNAL(fetchPosition(QString)), &handler,  SLOT(getFromString(QString)));
 //    QObject::connect(engine.rootObjects().first() , SIGNAL(loadProperty(QString guid, QString summary, QString price, QString bedrooms, QString bathrooms, QString propertyType, QString title, QString thumbnailUrl, QString imgurl)), &shownProperty,  SLOT(changeProperty(QString guid, QString summary, QString price, QString bedrooms, QString bathrooms, QString propertyType, QString title, QString thumbnailUrl, QString imgurl)));
 
     return app.exec();

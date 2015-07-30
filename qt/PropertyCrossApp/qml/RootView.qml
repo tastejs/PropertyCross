@@ -7,7 +7,6 @@ Item {
     state: "showingRoot"
     //    width: 640
     //    height: 800
-   // width: parent.width
     property int activeMargin: width/100
     onVisibleChanged: {
         if(visible == false)
@@ -41,7 +40,6 @@ Item {
         //cppJsonHandler.getFromString(textFieldSearchLocation.text, 0)
         label_status.text = ""
         busyIndicator.visible = false
-        //stack.pop()
 
     }
 
@@ -49,6 +47,7 @@ Item {
         target: cppGpsPosition
                         onFetchPosition: {
                             textFieldSearchLocation.text = position
+                            startSearch(position)
                       }
     }
 
@@ -172,6 +171,7 @@ Item {
                     label_recentSearches.visible = false
                     listView_recentSearches.visible = false
                     rootView.incoming()
+                    stack.pop()
                     console.log("in Suggesting locations")
                 }
             }
@@ -227,7 +227,7 @@ Item {
                         height: parent.height
                         onPressedChanged: {
                             if(pressed)
-                            rectangle_recentSearchesRow.color = 'grey'
+                            rectangle_recentSearchesRow.color = 'silver'
                             else
                             rectangle_recentSearchesRow.color = '#00FFFFFF'
                         }
@@ -238,7 +238,6 @@ Item {
                     }
                 }
                 Rectangle {
-//                    anchors.top: item_test.bottom
                     height: 2
                     //don't show in first item
                     color: index==0 ? "#00000000" : 'lightgrey'
@@ -283,7 +282,7 @@ Item {
                         height: parent.height
                         onPressedChanged: {
                             if(pressed)
-                            rectangle_suggestedLocationsRow.color = 'grey'
+                            rectangle_suggestedLocationsRow.color = 'silver'
                             else
                             rectangle_suggestedLocationsRow.color = '#00FFFFFF'
                         }
@@ -294,7 +293,6 @@ Item {
                     }
                 }
                 Rectangle {
-//                    anchors.top: item_test.bottom
                     height: 2
                     //don't show in first item
                     color: index==0 ? "#00000000" : 'lightgrey'

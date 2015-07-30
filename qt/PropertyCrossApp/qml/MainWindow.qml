@@ -11,51 +11,25 @@ ApplicationWindow {
     title: qsTr("PropertyCross")
     visible: true
     id : mainWindow
-    /*    menuBar: MenuBar {
-        Menu {
-            visible: true
-            MenuItem{
-                text: qsTr('MenuItem')
-                //onClicked: console.log("Clicked on Favourites")
-            }
-        }
-    }*/
-    /* PropertyView {
-        id: propertyView
-        visible: false
-        enabled: false
-        property bool isFavourite
-    }*/
 
     toolBar: ToolBar {
         width: mainWindow.width
         visible: true
         id: toolbar
-          style: ToolBarStyle {
-        background: Rectangle {
-            color: "black"
-        }
-    }
         RowLayout {
             anchors.fill: parent
             ToolButton {
                 id: menu_back
-                //iconSource: "qrc:///res/ic_ab_back_holo_dark.png"
-
-                Image {
-                source: "qrc:///res/ic_ab_back_holo_dark.png"
-//                anchors.fill: parent
+                height: toolbar.height
                 Layout.fillHeight: true
-                height: parent.height
-                fillMode: Image.Stretch
-                anchors.margins: 4
+                Image {
+                    source: "qrc:///res/ic_ab_back_holo_dark.png"
+                    Layout.fillHeight: true
+                    height: toolbar.height
+                    fillMode: Image.Stretch
                 }
-                //height: toolButton_Favourites.height*2.5
-                //width: toolButton_Favourites.height*2.5
-                //Layout.fillHeight: true
-                //Layout.fillWidth: true
-                //Layout.maximumHeight: toolButton_Favourites.height*2.5
-                //Layout.maximumWidth: toolButton_Favourites.height*2.5
+                width: toolBar.height/3
+                Layout.maximumWidth: width
                 visible: {
                     if(stack.depth == 1)
                         false
@@ -63,40 +37,31 @@ ApplicationWindow {
                         true
                 }
                 onClicked: {
-                    //rootView.incoming()
                     stack.pop()
                 }
             }
 
             Image {
                 source: "qrc:///res/ic_launcher.png"
-                //iconSource: "qrc:///res/ic_launcher.png"
                 Layout.alignment: Qt.AlignLeft
-                //TODO make dynamic
-                height: 80
-//                Layout.maximumHeight: toolButton_Favourites.height*2.5
-//                Layout.maximumWidth: toolButton_Favourites.height*2.5
-//                height: toolButton_Favourites.height*2.5
-//                width: toolButton_Favourites.height*2.5
-
-                //  Layout.maximumWidth: toolbar.height
-
+                Layout.minimumHeight: toolbar.height
+                Layout.minimumWidth: toolbar.height
             }
             Text {
                 text: {
                     if(stack.currentItem.state==="showingRoot")
-                    "PropertyCross"
+                        "PropertyCross"
                     else if(stack.currentItem.state==="showingFavourites")
                         "Favourites"
                     else if(stack.currentItem.state==="showingProperty")
                         "Property Details"
                 }
-                        Connections {
-                            target: cppJsonHandler
-                            onSuccessfullySearched: {
-                                //toolbar_text.text =  "Showing "+page*20+" of "+totalResults
-                            }
-                        }
+                Connections {
+                    target: cppJsonHandler
+                    onSuccessfullySearched: {
+                        toolbar_text.text =  "Showing "+page*20+" of "+totalResults
+                    }
+                }
                 id: toolbar_text
                 Layout.alignment: Qt.AlignLeft
                 Layout.fillWidth: true
@@ -126,23 +91,22 @@ ApplicationWindow {
             }
             ToolButton {
                 id:toolButton_Favourites
-//                text: 'Favourites'
+                //                text: 'Favourites'
                 height: parent.height
                 Layout.fillHeight: true
                 style: ButtonStyle {
-                   label: Text {
-                       color: 'white'
-                       text: 'Favourites'
-                       verticalAlignment: Text.AlignVCenter
-                   }
-                  background: Rectangle { color: control.pressed||control.hover ? 'grey' : 'black'}
+                    label: Text {
+                        color: 'white'
+                        text: 'Favourites'
+                        verticalAlignment: Text.AlignVCenter
+                    }
+                    background: Rectangle { color: control.pressed||control.hover ? 'grey' : 'black'}
                 }
 
                 Layout.alignment: Qt.AlignRight
                 onClicked: {
                     rootView.disableElements()
                     stack.push("qrc:///qml/FavouritesView.qml")
-                    //console.log("Now in"+stack.currentItem.state)
                     cppPropertyListing.resetListing()
                 }
                 visible: {
@@ -163,17 +127,17 @@ ApplicationWindow {
                 signal toggleFavourite()
                 function loadStarIcon(value) {
                     if(value===true)
-//                        iconSource =  "qrc:///res/star.png"
+                        //                        iconSource =  "qrc:///res/star.png"
                         toolBar_imageStar.source = "qrc:///res/star.png"
                     else
-//                        iconSource =  "qrc:///res/nostar.png"
+                        //                        iconSource =  "qrc:///res/nostar.png"
                         toolBar_imageStar.source = "qrc:///res/nostar.png"
                 }
                 Image {
                     id: toolBar_imageStar
                     source: "qrc:///res/star.png"
-                            anchors.fill: parent
-                            anchors.margins: 4
+                    anchors.fill: parent
+                    anchors.margins: 4
                 }
 
                 property bool isFavourite
@@ -201,7 +165,6 @@ ApplicationWindow {
                              stack.pop();
                              event.accepted = true;
                          }
-        ListView { }
         initialItem: RootView {
             id: rootView
         }

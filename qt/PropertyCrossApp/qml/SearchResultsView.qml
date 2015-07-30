@@ -12,7 +12,7 @@ Item {
         target: cppJsonHandler
         onSuccessfullySearched: {
             busyIndicator.visible = false
-            toolbar_text.text,   page*20+" of "+totalResults+" matches"
+            //toolbar_text.text=   page*20+" of "+totalResults+" matches"
         }
     }
 
@@ -67,12 +67,6 @@ Item {
                             id: titleText
                             text: title+", "+bedrooms+" bed "+propertyType
                             wrapMode: Text.WrapAtWordBoundaryOrAnywhere
-                            //Layout.maximumWidth: propertyDelegate.width-image_property.width
-                            //width: parent.width
-                            //anchors.left: image_property.right
-                            //verticalAlignment: Text.AlignVCenter
-                            //anchors.top: text_propertyPrice.bottom
-                            //height: parent.height
                             color: "darkgrey"
                             Layout.leftMargin: rootView.activeMargin
                         }
@@ -89,13 +83,13 @@ Item {
                         }
                         onPressedChanged: {
                             if(pressed)
-                                rectangle_propertyRow.color = 'grey'
+                                rectangle_propertyRow.color = 'silver'
                             else
                                 rectangle_propertyRow.color = '#00FFFFFF'
                         }
                     }
                     Rectangle {
-                        color: index==0 ? '#00000000' : "lightgrey"
+                        color: index==0 ? '#00000000' : "grey"
                         height: 2
                         width: rootView.width- Layout.leftMargin-Layout.rightMargin
                         Layout.leftMargin: rootView.activeMargin
