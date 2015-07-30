@@ -6,10 +6,8 @@ import QtQuick.Window 2.2
 Item {
     Layout.leftMargin: rootView.activeMargin
     Layout.rightMargin: rootView.activeMargin
-    //    anchors.fill: parent
     id: searchResultsView
     state: "showingResults"
-    //    focus: true
     Connections {
         target: cppJsonHandler
         onSuccessfullySearched: {
@@ -29,9 +27,6 @@ Item {
             Layout.leftMargin: rootView.activeMargin
             Layout.rightMargin: rootView.activeMargin
             width: searchResultsView.width
-            //            objectName: "listView_recentSearches"
-            //            width: parent.width
-            //            height: parent.height
             Layout.fillHeight: true
             Layout.fillWidth: true
             model: cppPropertyListing
@@ -42,9 +37,9 @@ Item {
                 height: searchResultsView.height/9
                 Rectangle {
                     Layout.fillWidth: true
+                    Layout.fillHeight: true
                     height: propertyDelegate.height
                     width: listView_properties.width
-                    Layout.fillHeight: true
                     id: rectangle_propertyRow
                     color: "#00FFFFFF"
 
@@ -58,17 +53,15 @@ Item {
                     }
 
                     ColumnLayout {
-                        //Layout.leftMargin: rootView.activeMargin
-                        //Layout.rightMargin: rootView.activeMargin
                         anchors.left: image_property.right
                         height: parent.height
                         Text {
-                            //anchors.left: image_property.right
                             horizontalAlignment: Text.AlignRight
                             text: "<b>£"+price+"</b>"
                             height: parent.height
                             verticalAlignment: Text.AlignVCenter
                             id: text_propertyPrice
+                            Layout.leftMargin: rootView.activeMargin
                         }
                         Text {
                             id: titleText
@@ -81,6 +74,7 @@ Item {
                             //anchors.top: text_propertyPrice.bottom
                             //height: parent.height
                             color: "darkgrey"
+                            Layout.leftMargin: rootView.activeMargin
                         }
                     }
 
@@ -100,11 +94,13 @@ Item {
                                 rectangle_propertyRow.color = '#00FFFFFF'
                         }
                     }
-                }
-                Rectangle {
-                    color: "grey"
-                    height: 2
-                    width: propertyDelegate.width
+                    Rectangle {
+                        color: index==0 ? '#00000000' : "lightgrey"
+                        height: 2
+                        width: rootView.width- Layout.leftMargin-Layout.rightMargin
+                        Layout.leftMargin: rootView.activeMargin
+                        Layout.rightMargin: rootView.activeMargin
+                    }
                 }
             }
 
@@ -113,10 +109,10 @@ Item {
                 Layout.fillHeight: true
                 width: searchResultsView.width
                 height: searchResultsView.height/9
-//                height: searchResultsView.height/9
+                //                height: searchResultsView.height/9
                 id: listView_propertiesFooter
-                            property int page
-                            property string name
+                property int page
+                property string name
                 Rectangle {
                     height: listView_propertiesFooter.height
                     width: listView_properties.width
@@ -128,9 +124,9 @@ Item {
                         wrapMode: Text.WrapAtWordBoundaryOrAnywhere
                         verticalAlignment: Text.AlignVCenter
                         horizontalAlignment: Text.AlignHCenter
-                            id: text_loadMoreProperties
-                            height: parent.height
-                            width: parent.width
+                        id: text_loadMoreProperties
+                        height: parent.height
+                        width: parent.width
                         MouseArea {
                             anchors.fill: parent
                             Layout.fillWidth: true
@@ -160,7 +156,7 @@ Item {
                     }
                 }
             }
-            } //end of ListView
+        } //end of ListView
 
-        }
     }
+}
