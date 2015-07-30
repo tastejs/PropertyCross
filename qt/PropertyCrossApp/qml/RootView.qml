@@ -7,7 +7,7 @@ Item {
     state: "showingRoot"
     //    width: 640
     //    height: 800
-    property int activeMargin: width/100
+    property int activeMargin: 3*width/100
     onVisibleChanged: {
         if(visible == false)
             incoming()
@@ -39,6 +39,7 @@ Item {
         enableElements()
         //cppJsonHandler.getFromString(textFieldSearchLocation.text, 0)
         label_status.text = ""
+//        textFieldSearchLocation.text = ""
         busyIndicator.visible = false
 
     }
@@ -112,6 +113,8 @@ Item {
             Layout.fillWidth: true
             onClicked: {
                 console.log("Clicked My location Button");
+                disableElements()
+                busyIndicator.visible = true
                 cppGpsPosition.startPositionRequest();
             }
         }

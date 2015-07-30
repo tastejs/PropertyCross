@@ -76,6 +76,8 @@ Item {
                             color: "darkgrey"
                             Layout.leftMargin: rootView.activeMargin
                             Layout.rightMargin: rootView.activeMargin
+                            width: rootView.width- Layout.leftMargin-Layout.rightMargin
+                            Layout.maximumWidth: rootView.width- Layout.leftMargin-Layout.rightMargin-image_favouritedProperty.width
                         }
                     }
 

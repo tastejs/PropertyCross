@@ -66,12 +66,16 @@ Item {
             Layout.maximumWidth: parent.width
         }
         Image {
+            id: image_test
             Layout.leftMargin: rootView.activeMargin
             Layout.rightMargin: rootView.activeMargin
             source: propertyLayout.imageUrl
             width: parent.width
+            height: parent.width/sourceSize.width*sourceSize.height
+            Layout.minimumHeight: height
             fillMode: Image.Stretch
             Layout.fillWidth: true
+            Layout.fillHeight: true
         }
         Text {
             id: text_rooms

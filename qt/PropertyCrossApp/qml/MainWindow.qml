@@ -42,37 +42,31 @@ ApplicationWindow {
             }
 
             Image {
+                id: toolbar_imageIcon
                 source: "qrc:///res/ic_launcher.png"
                 Layout.alignment: Qt.AlignLeft
-                Layout.minimumHeight: toolbar.height
-                Layout.minimumWidth: toolbar.height
+                Layout.minimumHeight: toolbar.height-anchors.margins
+                Layout.minimumWidth: toolbar.height-anchors.margins
+                    anchors.margins: 10
+                    anchors.left: menu_back.right
             }
             Text {
-                text: {
-                    if(stack.currentItem.state==="showingRoot")
-                        "PropertyCross"
-                    else if(stack.currentItem.state==="showingFavourites")
-                        "Favourites"
-                    else if(stack.currentItem.state==="showingProperty")
-                        "Property Details"
-                }
-                Connections {
-                    target: cppJsonHandler
-                    onSuccessfullySearched: {
-                        toolbar_text.text =  "Showing "+page*20+" of "+totalResults
-                    }
-                }
+                text: ''
                 id: toolbar_text
                 Layout.alignment: Qt.AlignLeft
                 Layout.fillWidth: true
                 color: "white"
+                anchors.left: toolbar_imageIcon.right
+                anchors.margins: 20
             }
 
             BusyIndicator {
                 id: busyIndicator
-                Layout.alignment: Qt.AlignRight
-                Layout.maximumHeight: toolButton_Favourites.height
-                Layout.maximumWidth: toolButton_Favourites.height
+                //Layout.alignment: Qt.AlignRight
+                anchors.right: toolButton_Favourites.left
+                Layout.minimumHeight: toolbar.height-anchors.margins
+                Layout.minimumWidth: toolbar.height-anchors.margins
+                    anchors.margins: 20
                 Layout.fillHeight: true
                 running: true
                 visible: false
@@ -118,10 +112,9 @@ ApplicationWindow {
             }
             ToolButton {
                 id: toolButton_star
-                Layout.maximumHeight: toolButton_Favourites.height
-                Layout.maximumWidth: toolButton_Favourites.height
-                height: toolbar.height
-                width: toolbar.height
+                Layout.maximumHeight: toolbar.height-anchors.margins
+                Layout.maximumWidth: toolbar.height-anchors.margins
+                    anchors.margins: 20
                 Layout.fillHeight: true
                 Layout.fillWidth: true
                 signal toggleFavourite()
@@ -137,7 +130,7 @@ ApplicationWindow {
                     id: toolBar_imageStar
                     source: "qrc:///res/star.png"
                     anchors.fill: parent
-                    anchors.margins: 4
+                    anchors.margins: 10
                 }
 
                 property bool isFavourite
@@ -161,12 +154,31 @@ ApplicationWindow {
         anchors.fill: parent
         width: parent.width
         focus: true
+        property string searchResultsTitle
         Keys.onReleased: if ((event.key === Qt.Key_F1 || event.key === Qt.Key_Back) && stack.depth > 1) {
                              stack.pop();
                              event.accepted = true;
                          }
         initialItem: RootView {
             id: rootView
+        }
+        onCurrentItemChanged: {
+                    if(stack.currentItem.state==="showingRoot")
+                        toolbar_text.text = qsTr("PropertyCross")
+                    else if(stack.currentItem.state==="showingFavourites")
+                        toolbar_text.text = qsTr("Favourites")
+                    else if(stack.currentItem.state==="showingProperty")
+                        toolbar_text.text = qsTr("Property Details")
+                    else if(stack.currentItem.state==="showingResults")
+                        toolbar_text.text = stack.searchResultsTitle
+
+        }
+        Connections {
+            target: cppJsonHandler
+            onSuccessfullySearched: {
+                stack.searchResultsTitle =  qsTr("Showing "+page*20+" of "+totalResults)
+                        toolbar_text.text = stack.searchResultsTitle
+            }
         }
     }
 }

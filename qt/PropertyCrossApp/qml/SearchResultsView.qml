@@ -69,6 +69,9 @@ Item {
                             wrapMode: Text.WrapAtWordBoundaryOrAnywhere
                             color: "darkgrey"
                             Layout.leftMargin: rootView.activeMargin
+                            Layout.rightMargin: rootView.activeMargin
+                            //width: rootView.width- Layout.leftMargin-Layout.rightMargin
+                            Layout.maximumWidth: rootView.width- Layout.leftMargin-Layout.rightMargin-image_property.width
                         }
                     }
 
@@ -132,7 +135,7 @@ Item {
                             }
                             onPressedChanged: {
                                 if(pressed)
-                                    rectangle_propertiesFooter.color = 'grey'
+                                    rectangle_propertiesFooter.color = 'silver'
                                 else
                                     rectangle_propertiesFooter.color = '#00FFFFFF'
                             }
