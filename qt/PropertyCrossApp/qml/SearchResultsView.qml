@@ -12,6 +12,7 @@ Item {
         target: cppJsonHandler
         onSuccessfullySearched: {
             busyIndicator.visible = false
+        Qt.inputMethod.hide();
             //toolbar_text.text=   page*20+" of "+totalResults+" matches"
         }
     }
