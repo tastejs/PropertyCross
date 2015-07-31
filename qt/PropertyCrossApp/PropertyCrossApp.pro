@@ -13,7 +13,7 @@ SOURCES += \
 INCLUDEPATH += ../PropertyCrossLib/include
 INCLUDEPATH += ../PropertyCrossLib/Model
 
-LIBS += -L../PropertyCrossLib/ -lPropertyCrossLib
+#LIBS += -L../PropertyCrossLib/ -lPropertyCrossLib
 OTHER_FILES += \
     qml/MainWindow.qml
 
@@ -40,9 +40,9 @@ DISTFILES += \
 
 
 
-#win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../PropertyCrossLib/release/ -lPropertyCrossLib
-#else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../PropertyCrossLib/debug/ -lPropertyCrossLib
-#else:unix: LIBS += -L$$OUT_PWD/../PropertyCrossLib/ -lPropertyCrossLib
+win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../PropertyCrossLib/release/ -lPropertyCrossLib
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../PropertyCrossLib/debug/ -lPropertyCrossLib
+else:unix: LIBS += -L$$OUT_PWD/../PropertyCrossLib/ -lPropertyCrossLib
 
 INCLUDEPATH += $$PWD/../PropertyCrossLib
 DEPENDPATH += $$PWD/../PropertyCrossLib
