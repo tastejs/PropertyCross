@@ -145,6 +145,11 @@ Item {
                     label_status.text = "The location given was not recognised"
                     console.log("in error Retrieving from GPSHandler")
                     rootView.incoming()
+                    label_suggestedLocations.visible = false
+                    listView_suggestedLocations.visible = false
+                    label_recentSearches.visible = true
+                    listView_recentSearches.visible = true
+                    label_status.text = "The location given was not recognised"
                 }
             }
         }
