@@ -53,6 +53,7 @@ public:
 public slots:
     void addSearch(const Search &search);
     void reloadSearchesFromStorage();
+    void clearAllDisplayedSearches();
 
 protected:
     QHash<int, QByteArray> roleNames() const;

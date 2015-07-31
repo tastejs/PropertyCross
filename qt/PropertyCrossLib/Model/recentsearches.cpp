@@ -62,7 +62,7 @@ void RecentSearchesModel::reloadSearchesFromStorage()
 {
     qDebug() << "in reloadSearchesFromStorage";
     RecentSearchesStorage searchesStorage;
-    m_searches.erase(m_searches.begin(), m_searches.end());
+    clearAllDisplayedSearches();
     QList<Search> newSearches = searchesStorage.getRecentSearches();
     for(auto i=newSearches.constBegin();i!=newSearches.constEnd(); i++){
     beginInsertRows(QModelIndex(), rowCount(), rowCount());
@@ -70,6 +70,13 @@ void RecentSearchesModel::reloadSearchesFromStorage()
     endInsertRows();
     }
 
+}
+
+void RecentSearchesModel::clearAllDisplayedSearches()
+{
+  beginResetModel();
+  m_searches.erase(m_searches.begin(), m_searches.end());
+  endResetModel();
 }
 
 int RecentSearchesModel::rowCount(const QModelIndex & parent) const {
