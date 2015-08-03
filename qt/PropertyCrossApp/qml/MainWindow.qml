@@ -94,7 +94,7 @@ ApplicationWindow {
                         text: 'Favourites'
                         verticalAlignment: Text.AlignVCenter
                     }
-                    background: Rectangle { color: control.pressed||control.hover ? 'grey' : 'black'}
+                    background: Rectangle { color: control.pressed||control.hover ? 'grey' : '#00000000'}
                 }
 
                 Layout.alignment: Qt.AlignRight
