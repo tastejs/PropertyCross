@@ -45,8 +45,8 @@ ApplicationWindow {
                 id: toolbar_imageIcon
                 source: "qrc:///res/ic_launcher.png"
                 Layout.alignment: Qt.AlignLeft
-                Layout.minimumHeight: toolbar.height-anchors.margins
-                Layout.minimumWidth: toolbar.height-anchors.margins
+                Layout.maximumHeight: toolbar.height*0.8
+                Layout.maximumWidth:  toolbar.height*0.8
                     anchors.margins: 10
                     anchors.left: menu_back.right
             }
@@ -63,13 +63,14 @@ ApplicationWindow {
             BusyIndicator {
                 id: busyIndicator
                 //Layout.alignment: Qt.AlignRight
-                anchors.right: toolButton_Favourites.left
+                anchors.right: parent.right//toolButton_Favourites.left
                 Layout.minimumHeight: toolbar.height-anchors.margins
                 Layout.minimumWidth: toolbar.height-anchors.margins
                     anchors.margins: 20
                 Layout.fillHeight: true
                 running: true
                 visible: false
+                Layout.alignment: Qt.AlignRight
                 //  anchors.verticalCenter: parent.verticalCenter
                 style: BusyIndicatorStyle {
                     indicator: Image {
@@ -104,7 +105,7 @@ ApplicationWindow {
                     cppPropertyListing.resetListing()
                 }
                 visible: {
-                    if(stack.currentItem.state==="showingRoot")
+                    if((stack.currentItem.state==="showingRoot")&&(busyIndicator.visible==false))
                         true
                     else
                         false
@@ -112,11 +113,15 @@ ApplicationWindow {
             }
             ToolButton {
                 id: toolButton_star
-                Layout.maximumHeight: toolbar.height-anchors.margins
-                Layout.maximumWidth: toolbar.height-anchors.margins
+                height: toolbar_imageIcon.height*1.5
+                width: toolbar_imageIcon.height*1.5
+//                Layout.minimumHeight: toolbar_imageIcon.height
+//                Layout.minimumWidth: toolbar_imageIcon.height
+//                Layout.minimumHeight: toolbar_imageIcon.height
+//                Layout.minimumWidth: toolbar_imageIcon.height
                     anchors.margins: 20
-                Layout.fillHeight: true
-                Layout.fillWidth: true
+                //Layout.fillHeight: true
+                //Layout.fillWidth: true
                 signal toggleFavourite()
                 function loadStarIcon(value) {
                     if(value===true)
@@ -130,7 +135,7 @@ ApplicationWindow {
                     id: toolBar_imageStar
                     source: "qrc:///res/star.png"
                     anchors.fill: parent
-                    anchors.margins: 10
+                    //anchors.margins: 10
                 }
 
                 property bool isFavourite

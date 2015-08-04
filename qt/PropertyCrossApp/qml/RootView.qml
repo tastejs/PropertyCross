@@ -32,6 +32,7 @@ Item {
         //cppJsonHandler.getFromString(textFieldSearchLocation.text, 0)
         label_status.text = ""
         Qt.inputMethod.hide();
+        //toolButton_Favourites.visible = false
         busyIndicator.visible = true
     }
 
@@ -40,6 +41,7 @@ Item {
         //cppJsonHandler.getFromString(textFieldSearchLocation.text, 0)
         label_status.text = ""
 //        textFieldSearchLocation.text = ""
+        //toolButton_Favourites.visible = false
         busyIndicator.visible = false
 
     }

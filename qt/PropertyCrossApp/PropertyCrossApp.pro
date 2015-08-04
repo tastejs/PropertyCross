@@ -6,6 +6,7 @@ QT       += positioning
 TARGET = PropertyCross
 CONFIG   += C++11
 #CONFIG   -= app_bundle
+#QT += macextras
 
 SOURCES += \
     src/main.cpp
@@ -51,6 +52,12 @@ contains(ANDROID_TARGET_ARCH,armeabi-v7a) {
     ANDROID_EXTRA_LIBS = \
         $$PWD/../../build-PropertyCross-Android_for_armeabi_v7a_GCC_4_9_Qt_5_5_0-Debug/android-build/libs/armeabi-v7a/libPropertyCrossLib.so
 #    ANDROID_BUNDLED_IN_LIB = libPropertyCrossLib.so
+}
+
+mac {
+QMAKE_INFO_PLIST = ios/info.plist
+ios_icon.files = $$files($$PWD/res/ic_launcher.png)
+QMAKE_BUNDLE_DATA += ios_icon
 }
 
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
