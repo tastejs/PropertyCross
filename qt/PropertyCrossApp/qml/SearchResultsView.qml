@@ -63,6 +63,7 @@ Item {
                             verticalAlignment: Text.AlignVCenter
                             id: text_propertyPrice
                             Layout.leftMargin: rootView.activeMargin
+                            font.pixelSize: parent.height*0.25
                         }
                         Text {
                             id: titleText
@@ -72,7 +73,8 @@ Item {
                             Layout.leftMargin: rootView.activeMargin
                             Layout.rightMargin: rootView.activeMargin
                             //width: rootView.width- Layout.leftMargin-Layout.rightMargin
-                            Layout.maximumWidth: rootView.width- Layout.leftMargin-Layout.rightMargin-image_property.width
+                            Layout.maximumWidth: rootView.width- 2*Layout.leftMargin-2*Layout.rightMargin-image_property.width
+                            font.pixelSize: parent.height*0.2
                         }
                     }
 
@@ -125,6 +127,7 @@ Item {
                         id: text_loadMoreProperties
                         height: parent.height
                         width: parent.width
+                        font.pixelSize: parent.height*0.2
                         MouseArea {
                             anchors.fill: parent
                             Layout.fillWidth: true

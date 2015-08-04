@@ -73,6 +73,7 @@ Item {
             width: parent.width
             height: parent.width/sourceSize.width*sourceSize.height
             Layout.minimumHeight: height
+            Layout.maximumWidth: parent.width
             fillMode: Image.Stretch
             Layout.fillWidth: true
             Layout.fillHeight: true
