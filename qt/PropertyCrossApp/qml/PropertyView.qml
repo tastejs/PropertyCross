@@ -63,7 +63,7 @@ Item {
             font.pixelSize: text_rooms.font.pixelSize*1.5
             wrapMode: Text.WrapAtWordBoundaryOrAnywhere
             width: parent.width
-            Layout.maximumWidth: parent.width
+            Layout.maximumWidth: parent.width-Layout.leftMargin -Layout.rightMargin
         }
         Image {
             id: image_test
@@ -73,7 +73,7 @@ Item {
             width: parent.width
             height: parent.width/sourceSize.width*sourceSize.height
             Layout.minimumHeight: height
-            Layout.maximumWidth: parent.width
+            Layout.maximumWidth: parent.width-Layout.leftMargin -Layout.rightMargin
             fillMode: Image.Stretch
             Layout.fillWidth: true
             Layout.fillHeight: true
@@ -90,7 +90,7 @@ Item {
             text: propertyLayout.summary
             wrapMode: Text.WrapAtWordBoundaryOrAnywhere
             width: parent.width
-            Layout.maximumWidth: parent.width
+            Layout.maximumWidth: parent.width-Layout.leftMargin -Layout.rightMargin
         }
 
         function loadProperty(guid_, summary_,price_, bedrooms_,bathrooms_,propertyType_,title_, thumbnailUrl_, imageUrl_) {
