@@ -10,5 +10,6 @@
         <file>res/refresh.png</file>
         <file>res/star.png</file>
         <file>res/ic_ab_back_holo_dark.png</file>
+        <file>qml/DelegateProperties.qml</file>
     </qresource>
 </RCC>

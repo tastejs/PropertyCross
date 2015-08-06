@@ -11,8 +11,9 @@ CONFIG   += C++11
 SOURCES += \
     src/main.cpp
 
-INCLUDEPATH += ../PropertyCrossLib/include
+INCLUDEPATH += "../PropertyCrossLib/include"
 INCLUDEPATH += ../PropertyCrossLib/Model
+INCLUDEPATH += $$PWD/../PropertyCrossLib/include
 
 #LIBS += -L../PropertyCrossLib/ -lPropertyCrossLib
 OTHER_FILES += \
@@ -33,7 +34,8 @@ DISTFILES += \
     android/res/values/libs.xml \
     android/build.gradle \
     android/gradle/wrapper/gradle-wrapper.properties \
-    android/gradlew.bat
+    android/gradlew.bat \
+    qml/DelegateProperties.qml
 
 #contains(ANDROID_TARGET_ARCH,armeabi-v7a) {
 #    ANDROID_EXTRA_LIBS =
@@ -61,3 +63,5 @@ QMAKE_BUNDLE_DATA += ios_icon
 }
 
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
+
+message($$INCLUDEPATH)
