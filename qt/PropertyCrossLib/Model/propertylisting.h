@@ -7,6 +7,7 @@
 #include <QObject>
 #include <QQmlListProperty>
 
+/** The Model which hold the properties in the listing of a location */
 class PropertyListingModel : public QAbstractListModel {
     Q_OBJECT
 public:

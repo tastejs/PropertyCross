@@ -19,7 +19,7 @@ private slots:
 
 void TestFavourites::can_add_and_remove_properties()
 {
-    Favourites favourites;
+    FavouritesStorage favourites;
     QSignalSpy spy(&favourites, SIGNAL(favouritedPropertiesChanged()));
     Property property = Property::fromStrings("abcd","Summary","5.5","1","1","propertyType","title","httpThumbnail","httpimageUrl");
 
@@ -73,14 +73,14 @@ void TestFavourites::can_add_and_remove_properties()
 }
 
 void TestFavourites::triggering_Toggle_does_signal_toggle() {
-    Favourites favourites;
+    FavouritesStorage favourites;
 
     favourites.addNewFavourite("abcd","Summary","5.5","1","1","propertyType","title","httpThumbnail","httpimageUrl");
     QVERIFY(favourites.isFavourited("abcd")==true);
 }
 
 void TestFavourites::correctly_identifies_favourited_property() {
-    Favourites favourites;
+    FavouritesStorage favourites;
     QSignalSpy spy(&favourites, SIGNAL(toggleFavourite()));
 
     favourites.triggerFavouriteToggle();
@@ -88,7 +88,7 @@ void TestFavourites::correctly_identifies_favourited_property() {
 }
 
 void TestFavourites::can_get_list_of_favourtied_properties() {
-    Favourites favourites;
+    FavouritesStorage favourites;
 
     favourites.removeAllFavourites();
     favourites.addNewFavourite("fav1","Summary","5.5","1","1","propertyType","title","httpThumbnail","httpimageUrl");

@@ -4,13 +4,13 @@
 #include <QDebug>
 #include <QSharedPointer>
 
-Favourites::Favourites(QObject *parent) :
+FavouritesStorage::FavouritesStorage(QObject *parent) :
 QObject(parent)
 {
 
 }
 
-void Favourites::addNewFavourite(Property property)
+void FavouritesStorage::addNewFavourite(Property property)
 {
     QSettings settings;
     QMap<QString, QVariant> storageList =  settings.value("favouritedProperties").toMap();
@@ -23,7 +23,7 @@ void Favourites::addNewFavourite(Property property)
 
 }
 
-void Favourites::removeFavourite(Property property)
+void FavouritesStorage::removeFavourite(Property property)
 {
     QSettings settings;
     QMap<QString, QVariant> storageList =  settings.value("favouritedProperties").toMap();
@@ -35,18 +35,18 @@ void Favourites::removeFavourite(Property property)
     qDebug() << "Emit favouritedPropertiesChanged(removed)";
 }
 
-void Favourites::addNewFavourite(QString guid, QString summary, QString price, QString bedrooms, QString bathrooms, QString propertyType, QString title, QString thumbnailUrl, QString imageUrl)
+void FavouritesStorage::addNewFavourite(QString guid, QString summary, QString price, QString bedrooms, QString bathrooms, QString propertyType, QString title, QString thumbnailUrl, QString imageUrl)
 {
     addNewFavourite(Property::fromStrings(guid, summary, price, bedrooms, bathrooms, propertyType, title, thumbnailUrl, imageUrl));
 }
 
-void Favourites::removeFavourite(QString guid, QString summary, QString price, QString bedrooms, QString bathrooms, QString propertyType, QString title, QString thumbnailUrl, QString imageUrl)
+void FavouritesStorage::removeFavourite(QString guid, QString summary, QString price, QString bedrooms, QString bathrooms, QString propertyType, QString title, QString thumbnailUrl, QString imageUrl)
 {
 
     removeFavourite(Property::fromStrings(guid, summary, price, bedrooms, bathrooms, propertyType, title, thumbnailUrl, imageUrl));
 }
 
-void Favourites::removeAllFavourites()
+void FavouritesStorage::removeAllFavourites()
 {
     QSettings settings;
     QMap<QString, QVariant> storageList =  settings.value("favouritedProperties").toMap();
@@ -59,7 +59,7 @@ void Favourites::removeAllFavourites()
 
 }
 
-const QList<Property> Favourites::getFavouritedProperties()
+const QList<Property> FavouritesStorage::getFavouritedProperties()
 {
     QSettings settings;
     QList<Property> properties;
@@ -71,14 +71,14 @@ const QList<Property> Favourites::getFavouritedProperties()
     return properties;
 }
 
-bool Favourites::isFavourited(QString property)
+bool FavouritesStorage::isFavourited(QString property)
 {
     QSettings settings;
     QList<Property> properties;
     QMap <QString, QVariant> favouritedProperties = settings.value("favouritedProperties").toMap();
     return favouritedProperties.contains(property);
 }
-   void Favourites::triggerFavouriteToggle()
+   void FavouritesStorage::triggerFavouriteToggle()
    {
       emit  toggleFavourite();
    }
@@ -163,7 +163,7 @@ QHash<int, QByteArray> FavouritedPropertyListingModel::roleNames() const {
 
    void FavouritedPropertyListingModel::reloadFavouritedFromStorage()
    {
-    Favourites favourites;
+    FavouritesStorage favourites;
     resetListing();
    QList<Property> properties = favourites.getFavouritedProperties();
  //   qDebug() << "Having read"<<properties.count() << "properties";

@@ -5,6 +5,7 @@
 #include <QJsonObject>
 #include <QObject>
 
+/** Class which describes a property */
 class Property
 {
 public:
@@ -55,16 +56,20 @@ private:
 };
 
 
-class PropertyDelegate : public QObject {
+/** The model to the properties */
+class PropertyModel : public QObject {
     Q_OBJECT
 public:
-    PropertyDelegate(QObject* parent = 0);
-    virtual ~PropertyDelegate () {}
+    PropertyModel(QObject* parent = 0);
+    virtual ~PropertyModel () {}
 
 public slots:
+    /** To be called to change the property which the user would like to show */
     void changeProperty(QString guid, QString summary, QString price, QString bedrooms, QString bathrooms, QString propertyType, QString title, QString thumbnailUrl, QString imageUrl);
 signals:
+    /** Emitted when the property to be displayed changed */
     void propertyChanged(QString guid, QString summary, QString price, QString bedrooms, QString bathrooms, QString propertyType, QString title, QString thumbnailUrl, QString imageUrl);
+    /** Emitted when the UI should show a property */
     void showProperty(QString guid, QString summary, QString price, QString bedrooms, QString bathrooms, QString propertyType, QString title, QString thumbnailUrl, QString imageUrl);
 private:
     Property m_property;

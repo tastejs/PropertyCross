@@ -15,14 +15,14 @@ void Position::startPositionRequest()
         connect(m_positionSource, SIGNAL(positionUpdated(QGeoPositionInfo)),
                 this, SLOT(positionUpdated(QGeoPositionInfo)));
         connect(m_positionSource, SIGNAL(error(QGeoPositionInfoSource::Error)),
-                this, SLOT(positionError(QGeoPositionInfoSource::Error)));
+                this, SLOT(positionTimeout(QGeoPositionInfoSource::Error)));
         connect(m_positionSource, SIGNAL(updateTimeout()),
-                this, SLOT(positionError()));
+                this, SLOT(positionTimeout()));
         //m_positionSource->setPreferredPositioningMethods(m_positionSource->NonSatellitePositioningMethods);
         m_positionSource->setPreferredPositioningMethods(m_positionSource->AllPositioningMethods);
         m_positionSource->requestUpdate(TIMEOUT);
     } else {
-        emit positionError(QGeoPositionInfoSource::Error());
+        emit positionTimeout(QGeoPositionInfoSource::Error());
     }
 }
 
@@ -32,13 +32,13 @@ void Position::positionUpdated(QGeoPositionInfo position)
     qDebug()<<"Got coordinate:"<<QString::number(position.coordinate().latitude(),'f');
 }
 
-void Position::positionError(QGeoPositionInfoSource::Error /*error*/)
+void Position::positionTimeout(QGeoPositionInfoSource::Error /*error*/)
 {
     emit fetchPositionError();
     qDebug() << "Error in getting Position from platform";
 }
 
-void Position::positionError()
+void Position::positionTimeout()
 {
     emit fetchPositionError();
     qDebug() << "Error in getting Position from platform(timeOut)";

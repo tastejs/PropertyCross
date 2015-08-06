@@ -34,9 +34,9 @@ int main(int argc, char *argv[])
     LocationListingModel locationListing;
     RecentSearchesModel recentSearches;
     RecentSearchesStorage searchesStorage;
-    Favourites favourites;
+    FavouritesStorage favourites;
     FavouritedPropertyListingModel favouritesListing;
-    PropertyDelegate shownProperty;
+    PropertyModel shownProperty;
     Position gpsPosition;
 //    searchesStorage.deleteAllRecentSearches();
 

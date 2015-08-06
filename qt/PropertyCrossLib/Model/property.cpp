@@ -1,15 +1,13 @@
 #include "property.h"
 #include <QDebug>
-Property::Property()://QObject *parent) :
-   //QObject(parent),
+Property::Property():
     m_price(0),
     m_bedrooms(0),
     m_bathrooms(0) {
 
 }
 
-Property::Property(const QJsonObject& jsonObj)://, QObject *parent) :
-//   QObject(parent),
+Property::Property(const QJsonObject& jsonObj):
     m_price(0),
     m_bedrooms(0),
     m_bathrooms(0)
@@ -23,7 +21,6 @@ Property::Property(const QJsonObject& jsonObj)://, QObject *parent) :
     m_thumbnailUrl         = jsonObj.value(QString("thumb_url")).toString();
     m_title            = jsonObj.value(QString("title")).toString();
     m_propertyType     = jsonObj.value(QString("property_type")).toString();
-//    qDebug() <<"Property has"<<m_bedrooms<<","<<m_bathrooms;
 }
 
 QString Property::getGuid() const
@@ -154,16 +151,18 @@ Property Property::fromStrings(QString guid, QString summary, QString price, QSt
 
 }
 
-PropertyDelegate::PropertyDelegate(QObject *parent) :
+PropertyModel::PropertyModel(QObject *parent) :
 QObject(parent)
 {
 
 }
 
-void PropertyDelegate::changeProperty(QString guid, QString summary, QString price, QString bedrooms, QString bathrooms, QString propertyType, QString title, QString thumbnailUrl, QString imageUrl)
+void PropertyModel::changeProperty(QString guid, QString summary, QString price, QString bedrooms, QString bathrooms, QString propertyType, QString title, QString thumbnailUrl, QString imageUrl)
 {
+  //if the property currently shown isn't this property
     if(guid!=m_property.getGuid())
     emit propertyChanged(guid, summary, price, bedrooms, bathrooms, propertyType, title, thumbnailUrl, imageUrl);
+    //somebody wants us to show this property
     emit showProperty(guid, summary, price, bedrooms, bathrooms, propertyType, title, thumbnailUrl, imageUrl);
 
    m_property.setGuid(guid);
