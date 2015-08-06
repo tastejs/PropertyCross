@@ -148,7 +148,8 @@ Item {
                             target: cppJsonHandler
                             onSuccessfullySearched: {
                                 //TODO handle zero (or <20) houses, last page
-                                text_loadMoreProperties.text = "Results for <b>"+location+"</b>, showing <b>"+(page*20)+"</b> of <b>"+totalResults+"</b> properties."
+                                var showing = (totalResults-page*20)>0 ? page*20 : totalResults
+                                text_loadMoreProperties.text = "Results for <b>"+location+"</b>, showing <b>"+showing+"</b> of <b>"+totalResults+"</b> properties."
                                 console.log("Successfully searched for "+location+" on page"+page+" has results "+totalResults)
                                 listView_propertiesFooter.page = page
                                 listView_propertiesFooter.name = location

@@ -181,7 +181,8 @@ ApplicationWindow {
         Connections {
             target: cppJsonHandler
             onSuccessfullySearched: {
-                stack.searchResultsTitle =  qsTr("Showing "+page*20+" of "+totalResults)
+                var showing = (totalResults-page*20)>0 ? page*20 : totalResults
+                stack.searchResultsTitle =  qsTr("Showing "+showing+" of "+totalResults)
                         toolbar_text.text = stack.searchResultsTitle
             }
         }
