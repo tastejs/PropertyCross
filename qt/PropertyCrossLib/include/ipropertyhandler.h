@@ -3,7 +3,6 @@
 #include <QObject>
 #include <QList>
 #include <QSharedPointer>
-#include "../Model/property.h"
 
 /** Abstract interface for PropertyHandler */
 class IPropertyHandler {

@@ -1,7 +1,7 @@
 #include <QApplication>
 #include "jsonhandler.h"
 #include "propertylisting.h"
-#include "recentsearches.h"
+#include "searches.h"
 #include "favourites.h"
 #include "position.h"
 
@@ -11,20 +11,7 @@
 #include <QQmlComponent>
 #include <QQmlContext>
 
-QDataStream& operator<<(QDataStream& out, const Search& s) {
-    out << s.search() << s.results();
-    return out;
-}
 
-QDataStream& operator>>(QDataStream& in, Search& s) {
-    QString search;
-    in >> search;
-    s.setSearch(search);
-    int results;
-    in >> results;
-    s.setResults(results);
-    return in;
-}
 
 int main(int argc, char *argv[])
 {

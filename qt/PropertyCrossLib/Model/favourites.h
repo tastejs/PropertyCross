@@ -5,7 +5,7 @@
 
 #include <QAbstractListModel>
 
-/*Persisten storage for favourited Properties */
+/*Persistent storage for favourited Properties */
 class Favourites : public QObject
 {
     Q_OBJECT

@@ -15,7 +15,7 @@ SOURCES += \
     ../PropertyCrossLib/Model/favourites.cpp \
     ../PropertyCrossLib/Model/location.cpp \
      ../PropertyCrossLib/Model/jsonhandler.cpp \
-    ../PropertyCrossLib/Model/recentsearches.cpp \
+    ../PropertyCrossLib/Model/searches.cpp \
     ../PropertyCrossLib/Model/propertylisting.cpp \
     ../PropertyCrossLib/Model/position.cpp \
     src/TestProperty.cpp \
@@ -27,13 +27,16 @@ SOURCES += \
 
 HEADERS += \
     include/TestSuite.h \
+    include/ipropertyhandler.h \
     ../PropertyCrossLib/Model/property.h \
     ../PropertyCrossLib/Model/favourites.h \
     ../PropertyCrossLib/Model/location.h \
     ../PropertyCrossLib/Model/jsonhandler.h \
-    ../PropertyCrossLib/Model/recentsearches.h \
+    ../PropertyCrossLib/Model/searches.h \
     ../PropertyCrossLib/Model/propertylisting.h \
     ../PropertyCrossLib/Model/position.h
 
 INCLUDEPATH += ./include \
-    ../PropertyCrossLib//Model
+    ../PropertyCrossLib/Model \
+    ../PropertyCrossLib/include
+INCLUDEPATH += "$$PWD/../PropertyCrossLib/include"

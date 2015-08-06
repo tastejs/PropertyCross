@@ -9,7 +9,7 @@
 #include <QtNetwork/QNetworkRequest>
 #include <QtNetwork/QNetworkReply>
 #include <QString>
-#include "recentsearches.h"
+#include "searches.h"
 
 QSharedPointer<QNetworkAccessManager> JsonHandler::manager  = QSharedPointer<QNetworkAccessManager>(0);
 //example: http://api.nestoria.co.uk/api?country=uk&pretty=1&action=search_listings&encoding=json&listing_type=buy&page=1&place_name=leeds

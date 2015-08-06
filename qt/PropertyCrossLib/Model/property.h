@@ -5,12 +5,11 @@
 #include <QJsonObject>
 #include <QObject>
 
-class Property //: public QObject
+class Property
 {
-//    Q_OBJECT
 public:
-    Property(const QJsonObject &jsonObj);//, QObject *parent = 0);
-    Property();//QObject *parent = 0);
+    Property(const QJsonObject &jsonObj);
+    Property();
 
     QString getGuid() const;
     void setGuid(const QString &value);

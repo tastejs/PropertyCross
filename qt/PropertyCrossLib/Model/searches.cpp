@@ -1,9 +1,24 @@
-#include "recentsearches.h"
+#include "searches.h"
 #include <QSettings>
 #include <QDebug>
 #include <QDataStream>
 
 Q_DECLARE_METATYPE(Search)
+
+QDataStream& operator<<(QDataStream& out, const Search& s) {
+    out << s.search() << s.results();
+    return out;
+}
+
+QDataStream& operator>>(QDataStream& in, Search& s) {
+    QString search;
+    in >> search;
+    s.setSearch(search);
+    int results;
+    in >> results;
+    s.setResults(results);
+    return in;
+}
 
 RecentSearchesStorage::RecentSearchesStorage(QObject *parent):
 QObject(parent)

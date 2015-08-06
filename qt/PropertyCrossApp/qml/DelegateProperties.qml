@@ -21,6 +21,7 @@ import QtQuick.Layouts 1.2
                         source: thumbnailUrl
                         sourceSize.height: parent.height
                         sourceSize.width: parent.width
+                        fillMode: Image.PreserveAspectFit
                     }
 
                     ColumnLayout {

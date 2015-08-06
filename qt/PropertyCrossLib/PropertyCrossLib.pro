@@ -16,21 +16,21 @@ SOURCES += \
     Model/jsonhandler.cpp \
     Model/location.cpp \
     Model/propertylisting.cpp \
-    Model/recentsearches.cpp \
     Model/favourites.cpp \
-    Model/position.cpp
+    Model/position.cpp \
+    Model/searches.cpp
 
 HEADERS += \
-    include/Application.h \
     Model/property.h \
     Model/jsonhandler.h \
     include/ipropertyhandler.h \
     Model/location.h \
     Model/propertylisting.h \
-    Model/recentsearches.h \
     Model/favourites.h \
-    Model/position.h
+    Model/position.h \
+    Model/searches.h
 
-INCLUDEPATH += ./include
+#INCLUDEPATH += %%_PRO_FILE_PWD_/include
+INCLUDEPATH += include
 
 DISTFILES +=

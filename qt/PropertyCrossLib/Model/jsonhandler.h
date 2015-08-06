@@ -1,12 +1,12 @@
 #ifndef JSONHANDLER_H
 #define JSONHANDLER_H
 
-#include <QObject>
 #include "property.h"
 #include "location.h"
-#include "recentsearches.h"
-#include "../include/ipropertyhandler.h"
+#include "searches.h"
+#include "ipropertyhandler.h"
 
+#include <QObject>
 #include <QtNetwork/QNetworkAccessManager>
 #include <QSharedPointer>
 #include <QList>

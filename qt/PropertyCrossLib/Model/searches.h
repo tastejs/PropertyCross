@@ -7,7 +7,7 @@
 #include <QDataStream>
 
 
-
+/** Describes a search: name of the location and hits we got for it */
 class Search {
 public:
     Search();
@@ -17,43 +17,42 @@ public:
 
     int results() const;
     void setResults(const int &results);
-//    QDataStream& operator<<(QDataStream& out);
-//        QDataStream& operator>>(QDataStream& in);
 
 private:
     QString m_search;
     int m_results;
 };
 
-//QDataStream& operator<<(QDataStream& out, const Search& s) {
-//    out << s.search() << s.results();
-//    return out;
-//}
 
-//QDataStream& operator>>(QDataStream& in, Search& s) {
-//    QString search;
-//    in >> search;
-//    s.setSearch(search);
-//    int results;
-//    in >> results;
-//    s.setResults(results);
-//    return in;
-//}
+///Output operator for search
+QDataStream& operator<<(QDataStream& out, const Search& s);
+///Input operator for search
+QDataStream& operator>>(QDataStream& in, Search& s);
 
+/**
+ * Persistent Storage of searches - holds the last four searches
+ */
 class RecentSearchesStorage : public QObject
 {
     Q_OBJECT
 public:
     RecentSearchesStorage(QObject *parent = 0);
+    /** Get the four most recent searches from the persistent storage */
     const QList<Search> getRecentSearches() const;
 signals:
+    /** Emitted when one of the four recent searches changed */
     void recentSearchesChanged();
 public slots:
+    /** Add a a new search to the persistent storage
+     * param search Search to be added
+     */
     void addNewSearch(Search search);
+    /** Delete all searches from the persistent storage */
     void deleteAllRecentSearches();
 private:
 };
 
+/** Model of the recent Searches - to be used in e.g. a ListView */
 class RecentSearchesModel : public QAbstractListModel {
     Q_OBJECT
 public:
