@@ -1,6 +1,9 @@
 #include "recentsearches.h"
 #include <QSettings>
 #include <QDebug>
+#include <QDataStream>
+
+Q_DECLARE_METATYPE(Search)
 
 RecentSearchesStorage::RecentSearchesStorage(QObject *parent):
 QObject(parent)
@@ -12,31 +15,33 @@ const QList<Search> RecentSearchesStorage::getRecentSearches() const
 
     QSettings settings;
     QList<Search> searches;
-    QMap <QString, QVariant> storedSearches = settings.value("recentSearches").toMap();
+    QList <QVariant> storedSearches = settings.value("recentSearches").toList();
     for(auto i=storedSearches.begin(); i!=storedSearches.end(); i++){
-        searches.append(Search(i.key(),i.value().toInt()));
+        searches.push_back(Search(i->value<Search>()));
+    //qDebug() << "List:"<<i->value<Search>().search();
     }
     return searches;
 }
 
 void RecentSearchesStorage::addNewSearch(Search search)
 {
-
     QSettings settings;
-    QMap<QString, QVariant> storageList =  settings.value("recentSearches").toMap();
-    if(storageList.contains(search.search()))
-        return;
-    storageList.insert(search.search(),search.results());
+    QList<QVariant> storageList =  settings.value("recentSearches").toList();
+    for(auto it = storageList.begin(); it!=storageList.end();it++)
+        if(it->value<Search>().search() == search.search())
+            return;
+    if(storageList.count()==4)
+      storageList.erase(storageList.begin());
+    storageList.push_back(QVariant::fromValue(Search(search.search(),search.results())));
     settings.setValue("recentSearches", storageList);
-//    QList<Search> list = getRecentSearches();
     emit recentSearchesChanged();
-    qDebug() << "Emit recentSearchesChanged";
+    qDebug() << "Emit recentSearchesChanged--2";
 }
 
 void RecentSearchesStorage::deleteAllRecentSearches()
 {
     QSettings settings;
-    QMap<QString, QVariant> storageList =  settings.value("recentSearches").toMap();
+    QList<QVariant> storageList =  settings.value("recentSearches").toList();
     if(storageList.count()==0)
         return;
     storageList.clear();

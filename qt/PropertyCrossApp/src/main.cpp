@@ -11,11 +11,29 @@
 #include <QQmlComponent>
 #include <QQmlContext>
 
+QDataStream& operator<<(QDataStream& out, const Search& s) {
+    out << s.search() << s.results();
+    return out;
+}
+
+QDataStream& operator>>(QDataStream& in, Search& s) {
+    QString search;
+    in >> search;
+    s.setSearch(search);
+    int results;
+    in >> results;
+    s.setResults(results);
+    return in;
+}
+
 int main(int argc, char *argv[])
 {
     QCoreApplication::setOrganizationName("Propertycross");
     QCoreApplication::setOrganizationDomain("propertycross.com");
     QCoreApplication::setApplicationName("PropertyCross");
+
+    qRegisterMetaTypeStreamOperators<Search>("Search");
+
     QApplication app(argc, argv);
 
    // qmlRegisterType<QSharedPointer<Property> > >("com. propertycross.shptrProperty", 1, 0, "ShptrProperty");
@@ -33,6 +51,7 @@ int main(int argc, char *argv[])
     FavouritedPropertyListingModel favouritesListing;
     PropertyDelegate shownProperty;
     Position gpsPosition;
+//    searchesStorage.deleteAllRecentSearches();
 
     QQmlApplicationEngine engine;
     engine.rootContext()->setContextProperty("cppPropertyListing", &propertyListing);

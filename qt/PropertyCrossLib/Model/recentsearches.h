@@ -4,6 +4,7 @@
 #include <QAbstractListModel>
 #include <QHash>
 #include <QStringList>
+#include <QDataStream>
 
 
 
@@ -16,11 +17,28 @@ public:
 
     int results() const;
     void setResults(const int &results);
+//    QDataStream& operator<<(QDataStream& out);
+//        QDataStream& operator>>(QDataStream& in);
 
 private:
     QString m_search;
     int m_results;
 };
+
+//QDataStream& operator<<(QDataStream& out, const Search& s) {
+//    out << s.search() << s.results();
+//    return out;
+//}
+
+//QDataStream& operator>>(QDataStream& in, Search& s) {
+//    QString search;
+//    in >> search;
+//    s.setSearch(search);
+//    int results;
+//    in >> results;
+//    s.setResults(results);
+//    return in;
+//}
 
 class RecentSearchesStorage : public QObject
 {
@@ -33,7 +51,7 @@ signals:
 public slots:
     void addNewSearch(Search search);
     void deleteAllRecentSearches();
-    private:
+private:
 };
 
 class RecentSearchesModel : public QAbstractListModel {
