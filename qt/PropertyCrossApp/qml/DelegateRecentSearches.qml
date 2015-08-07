@@ -4,13 +4,13 @@ import QtQuick.Layouts 1.2
 Item {
     id: delegate_recentSearches
     Layout.fillWidth: true
-    height: parent.height/4
+    height: parent.parent.height/4
 //    width: parent.width
     Layout.fillHeight: true
     Rectangle {
         Layout.fillWidth: true
         height: delegate_recentSearches.height
-        width: parent.parent.width
+        width: delegate_recentSearches.parent.width
         Layout.fillHeight: true
         id: rectangle_recentSearchesRow
         color: "#00FFFFFF"
