@@ -65,7 +65,6 @@ ApplicationWindow {
 
             BusyIndicator {
                 id: busyIndicator
-                //Layout.alignment: Qt.AlignRight
                 anchors.right: parent.right//toolButton_Favourites.left
                 Layout.minimumHeight: toolbar.height-anchors.margins
                 Layout.minimumWidth: toolbar.height-anchors.margins
@@ -117,13 +116,7 @@ ApplicationWindow {
                 id: toolButton_star
                 height: toolbar_imageIcon.height*1.5
                 width: toolbar_imageIcon.height*1.5
-//                Layout.minimumHeight: toolbar_imageIcon.height
-//                Layout.minimumWidth: toolbar_imageIcon.height
-//                Layout.minimumHeight: toolbar_imageIcon.height
-//                Layout.minimumWidth: toolbar_imageIcon.height
                     anchors.margins: 20
-                //Layout.fillHeight: true
-                //Layout.fillWidth: true
                 signal toggleFavourite()
                 function loadStarIcon(value) {
                     if(value===true)

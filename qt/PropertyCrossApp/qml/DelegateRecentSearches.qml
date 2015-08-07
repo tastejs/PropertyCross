@@ -5,7 +5,6 @@ Item {
     id: delegate_recentSearches
     Layout.fillWidth: true
     height: parent.parent.height/4
-//    width: parent.width
     Layout.fillHeight: true
     Rectangle {
         Layout.fillWidth: true

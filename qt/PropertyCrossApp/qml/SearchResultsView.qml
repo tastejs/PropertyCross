@@ -1,7 +1,6 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.2
 import QtQuick.Window 2.2
-//import PropertyCross 1.0
 
 Item {
     Layout.leftMargin: rootView.activeMargin
@@ -13,7 +12,6 @@ Item {
         onSuccessfullySearched: {
             busyIndicator.visible = false
         Qt.inputMethod.hide();
-            //toolbar_text.text=   page*20+" of "+totalResults+" matches"
         }
     }
 

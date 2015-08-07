@@ -43,7 +43,6 @@ import QtQuick.Layouts 1.2
                             color: "darkgrey"
                             Layout.leftMargin: rootView.activeMargin
                             Layout.rightMargin: rootView.activeMargin
-                            //width: rootView.width- Layout.leftMargin-Layout.rightMargin
                             Layout.maximumWidth: rootView.width- 2*Layout.leftMargin-2*Layout.rightMargin-image_property.width
                             font.pixelSize: parent.height*0.2
                         }
