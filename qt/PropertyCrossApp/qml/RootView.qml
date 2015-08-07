@@ -54,10 +54,8 @@ Item {
                       }
     }
 
-    //Text eliding doesn't seem to work in a Layout, so put Text outside of layout
     ColumnLayout {
         clip: true
-        // anchors.top:  textIntroduction.bottom
         height: parent.height
         width: parent.width
         Text {
@@ -98,7 +96,6 @@ Item {
             anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width-2*Layout.rightMargin
             Layout.fillWidth: true
-            //            signal searchFor(string msg, int page)
             onClicked: {
                 console.log("Clicked Go Button");
                 rootView.startSearch(textFieldSearchLocation.text)
@@ -204,56 +201,7 @@ Item {
             Layout.fillWidth: true
             clip: true
             model: cppRecentSearches
-            delegate: Item {
-                id: delegate_recentSearches
-                Layout.fillWidth: true
-                height: listView_recentSearches.height/5
-                Layout.fillHeight: true
-                Rectangle {
-                    Layout.fillWidth: true
-                    height: delegate_recentSearches.height
-                    width: listView_recentSearches.width
-                    Layout.fillHeight: true
-                    id: rectangle_recentSearchesRow
-                    color: "#00FFFFFF"
-                    Text {
-                        text: search
-                        Layout.alignment: Qt.AlignCenter
-                        height: parent.height
-                        verticalAlignment: Text.AlignVCenter
-                    }
-                    Text {
-                        id: text_totalResults
-                        horizontalAlignment: Text.AlignRight
-                        verticalAlignment: Text.AlignVCenter
-                        Layout.alignment:  Qt.AlignRight | Qt.AlignVCenter
-                        width: listView_recentSearches.width
-                        height: parent.height
-                        text: "("+results+")"
-
-                MouseArea {
-                    anchors.fill: parent
-                        width: listView_recentSearches.width
-                        height: parent.height
-                        onPressedChanged: {
-                            if(pressed)
-                            rectangle_recentSearchesRow.color = 'silver'
-                            else
-                            rectangle_recentSearchesRow.color = '#00FFFFFF'
-                        }
-                    onClicked: {
-                        rootView.startSearch(search);
-                    }
-                }
-                    }
-                }
-                Rectangle {
-                    height: 2
-                    //don't show in first item
-                    color: index==0 ? "#00000000" : 'lightgrey'
-                    width: listView_recentSearches.width
-                }
-            } //end delegate
+            delegate: DelegateRecentSearches {}
         } //end listview
 
 

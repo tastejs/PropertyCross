@@ -33,7 +33,8 @@ DISTFILES += \
     android/build.gradle \
     android/gradle/wrapper/gradle-wrapper.properties \
     android/gradlew.bat \
-    qml/DelegateProperties.qml
+    qml/DelegateProperties.qml \
+    qml/DelegateRecentSearches.qml
 
 win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../PropertyCrossLib/release/ -lPropertyCrossLib
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../PropertyCrossLib/debug/ -lPropertyCrossLib

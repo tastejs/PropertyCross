@@ -11,5 +11,6 @@
         <file>res/star.png</file>
         <file>res/ic_ab_back_holo_dark.png</file>
         <file>qml/DelegateProperties.qml</file>
+        <file>qml/DelegateRecentSearches.qml</file>
     </qresource>
 </RCC>

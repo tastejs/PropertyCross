@@ -77,7 +77,6 @@ Item {
                         Connections {
                             target: cppJsonHandler
                             onSuccessfullySearched: {
-                                //TODO handle zero (or <20) houses, last page
                                 var showing = (totalResults-page*20)>0 ? page*20 : totalResults
                                 text_loadMoreProperties.text = "Results for <b>"+location+"</b>, showing <b>"+showing+"</b> of <b>"+totalResults+"</b> properties."
                                 console.log("Successfully searched for "+location+" on page"+page+" has results "+totalResults)
