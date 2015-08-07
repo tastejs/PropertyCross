@@ -1,0 +1,5 @@
+*.pro.user
+*.Debug
+.Release
+*.vcxproj.user
+*.vcxproj.filters
