@@ -14,11 +14,7 @@
         <file>qml/DelegateRecentSearches.qml</file>
         <file>qml/AppStyle.qml</file>
         <file>qml/qmldir</file>
-    </qresource>
-    <qresource prefix="/mac">
-        <file>qml/mac/AppStyle.qml</file>
-    </qresource>
-    <qresource prefix="/android">
-        <file>qml/android/AppStyle.qml</file>
+        <file>qml/+ios/AppStyle.qml</file>
+        <file>qml/+android/AppStyle.qml</file>
     </qresource>
 </RCC>

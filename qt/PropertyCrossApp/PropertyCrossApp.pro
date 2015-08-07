@@ -35,10 +35,10 @@ DISTFILES += \
     android/gradlew.bat \
     qml/DelegateProperties.qml \
     qml/DelegateRecentSearches.qml \
-    qml/mac/AppStyle.qml \
+    qml/+ios/AppStyle.qml \
     qml/AppStyle.qml \
     qml/qmldir \
-    qml/android/AppStyle.qml
+    qml/+android/AppStyle.qml
 
 win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../PropertyCrossLib/release/ -lPropertyCrossLib
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../PropertyCrossLib/debug/ -lPropertyCrossLib
