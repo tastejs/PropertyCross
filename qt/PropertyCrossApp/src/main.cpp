@@ -10,6 +10,7 @@
 #include <QQmlEngine>
 #include <QQmlComponent>
 #include <QQmlContext>
+#include <QQmlFileSelector>
 
 
 
@@ -49,6 +50,7 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("cppFavouritesHandler", &favourites);
     engine.rootContext()->setContextProperty("cppShownProperty", &shownProperty);
     engine.rootContext()->setContextProperty("cppGpsPosition", &gpsPosition);
+    QQmlFileSelector* selector = new QQmlFileSelector(&engine);
     engine.load(QUrl(QStringLiteral("qrc:/qml/MainWindow.qml")));
 
     QObject::connect(&handler,          SIGNAL(propertiesReady(QSharedPointer<QList<Property*> >)), &propertyListing, SLOT(addToListing(QSharedPointer<QList<Property*> >)));

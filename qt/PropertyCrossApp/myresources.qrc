@@ -12,5 +12,13 @@
         <file>res/ic_ab_back_holo_dark.png</file>
         <file>qml/DelegateProperties.qml</file>
         <file>qml/DelegateRecentSearches.qml</file>
+        <file>qml/AppStyle.qml</file>
+        <file>qml/qmldir</file>
+    </qresource>
+    <qresource prefix="/mac">
+        <file>qml/mac/AppStyle.qml</file>
+    </qresource>
+    <qresource prefix="/android">
+        <file>qml/android/AppStyle.qml</file>
     </qresource>
 </RCC>

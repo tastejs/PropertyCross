@@ -3,6 +3,8 @@ import QtQuick.Controls 1.2
 import QtQuick.Window 2.2
 import QtQuick.Layouts 1.2
 import QtQuick.Controls.Styles 1.4
+//import "."
+import "."// 1.0
 
 
 ApplicationWindow {
@@ -56,7 +58,7 @@ ApplicationWindow {
                 id: toolbar_text
                 Layout.alignment: Qt.AlignLeft
                 Layout.fillWidth: true
-                color: "white"
+                color: AppStyle.textColor
                 anchors.left: toolbar_imageIcon.right
                 anchors.margins: 20
             }
@@ -87,12 +89,11 @@ ApplicationWindow {
             }
             ToolButton {
                 id:toolButton_Favourites
-                //                text: 'Favourites'
                 height: parent.height
                 Layout.fillHeight: true
                 style: ButtonStyle {
                     label: Text {
-                        color: 'white'
+                        color: AppStyle.textColor
                         text: 'Favourites'
                         verticalAlignment: Text.AlignVCenter
                     }
