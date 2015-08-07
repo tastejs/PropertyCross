@@ -37,6 +37,7 @@ ApplicationWindow {
                         true
                 }
                 onClicked: {
+                    rootView.incoming()
                     stack.pop()
                 }
             }
@@ -163,6 +164,8 @@ ApplicationWindow {
         Keys.onReleased: if ((event.key === Qt.Key_F1 || event.key === Qt.Key_Back) && stack.depth > 1) {
                              stack.pop();
                              event.accepted = true;
+                             if(stack.depth==1)
+                                 rootView.incoming()
                          }
         initialItem: RootView {
             id: rootView

@@ -9,8 +9,6 @@ Item {
     //    height: 800
     property int activeMargin: 3*width/100
     onVisibleChanged: {
-        if(visible == false)
-            incoming()
     }
 
     function disableElements() {
@@ -29,10 +27,8 @@ Item {
         disableElements()
         cppPropertyListing.resetListing()
         cppJsonHandler.getFromString(term)
-        //cppJsonHandler.getFromString(textFieldSearchLocation.text, 0)
         label_status.text = ""
         Qt.inputMethod.hide();
-        //toolButton_Favourites.visible = false
         busyIndicator.visible = true
     }
 
@@ -41,9 +37,12 @@ Item {
         //cppJsonHandler.getFromString(textFieldSearchLocation.text, 0)
         label_status.text = ""
 //        textFieldSearchLocation.text = ""
-        //toolButton_Favourites.visible = false
         busyIndicator.visible = false
-
+        label_suggestedLocations.visible = false
+        listView_suggestedLocations.visible = false
+        label_recentSearches.visible = true
+        listView_recentSearches.visible = true
+        console.log("in incoming rootView")
     }
 
     Connections {
@@ -52,6 +51,19 @@ Item {
                             textFieldSearchLocation.text = position
                             startSearch(position)
                       }
+    }
+    Connections {
+        target: cppJsonHandler
+        onLocationsReady: {
+            label_status.text = ""
+            busyIndicator.visible = false
+            label_suggestedLocations.visible = true
+            listView_suggestedLocations.visible = true
+            label_recentSearches.visible = false
+            listView_recentSearches.visible = false
+            stack.pop()
+            console.log("in Suggesting locations")
+        }
     }
 
     ColumnLayout {
@@ -128,10 +140,10 @@ Item {
                 target: cppJsonHandler
                 onErrorRetrievingRequest: {
                     console.log("in error Retrieving from JsonHandler")
-                    label_suggestedLocations.visible = false
-                    listView_suggestedLocations.visible = false
-                    label_recentSearches.visible = true
-                    listView_recentSearches.visible = true
+                    //label_suggestedLocations.visible = false
+                    //listView_suggestedLocations.visible = false
+                    //label_recentSearches.visible = true
+                    //listView_recentSearches.visible = true
                     rootView.incoming()
                     stack.pop()
                     label_status.text = "The location given was not recognised"
@@ -144,10 +156,10 @@ Item {
                     label_status.text = "The location given was not recognised"
                     console.log("in error Retrieving from GPSHandler")
                     rootView.incoming()
-                    label_suggestedLocations.visible = false
-                    listView_suggestedLocations.visible = false
-                    label_recentSearches.visible = true
-                    listView_recentSearches.visible = true
+                    //label_suggestedLocations.visible = false
+                    //listView_suggestedLocations.visible = false
+                    //label_recentSearches.visible = true
+                    //listView_recentSearches.visible = true
                     label_status.text = "The location given was not recognised"
                 }
             }
@@ -169,18 +181,6 @@ Item {
                 border.color: "black"
                 border.width: 2
                 width: rootView.width
-            }
-            Connections {
-                target: cppJsonHandler
-                onLocationsReady: {
-                    label_suggestedLocations.visible = true
-                    listView_suggestedLocations.visible = true
-                    label_recentSearches.visible = false
-                    listView_recentSearches.visible = false
-                    rootView.incoming()
-                    stack.pop()
-                    console.log("in Suggesting locations")
-                }
             }
         }
         Rectangle {
