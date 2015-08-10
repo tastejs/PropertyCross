@@ -137,6 +137,10 @@ ApplicationWindow {
                 id: toolButton_star
                 height: toolbar_imageIcon.height*1.5
                 width: toolbar_imageIcon.height*1.5
+                //Layout.maximumHeight: toolbar_imageIcon.height*1.5
+                //Layout.maximumWidth: toolbar_imageIcon.height*1.5
+                Layout.maximumHeight: toolbar.height*0.8
+                Layout.maximumWidth:  toolbar.height*0.8
                 anchors.margins: 20
                 signal toggleFavourite()
                 function loadStarIcon(value) {

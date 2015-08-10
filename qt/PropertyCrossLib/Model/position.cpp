@@ -39,7 +39,7 @@ void Position::positionTimeout(QGeoPositionInfoSource::Error error)
 
 void Position::positionTimeout()
 {
-    emit fetchPositionError();
+    emit fetchPositionErrorTimeout();
     qDebug() << "Error in getting Position from platform(timeOut)";
 }
 

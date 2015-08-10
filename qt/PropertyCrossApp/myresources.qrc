@@ -16,5 +16,6 @@
         <file>qml/qmldir</file>
         <file>qml/+ios/AppStyle.qml</file>
         <file>qml/+android/AppStyle.qml</file>
+        <file>qml/FooterProperties.qml</file>
     </qresource>
 </RCC>

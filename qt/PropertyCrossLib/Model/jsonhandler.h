@@ -11,6 +11,7 @@
 #include <QSharedPointer>
 #include <QList>
 #include <QUrl>
+#include <QTimer>
 
 class QNetworkReply;
 
@@ -20,7 +21,7 @@ public:
     JsonHandler(QObject *parent = 0);
     virtual ~JsonHandler () {
         //temp fix to reset manager on exit
-        manager.reset();
+        m_manager.reset();
     }
 
 public slots:
@@ -42,15 +43,16 @@ public slots:
     @param page which page of the string to get
     @return a pointer to a list of the properties
     */
-    //TODO not working - needed?
     void getListedLocations(QString location, int page);
-
+protected slots:
     /** Start a query on the netopia Server with the given URL
      * param url the URL to use for the query
      */
 void startRequest(QUrl url);
 /** To be called when the Request has finished */
 void replyFinished(QNetworkReply* reply);
+/** To be called when a timeout occured */
+void networkTimeout();
 
 signals:
 /** Emitted if the properties from a request are ready (e.g. to be displayed) */
@@ -63,8 +65,11 @@ signals:
     void successfullySearched(QString location, int page, int totalResults);
     /** Emitted if there was a problem with a search and it couldn't been finished properly */
     void errorRetrievingRequest();
+    /** Emitted if the request took to long to finish */
+     void requestTimedOut();
 private:
-    static QSharedPointer<QNetworkAccessManager> manager;
+    static QSharedPointer<QNetworkAccessManager> m_manager;
+    QTimer m_timer;
 
 };
 

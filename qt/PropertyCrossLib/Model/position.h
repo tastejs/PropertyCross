@@ -26,6 +26,8 @@ signals:
     void fetchPosition(QString position);
     /** Emitted to let the UI know that there was a problem with getting the position from the platform */
     void fetchPositionError();
+    /** Emitted to let the UI know that we timed out trying to get a position from the platform */
+    void fetchPositionErrorTimeout();
 private:
     QGeoPositionInfoSource* m_positionSource;
 };

@@ -46,7 +46,7 @@ signals:
     /** Emitted when one of the four recent searches changed */
     void recentSearchesChanged();
 public slots:
-    /** Add a a new search to the persistent storage
+    /** Add a a new search to the persistent storage (search has to contain more than 0 properties)
      * param search Search to be added
      */
     void addNewSearch(Search search);

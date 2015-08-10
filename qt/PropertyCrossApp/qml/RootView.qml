@@ -140,27 +140,36 @@ Item {
                 target: cppJsonHandler
                 onErrorRetrievingRequest: {
                     console.log("in error Retrieving from JsonHandler")
-                    //label_suggestedLocations.visible = false
-                    //listView_suggestedLocations.visible = false
-                    //label_recentSearches.visible = true
-                    //listView_recentSearches.visible = true
                     rootView.incoming()
                     stack.pop()
                     label_status.text = "The location given was not recognised"
-
                 }
+                onSuccessfullySearched: {
+                if(totalResults==0) {
+                    rootView.incoming();
+                    stack.pop();
+                    label_status.text = "There were no properties found for the given location"
+                }
+                }
+                onRequestTimedOut:
+                {
+                    rootView.incoming();
+                   stack.pop();
+                    label_status.text = "An error occured while searching. Please check your network connection and try again."
+                }
+
             }
             Connections {
                 target: cppGpsPosition
                 onFetchPositionError: {
-                    label_status.text = "The location given was not recognised"
+                    label_status.text = "The use of location is currently disabled."
                     console.log("in error Retrieving from GPSHandler")
                     rootView.incoming()
-                    //label_suggestedLocations.visible = false
-                    //listView_suggestedLocations.visible = false
-                    //label_recentSearches.visible = true
-                    //listView_recentSearches.visible = true
-                    label_status.text = "The location given was not recognised"
+                }
+                onFetchPositionErrorTimeout: {
+                    label_status.text = "Unable to detect current location. Please ensure location is turned on in your phone settings and try again."
+                    console.log("in error Retrieving from GPSHandler")
+                    rootView.incoming()
                 }
             }
         }

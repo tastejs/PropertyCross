@@ -43,6 +43,8 @@ void RecentSearchesStorage::addNewSearch(Search search)
 {
     QSettings settings;
     QList<QVariant> storageList =  settings.value(storageKey).toList();
+    if(search.results()==0)
+      return;
     for(auto it = storageList.begin(); it!=storageList.end();it++)
         if(it->value<Search>().search() == search.search())
             return;

@@ -11,31 +11,30 @@
 #include <QString>
 #include "searches.h"
 
-QSharedPointer<QNetworkAccessManager> JsonHandler::manager  = QSharedPointer<QNetworkAccessManager>(0);
+QSharedPointer<QNetworkAccessManager> JsonHandler::m_manager  = QSharedPointer<QNetworkAccessManager>(0);
 //example: http://api.nestoria.co.uk/api?country=uk&pretty=1&action=search_listings&encoding=json&listing_type=buy&page=1&place_name=leeds
 //options:
 //place_name=leeds - listing from string
 //centre_point=51.684183,-3.431481 -- geo listing
 //place_name=newcr -- suggest locations
 static const QString baseUrl = "http://api.nestoria.co.uk/api?country=uk&pretty=1&action=search_listings&encoding=json&listing_type=buy";
+static const double NETWORK_TIMEOUT = 5000;
 
 
 
 JsonHandler::JsonHandler(QObject *parent) :
     QObject(parent)
 {
-    if(manager.isNull()) {
-        manager = QSharedPointer<QNetworkAccessManager>(new QNetworkAccessManager(this));
+    if(m_manager.isNull()) {
+        m_manager = QSharedPointer<QNetworkAccessManager>(new QNetworkAccessManager(this));
     }
 
-    connect(manager.data(), SIGNAL(finished(QNetworkReply*)), this, SLOT(replyFinished(QNetworkReply*)));
+    connect(m_manager.data(), SIGNAL(finished(QNetworkReply*)), this, SLOT(replyFinished(QNetworkReply*)));
+    connect(&m_timer, SIGNAL(timeout()), this, SLOT(networkTimeout()));
 }
 
 void JsonHandler::getFromString(QString location, int page) {
-    manager->get(QNetworkRequest(QUrl(baseUrl+"&place_name="+location+"&page="+QString::number(page+1))));
-    QUrl test(baseUrl+"&place_name="+location+"&page="+QString::number(page+1));
-qDebug() << "Getting: "<<    test.toString();
-//  qDebug() << "Started request to get page "<<page<<" of "<<location;
+  startRequest(QUrl(baseUrl+"&place_name="+location+"&page="+QString::number(page+1)));
 }
 
 void JsonHandler::getFromString(QString location)
@@ -44,22 +43,27 @@ getFromString(location,0);
 }
 
 void JsonHandler::getFromLocation(float latitude, float longtitude, int page) {
-    manager->get(QNetworkRequest(QUrl(baseUrl+"&centre_point="+latitude+","+longtitude+"&page="+page)));
+    startRequest(QUrl(baseUrl+"&centre_point="+latitude+","+longtitude+"&page="+page));
 }
 
 void JsonHandler::getListedLocations(QString location, int page) {
-    manager->get(QNetworkRequest(QUrl(baseUrl+"&place_name="+location+"&page="+page)));
+    startRequest(QUrl(baseUrl+"&place_name="+location+"&page="+page));
 }
 
 void JsonHandler::startRequest(QUrl url)
 {
-    if(manager.isNull())
+    if(m_manager.isNull())
         return;
-    manager->get(QNetworkRequest(url));
+    m_manager->get(QNetworkRequest(url));
+    m_timer.setSingleShot(true);
+    m_timer.setInterval(NETWORK_TIMEOUT);
+    m_timer.start();
 }
 
 void JsonHandler::replyFinished(QNetworkReply* reply)
 {
+  m_timer.stop();
+  qDebug() << "in reply";
     if(reply)
     {
         QJsonParseError error;
@@ -109,5 +113,11 @@ void JsonHandler::replyFinished(QNetworkReply* reply)
             emit errorRetrievingRequest();
         }
     }
-//    reply->deleteLater();
+    //    reply->deleteLater();
+}
+
+void JsonHandler::networkTimeout()
+{
+  emit(requestTimedOut());
+
 }

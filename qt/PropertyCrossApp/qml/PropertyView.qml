@@ -53,14 +53,14 @@ Item {
             text: "<b>£"+propertyLayout.price+"</b>"
             Layout.leftMargin: rootView.activeMargin
             Layout.rightMargin: rootView.activeMargin
-            font.pixelSize: text_rooms.font.pixelSize*2
+            font.pixelSize: text_rooms.font.pixelSize*1.85
             font.bold: true
         }
         Text {
             Layout.leftMargin: rootView.activeMargin
             Layout.rightMargin: rootView.activeMargin
             text: propertyLayout.title
-            font.pixelSize: text_rooms.font.pixelSize*1.5
+            font.pixelSize: text_rooms.font.pixelSize*1.3
             wrapMode: Text.WrapAtWordBoundaryOrAnywhere
             width: parent.width
             Layout.maximumWidth: parent.width-Layout.leftMargin -Layout.rightMargin
@@ -82,9 +82,10 @@ Item {
             id: text_rooms
             Layout.leftMargin: rootView.activeMargin
             Layout.rightMargin: rootView.activeMargin
-            text: propertyLayout.bedrooms+" bed, "+propertyLayout.bathrooms+" bathroom "+propertyLayout.propertyType+"\n"
+            text: propertyLayout.bedrooms+" bed, "+propertyLayout.bathrooms+" bathroom "+propertyLayout.propertyType
         }
         Text {
+            Layout.topMargin: 5
             Layout.leftMargin: rootView.activeMargin
             Layout.rightMargin: rootView.activeMargin
             text: propertyLayout.summary

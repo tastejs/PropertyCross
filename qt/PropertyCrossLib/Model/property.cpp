@@ -50,6 +50,15 @@ Property::Property(const QJsonObject& jsonObj):
     m_summary          = jsonObj.value(QString("summary")).toString();
     m_thumbnailUrl         = jsonObj.value(QString("thumb_url")).toString();
     m_title            = jsonObj.value(QString("title")).toString();
+    //Truncate index to the first two informations
+    int index;
+    if(m_title.indexOf(","))
+        index = m_title.indexOf(",",m_title.indexOf(","));
+    if(m_title.indexOf(",",index+1))
+        index = m_title.indexOf(",",index+1);
+    if(index>0)
+        m_title.truncate(index);
+   qDebug()<<"Truncated at: "<<index;
     m_propertyType     = jsonObj.value(QString("property_type")).toString();
 }
 

@@ -32,7 +32,7 @@ Item {
 
         ListView {
             id: listView_FavouritedProperties
-            Layout.leftMargin: rootView.activeMargin
+            //Layout.leftMargin: rootView.activeMargin
             Layout.rightMargin: rootView.activeMargin
             Layout.fillHeight: true
             Layout.fillWidth: true

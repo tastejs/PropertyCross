@@ -38,7 +38,8 @@ DISTFILES += \
     qml/+ios/AppStyle.qml \
     qml/AppStyle.qml \
     qml/qmldir \
-    qml/+android/AppStyle.qml
+    qml/+android/AppStyle.qml \
+    qml/FooterProperties.qml
 
 win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../PropertyCrossLib/release/ -lPropertyCrossLib
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../PropertyCrossLib/debug/ -lPropertyCrossLib
