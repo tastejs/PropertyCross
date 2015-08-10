@@ -22,7 +22,8 @@ SOURCES += \
     src/TestJsonHandler.cpp \
     src/TestLocation.cpp \
     src/TestPosition.cpp \
-    src/TestFavourites.cpp
+    src/TestFavourites.cpp \
+    src/TestSearches.cpp
 
 
 HEADERS += \

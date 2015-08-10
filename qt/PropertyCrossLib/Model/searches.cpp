@@ -4,6 +4,7 @@
 #include <QDataStream>
 
 Q_DECLARE_METATYPE(Search)
+const QString storageKey = "recentSearches";
 
 QDataStream& operator<<(QDataStream& out, const Search& s) {
     out << s.search() << s.results();
@@ -30,7 +31,7 @@ const QList<Search> RecentSearchesStorage::getRecentSearches() const
 
     QSettings settings;
     QList<Search> searches;
-    QList <QVariant> storedSearches = settings.value("recentSearches").toList();
+    QList <QVariant> storedSearches = settings.value(storageKey).toList();
     for(auto i=storedSearches.begin(); i!=storedSearches.end(); i++){
         searches.push_back(Search(i->value<Search>()));
     //qDebug() << "List:"<<i->value<Search>().search();
@@ -41,26 +42,26 @@ const QList<Search> RecentSearchesStorage::getRecentSearches() const
 void RecentSearchesStorage::addNewSearch(Search search)
 {
     QSettings settings;
-    QList<QVariant> storageList =  settings.value("recentSearches").toList();
+    QList<QVariant> storageList =  settings.value(storageKey).toList();
     for(auto it = storageList.begin(); it!=storageList.end();it++)
         if(it->value<Search>().search() == search.search())
             return;
     if(storageList.count()==4)
       storageList.erase(storageList.begin());
     storageList.push_back(QVariant::fromValue(Search(search.search(),search.results())));
-    settings.setValue("recentSearches", storageList);
+    settings.setValue(storageKey, storageList);
     emit recentSearchesChanged();
-    qDebug() << "Emit recentSearchesChanged--2";
+    qDebug() << "Emit recentSearchesChanged - added "<<search.search();
 }
 
 void RecentSearchesStorage::deleteAllRecentSearches()
 {
     QSettings settings;
-    QList<QVariant> storageList =  settings.value("recentSearches").toList();
+    QList<QVariant> storageList =  settings.value(storageKey).toList();
     if(storageList.count()==0)
         return;
     storageList.clear();
-    settings.setValue("recentSearches", storageList);
+    settings.setValue(storageKey, storageList);
     emit recentSearchesChanged();
 }
 

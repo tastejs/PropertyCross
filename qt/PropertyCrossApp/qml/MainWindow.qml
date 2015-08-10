@@ -127,7 +127,7 @@ ApplicationWindow {
                     cppPropertyListing.resetListing()
                 }
                 visible: {
-                    if((stack.currentItem.state==="showingRoot")&&(busyIndicator.visible==false))
+                    if((stack.currentItem!=null)&&(stack.currentItem.state==="showingRoot")&&(busyIndicator.visible==false))
                         true
                     else
                         false
@@ -156,7 +156,7 @@ ApplicationWindow {
 
                 property bool isFavourite
                 visible: {
-                    if(stack.currentItem.state==="showingProperty")
+                    if(stack.currentItem!=null&&stack.currentItem.state==="showingProperty")
                         true
                     else
                         false
@@ -184,14 +184,15 @@ ApplicationWindow {
             id: rootView
         }
         onCurrentItemChanged: {
-            if(stack.currentItem.state==="showingRoot")
-                toolbar_text.text = qsTr("PropertyCross")
-            else if(stack.currentItem.state==="showingFavourites")
-                toolbar_text.text = qsTr("Favourites")
-            else if(stack.currentItem.state==="showingProperty")
-                toolbar_text.text = qsTr("Property Details")
-            else if(stack.currentItem.state==="showingResults")
-                toolbar_text.text = stack.searchResultsTitle
+            if(stack.currentItem!=null)
+                if(stack.currentItem.state==="showingRoot")
+                    toolbar_text.text = qsTr("PropertyCross")
+                else if(stack.currentItem.state==="showingFavourites")
+                    toolbar_text.text = qsTr("Favourites")
+                else if(stack.currentItem.state==="showingProperty")
+                    toolbar_text.text = qsTr("Property Details")
+                else if(stack.currentItem.state==="showingResults")
+                    toolbar_text.text = stack.searchResultsTitle
 
         }
         Connections {

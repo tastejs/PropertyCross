@@ -25,6 +25,7 @@ private slots:
 
 void TestJsonHandler::can_make_requests_with_String()
 {
+    qRegisterMetaTypeStreamOperators<Search>("Search");
     JsonHandler handler(this);
     qRegisterMetaType<QSharedPointer<QList<Property*> > >("QSharedPointer<QList<Property> >");
     QSignalSpy spy(&handler, SIGNAL(propertiesReady(QSharedPointer<QList<Property> >)));
@@ -50,9 +51,9 @@ void TestJsonHandler::can_make_requests_with_String()
     }
     arguments = spySucessfullSearch.first();
     if(arguments.size()>0) {
-        Search search = arguments.first().value<Search>();
+        Search search = arguments.at(0).value<Search>();
         qDebug() << "Search was: "<<search.search()<<" , count was:"<<search.results();
-//        QVERIFY(search.search()=="London");
+        QVERIFY(search.search()=="London");
         QVERIFY(search.results()>0);
     } else {
         QFAIL("could not get arguments for sucessful Search");

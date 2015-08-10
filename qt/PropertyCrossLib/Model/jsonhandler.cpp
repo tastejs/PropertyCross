@@ -84,7 +84,8 @@ void JsonHandler::replyFinished(QNetworkReply* reply)
                 properties->append(tmp);
             }
             emit propertiesReady(properties);
-            emit successfullySearched(Search(doc.object().value(QString("request")).toObject().value(QString("location")).toString(),doc.object().value(QString("response")).toObject().value(QString("total_results")).toInt()));
+            Search test(doc.object().value(QString("request")).toObject().value(QString("location")).toString(),doc.object().value(QString("response")).toObject().value(QString("total_results")).toInt());
+            emit successfullySearched(test);
             emit successfullySearched(doc.object().value(QString("request")).toObject().value(QString("location")).toString(),doc.object().value(QString("response")).toObject().value(QString("page")).toString().toInt(),doc.object().value(QString("response")).toObject().value(QString("total_results")).toInt());
             qDebug()<<"In reply for page "<<doc.object().value(QString("response")).toObject().value(QString("page")).toString().toInt();
             qDebug() << "Emitt ready properties";

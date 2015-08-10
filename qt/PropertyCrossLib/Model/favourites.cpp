@@ -4,6 +4,8 @@
 #include <QDebug>
 #include <QSharedPointer>
 
+const QString storageKey = "favouritedProperties";
+
 FavouritesStorage::FavouritesStorage(QObject *parent) :
 QObject(parent)
 {
@@ -12,25 +14,25 @@ QObject(parent)
 
 void FavouritesStorage::addNewFavourite(Property property)
 {
+//  qDebug() << "Want to add new Favourite with guid "<< property.getGuid();
     QSettings settings;
-    QMap<QString, QVariant> storageList =  settings.value("favouritedProperties").toMap();
+    QMap<QString, QVariant> storageList =  settings.value(storageKey).toMap();
     if(storageList.contains(property.getGuid()))
         return;
     storageList.insert(property.getGuid(),QVariant(property.toList()));
-    settings.setValue("favouritedProperties", storageList);
+    settings.setValue(storageKey, storageList);
     emit favouritedPropertiesChanged();
-    qDebug() << "Emit favouritedPropertiesChanged(added)";
-
+    qDebug() << "Emit favouritedPropertiesChanged(added), now contains"<<storageList.count();
 }
 
 void FavouritesStorage::removeFavourite(Property property)
 {
     QSettings settings;
-    QMap<QString, QVariant> storageList =  settings.value("favouritedProperties").toMap();
+    QMap<QString, QVariant> storageList =  settings.value(storageKey).toMap();
     if(!storageList.contains(property.getGuid()))
         return;
     storageList.remove(property.getGuid());
-    settings.setValue("favouritedProperties", storageList);
+    settings.setValue(storageKey, storageList);
     emit favouritedPropertiesChanged();
     qDebug() << "Emit favouritedPropertiesChanged(removed)";
 }
@@ -49,11 +51,11 @@ void FavouritesStorage::removeFavourite(QString guid, QString summary, QString p
 void FavouritesStorage::removeAllFavourites()
 {
     QSettings settings;
-    QMap<QString, QVariant> storageList =  settings.value("favouritedProperties").toMap();
+    QMap<QString, QVariant> storageList =  settings.value(storageKey).toMap();
     if(storageList.count()==0)
         return;
     storageList.clear();
-    settings.setValue("favouritedProperties", storageList);
+    settings.setValue(storageKey, storageList);
     emit favouritedPropertiesChanged();
     qDebug() << "Emit removeAllFavourites";
 
@@ -63,11 +65,10 @@ const QList<Property> FavouritesStorage::getFavouritedProperties()
 {
     QSettings settings;
     QList<Property> properties;
-    QMap <QString, QVariant> favouritedProperties = settings.value("favouritedProperties").toMap();
+    QMap <QString, QVariant> favouritedProperties = settings.value(storageKey).toMap();
     for(auto i=favouritedProperties.begin(); i!=favouritedProperties.end(); i++){
         properties.append(Property::fromList(i.value().toList()));
     }
-//    qDebug() << "There are "<<properties.count()<<" favourited properties";
     return properties;
 }
 
@@ -75,7 +76,7 @@ bool FavouritesStorage::isFavourited(QString property)
 {
     QSettings settings;
     QList<Property> properties;
-    QMap <QString, QVariant> favouritedProperties = settings.value("favouritedProperties").toMap();
+    QMap <QString, QVariant> favouritedProperties = settings.value(storageKey).toMap();
     return favouritedProperties.contains(property);
 }
    void FavouritesStorage::triggerFavouriteToggle()
@@ -143,16 +144,11 @@ QHash<int, QByteArray> FavouritedPropertyListingModel::roleNames() const {
 
    void FavouritedPropertyListingModel::addToListing(QSharedPointer<QList<Property*> > ptrList) {
       qDebug() << QString("Received list") ;
-//      m_properties.clear();
       for(int i=0; i<ptrList->size(); i++){
-    //  m_properties.append(ptrList->at(i));
-//    m_properties << (*property);
     beginInsertRows(QModelIndex(), rowCount(), rowCount());
     m_properties.append(*ptrList->at(i));
     endInsertRows();
-//      emit addProperty(ptrList->at(i)->getTitle(), QString::number(ptrList->at(i)->getPrice()), ptrList->at(i)->getImageUrl());
       }
- //     emit ready();
    }
 
    void FavouritedPropertyListingModel::resetListing() {

@@ -4,6 +4,7 @@
 #include <QString>
 #include <QJsonObject>
 #include <QObject>
+#include <QDataStream>
 
 /** Class which describes a property */
 class Property
@@ -55,6 +56,10 @@ private:
      QString m_imageUrl;
 };
 
+///Output operator for property
+QDataStream& operator<<(QDataStream& out, const Property& p);
+///Input operator for property
+QDataStream& operator>>(QDataStream& in, Property& p);
 
 /** The model to the properties */
 class PropertyModel : public QObject {

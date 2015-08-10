@@ -1,5 +1,35 @@
 #include "property.h"
 #include <QDebug>
+#include <QDataStream>
+QDataStream& operator<<(QDataStream& out, const Property& p) {
+    out << p.getGuid()<<p.getSummary()<<p.getPrice()<<p.getBedrooms()<<p.getBathrooms()<<
+           p.getPropertyType()<<p.getTitle()<<p.getThumbnailUrl()<<p.getImageUrl();
+    return out;
+}
+
+QDataStream& operator>>(QDataStream& in, Property& p) {
+ QString s;
+ int i;
+ in>>s;
+ p.setGuid(s);
+ in>>s;
+ p.setSummary(s);
+ in>>i;
+ p.setPrice(i);
+ in>>i;
+ p.setBedrooms(i);
+ in>>i;
+ p.setBathrooms(i);
+ in>>s;
+ p.setPropertyType(s);
+ in>>s;
+ p.setTitle(s);
+ in>>s;
+ p.setThumbnailUrl(s);
+ in>>s;
+ p.setImageUrl(s);
+    return in;
+}
 Property::Property():
     m_price(0),
     m_bedrooms(0),

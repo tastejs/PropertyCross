@@ -1,27 +1,38 @@
 #include "TestSuite.h"
 
-#include <QtTest/QtTest>
 #include "favourites.h"
 
 #include <QSignalSpy>
+#include <QtTest/QtTest>
 
 Q_DECLARE_METATYPE( QSharedPointer<QList<Property*> > )
+Q_DECLARE_METATYPE( Property)
 
 class TestFavourites: public TestSuite
 {
     Q_OBJECT
 private slots:
+  void initTestCase();
     void can_add_and_remove_properties();
     void triggering_Toggle_does_signal_toggle();
     void can_get_list_of_favourtied_properties();
     void correctly_identifies_favourited_property();
 };
 
+void TestFavourites::initTestCase() {
+    //For QSettings to work one has to have set the Organization information
+    QCoreApplication::setOrganizationName("PropertyCrossTest");
+    QCoreApplication::setOrganizationDomain("com.propertycrossTest");
+    QCoreApplication::setApplicationName("PropertyCrossTest");
+}
+
 void TestFavourites::can_add_and_remove_properties()
 {
+    //qRegisterMetaTypeStreamOperators<Property>("Property");
     FavouritesStorage favourites;
     QSignalSpy spy(&favourites, SIGNAL(favouritedPropertiesChanged()));
-    Property property = Property::fromStrings("abcd","Summary","5.5","1","1","propertyType","title","httpThumbnail","httpimageUrl");
+    Property property = Property::fromStrings("g1-TNtAzM4UjM2UDM=E","Summary","5.5","1","1","propertyType","title","httpThumbnail","httpimageUrl");
+    qDebug() << "TestProperty"<<property.getGuid();
 
     //Adding a new property should generate a corresponding signal
     favourites.addNewFavourite(property);
@@ -72,14 +83,17 @@ void TestFavourites::can_add_and_remove_properties()
     QCOMPARE(spy.count(), 0);
 }
 
-void TestFavourites::triggering_Toggle_does_signal_toggle() {
+void TestFavourites::correctly_identifies_favourited_property() {
+    qRegisterMetaTypeStreamOperators<Property>("Property");
     FavouritesStorage favourites;
 
-    favourites.addNewFavourite("abcd","Summary","5.5","1","1","propertyType","title","httpThumbnail","httpimageUrl");
-    QVERIFY(favourites.isFavourited("abcd")==true);
+    favourites.addNewFavourite("g1-TNtAzM4UjM2UDM=E","Summary","5.5","1","1","propertyType","title","httpThumbnail","httpimageUrl");
+    QVERIFY(favourites.isFavourited("g1-TNtAzM4UjM2UDM=E")==true);
+    QVERIFY(favourites.isFavourited("abcd")==false);
 }
 
-void TestFavourites::correctly_identifies_favourited_property() {
+void TestFavourites::triggering_Toggle_does_signal_toggle() {
+    qRegisterMetaTypeStreamOperators<Property>("Property");
     FavouritesStorage favourites;
     QSignalSpy spy(&favourites, SIGNAL(toggleFavourite()));
 

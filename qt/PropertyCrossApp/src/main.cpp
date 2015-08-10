@@ -15,7 +15,7 @@
 int main(int argc, char *argv[])
 {
     QCoreApplication::setOrganizationName("PropertyCross");
-    QCoreApplication::setOrganizationDomain("com.propertycross.com");
+    QCoreApplication::setOrganizationDomain("com.propertycross");
     QCoreApplication::setApplicationName("PropertyCross");
 
     //we register a new QVariant-type search - enable streaming of it
