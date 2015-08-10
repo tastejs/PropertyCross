@@ -17,6 +17,9 @@ public:
 
     int results() const;
     void setResults(const int &results);
+    bool operator==(const Search& s) const {
+      return (this->search()==s.search())&&(this->results()==s.results());
+    }
 
 private:
     QString m_search;
