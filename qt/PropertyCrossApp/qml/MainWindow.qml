@@ -3,8 +3,7 @@ import QtQuick.Controls 1.2
 import QtQuick.Window 2.2
 import QtQuick.Layouts 1.2
 import QtQuick.Controls.Styles 1.4
-//import "."
-import "."// 1.0
+import "."
 
 
 ApplicationWindow {
@@ -13,6 +12,12 @@ ApplicationWindow {
     title: qsTr("PropertyCross")
     visible: true
     id : mainWindow
+
+    function goBack() {
+        stack.pop();
+        if(stack.depth==1)
+            rootView.incoming()
+    }
 
     toolBar: ToolBar {
         width: mainWindow.width
@@ -39,8 +44,7 @@ ApplicationWindow {
                         true
                 }
                 onClicked: {
-                    rootView.incoming()
-                    stack.pop()
+                    mainWindow.goBack()
                 }
             }
 
@@ -50,17 +54,34 @@ ApplicationWindow {
                 Layout.alignment: Qt.AlignLeft
                 Layout.maximumHeight: toolbar.height*0.8
                 Layout.maximumWidth:  toolbar.height*0.8
-                    anchors.margins: 10
-                    anchors.left: menu_back.right
+                width: toolbar.height*0.8
+                height: toolbar.height*0.8
+                anchors.margins: 10
+                anchors.left: menu_back.right
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        mainWindow.goBack()
+                    }
+                }
             }
             Text {
-                text: ''
+                text: 'Property Cross'
                 id: toolbar_text
                 Layout.alignment: Qt.AlignLeft
-                Layout.fillWidth: true
+                //Layout.fillWidth: true
                 color: AppStyle.textColor
                 anchors.left: toolbar_imageIcon.right
                 anchors.margins: 20
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        mainWindow.goBack()
+                    }
+                }
+            }
+            Item {
+                Layout.fillWidth: true
             }
 
             BusyIndicator {
@@ -68,7 +89,7 @@ ApplicationWindow {
                 anchors.right: parent.right//toolButton_Favourites.left
                 Layout.minimumHeight: toolbar.height-anchors.margins
                 Layout.minimumWidth: toolbar.height-anchors.margins
-                    anchors.margins: 20
+                anchors.margins: 20
                 Layout.fillHeight: true
                 running: true
                 visible: false
@@ -116,7 +137,7 @@ ApplicationWindow {
                 id: toolButton_star
                 height: toolbar_imageIcon.height*1.5
                 width: toolbar_imageIcon.height*1.5
-                    anchors.margins: 20
+                anchors.margins: 20
                 signal toggleFavourite()
                 function loadStarIcon(value) {
                     if(value===true)
@@ -156,23 +177,21 @@ ApplicationWindow {
         focus: true
         property string searchResultsTitle
         Keys.onReleased: if ((event.key === Qt.Key_F1 || event.key === Qt.Key_Back) && stack.depth > 1) {
-                             stack.pop();
                              event.accepted = true;
-                             if(stack.depth==1)
-                                 rootView.incoming()
+                             mainWindow.goBack()
                          }
         initialItem: RootView {
             id: rootView
         }
         onCurrentItemChanged: {
-                    if(stack.currentItem.state==="showingRoot")
-                        toolbar_text.text = qsTr("PropertyCross")
-                    else if(stack.currentItem.state==="showingFavourites")
-                        toolbar_text.text = qsTr("Favourites")
-                    else if(stack.currentItem.state==="showingProperty")
-                        toolbar_text.text = qsTr("Property Details")
-                    else if(stack.currentItem.state==="showingResults")
-                        toolbar_text.text = stack.searchResultsTitle
+            if(stack.currentItem.state==="showingRoot")
+                toolbar_text.text = qsTr("PropertyCross")
+            else if(stack.currentItem.state==="showingFavourites")
+                toolbar_text.text = qsTr("Favourites")
+            else if(stack.currentItem.state==="showingProperty")
+                toolbar_text.text = qsTr("Property Details")
+            else if(stack.currentItem.state==="showingResults")
+                toolbar_text.text = stack.searchResultsTitle
 
         }
         Connections {
@@ -180,7 +199,7 @@ ApplicationWindow {
             onSuccessfullySearched: {
                 var showing = (totalResults-page*20)>0 ? page*20 : totalResults
                 stack.searchResultsTitle =  qsTr("Showing "+showing+" of "+totalResults)
-                        toolbar_text.text = stack.searchResultsTitle
+                toolbar_text.text = stack.searchResultsTitle
             }
         }
     }
