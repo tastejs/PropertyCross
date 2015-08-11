@@ -5,6 +5,7 @@
 #include <QGeoCoordinate>
 #include <QGeoPositionInfoSource>
 #include <QString>
+#include <QTimer>
 
 /** Class To Fetch the position form the platform */
 class Position : public QObject
@@ -18,7 +19,7 @@ public slots:
     /** Method to be called when a request has successfully finished */
     void positionUpdated(QGeoPositionInfo);
     /** Method to be called when there was an error with a request */
-    void positionTimeout(QGeoPositionInfoSource::Error);
+    void positionError(QGeoPositionInfoSource::Error);
     /** Method to be called when the request timed out*/
     void positionTimeout();
 signals:
@@ -30,6 +31,7 @@ signals:
     void fetchPositionErrorTimeout();
 private:
     QGeoPositionInfoSource* m_positionSource;
+    QTimer m_timer;
 };
 
 #endif // POSITION_H
