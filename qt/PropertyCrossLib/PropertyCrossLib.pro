@@ -3,7 +3,7 @@ QT       += core
 QT	 += qml quick
 QT       += network
 QT       += positioning
-win32|win64 {
+win32 {
 CONFIG       += static
 }
 
