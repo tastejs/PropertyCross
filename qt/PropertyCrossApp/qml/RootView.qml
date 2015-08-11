@@ -5,8 +5,6 @@ import QtQuick.Layouts 1.2
 Item {
     id: rootView
     state: "showingRoot"
-    //    width: 640
-    //    height: 800
     property int activeMargin: 3*width/100
     onVisibleChanged: {
     }
@@ -34,9 +32,7 @@ Item {
 
     function incoming() {
         enableElements()
-        //cppJsonHandler.getFromString(textFieldSearchLocation.text, 0)
         label_status.text = ""
-//        textFieldSearchLocation.text = ""
         busyIndicator.visible = false
         label_suggestedLocations.visible = false
         listView_suggestedLocations.visible = false
@@ -76,7 +72,6 @@ Item {
             Layout.margins: 20
             id: textIntroduction
             wrapMode: Text.WrapAtWordBoundaryOrAnywhere
-            elide: Text.ElideRight
             width: parent.width-Layout.leftMarin-Layout.rightMargin
             text: qsTr("Use the form below to search for houses to buy. You can search by place-name, postcode, or click 'My location', to search in your current location!")
             textFormat: Text.PlainText
@@ -136,6 +131,9 @@ Item {
             text: ""
             Layout.leftMargin: rootView.activeMargin
             Layout.rightMargin: rootView.activeMargin
+            wrapMode: Text.WrapAtWordBoundaryOrAnywhere
+            width: parent.width-Layout.leftMarin-Layout.rightMargin
+            Layout.maximumWidth: parent.width-Layout.leftMargin-Layout.rightMargin
             Connections {
                 target: cppJsonHandler
                 onErrorRetrievingRequest: {
@@ -162,14 +160,14 @@ Item {
             Connections {
                 target: cppGpsPosition
                 onFetchPositionError: {
-                    label_status.text = "The use of location is currently disabled."
                     console.log("in error Retrieving from GPSHandler")
                     rootView.incoming()
+                    label_status.text = "The use of location is currently disabled."
                 }
                 onFetchPositionErrorTimeout: {
-                    label_status.text = "Unable to detect current location. Please ensure location is turned on in your phone settings and try again."
                     console.log("in error Retrieving from GPSHandler")
                     rootView.incoming()
+                    label_status.text = "Unable to detect current location. Please ensure location is turned on in your phone settings and try again."
                 }
             }
         }

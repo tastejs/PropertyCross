@@ -40,11 +40,9 @@ Item {
             Text {
                 id: titleText
                 text: title+", "+bedrooms+" bed "+propertyType
-                //wrapMode: Text.WrapAtWordBoundaryOrAnywhere
                 elide: Text.ElideRight
                 color: "darkgrey"
                 Layout.leftMargin: rootView.activeMargin
-                //                            Layout.rightMargin: rootView.activeMargin
                 anchors.top: text_propertyPrice.bottom
                 Layout.maximumWidth: rootView.width- 2*Layout.leftMargin-Layout.rightMargin-image_property.width
                 font.pixelSize: parent.height*0.2
@@ -72,8 +70,6 @@ Item {
             color: index==0 ? '#00000000' : "grey"
             height: 2
             width: rootView.width- Layout.leftMargin-Layout.rightMargin
-            //                        Layout.leftMargin: rootView.activeMargin
-            //                        Layout.rightMargin: rootView.activeMargin
         }
     }
 }

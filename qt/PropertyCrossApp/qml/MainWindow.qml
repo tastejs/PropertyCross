@@ -94,7 +94,6 @@ ApplicationWindow {
                 running: true
                 visible: false
                 Layout.alignment: Qt.AlignRight
-                //  anchors.verticalCenter: parent.verticalCenter
                 style: BusyIndicatorStyle {
                     indicator: Image {
                         source: "qrc:///res/refresh.png"
