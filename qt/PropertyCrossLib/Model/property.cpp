@@ -58,7 +58,6 @@ Property::Property(const QJsonObject& jsonObj):
         index = m_title.indexOf(",",index+1);
     if(index>0)
         m_title.truncate(index);
-   qDebug()<<"Truncated at: "<<index;
     m_propertyType     = jsonObj.value(QString("property_type")).toString();
 }
 
