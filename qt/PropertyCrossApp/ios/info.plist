@@ -13,7 +13,7 @@
 	<key>CFBundleExecutable</key>
 	<string>PropertyCross</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.yourcompany.${PRODUCT_NAME:rfc1034identifier}</string>
+        <string>com.propertycross.ios.${PRODUCT_NAME:rfc1034identifier}</string>
 	<key>CFBundleDisplayName</key>
 	<string>${PRODUCT_NAME}</string>
 	<key>CFBundleName</key>
