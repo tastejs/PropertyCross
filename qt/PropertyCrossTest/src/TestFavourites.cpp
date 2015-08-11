@@ -30,6 +30,7 @@ void TestFavourites::can_add_and_remove_properties()
 {
     //qRegisterMetaTypeStreamOperators<Property>("Property");
     FavouritesStorage favourites;
+    favourites.removeAllFavourites();
     QSignalSpy spy(&favourites, SIGNAL(favouritedPropertiesChanged()));
     Property property = Property::fromStrings("g1-TNtAzM4UjM2UDM=E","Summary","5.5","1","1","propertyType","title","httpThumbnail","httpimageUrl");
     qDebug() << "TestProperty"<<property.getGuid();
