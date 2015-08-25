@@ -1,29 +1,116 @@
-﻿.win8phone-layout {
+﻿/* Layout */
+
+.simple-layout,
+.simple-layout-tablet {
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+.simple-layout .layout-header {
+    position: absolute;
+    width: 100%;
+}
+
+.simple-layout .layout-content {
+    position: absolute;
+    width: 100%;
+    overflow: hidden;
+}
+
+.simple-layout .layout-content > div,
+.simple-layout .transition-frame {
+    height: 100%;
+    width: 100%;
+}
+
+.simple-layout .view-footer {
+    position: static;
+}
+
+.simple-layout .view-footer .dx-toolbar {
+    background: transparent;
+    border: none;
+    margin-bottom: 10px;
+}
+
+.simple-layout .view-footer .dx-toolbar .dx-toolbar-center {
+    width: 100%;
+}
+
+/* ios7 */
+
+.dx-theme-ios7 .simple-layout .layout-header {
+    top: 0;
+    height: 44px;
+}
+
+.dx-theme-ios7 .simple-layout .layout-content {
+    top: 45px;
+    bottom: 0;
+}
+
+.dx-theme-ios7 .simple-layout .view-footer .dx-toolbar {
+    height: 57px;
+}
+
+.dx-theme-ios7 .simple-layout .view-footer .dx-button .dx-button-content .dx-button-text {
+    font-size: 20px;
+    line-height: 38px;
+}
+
+/* android5 */
+
+.dx-theme-android5 .simple-layout .layout-content {
+    top: 56px;
+    bottom: 0;
+}
+
+/* generic */
+
+.dx-theme-generic .simple-layout .layout-content {
+    top: 56px;
+    bottom: 0;
+}
+
+.dx-theme-generic.dx-device-mobile .simple-layout .layout-header {
+    height: 56px;
+}
+
+.dx-theme-generic.dx-device-mobile .simple-layout .layout-header .dx-toolbar {
+    background: none;
+}
+
+.dx-theme-generic .simple-layout .view-footer .dx-button {
+    width: 97%;
+    overflow: visible;
+}
+
+/* Windows Phone 8*/
+.win8phone-layout {
     height: 100%;
     width: 100%;
     overflow: hidden;
     position: relative;
 }
 
-.win8phone-layout .load-panel.dx-loadpanel-content {
-    background: transparent;
-    border: none;
+.win8phone-layout .layout-header {
+    height: 20px;
+    margin-left: 10px;
+    text-transform: uppercase;
 }
 
 .win8phone-layout .layout-content {
     position: absolute;
-    top: 35px;
+    top: 20px;
     bottom: 0;
     width: 100%;
     overflow: hidden;
 }
 
-.win8phone-layout .layout-content > div[data-options] {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
+.win8phone-layout .layout-content > div {
+    height: 100%;
+    width: 100%;
 }
 
 .win8phone-layout .view-content {
@@ -33,32 +120,14 @@
 }
 
 .win8phone-layout .layout-frame {
+    top: 0;
+    bottom: 0;
     position: absolute;
-    height: 100%;
     width: 100%;
 }
-
-.win8phone-layout .layout-frame.has-toolbar-bottom {
-    height: auto;
-    top: 0;
+.win8phone-layout.has-toolbar-bottom .layout-frame,
+.win8phone-layout .has-toolbar-bottom.layout-frame {
     bottom: 40px;
-}
-
-/* navigation */
-.win8phone-layout .navigation-list.dx-list .dx-list-item .dx-navigation-item {
-	line-height: 24px;
-	height: 24px;
-}
-
-.win8phone-layout .navigation-list.dx-list .dx-list-item .dx-icon {
-	float: left;
-	margin-right: 15px;
-	-moz-background-size: 100%;
-	-o-background-size: 100%;
-	-webkit-background-size: 100%;
-	background-size: 100%;
-	width: 24px;
-	height: 24px;
 }
 
 .win8phone-layout .dx-toolbar.layout-toolbar-bottom {
@@ -67,13 +136,13 @@
     margin-bottom: 0;
 }
 
-.win8phone-layout .dx-toolbar.layout-toolbar-bottom.semi-hidden {
-    margin-bottom: -20px;
+.win8phone-layout .layout-footer {
+    position: absolute;
+    bottom: 0;
+    height: 0;
+    width: 100%;
 }
 
-.win8phone-layout .dx-toolbar.layout-toolbar-bottom.with-transition {
-    -webkit-transition: margin-bottom .2s;
-    -moz-transition: margin-bottom .2s;
-    -o-transition: margin-bottom .2s;
-    transition: margin-bottom .2s;
+.win8phone-layout.has-toolbar-bottom .layout-footer {
+    height: 40px;
 }

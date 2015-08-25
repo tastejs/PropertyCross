@@ -12,11 +12,16 @@ body
 }
 
 .dx-theme-ios .dx-textbox-input,
-.dx-theme-ios .dx-list
+.dx-theme-ios .dx-list,
+.dx-theme-ios7 .dx-toolbar,
+ .dx-theme-ios7 .dx-toolbar-after
 {
     background-color: #f7f7f7;
 }
 
+.dx-viewport.dx-theme-ios7 .navbar-layout .layout-content{
+    background-color: #fff;
+}
 
 h2
 {
@@ -30,8 +35,6 @@ h3
     font-weight: bold !important;
     padding-left: 0px !important;
 }
-
-
 
 
 .dx-theme-ios .dx-textbox,
@@ -66,6 +69,7 @@ h3
     padding: 10px 10px 0px 10px;
 }
 
+.dx-theme-android5 .elements-block,
 .dx-theme-android .elements-block,
 .dx-theme-tizen .elements-block
 {
@@ -76,6 +80,7 @@ h3
 {
     font-size: 14px;
     white-space: normal;
+    height: 60px;
 }
 
 .property-item img
@@ -149,14 +154,12 @@ h3
     background-color: rgba(255,255,255,0.20);
 }
 
-.win8phone-layout .layout-content > div[data-options] {
-    left: 10px !important;
-    right: 10px !important;
+.win8phone-layout .home-list  {
+    border-spacing: 0 5px;
 }
 
 .win8phone-layout .home-list-item {
     background: red;
-    margin: 10px 5px;
 }
 
 .win8phone-layout .last-search-count {
@@ -166,5 +169,6 @@ h3
 }
 
 .win8phone-layout .elements-block {
+    padding: 0 10px;
     margin-bottom: 15px;
 }

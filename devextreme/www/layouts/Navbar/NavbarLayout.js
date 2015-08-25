@@ -1,68 +1,58 @@
-﻿(function($, DX, undefined) {
-
+(function($, DX, undefined) {
+    var HAS_NAVBAR_CLASS = "has-navbar",
+        HAS_TOOLBAR_CLASS = "has-toolbar",
+        HAS_TOOLBAR_BOTTOM_CLASS = "has-toolbar-bottom",
+        TOOLBAR_BOTTOM_ACTIVE_CLASS = "dx-appbar-active",
+        SEMI_HIDDEN_CLASS = "semi-hidden",
+        TOOLBAR_BOTTOM_SELECTOR = ".layout-toolbar-bottom.win8",
+        ACTIVE_PIVOT_ITEM_SELECTOR = ".dx-pivot-item:not(.dx-pivot-item-hidden)",
+        LAYOUT_FOOTER_SELECTOR = ".layout-footer",
+        ACTIVE_TOOLBAR_SELECTOR = ".dx-active-view .dx-toolbar";
     DX.framework.html.NavBarController = DX.framework.html.DefaultLayoutController.inherit({
-
-        _onRenderComplete: function(viewInfo) {
-
-            var CLASS_NAME = "has-toolbar";
-
-            var $layoutFooter = viewInfo.renderResult.$markup.find(".layout-footer"),
-                $toolbar = $layoutFooter.find(".dx-toolbar");
-
-            if($toolbar.length) {
-                var isToolbarNotEmpty = !!$toolbar.data("dxToolbar").option("items").length,
-                    $layoutContent = viewInfo.renderResult.$markup.find(".layout-content");
-
-                $layoutFooter.toggleClass(CLASS_NAME, isToolbarNotEmpty);
-                $layoutContent.toggleClass(CLASS_NAME, isToolbarNotEmpty);
-            }
-
-            this._initToolbar(viewInfo.renderResult.$markup);
-
-            var $navBar = viewInfo.renderResult.$markup.find("#navBar"),
-                navBar = $navBar.data("dxNavBar"),
-                $content = viewInfo.renderResult.$markup.find(".layout-content");
-
-            if(!navBar)
-                return;
-
-            var isNavBarVisible = $.grep(navBar.option("items"), function (navItem) {
-                return $.isFunction(navItem.visible) ? navItem.visible() : navItem.visible;
-            }).length;
-
-            if(isNavBarVisible) {
-                $content.addClass("has-navbar");
-                $navBar.show();
-            }
-            else {
-                $content.removeClass("has-navbar");
-                $navBar.hide();
-            }
-
-            var $toolbarBottom = viewInfo.renderResult.$markup.find(".layout-toolbar-bottom"),
-                toolbarBottom = $toolbarBottom.data("dxToolbar");
-
-            if(toolbarBottom && toolbarBottom.option("items").length) {
-                viewInfo.renderResult.$markup.find(".layout-content").addClass("has-toolbar-bottom");
-            }
-
-            this.callBase.apply(this, arguments);
+        ctor: function(options) {
+            options = options || {};
+            options.name = options.name || "navbar";
+            this.callBase(options)
         },
-
-        _initToolbar: function($markup) {
-            var $layoutFooter = $markup.find(".layout-toolbar-bottom.win8");
-            if(!$layoutFooter.data("__inited")) {
-                $layoutFooter.data("__inited", true);
-                $layoutFooter.click(function() {
-                    if($layoutFooter.get(0) === event.srcElement) {
-                        $(this).toggleClass("semi-hidden");
-                    }
-                });
-            }
+        _createNavigationWidget: function(navigationCommands) {
+            this.callBase(navigationCommands);
+            this.$navbar = this._$mainLayout.find(".navbar-container");
+            return this.$navbar
+        },
+        _renderNavigationImpl: function(navigationCommands) {
+            this.callBase(navigationCommands);
+            if (navigationCommands.length)
+                this._$mainLayout.addClass(HAS_NAVBAR_CLASS)
+        },
+        _showViewImpl: function(viewInfo) {
+            var that = this;
+            return that.callBase.apply(that, arguments).done(function() {
+                    var $toolbar = that._$mainLayout.find(LAYOUT_FOOTER_SELECTOR).find(ACTIVE_TOOLBAR_SELECTOR),
+                        isToolbarEmpty = !$toolbar.length || !$toolbar.dxToolbar("instance").option("visible");
+                    that._$mainLayout.toggleClass(HAS_TOOLBAR_CLASS, !isToolbarEmpty)
+                })
         }
-
     });
-
-    DX.framework.html.layoutControllers.navbar = new DX.framework.html.NavBarController();
-
+    var layoutSets = DX.framework.html.layoutSets;
+    layoutSets["navbar"] = layoutSets["navbar"] || [];
+    layoutSets["navbar"].push({
+        platform: "ios",
+        controller: new DX.framework.html.NavBarController
+    });
+    layoutSets["navbar"].push({
+        platform: "android",
+        controller: new DX.framework.html.NavBarController
+    });
+    layoutSets["navbar"].push({
+        platform: "generic",
+        controller: new DX.framework.html.NavBarController
+    });
+    layoutSets["split"] = layoutSets["split"] || [];
+    layoutSets["split"].push({
+        platform: "win8",
+        phone: false,
+        root: true,
+        pane: "master",
+        controller: new DX.framework.html.NavBarController
+    })
 })(jQuery, DevExpress);

@@ -6,49 +6,9 @@
 !function() {
     var app,
         APP_SETTINGS,
-        PropertyFinder = window.PropertyFinder = { },
-        device = DevExpress.devices.current();
+        PropertyFinder = window.PropertyFinder = {};
 
     PropertyFinder.views = {};
-    PropertyFinder.isWinPhone = device.platform === "win8" && device.phone;
-
-    function onBackKeyDown() {
-        if(PropertyFinder.app.canBack()) {
-            PropertyFinder.app.back();
-        }
-        else {
-            throw new Error("exit");
-        }
-    }
-
-    APP_SETTINGS = {
-        namespace: PropertyFinder.views,
-        
-        defaultLayout: "navbar",
-        //defaultLayout: "slideout",
-        navigation: [
-            {
-                title: "Home",
-                action: "#Home",
-                icon: "home"
-            },
-            {
-                title: "Favorites",
-                action: "#Faves",
-                icon: "favorites"
-            },
-            {
-                title: "About",
-                action: "#About",
-                icon: "info"
-            }
-        ]
-    };
-
-    if(PropertyFinder.isWinPhone) {
-        APP_SETTINGS.defaultLayout = "simple";
-        $.each(APP_SETTINGS.navigation, function (i, item) { item.root = false; });
-    }
 
     Globalize.culture("en-GB");
 
@@ -56,34 +16,102 @@
         timeout: 5000
     });
 
-    // http://phonejs.devexpress.com/Blog/ios7-mobile-app-style-released
-    function chooseIosTheme() {
-        var devices = DevExpress.devices,
-            iosVersion = devices.iosVersion();
-
-        if(devices.current().platform === "ios" && iosVersion && iosVersion[0] === 7)  {
-            $(".dx-viewport")
-                .removeClass("dx-theme-ios")
-                .addClass("dx-theme-ios7");
-        }
-    }
-
-    $(function() {
-        document.addEventListener("deviceready", function() {
-            if (PropertyFinder.isWinPhone)
-                document.addEventListener("backbutton", onBackKeyDown, false);
-            navigator.splashscreen.hide();
-        }, false);
+    $(function () {
 
         // Use one of the following lines to force a specific platform when viewing in a desktop browser
-        // DevExpress.devices.current("iPhone");
-        // DevExpress.devices.current("androidPhone");
-        // DevExpress.devices.current("win8Phone");
-        // DevExpress.devices.current("tizen");
+
+        // DevExpress.devices.current({ platform: "ios" });
+        // DevExpress.devices.current({ platform: "win8" });
+        // DevExpress.devices.current({ platform: "android" });
+        // DevExpress.devices.current({ platform: "generic" });
+
+        var device = DevExpress.devices.current();
+        PropertyFinder.isWinPhone = device.platform === "win8" && device.phone;
+
+        $(document).on("deviceready", function () {
+            navigator.splashscreen.hide();
+            if(window.devextremeaddon) {
+                window.devextremeaddon.setup();
+            }
+            $(document).on("backbutton", function () {
+                DevExpress.processHardwareBackButton();
+            });
+        });
+
+        function onNavigatingBack(e) {
+            if(e.isHardwareButton && !PropertyFinder.app.canBack()) {
+                e.cancel = true;
+                exitApp();
+            }
+        }
+
+        function exitApp() {
+            switch(DevExpress.devices.real().platform) {
+                case "tizen":
+                    tizen.application.getCurrentApplication().exit();
+                    break;
+                case "android":
+                    navigator.app.exitApp();
+                    break;
+                case "win8":
+                    window.external.Notify("DevExpress.ExitApp");
+                    break;
+            }
+        }
+
+        APP_SETTINGS = {
+            namespace: PropertyFinder.views,
+
+            layoutSet: DevExpress.framework.html.layoutSets["navbar"],
+            navigation: [
+                {
+                    title: "Home",
+                    onExecute: "#Home",
+                    icon: "home"
+                },
+                {
+                    title: "Favorites",
+                    onExecute: "#Faves",
+                    icon: "favorites"
+                },
+                {
+                    title: "About",
+                    onExecute: "#About",
+                    icon: "info"
+                }
+            ],
+            commandMapping: {
+                "generic-header-toolbar": {
+                    "commands": [
+                      { id: "addToFav", location: "after" }
+                    ]
+                },
+                "ios-header-toolbar": {
+                    "commands": [
+                      { id: "addToFav", location: "after" }
+                    ]
+                },
+                "android-simple-toolbar": {
+                    "commands": [
+                      { id: "addToFav", location: "after" }
+                    ]
+                },
+                "win8-phone-appbar": {
+                    "commands": [
+                        { id: "addToFav", location: "center" },
+                        { id: "goToFav", location: "center" },
+                        { id: "goToAbout", location: "center" }
+                    ]
+                }
+            }
+        };
+
+        if(PropertyFinder.isWinPhone) 
+            APP_SETTINGS.layoutSet = DevExpress.framework.html.layoutSets["simple"];
 
         app = PropertyFinder.app = new DevExpress.framework.html.HtmlApplication(APP_SETTINGS);
-        chooseIosTheme();
-        app.router.register(":view/:id", { view: "Home", id: undefined });
+        app.router.register(":view/:location/:coordinates", { view: "Home", location: undefined, coordinates: undefined });
+        app.on("navigatingBack", onNavigatingBack);
         app.navigate();    
     });
 
@@ -98,14 +126,11 @@
 
     var nestoriaTotalCount = ko.observable(0),
         nestoriaSuggestions = ko.observableArray(),
-        pageIndex = 1,
         nestoriaSearchOptions = {};
 
     function load(loadOptions) {
-        var result = $.Deferred();
-
-        if(loadOptions.refresh)
-            pageIndex = 1;
+        var result = $.Deferred(),
+            pageIndex = loadOptions.skip / NESTORIA_PAGE_SIZE + 1;
 
         var ajaxOptions = {
             url: NESTORIA_API_ENDPOINT,
@@ -131,8 +156,8 @@
                             result.reject(Error("There were no properties found for the given location."));
                         } else {
                             nestoriaTotalCount(data.response.total_results);
+                            nestoriaTotalCount.notifySubscribers();
                             nestoriaSuggestions([]);
-                            pageIndex++;
                             result.resolve(data.response.listings);
                         }
                         break;
@@ -173,7 +198,7 @@
     $.extend(PropertyFinder, {
         nestoriaTotalCount: nestoriaTotalCount,
         nestoriaSuggestions: nestoriaSuggestions,
-        nestoriaSource: DevExpress.data.createDataSource({
+        nestoriaSource: new DevExpress.data.DataSource({
             load: load
         }),
         nestoriaSearchOptions: nestoriaSearchOptions
@@ -217,13 +242,11 @@
         return result[0];
     }
 
-    var recentSearchesSource = DevExpress.data.createDataSource({
+    var recentSearchesSource = new DevExpress.data.DataSource({
         load: function (loadOptions) {
-            if (loadOptions.refresh) {
-                var rawSearches = localStorage.getItem(SEARCHES_STORAGE_KEY),
-                    searches = JSON.parse(rawSearches || '[]');
-                return searches;
-            }
+            var rawSearches = localStorage.getItem(SEARCHES_STORAGE_KEY),
+                searches = JSON.parse(rawSearches || '[]');
+            return searches;
         }
     });
 
@@ -249,8 +272,10 @@
             searches.pop();
         }
         localStorage.setItem(SEARCHES_STORAGE_KEY, JSON.stringify(searches));
-        recentSearchesSource.reload();
+        recentSearchesSource.load();
     }
+
+    recentSearchesSource.load();
 
     $.extend(PropertyFinder, {
         currentProperty: currentProperty,

@@ -4,10 +4,13 @@ PropertyFinder.views.Results = function (params) {
     if (!PropertyFinder.nestoriaSource.isLoaded())
         PropertyFinder.app.navigate("Home");
 
-    var title = ko.computed(function() {
-        return Globalize.format(PropertyFinder.nestoriaSource.items().length, "n0")
+    var title = ko.computed(function () {
+        var count = PropertyFinder.nestoriaSource.pageSize() * (PropertyFinder.nestoriaSource.pageIndex() + 1),
+            total = PropertyFinder.nestoriaTotalCount();
+        if(count > total) count = total;
+        return Globalize.format(count, "n0")
             + " of "
-            + Globalize.format(PropertyFinder.nestoriaTotalCount(), "n0");
+            + Globalize.format(total, "n0");
     });
 
     function handleItemClick(e) {
@@ -15,8 +18,16 @@ PropertyFinder.views.Results = function (params) {
         PropertyFinder.app.navigate("Details");
     }
 
+    function listReady(e) {
+        if(PropertyFinder.updateList) {
+            e.component.scrollTo(0);
+            PropertyFinder.updateList = false;
+        }
+    }
+
     return {
         title: title,
-        handleItemClick: handleItemClick
+        handleItemClick: handleItemClick,
+        listReady: listReady
     };
 };

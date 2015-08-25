@@ -1,1 +1,1 @@
-// This file is replaced by the native app packager
+﻿// This is a fake cordova.js file. It will be replaced with a file specific to the platform and version when building the native package.

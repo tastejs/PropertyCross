@@ -1,6 +1,6 @@
 <div data-options="dxView : { name: 'Home', title: 'PropertyFinder' } " >
-    <div data-bind="dxCommand: { action: handleFaveClick, location: 'edit', iconSrc: 'images/fav_off.png', title: 'faves', visible: isWinPhone } "></div>
-    <div data-bind="dxCommand: { action: handleAboutClick, location: 'edit', icon: 'help', title: 'about', visible: isWinPhone } "></div>
+    <div data-bind="dxCommand: { id: 'goToFav', onExecute: handleFaveClick, iconSrc: 'images/fav_off.png', title: 'faves' } "></div>
+    <div data-bind="dxCommand: { id: 'goToAbout', onExecute: handleAboutClick, icon: 'help', title: 'about' } "></div>-
 
     <div data-options="dxContent : { targetPlaceholder: 'content' } " >
         <div data-bind="dxLoadPanel: { visible: loading }"></div>
@@ -12,9 +12,9 @@
         </div>
 
         <div class="elements-block">
-            <div data-bind="dxTextBox: { value: displayText, enterKeyAction: handleGoClick, valueUpdateAction: handleTextChange, valueUpdateEvent: 'keyup', placeholder: 'Type here...' }"></div>
-            <div data-bind="dxButton: { text: 'Search', clickAction: handleGoClick }"></div>
-            <div data-bind="dxButton: { text: 'My location', clickAction: handleLocationClick }"></div>
+            <div data-bind="dxTextBox: { value: displayText, onEnterKey: handleGoClick, onValueChanged: handleTextChange, valueChangeEvent: 'keyup', placeholder: 'Type here...' }"></div>
+            <div data-bind="dxButton: { text: 'Search', onClick: handleGoClick }"></div>
+            <div data-bind="dxButton: { text: 'My location', onClick: handleLocationClick }"></div>
         </div>
         
         <!-- ko if: errorText() -->
@@ -26,7 +26,7 @@
         <!-- ko if: shouldDisplaySuggestions() -->
         <div class="elements-block">
             <h3>Please select a location below:</h3>
-            <div data-bind="dxList: { items: nestoriaSuggestions, itemClickAction: handleSuggestionClick }" class="suggestion-list">
+            <div data-bind="dxList: { items: nestoriaSuggestions, onItemClick: handleSuggestionClick }" class="suggestion-list home-list">
                 <div data-options="dxTemplate : { name: 'item' } " class="home-list-item">
                     <span data-bind="text: long_title"></span>
                 </div>
@@ -37,7 +37,7 @@
         <!-- ko if: shouldDisplayRecentSearches() -->        
         <div class="elements-block">
             <h3>Recent searches:</h3>
-            <div data-bind="dxList: { dataSource: recentSearchesSource, itemClickAction: handleRecentSearchesItemClick, scrollingEnabled: false }">
+            <div data-bind="dxList: { dataSource: recentSearchesSource, onItemClick: handleRecentSearchesItemClick, scrollingEnabled: false }" class="home-list">
                 <div data-options="dxTemplate : { name: 'item' } " class="home-list-item">
                     <span data-bind="text: name"></span>
                     <span data-bind="text: Globalize.format(count, 'n0')" class="last-search-count"></span>

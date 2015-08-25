@@ -23,7 +23,9 @@ PropertyFinder.views.Home = function(params) {
             coordinates: coordinates()
         });
 
-        PropertyFinder.nestoriaSource.reload()
+
+        PropertyFinder.nestoriaSource.pageIndex(0);
+        PropertyFinder.nestoriaSource.load()
             .done(handleNestoriaSearchSuccess)
             .fail(handleNestoriaSearchFailure);
     }
@@ -38,9 +40,12 @@ PropertyFinder.views.Home = function(params) {
                 coordinates(),
                 nestoriaTotalCount()
             );
-            app.navigate("Results");
+            app.navigate({
+                view: "Results",
+                location: searchText(),
+                coordinates: coordinates()
+            });
         }
-
     }
 
     function handleNestoriaSearchFailure(error) {
@@ -141,7 +146,7 @@ PropertyFinder.views.Home = function(params) {
         return nestoriaSuggestions().length < 1 && recentSearchesSource.items().length > 0;
     }
 
-    recentSearchesSource.load();
+    //recentSearchesSource.load();
 
     // ViewModel exports
 

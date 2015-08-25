@@ -1,5 +1,5 @@
 <div data-options="dxView : { name: 'Details', title: 'Property Details' } " >
-    <div data-bind="dxCommand: { action: handleFaveClick, location: 'edit', iconSrc: favesIconSrc, title: favesText } "></div>
+    <div data-bind="dxCommand: { id: 'addToFav', onExecute: handleFaveClick, iconSrc: favesIconSrc, title: favesText } "></div>
     
     <div data-options="dxContent : { targetPlaceholder: 'content' } " >
         <!-- ko with: propertyView -->

@@ -1,7 +1,7 @@
 <div data-options="dxView : { name: 'Results' } " >
     <div  data-options="dxContent : { targetPlaceholder: 'content' } " >
-        <div id="searchList" data-bind="dxList: { dataSource: PropertyFinder.nestoriaSource, itemClickAction: handleItemClick }">
-            <div data-bind="template: { name: 'list-template' }" class="property-item" data-options="dxTemplate : { name: 'item' } " ></div>
+        <div id="searchList" data-bind="dxList: { dataSource: PropertyFinder.nestoriaSource, onItemClick: handleItemClick, onContentReady: listReady }">
+            <div data-bind="template: { name: 'list-template' }" class="property-item" data-options="dxTemplate : { name: 'item' } "></div>
         </div>
     </div>
 </div>    
