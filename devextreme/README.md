@@ -1,27 +1,27 @@
-# PhoneJS
+# DevExtreme
 
-Visit the [PhoneJS page](http://propertycross.com/phonejs/) on the PropertyCross website for screenshots and code sharing metrics.
+Visit the [DevExtreme page](http://propertycross.com/devextreme/) on the PropertyCross website for screenshots and code sharing metrics.
 
 ##Introduction
 
-[PhoneJS](http://phonejs.devexpress.com/) is a commercial HTML5 framework for cross platform mobile application development from [DevExpress](http://www.devexpress.com/). PhoneJS is free for non-commercial use. 
+[DevExtreme](http://js.devexpress.com/) is a commercial cross-platform HTML5/JavaScript tools for mobile and web development from [DevExpress](http://www.devexpress.com/). 
 
-PhoneJS uses the [Knockout](http://knockoutjs.com/) MVVM framework for structuring the application, with the PhoneJS CSS providing a native-styled UI for the various phone platforms. PhoneJS applications use [PhoneGap](http://phonegap.com/) for packaging.
+DevExtreme Mobile provides the way to use one of popular MVVM frameworks ([Knockout](http://knockoutjs.com/) or [AngularJS](https://angularjs.org/)) for structuring the application, with the DevExtreme CSS providing a native-styled UI for the various phone platforms. DevExtreme mobile applications use [PhoneGap](http://phonegap.com/) for packaging.
 
-DevExpress also offers a more integrated solution based on PhoneJS, called [DevExtreme](http://www.devexpress.com/Products/HTML-JS/), which adds Visual Studio tooling.
+DevExtreme Complete subscription is a more integrated solution which adds Visual Studio tooling.
 
 ## Building
 
-The documentation for PhoneJS can be [found online](http://phonejs.devexpress.com/Documentation). PhoneJS applications can be run directly from a browser, although you have to override the browser UserAgent or use a simulator such as [Ripple](http://emulate.phonegap.com/) in order to mimic a mobile browser.
+The documentation for DevExtreme can be [found online](http://js.devexpress.com/Documentation). DevExtreme applications can be run directly from a browser, although you have to override the browser UserAgent or use a simulator such as [Ripple](http://emulate.phonegap.com/) in order to mimic a mobile browser.
 
-The PhoneJS application is packaged using [PhoneGap Build](https://build.phonegap.com/), with the configuration specified in the `config.xml` file.
+The DevExtreme mobile application is packaged using [PhoneGap Build](https://build.phonegap.com/), with the configuration specified in the `config.xml` file.
 
 ##Application Structure
 
- + `\css` - The PhoneJS CSS files for the various supported platforms.
+ + `\css` - The DevExtreme CSS files for the various supported platforms.
  + `\images` - The images used by this app.
- + `\js` - The PhoneJS framework, and associated dependencies, including jQuery and Knockout.
- + `\layouts` - Templates used by PhoneJS to describe standard screen layouts.
+ + `\js` - The DevExtreme framework, and associated dependencies, including jQuery and Knockout.
+ + `\layouts` - Templates used by DevExtreme to describe standard screen layouts.
  + `\Resources` - icons and splashscreens used by PhoneGap.
  + `\views` - contains the HTML views and the view models for this application.
  + `.htaccess` - HTTP no-cache settings for testing purposes

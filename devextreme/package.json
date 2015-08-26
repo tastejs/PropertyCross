@@ -1,12 +1,12 @@
 {
-  "name": "phonejs",
+  "name": "devextreme",
   "version": "1.3.0",
   "abbr": "pjs",
-  "implName": "PhoneJS",
+  "implName": "DevExtreme",
   "phonegap": true,
   "contributors": [{
     "name": "DevExpress",
-    "url": "http://phonejs.devexpress.com/"
+    "url": "http://js.devexpress.com/"
   }],
   "platforms": ["android", "ios", "windowsphone"],
   "appId": 736273,
