@@ -1,0 +1,16 @@
+{
+  "name": "devextreme",
+  "version": "1.3.0",
+  "abbr": "pjs",
+  "implName": "DevExtreme",
+  "phonegap": true,
+  "contributors": [{
+    "name": "DevExpress",
+    "url": "http://js.devexpress.com/"
+  }],
+  "platforms": ["android", "ios", "windowsphone"],
+  "appId": 736273,
+  "devDependencies": {
+    "grunt": "0.4.2"
+  }
+}

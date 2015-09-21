@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="css/dx.common.css" />
+    <link rel="stylesheet" type="text/css" href="css/dx.spa.css" />
+    
+    <link rel="dx-theme" data-theme="ios7.default" href="css/dx.ios7.default.css" />
+    
+    <link rel="dx-theme" data-theme="android5.light" href="css/dx.android5.light.css" />
+    <link rel="dx-theme" data-theme="win8.black" href="css/dx.win8.black.css" />
+    
+    <link rel="dx-theme" data-theme="generic.light" href="css/dx.light.css" />
+    <link rel="dx-theme" data-theme="generic.contrast" href="css/dx.contrast.css" />
+    <link rel="dx-theme" data-theme="generic.contrast.compact" href="css/dx.contrast.compact.css" />
+    <link rel="dx-theme" data-theme="generic.dark.compact" href="css/dx.dark.compact.css" />
+    <link rel="dx-theme" data-theme="generic.light.compact" href="css/dx.light.compact.css" />
+
+    <title>PropertyFinder</title>
+        
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+    <!-- This script is added by PhoneGap build -->
+    <script type="text/javascript" src="cordova.js"></script>
+    
+    <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="js/knockout-3.3.0.js"></script>
+    <script type="text/javascript" src="js/globalize.min.js"></script>
+    <script type="text/javascript" src="js/globalize.culture.en-GB.js"></script> 
+
+    <script type="text/javascript" src="js/dx.phonejs.js"></script>
+
+    <!-- App -->
+    <link rel="stylesheet" type="text/css" href="css/app.css" />
+    <script type="text/javascript" src="js/app.js"></script>
+
+    <!-- Layouts -->
+    <script type="text/javascript" src="layouts/Simple/SimpleLayout.js"></script>
+    <link rel="stylesheet" type="text/css" href="layouts/Simple/SimpleLayout.css" />
+    <link rel="dx-template" type="text/html" href="layouts/Simple/SimpleLayout.html"/>
+
+    <script type="text/javascript" src="layouts/Navbar/NavbarLayout.js"></script>
+    <link rel="stylesheet" type="text/css" href="layouts/Navbar/NavbarLayout.css" />
+    <link rel="dx-template" type="text/html" href="layouts/Navbar/NavbarLayout.html"/>
+
+    <!-- App views -->
+    <script type="text/javascript" src="views/home.js"></script>
+    <link rel="dx-template" type="text/html" href="views/home.html"/>
+
+    <script type="text/javascript" src="views/results.js"></script>
+    <link rel="dx-template" type="text/html" href="views/results.html"/>
+
+    <script type="text/javascript" src="views/details.js"></script>
+    <link rel="dx-template" type="text/html" href="views/details.html"/>
+
+    <script type="text/javascript" src="views/faves.js"></script>
+    <link rel="dx-template" type="text/html" href="views/faves.html"/>    
+    
+    <link rel="dx-template" type="text/html" href="views/about.html"/>
+
+</head>
+<body>
+    <div class="dx-viewport"></div>
+
+    <!-- Shared templates: -->
+
+    <script type="text/html" id="list-template">
+        <img width="60" height="60" data-bind="attr: { src: thumb_url }" />
+        <p class="property-info">
+            <span data-bind="text: Globalize.format( price, 'c0' )" class="property-price"></span>
+            <br />
+            <span data-bind="text: title"></span> <span data-bind="text: bedroom_number"></span> bed <span data-bind="text: property_type"></span>
+        </p>
+    </script>
+</body>
+</html>
