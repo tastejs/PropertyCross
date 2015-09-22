@@ -11,13 +11,13 @@ CONFIG   += C++11
 SOURCES += \
     src/TestSuite.cpp \
     src/TestAll.cpp \
-    ../PropertyCrossLib/Model/property.cpp \
-    ../PropertyCrossLib/Model/favourites.cpp \
-    ../PropertyCrossLib/Model/location.cpp \
-     ../PropertyCrossLib/Model/jsonhandler.cpp \
-    ../PropertyCrossLib/Model/searches.cpp \
-    ../PropertyCrossLib/Model/propertylisting.cpp \
-    ../PropertyCrossLib/Model/position.cpp \
+    ../PropertyCrossLib/src/property.cpp \
+    ../PropertyCrossLib/src/favourites.cpp \
+    ../PropertyCrossLib/src/location.cpp \
+     ../PropertyCrossLib/src/jsonhandler.cpp \
+    ../PropertyCrossLib/src/searches.cpp \
+    ../PropertyCrossLib/src/propertylisting.cpp \
+    ../PropertyCrossLib/src/position.cpp \
     src/TestProperty.cpp \
     src/TestJsonHandler.cpp \
     src/TestLocation.cpp \
@@ -29,15 +29,15 @@ SOURCES += \
 HEADERS += \
     include/TestSuite.h \
     include/ipropertyhandler.h \
-    ../PropertyCrossLib/Model/property.h \
-    ../PropertyCrossLib/Model/favourites.h \
-    ../PropertyCrossLib/Model/location.h \
-    ../PropertyCrossLib/Model/jsonhandler.h \
-    ../PropertyCrossLib/Model/searches.h \
-    ../PropertyCrossLib/Model/propertylisting.h \
-    ../PropertyCrossLib/Model/position.h
+    ../PropertyCrossLib/include/property.h \
+    ../PropertyCrossLib/include/favourites.h \
+    ../PropertyCrossLib/include/location.h \
+    ../PropertyCrossLib/include/jsonhandler.h \
+    ../PropertyCrossLib/include/searches.h \
+    ../PropertyCrossLib/include/propertylisting.h \
+    ../PropertyCrossLib/include/position.h
 
 INCLUDEPATH += ./include \
-    ../PropertyCrossLib/Model \
+    ../PropertyCrossLib/src \
     ../PropertyCrossLib/include
 INCLUDEPATH += "$$PWD/../PropertyCrossLib/include"

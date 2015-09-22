@@ -11,23 +11,23 @@ TARGET    = PropertyCrossLib
 CONFIG   += C++11
 
 SOURCES += \
-    Model/property.cpp \
-    Model/jsonhandler.cpp \
-    Model/location.cpp \
-    Model/propertylisting.cpp \
-    Model/favourites.cpp \
-    Model/position.cpp \
-    Model/searches.cpp
+    src/property.cpp \
+    src/jsonhandler.cpp \
+    src/location.cpp \
+    src/propertylisting.cpp \
+    src/favourites.cpp \
+    src/position.cpp \
+    src/searches.cpp
 
 HEADERS += \
-    Model/property.h \
-    Model/jsonhandler.h \
+    include/property.h \
+    include/jsonhandler.h \
     include/ipropertyhandler.h \
-    Model/location.h \
-    Model/propertylisting.h \
-    Model/favourites.h \
-    Model/position.h \
-    Model/searches.h
+    include/location.h \
+    include/propertylisting.h \
+    include/favourites.h \
+    include/position.h \
+    include/searches.h
 
 #INCLUDEPATH += %%_PRO_FILE_PWD_/include
 INCLUDEPATH += include

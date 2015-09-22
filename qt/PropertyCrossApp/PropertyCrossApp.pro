@@ -12,7 +12,7 @@ SOURCES += \
     src/main.cpp
 
 INCLUDEPATH += ../PropertyCrossLib/include
-INCLUDEPATH += ../PropertyCrossLib/Model
+INCLUDEPATH += ../PropertyCrossLib/src
 
 OTHER_FILES += \
     qml/MainWindow.qml
