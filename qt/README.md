@@ -1,4 +1,4 @@
-#KendoUI PropertyCross
+#Qt PropertyCross
 
 Visit the [Qt page](http://propertycross.com/qt/) on the PropertyCross website for screenshots and code sharing metrics.
 
