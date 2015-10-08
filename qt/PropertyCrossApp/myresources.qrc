@@ -1,0 +1,21 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qml/MainWindow.qml</file>
+        <file>qml/RootView.qml</file>
+        <file>qml/PropertyView.qml</file>
+        <file>qml/SearchResultsView.qml</file>
+        <file>qml/FavouritesView.qml</file>
+        <file>res/ic_launcher.png</file>
+        <file>res/nostar.png</file>
+        <file>res/refresh.png</file>
+        <file>res/star.png</file>
+        <file>res/ic_ab_back_holo_dark.png</file>
+        <file>qml/DelegateProperties.qml</file>
+        <file>qml/DelegateRecentSearches.qml</file>
+        <file>qml/AppStyle.qml</file>
+        <file>qml/qmldir</file>
+        <file>qml/+ios/AppStyle.qml</file>
+        <file>qml/+android/AppStyle.qml</file>
+        <file>qml/FooterProperties.qml</file>
+    </qresource>
+</RCC>
