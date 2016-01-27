@@ -1,71 +1,80 @@
 package com.propertycross.neomad.screen;
 
-import java.io.InputStream;
-
+import com.neomades.app.Application;
 import com.neomades.app.ResManager;
+import com.neomades.content.image.FileImageCache;
+import com.neomades.content.image.ImageLoader;
+import com.neomades.content.image.ImageUrlLabel;
 import com.neomades.graphics.Image;
 import com.neomades.graphics.ScaleType;
 import com.neomades.io.file.File;
-import com.neomades.io.file.FileInputStream;
-import com.neomades.io.file.FileStorage;
-import com.neomades.io.http.HttpListener;
-import com.neomades.io.http.HttpRequest;
-import com.neomades.io.http.HttpResponse;
-import com.neomades.ui.ImageLabel;
 import com.neomades.ui.StretchMode;
 import com.neomades.ui.TextLabel;
 import com.neomades.ui.menu.Menu;
 import com.neomades.ui.menu.MenuItem;
 import com.propertycross.neomad.Constants;
+import com.propertycross.neomad.PropertyCross;
 import com.propertycross.neomad.Res;
-import com.propertycross.neomad.adapter.screen.PropertyDetailAdapter;
-import com.propertycross.neomad.event.Event;
+import com.propertycross.neomad.model.PersistenceState;
 import com.propertycross.neomad.model.Property;
+import com.propertycross.neomad.screen.adapter.screen.ScreenAdapter;
+import com.propertycross.neomad.services.PersistenceStateEvent;
 import com.propertycross.neomad.utils.Fonts;
-import com.propertycross.neomad.utils.Log;
-import com.propertycross.neomad.utils.StreamUtils;
 
 /**
  * @author Neomades
  */
-public class PropertyDetail extends PropertyDetailAdapter {
+public class PropertyDetail extends ScreenAdapter {
+
+	
+	private Property property;
 
 	private MenuItem favouritesMenuItem;
+	
+	private static ImageLoader loader = new ImageLoader(new FileImageCache(new File(PropertyCross.getAppCacheDir(), Constants.PROPERTIES_IMAGES_CACHE)));
 
 	protected void onCreate() {
+		//this.registerEvent(Constants.LOAD_COMPLETE);
+		
 		setContent(Res.layout.PROPERTY_DETAIL_VIEW);
 		setTitle(Res.string.PROPERTY_DETAILS);
 		init();
 		
 		TextLabel price = (TextLabel) findView(Res.id.ITEM_DETAIL_PRICE);
-		price.setText(getProperty().getFormattedPrice());
+		price.setText(property.getFormattedPrice());
 		price.setFont(Fonts.DEFAULT_PLAIN_LARGE);
 		
 		TextLabel location = (TextLabel) findView(Res.id.ITEM_DETAIL_LOCATION);
-		location.setText(getProperty().getShortTitle());
+		location.setText(property.getShortTitle());
 		location.setFont(Fonts.DEFAULT_PLAIN_SMALL);
 		if (Constants.PROPERTY_DETAILS_SUBTITLE) {
-			location.setText(getProperty().getShortTitle());
+			location.setText(property.getShortTitle());
 			location.setFont(Fonts.DEFAULT_PLAIN_SMALL);
 		} else {
 			location.setVisible(false);
 			setTitleFont(Fonts.DEFAULT_PLAIN_LARGE);
-			setTitle(getProperty().getShortTitle());
+			setTitle(property.getShortTitle());
 		}
 		
 		
-		ImageLabel image = (ImageLabel) findView(Res.id.ITEM_DETAIL_IMAGE);
-		setImage(getProperty(), image);
+		ImageUrlLabel image = (ImageUrlLabel) findView(Res.id.ITEM_DETAIL_IMAGE);
+		image.setImageUrl(property.getImageUrl(), loader);
 		image.setStretchMode(StretchMode.MATCH_PARENT, StretchMode.MATCH_PARENT);
 		image.setImageScaleType(ScaleType.SCALE_ASPECT_FIT);
 		image.setDrawingCacheEnabled(true);
 		
 		TextLabel title = (TextLabel) findView(Res.id.ITEM_DETAIL_TITLE);
-		title.setText(getProperty().getBedBathroomText());
+		title.setText(property.getBedBathroomText());
 		title.setFont(Fonts.DEFAULT_PLAIN_SMALL);
 		
 		TextLabel desc = (TextLabel) findView(Res.id.ITEM_DETAIL_DESC);
-		desc.setText(getProperty().getSummary());
+		desc.setText(property.getSummary());
+	}
+	
+	protected void init() {
+		super.init();
+		property = (Property) getScreenParams().getObject(
+				Property.class.getName());
 	}
 
 	protected void onMenuCreate(Menu menu) {
@@ -80,63 +89,24 @@ public class PropertyDetail extends PropertyDetailAdapter {
 
 	protected void onMenuAction(MenuItem menuItem) {
 		toggleFavorite();
-		send(new Event(null, getName(), PropertyFavourites.SERVICE_NAME,
-				Event.Type.UPDATE_LIST));
+		Application.getCurrent().getEventBus().send(new PersistenceStateEvent(this, this, Constants.UPDATE_FAVORITES));
 		favouritesMenuItem.setImage(getFavicon());
 	}
 
+	private void toggleFavorite() {
+		PersistenceState.getInstance().persist(property);
+	}
+	
+	private boolean isFavorite() {
+		return PersistenceState.getInstance().isFavorite(property);
+	}
+	
 	private Image getFavicon() {
 		return ResManager.getImage(isFavorite() ? Res.image.STAR
 				: Res.image.NO_STAR);
 	}
 
-	private void setImage(Property model, final ImageLabel image) {
-		File cache = new File(FileStorage.getPrivateDir(), "images");
-		if (!cache.exists()) {
-			cache.mkdirs();
-		}
-		final File file = new File(cache, model.getGuid() + "_big");
-		try {
-			if (file.exists()) {
-				image.setImage(Image.createImage(new FileInputStream(file)));
-			} else {
-				image.setImage(null);
-				asyncLoadImage(model, image, file);
-			}
-		} catch (Exception ex) {
-			Log.d(ex.getMessage());
-		}
-	}
-
-	private void asyncLoadImage(Property model, final ImageLabel image, final File file) {
-		new HttpRequest(model.getImageUrl())
-				.executeAsync(new HttpListener() {
-					public void onHttpResponse(HttpRequest httpRequest,
-							HttpResponse httpResponse) {
-						
-						if (httpResponse.isSuccess()) {
-							final InputStream dataStream = httpResponse
-									.getDataStream();
-							controller.runOnUiThread(new Runnable() {
-								public void run() {
-									updateImage(image, file, dataStream);
-								}
-							});
-						}
-					}
-				});
-	}
-	
-	private void updateImage(final ImageLabel image, final File file,
-			final InputStream dataStream) {
-		try {
-			StreamUtils.copy(dataStream,
-					file);
-			image.setImage(Image
-					.createImage(new FileInputStream(
-							file)));
-		} catch (Exception ex) {
-			Log.d(ex.getMessage());
-		}
+	protected void update() {
+		
 	}
 }

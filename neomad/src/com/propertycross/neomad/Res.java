@@ -9,46 +9,45 @@ package com.propertycross.neomad;
 public final class Res {
 
 	public static final class id {
-		public static final int ITEM_DESC = 26;
-		public static final int WAIT_VIEW = 27;
-		public static final int ITEM_DETAIL_DESC = 28;
-		public static final int ITEM_RECENT_LABEL = 29;
-		public static final int ITEM_PRICE = 30;
-		public static final int ITEM_RECENT_COUNT = 31;
-		public static final int RESULTS_HEADER = 32;
-		public static final int ITEM_DETAIL_LOCATION = 33;
-		public static final int ID_SEARCH = 34;
-		public static final int ERROR_MESSAGE = 35;
-		public static final int ITEM_DETAIL_IMAGE = 36;
-		public static final int ID_PROPERTY_FINDER = 37;
-		public static final int ITEM_FOOTER_LOADING = 38;
-		public static final int ITEM_DETAIL_TITLE = 39;
-		public static final int LABEL_NO_ITEM = 40;
-		public static final int DO_SEARCH = 41;
-		public static final int ITEM_DETAIL_PRICE = 42;
-		public static final int ITEM_FOOTER_MESSAGE = 43;
-		public static final int RECENT_LIST = 44;
-		public static final int ID_SEARCH_DESCRIPTION = 45;
-		public static final int DO_LOCATION = 46;
-		public static final int ITEM_IMAGE = 47;
-		public static final int PROPERTY_LIST = 48;
+		public static final int ITEM_DESC = 25;
+		public static final int WAIT_VIEW = 26;
+		public static final int ITEM_DETAIL_DESC = 27;
+		public static final int ITEM_RECENT_LABEL = 28;
+		public static final int ITEM_PRICE = 29;
+		public static final int ITEM_RECENT_COUNT = 30;
+		public static final int RESULTS_HEADER = 31;
+		public static final int ITEM_DETAIL_LOCATION = 32;
+		public static final int ID_SEARCH = 33;
+		public static final int ERROR_MESSAGE = 34;
+		public static final int ITEM_DETAIL_IMAGE = 35;
+		public static final int ID_PROPERTY_FINDER = 36;
+		public static final int ITEM_FOOTER_LOADING = 37;
+		public static final int ITEM_DETAIL_TITLE = 38;
+		public static final int LABEL_NO_ITEM = 39;
+		public static final int DO_SEARCH = 40;
+		public static final int ITEM_DETAIL_PRICE = 41;
+		public static final int ITEM_FOOTER_MESSAGE = 42;
+		public static final int RECENT_LIST = 43;
+		public static final int ID_SEARCH_DESCRIPTION = 44;
+		public static final int DO_LOCATION = 45;
+		public static final int ITEM_IMAGE = 46;
+		public static final int PROPERTY_LIST = 47;
 	}
 
 	public static final class image {
 		public static final int SCREEN_BG_IMAGE = 15;
 		public static final int STAR = 16;
 		public static final int NO_STAR = 17;
-		public static final int FAVS = 18;
+		public static final int FAVS_ICON = 18;
 	}
 
 	public static final class layout {
 		public static final int PROPERTY_RECENT_ROW = 19;
 		public static final int PROPERTY_DETAIL_VIEW = 20;
 		public static final int PROPERTY_SEARCH_FOOTER = 21;
-		public static final int PROPERTY_SPLASH = 22;
-		public static final int PROPERTY_FINDER_SCREEN = 23;
-		public static final int PROPERTY_SEARCH_ROW = 24;
-		public static final int PROPERTY_SEARCH_SCREEN = 25;
+		public static final int PROPERTY_FINDER_SCREEN = 22;
+		public static final int PROPERTY_SEARCH_ROW = 23;
+		public static final int PROPERTY_SEARCH_SCREEN = 24;
 	}
 
 	public static final class string {

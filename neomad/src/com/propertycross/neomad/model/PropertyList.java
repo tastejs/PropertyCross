@@ -2,58 +2,51 @@ package com.propertycross.neomad.model;
 
 import java.util.Vector;
 
-import com.neomades.json.JSONArray;
-import com.neomades.json.JSONException;
-import com.neomades.json.JSONObject;
-
-/**
- * @author Neomades
- */
 public class PropertyList {
-
+	
+	private final Vector items = new Vector();
 	private int count;
-	private int page;
 	private int pages;
-	private Vector data;
-
+	private int page;
+	
 	public int getCount() {
 		return count;
 	}
 
-	public int getPage() {
-		return page;
+	public void setCount(int count) {
+		this.count = count;
 	}
 
 	public int getPages() {
 		return pages;
 	}
 
+	public void setPages(int pages) {
+		this.pages = pages;
+	}
+
+	public int getPage() {
+		return page;
+	}
+
+	public void setPage(int page) {
+		this.page = page;
+	}
+
+	public void add(Property propertyItem) {
+		items.addElement(propertyItem);
+	}
+
+	public Property get(int i) {
+		return (Property)items.elementAt(i);
+	}
+
 	public Vector getData() {
-		return data;
+		return items;
 	}
-
-	public static PropertyList valueOf(JSONObject json) {
-		PropertyList l = new PropertyList();
-		try {
-			JSONObject res = json.getJSONObject("response");
-
-			l.count = res.getInt("total_results");
-			l.page = res.getInt("page");
-			l.pages = res.getInt("total_pages");
-
-			JSONArray list = res.getJSONArray("listings");
-
-			l.data = new Vector();
-
-			for (int i = 0; i < list.length(); i++) {
-				l.data.addElement(Property.valueOf(list.getJSONObject(i)));
-			}
-		} catch (JSONException ex) {
-			l.data = new Vector();
-			l.count = 0;
-			l.page = 0;
-			l.pages = 0;
-		}
-		return l;
+	
+	public int size() {
+		return items.size();
 	}
+	
 }

@@ -2,9 +2,10 @@ package com.propertycross.neomad.model;
 
 import java.util.Vector;
 
-import com.propertycross.neomad.event.Event;
+import com.neomades.app.Application;
+import com.propertycross.neomad.Constants;
 import com.propertycross.neomad.model.search.RecentSearch;
-import com.propertycross.neomad.service.impl.PersistenceService;
+import com.propertycross.neomad.services.PersistenceStateEvent;
 import com.propertycross.neomad.utils.StringUtils;
 
 /**
@@ -15,11 +16,18 @@ public class PersistenceState {
 	private static final int SEARCH_COUNT_LIMIT = 4;
 	private Vector searches = new Vector();
 	private Vector favorites = new Vector();
-	private PersistenceService manager;
-
-	public PersistenceState(PersistenceService manager) {
-		this.manager = manager;
+	
+	private PersistenceState() {}
+	
+	private static class PersistenceStateHolder {
+		private final static PersistenceState instance = new PersistenceState();
 	}
+	
+	public static PersistenceState getInstance()
+	{
+		return PersistenceStateHolder.instance;
+	}
+	
 
 	public Vector getSearches() {
 		return searches;
@@ -89,6 +97,6 @@ public class PersistenceState {
 	}
 
 	public void flush() {
-		manager.send(new Event(this, this, PersistenceService.SERVICE_NAME, Event.Type.SAVE));
+		Application.getCurrent().getEventBus().send(new PersistenceStateEvent(this, this, Constants.SAVE));
 	}
 }

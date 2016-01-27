@@ -2,86 +2,100 @@ package com.propertycross.neomad.screen;
 
 import java.util.Vector;
 
+import com.neomades.app.Application;
 import com.neomades.app.ResManager;
 import com.neomades.app.ScreenParams;
+import com.neomades.content.ContentError;
+import com.neomades.event.Event;
 import com.neomades.graphics.Color;
-import com.neomades.json.JSONException;
-import com.neomades.json.JSONObject;
+import com.neomades.location.LocationListener;
+import com.neomades.location.LocationManager;
 import com.neomades.ui.Button;
+import com.neomades.ui.ListView;
+import com.neomades.ui.TextField;
 import com.neomades.ui.TextLabel;
+import com.neomades.ui.VerticalLayout;
 import com.neomades.ui.View;
 import com.neomades.ui.WaitView;
 import com.neomades.ui.listeners.ClickListener;
+import com.neomades.ui.listeners.ItemClickedListener;
 import com.neomades.ui.menu.Menu;
 import com.neomades.ui.menu.MenuItem;
 import com.propertycross.neomad.Constants;
 import com.propertycross.neomad.Res;
-import com.propertycross.neomad.adapter.screen.PropertyFinderAdapter;
-import com.propertycross.neomad.event.CallbackEvent;
-import com.propertycross.neomad.event.Event;
-import com.propertycross.neomad.event.SearchEvent;
 import com.propertycross.neomad.model.Location;
 import com.propertycross.neomad.model.LocationList;
 import com.propertycross.neomad.model.PersistenceState;
 import com.propertycross.neomad.model.PropertyList;
-import com.propertycross.neomad.model.search.FullTextSearch;
-import com.propertycross.neomad.model.search.GeoLocationSearch;
+import com.propertycross.neomad.model.SearchResult;
+import com.propertycross.neomad.model.search.LocationSearch;
 import com.propertycross.neomad.model.search.RecentSearch;
 import com.propertycross.neomad.model.search.Search;
-import com.propertycross.neomad.service.impl.PersistenceService;
-import com.propertycross.neomad.utils.Log;
-import com.propertycross.neomad.utils.StringUtils;
+import com.propertycross.neomad.screen.adapter.list.RecentSearchListAdapter;
+import com.propertycross.neomad.screen.adapter.screen.ScreenAdapter;
+import com.propertycross.neomad.services.PersistenceStateEvent;
+import com.propertycross.neomad.utils.Fonts;
 
-/**
- * @author Neomades
- */
-public class PropertyFinder extends PropertyFinderAdapter implements ClickListener {
+public class PropertyFinder extends ScreenAdapter implements ClickListener, ItemClickedListener, LocationListener {
 
 	public static final String FAVOURITES = "favourites";
+	
+	private TextField searchQueryTextField;
 	private Button doSearch;
 	private Button doLocation;
 	private WaitView loadingView;
 
+	private ListView recentSearchesList;
+	private RecentSearchListAdapter adapter;
+	
+	private PropertyList properties;
+		
 	protected void onCreate() {
+		// Register events
+		this.registerEvent(Constants.EVENT_PROPERTY_LIST);
+		this.registerEvent(Constants.LOAD_COMPLETE);
+				
+		// Set UI
 		setContent(Res.layout.PROPERTY_FINDER_SCREEN);
+		replaceListView();
 		updateTitle(Constants.PROPERTY_FINDER_TITLE);
 		setShortTitle(Constants.PROPERTY_FINDER_SHORT_TITLE);
+		
 		init();
+		
 		loadingView = (WaitView) findView(Res.id.WAIT_VIEW);
 		if (Constants.waitColor != -1) {
 			loadingView.setColor(Color.rgb(Constants.waitColor));
 			loadingView.setStyle(WaitView.STYLE_GRAY);
 		}
+		
+		// Add listeners
 		doSearch = (Button) findView(Res.id.DO_SEARCH);
-		doLocation = (Button) findView(Res.id.DO_LOCATION);
 		doSearch.setClickListener(this);
+		
+		doLocation = (Button) findView(Res.id.DO_LOCATION);
 		doLocation.setClickListener(this);
-	}
-
-	public void onClick(View view) {
-		setActivityIndicatorVisible(true);
-		switch (view.getId()) {
-		case Res.id.DO_SEARCH:
-			doSearch();
-			break;
-		case Res.id.DO_LOCATION:
-			doLocation();
-			break;
-		default:
-			// none
-			break;
+		if (Constants.IOS) {
+			LocationManager.getDefault().requestWhenInUseAuthorization();
 		}
-
+	}
+	
+	protected void init() {
+		super.init();
+		((TextLabel) findView(Res.id.RESULTS_HEADER))
+				.setFont(Fonts.DEFAULT_PLAIN_XSMALL);
+		searchQueryTextField = (TextField) findView(Res.id.ID_SEARCH);
+		recentSearchesList = (ListView) findView(Res.id.RECENT_LIST);
+		recentSearchesList.setItemClickedListener(this);
+		adapter = new RecentSearchListAdapter();
+		recentSearchesList.setListAdapter(adapter);
+		loadRecentSearches();
 	}
 
 	protected void onMenuCreate(Menu menu) {
-		addFavouritesMenuItem(menu);
-	}
-
-	private void addFavouritesMenuItem(Menu menu) {
 		MenuItem item = null;
 		if (Constants.FAVOURITES_WITH_ICON) {
-			item = new MenuItem(Res.string.FAVOURITES, Res.image.FAVS);
+			item = new MenuItem(Res.string.FAVOURITES, Res.image.FAVS_ICON);
 
 		} else if (Constants.FAVOURITES_SHORT_TEXT) {
 			item = new MenuItem(Res.string.FAVS);
@@ -92,139 +106,96 @@ public class PropertyFinder extends PropertyFinderAdapter implements ClickListen
 		item.setAsRightAction();
 		menu.addItem(item);
 	}
-
+	
 	protected void onMenuAction(MenuItem item) {
-		// only one menu item
-		loadFavourites();
-	}
-
-	private void loadFavourites() {
-		send(new CallbackEvent(getName(), PersistenceService.SERVICE_NAME, Event.Type.LOAD) {
-			public void onComplete(Object result) {
-				doShowFavourites(result);
-			}
-		});
-	}
-
-	public void handleLocationResults(Object data) {
-		try {
-			JSONObject json = new JSONObject(data.toString());
-			Vector location = LocationList.valueOf(json).getData();
-			if (!location.isEmpty()) {
-				Location l = (Location) location.elementAt(0);
-				setSearch(new GeoLocationSearch(l));
-				getQuery().setText(getSearch().getLabel());
-			}
-			setProperties(PropertyList.valueOf(json));
-
-			if (getProperties().getCount() > 0) {
-				// Save recent searches
-				getState().persist(new RecentSearch(getSearch(), getProperties().getCount()));
-				
-				ScreenParams values = new ScreenParams();
-				values.putObject(PropertyList.class.getName(), getProperties());
-				values.putObject(Search.class.getName(), getSearch());
-				values.putObject(EXTRA_PREVIOUS_SCREEN, getShortTitle());
-				controller.pushScreen(PropertyResult.class, values);
-			} else {
-				setMessage(ResManager.getString(Res.string.NO_RESULT));
-			}
-			
-			updateSearches();
-			
-		} catch (JSONException ex) {
-			Log.d(ex.getMessage());
-		}
-		enableAction();
-	}
-
-	public void handleAmbiguousLocation(Object data) {
-		try {
-			LocationList l = LocationList.valueOf(new JSONObject(data.toString()));
-			Vector items = new Vector();
-			for (int i = 0; i < l.getData().size(); i++) {
-				items.addElement(new RecentSearch(new GeoLocationSearch((Location) l.getData().elementAt(i)), 0));
-			}
-			getAdapter().setItems(items);
-			((TextLabel) findView(Res.id.RESULTS_HEADER)).setText(Res.string.AMBIGUOUS_LOCATION);
-			update();
-		} catch (JSONException ex) {
-			Log.d(ex.getMessage());
-		}
-		enableAction();
-	}
-	
-	protected void willSendEvent() {
-		setActivityIndicatorVisible(true);
-	}
-	
-	protected void didReceivedEvent() {
-		setActivityIndicatorVisible(false);
-	}
-
-	public void onEventReceived(Event e) {
-		super.onEventReceived(e);
-		
-		if (e.getType() == Event.Type.FIND_ERROR) {
-			onLocationNotFound();
-		} else if (e.getType() == Event.Type.FIND_BY_NAME_RES) {
-			onLocationResult(e);
-		} else if (e.getType() == Event.Type.FOUND_AMBIGIOUS_RES) {
-			onLocationAmbiguous(e);
-		} else if (e.getType() == Event.Type.FIND_BY_LOCATION_RES) {
-			onLocationResult(e);
-		} else if (e.getType() == Event.Type.NETWORK_ERROR) {
-			onNetworkError();
-		}
-	}
-
-	private void onLocationResult(Event e) {
-		handleLocationResults(e.getValue());
-		update();
-	}
-
-	private void onLocationNotFound() {
-		setMessage(ResManager.getString(Res.string.LOCATION_NOT_FOUND));
-		enableAction();
-	}
-
-	private void onLocationAmbiguous(Event e) {
-		handleAmbiguousLocation(e.getValue());
-	}
-
-	private void onNetworkError() {
-		setMessage(ResManager.getString(Res.string.NETWORK_ERROR));
-		enableAction();
-	}
-
-	private void doSearch() {
-		if (getQuery().getText() != null) {
-			doSearch.setEnabled(false);
-			setMessage("");
-			
-			send(new SearchEvent(getName(), getQuery().getText().trim(), 1));
-		}
-	}
-
-	private void doLocation() {
-		setMessage("");
-		doLocation.setEnabled(false);
-		find();
-	}
-
-	private void doShowFavourites(Object result) {
-		setState((PersistenceState) result);
+		// only one menu item - load favorites
 		ScreenParams values = new ScreenParams();
-		values.putObject(FAVOURITES, getState().getFavourites());
+		values.putObject(FAVOURITES, PersistenceState.getInstance().getFavourites());
 		values.putObject(EXTRA_PREVIOUS_SCREEN, getShortTitle());
 		controller.pushScreen(PropertyFavourites.class, values);
 	}
 
-	private void enableAction() {
-		doSearch.setEnabled(true);
-		doLocation.setEnabled(true);
+	private void replaceListView() {
+		if (Constants.FINDER_LIST_WITH_TABLE_STYLE) {
+			VerticalLayout container = ((VerticalLayout) findView(Res.id.ID_PROPERTY_FINDER));
+			ListView oldlist = (ListView) findView(Res.id.RECENT_LIST);
+
+			ListView styledList = new ListView(ListView.STYLE_GROUPED);
+			styledList.setId(Res.id.RECENT_LIST);
+			styledList.setBackgroundColor(Color.WHITE);
+			styledList.setSeparatorVisible(true);
+			styledList.setSeparatorColor(Color.GRAY);
+			styledList.setListIndicatorVisible(true);
+			styledList.setMarginBottom(Constants.FINDER_LIST_MARGIN);
+			styledList.setStretchMode(MATCH_PARENT, MATCH_CONTENT);
+
+			container.removeView(oldlist);
+			container.addView(styledList);
+		}
+	}
+	
+	private void loadRecentSearches() {
+		Application.getCurrent().getEventBus().send(new PersistenceStateEvent(this, this, Constants.LOAD));
+	}
+	
+	protected void update() {
+		recentSearchesList.notifyDataChanged();
+	}
+	
+	protected void updateSearches() {
+		updateResultsHeaderTextLabel((TextLabel) findView(Res.id.RESULTS_HEADER), Res.string.RECENT_SEARCHES);
+		adapter.setItems(PersistenceState.getInstance().getSearches());
+		update();
+	}
+	
+	private void updateResultsHeaderTextLabel(TextLabel textLabel, int textResId) {
+		String text = ResManager.getString(textResId);
+		if (Constants.RESULTS_HEADER_TITLE_IN_UPPERCASE) {
+			text = text.toUpperCase();
+		}
+		textLabel.setText(text);
 	}
 
+	// ItemClickedListener implementation
+	public void onItemClicked(int i, View view) {
+		RecentSearch recentSearch = (RecentSearch) adapter.getViewModel(i);
+		searchQueryTextField.setText(recentSearch.getSearch().getLabel());
+		doSearch(recentSearch.getSearch().getQuery());
+	}
+	
+	// ClickListener implementation
+	public void onClick(View view) {
+		switch (view.getId()) {
+		case Res.id.DO_SEARCH:
+			doSearch(null);
+			break;
+		case Res.id.DO_LOCATION:
+			doLocation();
+			break;
+		default:
+			// none
+			break;
+		}
+	}
+
+	// LocationListener implementation
+	public void onLocationChanged(final com.neomades.location.Location location) {
+		controller.runOnUiThread(new Runnable() {
+			public void run() {
+				if (location != null) {
+					LocationSearch eventValue = new LocationSearch(location.getLatitude(), location.getLongitude(), 1);
+					send(new Event(eventValue, this, Constants.FIND_BY_LOCATION));
+				} else {
+					onNoLocation();
+				}
+			}
+		});
+	}
+	
+	protected void setMessage(String msg) {
+		((TextLabel) findView(Res.id.ERROR_MESSAGE)).setText(msg);
+	}
+	
 	protected void setActivityIndicatorVisible(boolean on) {
 		if (loadingView != null) {
 			loadingView.setVisible(on);
@@ -235,13 +206,128 @@ public class PropertyFinder extends PropertyFinderAdapter implements ClickListen
 		}
 	}
 	
+	private void enableAction() {
+		doSearch.setEnabled(true);
+		doLocation.setEnabled(true);
+	}
+	
+
+	private void doLocation() {
+		LocationManager manager = LocationManager.getDefault();
+		
+		if (!manager.isSupported() || !manager.isLocationEnabledByUser()) {
+			onNoLocation();
+		}
+		else {
+			setMessage("");
+			setActivityIndicatorVisible(true);
+			doLocation.setEnabled(false);
+			manager.requestMyLocation(this);
+		}
+	}
+	
+	protected void onNoLocation() {
+		setActivityIndicatorVisible(false);
+		setMessage(ResManager.getString(Res.string.NO_LOCATION));
+		enableAction();
+	}
+	
+	protected void onLocationNotFound() {
+		setActivityIndicatorVisible(false);
+		setMessage(ResManager.getString(Res.string.LOCATION_NOT_FOUND));
+		enableAction();
+	}
+
+	private void doSearch(String query) {
+		if (searchQueryTextField.getText() != null) {
+			setActivityIndicatorVisible(true);
+			doSearch.setEnabled(false);
+			setMessage("");
+			if (query == null) {
+				query = searchQueryTextField.getText().trim();
+			}
+			LocationSearch eventValue = new LocationSearch(searchQueryTextField.getText().trim(), query, 1);
+			send(new Event(eventValue, this, Constants.FIND_BY_NAME));
+		}
+	}
+	
+	
+	
 	protected void onPause() {
 		super.onPause();
 		setActivityIndicatorVisible(false);
+		this.unregisterEvent(Constants.EVENT_PROPERTY_LIST);
 	}
 	
 	protected void onResume() {
 		super.onResume();
 		setActivityIndicatorVisible(false);
+		this.registerEvent(Constants.EVENT_PROPERTY_LIST);
 	}
+	
+	public void onReceiveEvent(Event event) {
+		if (event.hasType(Constants.EVENT_PROPERTY_LIST)) {
+			SearchResult result = (SearchResult) event.getValue();
+			if (result.isError()) {
+				onLocationNotFound();
+				setActivityIndicatorVisible(false);
+				enableAction();
+			}
+			else if (result.isAmbiguous()) {
+				LocationList list = result.getLocationList();
+				Vector items = new Vector();
+				for (int i = 0; i < list.getSize(); i++) {
+					items.addElement(new RecentSearch(new LocationSearch(list.getLocation(i), 1), 0));
+				}
+				adapter.setItems(items);
+				updateResultsHeaderTextLabel((TextLabel) findView(Res.id.RESULTS_HEADER), Res.string.AMBIGUOUS_LOCATION);
+				setActivityIndicatorVisible(false);
+				enableAction();
+				update();
+			}
+			else if (result.isSuccess()) {
+				LocationList locationList = result.getLocationList();
+				LocationSearch search = null;
+				if (!locationList.isEmpty()) {
+					Location l = locationList.getLocation(0);
+					search = new LocationSearch(l, 1);
+					searchQueryTextField.setText(search.getLabel());
+				}
+				
+				properties = result.getPropertyList();
+				
+				if (properties.getCount() > 0) {
+					// Save recent searches
+					PersistenceState.getInstance().persist(new RecentSearch(search, properties.getCount()));
+					
+					ScreenParams values = new ScreenParams();
+					values.putObject(PropertyList.class.getName(), properties);
+					values.putObject(Search.class.getName(), search);
+					values.putObject(EXTRA_PREVIOUS_SCREEN, getShortTitle());
+					setActivityIndicatorVisible(false);
+					enableAction();
+					this.unregisterEvent(Constants.EVENT_PROPERTY_LIST);
+					controller.pushScreen(PropertyResult.class, values);
+				}
+				else {
+					setMessage(ResManager.getString(Res.string.NO_RESULT));
+					setActivityIndicatorVisible(false);
+					enableAction();
+				}
+				updateSearches();
+			}
+		}
+		else if (event.hasType("ContentError") && ((ContentError)event).isNetworkError()) {
+			onNetworkError();
+		}
+		else if (event.hasType(Constants.LOAD_COMPLETE)) {
+			updateSearches();
+		}
+	}
+
+	private void onNetworkError() {
+		setMessage(ResManager.getString(Res.string.NETWORK_ERROR));
+		enableAction();
+	}
+
 }
