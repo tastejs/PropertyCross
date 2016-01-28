@@ -62,50 +62,50 @@
       <HintPath>..\packages\Crosslight.Xamarin.Android.Support.v7.RecyclerView.23.1.1\lib\MonoAndroid10\Xamarin.Android.Support.v7.RecyclerView.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows" />
-    <Reference Include="Intersoft.Crosslight">
-      <HintPath>..\packages\Intersoft.Crosslight.5.0.5000.499\lib\MonoAndroid10\Intersoft.Crosslight.dll</HintPath>
+    <Reference Include="Intersoft.Crosslight, Version=5.0.5000.1, Culture=neutral, PublicKeyToken=71f3e3261ac778b5">
+      <HintPath>..\packages\Intersoft.Crosslight.5.0.5000.501\lib\MonoAndroid10\Intersoft.Crosslight.dll</HintPath>
     </Reference>
-    <Reference Include="Intersoft.Crosslight.Android">
-      <HintPath>..\packages\Intersoft.Crosslight.5.0.5000.499\lib\MonoAndroid10\Intersoft.Crosslight.Android.dll</HintPath>
+    <Reference Include="Intersoft.Crosslight.Android, Version=5.0.5000.1, Culture=neutral, PublicKeyToken=71f3e3261ac778b5">
+      <HintPath>..\packages\Intersoft.Crosslight.5.0.5000.501\lib\MonoAndroid10\Intersoft.Crosslight.Android.dll</HintPath>
+    </Reference>
+    <Reference Include="Intersoft.Crosslight.Android.v7, Version=5.0.5000.1, Culture=neutral, PublicKeyToken=71f3e3261ac778b5">
+      <HintPath>..\packages\Intersoft.Crosslight.Android.v7.5.0.5000.501\lib\MonoAndroid10\Intersoft.Crosslight.Android.v7.dll</HintPath>
     </Reference>
     <Reference Include="Intersoft.Crosslight.Services.ImageLoader">
-      <HintPath>..\packages\Intersoft.Crosslight.Services.ImageLoader.5.0.5000.499\lib\Intersoft.Crosslight.Services.ImageLoader.dll</HintPath>
-    </Reference>
-    <Reference Include="Intersoft.Crosslight.Android.v7">
-      <HintPath>..\packages\Intersoft.Crosslight.Android.v7.5.0.5000.499\lib\MonoAndroid10\Intersoft.Crosslight.Android.v7.dll</HintPath>
+      <HintPath>..\packages\Intersoft.Crosslight.Services.ImageLoader.5.0.5000.501\lib\Intersoft.Crosslight.Services.ImageLoader.dll</HintPath>
     </Reference>
     <Reference Include="Intersoft.Crosslight.Data">
-      <HintPath>..\packages\Intersoft.Crosslight.Data.5.0.5000.499\lib\Intersoft.Crosslight.Data.dll</HintPath>
+      <HintPath>..\packages\Intersoft.Crosslight.Data.5.0.5000.501\lib\Intersoft.Crosslight.Data.dll</HintPath>
     </Reference>
     <Reference Include="Intersoft.Crosslight.Data.ComponentModel">
-      <HintPath>..\packages\Intersoft.Crosslight.Data.5.0.5000.499\lib\Intersoft.Crosslight.Data.ComponentModel.dll</HintPath>
+      <HintPath>..\packages\Intersoft.Crosslight.Data.5.0.5000.501\lib\Intersoft.Crosslight.Data.ComponentModel.dll</HintPath>
     </Reference>
     <Reference Include="Intersoft.Crosslight.Data.SQLite">
-      <HintPath>..\packages\Intersoft.Crosslight.Data.Sqlite.5.0.5000.499\lib\MonoAndroid10\Intersoft.Crosslight.Data.SQLite.dll</HintPath>
+      <HintPath>..\packages\Intersoft.Crosslight.Data.Sqlite.5.0.5000.501\lib\MonoAndroid10\Intersoft.Crosslight.Data.SQLite.dll</HintPath>
     </Reference>
     <Reference Include="Intersoft.Crosslight.Data.SQLite.Android">
-      <HintPath>..\packages\Intersoft.Crosslight.Data.Sqlite.5.0.5000.499\lib\MonoAndroid10\Intersoft.Crosslight.Data.SQLite.Android.dll</HintPath>
+      <HintPath>..\packages\Intersoft.Crosslight.Data.Sqlite.5.0.5000.501\lib\MonoAndroid10\Intersoft.Crosslight.Data.SQLite.Android.dll</HintPath>
     </Reference>
     <Reference Include="Intersoft.Crosslight.RestClient">
-      <HintPath>..\packages\Intersoft.Crosslight.RestClient.5.0.5000.499\lib\Intersoft.Crosslight.RestClient.dll</HintPath>
+      <HintPath>..\packages\Intersoft.Crosslight.RestClient.5.0.5000.501\lib\Intersoft.Crosslight.RestClient.dll</HintPath>
     </Reference>
     <Reference Include="Intersoft.Crosslight.Services.Auth">
-      <HintPath>..\packages\Intersoft.Crosslight.Services.Auth.5.0.5000.499\lib\Intersoft.Crosslight.Services.Auth.dll</HintPath>
+      <HintPath>..\packages\Intersoft.Crosslight.Services.Auth.5.0.5000.501\lib\Intersoft.Crosslight.Services.Auth.dll</HintPath>
     </Reference>
     <Reference Include="Intersoft.Crosslight.Services.Social">
-      <HintPath>..\packages\Intersoft.Crosslight.Services.Social.5.0.5000.499\lib\MonoAndroid10\Intersoft.Crosslight.Services.Social.dll</HintPath>
+      <HintPath>..\packages\Intersoft.Crosslight.Services.Social.5.0.5000.501\lib\MonoAndroid10\Intersoft.Crosslight.Services.Social.dll</HintPath>
     </Reference>
     <Reference Include="Intersoft.Crosslight.Services.Social.Android">
-      <HintPath>..\packages\Intersoft.Crosslight.Services.Social.5.0.5000.499\lib\MonoAndroid10\Intersoft.Crosslight.Services.Social.Android.dll</HintPath>
+      <HintPath>..\packages\Intersoft.Crosslight.Services.Social.5.0.5000.501\lib\MonoAndroid10\Intersoft.Crosslight.Services.Social.Android.dll</HintPath>
     </Reference>
     <Reference Include="Intersoft.Crosslight.Services.PushNotification">
-      <HintPath>..\packages\Intersoft.Crosslight.Services.PushNotification.5.0.5000.499\lib\MonoAndroid10\Intersoft.Crosslight.Services.PushNotification.dll</HintPath>
+      <HintPath>..\packages\Intersoft.Crosslight.Services.PushNotification.5.0.5000.501\lib\MonoAndroid10\Intersoft.Crosslight.Services.PushNotification.dll</HintPath>
     </Reference>
     <Reference Include="Intersoft.Crosslight.Services.PushNotification.Android">
-      <HintPath>..\packages\Intersoft.Crosslight.Services.PushNotification.5.0.5000.499\lib\MonoAndroid10\Intersoft.Crosslight.Services.PushNotification.Android.dll</HintPath>
+      <HintPath>..\packages\Intersoft.Crosslight.Services.PushNotification.5.0.5000.501\lib\MonoAndroid10\Intersoft.Crosslight.Services.PushNotification.Android.dll</HintPath>
     </Reference>
     <Reference Include="Intersoft.AppFramework">
-      <HintPath>..\packages\Intersoft.AppFramework.5.0.5000.499\lib\Intersoft.AppFramework.dll</HintPath>
+      <HintPath>..\packages\Intersoft.AppFramework.5.0.5000.501\lib\Intersoft.AppFramework.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

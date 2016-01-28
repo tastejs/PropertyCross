@@ -72,35 +72,35 @@
     <Reference Include="Microsoft.Threading.Tasks.Extensions">
       <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\portable-net40+sl4+win8+wp71+wpa81\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="Intersoft.Crosslight">
-      <HintPath>..\packages\Intersoft.Crosslight.5.0.5000.499\lib\Intersoft.Crosslight.dll</HintPath>
+    <Reference Include="Intersoft.Crosslight, Version=5.0.5000.1, Culture=neutral, PublicKeyToken=71f3e3261ac778b5">
+      <HintPath>..\packages\Intersoft.Crosslight.5.0.5000.501\lib\Intersoft.Crosslight.dll</HintPath>
     </Reference>
     <Reference Include="Intersoft.Crosslight.Services.ImageLoader">
-      <HintPath>..\packages\Intersoft.Crosslight.Services.ImageLoader.5.0.5000.499\lib\Intersoft.Crosslight.Services.ImageLoader.dll</HintPath>
+      <HintPath>..\packages\Intersoft.Crosslight.Services.ImageLoader.5.0.5000.501\lib\Intersoft.Crosslight.Services.ImageLoader.dll</HintPath>
     </Reference>
     <Reference Include="Intersoft.Crosslight.Data">
-      <HintPath>..\packages\Intersoft.Crosslight.Data.5.0.5000.499\lib\Intersoft.Crosslight.Data.dll</HintPath>
+      <HintPath>..\packages\Intersoft.Crosslight.Data.5.0.5000.501\lib\Intersoft.Crosslight.Data.dll</HintPath>
     </Reference>
     <Reference Include="Intersoft.Crosslight.Data.ComponentModel">
-      <HintPath>..\packages\Intersoft.Crosslight.Data.5.0.5000.499\lib\Intersoft.Crosslight.Data.ComponentModel.dll</HintPath>
+      <HintPath>..\packages\Intersoft.Crosslight.Data.5.0.5000.501\lib\Intersoft.Crosslight.Data.ComponentModel.dll</HintPath>
     </Reference>
     <Reference Include="Intersoft.Crosslight.Data.SQLite">
-      <HintPath>..\packages\Intersoft.Crosslight.Data.Sqlite.5.0.5000.499\lib\Intersoft.Crosslight.Data.SQLite.dll</HintPath>
+      <HintPath>..\packages\Intersoft.Crosslight.Data.Sqlite.5.0.5000.501\lib\Intersoft.Crosslight.Data.SQLite.dll</HintPath>
     </Reference>
     <Reference Include="Intersoft.Crosslight.RestClient">
-      <HintPath>..\packages\Intersoft.Crosslight.RestClient.5.0.5000.499\lib\Intersoft.Crosslight.RestClient.dll</HintPath>
+      <HintPath>..\packages\Intersoft.Crosslight.RestClient.5.0.5000.501\lib\Intersoft.Crosslight.RestClient.dll</HintPath>
     </Reference>
     <Reference Include="Intersoft.Crosslight.Services.Auth">
-      <HintPath>..\packages\Intersoft.Crosslight.Services.Auth.5.0.5000.499\lib\Intersoft.Crosslight.Services.Auth.dll</HintPath>
+      <HintPath>..\packages\Intersoft.Crosslight.Services.Auth.5.0.5000.501\lib\Intersoft.Crosslight.Services.Auth.dll</HintPath>
     </Reference>
     <Reference Include="Intersoft.Crosslight.Services.Social">
-      <HintPath>..\packages\Intersoft.Crosslight.Services.Social.5.0.5000.499\lib\Intersoft.Crosslight.Services.Social.dll</HintPath>
+      <HintPath>..\packages\Intersoft.Crosslight.Services.Social.5.0.5000.501\lib\Intersoft.Crosslight.Services.Social.dll</HintPath>
     </Reference>
     <Reference Include="Intersoft.Crosslight.Services.PushNotification">
-      <HintPath>..\packages\Intersoft.Crosslight.Services.PushNotification.5.0.5000.499\lib\Intersoft.Crosslight.Services.PushNotification.dll</HintPath>
+      <HintPath>..\packages\Intersoft.Crosslight.Services.PushNotification.5.0.5000.501\lib\Intersoft.Crosslight.Services.PushNotification.dll</HintPath>
     </Reference>
     <Reference Include="Intersoft.AppFramework">
-      <HintPath>..\packages\Intersoft.AppFramework.5.0.5000.499\lib\Intersoft.AppFramework.dll</HintPath>
+      <HintPath>..\packages\Intersoft.AppFramework.5.0.5000.501\lib\Intersoft.AppFramework.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
