@@ -10,8 +10,8 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>PropertyCross_Intersoft.Core</RootNamespace>
     <AssemblyName>PropertyCross_Intersoft.Core</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Profile158</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Profile78</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
   </PropertyGroup>
@@ -61,59 +61,63 @@
     <Compile Include="BindingProviders\PropertySearchBindingProvider.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Intersoft.AppFramework">
-      <HintPath>..\Packages\Intersoft.Crosslight\Intersoft.AppFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="Intersoft.Crosslight">
-      <HintPath>..\packages\Intersoft.Crosslight\Intersoft.Crosslight.dll</HintPath>
-    </Reference>
-    <Reference Include="Intersoft.Crosslight.Data">
-      <HintPath>..\packages\Intersoft.Crosslight\Intersoft.Crosslight.Data.dll</HintPath>
-    </Reference>
-    <Reference Include="Intersoft.Crosslight.Data.ComponentModel">
-      <HintPath>..\packages\Intersoft.Crosslight\Intersoft.Crosslight.Data.ComponentModel.dll</HintPath>
-    </Reference>
-    <Reference Include="Intersoft.Crosslight.Data.SQLite">
-      <HintPath>..\packages\Intersoft.Crosslight\Intersoft.Crosslight.Data.SQLite.dll</HintPath>
-    </Reference>
-    <Reference Include="Intersoft.Crosslight.RestClient">
-      <HintPath>..\packages\Intersoft.Crosslight\Intersoft.Crosslight.RestClient.dll</HintPath>
-    </Reference>
-    <Reference Include="Intersoft.Crosslight.Services.Auth">
-      <HintPath>..\packages\Intersoft.Crosslight\Intersoft.Crosslight.Services.Auth.dll</HintPath>
-    </Reference>
-    <Reference Include="Intersoft.Crosslight.Services.ImageLoader">
-      <HintPath>..\packages\Intersoft.Crosslight\Intersoft.Crosslight.Services.ImageLoader.dll</HintPath>
-    </Reference>
-    <Reference Include="Intersoft.Crosslight.Services.PushNotification">
-      <HintPath>..\packages\Intersoft.Crosslight\Intersoft.Crosslight.Services.PushNotification.dll</HintPath>
-    </Reference>
-    <Reference Include="Intersoft.Crosslight.Services.Social">
-      <HintPath>..\packages\Intersoft.Crosslight\Intersoft.Crosslight.Services.Social.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Threading.Tasks">
-      <HintPath>..\Packages\Microsoft.Bcl.Async.1.0.165\lib\portable-net40+sl4+win8+wp71\Microsoft.Threading.Tasks.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Threading.Tasks.Extensions">
-      <HintPath>..\Packages\Microsoft.Bcl.Async.1.0.165\lib\portable-net40+sl4+win8+wp71\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Runtime">
-      <HintPath>..\Packages\Microsoft.Bcl.1.0.19\lib\portable-net40+sl5+win8+wp8\System.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Threading.Tasks">
-      <HintPath>..\Packages\Microsoft.Bcl.1.0.19\lib\portable-net40+sl5+win8+wp8\System.Threading.Tasks.dll</HintPath>
-    </Reference>
     <Reference Include="System.Windows" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="Microsoft.Threading.Tasks">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\portable-net40+sl4+win8+wp71+wpa81\Microsoft.Threading.Tasks.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks.Extensions">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\portable-net40+sl4+win8+wp71+wpa81\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Intersoft.Crosslight, Version=5.0.5000.1, Culture=neutral, PublicKeyToken=71f3e3261ac778b5">
+      <HintPath>..\packages\Intersoft.Crosslight.5.0.5000.501\lib\Intersoft.Crosslight.dll</HintPath>
+    </Reference>
+    <Reference Include="Intersoft.Crosslight.Services.ImageLoader">
+      <HintPath>..\packages\Intersoft.Crosslight.Services.ImageLoader.5.0.5000.501\lib\Intersoft.Crosslight.Services.ImageLoader.dll</HintPath>
+    </Reference>
+    <Reference Include="Intersoft.Crosslight.Data">
+      <HintPath>..\packages\Intersoft.Crosslight.Data.5.0.5000.501\lib\Intersoft.Crosslight.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Intersoft.Crosslight.Data.ComponentModel">
+      <HintPath>..\packages\Intersoft.Crosslight.Data.5.0.5000.501\lib\Intersoft.Crosslight.Data.ComponentModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Intersoft.Crosslight.Data.SQLite">
+      <HintPath>..\packages\Intersoft.Crosslight.Data.Sqlite.5.0.5000.501\lib\Intersoft.Crosslight.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="Intersoft.Crosslight.RestClient">
+      <HintPath>..\packages\Intersoft.Crosslight.RestClient.5.0.5000.501\lib\Intersoft.Crosslight.RestClient.dll</HintPath>
+    </Reference>
+    <Reference Include="Intersoft.Crosslight.Services.Auth">
+      <HintPath>..\packages\Intersoft.Crosslight.Services.Auth.5.0.5000.501\lib\Intersoft.Crosslight.Services.Auth.dll</HintPath>
+    </Reference>
+    <Reference Include="Intersoft.Crosslight.Services.Social">
+      <HintPath>..\packages\Intersoft.Crosslight.Services.Social.5.0.5000.501\lib\Intersoft.Crosslight.Services.Social.dll</HintPath>
+    </Reference>
+    <Reference Include="Intersoft.Crosslight.Services.PushNotification">
+      <HintPath>..\packages\Intersoft.Crosslight.Services.PushNotification.5.0.5000.501\lib\Intersoft.Crosslight.Services.PushNotification.dll</HintPath>
+    </Reference>
+    <Reference Include="Intersoft.AppFramework">
+      <HintPath>..\packages\Intersoft.AppFramework.5.0.5000.501\lib\Intersoft.AppFramework.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Assets\" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
@@ -121,9 +125,4 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.13\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.13\tools\Microsoft.Bcl.Build.targets')" />
-  <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
-    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.13\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
-    <Error Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.13\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
-  </Target>
 </Project>

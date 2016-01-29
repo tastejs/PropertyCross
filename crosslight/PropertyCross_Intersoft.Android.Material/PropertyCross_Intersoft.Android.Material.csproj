@@ -3,19 +3,19 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{36A70576-A7DD-46C5-AB4B-8914CB660D4F}</ProjectGuid>
+    <ProjectGuid>{D7B0AD50-D9F6-49DF-9846-5701F247B14F}</ProjectGuid>
     <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PropertyCross_Intersoft.Android</RootNamespace>
-    <AssemblyName>PropertyCross_Intersoft.Android</AssemblyName>
+    <RootNamespace>PropertyCross_Intersoft.Android.Material</RootNamespace>
+    <AssemblyName>PropertyCross_Intersoft.Android.Material</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <AndroidApplication>true</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
-    <TargetFrameworkVersion>v4.0.3</TargetFrameworkVersion>
+    <AndroidUseLatestPlatformSdk>False</AndroidUseLatestPlatformSdk>
+    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
-    <MandroidI18n />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -25,9 +25,10 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AndroidLinkSkip>System.Core;mscorlib</AndroidLinkSkip>
     <EmbedAssembliesIntoApk>False</EmbedAssembliesIntoApk>
-    <AndroidLinkMode>None</AndroidLinkMode>
-    <AndroidSupportedAbis>armeabi;armeabi-v7a;x86</AndroidSupportedAbis>
+    <Debugger>Xamarin</Debugger>
+    <DevInstrumentationEnabled>True</DevInstrumentationEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -37,30 +38,38 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AndroidUseSharedRuntime>False</AndroidUseSharedRuntime>
-    <AndroidStoreUncompressedFileExtensions>
-    </AndroidStoreUncompressedFileExtensions>
-    <JavaMaximumHeapSize>
-    </JavaMaximumHeapSize>
-    <JavaOptions>
-    </JavaOptions>
-    <AndroidSupportedAbis>armeabi%3barmeabi-v7a%3bx86</AndroidSupportedAbis>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />
     <Reference Include="mscorlib" />
     <Reference Include="System" />
-    <Reference Include="System.Windows" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
+    <Reference Include="Xamarin.Android.Support.Design, Version=1.0.0.0, Culture=neutral, PublicKeyToken=71f3e3261ac778b5">
+      <HintPath>..\packages\Crosslight.Xamarin.Android.Support.Design.23.1.1\lib\MonoAndroid10\Xamarin.Android.Support.Design.dll</HintPath>
+    </Reference>
     <Reference Include="Xamarin.Android.Support.v4, Version=1.0.0.0, Culture=neutral, PublicKeyToken=71f3e3261ac778b5">
       <HintPath>..\packages\Crosslight.Xamarin.Android.Support.v4.23.1.1\lib\MonoAndroid10\Xamarin.Android.Support.v4.dll</HintPath>
     </Reference>
-    <Reference Include="Intersoft.Crosslight">
+    <Reference Include="Xamarin.Android.Support.v7.AppCompat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=71f3e3261ac778b5">
+      <HintPath>..\packages\Crosslight.Xamarin.Android.Support.v7.AppCompat.23.1.1\lib\MonoAndroid10\Xamarin.Android.Support.v7.AppCompat.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.v7.CardView, Version=1.0.0.0, Culture=neutral, PublicKeyToken=71f3e3261ac778b5">
+      <HintPath>..\packages\Crosslight.Xamarin.Android.Support.v7.CardView.23.1.1\lib\MonoAndroid10\Xamarin.Android.Support.v7.CardView.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.v7.RecyclerView, Version=1.0.0.0, Culture=neutral, PublicKeyToken=71f3e3261ac778b5">
+      <HintPath>..\packages\Crosslight.Xamarin.Android.Support.v7.RecyclerView.23.1.1\lib\MonoAndroid10\Xamarin.Android.Support.v7.RecyclerView.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows" />
+    <Reference Include="Intersoft.Crosslight, Version=5.0.5000.1, Culture=neutral, PublicKeyToken=71f3e3261ac778b5">
       <HintPath>..\packages\Intersoft.Crosslight.5.0.5000.501\lib\MonoAndroid10\Intersoft.Crosslight.dll</HintPath>
     </Reference>
-    <Reference Include="Intersoft.Crosslight.Android">
+    <Reference Include="Intersoft.Crosslight.Android, Version=5.0.5000.1, Culture=neutral, PublicKeyToken=71f3e3261ac778b5">
       <HintPath>..\packages\Intersoft.Crosslight.5.0.5000.501\lib\MonoAndroid10\Intersoft.Crosslight.Android.dll</HintPath>
+    </Reference>
+    <Reference Include="Intersoft.Crosslight.Android.v7, Version=5.0.5000.1, Culture=neutral, PublicKeyToken=71f3e3261ac778b5">
+      <HintPath>..\packages\Intersoft.Crosslight.Android.v7.5.0.5000.501\lib\MonoAndroid10\Intersoft.Crosslight.Android.v7.dll</HintPath>
     </Reference>
     <Reference Include="Intersoft.Crosslight.Services.ImageLoader">
       <HintPath>..\packages\Intersoft.Crosslight.Services.ImageLoader.5.0.5000.501\lib\Intersoft.Crosslight.Services.ImageLoader.dll</HintPath>
@@ -100,68 +109,80 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activities\PropertySearchActivity.cs" />
+    <Compile Include="AndroidApp.cs" />
+    <Compile Include="Fragments\FavouriteListFragment.cs" />
+    <Compile Include="Fragments\PropertyDetailFragment.cs" />
+    <Compile Include="Fragments\PropertyListFragment.cs" />
+    <Compile Include="Fragments\PropertySearchFragment.cs" />
+    <Compile Include="Infrastructure\AppInitializer.cs" />
+    <Compile Include="LaunchActivity.cs" />
+    <Compile Include="Resources\Resource.Designer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="Resources\AboutResources.txt" />
+    <None Include="Assets\AboutAssets.txt" />
+    <AndroidResource Include="Resources\layout\item_layout.axml" />
+    <AndroidResource Include="Resources\layout\item_detail.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\Icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\AndroidManifest.xml" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\PropertyCross_Intersoft.Core\PropertyCross_Intersoft.Core.csproj">
       <Project>{4E804DAB-2506-42F3-AD9D-50884966863E}</Project>
       <Name>PropertyCross_Intersoft.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Activities\FavouriteListActivity.cs" />
-    <Compile Include="Activities\PropertyDetailActivity.cs" />
-    <Compile Include="Activities\PropertyListActivity.cs" />
-    <Compile Include="Activities\PropertySearchActivity.cs" />
-    <Compile Include="Infrastructure\AppInitializer.cs" />
-    <Compile Include="NotificationBootReceiver.cs" />
-    <Compile Include="NotificationBroadcastReceiver.cs" />
-    <Compile Include="Resources\Resource.Designer.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="LaunchActivity.cs" />
-    <Compile Include="AndroidApp.cs" />
+    <AndroidResource Include="Resources\values\colors.xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
-    <None Include="packages.config" />
-    <None Include="Resources\AboutResources.txt" />
-    <None Include="Assets\AboutAssets.txt" />
-    <None Include="Properties\AndroidManifest.xml">
-      <SubType>Designer</SubType>
-    </None>
-    <AndroidResource Include="Resources\drawable\square_placeholder.png" />
-    <AndroidResource Include="Resources\values\dimen.xml" />
-    <AndroidResource Include="Resources\color\listview_background_selector.xml" />
     <AndroidResource Include="Resources\values\styles.xml" />
-    <AndroidResource Include="Resources\values\strings.xml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\actionbareditinglayout.axml" />
-    <AndroidResource Include="Resources\layout\actionbardetail.axml">
-      <SubType>AndroidResource</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\propertydetail.axml">
-      <SubType>AndroidResource</SubType>
-    </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\icon.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\light_splash.png" />
   </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\item_placeholder.png" />
-  </ItemGroup>
-  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-     Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\nostar.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\star.png" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\mipmap-hdpi\icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\mipmap-mdpi\icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\mipmap-xhdpi\icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\mipmap-xxhdpi\icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\mipmap-xxxhdpi\icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\item_placeholder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ic_toolbar.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+     Other similar extension points exist, see Microsoft.Common.targets.
+		<Target Name="BeforeBuild">
+		</Target>
+		<Target Name="AfterBuild">
+		</Target>
+ -->
 </Project>

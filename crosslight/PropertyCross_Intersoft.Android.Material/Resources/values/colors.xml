@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+  <color name="primary">#2196F3</color>
+  <!-- 500 -->
+  <color name="primaryDark">#1976D2</color>
+  <!-- 700 -->
+  <color name="accent">#42A5F5</color>
+  <!-- 400 -->
+  <color name="navigation_bar">#42A5F5</color>
+  <!-- 400 -->
+
+  <color name="window_dark_background">#000000</color>
+  <color name="window_light_background">#ffffff</color>
+
+  <color name="action_menu_foreground">#ffffff</color>
+  <color name="button_foreground">#ffffff</color>
+
+  <color name="nav_end_background">#1565C0</color>
+  <!-- 800 -->
+  <color name="nav_center_background">#2196F3</color>
+  <!-- 500 -->
+  <color name="nav_start_background">#42A5F5</color>
+  <!-- 400 -->
+
+  <color name="nav_header_title_foreground">#ffffff</color>
+  <color name="nav_header_subtitle_foreground">#ffffff</color>
+
+  <color name="facebook">#214890</color>
+
+  <color name="progress_dialog_background">#2196F3</color>
+  <color name="progress_text_color">#ffffff</color>
+  <color name="progress_bar_color">#ffffff</color>
+  <color name="progress_text_color_inverse">#42A5F5</color>
+  <color name="progress_bar_color_inverse">#42A5F5</color>
+</resources>

@@ -34,13 +34,14 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
-    <MtouchLink>None</MtouchLink>
-    <MtouchDebug>true</MtouchDebug>
+    <MtouchDebug>True</MtouchDebug>
     <AssemblyName>CrosslightAppiOS</AssemblyName>
     <CodesignKey>iPhone Developer</CodesignKey>
     <MtouchI18n>
     </MtouchI18n>
-    <MtouchArch>i386</MtouchArch>
+    <MtouchArch>i386, x86_64</MtouchArch>
+    <MtouchOptimizePNGs>True</MtouchOptimizePNGs>
+    <MtouchExtraArgs>--linkskip=System.Core --linkskip=mscorlib</MtouchExtraArgs>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>none</DebugType>
@@ -61,15 +62,16 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>False</ConsolePause>
-    <MtouchDebug>true</MtouchDebug>
+    <MtouchDebug>True</MtouchDebug>
     <CodesignKey>iPhone Developer</CodesignKey>
     <AssemblyName>CrosslightBusinessAppiOS</AssemblyName>
     <IpaPackageName>
     </IpaPackageName>
     <MtouchI18n>
     </MtouchI18n>
-    <MtouchArch>ARMv7</MtouchArch>
-    <MtouchLink>None</MtouchLink>
+    <MtouchArch>ARMv7, ARMv7s, ARM64</MtouchArch>
+    <MtouchOptimizePNGs>True</MtouchOptimizePNGs>
+    <MtouchExtraArgs>--linkskip=System.Core --linkskip=mscorlib</MtouchExtraArgs>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>none</DebugType>
@@ -119,6 +121,7 @@
     <Compile Include="ViewControllers\PropertyDetailViewController.designer.cs">
       <DependentUpon>PropertyDetailViewController.cs</DependentUpon>
     </Compile>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -133,28 +136,64 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Intersoft.AppFramework">
-      <HintPath>..\packages\Intersoft.Crosslight\Intersoft.AppFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="Intersoft.Crosslight">
-      <HintPath>..\packages\Intersoft.Crosslight\Intersoft.Crosslight.dll</HintPath>
-    </Reference>
-    <Reference Include="Intersoft.Crosslight.Data">
-      <HintPath>..\packages\Intersoft.Crosslight\Intersoft.Crosslight.Data.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Windows" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
+    <Reference Include="Xamarin.iOS" />
+    <Reference Include="Microsoft.Threading.Tasks, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\portable-net45+win8+wpa81\Microsoft.Threading.Tasks.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks.Extensions, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\portable-net45+win8+wpa81\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Intersoft.Crosslight, Version=5.0.5000.1, Culture=neutral, PublicKeyToken=71f3e3261ac778b5">
+      <HintPath>..\packages\Intersoft.Crosslight.5.0.5000.501\lib\Xamarin.iOS10\Intersoft.Crosslight.dll</HintPath>
+    </Reference>
+    <Reference Include="Intersoft.Crosslight.iOS, Version=5.0.5000.1, Culture=neutral, PublicKeyToken=71f3e3261ac778b5">
+      <HintPath>..\packages\Intersoft.Crosslight.5.0.5000.501\lib\Xamarin.iOS10\Intersoft.Crosslight.iOS.dll</HintPath>
+    </Reference>
+    <Reference Include="Intersoft.Crosslight.Services.ImageLoader">
+      <HintPath>..\packages\Intersoft.Crosslight.Services.ImageLoader.5.0.5000.501\lib\Intersoft.Crosslight.Services.ImageLoader.dll</HintPath>
+    </Reference>
+    <Reference Include="Intersoft.Crosslight.Data">
+      <HintPath>..\packages\Intersoft.Crosslight.Data.5.0.5000.501\lib\Intersoft.Crosslight.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Intersoft.Crosslight.Data.ComponentModel">
+      <HintPath>..\packages\Intersoft.Crosslight.Data.5.0.5000.501\lib\Intersoft.Crosslight.Data.ComponentModel.dll</HintPath>
+    </Reference>
     <Reference Include="Intersoft.Crosslight.Data.SQLite">
-      <HintPath>..\Packages\Intersoft.Crosslight\Intersoft.Crosslight.Data.SQLite.dll</HintPath>
+      <HintPath>..\packages\Intersoft.Crosslight.Data.Sqlite.5.0.5000.501\lib\Xamarin.iOS10\Intersoft.Crosslight.Data.SQLite.dll</HintPath>
     </Reference>
     <Reference Include="Intersoft.Crosslight.Data.SQLite.iOS">
-      <HintPath>..\Packages\Intersoft.Crosslight\iOS.Unified\Intersoft.Crosslight.Data.SQLite.iOS.dll</HintPath>
+      <HintPath>..\packages\Intersoft.Crosslight.Data.Sqlite.5.0.5000.501\lib\Xamarin.iOS10\Intersoft.Crosslight.Data.SQLite.iOS.dll</HintPath>
     </Reference>
-    <Reference Include="Xamarin.iOS" />
-    <Reference Include="Intersoft.Crosslight.iOS">
-      <HintPath>..\Packages\Intersoft.Crosslight\iOS.Unified\Intersoft.Crosslight.iOS.dll</HintPath>
+    <Reference Include="Intersoft.Crosslight.RestClient">
+      <HintPath>..\packages\Intersoft.Crosslight.RestClient.5.0.5000.501\lib\Intersoft.Crosslight.RestClient.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Intersoft.Crosslight.Services.Auth">
+      <HintPath>..\packages\Intersoft.Crosslight.Services.Auth.5.0.5000.501\lib\Intersoft.Crosslight.Services.Auth.dll</HintPath>
+    </Reference>
+    <Reference Include="Intersoft.Crosslight.Services.Social">
+      <HintPath>..\packages\Intersoft.Crosslight.Services.Social.5.0.5000.501\lib\Xamarin.iOS10\Intersoft.Crosslight.Services.Social.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Intersoft.Crosslight.Services.Social.iOS">
+      <HintPath>..\packages\Intersoft.Crosslight.Services.Social.5.0.5000.501\lib\Xamarin.iOS10\Intersoft.Crosslight.Services.Social.iOS.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Intersoft.Crosslight.Services.PushNotification">
+      <HintPath>..\packages\Intersoft.Crosslight.Services.PushNotification.5.0.5000.501\lib\Xamarin.iOS10\Intersoft.Crosslight.Services.PushNotification.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Intersoft.Crosslight.Services.PushNotification.iOS">
+      <HintPath>..\packages\Intersoft.Crosslight.Services.PushNotification.5.0.5000.501\lib\Xamarin.iOS10\Intersoft.Crosslight.Services.PushNotification.iOS.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Intersoft.AppFramework">
+      <HintPath>..\packages\Intersoft.AppFramework.5.0.5000.501\lib\Intersoft.AppFramework.dll</HintPath>
+      <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -166,17 +205,6 @@
     <BundleResource Include="Resources\star%402x.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Icon.png" />
-    <BundleResource Include="Resources\Icon%402x.png" />
-    <BundleResource Include="Resources\Icon-72.png" />
-    <BundleResource Include="Resources\Icon-72%402x.png" />
-    <BundleResource Include="Resources\Icon-Small.png" />
-    <BundleResource Include="Resources\Icon-Small%402x.png" />
-    <BundleResource Include="Resources\Icon-Small-50.png" />
-    <BundleResource Include="Resources\Icon-Small-50%402x.png" />
-    <BundleResource Include="Resources\Default.png" />
-    <BundleResource Include="Resources\Default%402x.png" />
-    <BundleResource Include="Resources\Default-568h%402x.png" />
     <BundleResource Include="Resources\Crosslight512.png" />
   </ItemGroup>
   <ItemGroup>
@@ -184,11 +212,9 @@
     <ITunesArtwork Include="iTunesArtwork%402x" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Views\" />
-  </ItemGroup>
-  <ItemGroup>
-    <InterfaceDefinition Include="Views\PropertyDetailView.xib" />
+    <InterfaceDefinition Include="Views\MainStoryboard.storyboard" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PropertyCross_Intersoft.Core\PropertyCross_Intersoft.Core.csproj">
@@ -196,4 +222,11 @@
       <Name>PropertyCross_Intersoft.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets'))" />
+  </Target>
 </Project>
