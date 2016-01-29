@@ -1,6 +1,6 @@
 #Crosslight Implementation
 
-Visit the [Crosslight Mobile page](http://propertycross.com/crosslight/) on the PropertyCross website for screenshots and code sharing metrics.
+Visit the [Crosslight page](http://propertycross.com/crosslight/) on the PropertyCross website for screenshots and code sharing metrics.
 
 ##Introduction
 
