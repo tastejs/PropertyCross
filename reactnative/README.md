@@ -23,7 +23,6 @@ To create the Android project files run the 'react-native android' command in th
 This project is based on Colin Eberhardt's Property Finder. You can read about his experience writing Property Finder in [this blog](https://www.raywenderlich.com/99473/introducing-react-native-building-apps-javascript).
 
 For more information about PropertyCross, visit [PropertyCross.com](http://www.propertycross.com).
-
 For more information about React Native, visit [Facebook's information page](https://facebook.github.io/react-native/).
 
 In addition, you might find the following resources useful to get started with React Native:
