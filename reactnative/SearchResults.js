@@ -46,21 +46,21 @@ var styles = StyleSheet.create({
 });
 
   function urlForQueryAndPage(key, value, pageNumber) {
-  var data = {
-      country: 'uk',
-      pretty: '1',
-      encoding: 'json',
-      listing_type: 'buy',
-      action: 'search_listings',
-      page: pageNumber
-  };
-  data[key] = value;
+    var data = {
+        country: 'uk',
+        pretty: '1',
+        encoding: 'json',
+        listing_type: 'buy',
+        action: 'search_listings',
+        page: pageNumber
+    };
+    data[key] = value;
 
-  var querystring = Object.keys(data)
-    .map(key => key + '=' + encodeURIComponent(data[key]))
-    .join('&');
+    var querystring = Object.keys(data)
+      .map(key => key + '=' + encodeURIComponent(data[key]))
+      .join('&');
 
-  return 'http://api.nestoria.co.uk/api?' + querystring;
+    return 'http://api.nestoria.co.uk/api?' + querystring;
 };
 
 class SearchResults extends Component {
@@ -90,16 +90,19 @@ class SearchResults extends Component {
     AsyncStorage.getItem("favourites").then((value) =>
     {
       var tempFavourites = value != undefined ? JSON.parse("" + value +"") : [];
+      var alreadyExists = false;
       for(var i = 0; i < tempFavourites.length; i++)
       {
         if(tempFavourites[i].guid == property.guid)
         {
           tempFavourites.splice(i,1);//remove the property from favourites
-          AsyncStorage.setItem("favourites", JSON.stringify(tempFavourites)).then().done();
-          return;
+          alreadyExists = true;
         }
       }
-      tempFavourites.push(property);
+      if(!alreadyExists)
+      {
+        tempFavourites.push(property);
+      }
       AsyncStorage.setItem("favourites", JSON.stringify(tempFavourites)).then().done();
     }).done();
   }
@@ -138,6 +141,12 @@ class SearchResults extends Component {
     );
   }
 
+  fetchNextPage() {
+    var nextPage = (this.state.shownListings.length / 20) + 1;
+    var query = urlForQueryAndPage('place_name', this.props.searchResponse.locations[0].place_name, nextPage);
+    this._executeQuery(query);
+  }
+
   renderFooter(){
     if(this.state.shownListings === undefined || this.state.shownListings.length == 0 || this.state.shownListings.length % 20 != 0)
     {
@@ -157,12 +166,6 @@ class SearchResults extends Component {
         </View>
       </TouchableHighlight>
     );
-  }
-
-  fetchNextPage() {
-    var nextPage = (this.state.shownListings.length / 20) + 1;
-    var query = urlForQueryAndPage('place_name', this.props.searchResponse.locations[0].place_name, nextPage);
-    this._executeQuery(query);
   }
 
   render() {

@@ -2,6 +2,7 @@
 
 var React = require('react-native');
 var PropertyView = require('./PropertyView');
+var SearchPage = require('./SearchPage');
 var {
   StyleSheet,
   Image, 
@@ -53,21 +54,48 @@ class Favourites extends Component {
 
   constructor(props) {
     super(props);
-        this.state = {
-          noFavouritesMessage: 'You have not added any properties to your favourites.'
-        };
+    this.state = {
+      noFavouritesMessage: 'You have not added any properties to your favourites.'
+    };
+    this.displayFavourites();
   }
 
   rowPressed(propertyGuid) {
     var property = JSON.parse(this.state.favourites)
-      .filter(prop => prop.guid === propertyGuid)[0];
-
+    .filter(prop => prop.guid === propertyGuid)[0];
+    var parentref = this;
     this.props.navigator.push({
       title: "Property",
       component: PropertyView,
-      passProps: {property: property},
-      pageRefresh: () => { displayFavourites()}
-  });
+      passProps: 
+        {property: property, parentref: this},
+        rightButtonTitle: 'Favourite',
+        onRightButtonPress: () => {
+          parentref.toggleFavourited(property);
+        }
+    })
+  };
+
+  toggleFavourited(property){
+    AsyncStorage.getItem("favourites").then((value) =>
+    {
+      var tempFavourites = value != undefined ? JSON.parse("" + value +"") : [];
+      var alreadyExists = false;
+      for(var i = 0; i < tempFavourites.length; i++)
+      {
+        if(tempFavourites[i].guid == property.guid)
+        {
+          tempFavourites.splice(i,1);//remove the property from favourites
+          alreadyExists = true;
+        }
+      }
+      if(!alreadyExists)
+      {
+        tempFavourites.push(property);
+      }
+      AsyncStorage.setItem("favourites", JSON.stringify(tempFavourites)).then().done();
+      this.setState({favourites: JSON.stringify(tempFavourites)});
+    }).done();
   }
 
   displayFavourites(){
@@ -112,7 +140,7 @@ class Favourites extends Component {
 
   render() {
     var dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.guid !== r2.guid});
-    if(this.state.favourites == undefined || this.state.favourites.length == 0)
+    if(this.state.favourites == undefined || JSON.parse(this.state.favourites).length == 0)
     {
       return (<Text style={styles.errorMessage}>{this.state.noFavouritesMessage}</Text>);
     }

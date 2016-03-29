@@ -121,7 +121,7 @@ class SearchPage extends Component {
   }
 
   _handleResponse(response, coordinatesUsed) {
-    this.setState({ isLoading: false });
+    this.setState({isLoading: false });
     this.setState({locations: undefined});
     if(response.application_response_code == 201)
     {
@@ -244,6 +244,28 @@ class SearchPage extends Component {
           });
         }
       });
+  }
+
+  toggleFavourited(property){
+    AsyncStorage.getItem("favourites").then((value) =>
+    {
+      var tempFavourites = value != undefined ? JSON.parse("" + value +"") : [];
+      var alreadyExists = false;
+      for(var i = 0; i < tempFavourites.length; i++)
+      {
+        if(tempFavourites[i].guid == property.guid)
+        {
+          tempFavourites.splice(i,1);//remove the property from favourites
+          alreadyExists = true;
+        }
+      }
+      if(!alreadyExists)
+      {
+        tempFavourites.push(property);
+      }
+      AsyncStorage.setItem("favourites", JSON.stringify(tempFavourites)).then().done();
+      this.setState({favourites: JSON.stringify(tempFavourites)});
+    }).done();
   }
 
   onSearchTextChanged(event) {

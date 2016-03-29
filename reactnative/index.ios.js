@@ -12,6 +12,7 @@ var styles = React.StyleSheet.create({
 
 class PropertyFinderApp extends React.Component {
   render() {
+
     return (
       <React.NavigatorIOS
         ref="nav"
