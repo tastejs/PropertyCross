@@ -1,0 +1,27 @@
+﻿Label {
+    color: black;
+}
+
+Button {
+    background-color: #4880E8;
+    color: white;
+    horizontal-align: center;
+    margin: 5;
+    padding: 10;
+    font-size: 22;
+    text-transform: none;
+}
+
+ActionBar {
+    background-color: #4880E8;
+    color: white;
+    text-align: center;
+}
+
+.hidden {
+    opacity: 0;
+}
+
+.action-bar-button {
+    background-color: #4880E8;
+}

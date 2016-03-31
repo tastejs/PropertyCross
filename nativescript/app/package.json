@@ -1,0 +1,21 @@
+{
+    "name": "property-cross-nativescript",
+    "main": "main.js",
+    "version": "0.1",
+    "author": {
+        "name": "Nils Meissner",
+        "email": "nmeissner@scottlogic.com"
+    },
+    "description": "Nativescript property cross project",
+    "keywords": [
+        "scottlogic",
+        "mobile",
+        "nativescript",
+        "{N}",
+        "tns",
+        "property-cross"
+    ],
+    "android": {
+        "v8Flags": "--expose_gc"
+    }
+}

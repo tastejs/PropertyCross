@@ -1,0 +1,34 @@
+<ActionBar title=" PropertyCross" android.icon="res://icon" android.iconVisibility="always">
+    <ActionItem (tap)="goToFavourites()">
+        <Button class="action-bar-button" text="Faves"></Button>
+    </ActionItem>
+</ActionBar>
+<ActivityIndicator [busy]="isSearching"></ActivityIndicator>
+<StackLayout cssClass="{{ isSearching ? 'hidden' : ''}}">
+    <Label class="intro" text="{{introduction}}" textWrap="true"></Label>
+    <SearchBar class="searchfield" #searchField hint="Enter a location" [(ngModel)]="location.name"></SearchBar>
+    <StackLayout orientation="horizontal">
+        <Button text="Go" (tap)="search()"></Button>
+        <Button text="My Location" (tap)="determineLocation()"></Button>
+    </StackLayout>
+    <StackLayout *ngIf="!error && !locationProposal">
+        <Label class="caption" text="Recent searches:"></Label>
+        <DockLayout *ngFor="#item of recentLocations" orientation="horizontal" (tap)="repeatRecentSearch(item)" stretchLastChild="false">
+            <Label dock="left" class="location-label" text="{{item.location.name}}"></Label>
+            <Label dock="right" class="results-label" text="{{item.results}}" minWidth="80"></Label>
+        </DockLayout>
+    </StackLayout>
+    <StackLayout *ngIf="!error && locationProposal">
+        <Label class="caption" text="Please select a location below:"></Label>
+        <ListView [items]="proposedLocations">
+            <template #item="item">
+                <StackLayout orientation="horizontal" (tap)="searchProposedLocation(item)">
+                    <Label class="location-label" text="{{item.name}}"></Label>
+                </StackLayout>
+            </template>
+        </ListView>
+    </StackLayout>
+    <StackLayout *ngIf="error">
+        <Label class="error" [text]="errorMessage" textWrap="true"></Label>
+    </StackLayout>
+</StackLayout>

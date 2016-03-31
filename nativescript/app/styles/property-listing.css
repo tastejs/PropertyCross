@@ -1,0 +1,24 @@
+.title-label {
+    font-size: 22;
+    margin: 5;
+}
+
+
+.price-label {
+    font-size: 26;
+    margin-left: 5;
+    margin-right: 5;
+    color: blue;
+}
+
+.rooms-label {
+    padding-top: 10;
+}
+
+.summary {
+    padding-top: 10;
+}
+
+.listing {
+    padding: 10;
+}
