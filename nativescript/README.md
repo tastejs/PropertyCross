@@ -4,9 +4,9 @@ Visit the [NativeScript page](http://propertycross.com/nativescript/) on the Pro
 
 ##Introduction
 
-[NativeScript](https://www.nativescript.org/) is a framework to develop truly native apps for iOS and Android from a single code base of JavaScript or TypeScript, XML and CSS.
-NativeScript takes the cross-platform code and translates it into the language that the target platform speaks.
-Using the NativeScript/Angular2 bridge the features of NativeScript and Angular2 can be combined to write Angular2 components for mobile platforms.
+[NativeScript](https://www.nativescript.org/) is a framework for building native iOS and Android apps using JavaScript and CSS. NativeScript renders UIs with the native platform’s rendering engine, resulting in native-like performance and UX.
+When an app is build, the NativeScript runtime translates the non-platform specific code to the native language of the target platform.
+Using the [NativeScript/Angular2 bridge](https://github.com/NativeScript/nativescript-angular) the features of NativeScript and Angular2 can be combined to write Angular2 components for mobile platforms.
 
 ##Building the Application
 
