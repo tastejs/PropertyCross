@@ -1,9 +1,7 @@
 <?xml version="1.0"?>
 <FrameLayout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	stretchHorizontalMode="MATCH_PARENT" stretchVerticalMode="MATCH_PARENT"
-	xsi:noNamespaceSchemaLocation="http://www.neomades.com/XSD/3.5.0/layout.xsd">
-
-	<Include refLayout="@layout/PROPERTY_SPLASH"/>
+	xsi:noNamespaceSchemaLocation="http://www.neomades.com/XSD/3.9.4/layout.xsd">
 
 	<VerticalLayout padding="4" contentAlignment="HCENTER|VCENTER"
 		stretchHorizontalMode="MATCH_PARENT" stretchVerticalMode="MATCH_PARENT">

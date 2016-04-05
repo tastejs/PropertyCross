@@ -17,7 +17,7 @@ public final class Log {
 	 */
 	public static void d(Object msg) {
 		if (Constants.DEBUG) {
-			System.out.println(msg.toString()); // NOSONAR
+			com.neomades.util.Log.debug(msg.toString());
 		}
 	}
 

@@ -1,15 +1,12 @@
 package com.propertycross.neomad.model;
 
-import com.neomades.json.JSONException;
-import com.neomades.json.JSONObject;
-import com.propertycross.neomad.utils.StringUtils;
+import com.neomades.util.StringUtils;
 
-/**
- * @author Neomades
- */
 public class Property {
+
 	private static final int THREE_DIGITS = 3;
 	private static final int THOUSAND = 1000;
+
 	private String guid;
 	private String summary;
 	private int price;
@@ -24,45 +21,77 @@ public class Property {
 		return guid;
 	}
 
+	public void setGuid(String guid) {
+		this.guid = guid;
+	}
+
 	public String getSummary() {
 		return summary;
+	}
+
+	public void setSummary(String summary) {
+		this.summary = summary;
 	}
 
 	public int getPrice() {
 		return price;
 	}
 
+	public void setPrice(int price) {
+		this.price = price;
+	}
+
 	public int getBedrooms() {
 		return bedrooms;
+	}
+
+	public void setBedrooms(int bedrooms) {
+		this.bedrooms = bedrooms;
 	}
 
 	public int getBathrooms() {
 		return bathrooms;
 	}
 
+	public void setBathrooms(int bathrooms) {
+		this.bathrooms = bathrooms;
+	}
+
 	public String getPropertyType() {
 		return propertyType;
+	}
+
+	public void setPropertyType(String propertyType) {
+		this.propertyType = propertyType;
 	}
 
 	public String getTitle() {
 		return title;
 	}
 
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
 	public String getThumbnailUrl() {
 		return thumbnailUrl;
+	}
+
+	public void setThumbnailUrl(String thumbnailUrl) {
+		this.thumbnailUrl = thumbnailUrl;
 	}
 
 	public String getImageUrl() {
 		return imageUrl;
 	}
 
-	public String getBedBathroomText() {
-		return bedrooms + " bed, " + bathrooms + " bathroom";
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
 	}
 
 	public String getFormattedPrice() {
 		if (price < THOUSAND) {
-			return "£" + price;
+			return "Â£" + price;
 		}
 
 		String priceAsString = price + "";
@@ -76,7 +105,7 @@ public class Property {
 						+ formattedPrice;
 				index = index - THREE_DIGITS;
 			} else {
-				formattedPrice = "£" + priceAsString.substring(0, index)
+				formattedPrice = "Â£" + priceAsString.substring(0, index)
 						+ formattedPrice;
 				index = 0;
 			}
@@ -93,38 +122,7 @@ public class Property {
 		return title;
 	}
 
-	public static Property valueOf(JSONObject json) {
-		Property p = new Property();
-		try {
-			p.guid = json.getString("guid");
-			p.price = json.getInt("price");
-			p.propertyType = json.getString("property_type");
-			try {
-				p.bedrooms = json.getInt("bedroom_number");
-			} catch (JSONException ex) {
-				p.bedrooms = 0;
-			}
-			try {
-				p.bathrooms = json.getInt("bathroom_number");
-			} catch (JSONException ex) {
-				p.bathrooms = 0;
-			}
-			p.title = json.getString("title");
-			p.thumbnailUrl = json.getString("thumb_url");
-			p.imageUrl = json.getString("img_url");
-			p.summary = json.getString("summary");
-
-		} catch (JSONException ex) {
-			p.guid = "";
-			p.price = 0;
-			p.propertyType = "";
-			p.bedrooms = 0;
-			p.bathrooms = 0;
-			p.title = "";
-			p.thumbnailUrl = "";
-			p.imageUrl = "";
-			p.summary = "";
-		}
-		return p;
+	public String getBedBathroomText() {
+		return bedrooms + " bed, " + bathrooms + " bathroom";
 	}
 }

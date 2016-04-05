@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<VerticalLayout id="@+id/ID_PROPERTY_FINDER" xsi:noNamespaceSchemaLocation="http://www.neomades.com/XSD/3.5.0/layout.xsd"
+<VerticalLayout id="@+id/ID_PROPERTY_FINDER" xsi:noNamespaceSchemaLocation="http://www.neomades.com/XSD/3.9.4/layout.xsd"
                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                 contentAlignment="HCENTER|TOP"
                 padding="16"

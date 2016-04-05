@@ -5,11 +5,11 @@
     backgroundColor="#80808080"
     stretchHorizontalMode="MATCH_PARENT"
     stretchVerticalMode="MATCH_CONTENT"
-    xsi:noNamespaceSchemaLocation="http://www.neomades.com/XSD/3.5.0/layout.xsd" >
+    xsi:noNamespaceSchemaLocation="http://www.neomades.com/XSD/3.9.4/layout.xsd" >
 
     <!-- Picture -->
 
-    <ImageLabel
+    <ImageUrlLabel
         id="@+id/ITEM_IMAGE"
         height="50"
         marginRight="4"

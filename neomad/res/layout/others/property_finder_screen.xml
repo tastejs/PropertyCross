@@ -2,7 +2,7 @@
 <VerticalLayout id="@+id/ID_PROPERTY_FINDER"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" contentAlignment="HCENTER|TOP"
 	padding="16" stretchHorizontalMode="MATCH_PARENT" stretchVerticalMode="MATCH_PARENT"
-	xsi:noNamespaceSchemaLocation="http://www.neomades.com/XSD/3.5.0/layout.xsd">
+	xsi:noNamespaceSchemaLocation="http://www.neomades.com/XSD/3.9.4/layout.xsd">
 
 	<TextLabel id="@+id/ID_SEARCH_DESCRIPTION" marginBottom="4"
 		stretchHorizontalMode="MATCH_PARENT" stretchVerticalMode="MATCH_CONTENT"

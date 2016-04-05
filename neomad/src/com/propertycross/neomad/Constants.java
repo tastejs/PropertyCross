@@ -33,6 +33,41 @@ public class Constants implements TargetInfo {
 	public static final int FONT_MEDIUM_SIZE = 20;
 	public static final int FONT_LARGE_SIZE = 22;
 
+	// Package content constants
+	public static final String PROPERTIES_CACHE = "com.propertycross.neomad.PROPERTIES_CACHE";
+	public static final String PROPERTIES_IMAGES_CACHE = "com.propertycross.neomad.PROPERTIES_IMAGES_CACHE";
+	public static final String PROPERTIES_THUMBNAILS_CACHE = "com.propertycross.neomad.PROPERTIES_THUMBNAILS_CACHE";
+	public static final String HTTP = "com.propertycross.neomad.HTTP";
+	public static final String PROPERTY_PARSER = "com.propertycross.neomad.PROPERTY_PARSER";
+	public static final String ROOT_CACHE = "properties";
+	public static final int MEMORY_THUMBNAILS_CACHE_LRU_COUNT = 20;
+
+	// Package Content events
+	public static final String EVENT_PROPERTY_LIST = "PropertyList";
+	
+	// EventBus event's types
+	public static final String ERROR = "Error";
+	public static final String LOAD = "Load";
+	public static final String LOAD_COMPLETE = "LoadComplete";
+	public static final String SAVE = "Save";
+	public static final String UPDATE_FAVORITES = "UpdateFavorites";
+	public static final String UPDATE_FAVORITES_COMPLETE = "UpdateFavoritesComplete";
+	public static final String UPDATE_LIST = "UpdateList";
+	public static final String FIND_BY_NAME = "FindByName";
+	public static final String FIND_BY_NAME_RES = "FindByNameRes";
+	public static final String FIND_BY_LOCATION = "FindByLocation";
+	public static final String FIND_BY_LOCATION_RES = "FindByLocationRes";
+	public static final String FOUND_AMBIGIOUS_RES = "FoundAmbigiousRes";
+	public static final String FIND_ERROR = "FindError";
+	public static final String LOAD_PROPERTIES = "LoadProperties";
+	public static final String GET_LOCATION = "GetLocation";
+	public static final String GET_LOCATION_RES = "GetLocationRes";
+	public static final String NETWORK_ERROR = "NetworkError";
+	
+	public static final int FOUND_SUCCESS = 0;
+	public static final int FOUND_AMBIGUOUS = 1;
+	public static final int FOUND_ERROR = 2;
+	
 	/**
 	 * Prints Exception message
 	 */
@@ -42,13 +77,11 @@ public class Constants implements TargetInfo {
 
 	public static final int FINDER_LIST_MARGIN = 4;
 
-
-
 	public static boolean THEME_LIGHT_WITH_DARK_ACTION_BAR = false;
 
 	public static boolean PROPERTY_DETAILS_SUBTITLE = true;
-
-	public static boolean SPLASH_ENABLED = false;
+	
+	public static boolean RESULTS_HEADER_TITLE_IN_UPPERCASE = true;
 
 	public static boolean SCREEN_WITH_BG_IMAGE = false;
 
@@ -77,11 +110,11 @@ public class Constants implements TargetInfo {
 		if (WINDOWS_PHONE) {
 			SCREEN_WITH_BG_IMAGE = true;
 			LAYOUT_PATH = "metro";
-			MENU_ITEM_PATH = "metro";
+			MENU_ITEM_PATH = "windowsphone";
 			LAYOUT_LIST_PATH = "metro";
 			FAVOURITES_WITH_ICON = true;
-			SPLASH_ENABLED = true;
 			PROPERTY_DETAILS_SUBTITLE = false;
+			RESULTS_HEADER_TITLE_IN_UPPERCASE = false;
 		} else if (ANDROID) {
 			SCREEN_WITH_BACKGROUND = true;
 			RECENT_SEARCH_COUNT_WITH_PARENTHESIS = true;

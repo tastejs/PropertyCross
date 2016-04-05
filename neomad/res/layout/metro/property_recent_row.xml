@@ -7,7 +7,7 @@
                   stretchHorizontalMode="MATCH_PARENT"
                   stretchVerticalMode="MATCH_CONTENT"
                   contentAlignment="VCENTER|LEFT"
-                  xsi:noNamespaceSchemaLocation="http://www.neomades.com/XSD/3.5.0/layout.xsd">
+                  xsi:noNamespaceSchemaLocation="http://www.neomades.com/XSD/3.9.4/layout.xsd">
     <!-- Query -->
     <TextLabel id="@+id/ITEM_RECENT_LABEL"
                layoutAlignment="LEFT|VCENTER"
