@@ -40,7 +40,7 @@ var styles = React.StyleSheet.create({
   }
 });
 
-class PropertyFinderApp extends React.Component {
+class PropertyCrossApp extends React.Component {
   render() {
     var NavigationBarRouteMapper = { 
       LeftButton: function( route, navigator, index, navState ){
@@ -84,5 +84,5 @@ class PropertyFinderApp extends React.Component {
   }
 }
 
-React.AppRegistry.registerComponent('PropertyFinder',
-  function() { return PropertyFinderApp });
+React.AppRegistry.registerComponent('PropertyCross',
+  function() { return PropertyCrossApp });

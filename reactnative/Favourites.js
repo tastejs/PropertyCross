@@ -63,15 +63,14 @@ class Favourites extends Component {
   rowPressed(propertyGuid) {
     var property = JSON.parse(this.state.favourites)
     .filter(prop => prop.guid === propertyGuid)[0];
-    var parentref = this;
     this.props.navigator.push({
       title: "Property",
       component: PropertyView,
       passProps: 
-        {property: property, parentref: this},
+        {property: property},
         rightButtonTitle: 'Favourite',
         onRightButtonPress: () => {
-          parentref.toggleFavourited(property);
+          this.toggleFavourited(property);
         }
     })
   };
