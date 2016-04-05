@@ -14,9 +14,9 @@ To produce an iOS build you will need to have access to a Mac with the latest ve
 
 ###Android
 
-To run this application on an Android device you will need to have the Android SDK installed. The Android SDK can be downloaded from http://developer.android.com/sdk/installing/index.html?pkg=tools. In the SDK manager you will need to install ‘Android SDK Tools’, ‘Android SDK Platform Tools’, ‘Android SDK Build-tools’ and ‘Android SDK Platform 23’.
+To run this application on an Android device you will need to have the Android SDK installed. The Android SDK can be downloaded from http://developer.android.com/sdk/installing/index.html?pkg=tools. In the SDK manager you will need to install ‘Android SDK Tools’, ‘Android SDK Platform Tools’, ‘Android SDK Build-tools’ and ‘Android SDK Platform 23’. The next step is to create the Android project files by running the 'react-native android' command in the project's main directory and to download the project's dependencies which can be done by running the 'npm install' command.
 
-To create the Android project files run the 'react-native android' command in the project's main directory. To produce a build for the project you need to run the project's build.gradle. One way of doing this is by running it within [Android Studio](http://developer.android.com/sdk/installing/index.html?pkg=studio). You can import the project into Android Studio using the build.gradle file. Once the build.gradle has been ran it will produce apk files in the android/app/build/outputs/apk folder. These can be uploaded to a device or virtual device by using the adb install <apk-path> command.
+To produce a build for the project you need to run the project's build.gradle. One way of doing this is by running it within [Android Studio](http://developer.android.com/sdk/installing/index.html?pkg=studio). You can import the project into Android Studio using the build.gradle file. Once the build.gradle has been ran it will produce apk files in the android/app/build/outputs/apk folder. These can be uploaded to a device or virtual device by using the adb install <apk-path> command.
 
 ##Relevant Links
 
