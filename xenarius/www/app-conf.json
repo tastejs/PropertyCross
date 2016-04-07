@@ -1,0 +1,1534 @@
+{
+  "id": "com.propertycross.devexpress",
+  "title": "Xenarius PropertyCross",
+  "platforms": [
+    {
+      "name": "DesktopRule",
+      "layout": "desktop",
+      "options": {
+        "deviceType": "desktop"
+      }
+    },
+    {
+      "name": "PhoneRule",
+      "layout": "slideout",
+      "options": {
+        "deviceType": "phone"
+      }
+    },
+    {
+      "name": "TabletRule",
+      "layout": "split",
+      "options": {
+        "deviceType": "tablet"
+      }
+    }
+  ],
+  "model": [
+    {
+      "name": "authenticated",
+      "type": "boolean",
+      "defaultValue": false,
+      "persistent": true,
+      "isCalculatedDefaultValue": null
+    },
+    {
+      "name": "listings",
+      "type": "object[]",
+      "defaultValue": [],
+      "isCalculatedDefaultValue": null
+    },
+    {
+      "name": "initialState",
+      "type": "boolean",
+      "defaultValue": null,
+      "isCalculatedDefaultValue": null
+    },
+    {
+      "name": "errorState",
+      "type": "boolean",
+      "defaultValue": null,
+      "isCalculatedDefaultValue": null
+    },
+    {
+      "name": "listedState",
+      "type": "boolean",
+      "defaultValue": null,
+      "isCalculatedDefaultValue": null
+    }
+  ],
+  "dataStores": [
+    {
+      "type": "rest",
+      "id": "LocationStore",
+      "name": "LocationStore",
+      "key": "id",
+      "load": {
+        "dataExpr": "",
+        "urlExpr": "'http://api.nestoria.co.uk/api'",
+        "dataType": "jsonp",
+        "getAjaxData": {
+          "logic": {
+            "variables": [
+              {
+                "name": "result",
+                "type": "object",
+                "value": {
+                  "country": "uk",
+                  "pretty": 1,
+                  "action": "search_listings",
+                  "encoding": "json",
+                  "listing_type": "buy",
+                  "page": 1,
+                  "place_name": "leeds"
+                }
+              },
+              {
+                "name": "isCoordinate",
+                "type": "boolean",
+                "value": false
+              },
+              {
+                "name": "error",
+                "type": "string",
+                "value": ""
+              },
+              {
+                "name": "temp",
+                "type": "string",
+                "value": ""
+              }
+            ],
+            "calls": [
+              {
+                "_type": "SetValue",
+                "leftExpr": "result.page",
+                "valueExpr": "$options.skip+1"
+              },
+              {
+                "_type": "SetValue",
+                "leftExpr": "temp",
+                "valueExpr": "$options.filter"
+              },
+              {
+                "_type": "Call",
+                "functionName": "$global.uf_isCoordinate",
+                "resultVariableName": "isCoordinate",
+                "params": [
+                  {
+                    "name": "searchTitle",
+                    "expr": "temp"
+                  }
+                ]
+              },
+              {
+                "_type": "Switch",
+                "expr": "isCoordinate",
+                "cases": [
+                  {
+                    "calls": [
+                      {
+                        "_type": "SetValue",
+                        "leftExpr": "result.centre_point",
+                        "valueExpr": "$options.filter"
+                      },
+                      {
+                        "_type": "Eval",
+                        "expr": "delete result[\"place_name\"]",
+                        "errorVariableName": "error"
+                      }
+                    ],
+                    "valueExpr": "true"
+                  }
+                ],
+                "otherwise": [
+                  {
+                    "_type": "SetValue",
+                    "leftExpr": "result.place_name",
+                    "valueExpr": "$options.filter"
+                  },
+                  {
+                    "_type": "Eval",
+                    "expr": "delete result[\"centre_point\"]",
+                    "errorVariableName": "error"
+                  }
+                ]
+              },
+              {
+                "_type": "Event",
+                "returnValue": null,
+                "flow": 0,
+                "returnExpr": "result"
+              }
+            ]
+          }
+        },
+        "method": "get",
+        "processResult": {
+          "logic": {
+            "variables": [
+              {
+                "name": "arrayCount",
+                "value": 0,
+                "type": "number",
+                "parameter": false
+              }
+            ],
+            "calls": [
+              {
+                "_type": "Event",
+                "returnValue": null,
+                "returnExpr": "$data.response.listings",
+                "flow": 0
+              }
+            ]
+          },
+          "parameters": []
+        }
+      }
+    },
+    {
+      "type": "local",
+      "load": {
+        "urlExpr": "''",
+        "method": "get"
+      },
+      "byKey": {
+        "urlExpr": "''",
+        "method": "get"
+      },
+      "insert": {
+        "urlExpr": "''",
+        "method": "post"
+      },
+      "update": {
+        "urlExpr": "''",
+        "method": "patch"
+      },
+      "remove": {
+        "urlExpr": "''",
+        "method": "delete"
+      },
+      "totalCount": {
+        "urlExpr": "''",
+        "method": "get"
+      },
+      "withCredentials": true,
+      "id": "RecentLocations",
+      "key": "id",
+      "name": "rescently",
+      "flushInterval": 5000
+    },
+    {
+      "type": "local",
+      "headers": [],
+      "load": {
+        "urlExpr": "''",
+        "method": "get"
+      },
+      "byKey": {
+        "urlExpr": "''",
+        "method": "get"
+      },
+      "insert": {
+        "urlExpr": "''",
+        "method": "post"
+      },
+      "update": {
+        "urlExpr": "''",
+        "method": "patch"
+      },
+      "remove": {
+        "urlExpr": "''",
+        "method": "delete"
+      },
+      "totalCount": {
+        "urlExpr": "''",
+        "method": "get"
+      },
+      "id": "FavoritesStore",
+      "key": "id",
+      "name": "favorites",
+      "flushInterval": 5000,
+      "local": [
+        {}
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "uf_SetState",
+      "function": {
+        "logic": {
+          "variables": [
+            {
+              "name": "state",
+              "value": "",
+              "type": "string",
+              "parameter": true
+            }
+          ],
+          "calls": [
+            {
+              "_type": "Switch",
+              "expr": "\"initial\" == state",
+              "cases": [
+                {
+                  "calls": [
+                    {
+                      "_type": "SetValue",
+                      "valueExpr": "true",
+                      "leftExpr": "$global.initialState"
+                    },
+                    {
+                      "_type": "SetValue",
+                      "valueExpr": "false",
+                      "leftExpr": "$global.listedState"
+                    },
+                    {
+                      "_type": "SetValue",
+                      "valueExpr": "false",
+                      "leftExpr": "$global.errorState"
+                    }
+                  ],
+                  "valueExpr": "true"
+                }
+              ],
+              "otherwise": [
+                {
+                  "_type": "Switch",
+                  "expr": "\"error\" == state",
+                  "cases": [
+                    {
+                      "calls": [
+                        {
+                          "_type": "SetValue",
+                          "valueExpr": "false",
+                          "leftExpr": "$global.initialState"
+                        },
+                        {
+                          "_type": "SetValue",
+                          "valueExpr": "false",
+                          "leftExpr": "$global.listedState"
+                        },
+                        {
+                          "_type": "SetValue",
+                          "valueExpr": "true",
+                          "leftExpr": "$global.errorState"
+                        }
+                      ],
+                      "valueExpr": "true"
+                    }
+                  ],
+                  "otherwise": [
+                    {
+                      "_type": "Switch",
+                      "expr": "\"listed\" == state",
+                      "cases": [
+                        {
+                          "calls": [
+                            {
+                              "_type": "SetValue",
+                              "valueExpr": "false",
+                              "leftExpr": "$global.initialState"
+                            },
+                            {
+                              "_type": "SetValue",
+                              "valueExpr": "true",
+                              "leftExpr": "$global.listedState"
+                            },
+                            {
+                              "_type": "SetValue",
+                              "valueExpr": "false",
+                              "leftExpr": "$global.errorState"
+                            }
+                          ],
+                          "valueExpr": "true"
+                        }
+                      ],
+                      "otherwise": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "uf_isCoordinate",
+      "function": {
+        "logic": {
+          "variables": [
+            {
+              "name": "error",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "searchCoordArr",
+              "type": "string[]"
+            },
+            {
+              "name": "isCoordinate",
+              "type": "boolean",
+              "value": false
+            },
+            {
+              "name": "searchTitle",
+              "parameter": true
+            }
+          ],
+          "calls": [
+            {
+              "_type": "Log",
+              "level": "info",
+              "expr": "searchTitle"
+            },
+            {
+              "_type": "SetValue",
+              "leftExpr": "searchCoordArr",
+              "valueExpr": "searchTitle.split(',')"
+            },
+            {
+              "_type": "SetValue",
+              "leftExpr": "isCoordinate",
+              "valueExpr": "searchCoordArr.every(function isNumber(item) { return !isNaN(parseFloat(item))})"
+            },
+            {
+              "_type": "Event",
+              "returnValue": null,
+              "flow": 0,
+              "returnExpr": "isCoordinate"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "views": [
+    {
+      "commands": [
+        {
+          "id": "Favourites",
+          "title": "",
+          "icon": "favorites",
+          "disabled": false,
+          "visible": true,
+          "buttonType": "normal",
+          "showIcon": {
+            "phone": true,
+            "tablet": true,
+            "desktop": false
+          },
+          "showText": {
+            "phone": true,
+            "tablet": false,
+            "desktop": true
+          },
+          "onExecute": {
+            "logic": {
+              "variables": [],
+              "calls": [
+                {
+                  "_type": "NavigateToView",
+                  "viewId": "Favourites",
+                  "viewIdExpr": "",
+                  "viewParametersExpr": ""
+                }
+              ]
+            },
+            "parameters": []
+          },
+          "type": "command"
+        }
+      ],
+      "model": [
+        {
+          "name": "placeNameTitle",
+          "type": "string",
+          "defaultValue": "leeds"
+        },
+        {
+          "name": "errorDescription",
+          "type": "string",
+          "defaultValue": null
+        },
+        {
+          "name": "locationArray",
+          "type": "object[]",
+          "defaultValue": null
+        }
+      ],
+      "params": [],
+      "dataSources": [
+        {
+          "id": "LocationLIst",
+          "store": "LocationStore",
+          "refreshOnViewShown": "whenChanges",
+          "calculatedFields": [],
+          "filter": null,
+          "sort": ""
+        },
+        {
+          "id": "RecentlyList",
+          "store": "RecentLocations",
+          "refreshOnViewShown": "whenChanges",
+          "calculatedFields": [],
+          "filter": "",
+          "sort": ""
+        }
+      ],
+      "type": "view",
+      "functions": [],
+      "id": "PropertySearchPage",
+      "title": "Property Cross",
+      "navigationTitle": "",
+      "onLoad": {
+        "logic": {
+          "variables": [],
+          "calls": [
+            {
+              "_type": "Call",
+              "functionName": "$global.uf_SetState",
+              "resultVariableName": "",
+              "params": [
+                {
+                  "name": "state",
+                  "expr": "\"initial\""
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "components": [
+        {
+          "type": "label",
+          "id": "InstructionalText",
+          "style": {
+            "marginTop": "10px",
+            "marginBottom": "10px",
+            "paddingLeft": "10px",
+            "paddingRight": "10px"
+          },
+          "text": "Use the form below to search for houses to buy. You can search by place-name, postcode, or click 'My location', to search in your current location!"
+        },
+        {
+          "type": "input",
+          "id": "Search",
+          "style": {
+            "marginLeft": "10px",
+            "marginRight": "20px"
+          },
+          "value": "$model.placeNameTitle",
+          "showClearButton": true,
+          "placeholder": ""
+        },
+        {
+          "type": "container",
+          "id": "container1",
+          "style": {
+            "marginTop": "10px",
+            "marginLeft": "10px",
+            "marginRight": "10px"
+          },
+          "components": [
+            {
+              "type": "button",
+              "id": "Go",
+              "text": "Go",
+              "onClick": {
+                "logic": {
+                  "variables": [
+                    {
+                      "name": "error",
+                      "type": "string",
+                      "value": ""
+                    },
+                    {
+                      "name": "isCoordinate",
+                      "type": "boolean",
+                      "value": false
+                    },
+                    {
+                      "name": "response",
+                      "type": "object"
+                    },
+                    {
+                      "name": "requestExpression",
+                      "type": "object",
+                      "value": {
+                        "country": "uk",
+                        "pretty": 1,
+                        "action": "search_listings",
+                        "encoding": "json",
+                        "listing_type": "buy",
+                        "page": 1,
+                        "place_name": "leeds"
+                      }
+                    }
+                  ],
+                  "calls": [
+                    {
+                      "_type": "Call",
+                      "functionName": "$global.uf_SetState",
+                      "resultVariableName": "",
+                      "params": [
+                        {
+                          "name": "state",
+                          "expr": "\"listed\""
+                        }
+                      ]
+                    },
+                    {
+                      "_type": "Call",
+                      "functionName": "$global.uf_isCoordinate",
+                      "resultVariableName": "isCoordinate",
+                      "params": [
+                        {
+                          "name": "searchTitle",
+                          "expr": "$model.placeNameTitle"
+                        }
+                      ]
+                    },
+                    {
+                      "_type": "Switch",
+                      "expr": "isCoordinate",
+                      "cases": [
+                        {
+                          "calls": [
+                            {
+                              "_type": "SetValue",
+                              "leftExpr": "requestExpression.place_name",
+                              "valueExpr": "$model.placeNameTitle"
+                            },
+                            {
+                              "_type": "Eval",
+                              "expr": "delete requestExpression['centre_point']",
+                              "errorVariableName": "error"
+                            }
+                          ],
+                          "valueExpr": "false"
+                        }
+                      ],
+                      "otherwise": [
+                        {
+                          "_type": "SetValue",
+                          "leftExpr": "requestExpression.centre_point",
+                          "valueExpr": "$model.placeNameTitle"
+                        },
+                        {
+                          "_type": "Eval",
+                          "expr": "delete requestExpression['place_name']",
+                          "errorVariableName": "error"
+                        }
+                      ]
+                    },
+                    {
+                      "_type": "SendRequest",
+                      "dataType": "jsonp",
+                      "urlExpr": "'http://api.nestoria.co.uk/api'",
+                      "method": "get",
+                      "dataExpr": "requestExpression",
+                      "variableName": "response",
+                      "errorVariableName": "error",
+                      "cacheResponse": false
+                    },
+                    {
+                      "_type": "Insert",
+                      "storeExpr": "",
+                      "objectExpr": "{\"location\":$model.placeNameTitle, \"count\":response.response.total_results}",
+                      "storeId": "RecentLocations",
+                      "errorVariableName": "error"
+                    },
+                    {
+                      "_type": "SetValue",
+                      "leftExpr": "$model.locationArray",
+                      "valueExpr": "response.response.locations"
+                    },
+                    {
+                      "_type": "Switch",
+                      "expr": "typeof(response.response.listings) == \"undefined\"",
+                      "cases": [
+                        {
+                          "calls": [
+                            {
+                              "_type": "NavigateToView",
+                              "viewIdExpr": "",
+                              "viewParametersExpr": "",
+                              "viewId": "SearchResultsPage",
+                              "viewParameters": [
+                                {
+                                  "name": "searchString",
+                                  "valueExpr": "$model.placeNameTitle"
+                                }
+                              ]
+                            }
+                          ],
+                          "valueExpr": "false"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "type": "button",
+              "id": "MyLocation",
+              "style": {
+                "marginLeft": "20px"
+              },
+              "text": "My Location",
+              "onClick": {
+                "logic": {
+                  "variables": [
+                    {
+                      "name": "error",
+                      "type": "string",
+                      "value": ""
+                    },
+                    {
+                      "name": "coordinateString",
+                      "type": "string",
+                      "value": ""
+                    },
+                    {
+                      "name": "requestExpression",
+                      "type": "object",
+                      "value": {
+                        "country": "uk",
+                        "pretty": 1,
+                        "action": "search_listings",
+                        "encoding": "json",
+                        "listing_type": "buy",
+                        "page": 1,
+                        "place_name": "leeds"
+                      }
+                    }
+                  ],
+                  "calls": [
+                    {
+                      "_type": "Call",
+                      "functionName": "$global.uf_SetState",
+                      "resultVariableName": "",
+                      "params": [
+                        {
+                          "name": "state",
+                          "expr": "\"listed\""
+                        }
+                      ]
+                    },
+                    {
+                      "_type": "Eval",
+                      "expr": "navigator.geolocation.getCurrentPosition(function(position) {$model.placeNameTitle = \"\" + position.coords.latitude + \",\" + position.coords.longitude;});",
+                      "errorVariableName": "error"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "label",
+          "id": "listedLabel",
+          "style": {
+            "position": "static",
+            "marginTop": "10px",
+            "marginLeft": "10px"
+          },
+          "visible": "$global.listedState",
+          "text": "Please select a location bellow:"
+        },
+        {
+          "type": "list",
+          "id": "mainList",
+          "visible": "$global.listedState",
+          "dataSource": "$model.locationArray",
+          "editConfig": {},
+          "pullRefreshEnabled": false,
+          "onItemClick": {
+            "logic": {
+              "variables": [
+                {
+                  "name": "requestExpression",
+                  "value": {
+                    "country": "uk",
+                    "pretty": 1,
+                    "action": "search_listings",
+                    "encoding": "json",
+                    "listing_type": "buy",
+                    "page": 1,
+                    "place_name": "leeds"
+                  },
+                  "type": "object",
+                  "parameter": false
+                }
+              ],
+              "calls": [
+                {
+                  "_type": "NavigateToView",
+                  "viewId": "SearchResultsPage",
+                  "viewIdExpr": "",
+                  "viewParametersExpr": "",
+                  "viewParameters": [
+                    {
+                      "name": "searchString",
+                      "valueExpr": "$data.place_name"
+                    }
+                  ]
+                }
+              ]
+            },
+            "parameters": []
+          },
+          "itemComponents": [
+            {
+              "type": "label",
+              "id": "long_title",
+              "style": {
+                "marginTop": "5px",
+                "marginLeft": "5px",
+                "marginBottom": "5px"
+              },
+              "text": "$data.long_title"
+            }
+          ]
+        },
+        {
+          "type": "label",
+          "id": "initialLabel",
+          "style": {
+            "position": "static",
+            "marginTop": "5px",
+            "marginLeft": "5px"
+          },
+          "visible": "$global.initialState",
+          "text": "Recent searches:"
+        },
+        {
+          "type": "list",
+          "id": "recentlyList",
+          "visible": "$global.initialState",
+          "dataSource": "$model.RecentlyList",
+          "editConfig": {
+            "allowItemDeleting": true,
+            "itemDeleteMode": "swipe"
+          },
+          "onItemClick": {
+            "logic": {
+              "variables": [
+                {
+                  "name": "error",
+                  "type": "string",
+                  "value": ""
+                },
+                {
+                  "name": "isCoordinate",
+                  "type": "boolean",
+                  "value": false
+                },
+                {
+                  "name": "response",
+                  "type": "object"
+                },
+                {
+                  "name": "requestExpression",
+                  "type": "object",
+                  "value": {
+                    "country": "uk",
+                    "pretty": 1,
+                    "action": "search_listings",
+                    "encoding": "json",
+                    "listing_type": "buy",
+                    "page": 1,
+                    "place_name": "leeds"
+                  }
+                }
+              ],
+              "calls": [
+                {
+                  "_type": "Call",
+                  "functionName": "$global.uf_SetState",
+                  "resultVariableName": "",
+                  "params": [
+                    {
+                      "name": "state",
+                      "expr": "\"listed\""
+                    }
+                  ]
+                },
+                {
+                  "_type": "Call",
+                  "functionName": "$global.uf_isCoordinate",
+                  "resultVariableName": "isCoordinate",
+                  "params": [
+                    {
+                      "name": "searchTitle",
+                      "expr": "$data.location"
+                    }
+                  ]
+                },
+                {
+                  "_type": "Switch",
+                  "expr": "isCoordinate",
+                  "cases": [
+                    {
+                      "calls": [
+                        {
+                          "_type": "SetValue",
+                          "leftExpr": "requestExpression.place_name",
+                          "valueExpr": "$data.location"
+                        },
+                        {
+                          "_type": "Eval",
+                          "expr": "delete requestExpression['centre_point']",
+                          "errorVariableName": "error"
+                        }
+                      ],
+                      "valueExpr": "false"
+                    }
+                  ],
+                  "otherwise": [
+                    {
+                      "_type": "SetValue",
+                      "leftExpr": "requestExpression.centre_point",
+                      "valueExpr": "$model.placeNameTitle"
+                    },
+                    {
+                      "_type": "Eval",
+                      "expr": "delete requestExpression['place_name']",
+                      "errorVariableName": "error"
+                    }
+                  ]
+                },
+                {
+                  "_type": "SendRequest",
+                  "dataType": "jsonp",
+                  "urlExpr": "'http://api.nestoria.co.uk/api'",
+                  "method": "get",
+                  "dataExpr": "requestExpression",
+                  "variableName": "response",
+                  "errorVariableName": "error",
+                  "cacheResponse": false
+                },
+                {
+                  "_type": "SetValue",
+                  "leftExpr": "$model.locationArray",
+                  "valueExpr": "response.response.locations"
+                },
+                {
+                  "_type": "Switch",
+                  "expr": "typeof(response.response.listings) == \"undefined\"",
+                  "cases": [
+                    {
+                      "calls": [
+                        {
+                          "_type": "NavigateToView",
+                          "viewIdExpr": "",
+                          "viewParametersExpr": "",
+                          "viewId": "SearchResultsPage",
+                          "viewParameters": [
+                            {
+                              "name": "searchString",
+                              "valueExpr": "$model.placeNameTitle"
+                            }
+                          ]
+                        }
+                      ],
+                      "valueExpr": "false"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "itemComponents": [
+            {
+              "type": "row",
+              "id": "row1",
+              "columns": [
+                {
+                  "id": "column1",
+                  "span": 6,
+                  "components": [
+                    {
+                      "type": "label",
+                      "id": "recentlyLocations",
+                      "style": {
+                        "position": "static",
+                        "top": "20px",
+                        "marginTop": "5px",
+                        "marginLeft": "5px",
+                        "marginBottom": "5px"
+                      },
+                      "text": "$data.location"
+                    }
+                  ]
+                },
+                {
+                  "id": "column2",
+                  "style": {
+                    "horizontalAlign": "right"
+                  },
+                  "span": 6,
+                  "components": [
+                    {
+                      "type": "label",
+                      "id": "recentCount",
+                      "style": {
+                        "marginTop": "5px",
+                        "marginLeft": "5px",
+                        "marginBottom": "5px",
+                        "marginRight": "10px"
+                      },
+                      "text": "$data.count"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "label",
+          "id": "errorLabel",
+          "style": {
+            "marginTop": "5px",
+            "marginLeft": "5px"
+          },
+          "visible": "$global.errorState",
+          "text": "There was a problem with your search."
+        },
+        {
+          "type": "label",
+          "id": "errorDescription",
+          "style": {
+            "marginTop": "5px",
+            "marginLeft": "5px",
+            "marginBottom": "5px"
+          },
+          "text": "$model.errorDescription"
+        }
+      ]
+    },
+    {
+      "commands": [
+        {
+          "id": "AddFavorites",
+          "title": "favorites",
+          "icon": "like",
+          "disabled": "$model.isLiked",
+          "visible": true,
+          "buttonType": "normal",
+          "showIcon": {
+            "phone": true,
+            "tablet": true,
+            "desktop": false
+          },
+          "showText": {
+            "phone": false,
+            "tablet": false,
+            "desktop": true
+          },
+          "onExecute": {
+            "logic": {
+              "variables": [
+                {
+                  "name": "error",
+                  "value": "",
+                  "type": "string",
+                  "parameter": false
+                }
+              ],
+              "calls": [
+                {
+                  "_type": "Insert",
+                  "objectExpr": "$model",
+                  "storeId": "FavoritesStore",
+                  "storeExpr": "",
+                  "errorVariableName": "error"
+                },
+                {
+                  "_type": "SetValue",
+                  "valueExpr": "true",
+                  "leftExpr": "$model.isLiked"
+                }
+              ]
+            },
+            "parameters": []
+          },
+          "type": "command"
+        }
+      ],
+      "model": [],
+      "params": [
+        {
+          "name": "price",
+          "type": "string",
+          "defaultValue": null,
+          "expand": null
+        },
+        {
+          "name": "adress",
+          "type": "string",
+          "defaultValue": null,
+          "expand": null
+        },
+        {
+          "name": "img",
+          "type": "string",
+          "defaultValue": null,
+          "expand": null
+        },
+        {
+          "name": "keywords",
+          "type": "string",
+          "defaultValue": null,
+          "expand": null
+        },
+        {
+          "name": "summary",
+          "type": "string",
+          "defaultValue": null,
+          "expand": null
+        },
+        {
+          "name": "isLiked",
+          "type": "boolean",
+          "defaultValue": null,
+          "expand": null
+        },
+        {
+          "name": "guid",
+          "type": "string",
+          "defaultValue": null,
+          "expand": null
+        }
+      ],
+      "dataSources": [],
+      "type": "view",
+      "functions": [],
+      "id": "PropertyDetails",
+      "title": "PropertyDetails",
+      "onShow": {
+        "logic": {
+          "variables": [
+            {
+              "name": "error",
+              "value": "",
+              "type": "string",
+              "parameter": false
+            },
+            {
+              "name": "favorits",
+              "value": [],
+              "type": "object[]",
+              "parameter": false
+            }
+          ],
+          "calls": [
+            {
+              "_type": "RetrieveObject",
+              "type": 1,
+              "storeId": "FavoritesStore",
+              "variableName": "favorits",
+              "errorVariableName": "error",
+              "typeTitle": "all"
+            },
+            {
+              "_type": "Eval",
+              "expr": "$model.isLiked = favorits.some(function(obj){return obj.guid === $model.guid})",
+              "errorVariableName": "error"
+            }
+          ]
+        },
+        "parameters": []
+      },
+      "components": [
+        {
+          "type": "image",
+          "id": "Image",
+          "style": {
+            "position": "static",
+            "width": "379px",
+            "height": "204px",
+            "marginTop": "NaNpx",
+            "marginLeft": "NaNpx",
+            "marginBottom": "NaNpx",
+            "marginRight": "NaNpx"
+          },
+          "src": "$model.img"
+        },
+        {
+          "type": "label",
+          "id": "Adress",
+          "style": {
+            "marginTop": "10px",
+            "marginLeft": "10px",
+            "fontSize": "24px"
+          },
+          "text": "$model.adress"
+        },
+        {
+          "type": "label",
+          "id": "Cost",
+          "style": {
+            "marginTop": "10px",
+            "marginLeft": "10px",
+            "fontSize": "18px",
+            "fontWeight": "normal"
+          },
+          "text": "$model.price"
+        },
+        {
+          "type": "label",
+          "id": "AmountRestrooms",
+          "style": {
+            "width": "NaNpx",
+            "height": "NaNpx",
+            "marginTop": "10px",
+            "marginLeft": "10px",
+            "fontSize": "18px"
+          },
+          "text": "$model.keywords"
+        },
+        {
+          "type": "label",
+          "id": "Details",
+          "style": {
+            "wordWrap": "break-word",
+            "width": "NaNpx",
+            "height": "NaNpx",
+            "marginTop": "10px",
+            "marginLeft": "10px",
+            "paddingRight": "2px"
+          },
+          "text": "$model.summary"
+        }
+      ]
+    },
+    {
+      "commands": [],
+      "model": [],
+      "params": [],
+      "dataSources": [
+        {
+          "id": "FavoritesStore",
+          "store": "FavoritesStore",
+          "refreshOnViewShown": "whenChanges",
+          "calculatedFields": [],
+          "filter": "",
+          "sort": ""
+        }
+      ],
+      "type": "view",
+      "functions": [],
+      "id": "Favourites",
+      "title": "Favourites ",
+      "components": [
+        {
+          "type": "list",
+          "id": "favoritesList",
+          "dataSource": "$model.FavoritesStore",
+          "editConfig": {
+            "allowItemDeleting": true,
+            "itemDeleteMode": "swipe"
+          },
+          "onItemClick": {
+            "logic": {
+              "variables": [],
+              "calls": [
+                {
+                  "_type": "NavigateToView",
+                  "viewId": "PropertyDetails",
+                  "viewIdExpr": "",
+                  "viewParametersExpr": "",
+                  "viewParameters": [
+                    {
+                      "name": "price",
+                      "valueExpr": "$data.price"
+                    },
+                    {
+                      "name": "adress",
+                      "valueExpr": "$data.adress"
+                    },
+                    {
+                      "name": "img",
+                      "valueExpr": "$data.img"
+                    },
+                    {
+                      "name": "keywords",
+                      "valueExpr": "$data.keywords"
+                    },
+                    {
+                      "name": "summary",
+                      "valueExpr": "$data.summary"
+                    },
+                    {
+                      "name": "isLiked",
+                      "valueExpr": "$data.isLiked"
+                    },
+                    {
+                      "name": "guid",
+                      "valueExpr": "$data.guid"
+                    }
+                  ]
+                }
+              ]
+            },
+            "parameters": []
+          },
+          "itemComponents": [
+            {
+              "type": "image",
+              "id": "image1",
+              "style": {
+                "width": "70px",
+                "height": "70px",
+                "marginTop": "5px",
+                "marginLeft": "5px",
+                "marginBottom": "5px"
+              },
+              "src": "$data.img"
+            },
+            {
+              "type": "label",
+              "id": "price",
+              "style": {
+                "position": "absolute",
+                "top": "5px",
+                "right": "NaNpx",
+                "left": "85px",
+                "width": "NaNpx",
+                "height": "NaNpx",
+                "marginTop": "NaNpx",
+                "fontWeight": "bold"
+              },
+              "text": "$data.price"
+            },
+            {
+              "type": "label",
+              "id": "adress",
+              "style": {
+                "position": "absolute",
+                "top": "35px",
+                "left": "85px"
+              },
+              "text": "$data.adress"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "commands": [],
+      "model": [
+        {
+          "name": "matchesCurrent",
+          "type": "number",
+          "defaultValue": 0
+        },
+        {
+          "name": "matchesAll",
+          "type": "number",
+          "defaultValue": 0
+        }
+      ],
+      "params": [
+        {
+          "name": "searchString",
+          "type": "string",
+          "defaultValue": null,
+          "expand": null
+        }
+      ],
+      "dataSources": [
+        {
+          "id": "Locations",
+          "store": "LocationStore",
+          "refreshOnViewShown": "whenChanges",
+          "calculatedFields": [],
+          "filter": "$model.searchString",
+          "sort": ""
+        }
+      ],
+      "type": "view",
+      "functions": [],
+      "id": "SearchResultsPage",
+      "title": "Search Results",
+      "onLoad": {
+        "logic": {
+          "variables": [
+            {
+              "name": "error",
+              "value": "",
+              "type": "string",
+              "parameter": false
+            },
+            {
+              "name": "locationsObj",
+              "value": {
+                "location": "",
+                "count": 2012
+              },
+              "type": "object",
+              "parameter": false
+            }
+          ],
+          "calls": []
+        },
+        "parameters": []
+      },
+      "components": [
+        {
+          "type": "list",
+          "id": "listHouse",
+          "style": {
+            "height": "NaNpx"
+          },
+          "dataSource": "$model.Locations",
+          "editConfig": {},
+          "pullRefreshEnabled": true,
+          "onItemClick": {
+            "logic": {
+              "variables": [],
+              "calls": [
+                {
+                  "_type": "NavigateToView",
+                  "viewIdExpr": "",
+                  "viewParametersExpr": "",
+                  "viewId": "PropertyDetails",
+                  "viewParameters": [
+                    {
+                      "name": "price",
+                      "valueExpr": "\"£\" + $data.price_formatted.slice(0, -3)"
+                    },
+                    {
+                      "name": "adress",
+                      "valueExpr": "$data.title"
+                    },
+                    {
+                      "name": "img",
+                      "valueExpr": "$data.img_url"
+                    },
+                    {
+                      "name": "keywords",
+                      "valueExpr": "$data.keywords"
+                    },
+                    {
+                      "name": "summary",
+                      "valueExpr": "$data.summary"
+                    },
+                    {
+                      "name": "guid",
+                      "valueExpr": "$data.guid"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "itemComponents": [
+            {
+              "type": "container",
+              "id": "container1",
+              "style": {
+                "height": "NaNpx"
+              },
+              "components": [
+                {
+                  "type": "image",
+                  "id": "housePic",
+                  "style": {
+                    "position": "static",
+                    "width": "100%"
+                  },
+                  "src": "$data.img_url"
+                },
+                {
+                  "type": "label",
+                  "id": "title",
+                  "style": {
+                    "textShadow": "1px 1px black, 0 0 1em black",
+                    "position": "absolute",
+                    "top": "215px",
+                    "left": "15px",
+                    "color": "rgba(255, 255, 255, 1)",
+                    "height": "19px"
+                  },
+                  "text": "$data.title"
+                },
+                {
+                  "type": "label",
+                  "id": "priceLabel",
+                  "style": {
+                    "textShadow": "1px 1px black, 0 0 1em black",
+                    "position": "absolute",
+                    "top": "180px",
+                    "left": "15px",
+                    "color": "rgba(255, 255, 255, 1)",
+                    "width": "NaNpx",
+                    "fontSize": "22px",
+                    "fontWeight": "bold"
+                  },
+                  "text": "$data.price_formatted"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "navigation": {
+    "defaultView": "PropertySearchPage",
+    "title": "Navigation",
+    "items": [
+      {
+        "id": "PropertySearchPage",
+        "visible": true,
+        "icon": "find",
+        "onExecute": null,
+        "title": ""
+      },
+      {
+        "id": "Favourites",
+        "icon": "favorites",
+        "visible": true,
+        "onExecute": null,
+        "title": ""
+      }
+    ]
+  },
+  "authentication": {
+    "loginView": null,
+    "url": null,
+    "requestMethod": null,
+    "headersExpr": null,
+    "dataExpr": null
+  },
+  "authorization": {
+    "allowAnonymous": true,
+    "locations": [],
+    "loginView": null
+  },
+  "description": null,
+  "author": {
+    "name": null,
+    "email": null,
+    "website": null
+  },
+  "params": [],
+  "icon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAIAAADdvvtQAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAABD1JREFUeNrs3E1LFWsAwPEz1kJ3FbSJLgZCtuiNyqysyLpFkb1Bi7Z9g/sh7rZVHyCIFi2EFgWCBVLSi3Xv7QUJCloIEYShbkohcjqne2rmmTlahBPN8PutnFExPP+eZ+Z5zhh9PNVTg5/V5leAgBAQAkJAICAEhIAQEAgIASEgBAQCQkAICAGBgBAQAkJACAgEhIAQEAICASEgBISAQEAICAEhIBAQAkJACAgBgYAQEAJCQCAgBISAEBAICAEhIAQEAkJACAgBgYAQEAJCQAgIBISAEBACAgEhIASEgEBACAgBISAQEAJCQAgIAYGAEBACQkAgIASEgBAQCAgBISAEBAJCQAgIASEgEBACQkAICASEgBAQAgIBISAEhIBAQAgIASEgEBACQkAICAGBgBAQAkJAICAEhIAQEAgIASEgKmS5X0FZ/+v/9Xf0x7pvh/ODl+P7w/kvW3bhSvpw/tLFeHxMQNRq795GB44kPfUf+5QLKNp9JOpanxzPzS5tPaawEpu/cTVoZfO22orV2YB69wff8mDUNRBfzUzG40+Sw/aOtv6B7Ku7ZUf6ML51XUCkgvj3fjDebN8dHG7sra1clXzxm9dLPn8JqOSz2LVL9cuaVDFbo87u5HDPwaC2eyNu48kNQs/+C0adfclldbS1Z5FrJgHxJYuRoSCgPf3NDzq7ozVrk87qV0szkwIiNwLVb92np5KA1qz9fxZLD0WNzm4PF/QPEFD5B6Gn/+RnsWjDpuTU3Gx8c1BALDAIhTfnjVlsxer6BXVSWAHLPwKqUEDjY/Vb9PQsllkQKmL5R0DVaii8RY8On0g+Vczyj4CqFdBocI0c3H8Vs/wjoGoFNPEi2NZIX2IXs/wjoMo1FG5rNE8+vFvQ8o+AKnczP3KjxclHd4v+uQKqipnJxniTNj1V3PKPgKo4i314HxxOvfsFP1RA1ZF590/UtT69OS8gFpN590/zZLgjJiAWfiFPnmtx8tBxAfFjI9DmbS3OrlzVGJkExHdexTPna+0drcP684SA+N7wE74bOr232rZrn4BYtJ7O7vSbN+JXL2uvJ5JPt3dEh88KiIUDCm+14sdjmQXotp4+AbHwSxjeasWjw/Gj20FhO/vyzxwKiC9x5B/+mniRfeaw8eDzgIBo9fqFyz/xy+fNDzLPHO49JCBajUDh8s+3d69mNueL29YQUJmHn8zyz/RU8u7V3CxW0LaGgMo8/ITLP5nnezKzWEHbGgIqrfDZnUYxY3eCnuqzWOrJ+YK2NQRU2vlrINw9nZvN/oWy+iyWeXK+gG0NAZV2/vr6GHxz+AlbaQ5CmRXFArY1/Im7ctZTv6Wa/dDYtUgmrKH8l8U3B+Ojp4Nv3Ni7tI+JRR9P9Xg9MIUhIASEgEBACAgBISAQEAJCQAgIBISAEBACAgEhIASEgBAQCAgBISAEBAJCQPzOPgswAOz3/y8bsF2MAAAAAElFTkSuQmCC",
+  "appProtocol": null,
+  "theme": {
+    "colorHue": "",
+    "colorAccent": "",
+    "colorSelectedText": "",
+    "appearance": "generic"
+  }
+}

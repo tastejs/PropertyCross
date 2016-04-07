@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<widget id="com.propertycross.devexpress" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+  <name>Xenarius PropertyCross</name>
+  <description></description>
+  <author email="" href="">Unknown Author</author>
+  <content src="index.html" />
+  <preference name="permissions" value="none" />
+  <preference name="phonegap-version" value="cli-5.2.0" />
+  <preference name="orientation" value="default" />
+  <preference name="target-device" value="universal" />
+  <preference name="fullscreen" value="false" />
+  <preference name="webviewbounce" value="true" />
+  <preference name="prerendered-icon" value="true" />
+  <preference name="stay-in-webview" value="false" />
+  <preference name="ios-statusbarstyle" value="black-opaque" />
+  <preference name="StatusBarBackgroundColor" value="#000000" />
+  <preference name="StatusBarOverlaysWebView" value="false" />
+  <preference name="detect-data-types" value="true" />
+  <preference name="exit-on-suspend" value="false" />
+  <preference name="show-splash-screen-spinner" value="true" />
+  <preference name="auto-hide-splash-screen" value="false" />
+  <preference name="AutoHideSplashScreen" value="false" />
+  <preference name="disable-cursor" value="false" />
+  <preference name="android-minSdkVersion" value="7" />
+  <preference name="android-targetSdkVersion" value="14" />
+  <preference name="android-installLocation" value="auto" />
+  <preference name="SplashScreen" value="splash" />
+  <gap:plugin name="cordova-plugin-splashscreen" source="npm" />
+  <gap:plugin name="cordova-plugin-statusbar" source="npm" />
+  <gap:plugin name="cordova-plugin-whitelist" source="npm" />
+  <gap:plugin name="cordova-plugin-camera" source="npm" />
+  <gap:config-file platform="android" parent="/manifest" mode="add">
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MANAGE_DOCUMENTS" />
+  </gap:config-file>
+  <config-file platform="android" parent="/manifest" mode="add">
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MANAGE_DOCUMENTS" />
+  </config-file>
+  <icon src="icon.png" />
+  <icon gap:platform="android" gap:qualifier="ldpi" width="36" height="36" src="icons/36.png" />
+  <icon gap:platform="android" gap:qualifier="mdpi" width="48" height="48" src="icons/48.png" />
+  <icon gap:platform="android" gap:qualifier="hdpi" width="72" height="72" src="icons/72.png" />
+  <icon gap:platform="android" gap:qualifier="xhdpi" width="96" height="96" src="icons/96.png" />
+  <icon gap:platform="android" gap:qualifier="xxhdpi" width="144" height="144" src="icons/144.png" />
+  <icon gap:platform="android" gap:qualifier="xxxhdpi" width="192" height="192" src="icons/192.png" />
+  <icon gap:platform="ios" width="57" height="57" src="icons/57.png" />
+  <icon gap:platform="ios" width="60" height="60" src="icons/60.png" />
+  <icon gap:platform="ios" width="72" height="72" src="icons/72.png" />
+  <icon gap:platform="ios" width="76" height="76" src="icons/76.png" />
+  <icon gap:platform="ios" width="114" height="114" src="icons/114.png" />
+  <icon gap:platform="ios" width="120" height="120" src="icons/120.png" />
+  <icon gap:platform="ios" width="144" height="144" src="icons/144.png" />
+  <icon gap:platform="ios" width="152" height="152" src="icons/152.png" />
+  <icon gap:platform="ios" width="180" height="180" src="icons/180.png" />
+  <gap:splash gap:platform="android" gap:qualifier="port-ldpi" width="200" height="320" src="splashscreens/200-320.png" />
+  <gap:splash gap:platform="android" gap:qualifier="port-mdpi" width="320" height="480" src="splashscreens/320-480.png" />
+  <gap:splash gap:platform="android" gap:qualifier="port-hdpi" width="480" height="800" src="splashscreens/480-800.png" />
+  <gap:splash gap:platform="android" gap:qualifier="port-xhdpi" width="720" height="1280" src="splashscreens/720-1280.png" />
+  <gap:splash gap:platform="android" gap:qualifier="port-xxhdpi" width="960" height="1600" src="splashscreens/960-1600.png" />
+  <gap:splash gap:platform="android" gap:qualifier="port-xxxhdpi" width="1280" height="1920" src="splashscreens/1280-1920.png" />
+  <gap:splash gap:platform="android" gap:qualifier="land-ldpi" width="320" height="200" src="splashscreens/320-200.png" />
+  <gap:splash gap:platform="android" gap:qualifier="land-mdpi" width="480" height="320" src="splashscreens/480-320.png" />
+  <gap:splash gap:platform="android" gap:qualifier="land-hdpi" width="800" height="480" src="splashscreens/800-480.png" />
+  <gap:splash gap:platform="android" gap:qualifier="land-xhdpi" width="1280" height="720" src="splashscreens/1280-720.png" />
+  <gap:splash gap:platform="android" gap:qualifier="land-xxhdpi" width="1600" height="960" src="splashscreens/1600-960.png" />
+  <gap:splash gap:platform="android" gap:qualifier="land-xxxhdpi" width="1920" height="1280" src="splashscreens/1920-1280.png" />
+  <gap:splash gap:platform="ios" width="640" height="960" src="splashscreens/640-960.png" />
+  <gap:splash gap:platform="ios" width="640" height="1136" src="splashscreens/640-1136.png" />
+  <gap:splash gap:platform="ios" width="750" height="1334" src="splashscreens/750-1334.png" />
+  <gap:splash gap:platform="ios" width="768" height="1024" src="splashscreens/768-1024.png" />
+  <gap:splash gap:platform="ios" width="1536" height="2048" src="splashscreens/1536-2048.png" />
+  <gap:splash gap:platform="ios" width="1242" height="2208" src="splashscreens/1242-2208.png" />
+  <gap:splash gap:platform="ios" width="1024" height="768" src="splashscreens/1024-768.png" />
+  <gap:splash gap:platform="ios" width="1136" height="640" src="splashscreens/1136-640.png" />
+  <gap:splash gap:platform="ios" width="1334" height="750" src="splashscreens/1334-750.png" />
+  <gap:splash gap:platform="ios" width="2048" height="1536" src="splashscreens/2048-1536.png" />
+  <gap:splash gap:platform="ios" width="2208" height="1242" src="splashscreens/2208-1242.png" />
+  <gap:splash gap:platform="winphone" width="480" height="800" src="splashscreens/480-800.jpg" />
+  <access origin="*" />
+  <allow-intent href="http://*/*" />
+  <allow-intent href="https://*/*" />
+  <allow-intent href="tel:*" />
+  <allow-intent href="sms:*" />
+  <allow-intent href="mailto:*" />
+  <allow-intent href="geo:*" />
+  <platform name="android">
+    <allow-intent href="market:*" />
+  </platform>
+  <platform name="ios">
+    <allow-intent href="itms:*" />
+    <allow-intent href="itms-apps:*" />
+  </platform>
+  <engine name="android" spec="^4.0.2" />
+</widget>

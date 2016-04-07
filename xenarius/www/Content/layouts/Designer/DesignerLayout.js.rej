@@ -1,0 +1,52 @@
+diff a/Lib/DevExtreme/layouts/Designer/DesignerLayout.js b/Lib/DevExtreme/layouts/Designer/DesignerLayout.js	(rejected hunks)
+@@ -115,17 +115,45 @@
+                         that._listViewSourceRemoving(dropDown, key);
+                     };
+                 var hideTimeout = undefined;
++
++
++                
++
++                var setLoadingTimout = function (timeout) {
++                    var st = setTimeout(function () {
++                        var loadingElement = $('.dx-overlay-wrapper.dx-overlay-modal.dx-loadpanel-wrapper.dx-overlay-shader');
++                        if (loadingElement.length !== 0) {
++                            setLoadingTimout(1000);
++                        } else {
++                            var topHoverElement = $("*:hover").last(),
++                                isPopupHover = $($('.dx-popup-content.drop-down-menu-content').last()).find(topHoverElement).length !== 0;
++                            if (!isPopupHover) {
++                                hideTimeout = setTimeout(function () {
++                                    popup.hide();
++                                    hideTimeout = undefined;
++                                }, 1000);
++                            }
++                        }
++                        clearTimeout(st);
++                        st = undefined;
++                    }, timeout);
++                };
++
+                 popupContentElement.addClass("drop-down-menu-content")
+                     .on("mouseleave", function (e) {
+-                        var timeout = $(e.toElement).hasClass('dx-overlay-wrapper', 'dx-overlay-modal', 'dx-loadpanel-wrapper', 'dx-overlay-shader') ? 3000 : 1000;
+-                        hideTimeout = setTimeout(function () {
+-                            popup.hide();
+-                            hideTimeout = undefined;
+-                        }, timeout);
++                        if ($(e.toElement).hasClass('dx-overlay-wrapper', 'dx-overlay-modal', 'dx-loadpanel-wrapper', 'dx-overlay-shader')) {
++                            setLoadingTimout(1000);
++                        } else {
++                            hideTimeout = setTimeout(function () {
++                                popup.hide();
++                                hideTimeout = undefined;
++                            }, 1000);
++                        }
+                     })
+                     .on("mouseenter", function () {
+                         if (hideTimeout !== undefined) {
+                             clearTimeout(hideTimeout);
++                            hideTimeout = undefined;
+                         }
+                     });
+ 

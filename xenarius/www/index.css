@@ -1,0 +1,9 @@
+.dx-navigation-item {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.dx-list .dx-item.dx-state-hover .dx-item-content div,
+.dx-list .dx-item.dx-state-active .dx-item-content div {
+  background: transparent !important;
+}
