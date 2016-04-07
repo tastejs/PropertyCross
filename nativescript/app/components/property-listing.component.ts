@@ -25,8 +25,11 @@ export class PropertyListingComponent {
             this.listing = _searchResultsModel.getListingByGuid(guid);
         }
         let bedroomSuffix = (this.listing.bedroom_number > 1) ? "s" : "";
-        let bathroomSuffix = (this.listing.bathroom_number > 1) ? "s" : ""
-        this.rooms = this.listing.bedroom_number + " bedroom" + bedroomSuffix + ", " + this.listing.bathroom_number + " bathroom" + bathroomSuffix;
+        let bathroomSuffix = (this.listing.bathroom_number > 1) ? "s" : "";
+        this.rooms = this.listing.bedroom_number + " bedroom" + bedroomSuffix
+        if(this.listing.bathroom_number) {
+            this.rooms += ", " + this.listing.bathroom_number + " bathroom" + bathroomSuffix;
+        }
      }
     
     addToFavourites() {

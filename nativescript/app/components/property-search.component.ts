@@ -80,7 +80,7 @@ export class PropertySearchComponent {
     
     private processSearchResponse(response: Observable<any>) {
         response.subscribe(res => {
-            if(res.application_response_code === "100" || res.application_response_code === "101" || res.application_response_code === "110") {
+            if(res.application_response_code.substr(0,1) === "1") {
                 if (res.listings.length > 0) {
                     let location: SimpleLocation = { key: res.locations[0].place_name, name: res.locations[0].long_title }
                     this.addRecentLocation({ location: location, results: res.total_results });
