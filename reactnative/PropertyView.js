@@ -6,7 +6,8 @@ var {
   Image, 
   View,
   Text,
-  Component
+  Component,
+  AsyncStorage
 } = React;
 
 var styles = StyleSheet.create({
@@ -43,6 +44,23 @@ var styles = StyleSheet.create({
 });
 
 class PropertyView extends Component {
+  toggleFavourited = function(property){
+    var tempFavourites;
+    return AsyncStorage.getItem("favourites").then((value) =>
+    {
+      tempFavourites = value != undefined ? JSON.parse("" + value +"") : [];
+      var index = tempFavourites.findIndex(favourite => favourite.guid === property.guid);
+      if(index > -1)
+      {
+        tempFavourites.splice(index,1);
+      }
+      else
+      {
+        tempFavourites.push(property);
+      }
+      AsyncStorage.setItem("favourites", JSON.stringify(tempFavourites)).then().done();
+    });
+  };
 
   render() {
     var property = this.props.property;

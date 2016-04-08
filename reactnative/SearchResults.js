@@ -75,36 +75,15 @@ class SearchResults extends Component {
   rowPressed(propertyGuid) {
     var property = this.state.shownListings
       .filter(prop => prop.guid === propertyGuid)[0];
-
     this.props.navigator.push({
       title: "Property",
       component: PropertyView,
       passProps: {property: property},
       rightButtonTitle: 'Favourite',
       onRightButtonPress: () => {
-        this.toggleFavourited(property)
+        var propertyView = new PropertyView();
+        propertyView.toggleFavourited(property);
     }});
-  }
-
-  toggleFavourited(property){
-    AsyncStorage.getItem("favourites").then((value) =>
-    {
-      var tempFavourites = value != undefined ? JSON.parse("" + value +"") : [];
-      var alreadyExists = false;
-      for(var i = 0; i < tempFavourites.length; i++)
-      {
-        if(tempFavourites[i].guid == property.guid)
-        {
-          tempFavourites.splice(i,1);//remove the property from favourites
-          alreadyExists = true;
-        }
-      }
-      if(!alreadyExists)
-      {
-        tempFavourites.push(property);
-      }
-      AsyncStorage.setItem("favourites", JSON.stringify(tempFavourites)).then().done();
-    }).done();
   }
 
   _handleResponse(response) {

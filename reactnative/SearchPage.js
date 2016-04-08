@@ -194,13 +194,8 @@ class SearchPage extends Component {
   saveSearch(response)
   {
     var tempSearches = this.state.pastSearches;
-    var newPastSearch = {search:response.locations[0].title, results: response.total_results};
-    tempSearches.forEach((current,index) => {
-      if(current.search === newPastSearch.search)
-      {
-        tempSearches.splice(index,1);
-      }
-    });
+    var newPastSearch = {key: response.locations[0].place_name, search:response.locations[0].title, results: response.total_results};
+    tempSearches = tempSearches.filter(location => location.key != newPastSearch.key);
     tempSearches.unshift(newPastSearch);
     if(tempSearches.length > 6)
     {
@@ -246,28 +241,6 @@ class SearchPage extends Component {
       });
   }
 
-  toggleFavourited(property){
-    AsyncStorage.getItem("favourites").then((value) =>
-    {
-      var tempFavourites = value != undefined ? JSON.parse("" + value +"") : [];
-      var alreadyExists = false;
-      for(var i = 0; i < tempFavourites.length; i++)
-      {
-        if(tempFavourites[i].guid == property.guid)
-        {
-          tempFavourites.splice(i,1);//remove the property from favourites
-          alreadyExists = true;
-        }
-      }
-      if(!alreadyExists)
-      {
-        tempFavourites.push(property);
-      }
-      AsyncStorage.setItem("favourites", JSON.stringify(tempFavourites)).then().done();
-      this.setState({favourites: JSON.stringify(tempFavourites)});
-    }).done();
-  }
-
   onSearchTextChanged(event) {
     this.setState({ searchString: event.nativeEvent.text });
   }
@@ -284,12 +257,6 @@ class SearchPage extends Component {
       (<ProgressBarAndroid
       styleAttr="Large"/>);
     }
-    else
-    var spinner = this.state.isLoading ?
-    ( <ActivityIndicatorIOS
-        hidden='true'
-        size='large'/> ) :
-    ( <View/>);
     var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     var bottomAreaTitle = "Recent Searches:";
     var locations = [];

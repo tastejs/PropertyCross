@@ -70,32 +70,13 @@ class Favourites extends Component {
         {property: property},
         rightButtonTitle: 'Favourite',
         onRightButtonPress: () => {
-          this.toggleFavourited(property);
+          var propertyView = new PropertyView();
+          propertyView.toggleFavourited(property,this.displayFavourites).done(() =>{
+            this.displayFavourites();
+          });
         }
     })
   };
-
-  toggleFavourited(property){
-    AsyncStorage.getItem("favourites").then((value) =>
-    {
-      var tempFavourites = value != undefined ? JSON.parse("" + value +"") : [];
-      var alreadyExists = false;
-      for(var i = 0; i < tempFavourites.length; i++)
-      {
-        if(tempFavourites[i].guid == property.guid)
-        {
-          tempFavourites.splice(i,1);//remove the property from favourites
-          alreadyExists = true;
-        }
-      }
-      if(!alreadyExists)
-      {
-        tempFavourites.push(property);
-      }
-      AsyncStorage.setItem("favourites", JSON.stringify(tempFavourites)).then().done();
-      this.setState({favourites: JSON.stringify(tempFavourites)});
-    }).done();
-  }
 
   displayFavourites(){
     AsyncStorage.getItem("favourites").then((favourites) => {
