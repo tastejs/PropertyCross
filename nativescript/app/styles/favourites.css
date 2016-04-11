@@ -1,0 +1,23 @@
+.price-label {
+    font-size: 18;
+    margin-left: 5;
+    margin-right: 5;
+    color: blue;
+}
+
+.title-label {
+    font-size: 16;
+    margin-left: 5;
+    margin-right: 5;
+}
+
+.error {
+    padding: 10;
+    font-size: 20;
+    color: red;
+}
+
+.list-item {
+    padding: 5 10;
+    font-size: 16;
+}

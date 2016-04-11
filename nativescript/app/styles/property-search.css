@@ -1,0 +1,36 @@
+.searchfield {
+    padding: 10;
+}
+
+.intro {
+    horizontal-align: stretch;
+    padding: 10;
+}
+
+.caption {
+    padding: 10;
+    font-size: 22;
+    text-decoration: underline;
+}
+
+.error {
+    padding: 10;
+    font-size: 20;
+    color: red;
+}
+
+.location-label {
+    font-size: 20;
+    margin-left: 10;
+    margin-right: 5;
+}
+
+.results-label {
+    font-size: 16;
+    margin: 5;
+    background-color: darkblue;
+    color: white;
+    padding: 5;
+    border-radius: 5;
+    text-align: right;
+}

@@ -1,0 +1,16 @@
+<ActionBar title=" Favourites" android.icon="res://icon" android.iconVisibility="always">
+</ActionBar>
+<StackLayout>
+    <Label class="error" *ngIf="favourites.length==0" text="You have not added any properties to your favourites." textWrap="true"></Label>
+    <ListView [items]="favourites">
+        <template #item="item">
+            <StackLayout orientation="horizontal" class="list-item" (tap)="displayDetails(item)">
+                <Image [src]="item.img_url" height="50"></Image>
+                <StackLayout>
+                    <Label class="price-label" text="{{item.price | pound}}"></Label>
+                    <Label class="title-label" [text]="item.title"></Label>
+                </StackLayout>
+            </StackLayout>
+        </template>
+    </ListView>
+</StackLayout>

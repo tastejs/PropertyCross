@@ -1,0 +1,19 @@
+<ActionBar title=" {{ searchResults.length }} of {{ totalResults }} matches" android.icon="res://icon" android.iconVisibility="always">
+</ActionBar>
+<ActivityIndicator [busy]="isLoadingMore"></ActivityIndicator>
+<GridLayout cssClass="{{isLoadingMore ? 'hidden' : ''}}" rows="*, auto">
+    <GridLayout row="0">
+    <ListView [items]="searchResults" dock="top">
+        <template #item="item">
+            <StackLayout class="list-item" orientation="horizontal" (tap)="displayDetails(item)">
+                <Image [src]="item.img_url" height="50"></Image>
+                <StackLayout>
+                    <Label class="price-label" text="{{item.price | pound}}"></Label>
+                    <Label class="title-label" [text]="item.title"></Label>
+                </StackLayout>
+            </StackLayout>
+        </template>
+    </ListView>
+    </GridLayout>
+    <Button *ngIf="loadingButtonEnabled()" row="1" dock="bottom" text="load more" (tap)="loadMore()"></Button>
+</GridLayout>
