@@ -1,6 +1,5 @@
 package com.propertycross.codename1;
 
-
 import com.codename1.components.InfiniteProgress;
 import com.codename1.components.InfiniteScrollAdapter;
 import com.codename1.components.MultiButton;
@@ -19,9 +18,11 @@ import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
 import com.codename1.ui.EncodedImage;
+import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.Image;
 import com.codename1.ui.Label;
+import com.codename1.ui.TextArea;
 import com.codename1.ui.TextField;
 import com.codename1.ui.Toolbar;
 import com.codename1.ui.URLImage;
@@ -55,11 +56,16 @@ import java.util.Map;
  */
 public class PropertyCross {
     /**
+     * Determines the way the back command will behave across platforms
+     */
+    private static final Toolbar.BackCommandPolicy BACK_POLICY = Toolbar.BackCommandPolicy.AS_ARROW;
+    
+    /**
      * Caches results from searches, Codename One also contains a persistent CacheMap class that might be more suitable for caching since 
      * it also clears old cache entries and persists the caches to storage
      */
-    private Map<String, Map<Integer, Map<String, Object>>> cachedSearches = new HashMap<String, Map<Integer, Map<String, Object>>>();
-    private Map<Location, Map<Integer, Map<String, Object>>> cachedLocationSearches = new HashMap<Location, Map<Integer, Map<String, Object>>>();
+    private final Map<String, Map<Integer, Map<String, Object>>> cachedSearches = new HashMap<>();
+    private final Map<Location, Map<Integer, Map<String, Object>>> cachedLocationSearches = new HashMap<>();
     private Form current;
     
     /**
@@ -93,31 +99,28 @@ public class PropertyCross {
      * This is a Codename One initialization callback that is invoked when the app is started
      */    
     public void init(Object context) {
-        try {
-            // loading the theme of the application
-            Resources theme = Resources.openLayered("/theme");
-            UIManager.getInstance().setThemeProps(theme.getTheme(theme.getThemeResourceNames()[0]));
-            
-            // the specification requires that only portrait would be supported
-            Display.getInstance().lockOrientation(true);
-            
-            // We load the images that are stored in the resource file here so we can use them later
-            placeholder = (EncodedImage)theme.getImage("placeholder");
-            favoriteSel = theme.getImage("favorite_sel");
-            favoriteUnsel = theme.getImage("favorite_unsel");
-            
-            // We initialize the lists of favorites and recent entries here, we load them from storage and save
-            // them whenever we change them
-            favoritesList = (List<Map<String, Object>>)Storage.getInstance().readObject("favoritesList");
-            if(favoritesList == null) {
-                favoritesList = new ArrayList<Map<String, Object>>();
-            }
-            recentSearchesList = (List<Map<String, String>>)Storage.getInstance().readObject("recentSearches");
-            if(recentSearchesList == null) {
-                recentSearchesList = new ArrayList<Map<String, String>>();
-            }
-        } catch(IOException e){
-            e.printStackTrace();
+        // loading the theme of the application
+        Resources theme = UIManager.initFirstTheme("/theme");
+
+        // the specification requires that only portrait would be supported
+        Display.getInstance().lockOrientation(true);
+
+        Toolbar.setGlobalToolbar(true);
+        
+        // We load the images that are stored in the resource file here so we can use them later
+        placeholder = (EncodedImage)theme.getImage("placeholder");
+        favoriteSel = FontImage.createMaterial(FontImage.MATERIAL_STAR, "TitleCommand", 3.5f);
+        favoriteUnsel = FontImage.createMaterial(FontImage.MATERIAL_STAR_BORDER, "TitleCommand", 3.5f);
+
+        // We initialize the lists of favorites and recent entries here, we load them from storage and save
+        // them whenever we change them
+        favoritesList = (List<Map<String, Object>>)Storage.getInstance().readObject("favoritesList");
+        if(favoritesList == null) {
+            favoritesList = new ArrayList<>();
+        }
+        recentSearchesList = (List<Map<String, String>>)Storage.getInstance().readObject("recentSearches");
+        if(recentSearchesList == null) {
+            recentSearchesList = new ArrayList<>();
         }
     }
     
@@ -144,108 +147,88 @@ public class PropertyCross {
      */
     private void showMainForm(boolean back, String errorMessage, List<Map<String, Object>> listings) {
         // we initialize the main form and add the favorites command so we can navigate there
-        Form hi = new Form("PropertyCross");
-        Command favs = new Command("Favourites") {
-            @Override
-            public void actionPerformed(ActionEvent ev) {
-                showFavs();
-            }
-        };
-        favs.putClientProperty("android:showAsAction", "withText");        
-        hi.addCommand(favs);
-        
         // we use border layout so the list will take up all the available space
-        hi.setLayout(new BorderLayout());
+        Form hi = new Form("PropertyCross", new BorderLayout());
+        hi.getToolbar().addCommandToRightBar("Favs", null, e -> showFavs());
+        hi.getToolbar().setTitleCentered(true);
         
-        // we place the other elements in the box Y layout so they are one on top of the other
-        Container boxY = new Container(new BoxLayout(BoxLayout.Y_AXIS));
-        boxY.addComponent(new SpanLabel("Use the form below to search for houses to buy. You can search by place-name, postcode, or click 'My Location', to search in your current location!"));
-        final TextField search = new TextField();
+        final TextField search = new TextField("", "Search", 20, TextArea.ANY);
         
         // the component group gives the buttons and text field that rounded corner iOS look when running on iOS. It does nothing on other platforms by default
-        ComponentGroup gp = new ComponentGroup();
-        boxY.addComponent(gp);
-        search.setHint("Search");
-        gp.addComponent(search);
         Button go = new Button("Go");
         Button myLocation = new Button("My Location");
-        gp.addComponent(go);
-        gp.addComponent(myLocation);
+        ComponentGroup gp = ComponentGroup.enclose(search, go, myLocation);
         
         // this allows the "Done" button in the virtual keyboard to perform the search and also binds to the Go button.
-        ActionListener plainTextSearch = new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                if(search.getText().length() > 1) {
-                    performSearch(search.getText(), null);
-                } else {
-                    Dialog.show("Error", "You need to enter a search string", "OK", null);
-                }
+        ActionListener plainTextSearch = evt -> {
+            if(search.getText().length() > 1) {
+                performSearch(search.getText(), null);
+            } else {
+                Dialog.show("Error", "You need to enter a search string", "OK", null);
             }
         };
         search.setDoneListener(plainTextSearch);
         go.addActionListener(plainTextSearch);
         
         // we use the GPS to search for location and if its unavailble we just try to get the last known location
-        myLocation.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                InfiniteProgress ip = new InfiniteProgress();
-                Dialog dlg = ip.showInifiniteBlocking();
-                Location l = LocationManager.getLocationManager().getCurrentLocationSync(30000);
-                dlg.dispose();
-                if(l == null) {
-                    // fallback to estimate location
-                    try {
-                        l = LocationManager.getLocationManager().getCurrentLocation();
-                    } catch(IOException err) {
-                        Dialog.show("Error", "Failed in location lookup", "OK", null);
-                        return;
-                    }
+        myLocation.addActionListener(evt -> {
+            InfiniteProgress ip = new InfiniteProgress();
+            Dialog dlg = ip.showInifiniteBlocking();
+            Location l = LocationManager.getLocationManager().getCurrentLocationSync(30000);
+            dlg.dispose();
+            if(l == null) {
+                // fallback to estimate location
+                try {
+                    l = LocationManager.getLocationManager().getCurrentLocation();
+                } catch(IOException err) {
+                    Dialog.show("Error", "Failed in location lookup", "OK", null);
+                    return;
                 }
-                performSearch(null, l);
             }
+            performSearch(null, l);
         });
         
-        hi.addComponent(BorderLayout.NORTH, boxY);
+        // we place the other elements in the box Y layout so they are one on top of the other
+        Container boxY = BoxLayout.encloseY(
+            new SpanLabel("Use the form below to search for houses to buy. You can search by place-name, postcode, or click 'My Location', to search in your current location!"),
+                gp);
+        hi.add(BorderLayout.NORTH, boxY);
         
         // if there is a pending error message we show that since its the most important
         if(errorMessage != null) {
-                hi.addComponent(BorderLayout.CENTER, new SpanLabel(errorMessage));
+                hi.add(BorderLayout.CENTER, new SpanLabel(errorMessage));
         } else {
             // if there is a listing to pick from we will show that
             if(listings != null) {
                 // we create a list of the results returned from the server and map the result list to the JSON name (long_title)
-                boxY.addComponent(new Label("Please select a location below"));
+                boxY.add("Please select a location below");
                 final MultiList actualLocation = new MultiList();
                 actualLocation.getSelectedButton().setNameLine1("long_title");
                 actualLocation.getUnselectedButton().setNameLine1("long_title");
                 actualLocation.setModel(new DefaultListModel(listings));
-                hi.addComponent(BorderLayout.CENTER, actualLocation);
-                actualLocation.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent evt) {
-                        // when the user selects and entry from the list we navigate to the actual search result entry
-                        Map<String, Object> sel = (Map<String, Object>)actualLocation.getSelectedItem();
-                        performSearch((String)sel.get("place_name"), null);                        
-                    }
+                hi.add(BorderLayout.CENTER, actualLocation);
+                actualLocation.addActionListener(evt -> {
+                    // when the user selects and entry from the list we navigate to the actual search result entry
+                    Map<String, Object> sel = (Map<String, Object>)actualLocation.getSelectedItem();
+                    performSearch((String)sel.get("place_name"), null);
                 });               
             } else {
                 // otherwise we try to show the recent searches if there are any available
                 if(recentSearchesList.size() > 0) {
                     // recent searches are already stored in a way that is very friendly to list model so we can just show it
                     // we switch the list to horizontal layout mode so it will display more closely to the design
-                    boxY.addComponent(new Label("Recent Searches"));
+                    boxY.add(new Label("Recent Searches"));
                     final MultiList recentSearches = new MultiList();
                     recentSearches.getUnselectedButton().setHorizontalLayout(true);
                     recentSearches.getSelectedButton().setHorizontalLayout(true);
                     recentSearches.setModel(new DefaultListModel(recentSearchesList));
-                    hi.addComponent(BorderLayout.CENTER, recentSearches);
-                    recentSearches.addActionListener(new ActionListener() {
-                        public void actionPerformed(ActionEvent evt) {
-                            Map<String, String> selection = (Map<String, String>)recentSearches.getSelectedItem();
-                            performSearch((String)selection.get("Line1"), null);
-                        }
+                    hi.add(BorderLayout.CENTER, recentSearches);
+                    recentSearches.addActionListener(evt -> {
+                        Map<String, String> selection = (Map<String, String>)recentSearches.getSelectedItem();
+                        performSearch((String)selection.get("Line1"), null);
                     });
                 } else {
-                    boxY.addComponent(new Label("There are no recent searches"));
+                    boxY.add(new Label("There are no recent searches"));
                 }
             }
         }
@@ -263,13 +246,21 @@ public class PropertyCross {
      * @param f the form from which we would be returning
      */
     private void addBackToHome(Form f) {
-        // the back command maps to the physical button on devices other than iPhone and creates the back arrow appearance on iOS
-        f.setBackCommand(new Command("PropertyCross") {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                showMainForm(true, null, null);
-            }
-        });
+        // the back command maps to the physical button on devices other than iPhone and creates the back arrow 
+        // appearance on iOS
+        f.getToolbar().setBackCommand("PropertyCross", BACK_POLICY,  e -> showMainForm(true, null, null));
+        f.getToolbar().setTitleCentered(true);
+    }
+    
+    private String guid(Map<String, Object> currentListing) {
+        String guid = (String)currentListing.get("guid");
+                    
+        if(guid == null) {
+            String thumb_url = (String)currentListing.get("thumb_url");
+            guid = thumb_url.replace('/', '_').replace(':', '_').replace('&', '_').replace('?', '_');
+        }
+        
+        return guid;
     }
     
     /**
@@ -280,11 +271,8 @@ public class PropertyCross {
      */
     void performSearch(final String text, final Location l) {
         // the form is initilized when there are no results so the title is different from the design, as results come in we set the title correctly
-        final Form searchResults = new Form("Searching...");
+        final Form searchResults = new Form("Searching...", new BoxLayout(BoxLayout.Y_AXIS));
         addBackToHome(searchResults);
-        
-        // results are laid our vertically as buttons
-        searchResults.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
         
         // Codename One includes an ability to "infinitely scroll" which is more convenient than the "more" button 
         // approach. This works thru a callback to the runnable that fetches the additional results and we scroll
@@ -330,7 +318,7 @@ public class PropertyCross {
                     totalPages = totalPageCount.intValue();
                     if(text != null) {
                         // if the search was successful and it isn't yet in the recent search list we should add it to the recent searches
-                        Map<String, String> data = new HashMap<String, String>();
+                        Map<String, String> data = new HashMap<>();
                         data.put("Line1", text);
                         data.put("Line2", "(" + totalResults + ")");
                         if(!recentSearchesList.contains(data)) {
@@ -347,7 +335,7 @@ public class PropertyCross {
                     MultiButton mb = new MultiButton();
                     final Map<String, Object> currentListing = listings.get(iter);
                     String thumb_url = (String)currentListing.get("thumb_url");
-                    String guid = (String)currentListing.get("guid");
+                    String guid = guid(currentListing);
                     String price_formatted = (String)currentListing.get("price_formatted");
                     String summary = (String)currentListing.get("summary");
                     
@@ -359,10 +347,8 @@ public class PropertyCross {
                     listingsToAdd[iter] = mb;
                     
                     // if a property is clicked this will navigate to the property details
-                    mb.addActionListener(new ActionListener() {
-                        public void actionPerformed(ActionEvent evt) {
-                            showPropertyDetails(searchResults, currentListing);
-                        }
+                    mb.addActionListener(evt -> {
+                        showPropertyDetails(searchResults, currentListing);
                     });
                 }
                 
@@ -392,12 +378,12 @@ public class PropertyCross {
      * @param currentListing the listing details
      */
     void showPropertyDetails(final Form previousForm, final Map<String, Object> currentListing) {
-        final Form propertyDetails = new Form("Property Details");
+        final Form propertyDetails = new Form("Property Details", new BoxLayout(BoxLayout.Y_AXIS));
         
         // we check whether the current entry is marked as favorite via its unique ID from the server
         // if it is a favorite we use the selected icon for the command (a filled star) otherwise we use the 
         // unselected icon
-        String guid = (String)currentListing.get("guid");
+        String guid = guid(currentListing);
         final boolean isFavorite = isFavorite(guid);
         Image fav = favoriteUnsel;
         if(isFavorite) {
@@ -411,47 +397,29 @@ public class PropertyCross {
             public void actionPerformed(ActionEvent evt) {
                 mode = !mode;
                 setFavorite(currentListing, mode);
+                Button b = propertyDetails.getToolbar().findCommandComponent(this);
                 if(mode) {
-                    setIcon(favoriteSel);
+                    b.setIcon(favoriteSel);
                 } else {
-                    setIcon(favoriteUnsel);
+                    b.setIcon(favoriteUnsel);
                 }
-                propertyDetails.removeCommand(this);
-                propertyDetails.addCommand(this);
-                propertyDetails.revalidate();
             }
         };
-        propertyDetails.addCommand(favoriteCommand);
-        favoriteCommand.putClientProperty("android:showAsAction", "always");        
+        propertyDetails.getToolbar().addCommandToRightBar(favoriteCommand);
         
         // we set the back command to just slide back to the search results
-        propertyDetails.setBackCommand(new Command("Results") {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                previousForm.showBack();
-            }
-        });
-        propertyDetails.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
+        propertyDetails.getToolbar().setBackCommand("Results", BACK_POLICY, e -> previousForm.showBack());
+        propertyDetails.getToolbar().setTitleCentered(true);
+
         String price_formatted = (String)currentListing.get("price_formatted");
         String title = (String)currentListing.get("title");
         String img_url = (String)currentListing.get("img_url");
-        
-        // we set the title and second title to have larger presence in the UI so they will be more attractive
-        Label l = new Label(price_formatted);
-        l.setUIID("LargeTitle");
-        propertyDetails.addComponent(l);
-        Label lt = new Label(title);
-        lt.setUIID("SecondaryTitle");
-        propertyDetails.addComponent(lt);
-        
+                
         // we create a placeholder image for the wide image dynamically so it will be just the right size for the screen
         if(largePlaceholder == null) {
             Image tmp = Image.createImage(Display.getInstance().getDisplayWidth(), Display.getInstance().getDisplayWidth() / 4 * 3, 0);
             largePlaceholder = EncodedImage.createFromImage(tmp, false);
         }
-        
-        // the full width version of the image is downloaded dynamically into place and cached with the URLImage class
-        propertyDetails.addComponent(new Label(URLImage.createToStorage(largePlaceholder, "L" + guid, img_url, URLImage.RESIZE_SCALE_TO_FILL)));
         
         Object bathroom_number = currentListing.get("bathroom_number");
         Object bedroom_number = currentListing.get("bedroom_number");
@@ -466,10 +434,15 @@ public class PropertyCross {
                 struct = ((Double)bathroom_number).intValue() + " bathroom";
             }
         }
-        propertyDetails.addComponent(new Label(struct));
         String summary = (String)currentListing.get("summary");
-        propertyDetails.addComponent(new SpanLabel(summary));
         
+        // we set the title and second title to have larger presence in the UI so they will be more attractive
+        // the full width version of the image is downloaded dynamically into place and cached with the URLImage class
+        propertyDetails.add(new Label(price_formatted, "LargeTitle")).
+                add(new Label(title, "SecondaryTitle")).
+                add(new Label(URLImage.createToStorage(largePlaceholder, "L" + guid, img_url, URLImage.RESIZE_SCALE_TO_FILL))).
+                add(struct).
+                add(new SpanLabel(summary));
         
         propertyDetails.show();
     }
@@ -492,7 +465,7 @@ public class PropertyCross {
                     return val;
                 }
             } else {
-                cachedSearches.put(text, new HashMap<Integer, Map<String, Object>>());
+                cachedSearches.put(text, new HashMap<>());
             }
         } else {
             Map<Integer, Map<String, Object>> cacheMap = (Map<Integer, Map<String, Object>>)cachedLocationSearches.get(l);
@@ -502,7 +475,7 @@ public class PropertyCross {
                     return val;
                 }
             } else {
-                cachedLocationSearches.put(l, new HashMap<Integer, Map<String, Object>>());
+                cachedLocationSearches.put(l, new HashMap<>());
             }
         }
         
@@ -530,17 +503,16 @@ public class PropertyCross {
             // we show an error either in the main form or in a dialog, for later pages it means we got an error during scrolling so we will use a dialog
             private void showError(final String message) {
                 // call serially is used since we are not on the event disaptch thread during error callbacks
-                Display.getInstance().callSerially(new Runnable() {
-                    public void run() {
-                        if(pageNumber == 1) {
-                            showMainForm(true, message, null);
-                        } else {
-                            Dialog.show("Error", message, "OK", null);
-                        }
+                Display.getInstance().callSerially(() -> {
+                    if(pageNumber == 1) {
+                        showMainForm(true, message, null);
+                    } else {
+                        Dialog.show("Error", message, "OK", null);
                     }
                 });
             }
-        };
+        }
+        
         // here we create the request and the arguments, everything is seamlessly encoded and adapted
         MR r = new MR();
         r.setPost(false);
@@ -578,29 +550,24 @@ public class PropertyCross {
      * Shows the favorites screen 
      */
     void showFavs() {
-        final Form favsForm = new Form("Favourites");
+        final Form favsForm = new Form("Favourites", new BoxLayout(BoxLayout.Y_AXIS));
         addBackToHome(favsForm);
-        favsForm.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
         if(favoritesList.size() == 0) {
-            favsForm.addComponent(new SpanLabel("You have not added any properties to your favourites"));
+            favsForm.add(new SpanLabel("You have not added any properties to your favourites"));
         } else {
             // this is really trivial we just take the favorites and show them as a set of buttons
             for(Map<String, Object> c : favoritesList) {
                 MultiButton mb = new MultiButton();
                 final Map<String, Object> currentListing = c;
                 String thumb_url = (String)currentListing.get("thumb_url");
-                String guid = (String)currentListing.get("guid");
+                String guid = guid(currentListing);
                 String price_formatted = (String)currentListing.get("price_formatted");
                 String summary = (String)currentListing.get("summary");
                 mb.setIcon(URLImage.createToStorage(placeholder, guid, thumb_url, URLImage.RESIZE_SCALE_TO_FILL));
                 mb.setTextLine1(price_formatted);
                 mb.setTextLine2(summary);
-                mb.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent evt) {
-                        showPropertyDetails(favsForm, currentListing);
-                    }
-                });
-                favsForm.addComponent(mb);
+                mb.addActionListener(evt -> showPropertyDetails(favsForm, currentListing));
+                favsForm.add(mb);
             }
         }
         favsForm.show();
@@ -613,7 +580,7 @@ public class PropertyCross {
      */
     boolean isFavorite(String guid) {
         for(Map<String, Object> c : favoritesList) {
-            if(c.get("guid").equals(guid)) {
+            if(guid(c).equals(guid)) {
                 return true;
             }
         }
@@ -630,9 +597,9 @@ public class PropertyCross {
             favoritesList.add(currentListing);
             Storage.getInstance().writeObject("favoritesList", favoritesList);
         } else {
-            String guid = (String)currentListing.get("guid");
+            String guid = guid(currentListing);
             for(Map<String, Object> c : favoritesList) {
-                if(c.get("guid").equals(guid)) {
+                if(guid(currentListing).equals(guid)) {
                     favoritesList.remove(c);
                     Storage.getInstance().writeObject("favoritesList", favoritesList);
                     return;
