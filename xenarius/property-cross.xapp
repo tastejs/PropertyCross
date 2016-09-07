@@ -527,7 +527,7 @@
           "placeholder": ""
         },
         {
-          "type": "container",
+          "type": "stackPanel",
           "id": "container1",
           "style": {
             "marginTop": "10px",
@@ -1434,7 +1434,7 @@
           },
           "itemComponents": [
             {
-              "type": "container",
+              "type": "stackPanel",
               "id": "container1",
               "style": {
                 "height": "NaNpx"
@@ -1530,5 +1530,6 @@
     "colorAccent": "",
     "colorSelectedText": "",
     "appearance": "generic"
-  }
+  },
+  "schemeVersion": 3
 }
