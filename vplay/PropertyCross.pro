@@ -1,7 +1,10 @@
 # V-Play Apps Property Cross
 CONFIG += v-play
 
-# Dource file folder shipped with app
+# Add GPS
+QT += location
+
+# Source file folder shipped with app
 qmlFolder.source = qml
 DEPLOYMENTFOLDERS += qmlFolder
 

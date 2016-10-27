@@ -15,6 +15,7 @@ Page {
   NavigationStack {
     id: navStack
     leftColumnIndex: 1 //second page (listings list) is base for left column
+    splitView: tablet
 
     SearchPage {
     }
