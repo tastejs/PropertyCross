@@ -26,8 +26,6 @@ ListPage {
              DataModel.numListings).arg(
              DataModel.numTotalListings)
 
-  onItemSelected: navigationStack.popAllAndPush(detailPageComponent,
-                                                  {model: item.model})
   emptyText.text: favorites
                   ? qsTr("You have not added any properties to your favourites.")
                   : qsTr("No listings available.")
@@ -40,6 +38,14 @@ ListPage {
       scrollPos = listView.getScrollPosition()
       DataModel.loadNextPage()
     }
+  }
+
+  delegate: SimpleRow {
+    autoSizeImage: true
+    imageMaxSize: dp(40)
+    image.fillMode: Image.PreserveAspectCrop
+
+    onSelected: navigationStack.popAllExceptFirstAndPush(detailPageComponent, {model: item.model})
   }
 
   listView.onModelChanged: if(scrollPos) listView.restoreScrollPosition(scrollPos)

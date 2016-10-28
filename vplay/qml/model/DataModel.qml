@@ -208,8 +208,8 @@ Item {
     function createListingsModel(source) {
       return source.map(function(data) {
         return {
-          text: data.title,
-          detailText: data.summary,
+          text: data.price_formatted,
+          detailText: data.title,
           image: data.thumb_url,
           model: data
         }

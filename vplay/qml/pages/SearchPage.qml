@@ -10,11 +10,13 @@ Page {
   rightBarItem: NavigationBarRow {
     ActivityIndicatorBarItem {
       visible: DataModel.loading
+      showItem: showItemAlways
     }
 
     IconButtonBarItem {
       icon: IconType.heart
       onClicked: showListings(true)
+      title: qsTr("Favorites")
     }
   }
 
@@ -109,7 +111,7 @@ Page {
 
   function showListings(favorites) {
     if(navigationStack.depth === 1) {
-      navigationStack.popAllAndPush(listPageComponent, { favorites: favorites })
+      navigationStack.popAllExceptFirstAndPush(listPageComponent, { favorites: favorites })
     }
   }
 
