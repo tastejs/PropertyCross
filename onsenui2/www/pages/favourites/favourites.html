@@ -1,0 +1,27 @@
+<ons-page ng-controller="FavouritesPageController as vm">
+    <ons-toolbar class="navbar-blue">
+        <div class="left">
+            <ons-back-button>Back</ons-back-button>
+        </div>
+        <div class="center">Favourites</div>
+    </ons-toolbar>
+
+    <ons-row ng-if="vm.faves.length === 0">
+        <ons-col width="5%"></ons-col>
+        <ons-col width="90%">
+            <p>You have not added any properties to your favourites</p>
+        </ons-col>
+    </ons-row>
+
+    <ons-list ng-if="vm.faves.length > 0">
+        <ons-list-item ng-click="vm.goToPropertyDetails(property)" tappable modifier="chevron" ng-repeat="property in vm.faves track by $index">
+            <div class="left">
+                <img class="list__item__thumbnail" ng-src="{{ ::property.thumb_url }}">
+            </div>
+            <div class="center">
+                <span class="list__item__title">{{ ::property.price_formatted }}</span>
+                <span class="list__item__subtitle">{{ ::property.title }}</span>
+            </div>
+        </ons-list-item>
+    </ons-list>
+</ons-page>

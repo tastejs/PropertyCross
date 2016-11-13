@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+    <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" /> -->
+    <!-- Good default declaration:
+    * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+    * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+    * Disables use of eval() and inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+        * Enable inline JS: add 'unsafe-inline' to default-src
+        * Enable eval(): add 'unsafe-eval' to default-src
+    * Create your own at http://cspisawesome.com
+    -->
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
+
+    <title>PropertyCross</title>
+
+    <script src="assets/angular/angular.min.js"></script>
+    <script src="assets/onsenui/js/onsenui.min.js"></script>
+    <script src="assets/onsenui/js/angular-onsenui.min.js"></script>
+
+    <link rel="stylesheet" href="assets/onsenui/css/onsenui.css">
+    <link rel="stylesheet" href="assets/onsenui/css/onsen-css-components.css">
+    
+    <link rel="stylesheet" type="text/css" href="assets/css/styles.css" />
+</head>
+<body>
+    <ons-page>
+        <ons-navigator var="navi" page="pages/home/home.html"></ons-navigator>
+    </ons-page>
+
+    <script>
+        (function(ons){
+            'use strict';
+
+            window.app = ons.bootstrap();
+            ons.ready(function() {
+                if (ons.platform.isIOS()) {
+                    document.getElementsByTagName('body')[0].classList.add('ios');
+                } else {
+                    document.getElementsByTagName('body')[0].classList.add('material');
+                }
+            });
+        })(ons);
+    </script>
+    
+    <script src="cordova.js"></script>
+
+    <!-- Dependencies -->
+    <script type="text/javascript" src="assets/lodash/lodash.min.js"></script>
+    <script type="text/javascript" src="assets/localforage/localforage.min.js"></script>
+
+    <!-- config -->
+    <script type="text/javascript" src="assets/js/constants.js"></script>
+
+    <!-- services -->
+    <script type="text/javascript" src="services/localforage.service.js"></script>
+    <script type="text/javascript" src="services/lodash.service.js"></script>
+    <script type="text/javascript" src="services/recent-searches.service.js"></script>
+    <script type="text/javascript" src="services/properties.service.js"></script>
+    <script type="text/javascript" src="services/favourites.service.js"></script>
+
+    <!-- controllers -->
+    <script type="text/javascript" src="pages/home/home.controller.js"></script>
+    <script type="text/javascript" src="pages/favourites/favourites.controller.js"></script>
+    <script type="text/javascript" src="pages/results/results.controller.js"></script>
+    <script type="text/javascript" src="pages/property-details/property-details.controller.js"></script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<ons-page ng-controller="HomePageController as vm" id="home-page">
+    <ons-toolbar class="navbar-blue">
+        <div class="center">PropertyCross</div>
+        <div class="right" ng-click="vm.goToFaves()">Faves</div>
+    </ons-toolbar>
+
+    <ons-row>
+        <ons-col width="5%"></ons-col>
+        <ons-col width="90%">
+            <p>Use the form below to search for houses to buy. You can search by place-name, postcode, or click 'My location', to search in your current location!</p>
+        </ons-col>
+    </ons-row>
+
+    <ons-row id="search-properties-container">
+        <ons-col width="5%"></ons-col>
+        <ons-col width="90%">
+            <ons-input ng-model="vm.searchTerm" float placeholder="search"></ons-input>
+        </ons-col>
+    </ons-row>
+
+    <ons-modal id="home-modal">
+        <ons-progress-circular indeterminate></ons-progress-circular>
+    </ons-modal>
+
+    <ons-row style="margin-bottom: 15px">
+        <ons-col width="5%"></ons-col>
+        <ons-col width="40%">
+            <ons-button class="btn-green" modifier="large" ng-click="vm.searchByTerm()">Go</ons-button>
+        </ons-col>
+        <ons-col width="10%"></ons-col>
+        <ons-col width="40%">
+            <ons-button class="btn-blue" modifier='large' ng-click="vm.searchByPosition()">My location</ons-button>
+        </ons-col>
+    </ons-row>
+
+    <ons-row ng-if="vm.state === 0">
+        <ons-col width="5%"></ons-col>
+        <ons-col width="90%" class="text-error">
+            {{ vm.errorMessage }}
+        </ons-col>
+    </ons-row>
+
+    <ons-list ng-if="vm.state === 1">
+        <ons-list-header>Recent searches:</ons-list-header>
+        <ons-list-item ng-repeat="search in vm.recentSearches track by $index" 
+            ng-click="vm.doSearchWith(search.term)" mgtappable modifier="longdivider">
+            <div class="list__item__left">
+                {{ search.term }}
+            </div>
+            <div class="list__item__right">
+                <span class="badge">{{ search.results }}</span>
+            </div>
+        </ons-list-item>
+    </ons-list>
+
+    <ons-list ng-if="vm.state === 2">
+        <ons-list-header>Please select a location below:</ons-list-header>
+        <ons-list-item ng-repeat="location in vm.locations track by $index" 
+            ng-click="vm.doSearchWith(location.place_name)" tappable modifier="longdivider">
+            {{ location.title }}
+        </ons-list-item>
+    </ons-list>
+    
+</ons-page>
