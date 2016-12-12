@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>BindableApplicationBar</id>
+    <version>1.1.0.0</version>
+    <title>BindableApplicationBar</title>
+    <authors>Filip Skakun</authors>
+    <owners>Filip Skakun</owners>
+    <licenseUrl>https://bindableapplicationb.codeplex.com/license</licenseUrl>
+    <projectUrl>https://bindableapplicationb.codeplex.com/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Bindable application bar wrappers for Windows Phone.</description>
+    <releaseNotes>BindableApplicationBar for Windows Phone</releaseNotes>
+    <copyright />
+    <language>en-US</language>
+    <tags>bindable appbar applicationbar bindableappbar windowsphone xyzzer</tags>
+  </metadata>
+</package>

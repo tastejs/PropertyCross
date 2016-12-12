@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
+  <metadata>
+    <id>MvvmCross</id>
+    <version>3.1.1-beta2</version>
+    <title>MvvmCross</title>
+    <authors>MvvmCross</authors>
+    <owners>MvvmCross</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>This package contains the 'Getting Started' assemblies for MvvmCross v3 - Hot Tuna. This and other packages are currently under development...</description>
+    <releaseNotes />
+    <copyright />
+    <language />
+    <dependencies>
+      <dependency id="MvvmCross.HotTuna.StarterPack" version="3.1.1-beta2" />
+    </dependencies>
+  </metadata>
+</package>

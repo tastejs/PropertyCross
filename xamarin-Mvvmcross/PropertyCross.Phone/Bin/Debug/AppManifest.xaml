@@ -1,0 +1,23 @@
+﻿<Deployment xmlns="http://schemas.microsoft.com/client/2007/deployment" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" EntryPointAssembly="PropertyCross.WindowsPhone" EntryPointType="PropertyCross.WindowsPhone.App" RuntimeVersion="4.7.50308.0">
+  <Deployment.Parts>
+    <AssemblyPart x:Name="PropertyCross.WindowsPhone" Source="PropertyCross.WindowsPhone.dll" />
+    <AssemblyPart x:Name="BindableApplicationBar" Source="BindableApplicationBar.dll" />
+    <AssemblyPart x:Name="Cirrious.CrossCore" Source="Cirrious.CrossCore.dll" />
+    <AssemblyPart x:Name="Cirrious.CrossCore.WindowsPhone" Source="Cirrious.CrossCore.WindowsPhone.dll" />
+    <AssemblyPart x:Name="Cirrious.MvvmCross" Source="Cirrious.MvvmCross.dll" />
+    <AssemblyPart x:Name="Cirrious.MvvmCross.Localization" Source="Cirrious.MvvmCross.Localization.dll" />
+    <AssemblyPart x:Name="Cirrious.MvvmCross.Plugins.File" Source="Cirrious.MvvmCross.Plugins.File.dll" />
+    <AssemblyPart x:Name="Cirrious.MvvmCross.Plugins.File.WindowsPhone" Source="Cirrious.MvvmCross.Plugins.File.WindowsPhone.dll" />
+    <AssemblyPart x:Name="Cirrious.MvvmCross.Plugins.Network" Source="Cirrious.MvvmCross.Plugins.Network.dll" />
+    <AssemblyPart x:Name="Cirrious.MvvmCross.Plugins.Network.WindowsPhone" Source="Cirrious.MvvmCross.Plugins.Network.WindowsPhone.dll" />
+    <AssemblyPart x:Name="Cirrious.MvvmCross.Plugins.Visibility" Source="Cirrious.MvvmCross.Plugins.Visibility.dll" />
+    <AssemblyPart x:Name="Cirrious.MvvmCross.Plugins.Visibility.WindowsPhone" Source="Cirrious.MvvmCross.Plugins.Visibility.WindowsPhone.dll" />
+    <AssemblyPart x:Name="Cirrious.MvvmCross.WindowsPhone" Source="Cirrious.MvvmCross.WindowsPhone.dll" />
+    <AssemblyPart x:Name="MetroEventToCommand" Source="MetroEventToCommand.dll" />
+    <AssemblyPart x:Name="Microsoft.Phone.Controls.Toolkit" Source="Microsoft.Phone.Controls.Toolkit.dll" />
+    <AssemblyPart x:Name="Microsoft.Practices.ServiceLocation" Source="Microsoft.Practices.ServiceLocation.dll" />
+    <AssemblyPart x:Name="PropertyCross.Core" Source="PropertyCross.Core.dll" />
+    <AssemblyPart x:Name="System.Windows.Interactivity" Source="System.Windows.Interactivity.dll" />
+    <AssemblyPart x:Name="Newtonsoft.Json" Source="Newtonsoft.Json.dll" />
+  </Deployment.Parts>
+</Deployment>
