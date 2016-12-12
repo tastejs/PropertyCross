@@ -327,7 +327,7 @@ async.series([
     ["native/android/PropertyCross/res/drawable-mdpi/actionbar_tile.png", 6],
     ["xamarin/android/PropertyCross/Resources/drawable-mdpi/actionbar_tile.png", 6]
   ])
-
+  
 ], function(err) {
   if (err) {
     console.error(err);
