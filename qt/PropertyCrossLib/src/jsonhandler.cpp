@@ -17,8 +17,8 @@ QSharedPointer<QNetworkAccessManager> JsonHandler::m_manager  = QSharedPointer<Q
 //place_name=leeds - listing from string
 //centre_point=51.684183,-3.431481 -- geo listing
 //place_name=newcr -- suggest locations
-static const QString baseUrl = "http://api.nestoria.co.uk/api?country=uk&pretty=1&action=search_listings&encoding=json&listing_type=buy";
-static const double NETWORK_TIMEOUT = 5000;
+static const QString baseUrl = "https://api.nestoria.co.uk/api?country=uk&pretty=1&action=search_listings&encoding=json&listing_type=buy";
+static const double NETWORK_TIMEOUT = 30000;
 
 
 
@@ -54,7 +54,13 @@ void JsonHandler::startRequest(QUrl url)
 {
     if(m_manager.isNull())
         return;
-    m_manager->get(QNetworkRequest(url));
+
+    QNetworkRequest request = QNetworkRequest(url);
+    QSslConfiguration config = QSslConfiguration::defaultConfiguration();
+             config.setProtocol(QSsl::TlsV1_2);
+             request.setSslConfiguration(config);
+
+    m_manager->get(request);
     m_timer.setSingleShot(true);
     m_timer.setInterval(NETWORK_TIMEOUT);
     m_timer.start();
@@ -66,6 +72,12 @@ void JsonHandler::replyFinished(QNetworkReply* reply)
   qDebug() << "in reply";
     if(reply)
     {
+        QNetworkReply::NetworkError error2 = reply->error();
+        if ( error2 )
+        {
+            qDebug() << "error in reply";
+        }
+
         QJsonParseError error;
         QString replyString = (QString)reply->readAll();
         QJsonDocument doc = QJsonDocument::fromJson(replyString.toUtf8(), &error);
