@@ -76,7 +76,7 @@ public class PropertyFinderView extends SherlockActivity implements PropertyFind
         app.currentActivity = this;
 
         IMarshalInvokeService marshal = new MarshalInvokeService(app);
-        PropertyDataSource source = new PropertyDataSource(new JsonWebPropertySearch(marshal));
+        PropertyDataSource source = new PropertyDataSource(new JsonWebPropertySearch(this, marshal));
         geoLocationService = new GeoLocationService(
                 (LocationManager) getSystemService(Context.LOCATION_SERVICE), marshal);
         StatePersistenceService stateService = new StatePersistenceService(app);

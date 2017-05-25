@@ -20,7 +20,7 @@ public class Property {
 	public Property(JSONObject jsonProperty) {
 		try
 	    {
-	      guid = jsonProperty.getString("guid");
+	      //guid = jsonProperty.getString("guid");
 	      price = jsonProperty.getInt("price");
 	      propertyType = jsonProperty.getString("property_type");
 	      

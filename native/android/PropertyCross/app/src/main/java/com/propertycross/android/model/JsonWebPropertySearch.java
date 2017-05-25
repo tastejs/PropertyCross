@@ -1,17 +1,29 @@
 
 package com.propertycross.android.model;
 
+import android.content.Context;
 import android.util.Log;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.propertycross.android.events.Callback;
 import com.propertycross.android.presenter.IMarshalInvokeService;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONObject;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -22,10 +34,12 @@ public class JsonWebPropertySearch implements IJsonPropertySearch {
 
     private final Map<String, Object> commonParams;
     private final IMarshalInvokeService marshal;
-    private final String baseUrl = "http://api.nestoria.co.uk/api?";
+    private final String baseUrl = "https://api.nestoria.co.uk/api?";
     private final String TAG = "PropertyCross";
+    private Context context;
 
-    public JsonWebPropertySearch(IMarshalInvokeService service) {
+    public JsonWebPropertySearch(Context context, IMarshalInvokeService service) {
+        this.context = context;
         this.marshal = service;
         commonParams = new HashMap<String, Object>();
         commonParams.put("country", "uk");
@@ -89,45 +103,39 @@ public class JsonWebPropertySearch implements IJsonPropertySearch {
 
     }
 
-    private void executeWebRequest(final String url, final Callback<String> complete,
+    private void executeWebRequest(final String url,
+                                   final Callback<String> complete,
             final Callback<Exception> error) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
                     Log.d(TAG, url);
-                    DefaultHttpClient client = new DefaultHttpClient();
-                    HttpGet request = new HttpGet(url);
-                    HttpResponse response = client.execute(request);
 
-                    BufferedReader reader =
-                            new BufferedReader(new InputStreamReader(response.getEntity()
-                                    .getContent(), "UTF-8"));
+        JsonObjectRequest jsObjRequest = new JsonObjectRequest
+                (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
 
-                    final StringBuilder builder = new StringBuilder();
-                    for (String line = null; (line = reader.readLine()) != null;) {
-                        builder.append(line);
+                    @Override
+                    public void onResponse(final JSONObject response) {
+                        marshal.invoke(new Callback<Void>() {
+
+                            @Override
+                            public void complete(Void paramT) {
+                                complete.complete(response.toString());
+                            }
+                        });
                     }
+                }, new Response.ErrorListener() {
 
-                    marshal.invoke(new Callback<Void>() {
+                    @Override
+                    public void onErrorResponse(VolleyError e) {
+                        marshal.invoke(new Callback<Void>() {
 
-                        @Override
-                        public void complete(Void paramT) {
-                            complete.complete(builder.toString());
-                        }
-                    });
+                            @Override
+                            public void complete(Void paramT) {
+                                error.complete(new Exception());
+                            }
+                        });
+                    }
+                });
 
-                } catch (final Exception e) {
-                    Log.d(TAG, e.getMessage());
-                    marshal.invoke(new Callback<Void>() {
-
-                        @Override
-                        public void complete(Void paramT) {
-                            error.complete(e);
-                        }
-                    });
-                }
-            }
-        }).start();
+        RequestQueue queue = Volley.newRequestQueue(context);
+        queue.add(jsObjRequest);
     }
 }

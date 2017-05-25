@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 <item android:id="@+id/favourites_add_item" android:title="@string/favourites_add"
  		android:icon="@drawable/nostar" android:showAsAction="ifRoom|withText" />
