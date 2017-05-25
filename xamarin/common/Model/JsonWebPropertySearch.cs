@@ -30,7 +30,7 @@ namespace PropertyCross.Model
       var parameters = new Dictionary<string,object>(_commonParams);
       parameters.Add("place_name", location);
       parameters.Add("page", pageNumber);
-      string url = "http://api.nestoria.co.uk/api?" + ToQueryString(parameters);
+      string url = "https://api.nestoria.co.uk/api?" + ToQueryString(parameters);
 
       ExecuteWebRequest(url, callback, error);
     }
@@ -40,7 +40,7 @@ namespace PropertyCross.Model
       var parameters = new Dictionary<string, object>(_commonParams);
       parameters.Add("centre_point", latitude.ToString() + "," + longitude.ToString());
       parameters.Add("page", pageNumber);
-      string url = "http://api.nestoria.co.uk/api?" + ToQueryString(parameters);
+      string url = "https://api.nestoria.co.uk/api?" + ToQueryString(parameters);
 
       ExecuteWebRequest(url, callback, error);
     }
@@ -57,7 +57,7 @@ namespace PropertyCross.Model
         webClient.CancelAsync();
         error(new TimeoutException());
       };
-      timer = new Timer(timerCallback, null, 5000, 5000);
+      timer = new Timer(timerCallback, null, 30000, 30000);
       
       // create a web client
       webClient.DownloadStringCompleted += (s, e) =>
@@ -82,7 +82,7 @@ namespace PropertyCross.Model
       var items = parameters.Keys.Select(
         key => String.Format("{0}={1}", key, parameters[key].ToString())).ToArray();
 
-      return String.Join("&amp;", items);
+      return String.Join("&", items);
     }
   }
 }
