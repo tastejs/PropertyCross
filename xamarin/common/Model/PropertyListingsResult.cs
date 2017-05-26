@@ -13,7 +13,7 @@ namespace PropertyCross.Model
     public PropertyListingsResult(JObject json)
     { 
       TotalResult = (int)json["response"]["total_results"];
-      PageNumber = int.Parse((string)json["response"]["page"]);
+      PageNumber = (int)json["response"]["page"];
       TotalPages = (int)json["response"]["total_pages"];
 
       Data = new List<Property>();
