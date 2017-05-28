@@ -1,0 +1,12 @@
+{
+  "name": "PropertyCross",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node_modules/react-native/packager/packager.sh"
+  },
+  "dependencies": {
+    "@exponent/react-native-navigator": "^0.4.2",
+    "react-native": "^0.20.0"
+  }
+}
