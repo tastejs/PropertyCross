@@ -1,0 +1,39 @@
+{
+  "name": "propertycross-onsenui2-implementation",
+  "version": "1.0.0",
+  "description": "An implementation of PropertyCross using onsen ui 2",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vieraleonel/onsenui2-propertycross-impl"
+  },
+  "author": "Viera Leonel",
+  "license": "SEE LICENCE IN LICENSE",
+  "keywords": [
+    "cordova",
+    "propertycross",
+    "phonegap",
+    "framework7",
+    "mobile",
+    "hybrid"
+],
+  "homepage": "https://github.com/vieraleonel/onsenui2-propertycross-impl",
+  "dependencies": {
+    "angular": "^1.5.6",
+    "localforage": "^1.4.2",
+    "lodash": "^4.13.1",
+    "onsenui": "^2.0.3"
+  },
+  "devDependencies": {
+    "copyfiles": "^1.0.0",
+    "npm-run-all": "^2.3.0",
+    "rimraf": "^2.5.4"
+  },
+  "scripts": {
+    "setup:localforage": "copyfiles -f ./node_modules/localforage/dist/* ./www/assets/localforage",
+    "setup:lodash": "copyfiles -f ./node_modules/lodash/lodash.min.js ./www/assets/lodash",
+    "setup:angular": "copyfiles -f ./node_modules/angular/angular-csp.css ./node_modules/angular/angular.min.js ./node_modules/angular/angular.min.js.map ./www/assets/angular",
+    "setup:onsenui": "copyfiles -u 1 './node_modules/onsenui/css/**' './node_modules/onsenui/js/**' ./www/assets",
+    "setup": "npm-run-all --parallel 'setup:localforage' 'setup:lodash' 'setup:angular' 'setup:onsenui'",
+    "clean": "rimraf ./www/assets/localforage ./www/assets/lodash ./www/assets/angular ./www/assets/onsenui"
+  }
+}

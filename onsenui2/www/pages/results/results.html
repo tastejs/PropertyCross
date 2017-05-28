@@ -1,0 +1,29 @@
+<ons-page ng-controller="ResultsPageController as vm">
+    <ons-toolbar class="navbar-blue">
+        <div class="left">
+            <ons-back-button>Back</ons-back-button>
+        </div>
+        <div class="center">{{ vm.queryData.showing }} of {{ ::vm.queryData.results }} results</div>
+    </ons-toolbar>
+
+    <ons-list>
+        <ons-list-item ng-click="vm.goToPropertyDetails(property)" tappable modifier="chevron" ng-repeat="property in vm.queryData.properties track by $index">
+            <div class="left">
+                <img class="list__item__thumbnail" ng-src="{{ ::property.thumb_url }}">
+            </div>
+            <div class="center">
+                <span class="list__item__title">{{ ::property.price_formatted }}</span>
+                <span class="list__item__subtitle">{{ ::property.title }}</span>
+            </div>
+        </ons-list-item>
+        <ons-list-item tappable ng-if="vm.loadMore.canLoad" ng-click="vm.getMoreProperties()">
+            <div class="left" ng-if="vm.loadMore.loading">
+                <ons-progress-circular indeterminate></ons-progress-circular>
+            </div>
+            <div class="center">
+                <span class="list__item__title">{{ vm.loadMore.label }}</span>
+                <span class="list__item__subtitle">Results for {{ ::vm.queryData.searchTerm }}, showing {{ vm.queryData.showing }} of {{ ::vm.queryData.results }} properties</span>
+            </div>
+        </ons-list-item>
+    </ons-list>
+</ons-page>
